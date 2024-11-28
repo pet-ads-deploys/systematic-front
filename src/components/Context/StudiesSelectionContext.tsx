@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useState } from "react";
+import React, { ReactNode, createContext, useEffect, useState } from "react";
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
 import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
 
@@ -19,7 +19,15 @@ interface AppProviderProps {
 export const StudySelectionProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [isIncluded, setIsIncluded] = useState(false);
     const [isExcluded, setIsExcluded] = useState(false);
-    const articles = useGetAllReviewArticles() as ArticleInterface[];
+    const [articles, setArticles] = useState<ArticleInterface[]>([]);
+    const fetchedArticles = useGetAllReviewArticles() as ArticleInterface[];
+
+    useEffect(() => {
+      if(fetchedArticles.length > 0) {
+        console.log("atualizando articles!!!");
+        setArticles(fetchedArticles);
+      }
+    }, [fetchedArticles])
 
   return (
     <StudySelectionContext.Provider
