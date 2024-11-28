@@ -18,21 +18,27 @@ interface Props {
 }
 
 const useHandleExportedFiles = ({ setSessions, type }: Props) => {
-    const [showInput, setShowInput] = useState(false);
     const [referenceFiles, setReferenceFiles] = useState<File[]>([]);
     const [source, setSource] = useState("");
     const toast = useToast();
 
     const checkForDuplicateFile = (newFile: File) => {
         return referenceFiles.some(
-            (file) => file.name === newFile.name && file.size === newFile.size);
+            (file) => file.name === newFile.name && file.size === newFile.size
+        );
     };
 
-    function handleFile(e: React.FormEvent<HTMLInputElement>) {
-        const target = e.target as HTMLInputElement & { files: FileList };
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement> | any) => {
+        let files: FileList | null = null;
 
-        if (target.files.length > 0) {
-            const newFile = target.files[0];
+        if (e.target && e.target.files) {
+            files = e.target.files;
+        } else if (e.acceptedFiles) {
+            files = e.acceptedFiles;
+        }
+
+        if (files && files.length > 0) {
+            const newFile = files[0];
 
             const isDuplicate = checkForDuplicateFile(newFile);
 
@@ -44,13 +50,11 @@ const useHandleExportedFiles = ({ setSessions, type }: Props) => {
                     duration: 4500,
                     isClosable: true,
                     position: 'top'
-                  });
+                });
             } else {
                 setReferenceFiles((prevFiles) => [...prevFiles, newFile]);
             }
         }
-
-        setShowInput(false);
     }
 
     async function sendFilesToServer() {
@@ -84,8 +88,6 @@ const useHandleExportedFiles = ({ setSessions, type }: Props) => {
 
     return {
         handleFile,
-        showInput,
-        setShowInput,
         referenceFiles,
         setReferenceFiles,
         sendFilesToServer,

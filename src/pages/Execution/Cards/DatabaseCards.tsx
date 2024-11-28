@@ -1,5 +1,4 @@
 import { Card, Box, Text } from "@chakra-ui/react";
-import NavButton from "../../../components/Buttons/NavButton";
 import EventButton from "../../../components/Buttons/EventButton";
 import DataBaseIcon from "../../../components/Icons/DataBaseIcon";
 import AccordionDashboard from "./subcomponents/AccordionDashboard";
