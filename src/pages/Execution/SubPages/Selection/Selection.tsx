@@ -31,7 +31,7 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
   const [ searchString, setSearchString ] = useState<string>("");
 
 
-  if(!studiesData) return <>Studies data nor found</>
+  if(!studiesData) return <>Studies data not found</>
 
   return (
     <AppProvider>

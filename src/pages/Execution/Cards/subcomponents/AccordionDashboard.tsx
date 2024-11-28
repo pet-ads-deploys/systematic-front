@@ -92,6 +92,7 @@ export default function AccordionDashboard({ type }: { type: string }) {
                   <Text textAlign="center">Studies</Text>
                 </Flex>
               </Flex>
+              <Box maxH="5.5rem" overflowY='auto' pr={2}>
               {sessions.map((item) => (
                 <SessionPrev
                   key={item.id}
@@ -102,6 +103,7 @@ export default function AccordionDashboard({ type }: { type: string }) {
                   numberOfStudies={item.numberOfRelatedStudies}
                 />
               ))}
+              </Box>
               <Box>
                 <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
               </Box>

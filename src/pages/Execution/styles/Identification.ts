@@ -4,12 +4,13 @@ export const conteiner = {
 
 export const dataBaseconteiner = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(27vw, 1fr))",
+  gridTemplateColumns: "repeat(auto-fill, minmax(20rem, 1fr))",
   boxSizing: "border-box",
   p:"20px",
   w: "100%",
-  gap: "19px",
+  gap: "20px",
   mt: 10,
-  h: "fit-content",
-  margin: "0 !important" 
+  h: "100%",
+  margin: "0 !important",
+  maxHeight: "calc(100vh - 1.5rem)",
 };
