@@ -22,6 +22,13 @@ const useComboBoxSelection = () => {
 
   const handleExcludeItemClick = (isChecked: boolean) => {
     if(setIsExcluded) setIsExcluded(isChecked);
+    const articles = selectionContext?.articles;
+    const articleIndex = appContext?.selectionStudyIndex;
+    
+    if(articles && articleIndex){
+      const studyReviewId = articles[articleIndex].studyReviewId;
+      useChangeStudySelectionStatus({studyReviewId, status: 'EXCLUDED'})
+    }
   }
 
   return { handleIncludeItemClick, handleExcludeItemClick };
