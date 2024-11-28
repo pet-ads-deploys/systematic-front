@@ -24,6 +24,7 @@ import TestPage from "./pages/TestPage/TestPage";
 import Unauthorized from "./pages/UnauthorizedPage/UnauthorizedPage";
 import UserArea from "./pages/UserArea/UserArea";
 import Visualization from "./pages/NovaRevisao/visualization/Visualization";
+import { StudySelectionProvider } from "./components/Context/StudiesSelectionContext";
 
 function App() {
   const context = useContext(AppContext);
@@ -32,31 +33,33 @@ function App() {
     return (
       <Router>
         <AppProvider>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/landing" element={<ProtectedRoute element={<LandingPage />} />} />
-            <Route path="/test" element={<ProtectedRoute element={<TestPage />} />} />
-            <Route path="/user" element={<ProtectedRoute element={<UserArea />} />} />
-            <Route path="/collaborators" element={<ProtectedRoute element={<CollaboratorsPage />} />} />
-            <Route path="/unauthorized" element={<Unauthorized />} />
-            <Route path="/serverError" element={<ServerError />} />
+          <StudySelectionProvider>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/landing" element={<ProtectedRoute element={<LandingPage />} />} />
+              <Route path="/test" element={<ProtectedRoute element={<TestPage />} />} />
+              <Route path="/user" element={<ProtectedRoute element={<UserArea />} />} />
+              <Route path="/collaborators" element={<ProtectedRoute element={<CollaboratorsPage />} />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="/serverError" element={<ServerError />} />
 
-            <Route path="/newRevision" element={<ProtectedRoute element={<NovaRevisao />} />} />
-              <Route path="/newRevision/protocol/:id" element={<ProtectedRoute element={<Protocol />} />} />
-              <Route path="/newRevision/protocolpartTwo/:id" element={<ProtectedRoute element={<ProtocolPartTwo />} />} />
-              <Route path="/newRevision/protocolpartThree/:id" element={<ProtectedRoute element={<ProtocolPartThree />} />} />
-              <Route path="/newRevision/identification" element={<ProtectedRoute element={<Identification />} />} />
-              <Route path="/newRevision/identification/:session" element={<IdentificationSession/>} />
-              <Route path="/newRevision/keywords" element={<ProtectedRoute element={<KeyWordScreen />} />} />
-              <Route path="/newRevision/selection" element={<ProtectedRoute element={<Selection />} />} />
-              <Route path="/newRevision/extraction" element={<ProtectedRoute element={<Extraction />} />} />
-              <Route path="/newRevision/insertion" element={<ProtectedRoute element={<Insertion />} />} />
-              <Route path="/newRevision/graphics" element={<ProtectedRoute element={<Graphics />} />} />
-              <Route path="/newRevision/finalization" element={<ProtectedRoute element={<Finalization />} />} />
-              <Route path="/newRevision/visualization" element={<ProtectedRoute element={<Visualization />} />} />
-              <Route path="/newRevision/searchSession" element={<ProtectedRoute element={<SearchSession />} />} />
+              <Route path="/newRevision" element={<ProtectedRoute element={<NovaRevisao />} />} />
+                <Route path="/newRevision/protocol/:id" element={<ProtectedRoute element={<Protocol />} />} />
+                <Route path="/newRevision/protocolpartTwo/:id" element={<ProtectedRoute element={<ProtocolPartTwo />} />} />
+                <Route path="/newRevision/protocolpartThree/:id" element={<ProtectedRoute element={<ProtocolPartThree />} />} />
+                <Route path="/newRevision/identification" element={<ProtectedRoute element={<Identification />} />} />
+                <Route path="/newRevision/identification/:session" element={<IdentificationSession/>} />
+                <Route path="/newRevision/keywords" element={<ProtectedRoute element={<KeyWordScreen />} />} />
+                <Route path="/newRevision/selection" element={<ProtectedRoute element={<Selection />} />} />
+                <Route path="/newRevision/extraction" element={<ProtectedRoute element={<Extraction />} />} />
+                <Route path="/newRevision/insertion" element={<ProtectedRoute element={<Insertion />} />} />
+                <Route path="/newRevision/graphics" element={<ProtectedRoute element={<Graphics />} />} />
+                <Route path="/newRevision/finalization" element={<ProtectedRoute element={<Finalization />} />} />
+                <Route path="/newRevision/visualization" element={<ProtectedRoute element={<Visualization />} />} />
+                <Route path="/newRevision/searchSession" element={<ProtectedRoute element={<SearchSession />} />} />
 
-          </Routes>
+            </Routes>
+          </StudySelectionProvider>
         </AppProvider>
       </Router>
     );
