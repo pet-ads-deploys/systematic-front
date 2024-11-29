@@ -28,8 +28,8 @@ export default function StudiesModal({ isOpen, onClose }: IStudy) {
   const modalContext = useContext(ModalContext);
   const appContext = useContext(AppContext);
   const study = (appContext?.extractionStudy as StudyInterface);
-  const sortedStudies = (appContext?.sortedStudies as StudyInterface[])
-  const index = (appContext?.sortedExtractionStudyIndex as number);
+  const sortedStudies = (appContext?.selectionStudies as StudyInterface[])
+  const index = (appContext?.selectionStudyIndex as number);
 
 
 

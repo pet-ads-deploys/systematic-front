@@ -1,16 +1,16 @@
 import { Flex } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import DefaultNavigation from "./subcomponents/DefaultNav";
 import AccordionNav from "./subcomponents/AccordionNavigation";
 import UserInfos from "./subcomponents/UserInfos";
 import MenuButton from "./subcomponents/MenuButton";
 import { LARGE_SIZE, SMALL_SIZE, conteiner, content } from "./styles/sidebarStyles";
-import { motion, sync, useCycle } from "framer-motion";
+import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "./use-dimensions";
 import "./styles.css"
 import { Navigation } from "./Navigation";
 import { MenuToggle } from "./MenuToggle";
-
+import AppContext from "../../Context/AppContext";
 
 interface ISidebarProps {
   type: string;
@@ -37,43 +37,51 @@ const sidebar = {
   },
 };
 
-
 export default function Sidebar({defaultOpen, type}: ISidebarProps): JSX.Element {
-
-  const [isOpen, toggleOpen] = useCycle(false, true);
+  const context = useContext(AppContext);
+  if(!context) {
+    throw new Error("Failed to get the app context on sidebar");
+  }
+  const { sidebarState, setSidebarState } = context;
+  const [isOpen, toggleOpen] = useCycle(false, true); 
   const containerRef = useRef(null);
-  const { height } = useDimensions(containerRef);
-
+  const { height } = useDimensions(containerRef); 
   const [navSize, setNavSize] = useState(LARGE_SIZE);
 
   const toggleNavSize = (): void => {
     setNavSize(navSize === SMALL_SIZE ? LARGE_SIZE : SMALL_SIZE);
   };
 
+  const handleSidebarToggle = () => {
+    console.log("Antes da mudança de estado:", sidebarState);
+
+    if (sidebarState === 'open') {
+      setSidebarState('collapsed'); 
+    } else if (sidebarState === 'collapsed') {
+      setSidebarState('open'); 
+    } else {
+      setSidebarState('semi-collapsed');
+    }
+  };
+
   return (
-    <motion.div initial={false} animate="closed" variants={{closed: {
-      transition: {
-        delay: 2,
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-      },
-    },}} style={{width: isOpen ? "140px" : "350px" , transition: !isOpen ? "0s" : "1.5s"}}>
+    <motion.div initial={false} animate={sidebarState} variants={sidebar} style={{ width: sidebarState === 'open' ? "350px" : "140px", transition: !isOpen ? "0s" : "1.5s" }}>
       <motion.nav
         initial={false}
-        animate={!isOpen ? "open" : "closed"}
+        animate={sidebarState === 'open' ? "open" : "closed"}
         custom={height}
         ref={containerRef}
         style={{ margin: "20px" }}
       >
-        <motion.div 
+        <motion.div
           initial={false}
           className="background"
           variants={sidebar}
           style={{ borderRadius: "30px" }}
         />
         <Navigation defaultOpen={defaultOpen} type={type} />
-        <MenuToggle toggle={() => toggleOpen()} />
+        {/* Passando a função handleSidebarToggle para o MenuToggle */}
+        <MenuToggle toggle={handleSidebarToggle} />
       </motion.nav>
     </motion.div>
   );

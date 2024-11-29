@@ -55,6 +55,7 @@ export default function DynamicTable({ headerData, bodyData, tableType, filtered
             ))}
           </Tr>
         </Thead>
+        
         <Tbody>
           {sortedData.map((rowData, rowIndex) => (
             <TableRow

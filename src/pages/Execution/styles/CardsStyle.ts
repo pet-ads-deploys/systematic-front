@@ -62,6 +62,7 @@ export const btnConteiner = {
 
 export const tdSX = {
   w: "10em",
+  textAlign: 'center',
   alignSelf: "center",
   whiteSpace: "nowrap",
   overflow: "hidden",
@@ -69,3 +70,14 @@ export const tdSX = {
   fontWeight: 500, 
   cursor: "pointer"
 };
+
+export const collapsedTdSX = {
+  w: "5em",
+  textAlign: 'center',
+  alignSelf: "center",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  fontWeight: 500, 
+  cursor: "pointer"
+}

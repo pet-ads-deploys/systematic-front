@@ -22,9 +22,6 @@ const useGetReviewCard = () => {
       useEffect(() => {
     
         async function fetch(){
-            console.log("raw data:");
-            console.log(rawData);
-        
             let newCardData = await Promise.all(rawData.map(async (study) => {
             let status = await verifyUnfinishedStudy(study.id);
         
@@ -38,9 +35,6 @@ const useGetReviewCard = () => {
     
         fetch();
       }, [rawData]);
-
-      console.log('cardData:');
-      console.log(cardData);
     
     return { cardData, isLoaded }
 }

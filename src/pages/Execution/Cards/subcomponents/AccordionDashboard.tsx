@@ -14,22 +14,10 @@ interface ActionsModal {
   action: "create" | "update";
 }
 
-export default function AccordionDashboard({ type }: { type: string }) {
+export default function AccordionDashboard({ type, sessions, setSessions }: IAccordionDashBoard) {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [actionModal, setActionModal] = useState<"create" | "update">("create");
-  const [sessions, setSessions] = useState<
-    {
-      id: string;
-      systematicStudyd: string;
-      userId: string;
-      searchString: string;
-      additionalInfo: string;
-      timestamp: string;
-      source: string;
-      numberOfRelatedStudies: number;
-    }[]
-  >([]);
 
   const getTotalStudiesRelated = () => {
     return sessions.reduce((total, item) => total + item.numberOfRelatedStudies, 0);
