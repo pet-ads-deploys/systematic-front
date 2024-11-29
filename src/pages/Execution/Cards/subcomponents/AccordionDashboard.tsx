@@ -6,6 +6,9 @@ import SessionPrev from "./SessionPrev";
 
 // hooks
 import useGetSession from "../../../../hooks/reviews/useGetSession";
+import axios from "axios";
+import useDeleteSession from "../../../../hooks/reviews/useDeleteSession";
+import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 
 interface ActionsModal {
   action: "create" | "update";
@@ -47,8 +50,13 @@ export default function AccordionDashboard({ type }: { type: string }) {
     setShowModal(true);
   };
 
-  const handleDeleteStudies = (id: string) => {
-    setSessions(sessions.filter((prevStudies) => prevStudies.id !== id));
+  const handleDeleteStudies =  async (id: string) => {
+    try {
+      await UseDeleteSession(id);
+      setSessions(sessions.filter((prevStudies) => prevStudies.id !== id));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleAccordionToggle = () => {
