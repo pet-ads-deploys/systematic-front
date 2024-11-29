@@ -12,6 +12,7 @@ import { StudyInterface } from "../../../../../public/interfaces/IStudy";
 import { TableHeadersInterface } from "../../../../../public/interfaces/ITableHeaders";
 import { useState } from "react";
 import { tableTypeEnum } from "../../../../../public/enums/tableTypeEnum";
+import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
 
 export default function Extraction() {
   const studiesData: StudyInterface[] | undefined = useFetchTableData("/data/NewStudyData.json");
@@ -28,7 +29,7 @@ export default function Extraction() {
   const { value: selectedValue, handleChange: handleSelectChange } = useInputState<string | null>(null);
   const [ searchString, setSearchString ] = useState<string>("");
 
-  if(!studiesData) return <>Studies data nor found</>
+  if(!studiesData) return <NoStudiesData/>
 
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">

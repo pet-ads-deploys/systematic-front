@@ -12,6 +12,7 @@ import { flex } from "../NovaRevisao/styles/finalizationStyles";
 import EventButton from "../../components/Buttons/EventButton";
 import FlexLayout from "../../components/ui/Flex/Flex";
 import { TableHeadersInterface } from "../../../public/interfaces/ITableHeaders";
+import { NoStudiesData } from "../../components/NotFound/NoStudiesData";
 
 export default function SearchSession() {
   const bodyData = useFetchTableData("/data/tableData.json");
@@ -25,7 +26,7 @@ export default function SearchSession() {
 }
   const { value: checkedValues, handleChange: handleCheckboxChange } = useInputState<string[]>([]);
 
-  if(!bodyData) return <>Studies data nor found</>
+  if(!bodyData) return <NoStudiesData/>
   return (
     <FlexLayout navigationType="Accordion" defaultOpen={1}>
       <Header text={"Database Name-Studies Identification"} />
