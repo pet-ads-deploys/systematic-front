@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import useCreateProtocol from "./reviews/useCreateProtocol";
 import axios from "../interceptor/interceptor";
+import { useToast } from "@chakra-ui/react";
 
 export function useSelect(initialState: string[] = [], context: string) {
   const { sendSelectData } = useCreateProtocol();
+  const toast = useToast();
 
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [selectedValues, setSelectedValues] = useState<string[]>(initialState);
@@ -34,8 +36,26 @@ export function useSelect(initialState: string[] = [], context: string) {
   };
 
   const handleSelectAddButtonClick = () => {
-    if (selectedValue === null) return;
+    if (selectedValue === null) {
+      toast({
+        title: "Empty Field",
+        description: "The field must be filled!",
+        status: "warning",
+        duration: 4500,
+        isClosable: true,
+        position: 'top'
+      });
+      return;
+    }
     if( selectedValues.includes(`${selectedValue}`)){
+      toast({
+        title: "Duplicate option",
+        description: "This option already selected!",
+        status: "warning",
+        duration: 4500,
+        isClosable: true,
+        position: 'top'
+      });
       setSelectedValue(null);
       return;
     }
