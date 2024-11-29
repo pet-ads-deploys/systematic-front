@@ -6,8 +6,6 @@ import SessionPrev from "./SessionPrev";
 
 // hooks
 import useGetSession from "../../../../hooks/reviews/useGetSession";
-import axios from "axios";
-import useDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 
 interface ActionsModal {

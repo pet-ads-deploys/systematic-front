@@ -34,16 +34,17 @@ export function useSelect(initialState: string[] = [], context: string) {
   };
 
   const handleSelectAddButtonClick = () => {
-    if (selectedValue !== null) {
-      setSelectedValues((prevSelectedValues) => {
-        
-        let data = [ ...prevSelectedValues, selectedValue ];
-        sendSelectData(data, context);
-
-        return data;
-      });
+    if (selectedValue === null) return;
+    if( selectedValues.includes(`${selectedValue}`)){
       setSelectedValue(null);
+      return;
     }
+
+    const updatedValues = [...selectedValues, selectedValue];
+    setSelectedValues(updatedValues);
+    sendSelectData(updatedValues, context);
+
+    setSelectedValue(null);
   };
 
   const handleDeleteSelect = (index: number) => {
