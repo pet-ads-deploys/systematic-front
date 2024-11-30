@@ -1,7 +1,7 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, FormControl, FormLabel, Input, Textarea, Box, IconButton, Flex, Divider } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import UseDeleteSession from "../../../hooks/reviews/useDeleteSession";
-import {useEffect } from "react";
+import {useEffect, useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useToast } from "@chakra-ui/react";
 
@@ -18,10 +18,12 @@ interface DeleteDatabaseModalProps {
         source: string, 
         numberOfRelatedStudies: number
     }[];
+    databaseName: string;
 }
 
-function DeleteDatabaseModal({ show, sessions}: DeleteDatabaseModalProps) {
+function DeleteDatabaseModal({ show, sessions, databaseName}: DeleteDatabaseModalProps) {
     const { isOpen, onClose, onOpen } = useDisclosure();
+    const [nameOfDatabase, setNameOfDatabase] = useState<string>("");
     const toast = useToast();
 
     useEffect(() => {
@@ -33,7 +35,23 @@ function DeleteDatabaseModal({ show, sessions}: DeleteDatabaseModalProps) {
         onClose();
     }
 
+    const isDatabaseNameCorrect = (name: string) => {
+        return nameOfDatabase.trim() !== name.trim();
+    }
+
     const deleteAllReferences = async () => {
+        if (isDatabaseNameCorrect(nameOfDatabase)) {
+            toast({
+                title: "Invalid Database Name",
+                description: "Please enter the correct database name to proceed.",
+                status: "error",
+                duration: 4500,
+                isClosable: true,
+                position: "top",
+            });
+            return;
+        }
+
         try {
             sessions.map(async (study) => {
                 await UseDeleteSession(study.id);
@@ -66,16 +84,32 @@ function DeleteDatabaseModal({ show, sessions}: DeleteDatabaseModalProps) {
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader color={"#263C56"}>
+                    <FormControl mt={3} display="flex" mb={4} gap={3} justifyContent="left" alignItems="center">
+                        <Flex gap={3}>
+                        <IoIosWarning size="2rem"/>
+                        <FormLabel fontWeight="bold" fontSize="larger">Delete all session studies</FormLabel>
+                        </Flex>
+                    </FormControl>
                     <ModalCloseButton onClick={close} />
                 </ModalHeader>
                 <ModalBody>
                     <Flex>
-                     <IoIosWarning width={4}/>
                      Are you sure you want to delete all references in database? This action is permanent and cannot be undone.
                     </Flex>
+                    <FormControl mt={4} mb={3}>
+                        <FormLabel>
+                            To delete data from "{databaseName}", write the database name below:
+                        </FormLabel>
+                        <Input
+                            onChange={(e) => setNameOfDatabase(e.target.value)}
+                            value={nameOfDatabase}
+                            placeholder="Enter database name"
+                            aria-label="Database name input"
+                        />
+                    </FormControl>
                 </ModalBody>
                 <Divider colorScheme="purple.400"/>
-                <ModalFooter>
+                <ModalFooter mt={3}>
                     <Flex alignItems="center" justifyContent="space-evenly" gap={2}>
                     <Button onClick={close}
                         backgroundColor={"#263C56"}
@@ -84,14 +118,16 @@ function DeleteDatabaseModal({ show, sessions}: DeleteDatabaseModalProps) {
                         _hover={{ bg: "#2A4A6D", boxShadow: "md" }}
                     >
                        Cancel</Button>
-                       <Button onClick={deleteAllReferences}
-                        backgroundColor={"#263C56"}
-                        color={"#EBF0F3"}
-                        boxShadow="sm"
-                        _hover={{ bg: "#2A4A6D", boxShadow: "md" } 
-                    }
-                    >
-                       Remove</Button>
+                       <Button
+                            onClick={deleteAllReferences}
+                            backgroundColor={"#263C56"}
+                            color={"#EBF0F3"}
+                            boxShadow="sm"
+                            _hover={{ bg: "#2A4A6D", boxShadow: "md" }}
+                            isDisabled={isDatabaseNameCorrect(databaseName)}
+                        >
+                            Remove
+                        </Button>
                     </Flex>
                 </ModalFooter>
             </ModalContent>

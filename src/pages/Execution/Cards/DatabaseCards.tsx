@@ -120,11 +120,12 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
         </Box>
       </Box>
 
-      {showDeleteModal == true && (
+      {showDeleteModal && (
         <DeleteDatabaseModal
           show={setShowDeleteModal}
           action={deleteModal}
           sessions={sessions}
+          databaseName={text}
         />
       )}
 
@@ -133,7 +134,7 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
         sessions={sessions}
         setSessions={setSessions}
       />
-      {showModal == true && (
+      {showModal && (
         <IdentificationModal
           show={setShowModal}
           action={actionModal}
