@@ -4,20 +4,9 @@ import Header from "../../components/ui/Header/Header";
 import useFetchDataBases from "../../hooks/fetch/useFetchDataBases";
 import { conteiner, dataBaseconteiner } from "./styles/Identification";
 import FlexLayout from "../../components/ui/Flex/Flex";
-import { useEffect, useState } from "react";
 
 export default function Identification() {
-  const [id, setId] = useState('');
-
-  useEffect(() => {
-    const id = localStorage.getItem("systematicReviewId");
-    if(id){
-     setId(id);
-    }
-  }, [])
-
-  const url = `http://localhost:8080/systematic-study/${id}/protocol`
-  const { databases } = useFetchDataBases(url);
+  const { databases } = useFetchDataBases();
   console.log(databases);
 
   return (

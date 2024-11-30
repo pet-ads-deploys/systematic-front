@@ -4,8 +4,6 @@ import UseDeleteSession from "../../../hooks/reviews/useDeleteSession";
 import {useEffect } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useToast } from "@chakra-ui/react";
-import useHandleExportedFiles from "../../../hooks/reviews/useHandleExportedFiles";
-
 
 interface DeleteDatabaseModalProps {
     show: (value: boolean) => void;
@@ -49,7 +47,7 @@ function DeleteDatabaseModal({ show, sessions}: DeleteDatabaseModalProps) {
                 isClosable: true,
                 position: "top",
               });
-              close();    
+              close()    
         } catch (err) {
             console.log(err);
             toast({
