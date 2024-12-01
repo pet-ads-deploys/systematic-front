@@ -4,26 +4,57 @@ import useGetSession from "./useGetSession";
 import { useToast } from "@chakra-ui/react";
 
 interface Props {
-    setSessions: React.Dispatch<SetStateAction<{id: string, systematicStudyd: string, userId: string, 
-        searchString: string, additionalInfo: string, timestamp: string, 
-        source: string, numberOfRelatedStudies: number }[]>>
+    setSessions: React.Dispatch<SetStateAction<{
+        id: string;
+        systematicStudyd: string;
+        userId: string;
+        searchString: string;
+        additionalInfo: string;
+        timestamp: string;
+        source: string;
+        numberOfRelatedStudies: number;
+    }[]>>;
     type: string;
 }
 
 const useHandleExportedFiles = ({setSessions, type}: Props) => {
-    const [showInput, setShowInput] = useState(false);
     const [ referenceFiles, setReferenceFiles ] = useState<File[]>([]);
     const [source, setSource] = useState('');
     const toast = useToast();
 
-    function handleFile(e: React.FormEvent<HTMLInputElement>) {
-        const target = e.target as HTMLInputElement & {
-            files: FileList;
+    const checkForDuplicateFile = (newFile: File) => {
+        return referenceFiles.some(
+            (file) => file.name === newFile.name && file.size === newFile.size
+        );
+    };
+
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement> | any) => {
+        let files: FileList | null = null;
+
+        if (e.target && e.target.files) {
+            files = e.target.files;
+        } else if (e.acceptedFiles) {
+            files = e.acceptedFiles;
         }
 
-        console.log(target.files);
-        setReferenceFiles( () => [...referenceFiles, target.files[0]] );
-        setShowInput(false);
+        if (files && files.length > 0) {
+            const newFile = files[0];
+
+            const isDuplicate = checkForDuplicateFile(newFile);
+
+            if (isDuplicate) {
+                toast({
+                    title: "Duplicate file",
+                    description: "This file already exists!",
+                    status: "warning",
+                    duration: 4500,
+                    isClosable: true,
+                    position: 'top'
+                });
+            } else {
+                setReferenceFiles((prevFiles) => [...prevFiles, newFile]);
+            }
+        }
     }
 
     async function sendFilesToServer() {
@@ -39,41 +70,29 @@ const useHandleExportedFiles = ({setSessions, type}: Props) => {
         };
         const id = localStorage.getItem("systematicReviewId");
         const url = `http://localhost:8080/api/v1/systematic-study/${id}/search-session`;
-        formData.append("file", referenceFiles[referenceFiles.length - 1]);
-        formData.append("data", data);
+
+        if (referenceFiles.length > 0) {
+            formData.append("file", referenceFiles[referenceFiles.length - 1]);
+            formData.append("data", data);
+        }
 
         try {
-            const response = await axios.post(url, formData, options);
-            const rejectedArticles: string[] = response.data.invalidEntries;
-
-            if (rejectedArticles.length > 0) {
-                toast({
-                    title: "Artigos rejeitados",
-                    description: `${rejectedArticles.length} artigos foram rejeitados durante a importação.`,
-                    position: "top",
-                    status: "warning",
-                    duration: 4500,
-                    isClosable: true,
-                });
-            }
+            await axios.post(url, formData, options);
 
             const searchSessions = await useGetSession(type);
             setSessions(searchSessions.data.searchSessions);
         } catch (err) {
-            console.error(err);
-            toast({
-                title: "Erro",
-                position: "top",
-                description: "Ocorreu um erro ao enviar os arquivos. Por favor, tente novamente.",
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-            });
+            console.log(err);
         }
     }
 
-  
-    return { handleFile, showInput, setShowInput, referenceFiles, setReferenceFiles, sendFilesToServer, setSource }
-}
+    return {
+        handleFile,
+        referenceFiles,
+        setReferenceFiles,
+        sendFilesToServer,
+        setSource,
+    };
+};
 
 export default useHandleExportedFiles;

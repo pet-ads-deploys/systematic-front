@@ -11,6 +11,7 @@ import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStud
 import { btnStyles, conteiner, flex, inputconteiner, tableconteiner, textArea } from "../styles/finalizationStyles";
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
+import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
 
 export default function Finalization() {
   const bodyData = useFetchTableData("/data/tableData.json");
@@ -25,7 +26,7 @@ export default function Finalization() {
   const { value: selectedValue, handleChange: handleSelectChange } = useInputState<string | null>(null);
   const { value: checkedValues, handleChange: handleCheckboxChange } = useInputState<string[]>([]);
 
-  if(!bodyData) return <>Studies data nor found</>
+  if(!bodyData) return <NoStudiesData/>
 
   return (
     <FlexLayout defaultOpen={2} navigationType="Accordion">

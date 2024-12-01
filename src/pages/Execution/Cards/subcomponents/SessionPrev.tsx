@@ -1,5 +1,5 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Flex, Button, Text } from "@chakra-ui/react";
+import { Flex, Button, Text, Spacer } from "@chakra-ui/react";
 import { FaRegEye } from "react-icons/fa6";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -68,9 +68,7 @@ const SessionPrev = ({
             {numberOfStudies}
         </Text>
         </Flex>
-     
-
-      <Flex justifyContent="flex-end" mt={2}>
+      <Flex justifyContent="flex-end" mt={2} gap="5px">
      
 
         {numberOfStudies && numberOfStudies > 0 ? (
@@ -79,13 +77,12 @@ const SessionPrev = ({
             to={`/newRevision/identification/${sessionId}`}
             flex={1}
             colorScheme="gray"
-            mr={2}
             height={"35px"}
           >
             <FaRegEye />
           </Button>
         ) : (
-          <Button flex={1} colorScheme="gray" mr={2} height={"35px"} onClick={() => handleToastAlert()}>
+          <Button flex={1} colorScheme="gray" height={"35px"} onClick={() => handleToastAlert()}>
             <IoEyeOffOutline />
           </Button>
         )}
@@ -93,7 +90,6 @@ const SessionPrev = ({
           flex={1}
           colorScheme="gray"
           height={"35px"}
-          mr={2}
           onClick={() => handleOpenModal({ action: "update" })}
         >
           <EditIcon />
@@ -103,7 +99,6 @@ const SessionPrev = ({
           flex={1}
           colorScheme="gray"
           height={"35px"}
-          mr={2}
           onClick={() => handleDelete(sessionId)}
         >
           <DeleteIcon />

@@ -3,6 +3,7 @@ import DynamicTable from "../../Tables/DynamicTable";
 import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
 import useInputState from "../../../hooks/useInputState";
 import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
+import {NoStudiesData} from "../../NotFound/NoStudiesData";
 
 export default function SimilarStudies() {
   const studies = useFetchTableData("/data/NewStudyData.json");
@@ -16,7 +17,7 @@ export default function SimilarStudies() {
 }
   const { value: checkedValues } = useInputState<string[]>([]);
 
-  if(!studies) return <>Studies data nor found</>
+  if(!studies) return <NoStudiesData/>
 
   return (
     <Container>

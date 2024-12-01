@@ -19,6 +19,7 @@ import useGetAllReviewArticles from "../../../../hooks/useGetAllReviewArticles";
 import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
 import StudySelectionContext from "../../../../components/Context/StudiesSelectionContext";
+import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
 
 export default function Selection<U extends StudyInterface | KeywordInterface>() {
   const studiesData: U[] | undefined = useFetchTableData("/data/NewStudyData.json");
@@ -37,7 +38,7 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
   let articles: ArticleInterface[] = [];
   articles = selectionContext.articles;
 
-  if(!studiesData) return <>Studies data nor found</>
+  if(!studiesData) return <NoStudiesData/>
 
   return (
     <AppProvider>

@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "../../interceptor/interceptor";
 
-const useFetchDataBases = (url: string) => {
+const useFetchDataBases = () => {
   const [databases, setdatabase] = useState<string[]>([]);
+  const id = localStorage.getItem("systematicReviewId");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response = await axios.get(url, {withCredentials: true});
+        let response = await axios.get(`http://localhost:8080/systematic-study/${id}/protocol`, { withCredentials: true });
         setdatabase(response.data.content.informationSources);
-      } 
-      
-      catch (error) {
+      } catch (error) {
         console.error("Erro ao buscar os dados:", error);
       }
     };
-    
+
     fetchData();
-  }, [url]);
+  }, []);
 
   return { databases };
 };

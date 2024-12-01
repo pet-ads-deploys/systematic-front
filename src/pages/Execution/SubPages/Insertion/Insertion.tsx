@@ -11,6 +11,7 @@ import DynamicTable from "../../../../components/Tables/DynamicTable";
 import useFetchTableData from "../../../../hooks/seachAppropriateStudy/useFetchStudyData";
 import { btnconteiner, conteiner, inputconteiner } from "../../styles/executionStyles";
 import { TableHeadersInterface } from "../../../../../public/interfaces/ITableHeaders";
+import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
 
 export default function Insertion() {
   const bodyData = useFetchTableData("/data/tableData.json");
@@ -25,7 +26,7 @@ export default function Insertion() {
   const { value: selectedValue, handleChange: handleSelectChange } = useInputState<string | null>(null);
   const { value: checkedValues, handleChange: handleCheckboxChange } = useInputState<string[]>([]);
 
-  if(!bodyData) return <>Studies data nor found</>
+  if(!bodyData) return <NoStudiesData/>
 
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">

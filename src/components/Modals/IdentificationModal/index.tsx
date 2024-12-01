@@ -1,8 +1,9 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, FormControl, FormLabel, Input, Textarea, Box, IconButton, Flex } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { SetStateAction, useEffect } from "react";
-import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 import useHandleExportedFiles from "../../../hooks/reviews/useHandleExportedFiles";
+import DragAndDrop from "../../Inputs/DragAndDropInput";
 
 interface IdentificationModalProps {
     show: (value: boolean) => void;
@@ -16,7 +17,7 @@ interface IdentificationModalProps {
 function IdentificationModal({ show, action, type, setSessions }: IdentificationModalProps) {
     const { isOpen, onClose, onOpen } = useDisclosure();
 
-    const { handleFile, setShowInput, showInput, referenceFiles, setReferenceFiles, 
+    const { handleFile, referenceFiles, setReferenceFiles, 
         sendFilesToServer, setSource } = useHandleExportedFiles({setSessions: setSessions, type});
 
     useEffect(() => {
@@ -37,10 +38,6 @@ function IdentificationModal({ show, action, type, setSessions }: Identification
         const day = String(today.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
-
-    function addReferenceFile() {
-        setShowInput(true);
-    }
 
     function removeReferenceFile(index: number) {
         setReferenceFiles(referenceFiles.filter((_, i) => i !== index));
@@ -81,16 +78,13 @@ function IdentificationModal({ show, action, type, setSessions }: Identification
                                     aria-label="Remove file"
                                     icon={<DeleteIcon />}
                                     ml={2}
+                                    gap={1}
                                     onClick={() => removeReferenceFile(index)}
                                 />
                             </Flex>
                         ))}
 
-                        {showInput ? <Input type="file" onChange={handleFile}/> : <IconButton
-                            aria-label="Add file"
-                            icon={<AddIcon />}
-                            onClick={addReferenceFile}
-                        />}
+                        <DragAndDrop handleFileChange={handleFile} />
                     </FormControl>}
                 </ModalBody>
                 <ModalFooter>
