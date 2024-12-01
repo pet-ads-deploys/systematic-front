@@ -1,14 +1,21 @@
-import { useEffect, useState } from "react";
-import { Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Flex, Text, Box } from "@chakra-ui/react";
+import { useState } from "react";
 import { Accordionbtn, accordion } from "../../styles/CardsStyle";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
+  Flex,
+  Text,
+  Box,
+} from "@chakra-ui/react";
 import IdentificationModal from "../../../../components/Modals/IdentificationModal";
 import SessionPrev from "./SessionPrev";
-
-// hooks
-import useGetSession from "../../../../hooks/reviews/useGetSession";
+import IAccordionDashBoard from '../../../../../public/interfaces/IAccordionDashboard'
 import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 
-interface ActionsModal {
+interface actionsModal {
   action: "create" | "update";
 }
 
@@ -18,40 +25,33 @@ export default function AccordionDashboard({ type, sessions, setSessions }: IAcc
   const [actionModal, setActionModal] = useState<"create" | "update">("create");
 
   const getTotalStudiesRelated = () => {
-    return sessions.reduce((total, item) => total + item.numberOfRelatedStudies, 0);
+    let totalStudies = 0;
+
+    sessions.map((item) => {
+      totalStudies += item.numberOfRelatedStudies;
+    });
+
+    return totalStudies;
   };
 
-  useEffect(() => {
-    async function fetchSessions() {
-      const response = await useGetSession(type);
-      console.log(response.data.searchSessions);
-      setSessions(response.data.searchSessions);
-    }
-
-    fetchSessions();
-  }, [type, sessions]);
-
-  const handleOpenModal = ({ action }: ActionsModal) => {
+  const handleOpenModal = ({ action }: actionsModal) => {
     setActionModal(action);
     setShowModal(true);
   };
 
-  const handleDeleteStudies =  async (id: string) => {
-    try {
-      await UseDeleteSession(id);
-      setSessions(sessions.filter((prevStudies) => prevStudies.id !== id));
-    } catch (err) {
-      console.log(err);
-    }
+  const handleDeleteStudies = (id: string) => {
+    UseDeleteSession(id);
+    setSessions(sessions.filter((prevStudies) => prevStudies.id != id));
   };
 
   const handleAccordionToggle = () => {
+
     setIsAccordionOpen(!isAccordionOpen);
   };
 
   return (
     <Accordion allowToggle sx={accordion} onChange={handleAccordionToggle}>
-      {showModal && (
+      {showModal == true && (
         <IdentificationModal
           show={setShowModal}
           action={actionModal}
@@ -66,7 +66,7 @@ export default function AccordionDashboard({ type, sessions, setSessions }: IAcc
         </AccordionButton>
 
         <AccordionPanel>
-          {sessions.length > 0 ? (
+          {sessions && sessions.length > 0 ? (
             <>
               <Flex
                 flex={1}
@@ -77,27 +77,34 @@ export default function AccordionDashboard({ type, sessions, setSessions }: IAcc
                 gap={"3rem"}
               >
                 <Flex>
-                  <Text textAlign="left" whiteSpace={"nowrap"} overflow={"hidden"}>
+                  <Text
+                    
+                    textAlign="left"
+                    whiteSpace={"nowrap"}
+                    overflow={"hidden"}
+                  >
                     Date
                   </Text>
                 </Flex>
 
                 <Flex flex={1}>
-                  <Text textAlign="center">Studies</Text>
+                  <Text textAlign="center">
+                    Studies
+                  </Text>
                 </Flex>
               </Flex>
-              <Box maxH="5.5rem" overflowY='auto' pr={2}>
-              {sessions.map((item) => (
-                <SessionPrev
-                  key={item.id}
-                  sessionId={item.id}
-                  handleOpenModal={handleOpenModal}
-                  handleDelete={handleDeleteStudies}
-                  timestamp={item.timestamp}
-                  numberOfStudies={item.numberOfRelatedStudies}
-                />
-              ))}
-              </Box>
+              {sessions.map((item, index) => {
+                return (
+                  <SessionPrev
+                    key={index}
+                    sessionId={item.id}
+                    handleOpenModal={handleOpenModal}
+                    handleDelete={handleDeleteStudies}
+                    timestamp={item.timestamp}
+                    numberOfStudies={item.numberOfRelatedStudies}
+                  />
+                );
+              })}
               <Box>
                 <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
               </Box>
