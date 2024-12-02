@@ -1,9 +1,10 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, FormControl, FormLabel, Input, Textarea, Box, IconButton, Flex } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { SetStateAction, useEffect } from "react";
+import { SetStateAction, useContext, useEffect } from "react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import useHandleExportedFiles from "../../../hooks/reviews/useHandleExportedFiles";
 import DragAndDrop from "../../Inputs/DragAndDropInput";
+import StudySelectionContext from "../../Context/StudiesSelectionContext";
 
 interface IdentificationModalProps {
     show: (value: boolean) => void;
@@ -16,7 +17,9 @@ interface IdentificationModalProps {
 
 function IdentificationModal({ show, action, type, setSessions }: IdentificationModalProps) {
     const { isOpen, onClose, onOpen } = useDisclosure();
-
+    const selectionContext = useContext(StudySelectionContext);
+    if(!selectionContext) throw new Error("Failed to get selection context on identification modal!");
+    const reloadArticles = selectionContext.reloadArticles;
     const { handleFile, referenceFiles, setReferenceFiles, 
         sendFilesToServer, setSource } = useHandleExportedFiles({setSessions: setSessions, type});
 
@@ -27,6 +30,7 @@ function IdentificationModal({ show, action, type, setSessions }: Identification
 
     function close() {
         sendFilesToServer();
+        reloadArticles();
         show(false);
         onClose();
     }
