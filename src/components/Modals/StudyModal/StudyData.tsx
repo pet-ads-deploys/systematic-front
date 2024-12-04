@@ -39,17 +39,17 @@ export default function StudyDataFiel({ studyData, type }: IStudyDataFiel) {
                     </Text>
                   </Flex>
 
-                  <Text fontSize={"35"} fontWeight={"bold"} fontFamily={"Boboni"} lineHeight="1" align={"center"}>
+                  <Text fontSize={"35"} fontWeight={"bold"} fontFamily={"Boboni"} lineHeight="2.3rem" align={"center"}>
                     {studyData.title}
                   </Text>
 
-                  <Text p="1" fontWeight={"Bold"} align={"center"}>
+                  <Text p="1" lineHeight={'1.5rem'} fontWeight={"Bold"} align={"center"}>
                     {studyData.authors}
                   </Text>
 
                 <Flex fontFamily={"Literata"} flexDirection={"column"} align={"right"} gap="15px" pb="60px">
-                    <Text fontSize={"xxl"}><b>Abstract.</b> {studyData.abstract}</Text> 
-                    <Text fontSize={"xxl"}><b>Keywords.</b> {studyData.keywords}</Text> 
+                    <Text fontSize={"xxl"} lineHeight={'1.5rem'} ><b>Abstract.</b> {studyData.abstract}</Text> 
+                    <Text fontSize={"xxl"} lineHeight={'1.5rem'}><b>Keywords.</b> {studyData.keywords}</Text> 
                 </Flex>
 
               </Flex>
