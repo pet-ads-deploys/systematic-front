@@ -5,11 +5,14 @@ import { StudyInterface } from "../../../../../public/interfaces/IStudy";
 import { useContext, useEffect } from "react";
 import AppContext from "../../../../components/Context/AppContext";
 import useGetAllReviewArticles from "../../../../hooks/useGetAllReviewArticles";
-import { StudySelectionProvider } from "../../../../components/Context/StudiesSelectionContext";
+import StudySelectionContext, { StudySelectionProvider } from "../../../../components/Context/StudiesSelectionContext";
 
 export default function StudySelectionArea() {
   const context = useContext(AppContext);
-  const studyData = useGetAllReviewArticles();
+  const selectionContext = useContext(StudySelectionContext);
+  if(!selectionContext) throw new Error("Failed to get selection context on study Selection area");
+  const reload = selectionContext.reload;
+  const studyData = useGetAllReviewArticles(reload);
   const showSelectionModal = context?.showSelectionModal;
   const setSelectionStudies = context?.setSelectionStudies;
   const studyIndex = context?.selectionStudyIndex;

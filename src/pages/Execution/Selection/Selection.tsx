@@ -16,6 +16,7 @@ import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface
 import { useContext, useState } from "react";
 import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
 import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
+import { StudySelectionProvider } from "../../../components/Context/StudiesSelectionContext";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
@@ -42,33 +43,35 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
 
   return (
     <AppProvider>
-      <FlexLayout defaultOpen={1} navigationType="Accordion">
-        <Header text="Selection" />
-          <Box sx={conteiner}>
-            <Box sx={inputconteiner}>
-              <InputText type="search" placeholder="Insert article's name" nome="search" onChange={(e) => setSearchString(e.target.value)}/>
-              
-              <SelectInput
-                names={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
-                values={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
-                onSelect={handleSelectChange}
-                selectedValue={selectedStatus}
-                page={"selection"}
-              />
-
-              <ComboBox
-                isDisabled={false}
-                text="filter options"
-                options={Object.values(headerData)}
-              />
-            </Box>
-          </Box>
+      <StudySelectionProvider>
+        <FlexLayout defaultOpen={1} navigationType="Accordion">
+          <Header text="Selection" />
+            <Box sx={conteiner}>
+              <Box sx={inputconteiner}>
+                <InputText type="search" placeholder="Insert article's name" nome="search" onChange={(e) => setSearchString(e.target.value)}/>
                 
-          <Flex justifyContent='center' alignItems={'center'} flexDirection={'column'}>
-            <ArticlesTable articles={articles} />
-            <StudySelectionArea />
-          </Flex>
-      </FlexLayout>
+                <SelectInput
+                  names={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
+                  values={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
+                  onSelect={handleSelectChange}
+                  selectedValue={selectedStatus}
+                  page={"selection"}
+                />
+
+                <ComboBox
+                  isDisabled={false}
+                  text="filter options"
+                  options={Object.values(headerData)}
+                />
+              </Box>
+            </Box>
+                  
+            <Flex justifyContent='center' alignItems={'center'} flexDirection={'column'}>
+              <ArticlesTable articles={articles} />
+              <StudySelectionArea />
+            </Flex>
+        </FlexLayout>
+      </StudySelectionProvider>
     </AppProvider>
   );
 }

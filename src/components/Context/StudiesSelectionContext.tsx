@@ -9,6 +9,7 @@ interface AppContextType {
     setIsExcluded: React.Dispatch<React.SetStateAction<boolean>>;
     articles: ArticleInterface[];
     reloadArticles: () => void;
+    reload: boolean;
 }
 
 const StudySelectionContext = createContext<AppContextType | undefined>(undefined);
@@ -48,7 +49,8 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({ children })
         isExcluded,
         setIsExcluded,
         articles,
-        reloadArticles
+        reloadArticles,
+        reload
       }}
     >
       {children}
