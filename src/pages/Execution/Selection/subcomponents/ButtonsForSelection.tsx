@@ -1,14 +1,14 @@
 import { Button, Flex, IconButton, useDisclosure } from "@chakra-ui/react";
-import { boxconteiner, buttonconteiner, conteiner } from "../../../styles/BtnSelectionStyles";
-import ComboBox from "../../../../../components/Inputs/ComboBox";
+import { boxconteiner, buttonconteiner, conteiner } from "../../styles/BtnSelectionStyles";
+import ComboBox from "../../../../components/Inputs/ComboBox";
 import { FaPen } from "react-icons/fa6";
 import { useContext } from "react";
-import AppContext from "../../../../../components/Context/AppContext";
-import StudySelectionContext from "../../../../../components/Context/StudiesSelectionContext";
-import { StudyInterface } from "../../../../../../public/interfaces/IStudy";
-import StudyEdtionModal from "../../../../../components/Modals/StudyModal/StudyEdtionModal";
-import useFetchInclusionCriteria from "../../../../../hooks/fetch/useFetchInclusionCriteria";
-import useFetchExclusionCriteria from "../../../../../hooks/fetch/useFetchExclusionCriterias";
+import AppContext from "../../../../components/Context/AppContext";
+import StudySelectionContext from "../../../../components/Context/StudiesSelectionContext";
+import { StudyInterface } from "../../../../../public/interfaces/IStudy";
+import StudyEdtionModal from "../../../../components/Modals/StudyModal/StudyEdtionModal";
+import useFetchInclusionCriteria from "../../../../hooks/fetch/useFetchInclusionCriteria";
+import useFetchExclusionCriteria from "../../../../hooks/fetch/useFetchExclusionCriterias";
 
 export default function ButtonsForSelection() {
   const context = useContext(AppContext);

@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import FlexLayout from "../../components/ui/Flex/Flex";
-import Header from "../../components/ui/Header/Header";
+import FlexLayout from "../../../components/ui/Flex/Flex";
+import Header from "../../../components/ui/Header/Header";
 import {Flex} from "@chakra-ui/react";
-import useGetSessionStudies from "../../hooks/useGetSessionStudies";
-import ArticlesTable from "../../components/Tables/ArticlesTable/ArticlesTable";
-import ArticleInterface from "../../../public/interfaces/ArticleInterface";
+import useGetSessionStudies from "../../../hooks/useGetSessionStudies";
+import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
+import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 
 export default function IdentificationSession() {
     let articles: ArticleInterface[] = [];

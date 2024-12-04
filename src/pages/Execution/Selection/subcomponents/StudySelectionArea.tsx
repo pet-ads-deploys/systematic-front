@@ -1,11 +1,11 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import ButtonsForSelection from "./ButtonsForSelection";
-import StudyDataFiel from "../../../../../components/Modals/StudyModal/StudyData";
-import { StudyInterface } from "../../../../../../public/interfaces/IStudy";
+import StudyDataFiel from "../../../../components/Modals/StudyModal/StudyData";
+import { StudyInterface } from "../../../../../public/interfaces/IStudy";
 import { useContext, useEffect } from "react";
-import AppContext from "../../../../../components/Context/AppContext";
-import useGetAllReviewArticles from "../../../../../hooks/useGetAllReviewArticles";
-import { StudySelectionProvider } from "../../../../../components/Context/StudiesSelectionContext";
+import AppContext from "../../../../components/Context/AppContext";
+import useGetAllReviewArticles from "../../../../hooks/useGetAllReviewArticles";
+import { StudySelectionProvider } from "../../../../components/Context/StudiesSelectionContext";
 
 export default function StudySelectionArea() {
   const context = useContext(AppContext);

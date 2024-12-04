@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
-import DataBaseCard from "./Cards/DatabaseCards";
-import Header from "../../components/ui/Header/Header";
-import useFetchDataBases from "../../hooks/fetch/useFetchDataBases";
-import { conteiner, dataBaseconteiner } from "./styles/Identification";
-import FlexLayout from "../../components/ui/Flex/Flex";
-import StudySelectionContext, { StudySelectionProvider } from "../../components/Context/StudiesSelectionContext";
+import DataBaseCard from "../Cards/DatabaseCards";
+import Header from "../../../components/ui/Header/Header";
+import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
+import { conteiner, dataBaseconteiner } from "../styles/Identification";
+import FlexLayout from "../../../components/ui/Flex/Flex";
+import StudySelectionContext, { StudySelectionProvider } from "../../../components/Context/StudiesSelectionContext";
 
 export default function Identification() {
   const { databases } = useFetchDataBases();
