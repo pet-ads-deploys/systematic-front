@@ -1,0 +1,14 @@
+.wrapper {
+    background-color: #263C56;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    width: 250px;
+    margin: 2em;
+    border-radius: 30px;
+}
+
+.closeBtn {
+    margin-top: 20px;
+    margin-left: 10px;
+}

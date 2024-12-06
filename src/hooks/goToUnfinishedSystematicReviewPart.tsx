@@ -53,25 +53,25 @@ export default async function goToUnfinishedSystematicReviewPart(revisionId: str
 
     
     if(!isProtocolPartOneFinished(protocolData)) {
-        window.location.href = `http://localhost:5173/#/newRevision/protocol/${revisionId}`;
+        window.location.href = `http://localhost:5173/#/newReview/protocol/${revisionId}`;
       }
 
       else if (isPicocInitialized(protocolData) && !isPicocFinished(protocolData)){
-        window.location.href = `http://localhost:5173/#/newRevision/protocol/${revisionId}`;
+        window.location.href = `http://localhost:5173/#/newReview/protocol/${revisionId}`;
       }
 
 
       else if (!isProtocolPartTwoFinished(protocolData)) {
-                  window.location.href = `http://localhost:5173/#/newRevision/protocolpartTwo/${revisionId}`;
+                  window.location.href = `http://localhost:5173/#/newReview/protocolpartTwo/${revisionId}`;
                 }
                 
       else if (!isProtocolPartThreeFinished(protocolData)) {
-        window.location.href = `http://localhost:5173/#/newRevision/protocolpartThree/${revisionId}`;
+        window.location.href = `http://localhost:5173/#/newReview/protocolpartThree/${revisionId}`;
       }
         
     //   else if(!isSelectionProcessFinished(studiesData)) {
-    //     window.location.href = ` http://localhost:5173/#/newRevision/selection`;
+    //     window.location.href = ` http://localhost:5173/#/newReview/selection`;
     //   }
-      else if (!isExtractionProcessFinished(studiesData)) window.location.href = `http://localhost:5173/#/newRevision/extraction`;
-      else window.location.href = `http://localhost:5173/#/newRevision/finalization`;
+      else if (!isExtractionProcessFinished(studiesData)) window.location.href = `http://localhost:5173/#/newReview/extraction`;
+      else window.location.href = `http://localhost:5173/#/newReview/finalization`;
 }

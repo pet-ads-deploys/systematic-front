@@ -32,12 +32,12 @@ export default function ProtocolPartThree() {
 
   async function handleData() {
       await useCreateProtocolThree(analysis, id);
-      navigate("/newRevision/identification");
+      navigate("/newReview/identification");
   }
 
   async function handleDataReturn() {
     await useCreateProtocolThree(analysis, id);
-    navigate(`/newRevision/protocolpartTwo/${id}`);
+    navigate(`/newReview/protocolpartTwo/${id}`);
   }
 
   function handleAnalysisAndSynthesis(e: React.ChangeEvent<HTMLTextAreaElement>) {

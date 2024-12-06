@@ -10,7 +10,7 @@ interface IDefaultNavigation {
 
 const routes = [
   { path: "/user", icon: IoLibrarySharp, title: "My reviews" },
-  { path: "/newRevision", icon: SiAddthis, title: "New Revision" }
+  { path: "/newReview", icon: SiAddthis, title: "New Revision" }
 ];
 
 export default function DefaultNavigation({ navSize }: IDefaultNavigation) {

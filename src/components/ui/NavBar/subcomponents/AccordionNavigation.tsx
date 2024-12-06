@@ -18,7 +18,7 @@ export default function AccordionNav({ navSize, defaultOpen }: IAccordion) {
           navSize={navSize}
           title="Planning"
           names={["Protocol"]}
-          basePath="/newRevision"
+          basePath="/newReview"
           index={0}
           defaultOpen={defaultOpen}
         />
@@ -26,7 +26,7 @@ export default function AccordionNav({ navSize, defaultOpen }: IAccordion) {
           navSize={navSize}
           title="Execution"
           names={["KeyWords", "Insertion", "Identification", "Selection", "Extraction"]}
-          basePath="/newRevision"
+          basePath="/newReview"
           index={1}
           defaultOpen={defaultOpen}
         />
@@ -34,7 +34,7 @@ export default function AccordionNav({ navSize, defaultOpen }: IAccordion) {
           navSize={navSize}
           title="Summarization"
           names={["Graphics", "Visualization", "Finalization"]}
-          basePath="/newRevision"
+          basePath="/newReview"
           index={2}
           defaultOpen={defaultOpen}
         />

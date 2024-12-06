@@ -66,7 +66,7 @@ export default function Insertion() {
           tableType={"selection"}
         />
         <Box sx={btnconteiner}>
-          <NavButton text={"Back"} path={"/newRevision/identification"} w={"200px"} />
+          <NavButton text={"Back"} path={"/newReview/identification"} w={"200px"} />
           <EventButton
             event={function (): void {
               console.log("Adicionando novo paper!");

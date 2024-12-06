@@ -11,7 +11,7 @@ const RenderCreateNewReview = () => {
 
             <Text fontSize="lg" color="gray.500" mb={4}> How about creating a new one? </Text>
 
-            <NavButton text='Create review' path='/newRevision' ml='0rem' />
+            <NavButton text='Create review' path='/newReview' ml='0rem' />
         </Flex>
     )
 }

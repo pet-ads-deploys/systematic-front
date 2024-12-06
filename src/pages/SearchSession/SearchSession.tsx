@@ -68,7 +68,7 @@ export default function SearchSession() {
             filteredColumns={checkedValues}
             tableType={"selection"}
           />
-          <NavButton text={"Back"} path={"/newRevision/identification"} sx={navbtnStyles} />
+          <NavButton text={"Back"} path={"/newReview/identification"} sx={navbtnStyles} />
         </Box>
       </Box>
     </FlexLayout>

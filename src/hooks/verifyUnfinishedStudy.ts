@@ -71,8 +71,8 @@ export default async function verifyUnfinishedStudy(revisionId: string) {
       else return 'Extraction';
         
     //   else if(!isSelectionProcessFinished(studiesData)) {
-    //     window.location.href = ` http://localhost:5173/#/newRevision/selection`;
+    //     window.location.href = ` http://localhost:5173/#/newReview/selection`;
     //   }
-    //   else if (!isExtractionProcessFinished(studiesData)) window.location.href = ` http://localhost:5173/#/newRevision/extraction`;
-    //   else window.location.href = ` http://localhost:5173/#/newRevision/finalization`;
+    //   else if (!isExtractionProcessFinished(studiesData)) window.location.href = ` http://localhost:5173/#/newReview/extraction`;
+    //   else window.location.href = ` http://localhost:5173/#/newReview/finalization`;
 }

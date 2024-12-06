@@ -43,20 +43,20 @@ function App() {
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/serverError" element={<ServerError />} />
 
-              <Route path="/newRevision" element={<ProtectedRoute element={<NovaRevisao />} />} />
-                <Route path="/newRevision/protocol/:id" element={<ProtectedRoute element={<Protocol />} />} />
-                <Route path="/newRevision/protocolpartTwo/:id" element={<ProtectedRoute element={<ProtocolPartTwo />} />} />
-                <Route path="/newRevision/protocolpartThree/:id" element={<ProtectedRoute element={<ProtocolPartThree />} />} />
-                <Route path="/newRevision/identification" element={<ProtectedRoute element={<Identification />} />} />
-                <Route path="/newRevision/identification/:session" element={<IdentificationSession/>} />
-                <Route path="/newRevision/keywords" element={<ProtectedRoute element={<KeyWordScreen />} />} />
-                <Route path="/newRevision/selection" element={<ProtectedRoute element={<Selection />} />} />
-                <Route path="/newRevision/extraction" element={<ProtectedRoute element={<Extraction />} />} />
-                <Route path="/newRevision/insertion" element={<ProtectedRoute element={<Insertion />} />} />
-                <Route path="/newRevision/graphics" element={<ProtectedRoute element={<Graphics />} />} />
-                <Route path="/newRevision/finalization" element={<ProtectedRoute element={<Finalization />} />} />
-                <Route path="/newRevision/visualization" element={<ProtectedRoute element={<Visualization />} />} />
-                <Route path="/newRevision/searchSession" element={<ProtectedRoute element={<SearchSession />} />} />
+              <Route path="/newReview" element={<ProtectedRoute element={<NovaRevisao />} />} />
+                <Route path="/newReview/protocol/:id" element={<ProtectedRoute element={<Protocol />} />} />
+                <Route path="/newReview/protocolpartTwo/:id" element={<ProtectedRoute element={<ProtocolPartTwo />} />} />
+                <Route path="/newReview/protocolpartThree/:id" element={<ProtectedRoute element={<ProtocolPartThree />} />} />
+                <Route path="/newReview/identification" element={<ProtectedRoute element={<Identification />} />} />
+                <Route path="/newReview/identification/:session" element={<IdentificationSession/>} />
+                <Route path="/newReview/keywords" element={<ProtectedRoute element={<KeyWordScreen />} />} />
+                <Route path="/newReview/selection" element={<ProtectedRoute element={<Selection />} />} />
+                <Route path="/newReview/extraction" element={<ProtectedRoute element={<Extraction />} />} />
+                <Route path="/newReview/insertion" element={<ProtectedRoute element={<Insertion />} />} />
+                <Route path="/newReview/graphics" element={<ProtectedRoute element={<Graphics />} />} />
+                <Route path="/newReview/finalization" element={<ProtectedRoute element={<Finalization />} />} />
+                <Route path="/newReview/visualization" element={<ProtectedRoute element={<Visualization />} />} />
+                <Route path="/newReview/searchSession" element={<ProtectedRoute element={<SearchSession />} />} />
 
             </Routes>
           </StudySelectionProvider>
@@ -81,18 +81,18 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/serverError" element={<ServerError />} />
 
-          <Route path="/newRevision" element={<ProtectedRoute element={<NovaRevisao />} />} />
-            <Route path="/newRevision/protocol" element={<ProtectedRoute element={<Protocol />} />} />
-            <Route path="/newRevision/protocolpartTwo" element={<ProtectedRoute element={<ProtocolPartTwo />} />} />
-            <Route path="/newRevision/identification" element={<ProtectedRoute element={<Identification />} />} />
-            <Route path="/newRevision/keywords" element={<ProtectedRoute element={<KeyWordScreen />} />} />
-            <Route path="/newRevision/selection" element={<ProtectedRoute element={<Selection />} />} />
-            <Route path="/newRevision/extraction" element={<ProtectedRoute element={<Extraction />} />} />
-            <Route path="/newRevision/insertion" element={<ProtectedRoute element={<Insertion />} />} />
-            <Route path="/newRevision/graphics" element={<ProtectedRoute element={<Graphics />} />} />
-            <Route path="/newRevision/finalization" element={<ProtectedRoute element={<Finalization />} />} />
-            <Route path="/newRevision/searchSession" element={<ProtectedRoute element={<SearchSession />} />} />
-            {/* <Route path="/newRevision/protocolpartThree" element={<ProtocolPartThree />} /> */}
+          <Route path="/newReview" element={<ProtectedRoute element={<NovaRevisao />} />} />
+            <Route path="/newReview/protocol" element={<ProtectedRoute element={<Protocol />} />} />
+            <Route path="/newReview/protocolpartTwo" element={<ProtectedRoute element={<ProtocolPartTwo />} />} />
+            <Route path="/newReview/identification" element={<ProtectedRoute element={<Identification />} />} />
+            <Route path="/newReview/keywords" element={<ProtectedRoute element={<KeyWordScreen />} />} />
+            <Route path="/newReview/selection" element={<ProtectedRoute element={<Selection />} />} />
+            <Route path="/newReview/extraction" element={<ProtectedRoute element={<Extraction />} />} />
+            <Route path="/newReview/insertion" element={<ProtectedRoute element={<Insertion />} />} />
+            <Route path="/newReview/graphics" element={<ProtectedRoute element={<Graphics />} />} />
+            <Route path="/newReview/finalization" element={<ProtectedRoute element={<Finalization />} />} />
+            <Route path="/newReview/searchSession" element={<ProtectedRoute element={<SearchSession />} />} />
+            {/* <Route path="/newReview/protocolpartThree" element={<ProtocolPartThree />} /> */}
         </Routes>
       </AppProvider>
     </Router>

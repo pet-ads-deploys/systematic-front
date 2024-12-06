@@ -113,7 +113,7 @@ const useCreateReview = () => {
             
             localStorage.setItem('systematicReviewId', reviewId);
 
-            navigate(`/newRevision/protocol/${reviewId}`);
+            navigate(`/newReview/protocol/${reviewId}`);
         }
     }
 
@@ -122,7 +122,7 @@ const useCreateReview = () => {
 
         else {
             await useCreateReviewPut( { title, description, id } )
-            navigate(`/newRevision/protocol/${id}`);
+            navigate(`/newReview/protocol/${id}`);
         }
     }
 
