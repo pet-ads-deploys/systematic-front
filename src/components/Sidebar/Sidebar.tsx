@@ -17,7 +17,7 @@ const Sidebar = ({type}: Props) => {
     <motion.div 
       className={ isOpen ? Style.wrapper : Style.collapsed}
       animate={{
-        width: isOpen ? '250px' : '20px',
+        width: isOpen ? '250px' : '0px',
         borderRadius: isOpen ? '30px' : '50%'
       }}
       transition={{ type: 'just', duration: 0.3 }}
@@ -26,14 +26,14 @@ const Sidebar = ({type}: Props) => {
       ( 
       <>
         <Box className={Style.closeBtn}>
-            <CloseButton handleToggle={() => setIsOpen(!isOpen)} />
+            <CloseButton isOpen={isOpen} handleToggle={() => setIsOpen(!isOpen)} />
         </Box>
 
         <Navigation type={type}/> 
       </>) :
 
         (
-          <CloseButton className={Style.collapsedBtn} handleToggle={() => setIsOpen(!isOpen)} />
+          <CloseButton isOpen={isOpen} className={Style.collapsedBtn} handleToggle={() => setIsOpen(!isOpen)} />
         )
       }
     </motion.div>
