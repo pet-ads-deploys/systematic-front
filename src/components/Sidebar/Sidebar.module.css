@@ -13,6 +13,13 @@
     margin-left: 10px;
 }
 
+.collapsed {
+    display: flex;
+    flex-direction: column;
+    align-self: self-start;
+    margin: 3.3em 0 0 2.6em;
+}
+
 .navDiv {
     display: flex;
     flex-direction: column;
