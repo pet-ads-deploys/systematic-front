@@ -17,7 +17,7 @@ const Sidebar = ({type}: Props) => {
     <motion.div 
       className={ isOpen ? Style.wrapper : Style.collapsed}
       animate={{
-        width: isOpen ? '250px' : '60px',
+        width: isOpen ? '250px' : '20px',
         borderRadius: isOpen ? '30px' : '50%'
       }}
       transition={{ type: 'just', duration: 0.3 }}
