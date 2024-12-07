@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Box, Button } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
+import { Box } from '@chakra-ui/react';
 import Style from './Sidebar.module.css';
 import CloseButton from './subComponents/CloseButton';
 import Navigation from './Navigation';

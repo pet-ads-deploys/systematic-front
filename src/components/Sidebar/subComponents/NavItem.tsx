@@ -1,12 +1,9 @@
-import React from 'react'
-import { Box, Icon, createIcon } from '@chakra-ui/react';
+import { Box, Icon } from '@chakra-ui/react';
 import { Link } from 'react-router-dom'
-import { PlusSquareIcon } from '@chakra-ui/icons';
 import Styles from './NavItem.module.css';
 import { ImExit } from "react-icons/im";
 import { FiPlusCircle } from "react-icons/fi";
 import { ImBooks } from "react-icons/im";
-import { flex } from '../../../pages/NovaRevisao/styles/finalizationStyles';
 
 interface Props {
     to: string;

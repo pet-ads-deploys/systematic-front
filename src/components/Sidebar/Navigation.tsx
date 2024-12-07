@@ -1,6 +1,5 @@
-import React from 'react'
 import NavItem from './subComponents/NavItem';
-import { Box, Center, Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Styles from './Sidebar.module.css'
 
 interface Props {
