@@ -4,7 +4,7 @@
     flex-direction: column;
     height: 90vh;
     width: 250px;
-    margin: 2em 0 2em 1em;
+    margin: 2em 1em 2em 1em;
     border-radius: 30px;
 }
 
@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-self: self-start;
-    margin: 3.3em 0 0 1.6em;
+    margin: 3.3em 2.2em 0 1.6em;
 }
 
 .navDiv {
