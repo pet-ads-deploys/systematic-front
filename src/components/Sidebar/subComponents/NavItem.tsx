@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 
 interface Props {
     to: string;
+    text: string
 }
 
-const NavItem = ({to}: Props) => {
+const NavItem = ({to, text}: Props) => {
   return (
-    <Link to={to}>New review</Link>
+    <Link to={to}>{text}</Link>
   )
 }
 

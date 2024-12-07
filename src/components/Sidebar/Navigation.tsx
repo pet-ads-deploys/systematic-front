@@ -7,7 +7,10 @@ interface Props {
 const Navigation = ({type}: Props) => {
 
     return type == 'Default' ? (
-        <NavItem to='/newReview' />
+        <>
+            <NavItem to='/newReview' text='New Review' />
+            <NavItem to='/' text='Blblabla' />
+        </>
     ) : (<>p</>)
 }
 
