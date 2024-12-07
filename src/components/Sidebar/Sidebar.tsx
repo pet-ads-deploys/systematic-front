@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Box } from '@chakra-ui/react';
 import Style from './Sidebar.module.css';
-import CloseButton from './subComponents/CloseButton';
+import CloseButton from './buttons/CloseButton';
 import Navigation from './Navigation';
 
 interface Props {

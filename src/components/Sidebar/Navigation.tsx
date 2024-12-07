@@ -1,6 +1,7 @@
 import NavItem from './subComponents/NavItem';
 import { Box, Flex } from '@chakra-ui/react';
 import Styles from './Sidebar.module.css'
+import LogoutButton from './buttons/LogoutButton';
 
 interface Props {
     type: string
@@ -13,7 +14,7 @@ const Navigation = ({type}: Props) => {
             <Box className={Styles.navDiv} >
                 <NavItem to='/newReview' text='New Review' />
                 <NavItem to='/user' text='My Reviews' />
-                <NavItem to='/' text='Home' />
+                <LogoutButton />
             </Box>
 
             <Box>
