@@ -1,6 +1,12 @@
 .link {
     color: #c9d9e5;
-    margin-bottom: 6vh
+    height: 80%
+}
+
+.linksBox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6vh;
 }
 
 .navDiv {
