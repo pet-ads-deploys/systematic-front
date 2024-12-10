@@ -29,7 +29,7 @@ export default function Protocol() {
       <Box w={"100%"}>
       
         <Header text="Protocol" />
-        <Progress value={33} w={"100%"} />
+        <Progress value={33} ml='1vw' w={"100%"} />
         <Flex w={"100%"} justifyContent={"center"} direction={"column"} alignItems={"center"}>
           <FormControl sx={formControl}>
             <TextAreaInput value={goal} label="Objectives:" placeholder="What are your goals?" onChange={(e) => { setGoal(e.target.value) }}/>
