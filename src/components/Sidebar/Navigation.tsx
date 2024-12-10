@@ -20,7 +20,7 @@ const Navigation = ({type}: Props) => {
             </Box>
         </Flex>
     ) : (
-    <Box className={Styles.navDiv}>
+    <Box className={Styles.accordionNavDiv}>
         <AccordionComponent />
 
         <Box mt='2.6vw'>

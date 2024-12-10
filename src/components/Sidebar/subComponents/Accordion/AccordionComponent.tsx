@@ -10,7 +10,7 @@ const AccordionComponent = () => {
         <Accordion w='80%'>
     <AccordionItem>
       <h2>
-        <AccordionButton>
+        <AccordionButton p='1.2vw 1vh'>
           <Box color='#c9d9e5' as='span' flex='1' textAlign='left'>
             Protocol
           </Box>
@@ -24,7 +24,7 @@ const AccordionComponent = () => {
   
     <AccordionItem>
       <h2>
-        <AccordionButton>
+        <AccordionButton p='1.2vw 1vh'>
           <Box color='#c9d9e5' as='span' flex='1' textAlign='left'>
             Execution
           </Box>
@@ -41,7 +41,7 @@ const AccordionComponent = () => {
 
     <AccordionItem>
       <h2>
-        <AccordionButton>
+        <AccordionButton p='1.2vw 1vh'>
           <Box color='#c9d9e5' as='span' flex='1' textAlign='left'>
             Summarization
           </Box>
