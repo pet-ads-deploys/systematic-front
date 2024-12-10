@@ -65,7 +65,7 @@ export default function ProtocolPartThree() {
         </FormControl>
 
         <Box sx={buttonBox}>
-          <NavButton text='Return' event={handleDataReturn}/>
+          <NavButton text='Back' event={handleDataReturn}/>
           <NavButton text="Save" event={handleData} w={"fit-content"} />
         </Box>
 

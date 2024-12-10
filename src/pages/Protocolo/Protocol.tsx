@@ -82,7 +82,7 @@ export default function Protocol() {
           </FormControl>
 
           <Box sx={btnBox}>
-            <NavButton event={handleDataAndReturn} text='Return'/>
+            <NavButton event={handleDataAndReturn} text='Back'/>
             <NavButton event={handleDataAndGoNext} text="Next" />
           </Box>
         </Flex>
