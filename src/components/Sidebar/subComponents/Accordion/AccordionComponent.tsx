@@ -7,7 +7,7 @@ const AccordionComponent = () => {
     const id = localStorage.getItem('systematicReviewId');
 
     return (
-        <Accordion w='100%'>
+        <Accordion w='80%'>
     <AccordionItem>
       <h2>
         <AccordionButton>
@@ -32,8 +32,25 @@ const AccordionComponent = () => {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        <ProtocolAccordionSubItem to={`/newReview/protocol/${id}`} text='Protocol' />
-        <ProtocolAccordionSubItem to={`/newReview/protocol/${id}`} text='Protocol' />
+        <ProtocolAccordionSubItem to={`/newReview/keywords`} text='Keywords' />
+        <ProtocolAccordionSubItem to={`/newReview/insertion`} text='Insertion' />
+        <ProtocolAccordionSubItem to={`/newReview/identification`} text='Identification' />
+        <ProtocolAccordionSubItem to={`/newReview/selection`} text='Selection' />
+      </AccordionPanel>
+    </AccordionItem>
+
+    <AccordionItem>
+      <h2>
+        <AccordionButton>
+          <Box color='#c9d9e5' as='span' flex='1' textAlign='left'>
+            Summarization
+          </Box>
+          <AccordionIcon />
+        </AccordionButton>
+      </h2>
+      <AccordionPanel pb={4}>
+        <ProtocolAccordionSubItem to={`/newReview/keywords`} text='Keywords' />
+        <ProtocolAccordionSubItem to={`/newReview/insertion`} text='Insertion' />
         <ProtocolAccordionSubItem to={`/newReview/identification`} text='Identification' />
         <ProtocolAccordionSubItem to={`/newReview/selection`} text='Selection' />
       </AccordionPanel>
