@@ -1,4 +1,4 @@
-import { FormControl } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel } from "@chakra-ui/react";
 import TextAreaInput from "../Inputs/InputTextArea";
 import EventButton from "../Buttons/EventButton";
 import { useState } from "react";
@@ -9,9 +9,10 @@ import { useToast } from "@chakra-ui/react";
 interface IAddTextFieldProps {
   onAddText: (newKeyword: string) => void;
   text: string;
+  label: string;
 }
 
-export default function AddTextField({ onAddText, text }: IAddTextFieldProps) {
+export default function AddTextField({ onAddText, text, label }: IAddTextFieldProps) {
   const [inputValue, setInputValue] = useState<string>("");
   const toast = useToast();
 
@@ -37,9 +38,12 @@ export default function AddTextField({ onAddText, text }: IAddTextFieldProps) {
   };
 
   return (
-    <FormControl sx={formcontrol}>
+    <FormControl sx={formcontrol} mt="3rem">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <FormLabel>{label}</FormLabel>
+        <EventButton event={handleAddText} text="ADD" w={"10%"} />
+      </Box>
       <TextAreaInput value={inputValue} label="" placeholder={text} onChange={handleInputChange}></TextAreaInput>
-      <EventButton event={handleAddText} text="ADD" mt={2} w={"10%"} />
     </FormControl>
   );
 }

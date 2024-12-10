@@ -1,4 +1,4 @@
-import { FormControl, FormLabel } from "@chakra-ui/react";
+import { FormControl } from "@chakra-ui/react";
 import AddTextField from "./AddTextField";
 import InfosTable from "../Tables/InfosTable";
 import { useAddText } from "../../hooks/useAddText";
@@ -15,10 +15,8 @@ export default function AddTextTable({ text, placeholder }: AddTextTableProps) {
   const { handleDeleteText } = useDeleteText(text);
   return (
     <FormControl sx={label}>
-      <FormLabel>{text}</FormLabel>
-
       <FormControl sx={formcontrol}>
-        <AddTextField onAddText={handleAddText} text={placeholder} />
+        <AddTextField onAddText={handleAddText} label={text} text={placeholder}/>
         <InfosTable
           typeField={""}
           onDeleteAddedText={(index) => handleDeleteText(index, setAddText)}
