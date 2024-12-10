@@ -49,10 +49,9 @@ const AccordionComponent = () => {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        <ProtocolAccordionSubItem to={`/newReview/keywords`} text='Keywords' />
-        <ProtocolAccordionSubItem to={`/newReview/insertion`} text='Insertion' />
-        <ProtocolAccordionSubItem to={`/newReview/identification`} text='Identification' />
-        <ProtocolAccordionSubItem to={`/newReview/selection`} text='Selection' />
+        <ProtocolAccordionSubItem to={`/newReview/graphics`} text='Graphics' />
+        <ProtocolAccordionSubItem to={`/newReview/visualization`} text='Visualization' />
+        <ProtocolAccordionSubItem to={`/newReview/finalization`} text='Finalization' />
       </AccordionPanel>
     </AccordionItem>
   </Accordion>
