@@ -1,0 +1,11 @@
+.accordionNavlinkBox {
+    margin-left: .5vw;
+    display: flex;
+    padding: 1vh;
+}
+
+.accordionLink {
+    color: #c9d9e5;
+    margin-left: 1vw;
+    height: 80%
+}
