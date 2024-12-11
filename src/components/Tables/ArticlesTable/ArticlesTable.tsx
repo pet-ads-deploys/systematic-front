@@ -17,7 +17,6 @@ function ArticlesTable({articles}: Props) {
     const { sidebarState } = context
 
     return sidebarState == 'open' ?
-    
     <Collapsed articles={articles} />
 
     :
