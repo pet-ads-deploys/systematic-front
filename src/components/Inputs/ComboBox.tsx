@@ -23,7 +23,7 @@ export default function ComboBox({ text, options, isDisabled }: IComboBoxProps) 
       borderRadius={"6px"} 
       as={Button} 
       rightIcon={<ChevronDownIcon />} 
-      w={"50%"}>
+      w={"10rem"}>
         {text}
       </MenuButton>
 

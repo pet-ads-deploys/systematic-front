@@ -2,17 +2,16 @@ export const conteiner = {
   mt: 10,
   display: "flex",
   justifyContent: "center", 
-  alignItems: "flex-start", 
-  ml: "1em",
-  width: "100%"
+  alignItems: "center", 
+  width: "100%",
 };
 
 export const inputconteiner = {
   display: 'flex',
-  width: '70%',
-  mr: '2rem',
+  width: '97%',
+  m: '.5rem 0 0 0',
   gap: '2rem',
-  justifyContent: 'center'
+  justifyContent: 'space-between',
 };
 
 export const ckconteiner = {

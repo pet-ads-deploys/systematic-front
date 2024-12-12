@@ -6,5 +6,5 @@ interface IHeaderProps {
 }
 
 export default function Header({ text }: IHeaderProps) {
-  return <Heading sx={header} pl={"50px"}>{text}</Heading>;
+  return <Heading sx={header} ml={"1.5rem"}>{text}</Heading>;
 }

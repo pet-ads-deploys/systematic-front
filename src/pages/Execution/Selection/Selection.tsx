@@ -46,30 +46,35 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
       <StudySelectionProvider>
         <FlexLayout defaultOpen={1} navigationType="Accordion">
           <Header text="Selection" />
+          <Box w="100%">
             <Box sx={conteiner}>
-              <Box sx={inputconteiner}>
-                <InputText type="search" placeholder="Insert article's name" nome="search" onChange={(e) => setSearchString(e.target.value)}/>
-                
-                <SelectInput
-                  names={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
-                  values={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
-                  onSelect={handleSelectChange}
-                  selectedValue={selectedStatus}
-                  page={"selection"}
-                />
+                <Box sx={inputconteiner}>
+                  <InputText type="search" placeholder="Insert article atribute" nome="search" onChange={(e) => setSearchString(e.target.value)}/>
+                 
 
-                <ComboBox
-                  isDisabled={false}
-                  text="filter options"
-                  options={Object.values(headerData)}
-                />
-              </Box>
-            </Box>
+                  <Box display="flex" gap="1rem" justifyContent="space-between" alignItems="center">
+                  <SelectInput
+                    names={["","Accepted", "Duplicated", "Rejected", "Unclassified"]}
+                    values={["","Accepted", "Duplicated", "Rejected", "Unclassified"]}
+                    onSelect={handleSelectChange}
+                    selectedValue={selectedStatus}
+                    page={"selection"}
+                    placeholder="Status"
+                  />
+                   <ComboBox
+                    isDisabled={false}
+                    text="filter options"
+                    options={Object.values(headerData)}
+                  />
+                  </Box>
                   
-            <Flex justifyContent='center' alignItems={'center'} flexDirection={'column'}>
-              <ArticlesTable articles={articles} />
-              <StudySelectionArea />
-            </Flex>
+                </Box>
+              </Box>
+              <Flex justifyContent='center' alignItems={'center'} flexDirection={'column'}>
+                <ArticlesTable articles={articles} />
+                <StudySelectionArea />
+              </Flex>
+          </Box>
         </FlexLayout>
       </StudySelectionProvider>
     </AppProvider>

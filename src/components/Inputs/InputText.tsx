@@ -35,7 +35,7 @@ export default function InputText({ label, placeholder, type, nome, onChange, la
           name={nome}
           placeholder={placeholder}
           w={isSearchField ? "250px" : "100%"}
-          bgColor={"#C9D9E5"}
+          bgColor={"#EBF0F3"}
           borderRadius={"3px"}
           _placeholder={{ opacity: 1, color: "gray.500" }}
           focusBorderColor="#2E4B6C"
