@@ -17,11 +17,21 @@ import {
   CloseIcon,
   WarningIcon,
 } from "@chakra-ui/icons";
-import { tdSX } from "../../../pages/Execution/styles/CardsStyle";
+import {
+  collapsedSpanText,
+  tdSX,
+  tooltip,
+} from "../../../pages/Execution/styles/CardsStyle";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { useContext } from "react";
 import AppContext from "../../Context/AppContext";
 import { capitalize } from "../../../utils/CapitalizeText";
+import {
+  MdKeyboardDoubleArrowUp,
+  MdKeyboardDoubleArrowDown,
+  MdKeyboardArrowUp,
+  MdKeyboardArrowDown,
+} from "react-icons/md";
 
 interface Props {
   articles: ArticleInterface[];
@@ -47,16 +57,16 @@ export default function Collapsed({ articles }: Props) {
     }
   };
 
-  const renderPriorityIcon = (status: string) => {
-    switch (status) {
-      case "LOW":
-        return <CheckCircleIcon color="green.500" />;
-      case "VERY_LOW":
-        return <InfoIcon color="blue.500" />;
-      case "HIGH":
-        return <CloseIcon color="red.500" />;
+  const renderPriorityIcon = (priority: string) => {
+    switch (priority) {
       case "VERY_HIGH":
-        return <WarningIcon color="yellow.500" />;
+        return <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />;
+      case "HIGH":
+        return <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />;
+      case "LOW":
+        return <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />;
+      case "VERY_LOW":
+        return <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />;
       default:
         return null;
     }
@@ -64,14 +74,14 @@ export default function Collapsed({ articles }: Props) {
 
   if (setShowSelectionModal && setSelectionStudyIndex)
     return (
-        <TableContainer
-        width={"95%"}
+      <TableContainer
+        width={"97%"}
         mt={5}
         borderRadius="1rem"
         boxShadow="lg"
         bg="#EBF0F3"
         overflowY={"auto"}
-        maxH="75vh"
+        maxH="80vh"
       >
         <Table
           variant="unstyled"
@@ -79,85 +89,88 @@ export default function Collapsed({ articles }: Props) {
           size="md"
           boxShadow="md"
         >
-          <Thead
-            bg="#EBF0F3"
-            borderRadius="1rem"
-            borderBottom="2px solid #C9D9E5"
-            justifyContent="space-around"
-          >
-            <Tr>
+          <Thead bg="#EBF0F3" borderRadius="1rem" justifyContent="space-around">
+            <Tr alignItems="center" justifyContent="space-around">
               <Th
                 textAlign="center"
                 color="#263C56"
-                fontSize="medium"
-                mt="2rem"
-                p="0 1rem"
+                fontSize="larger"
                 w={3}
               ></Th>
               <Th
                 textAlign="center"
                 color="#263C56"
-                fontSize="medium"
-                mt="2rem"
+                fontSize="larger"
                 p="2rem 0 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
+                w="5%"
               >
-                ID Paper
+                ID
               </Th>
               <Th
                 textAlign="center"
                 color="#263C56"
-                fontSize="medium"
-                mt="2rem"
+                fontSize="larger"
                 p="2rem 0 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
               >
                 Title
               </Th>
               <Th
                 textAlign="center"
                 color="#263C56"
-                fontSize="medium"
-                mt="2rem"
+                fontSize="larger"
                 p="2rem 0 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
               >
                 Author
               </Th>
               <Th
                 textAlign="center"
                 color="#263C56"
-                fontSize="medium"
-                mt="2rem"
+                fontSize="larger"
                 p="2rem 0 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
               >
                 Journal
               </Th>
               <Th
                 textAlign="center"
                 color="#263C56"
-                fontSize="medium"
-                mt="2rem"
-                p="2rem 0 1rem 0"
+                fontSize="larger"
+                p="2rem 1rem 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
+                w="8%"
               >
                 Selection
               </Th>
               <Th
                 textAlign="center"
                 color="#263C56"
-                fontSize="medium"
-                mt="2rem"
-                p="2rem 0 1rem 0"
+                fontSize="larger"
+                p="2rem 1rem 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
+                w="8%"
               >
                 Extraction
               </Th>
               <Th
                 textAlign="center"
                 color="#263C56"
-                fontSize="medium"
-                mt="2rem"
-                p="2rem 0 1rem 0"
+                fontSize="larger"
+                p="2rem 1rem 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
+                w="8%"
               >
-                Priority
+                Reading Priority
               </Th>
-
             </Tr>
           </Thead>
           <Tbody>
@@ -173,7 +186,7 @@ export default function Collapsed({ articles }: Props) {
                   transition="background-color 0.3s, box-shadow 0.3s"
                   borderBottom="none"
                 >
-                  <Td textAlign="center" p="0 1rem" w={3}>
+                  <Td textAlign="center" w="5%">
                     <Checkbox
                       defaultChecked={index === 0 || index === 3}
                       sx={{
@@ -183,68 +196,38 @@ export default function Collapsed({ articles }: Props) {
                           borderColor: "#263C56",
                         },
                       }}
-                    ></Checkbox>
+                    />
                   </Td>
-                  <Td sx={tdSX} p="1rem 0">
-                    <Tooltip
+                  <Td sx={tdSX}>{String(index + 1).padStart(5, "0")}</Td>
+                  <Td sx={tdSX}>
+                    <Tooltip sx={tooltip}
                       label={e.title}
-                      aria-label="Título completo"
+                      aria-label="Full Title"
                       hasArrow
-                      placement="right"
-                      fontSize="xs"
-                      p="1rem 0"
                     >
-                      <Text sx={tdSX} p={0}>
-                        {String(index + 1).padStart(2, "0")}
-                      </Text>
+                      <Text sx={collapsedSpanText}>{e.title}</Text>
                     </Tooltip>
                   </Td>
-                  <Td sx={tdSX} p="1rem 0">
-                    <Tooltip
-                      label={e.title}
-                      aria-label="Título completo"
-                      hasArrow
-                      placement="right"
-                      fontSize="xs"
-                      p="1rem 0"
-                    >
-                      <Text sx={tdSX} p={0}>
-                        {e.title}
-                      </Text>
-                    </Tooltip>
-                  </Td>
-
-                  <Td sx={tdSX} p="1rem 0">
-                    <Tooltip
+                  <Td sx={tdSX}>
+                    <Tooltip sx={tooltip}
                       label={e.authors}
-                      aria-label="Título completo"
+                      aria-label="Full Author List"
                       hasArrow
-                      placement="right"
-                      fontSize="xs"
-                      p="1rem 0"
                     >
-                      <Text sx={tdSX} p={0}>
-                        {e.authors}
-                      </Text>
+                      <Text sx={collapsedSpanText}>{e.authors}</Text>
                     </Tooltip>
                   </Td>
-
-                  <Td sx={tdSX} p="1rem 0">
-                    <Tooltip
+                  <Td sx={tdSX}>
+                    <Tooltip sx={tooltip}
                       label={e.venue}
-                      aria-label="Título completo"
+                      aria-label="Journal Name"
                       hasArrow
-                      placement="right"
-                      fontSize="xs"
-                      p="1rem 0"
                     >
-                      <Text sx={tdSX} p={0}>
-                        {e.venue}
-                      </Text>
+                      <Text sx={collapsedSpanText}>{e.venue}</Text>
                     </Tooltip>
                   </Td>
 
-                  <Td textAlign="center">
+                  <Td p=".5rem 0" w="5rem">
                     <Box
                       display="flex"
                       alignItems="center"
@@ -252,7 +235,7 @@ export default function Collapsed({ articles }: Props) {
                       gap="0.5rem"
                     >
                       {renderStatusIcon(e.selectionStatus)}
-                      <Text>
+                      <Text sx={collapsedSpanText}>
                         {capitalize(
                           e.selectionStatus?.toString().toLowerCase() || ""
                         )}
@@ -260,23 +243,24 @@ export default function Collapsed({ articles }: Props) {
                     </Box>
                   </Td>
 
-                  <Td textAlign="center">
+                  <Td p=".5rem 0" w="5rem">
                     <Box
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                       gap="0.5rem"
                     >
-                      {renderStatusIcon(e.extraction)}
-                      <Text>
-                        {capitalize(
+                      {renderStatusIcon("UNCLASSIFIED")}
+                      <Text sx={collapsedSpanText}>
+                        {/* {capitalize(
                           e.extraction?.toString().toLowerCase() || ""
-                        )}
+                        )} */}
+                        Unclassified
                       </Text>
                     </Box>
                   </Td>
 
-                  <Td textAlign="center">
+                  <Td p=".5rem 0" w="5rem">
                     <Box
                       display="flex"
                       alignItems="center"
@@ -284,7 +268,7 @@ export default function Collapsed({ articles }: Props) {
                       gap="0.5rem"
                     >
                       {renderPriorityIcon(e.readingPriority)}
-                      <Text>
+                      <Text sx={collapsedSpanText}>
                         {capitalize(
                           e.readingPriority?.toString().toLowerCase() || ""
                         )}

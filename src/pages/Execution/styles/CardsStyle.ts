@@ -61,23 +61,41 @@ export const btnConteiner = {
 };
 
 export const tdSX = {
-  w: "10em",
-  textAlign: 'center',
+  w:"20em",
+  textAlign: "center",
   alignSelf: "center",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  fontWeight: 500, 
-  cursor: "pointer"
+  fontWeight: 500,
+  cursor: "pointer",
+  p: "0rem 1rem",
 };
 
 export const collapsedTdSX = {
-  w: "5em",
-  textAlign: 'center',
+  w:"28em",
+  textAlign: "center",
   alignSelf: "center",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  fontWeight: 500, 
-  cursor: "pointer"
+  fontWeight: 500,
+  cursor: "pointer",
+  p: "0.5rem",
+}
+
+export const collapsedSpanText = {
+  w:"inherit",
+  textAlign: "center",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  fontWeight: 500,
+  cursor: "pointer",
+};
+
+export const tooltip = {
+  p:"1rem",
+  placement:"right",
+  fontSize:"xs"
 }
