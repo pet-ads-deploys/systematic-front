@@ -35,9 +35,10 @@ import {
 
 interface Props {
   articles: ArticleInterface[];
+  handleHeaderClick: (key: keyof ArticleInterface) => void;
 }
 
-export default function Collapsed({ articles }: Props) {
+export default function Collapsed({ articles, handleHeaderClick }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
   const setSelectionStudyIndex = context?.setSelectionStudyIndex;
@@ -105,6 +106,7 @@ export default function Collapsed({ articles }: Props) {
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
                 w="5%"
+                onClick={() => handleHeaderClick("studyReviewId")}
               >
                 ID
               </Th>
@@ -115,6 +117,7 @@ export default function Collapsed({ articles }: Props) {
                 p="2rem 0 1rem 0"
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
+                onClick={() => handleHeaderClick("title")}
               >
                 Title
               </Th>
@@ -125,6 +128,7 @@ export default function Collapsed({ articles }: Props) {
                 p="2rem 0 1rem 0"
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
+                onClick={() => handleHeaderClick("author")}
               >
                 Author
               </Th>
@@ -135,7 +139,9 @@ export default function Collapsed({ articles }: Props) {
                 p="2rem 0 1rem 0"
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
+                onClick={() => handleHeaderClick("venue")}
               >
+
                 Journal
               </Th>
               <Th
@@ -146,6 +152,7 @@ export default function Collapsed({ articles }: Props) {
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
                 w="8%"
+                onClick={() => handleHeaderClick("selectionStatus")}
               >
                 Selection
               </Th>
@@ -157,6 +164,7 @@ export default function Collapsed({ articles }: Props) {
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
                 w="8%"
+                onClick={() => handleHeaderClick("extraction")}
               >
                 Extraction
               </Th>
@@ -168,6 +176,7 @@ export default function Collapsed({ articles }: Props) {
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
                 w="8%"
+                onClick={() => handleHeaderClick("readingPriority")}
               >
                 Reading Priority
               </Th>
@@ -198,7 +207,7 @@ export default function Collapsed({ articles }: Props) {
                       }}
                     />
                   </Td>
-                  <Td sx={tdSX}>{String(index + 1).padStart(5, "0")}</Td>
+                  <Td sx={tdSX}>{String(e.studyReviewId).padStart(5, "0")}</Td>
                   <Td sx={tdSX}>
                     <Tooltip sx={tooltip}
                       label={e.title}

@@ -22,9 +22,10 @@ import AppContext from "../../Context/AppContext";
 
 interface Props {
   articles: ArticleInterface[];
+  handleHeaderClick: (key: keyof ArticleInterface) => void;
 }
 
-export default function Collapsed({ articles }: Props) {
+export default function Collapsed({ articles, handleHeaderClick }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
   const setSelectionStudyIndex = context?.setSelectionStudyIndex;
@@ -60,6 +61,7 @@ export default function Collapsed({ articles }: Props) {
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
                 w="5%"
+                onClick={() => handleHeaderClick("studyReviewId")}
               >
                 ID
               </Th>
@@ -71,6 +73,7 @@ export default function Collapsed({ articles }: Props) {
               textTransform="capitalize"
               borderBottom="3px solid #C9D9E5"
               w="30%"
+              onClick={() => handleHeaderClick("title")}
             >
               Title
             </Th>
@@ -82,6 +85,7 @@ export default function Collapsed({ articles }: Props) {
               textTransform="capitalize"
               borderBottom="3px solid #C9D9E5"
               w="25%"
+              onClick={() => handleHeaderClick("authors")}
             >
               Author
             </Th>
@@ -93,6 +97,7 @@ export default function Collapsed({ articles }: Props) {
               textTransform="capitalize"
               borderBottom="3px solid #C9D9E5"
               w="20%"
+              onClick={() => handleHeaderClick("venue")}
             >
               Journal
             </Th>
@@ -123,7 +128,7 @@ export default function Collapsed({ articles }: Props) {
                   />
                 </Td>
                 <Td sx={collapsedTdSX}>
-                  {String(index + 1).padStart(5, "0")}
+                  {String(e.studyReviewId).padStart(5, "0")}
                 </Td>
                 <Td sx={collapsedTdSX}>
                   <Tooltip sx={tooltip}
