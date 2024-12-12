@@ -41,6 +41,17 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
 
   if(!studiesData) return <NoStudiesData/>
 
+  const handleSearchStudy = (searchString: string) => {
+    const lowerCaseSearch = searchString.toLowerCase();
+    return articles.filter((article) =>
+      Object.values(article).some((value) =>
+        value?.toString().toLowerCase().includes(lowerCaseSearch)
+      )
+    );
+  };
+
+  const filteredArticles = handleSearchStudy(searchString);
+
   return (
     <AppProvider>
       <StudySelectionProvider>
@@ -49,7 +60,7 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
           <Box w="100%">
             <Box sx={conteiner}>
                 <Box sx={inputconteiner}>
-                  <InputText type="search" placeholder="Insert article atribute" nome="search" onChange={(e) => setSearchString(e.target.value)}/>
+                  <InputText type="search" placeholder="Insert article atribute" nome="search" onChange={(e) => setSearchString(e.target.value)} value={searchString} />
                  
 
                   <Box display="flex" gap="1rem" justifyContent="space-between" alignItems="center">
@@ -71,7 +82,7 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
                 </Box>
               </Box>
               <Flex justifyContent='center' alignItems={'center'} flexDirection={'column'}>
-                <ArticlesTable articles={articles} />
+                <ArticlesTable articles={filteredArticles.length > 0 ?  filteredArticles : articles} />
                 <StudySelectionArea />
               </Flex>
           </Box>

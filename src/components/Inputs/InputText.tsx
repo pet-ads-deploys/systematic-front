@@ -42,7 +42,7 @@ export default function InputText({ label, placeholder, type, nome, onChange, la
           onChange={onChange}
           value={value}
         />
-        {isSearchField && <SearchButton />}
+        {/* {isSearchField && <SearchButton />} */}
       </FormControl>
     </FormControl>
   );
