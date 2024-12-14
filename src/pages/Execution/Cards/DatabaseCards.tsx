@@ -12,7 +12,7 @@ import {
 import IdentificationModal from "../../../components/Modals/IdentificationModal";
 import { useEffect, useState } from "react";
 import useGetSession from "../../../hooks/reviews/useGetSession";
-import DeleteDatabaseModal from "../../../components/Modals/Delete database";
+import DeleteDatabaseModal from "../../../components/Modals/DeleteDatabase";
 import { AddIcon } from "@chakra-ui/icons";
 import { AiOutlineDelete } from "react-icons/ai";
 
@@ -125,6 +125,7 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
           show={setShowDeleteModal}
           action={deleteModal}
           sessions={sessions}
+          setSessions={setSessions}
           databaseName={text}
         />
       )}
