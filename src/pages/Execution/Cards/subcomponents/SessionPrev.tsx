@@ -1,17 +1,23 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Flex, Button, Text, Spacer } from "@chakra-ui/react";
+import { Flex, Button, Text } from "@chakra-ui/react";
 import { FaRegEye } from "react-icons/fa6";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
+import { MdOutlineSdCardAlert } from "react-icons/md";
+
 
 interface actionsModal {
   action: "create" | "update";
 }
 
+interface inspectArticlesModal {
+  action: "inspect" | "refuse";
+}
 interface Props {
   handleOpenModal: (action: actionsModal) => void;
   handleDelete: (id: string) => void;
+  handleInspectOpenModal : (action: inspectArticlesModal) => void;
   timestamp: string;
   numberOfStudies: number;
   sessionId: string;
@@ -23,6 +29,7 @@ const SessionPrev = ({
   timestamp,
   numberOfStudies,
   sessionId,
+  handleInspectOpenModal,
 }: Props) => {
   const date = new Date(timestamp);
   let day, month;
@@ -102,6 +109,14 @@ const SessionPrev = ({
           onClick={() => handleDelete(sessionId)}
         >
           <DeleteIcon />
+        </Button>
+        <Button
+          flex={1}
+          colorScheme="gray"
+          height={"35px"}
+          onClick={() => handleInspectOpenModal({ action: "inspect" })}
+        >
+          <MdOutlineSdCardAlert />
         </Button>
       </Flex>
     </Flex>

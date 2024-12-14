@@ -14,15 +14,29 @@ import IdentificationModal from "../../../../components/Modals/IdentificationMod
 import SessionPrev from "./SessionPrev";
 import IAccordionDashBoard from '../../../../../public/interfaces/IAccordionDashboard'
 import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
+import InspectArticlesModal from "../../../../components/Modals/InspectArticles";
+import useHandleExportedFiles from "../../../../hooks/reviews/useHandleExportedFiles";
 
 interface actionsModal {
   action: "create" | "update";
+}
+
+interface inspectModal {
+  action: "inspect" | "refuse";
 }
 
 export default function AccordionDashboard({ type, sessions, setSessions }: IAccordionDashBoard) {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [actionModal, setActionModal] = useState<"create" | "update">("create");
+
+  const [showInspectArticlesModal, setShowInspectArticlesModal] = useState(false);
+  const [ispectModal, setIspectModal] = useState<"inspect" | "refuse">("inspect");
+
+  const { invalidEntries } = useHandleExportedFiles({
+    setSessions,
+    type,
+});
 
   const getTotalStudiesRelated = () => {
     let totalStudies = 0;
@@ -39,13 +53,17 @@ export default function AccordionDashboard({ type, sessions, setSessions }: IAcc
     setShowModal(true);
   };
 
+  const handleInspectOpenModal = ({ action }: inspectModal) => {
+    setIspectModal(action);
+    setShowInspectArticlesModal(true);
+  };
+
   const handleDeleteStudies = (id: string) => {
     UseDeleteSession(id);
     setSessions(sessions.filter((prevStudies) => prevStudies.id != id));
   };
 
   const handleAccordionToggle = () => {
-
     setIsAccordionOpen(!isAccordionOpen);
   };
 
@@ -100,11 +118,19 @@ export default function AccordionDashboard({ type, sessions, setSessions }: IAcc
                     sessionId={item.id}
                     handleOpenModal={handleOpenModal}
                     handleDelete={handleDeleteStudies}
+                    handleInspectOpenModal={handleInspectOpenModal}
                     timestamp={item.timestamp}
                     numberOfStudies={item.numberOfRelatedStudies}
                   />
                 );
               })}
+              {showInspectArticlesModal &&(
+                <InspectArticlesModal
+                  show={setShowInspectArticlesModal}
+                  action={ispectModal}
+                  invalidEntries={invalidEntries}
+                />
+              )}
               <Box>
                 <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
               </Box>
