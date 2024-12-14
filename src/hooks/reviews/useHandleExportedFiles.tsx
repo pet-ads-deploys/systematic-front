@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import axios from "../../interceptor/interceptor";
 import useGetSession from "./useGetSession";
 import { useToast } from "@chakra-ui/react";
@@ -19,6 +19,7 @@ interface Props {
 
 const useHandleExportedFiles = ({setSessions, type}: Props) => {
     const [ referenceFiles, setReferenceFiles ] = useState<File[]>([]);
+    const [invalidEntries, setInvalidEntries] = useState<string[]>([]);
     const [source, setSource] = useState('');
     const toast = useToast();
 
@@ -76,15 +77,38 @@ const useHandleExportedFiles = ({setSessions, type}: Props) => {
             formData.append("data", data);
         }
 
+        
+
         try {
-            await axios.post(url, formData, options);
+            const response = await axios.post(url, formData, options);
 
             const searchSessions = await useGetSession(type);
             setSessions(searchSessions.data.searchSessions);
+
+
+
+            const invalidArticles = response.data.invalidEntries;
+
+            if(invalidArticles.length > 0){
+                setInvalidEntries(invalidArticles);
+                console.log(`Artigos invalidos: ${invalidArticles}`);
+                toast({
+                    title: "Some files need revision",
+                    description: `${invalidArticles.length} file(s) could not be processed.`,
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top",
+                });
+                
+            }
+
         } catch (err) {
             console.log(err);
         }
     }
+
+    console.log(`Entradas invalidas: ${invalidEntries}`);
 
     return {
         handleFile,
@@ -92,6 +116,8 @@ const useHandleExportedFiles = ({setSessions, type}: Props) => {
         setReferenceFiles,
         sendFilesToServer,
         setSource,
+        invalidEntries,
+        setInvalidEntries,
     };
 };
 
