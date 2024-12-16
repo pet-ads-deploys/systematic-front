@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useState } from "react";
 import axios from "../../interceptor/interceptor";
 import useGetSession from "./useGetSession";
 import { useToast } from "@chakra-ui/react";
@@ -19,7 +19,7 @@ interface Props {
 
 const useHandleExportedFiles = ({setSessions, type}: Props) => {
     const [ referenceFiles, setReferenceFiles ] = useState<File[]>([]);
-    const [invalidEntries, setInvalidEntries] = useState<string[]>([]);
+    // const [invalidEntries, setInvalidEntries] = useState<string[]>([]);
     const [source, setSource] = useState('');
     const toast = useToast();
 
@@ -90,7 +90,7 @@ const useHandleExportedFiles = ({setSessions, type}: Props) => {
             const invalidArticles = response.data.invalidEntries;
 
             if(invalidArticles.length > 0){
-                setInvalidEntries(invalidArticles);
+                // setInvalidEntries(invalidArticles);
                 console.log(`Artigos invalidos: ${invalidArticles}`);
                 toast({
                     title: "Some files need revision",
@@ -108,7 +108,7 @@ const useHandleExportedFiles = ({setSessions, type}: Props) => {
         }
     }
 
-    console.log(`Entradas invalidas: ${invalidEntries}`);
+    // console.log(`Entradas invalidas: ${invalidEntries}`);
 
     return {
         handleFile,
@@ -116,8 +116,8 @@ const useHandleExportedFiles = ({setSessions, type}: Props) => {
         setReferenceFiles,
         sendFilesToServer,
         setSource,
-        invalidEntries,
-        setInvalidEntries,
+        // invalidEntries,
+        // setInvalidEntries,
     };
 };
 

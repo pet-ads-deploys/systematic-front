@@ -15,7 +15,6 @@ import SessionPrev from "./SessionPrev";
 import IAccordionDashBoard from '../../../../../public/interfaces/IAccordionDashboard'
 import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 import InspectArticlesModal from "../../../../components/Modals/InspectArticles";
-import useHandleExportedFiles from "../../../../hooks/reviews/useHandleExportedFiles";
 
 interface actionsModal {
   action: "create" | "update";
@@ -32,11 +31,6 @@ export default function AccordionDashboard({ type, sessions, setSessions }: IAcc
 
   const [showInspectArticlesModal, setShowInspectArticlesModal] = useState(false);
   const [ispectModal, setIspectModal] = useState<"inspect" | "refuse">("inspect");
-
-  const { invalidEntries } = useHandleExportedFiles({
-    setSessions,
-    type,
-});
 
   const getTotalStudiesRelated = () => {
     let totalStudies = 0;
@@ -66,6 +60,25 @@ export default function AccordionDashboard({ type, sessions, setSessions }: IAcc
   const handleAccordionToggle = () => {
     setIsAccordionOpen(!isAccordionOpen);
   };
+
+  const mockEntries = [
+    {
+        "title" : "Recent Advancements in Artificial Intelligence Research and Development",
+        "authors": "John Doe, Jane Smith, Alice Brown, Michael Lee",
+    },
+    {
+        "title" : "Investigating the Effects of Drug X on Patient Recovery and Outcomes",
+        "authors": "Dr. Alice Johnson, Dr. Robert White, Dr. Emily Brown, Dr. William Green",
+    },
+    {
+        "title" : "The Long-term Impact of Childhood Trauma on Adult Behavior and Mental Health",
+        "authors": "Dr. Emily Davis, Dr. Sarah Thompson, Dr. James Wilson, Dr. Laura Martinez",
+    },
+    {
+        "title" : "Analyzing the Impact of Tax Policies on Economic Growth and Development",
+        "authors": "Dr. Michael Brown, Dr. David Johnson, Dr. Linda Lee, Dr. Charles Green",
+    }
+];
 
   return (
     <Accordion allowToggle sx={accordion} onChange={handleAccordionToggle}>
@@ -128,7 +141,7 @@ export default function AccordionDashboard({ type, sessions, setSessions }: IAcc
                 <InspectArticlesModal
                   show={setShowInspectArticlesModal}
                   action={ispectModal}
-                  invalidEntries={invalidEntries}
+                  invalidEntries={mockEntries}
                 />
               )}
               <Box>

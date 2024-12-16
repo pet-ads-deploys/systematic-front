@@ -1,14 +1,15 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, FormLabel,Box, Flex, Divider } from "@chakra-ui/react";
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, FormLabel,Box, Flex, Divider , Text} from "@chakra-ui/react";
+import { Card, Heading, Stack } from "@chakra-ui/react"
 import { useDisclosure } from "@chakra-ui/react";
 import { FaGear } from "react-icons/fa6";
 
 interface InspectArticlesModalProps {
     show: (value: boolean) => void;
     action: "inspect" | "refuse";
-    invalidEntries: string[];
+    invalidEntries: {title: string; authors: string}[];
 }
 
-function InspectArticlesModal({ show, invalidEntries }: InspectArticlesModalProps) {
+function InspectArticlesModal({ show, invalidEntries}: InspectArticlesModalProps) {
     const { onClose, onOpen } = useDisclosure();
 
     const handleOpen = () => {
@@ -33,15 +34,35 @@ function InspectArticlesModal({ show, invalidEntries }: InspectArticlesModalProp
                     <ModalCloseButton onClick={handleClose} />
                 </ModalHeader>
                 <ModalBody>
-                    {invalidEntries.length > 0 ? (
-                        invalidEntries.map((entry, index) => (
-                            <Box key={index}>{entry}</Box>
-                        ))
-                    ) : (
-                        <p>No files to be processed</p>
-                    )}
+                    <Stack spacing={4} overflowY="auto" minH="15rem" maxH="30rem" p="1.5rem" >
+                        {invalidEntries.length > 0 ? (
+                            invalidEntries.map((entry, index) => (
+                                <Card
+                                key={index}
+                                width="100%"
+                                borderWidth="1px"
+                                borderRadius="lg"
+                                p={4}
+                                boxShadow="md"
+                                bg="white"
+                                _hover={{ boxShadow: "lg", bg: "gray.50" }}
+                                textAlign="justify"
+                                cursor="pointer"
+                              >
+                                <Heading size="md" mb={2}>
+                                  {entry?.title || "Unknown"}
+                                </Heading>
+                                <Text color="gray.600" fontSize="sm">
+                                  Author(s): {entry?.authors || "Unknown"}
+                                </Text>
+                              </Card>
+                            ))
+                          ) : (
+                            <Text>No articles with problems</Text>
+                          )}
+                    </Stack>
                 </ModalBody>
-                <Divider colorScheme="purple.400" />
+                <Divider/>
                 <ModalFooter mt={3}>
                     <Button
                         onClick={handleClose}
