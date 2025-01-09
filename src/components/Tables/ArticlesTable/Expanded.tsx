@@ -82,7 +82,7 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
         boxShadow="lg"
         bg="#EBF0F3"
         overflowY={"auto"}
-        maxH="80vh"
+        maxH="63.5vh"
       >
         <Table
           variant="unstyled"
@@ -182,6 +182,7 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
               </Th>
             </Tr>
           </Thead>
+          <Box maxHeight="40vh" overflowY="auto"></Box>
           <Tbody>
             {articles ? (
               articles.map((e, index) => (

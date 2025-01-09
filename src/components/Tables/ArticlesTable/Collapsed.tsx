@@ -13,7 +13,6 @@ import {
 import {
   collapsedSpanText,
   collapsedTdSX,
-  tdSX,
   tooltip,
 } from "../../../pages/Execution/styles/CardsStyle";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
@@ -38,7 +37,7 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
       boxShadow="lg"
       bg="#EBF0F3"
       overflowY="auto"
-      maxH="75vh"
+      maxH="63.5vh"
     >
       <Table variant="unstyled" colorScheme="#263C56" size="md">
         <Thead

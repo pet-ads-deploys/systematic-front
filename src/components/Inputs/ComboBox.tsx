@@ -17,9 +17,9 @@ export default function ComboBox({ text, options, isDisabled }: IComboBoxProps) 
       <MenuButton 
       bgColor={text === 'Include' ? '#6B8E23' :
         text === 'Exclude' ? '#8B0000' :
-        text === 'filter options' ? '#303D50' :
+        text === 'filter options' ? '#EBF0F3' :
         '#303D50'} 
-      color={"#ffff"} 
+      color={text === "filter options" ? "#2E4B6C" : "#ffff"} 
       borderRadius={"6px"} 
       as={Button} 
       rightIcon={<ChevronDownIcon />} 

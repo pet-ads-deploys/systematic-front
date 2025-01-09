@@ -31,7 +31,7 @@ export default function StudySelectionArea() {
   
   return (
     <StudySelectionProvider>
-      <Flex mt="10" direction="column" borderRadius='15px' bg="gray.600" mb='20px' w="80%" p="5" alignItems={"center"}>
+      <Flex mt="10" direction="column" borderRadius='15px' bg="gray.600" mb='20px' w="97%" p="5" alignItems={"center"}>
         <ButtonsForSelection />
         
         <Box w={"100%"} bg="gray.200">
