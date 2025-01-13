@@ -1,9 +1,11 @@
 import Header from "../../../components/ui/Header/Header";
-import DynamicTable from "../../../components/Tables/DynamicTable";
+// import DynamicTable from "../../../components/Tables/DynamicTable";
 import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
 import { Flex } from "@chakra-ui/react";
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import { KeyWordHeaderInterface } from "../../../../public/interfaces/IKeyWordHeard";
+// import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
+import KeywordsTable from "../../../components/Tables/KeywordsTable/KeywordsTable";
 
 export default function KeyWordScreen() {
   const keyWords = useFetchTableData("/data/keywordData.json");
@@ -16,10 +18,11 @@ export default function KeyWordScreen() {
 
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">
-      <Header text="Keyword Screen" />
+      <Header text="Keywords" />
 
       <Flex marginLeft={"4em"} marginRight={"4em"} w={"78vw"}>
-        <DynamicTable headerData={headerData} bodyData={keyWords} tableType="keyword" filteredColumns={[]} />
+        {/* <DynamicTable headerData={headerData} bodyData={keyWords} tableType={tableTypeEnum.KEYWORD} filteredColumns={[]} searchString="" selectedStatus={null}/> */}
+        <KeywordsTable keywords={keyWords}/>
       </Flex>
     </FlexLayout>
   );
