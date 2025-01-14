@@ -39,7 +39,7 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Significant results, needs validation through clinical trials.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY LOW",
     "selectionStatus": "UNCLASSIFIED",
     "extractionStatus": "UNCLASSIFIED"
   },
@@ -105,7 +105,7 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Important implications for conservation efforts, needs further investigation.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY LOW",
     "selectionStatus": "INCLUDED",
     "extractionStatus": "UNCLASSIFIED"
   },
@@ -127,8 +127,8 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Significant findings, suggests need for digital literacy programs.",
-    "readingPriority": "MEDIUM",
-    "selectionStatus": "UNCLASSIFIED",
+    "readingPriority": "VERY LOW",
+    "selectionStatus": "REJECTED",
     "extractionStatus": "UNCLASSIFIED"
   },
   {
@@ -193,7 +193,7 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Promising results, suggests potential for remote patient monitoring.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY HIGH",
     "selectionStatus": "INCLUDED",
     "extractionStatus": "UNCLASSIFIED"
   },
@@ -237,7 +237,7 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Positive correlation observed, suggests exercise as adjunct therapy for mental health conditions.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY HIGH",
     "selectionStatus": "DUPLICATED",
     "extractionStatus": "UNCLASSIFIED"
   },
@@ -281,7 +281,7 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Identification of genetic markers can aid in personalized cancer treatments.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY HIGH",
     "selectionStatus": "INCLUDED",
     "extractionStatus": "UNCLASSIFIED"
   },
@@ -325,7 +325,7 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Improved student participation observed, suggests potential for hybrid learning models.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY HIGH",
     "selectionStatus": "INCLUDED",
     "extractionStatus": "UNCLASSIFIED"
   }
