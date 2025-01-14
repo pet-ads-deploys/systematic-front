@@ -1,6 +1,6 @@
 import Header from "../../../components/ui/Header/Header";
 // import DynamicTable from "../../../components/Tables/DynamicTable";
-import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
+import useFetchStudyData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
 import { Flex } from "@chakra-ui/react";
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import { KeyWordHeaderInterface } from "../../../../public/interfaces/IKeyWordHeard";
@@ -8,7 +8,7 @@ import { KeyWordHeaderInterface } from "../../../../public/interfaces/IKeyWordHe
 import KeywordsTable from "../../../components/Tables/KeywordsTable/KeywordsTable";
 
 export default function KeyWordScreen() {
-  const keyWords = useFetchTableData("/data/keywordData.json");
+  const keyWords = useFetchStudyData("/data/keywordData.json");
   const headerData: KeyWordHeaderInterface = {
     keyword: "Keywords",
     frequency: "Frequency"

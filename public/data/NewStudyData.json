@@ -1,6 +1,6 @@
 [
   {
-    "studyId": 1,
+    "studyReviewId": 1,
     "systematicStudyId": 1,
     "studyType": "AI_RESEARCH",
     "title": "Recent Advancements in Artificial Intelligence Research and Development",
@@ -22,7 +22,7 @@
     "extractionStatus": "INCLUDED"
   },
   {
-    "studyId": 2,
+    "studyReviewId": 2,
     "systematicStudyId": 1,
     "studyType": "MEDICAL_RESEARCH",
     "title": "Investigating the Effects of Drug X on Patient Recovery and Outcomes",
@@ -39,12 +39,12 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Significant results, needs validation through clinical trials.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY LOW",
     "selectionStatus": "UNCLASSIFIED",
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 3,
+    "studyReviewId": 3,
     "systematicStudyId": 1,
     "studyType": "PSYCHOLOGICAL_RESEARCH",
     "title": "The Long-term Impact of Childhood Trauma on Adult Behavior and Mental Health",
@@ -66,7 +66,7 @@
     "extractionStatus": "INCLUDED"
   },
   {
-    "studyId": 4,
+    "studyReviewId": 4,
     "systematicStudyId": 1,
     "studyType": "ECONOMIC_ANALYSIS",
     "title": "Analyzing the Impact of Tax Policies on Economic Growth and Development",
@@ -88,7 +88,7 @@
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 5,
+    "studyReviewId": 5,
     "systematicStudyId": 1,
     "studyType": "BIOLOGICAL_RESEARCH",
     "title": "Investigating the Effects of Climate Change on Global Biodiversity Patterns",
@@ -105,12 +105,12 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Important implications for conservation efforts, needs further investigation.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY LOW",
     "selectionStatus": "INCLUDED",
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 6,
+    "studyReviewId": 6,
     "systematicStudyId": 1,
     "studyType": "SOCIOLOGICAL_RESEARCH",
     "title": "Examining the Effects of Social Media on Youth Behavior and Social Dynamics",
@@ -127,12 +127,12 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Significant findings, suggests need for digital literacy programs.",
-    "readingPriority": "MEDIUM",
-    "selectionStatus": "UNCLASSIFIED",
+    "readingPriority": "VERY LOW",
+    "selectionStatus": "REJECTED",
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 7,
+    "studyReviewId": 7,
     "systematicStudyId": 1,
     "studyType": "EDUCATIONAL_RESEARCH",
     "title": "The Impact of Online Learning on Student Academic Performance and Engagement",
@@ -154,7 +154,7 @@
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 8,
+    "studyReviewId": 8,
     "systematicStudyId": 1,
     "studyType": "ENVIRONMENTAL_RESEARCH",
     "title": "Analyzing the Impact of Pollution on Urban Health and Public Safety",
@@ -176,7 +176,7 @@
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 9,
+    "studyReviewId": 9,
     "systematicStudyId": 1,
     "studyType": "TECHNOLOGICAL_RESEARCH",
     "title": "Evaluating the Impact of Wearable Technology on Health Monitoring and Patient Care",
@@ -193,12 +193,12 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Promising results, suggests potential for remote patient monitoring.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY HIGH",
     "selectionStatus": "INCLUDED",
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 10,
+    "studyReviewId": 10,
     "systematicStudyId": 1,
     "studyType": "PUBLIC_HEALTH_RESEARCH",
     "title": "Evaluating the Impact of Vaccination Programs on Disease Prevention and Public Health",
@@ -220,7 +220,7 @@
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 11,
+    "studyReviewId": 11,
     "systematicStudyId": 1,
     "studyType": "PHYSICAL_ACTIVITY_RESEARCH",
     "title": "Exploring the Effects of Regular Exercise on Mental Health and Well-being",
@@ -237,12 +237,12 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Positive correlation observed, suggests exercise as adjunct therapy for mental health conditions.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY HIGH",
     "selectionStatus": "DUPLICATED",
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 12,
+    "studyReviewId": 12,
     "systematicStudyId": 1,
     "studyType": "NUTRITIONAL_RESEARCH",
     "title": "Investigating the Effects of Diet on Cardiovascular Health and Disease Prevention",
@@ -264,7 +264,7 @@
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 13,
+    "studyReviewId": 13,
     "systematicStudyId": 1,
     "studyType": "GENETIC_RESEARCH",
     "title": "Exploring the Genetic Factors Contributing to Cancer Susceptibility",
@@ -281,12 +281,12 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Identification of genetic markers can aid in personalized cancer treatments.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY HIGH",
     "selectionStatus": "INCLUDED",
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 14,
+    "studyReviewId": 14,
     "systematicStudyId": 1,
     "studyType": "PSYCHIATRIC_RESEARCH",
     "title": "Investigating the Neurobiological Basis of Schizophrenia and Potential Therapeutic Targets",
@@ -308,7 +308,7 @@
     "extractionStatus": "UNCLASSIFIED"
   },
   {
-    "studyId": 15,
+    "studyReviewId": 15,
     "systematicStudyId": 1,
     "studyType": "EDUCATIONAL_RESEARCH",
     "title": "Examining the Impact of Online Learning Platforms on Student Engagement and Performance",
@@ -325,7 +325,7 @@
     "formAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "robAnswers": [{"question": "Question 1", "answer": "Answer 1"}],
     "comments": "Improved student participation observed, suggests potential for hybrid learning models.",
-    "readingPriority": "MEDIUM",
+    "readingPriority": "VERY HIGH",
     "selectionStatus": "INCLUDED",
     "extractionStatus": "UNCLASSIFIED"
   }

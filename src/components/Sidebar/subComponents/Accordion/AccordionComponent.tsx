@@ -22,7 +22,7 @@ const AccordionComponent = () => {
         <AccordionButton p='1.2vw 1vh' color="white">
           <Box color='#c9d9e5' as='span' flex='1' textAlign='left' display="flex" gap=".5rem">
             <MdRule size="1.25rem" color="#c9d9e5"/>
-            Protocol
+            Planning
           </Box>
           <AccordionIcon />
         </AccordionButton>

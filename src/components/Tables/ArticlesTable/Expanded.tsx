@@ -14,7 +14,6 @@ import {
 import {
   CheckCircleIcon,
   InfoIcon,
-  CloseIcon,
   WarningIcon,
 } from "@chakra-ui/icons";
 import {
@@ -34,6 +33,7 @@ import {
   MdKeyboardArrowDown,
 } from "react-icons/md";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { IoIosCloseCircle } from "react-icons/io";
 
 interface Props {
   articles: ArticleInterface[];
@@ -53,7 +53,7 @@ export default function Collapsed({ articles, handleHeaderClick, sortConfig }: P
       case "DUPLICATED":
         return <InfoIcon color="blue.500" />;
       case "REJECTED":
-        return <CloseIcon color="red.500" />;
+        return <IoIosCloseCircle color="red" size="1.4rem"/>;
       case "UNCLASSIFIED":
         return <WarningIcon color="yellow.500" />;
       default:
@@ -63,13 +63,13 @@ export default function Collapsed({ articles, handleHeaderClick, sortConfig }: P
 
   const renderPriorityIcon = (priority: string) => {
     switch (priority) {
-      case "VERY_HIGH":
+      case "VERY HIGH":
         return <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />;
       case "HIGH":
         return <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />;
       case "LOW":
         return <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />;
-      case "VERY_LOW":
+      case "VERY LOW":
         return <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />;
       default:
         return null;
