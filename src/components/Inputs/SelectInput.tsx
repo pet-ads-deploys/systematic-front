@@ -22,7 +22,7 @@ export default function SelectInput({ values, names, onSelect, selectedValue, pl
       <Select bgColor={"#EBF0F3"} color="#2E4B6C" placeholder={placeholder} value={selectedValue || ""} onChange={handleSelectChange}>
         {names.map((optionName, index) => (
           <option key={index} value={values[index]}>
-            {optionName}
+            {optionName.toString().toLocaleLowerCase()}
           </option>
         ))}
       </Select>
