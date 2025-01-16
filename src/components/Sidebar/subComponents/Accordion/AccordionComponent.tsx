@@ -43,8 +43,8 @@ const AccordionComponent = () => {
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
-        <ProtocolAccordionSubItem icon={<IoText size="1.1rem" color='#c9d9e5'/>} to={`/newReview/keywords`} text='Keywords' />
-        <ProtocolAccordionSubItem icon={<CgFileAdd  size="1.1rem" color='#c9d9e5'/>} to={`/newReview/insertion`} text='Insertion' />
+        {/* <ProtocolAccordionSubItem icon={<IoText size="1.1rem" color='#c9d9e5'/>} to={`/newReview/keywords`} text='Keywords' /> */}
+        {/* <ProtocolAccordionSubItem icon={<CgFileAdd  size="1.1rem" color='#c9d9e5'/>} to={`/newReview/insertion`} text='Insertion' /> */}
         <ProtocolAccordionSubItem icon={<GrTag size="1rem" color='#c9d9e5'/>} to={`/newReview/identification`} text='Identification' />
         <ProtocolAccordionSubItem icon={<LuTextSelect size="1.2rem" color='#c9d9e5'/>} to={`/newReview/selection`} text='Selection' />
         <ProtocolAccordionSubItem icon={<TbFilterSearch size="1.2rem" color='#c9d9e5'/>} to={`/newReview/extraction`} text='Extraction' />
