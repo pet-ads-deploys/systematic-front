@@ -11,7 +11,7 @@ import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStud
 import { conteiner, inputconteiner } from "../styles/executionStyles";
 import { AppProvider } from "../../../components/Context/AppContext";
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
+// import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
 import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
 import { useContext, useState } from "react";
 // import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
@@ -24,14 +24,14 @@ import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
 
 export default function Selection<U extends StudyInterface | KeywordInterface>() {
   const studiesData: U[] | undefined = useFetchTableData("/data/NewStudyData.json");
-  const headerData: TableHeadersInterface = {
-    title: "Title",
-    authors: "Author",
-    year: "Year",
-    selectionStatus: "Selection",
-    extractionStatus: "Extraction",
-    readingPriority: "Reading Priority"
-}
+//   const headerData: TableHeadersInterface = {
+//     title: "Title",
+//     authors: "Author",
+//     year: "Year",
+//     selectionStatus: "Selection",
+//     extractionStatus: "Extraction",
+//     readingPriority: "Reading Priority"
+// }
   const { value: selectedStatus, handleChange: handleSelectChange } = useInputState<string | null>(null);
   const [ searchString, setSearchString ] = useState<string>("");
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
@@ -46,17 +46,17 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
   if(!studiesData) return <NoStudiesData/>
 
 
-  const handleComboBoxChange = (column: string, isChecked: boolean) => {
-    setSelectedColumns((prev) => {
-      if (isChecked && !prev.includes(column)) {
-        return [...prev, column];
-      }
-      if (!isChecked) {
-        return prev.filter((col) => col !== column);
-      }
-      return prev;
-    });
-  };
+  // const handleComboBoxChange = (column: string, isChecked: boolean) => {
+  //   setSelectedColumns((prev) => {
+  //     if (isChecked && !prev.includes(column)) {
+  //       return [...prev, column];
+  //     }
+  //     if (!isChecked) {
+  //       return prev.filter((col) => col !== column);
+  //     }
+  //     return prev;
+  //   });
+  // };
   
   const handleSearchAndFilter = (
     searchString: string,
@@ -109,14 +109,14 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
                     onSelect={(value) => handleSelectChange(value)}
                     selectedValue={selectedStatus}
                     page={"selection"}
-                    placeholder="Status"
+                    placeholder="Selection status"
                   />
-                   <ComboBox
+                   {/* <ComboBox
                     isDisabled={false}
                     text="filter options"
                     options={Object.values(headerData)}
                     onOptionchange={handleComboBoxChange} 
-                  />
+                  /> */}
                   </Box>
                   
                 </Box>
