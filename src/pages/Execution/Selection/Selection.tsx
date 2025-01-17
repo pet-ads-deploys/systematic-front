@@ -21,6 +21,7 @@ import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
 import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
+import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
 
 export default function Selection<U extends StudyInterface | KeywordInterface>() {
   const studiesData: U[] | undefined = useFetchTableData("/data/NewStudyData.json");
@@ -45,7 +46,6 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
 
   if(!studiesData) return <NoStudiesData/>
 
-
   // const handleComboBoxChange = (column: string, isChecked: boolean) => {
   //   setSelectedColumns((prev) => {
   //     if (isChecked && !prev.includes(column)) {
@@ -57,38 +57,12 @@ export default function Selection<U extends StudyInterface | KeywordInterface>()
   //     return prev;
   //   });
   // };
-  
-  const handleSearchAndFilter = (
-    searchString: string,
-    selectedStatus: string | null,
-    selectedColumns: string[]
-  ) => {
-    const lowerCaseSearch = searchString.toLowerCase();
-  
-    return articles.filter((article) => {
-      const matchesSearch = selectedColumns.length
-        ? selectedColumns.some((column) =>
-            article[column as keyof ArticleInterface]
-              ?.toString()
-              .toLowerCase()
-              .includes(lowerCaseSearch)
-          )
-        : Object.values(article).some((value) =>
-            value?.toString().toLowerCase().includes(lowerCaseSearch)
-          );
-  
-      const matchesStatus =
-        !selectedStatus || article.selectionStatus === selectedStatus;
-  
-      return matchesSearch && matchesStatus;
-    });
-  };
-  
-  
+    
   const filteredArticles = handleSearchAndFilter(
     searchString,
     selectedStatus,
-    selectedColumns
+    selectedColumns,
+    articles
   );   
 
   return (
