@@ -35,7 +35,7 @@ export default function NumberScale({
         {scaleValues.map((value, index) => (
             <Flex key={index} sx={radioBox}>
             {value}
-            <Radio key={index} sx={radios} variant={"outline"} value={value.toString()} /></Flex>
+            <Radio sx={radios} variant={"outline"} value={value.toString()} /></Flex>
         ))}
       </RadioGroup>
       {checkedOption && <Button onClick={handleClearSelection}>

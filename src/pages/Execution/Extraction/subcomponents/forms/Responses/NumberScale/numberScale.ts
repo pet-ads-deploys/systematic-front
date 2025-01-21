@@ -16,7 +16,7 @@ export const radiosGroup = {
   textAlign: "center",
   p: "1rem",
   w: "100%",
-    fontSize: "1.25rem"
+  fontSize: "1.25rem"
 };
 
 export const radioBox = {
