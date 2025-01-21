@@ -1,6 +1,17 @@
-import { Box, Button, Flex, FormControl, FormLabel, Radio, RadioGroup } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Text
+} from "@chakra-ui/react";
 import { useState } from "react";
-import { container, label, radiosGroup, radios, radioBox } from "./numberScale";
+import { container, label, radiosGroup, radios, radioBox, clearButton, radiosLabel } from "./numberScale";
+import { capitalize } from "../../../../../../../utils/CapitalizeText";
+import { RiRestartLine } from "react-icons/ri";
 
 interface NumberScaleProps {
   question: string;
@@ -13,8 +24,7 @@ export default function NumberScale({
   minValue,
   maxValue,
 }: NumberScaleProps) {
-  const [checkedOption, setCheckedOption] =
-    useState<string>("");
+  const [checkedOption, setCheckedOption] = useState<string>("");
 
   const scaleValues = Array.from(
     { length: maxValue - minValue + 1 },
@@ -23,24 +33,31 @@ export default function NumberScale({
 
   const handleClearSelection = () => {
     setCheckedOption("");
-  }
-
-  console.log("valor do radios:", checkedOption);
+  };
 
   return (
     <FormControl sx={container}>
-      <FormLabel sx={label}>{question}</FormLabel>
-      <Box h="10rem">
-      <RadioGroup sx={radiosGroup} gap=".5rem" value={checkedOption} onChange={setCheckedOption} w="100%">
-        {scaleValues.map((value, index) => (
-            <Flex key={index} sx={radioBox}>
-            {value}
-            <Radio sx={radios} variant={"outline"} value={value.toString()} /></Flex>
-        ))}
-      </RadioGroup>
-      {checkedOption && <Button onClick={handleClearSelection}>
+      <FormLabel sx={label}>{capitalize(question)}</FormLabel>
+      <Box display="flex" flexDirection="column" gap="1rem">
+        <RadioGroup
+          sx={radiosGroup}
+          value={checkedOption}
+          onChange={setCheckedOption}
+        >
+          <Flex wrap="wrap" justifyContent="center" gap="1rem">
+            {scaleValues.map((value, index) => (
+              <Flex key={index} sx={radioBox}>
+                <Text sx={radiosLabel}>{value}</Text>
+                <Radio sx={radios} value={value.toString()} />
+              </Flex>
+            ))}
+          </Flex>
+        </RadioGroup>
+        {checkedOption && (
+          <Button sx={clearButton} onClick={handleClearSelection}>
             Clear selection
-        </Button>}
+          </Button>
+        )}
       </Box>
     </FormControl>
   );

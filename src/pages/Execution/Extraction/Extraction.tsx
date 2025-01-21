@@ -141,8 +141,8 @@ export default function Extraction() {
                 justifyContent="center"
                 alignItems={"center"}
                 flexDirection={"column"}
-                w="97%"
-                gap="1rem"
+                w="100%"
+                gap="4rem"
               >
                 <ArticlesTable
                   articles={

@@ -1,18 +1,7 @@
 import useSWR from "swr";
 import Axios from "../../interceptor/interceptor";
 import getRequestOptions from "../../utils/getRequestOptions";
-
-interface Questions {
-  code: string;
-  description: string;
-  lower: number;
-  higher: number;
-  options: string[] | null;
-  questionId: string | null;
-  questionType: string | null;
-  scales: string | null;
-  systematicStudyId: string | null;
-}
+import { Questions } from "../../pages/Execution/Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
 
 interface HttpResponse {
   questions: Questions[];
