@@ -224,6 +224,8 @@ if(label == 'Risk of Bias Questions') adress = 'rob-question';
               <Td>
                 <DeleteButton index={index} handleDelete={() => handleDelete(index)} />
                 <EditButton
+                  itemDescription={row.question}
+                  itemType={row.type}
                   index={index}
                   editIndex={editIndex}
                   handleEdit={() => {
