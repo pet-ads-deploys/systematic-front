@@ -1,6 +1,7 @@
 import { FormControl, Select } from "@chakra-ui/react";
 import React from "react";
 import { formcontrol } from "./styles/SelectInputStyles";
+import { capitalize } from "../../utils/CapitalizeText";
 
 interface ISelectInputProps {
   values: string[];
@@ -22,7 +23,7 @@ export default function SelectInput({ values, names, onSelect, selectedValue, pl
       <Select bgColor={"#EBF0F3"} color="#2E4B6C" placeholder={placeholder} value={selectedValue || ""} onChange={handleSelectChange}>
         {names.map((optionName, index) => (
           <option key={index} value={values[index]}>
-            {optionName.toString().toLocaleLowerCase()}
+            {capitalize(optionName.toString())}
           </option>
         ))}
       </Select>
