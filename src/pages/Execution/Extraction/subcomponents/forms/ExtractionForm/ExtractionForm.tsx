@@ -5,6 +5,7 @@ import NumberScale from "../Responses/NumberScale/NumberScale";
 import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
 import { useState } from "react";
 import DropdownList from "../Responses/DropdownList/DropdownList";
+import LabeledList from "../Responses/LabeledList/LabeledList";
 
 export interface Questions {
   code: string;
@@ -14,7 +15,7 @@ export interface Questions {
   options: string[] | null;
   questionId: string | null;
   questionType: string | null;
-  scales: string | null;
+  scales: Record<string, number>;
   systematicStudyId: string | null;
 }
 
@@ -64,8 +65,14 @@ export default function ExtractionForm() {
             options={question.options || []}
           />
         );
-      default:
-        return null;
+      case "LABELED_SCALE":
+        return (
+          <LabeledList
+            key={question.code}
+            question={question.description}
+            scales={question.scales}
+          />
+        );
     }
   };
 
