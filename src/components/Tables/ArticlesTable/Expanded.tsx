@@ -52,7 +52,7 @@ export default function Collapsed({ articles, handleHeaderClick, sortConfig }: P
         return <CheckCircleIcon color="green.500" />;
       case "DUPLICATED":
         return <InfoIcon color="blue.500" />;
-      case "REJECTED":
+      case "EXCLUDED":
         return <IoIosCloseCircle color="red" size="1.4rem"/>;
       case "UNCLASSIFIED":
         return <WarningIcon color="yellow.500" />;

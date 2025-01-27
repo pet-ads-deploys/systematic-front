@@ -1,11 +1,12 @@
 import { Box, Button, Flex, FormControl, Text } from "@chakra-ui/react";
 import HeaderForm from "../HeaderForm/HeaderForm";
-import TextualResponse from "../Responses/Textual/Textual";
-import NumberScale from "../Responses/NumberScale/NumberScale";
+
 import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
 import { useState } from "react";
 import DropdownList from "../Responses/DropdownList/DropdownList";
 import LabeledList from "../Responses/LabeledList/LabeledList";
+import TextualResponse from "../Responses/Textual/Textual.tsx";
+import NumberScale from "../Responses/NumberScale/NumberScale.tsx";
 
 export interface Questions {
   code: string;
@@ -50,8 +51,8 @@ export default function ExtractionForm() {
           <NumberScale
             key={question.code}
             question={question.description}
-            minValue={question.higher}
-            maxValue={question.lower}
+            minValue={question.lower}
+            maxValue={question.higher}
             onResponse={(response) =>
               updateResponse(question.questionId || "", response)
             }
