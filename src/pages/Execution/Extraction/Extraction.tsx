@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import useInputState from "../../../hooks/useInputState";
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import Header from "../../../components/ui/Header/Header";
@@ -22,6 +22,9 @@ import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 import ExtractionForm from "./subcomponents/forms/ExtractionForm/ExtractionForm";
 import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
+import ButtonsLayout from "../Selection/subcomponents/LayoutButtons";
+import { LayoutModel } from "../Selection/Selection";
+import LayoutFactory from "../Selection/subcomponents/LayoutFactory";
 // import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
 
 export default function Extraction() {
@@ -44,6 +47,7 @@ export default function Extraction() {
   const [searchString, setSearchString] = useState<string>("");
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const selectionContext = useContext(StudySelectionContext);
+  const [layout, setLayout] = useState<LayoutModel>({ orientation: "default" });
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
   let articles: ArticleInterface[] = [];
@@ -58,6 +62,10 @@ export default function Extraction() {
     selectedColumns,
     articles
   );
+
+  const handleDefaultLayout = () => setLayout({ orientation: "default" });
+  const handleHorizontalLayout = () => setLayout({ orientation: "horizontal" });
+  const handleVerticalLayout = () => setLayout({ orientation: "vertical" });
 
   if (!studiesData) return <NoStudiesData />;
 
@@ -100,6 +108,7 @@ export default function Extraction() {
       <StudySelectionProvider>
         <FlexLayout defaultOpen={1} navigationType="Accordion">
           <Header text="Extraction" />
+            <ButtonsLayout handleDefaultLayout={handleDefaultLayout} handleHorizontalLayout={handleHorizontalLayout} handleVerticalLayout={handleVerticalLayout}/>
           <Box overflowY="auto" h="90%">
             <Box w="100%">
               <Box sx={conteiner}>
@@ -138,21 +147,7 @@ export default function Extraction() {
                   </Box>
                 </Box>
               </Box>
-              <Flex
-                justifyContent="center"
-                alignItems={"center"}
-                flexDirection={"column"}
-                w="100%"
-                gap="4rem"
-              >
-                <ArticlesTable
-                  articles={
-                    filteredArticles.length > 0 ? filteredArticles : articles
-                  }
-                />
-                  <StudySelectionArea />
-                  {articles.length > 0 && <ExtractionForm />}
-              </Flex>
+             <LayoutFactory page={{type: "Extraction"}} articles={articles} filteredArticles={filteredArticles} layout={layout}/>
             </Box>
           </Box>
         </FlexLayout>
