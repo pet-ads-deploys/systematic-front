@@ -1,5 +1,4 @@
 export const conteiner = {
-  mt: 10,
   display: "flex",
   justifyContent: "center", 
   alignItems: "center", 
@@ -8,7 +7,7 @@ export const conteiner = {
 
 export const inputconteiner = {
   display: 'flex',
-  width: '97%',
+  width: '100%',
   m: '.5rem 0 0 0',
   gap: '2rem',
   justifyContent: 'space-between',
@@ -28,5 +27,4 @@ export const btnconteiner = {
   alignItems: "center",
   columnGap: 5,
   alignSelf: "baseline",
-  mt: 10,
 };

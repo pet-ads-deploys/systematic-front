@@ -90,7 +90,7 @@ export default function Collapsed({ articles, handleHeaderClick, sortConfig }: P
   if (setShowSelectionModal && setSelectionStudyIndex)
     return (
       <TableContainer
-        width={"97%"}
+        width={"100%"}
         mt={5}
         borderRadius="1rem"
         boxShadow="lg"

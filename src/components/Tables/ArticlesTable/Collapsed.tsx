@@ -35,7 +35,7 @@ export default function Collapsed({ articles, handleHeaderClick, sortConfig }: P
 
   return (
     <TableContainer
-      width="97%"
+      width="100%"
       mt={5}
       borderRadius="1rem"
       boxShadow="lg"
