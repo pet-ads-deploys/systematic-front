@@ -21,6 +21,7 @@ import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 import ExtractionForm from "./subcomponents/forms/ExtractionForm/ExtractionForm";
+import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
 // import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
 
 export default function Extraction() {
@@ -46,7 +47,8 @@ export default function Extraction() {
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
   let articles: ArticleInterface[] = [];
-  articles = selectionContext.articles.filter((art) => art.selectionStatus === "INCLUDED");
+  // articles = selectionContext.articles.filter((art) => art.selectionStatus === "INCLUDED");
+  articles = selectionContext.articles;
 
   console.log("artigos filtrados em extraction: ", articles);
 
@@ -56,7 +58,6 @@ export default function Extraction() {
     selectedColumns,
     articles
   );
-
 
   if (!studiesData) return <NoStudiesData />;
 
@@ -116,24 +117,24 @@ export default function Extraction() {
                     justifyContent="space-between"
                     alignItems="center"
                   >
-                    {/* <SelectInput
+                    <SelectInput
                       names={[
                         "INCLUDED",
                         "DUPLICATED",
-                        "REJECTED",
+                        "EXCLUDED",
                         "UNCLASSIFIED",
                       ]}
                       values={[
                         "INCLUDED",
                         "DUPLICATED",
-                        "REJECTED",
+                        "EXCLUDED",
                         "UNCLASSIFIED",
                       ]}
                       onSelect={(value) => handleSelectChange(value)}
                       selectedValue={selectedStatus}
                       page={"selection"}
                       placeholder="Selection status"
-                    /> */}
+                    />
                   </Box>
                 </Box>
               </Box>
@@ -149,7 +150,8 @@ export default function Extraction() {
                     filteredArticles.length > 0 ? filteredArticles : articles
                   }
                 />
-                {articles.length > 0 && <ExtractionForm />}
+                  <StudySelectionArea />
+                  {articles.length > 0 && <ExtractionForm />}
               </Flex>
             </Box>
           </Box>
