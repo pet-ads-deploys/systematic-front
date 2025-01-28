@@ -71,6 +71,23 @@ export default function ProtocolPartTwo2() {
             typeField="select"
           />
 
+          <AddSelectionTable
+            label="Databases and Information Source"
+            options={[
+              "Google Scholar",
+              "Scopus",
+              "Scielo",
+              "BDTD",
+              "PubMed",
+              "Expert Suggestion",
+              "Backward Snowballing",
+              "Forward Snowballing",
+              "Grey Literature Sources",
+            ]}
+            placeholder={"Select Data Base"}
+            typeField="select"
+          />
+
           <TextAreaInput
             value={searchString}
             onChange={(e) => {
@@ -105,22 +122,6 @@ export default function ProtocolPartTwo2() {
             }}
             label="Research Strategy"
             placeholder="Enter research strategy"
-          />
-          <AddSelectionTable
-            label="Databases and Information Source"
-            options={[
-              "Google Scholar",
-              "Scopus",
-              "Scielo",
-              "BDTD",
-              "PubMed",
-              "Expert Suggestion",
-              "Backward Snowballing",
-              "Forward Snowballing",
-              "Grey Literature Sources",
-            ]}
-            placeholder={"Select Data Base"}
-            typeField="select"
           />
 
           <TextAreaInput
