@@ -11,19 +11,18 @@ interface ButtonsLayoutProps {
 export default function ButtonsLayout({handleDefaultLayout,handleHorizontalLayout,handleVerticalLayout}: ButtonsLayoutProps){
   return (
     <Flex
-      w="97%"
-      ml="1.25rem"
+      w="100%"
       justifyContent="end"
       alignContent="center"
       gap="1.5rem"
     >
-      <Button w="3rem" onClick={handleHorizontalLayout}>
+      <Button w="3rem" borderRadius=".5rem" onClick={handleHorizontalLayout}>
         <BsLayoutSplit color="black" size="1.25rem" />
       </Button>
-      <Button w="3rem" onClick={handleVerticalLayout}>
+      <Button w="3rem" borderRadius=".5rem" onClick={handleVerticalLayout}>
         <PiSquareSplitVerticalLight color="black" size="1.5rem" />
       </Button>
-      <Button w="3rem" onClick={handleDefaultLayout}>
+      <Button w="3rem" borderRadius=".5rem" onClick={handleDefaultLayout}>
         <BsArrowsFullscreen color="black" size="1rem" />
       </Button>
     </Flex>
