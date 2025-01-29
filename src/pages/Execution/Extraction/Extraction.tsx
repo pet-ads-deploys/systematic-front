@@ -48,6 +48,7 @@ export default function Extraction() {
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const selectionContext = useContext(StudySelectionContext);
   const [layout, setLayout] = useState<LayoutModel>({ orientation: "default" });
+  console.log("Valor do layout atual:", layout);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
   let articles: ArticleInterface[] = [];
@@ -107,47 +108,73 @@ export default function Extraction() {
     <AppProvider>
       <StudySelectionProvider>
         <FlexLayout defaultOpen={1} navigationType="Accordion">
-          <Header text="Extraction" />
-            <ButtonsLayout handleDefaultLayout={handleDefaultLayout} handleHorizontalLayout={handleHorizontalLayout} handleVerticalLayout={handleVerticalLayout}/>
-          <Box overflowY="auto" h="90%">
-            <Box w="100%">
-              <Box sx={conteiner}>
-                <Box sx={inputconteiner}>
-                  <InputText
-                    type="search"
-                    placeholder="Insert article atribute"
-                    nome="search"
-                    onChange={(e) => setSearchString(e.target.value)}
-                    value={searchString}
-                  />
-                  <Box
-                    display="flex"
-                    gap="1rem"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <SelectInput
-                      names={[
-                        "INCLUDED",
-                        "DUPLICATED",
-                        "EXCLUDED",
-                        "UNCLASSIFIED",
-                      ]}
-                      values={[
-                        "INCLUDED",
-                        "DUPLICATED",
-                        "EXCLUDED",
-                        "UNCLASSIFIED",
-                      ]}
-                      onSelect={(value) => handleSelectChange(value)}
-                      selectedValue={selectedStatus}
-                      page={"selection"}
-                      placeholder="Selection status"
-                    />
-                  </Box>
-                </Box>
+          <Flex
+            w="98%"
+            h="2.5rem"
+            justifyContent="space-between"
+            alignItems="center"
+            m="1rem 0 2rem 1.5rem"
+          >
+            <Header text="Extraction" />
+            <ButtonsLayout
+              handleDefaultLayout={handleDefaultLayout}
+              handleHorizontalLayout={handleHorizontalLayout}
+              handleVerticalLayout={handleVerticalLayout}
+            />
+          </Flex>
+          <Box
+            h="50rem"
+            w="98%"
+            // bg="red"
+            ml="1.5rem"
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            overflowY="auto"
+          >
+            <Box sx={inputconteiner}>
+              <InputText
+                type="search"
+                placeholder="Insert article atribute"
+                nome="search"
+                onChange={(e) => setSearchString(e.target.value)}
+                value={searchString}
+              />
+
+              <Box
+                display="flex"
+                gap="1rem"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <SelectInput
+                  names={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
+                  values={[
+                    "INCLUDED",
+                    "DUPLICATED",
+                    "EXCLUDED",
+                    "UNCLASSIFIED",
+                  ]}
+                  onSelect={(value) => handleSelectChange(value)}
+                  selectedValue={selectedStatus}
+                  page={"selection"}
+                  placeholder="Selection status"
+                />
+                {/* <ComboBox
+                    isDisabled={false}
+                    text="filter options"
+                    options={Object.values(headerData)}
+                    onOptionchange={handleComboBoxChange} 
+                  /> */}
               </Box>
-             <LayoutFactory page={{type: "Extraction"}} articles={articles} filteredArticles={filteredArticles} layout={layout}/>
+            </Box>
+            <Box w="100%" >
+              <LayoutFactory
+                page={{ type: "Extraction" }}
+                layout={layout}
+                articles={articles}
+                filteredArticles={filteredArticles}
+              />
             </Box>
           </Box>
         </FlexLayout>

@@ -5,7 +5,7 @@ import StudySelectionArea from "./StudySelectionArea";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
 import ExtractionForm from "../../Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
 
-interface PageLayout {
+export interface PageLayout {
   type: "Selection" | "Extraction";
 }
 
@@ -25,7 +25,7 @@ export default function LayoutFactory({
   switch (layout.orientation) {
     case "horizontal":
       return (
-        <Flex w="100%" h="100%">
+        <Flex w="100%" h="100%" gap="1.5rem">
           <Box w="50%" h="100%">
             <ArticlesTable
               articles={
@@ -33,7 +33,11 @@ export default function LayoutFactory({
               }
             />
           </Box>
-          <Box w="100%" h="100%">
+          <Box
+            overflowY={page.type === "Extraction" ? "auto" : "unset"}
+            w="100%"
+            h="100%"
+          >
             <StudySelectionArea />
             {page.type === "Extraction" && <ExtractionForm />}
           </Box>
@@ -42,7 +46,7 @@ export default function LayoutFactory({
 
     case "vertical":
       return (
-        <Flex flexDirection="column" w="100%" h="100%">
+        <Flex flexDirection="column" w="100%" h="100%" gap="2rem">
           <Box w="100%" h="50%">
             <ArticlesTable
               articles={
@@ -50,7 +54,11 @@ export default function LayoutFactory({
               }
             />
           </Box>
-          <Box w="100%" h="50%">
+          <Box
+            overflowY={page.type === "Extraction" ? "auto" : "unset"}
+            w="100%"
+            h="50%"
+          >
             <StudySelectionArea />
             {page.type === "Extraction" && <ExtractionForm />}
           </Box>
@@ -63,12 +71,19 @@ export default function LayoutFactory({
           justifyContent="center"
           alignItems="center"
         >
-          <ArticlesTable
-            articles={filteredArticles.length > 0 ? filteredArticles : articles}
-          />
-          <Box w="100%">
+          <Box
+            overflowY={page.type === "Extraction" ? "auto" : "unset"}
+            w="100%"
+          >
             <StudySelectionArea />
             {page.type === "Extraction" && <ExtractionForm />}
+          </Box>
+          <Box>
+            <ArticlesTable
+              articles={
+                filteredArticles.length > 0 ? filteredArticles : articles
+              }
+            />
           </Box>
         </Flex>
       );
