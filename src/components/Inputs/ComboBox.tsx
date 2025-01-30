@@ -1,6 +1,13 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import useComboBoxSelection from "../../hooks/useComboBoxSelection";
-import { Button, Checkbox, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Button,
+  Checkbox,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 
 interface IComboBoxProps {
   text: string;
@@ -9,8 +16,14 @@ interface IComboBoxProps {
   onOptionchange?: (option: string, isChecked: boolean) => void;
 }
 
-export default function ComboBox({ text, options, isDisabled, onOptionchange }: IComboBoxProps) {
-  const { handleIncludeItemClick, handleExcludeItemClick } = useComboBoxSelection();
+export default function ComboBox({
+  text,
+  options,
+  isDisabled,
+  onOptionchange,
+}: IComboBoxProps) {
+  const { handleIncludeItemClick, handleExcludeItemClick } =
+    useComboBoxSelection();
 
   return (
     <Menu closeOnSelect={false}>
@@ -26,9 +39,39 @@ export default function ComboBox({ text, options, isDisabled, onOptionchange }: 
         }
         color={text === "filter options" ? "#2E4B6C" : "#ffff"}
         borderRadius={"6px"}
+        border={
+          text === "Include"
+            ? "2px solid #6B8E23"
+            : text === "Exclude"
+            ? "2px solid #8B0000"
+            : text === "filter options"
+            ? "2px solid #CFE2F3"
+            : "#2F3E52"
+        }
         as={Button}
-        rightIcon={<ChevronDownIcon />}
-        w={"10rem"}
+        _hover={{
+          bg:
+            text === "Include"
+              ? "white"
+              : text === "Exclude"
+              ? "white"
+              : text === "filter options"
+              ? "#CFE2F3"
+              : "#2F3E52",
+          color:
+            text === "Include"
+              ? "#6B8E23"
+              : text === "Exclude"
+              ? "#8B0000"
+              : text === "filter options"
+              ? "#CFE2F3"
+              : "#2F3E52",
+          transition: "0.2s ease-in-out",
+        }}
+        transition="0.2s ease-in-out"
+        boxShadow="md"
+        rightIcon={<ChevronDownIcon fontSize="1.5rem" />}
+        w={"7.5rem"}
       >
         {text}
       </MenuButton>

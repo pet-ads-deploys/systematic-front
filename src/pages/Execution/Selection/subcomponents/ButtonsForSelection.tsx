@@ -89,6 +89,7 @@ export default function ButtonsForSelection() {
               boxShadow="md"
               p="1rem"
               onClick={ResetState}
+              w={"7.5rem"}
             >
               Reset
             </Button>
