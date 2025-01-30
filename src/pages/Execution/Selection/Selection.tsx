@@ -96,6 +96,7 @@ export default function Selection<
           >
             <Header text="Selection" />
             <ButtonsLayout
+              layout={layout}
               handleDefaultLayout={handleDefaultLayout}
               handleHorizontalLayout={handleHorizontalLayout}
               handleVerticalLayout={handleVerticalLayout}
