@@ -12,7 +12,7 @@ export default function StudySelectionArea() {
   const selectionContext = useContext(StudySelectionContext);
   if(!selectionContext) throw new Error("Failed to get selection context on study Selection area");
   const reload = selectionContext.reload;
-  const studyData = useGetAllReviewArticles(reload);
+  const studyData = useGetAllReviewArticles();
   const showSelectionModal = context?.showSelectionModal;
   const setSelectionStudies = context?.setSelectionStudies;
   const studyIndex = context?.selectionStudyIndex;
@@ -21,7 +21,7 @@ export default function StudySelectionArea() {
     console.log(studyIndex);
   }, [studyIndex])
 
-  if(setSelectionStudies) setSelectionStudies(studyData as StudyInterface[]);
+  if(setSelectionStudies && studyData?.articles) setSelectionStudies(studyData?.articles as StudyInterface[]);
 
   if (!showSelectionModal || !studyIndex) return (
     <Flex direction="column" bg="gray.600" borderRadius='1rem' w="100%" mb='20px' p="5" alignItems="center">
@@ -36,7 +36,7 @@ export default function StudySelectionArea() {
         <ButtonsForSelection />
         </Flex>
         <Box w={"100%"} h="100%">
-          <StudyDataFiel studyData={(studyData[studyIndex] as StudyInterface)} type="Selection" />
+          <StudyDataFiel studyData={(studyData?.articles?.[studyIndex] as StudyInterface)} type="Selection" />
         </Box>
       </Flex>
     </StudySelectionProvider>

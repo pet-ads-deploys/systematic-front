@@ -47,7 +47,7 @@ export default function Extraction() {
   const [searchString, setSearchString] = useState<string>("");
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const selectionContext = useContext(StudySelectionContext);
-  const [layout, setLayout] = useState<LayoutModel>({ orientation: "default" });
+  const [layout, setLayout] = useState<LayoutModel>({ orientation: "vertical" });
   console.log("Valor do layout atual:", layout);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");

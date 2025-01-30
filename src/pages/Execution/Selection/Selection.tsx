@@ -48,12 +48,13 @@ export default function Selection<
   const [searchString, setSearchString] = useState<string>("");
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const selectionContext = useContext(StudySelectionContext);
-  const [layout, setLayout] = useState<LayoutModel>({ orientation: "default" });
+  const [layout, setLayout] = useState<LayoutModel>({ orientation: "vertical" });
   console.log("Valor do layout atual:", layout);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
-  let articles: ArticleInterface[] = [];
-  articles = selectionContext.articles;
+  // let articles: ArticleInterface[] = [];
+  const articles: ArticleInterface[] = selectionContext.articles || [];
+  // articles = selectionContext.articles;
 
   // articles = studiesData;
 
