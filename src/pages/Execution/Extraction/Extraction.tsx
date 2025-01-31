@@ -19,9 +19,9 @@ import StudySelectionContext, {
 } from "../../../components/Context/StudiesSelectionContext";
 import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
-import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
-import ExtractionForm from "./subcomponents/forms/ExtractionForm/ExtractionForm";
-import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
+// import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
+// import ExtractionForm from "./subcomponents/forms/ExtractionForm/ExtractionForm";
+// import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
 import ButtonsLayout from "../Selection/subcomponents/LayoutButtons";
 import { LayoutModel } from "../Selection/Selection";
 import LayoutFactory from "../Selection/subcomponents/LayoutFactory";

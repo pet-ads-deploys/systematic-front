@@ -2,12 +2,12 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import useInputState from "../../../hooks/useInputState";
 import Header from "../../../components/ui/Header/Header";
 import FlexLayout from "../../../components/ui/Flex/Flex";
-import ComboBox from "../../../components/Inputs/ComboBox";
+// import ComboBox from "../../../components/Inputs/ComboBox";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
-import StudySelectionArea from "./subcomponents/StudySelectionArea";
+// import StudySelectionArea from "./subcomponents/StudySelectionArea";
 // import DynamicTable from "../../../components/Tables/DynamicTable";
-import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
+// import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
 import { conteiner, inputconteiner } from "../styles/executionStyles";
 import { AppProvider } from "../../../components/Context/AppContext";
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
@@ -18,9 +18,9 @@ import { useContext, useState } from "react";
 // import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
 import { StudySelectionProvider } from "../../../components/Context/StudiesSelectionContext";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
-import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
+// import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
-import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
+// import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
 import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
 import LayoutFactory from "./subcomponents/LayoutFactory";
 import ButtonsLayout from "./subcomponents/LayoutButtons";
@@ -88,7 +88,7 @@ export default function Selection<
       <StudySelectionProvider>
         <FlexLayout defaultOpen={1} navigationType="Accordion">
           <Flex
-            w="98%"
+            w="96%"
             h="2.5rem"
             justifyContent="space-between"
             alignItems="center"
@@ -103,13 +103,15 @@ export default function Selection<
             />
           </Flex>
           <Box
-            h="50rem"
+            h="fit-content"
+            maxH="85vh"
             w="98%"
             // bg="red"
             ml="1.5rem"
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
+            overflowY="auto"
           >
             <Box sx={inputconteiner}>
               <InputText
@@ -146,7 +148,7 @@ export default function Selection<
                   /> */}
               </Box>
             </Box>
-            <Box w="100%" h="100%"  overflowY="auto">
+            <Box w="100%">
               <Box sx={conteiner}>
                 <LayoutFactory
                   page={{ type: "Selection" }}
