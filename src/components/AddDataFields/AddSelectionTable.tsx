@@ -19,7 +19,7 @@ export default function AddSelectTable({ options, label, placeholder }: AddSelec
   return (
     <FormControl sx={conteiner} alignContent={"center"}>
       <FormLabel>{label}</FormLabel>
-      <FormControl sx={formcontrol}>
+      <FormControl sx={formcontrol} justifyContent="space-between">
         <SelectInput
           values={options}
           names={options}
@@ -28,7 +28,7 @@ export default function AddSelectTable({ options, label, placeholder }: AddSelec
           placeholder={placeholder}
           page={"protocol"}
         />
-        <EventButton text="Add" event={handleSelectAddButtonClick} w={"10%"} />
+        <EventButton text="Add" event={handleSelectAddButtonClick} w={"2%"} />
       </FormControl>
 
       <InfosTable

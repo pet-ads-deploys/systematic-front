@@ -41,7 +41,7 @@ export default function AddTextField({ onAddText, text, label }: IAddTextFieldPr
     <FormControl sx={formcontrol} mt="3rem">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <FormLabel>{label}</FormLabel>
-        <EventButton event={handleAddText} text="ADD" w={"10%"} />
+        <EventButton event={handleAddText} text="ADD" w={"2%"} />
       </Box>
       <TextAreaInput value={inputValue} label="" placeholder={text} onChange={handleInputChange}></TextAreaInput>
     </FormControl>

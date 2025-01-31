@@ -22,23 +22,27 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({ children })
   const [isIncluded, setIsIncluded] = useState(false);
   const [reload, setReload] = useState(false);
   const [isExcluded, setIsExcluded] = useState(false);
-  const [articles, setArticles] = useState<ArticleInterface[]>([]);
+  // const [articles, setArticles] = useState<ArticleInterface[]>([]);
   
-  const fetchedArticles = useGetAllReviewArticles(reload) as ArticleInterface[];
+  const {articles, mutate} = useGetAllReviewArticles();
 
-  useEffect(() => {
-    console.log("Artigos fetchados:", fetchedArticles);
-    if (fetchedArticles && fetchedArticles.length > 0) {
-      // Usar uma verificação de igualdade para garantir re-renderização
-      if (JSON.stringify(fetchedArticles) !== JSON.stringify(articles)) {
-        console.log("Atualizando articles!!!");
-        setArticles([...fetchedArticles]); // Criar uma nova referência
-      }
-    }
-  }, [fetchedArticles]); // Remover reloadArticles da dependência
+  // useEffect(() => {
+  //   console.log("Artigos fetchados:", fetchedArticles);
+  //   if (fetchedArticles && fetchedArticles.length > 0) {
+  //     // Usar uma verificação de igualdade para garantir re-renderização
+  //     if (JSON.stringify(fetchedArticles) !== JSON.stringify(articles)) {
+  //       console.log("Atualizando articles!!!");
+  //       setArticles([...fetchedArticles]); // Criar uma nova referência
+  //     }
+  //   }
+  // }, [fetchedArticles]); // Remover reloadArticles da dependência
+
+  // function reloadArticles() {
+  //   setReload(prevReload => !prevReload);
+  // }
 
   function reloadArticles() {
-    setReload(prevReload => !prevReload);
+    mutate();
   }
 
   return (

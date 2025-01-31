@@ -33,7 +33,7 @@ export default function Protocol() {
         <Flex w={"100%"} justifyContent={"center"} direction={"column"} alignItems={"center"}>
           <FormControl sx={formControl}>
             <TextAreaInput value={goal} label="Objectives:" placeholder="What are your goals?" onChange={(e) => { setGoal(e.target.value) }}/>
-            <TextAreaInput value={justification} label="Main question:" placeholder="The reason behind your research..." onChange={(e) => { setJustification(e.target.value) }}/>
+            <TextAreaInput value={justification} label="Primary question:" placeholder="The reason behind your research..." onChange={(e) => { setJustification(e.target.value) }}/>
             
             <Accordion defaultIndex={showResearchQuestions ? [0] : [-1]} allowToggle mt={6} w="60vw">
               
@@ -41,7 +41,7 @@ export default function Protocol() {
                 <h2 style={{color: "#2E4B6C"}}>
                   <AccordionButton>
                     <Box flex="1" textAlign="center">
-                      <Heading size="md">Optional Research Questions</Heading>
+                      <Heading size="md">Secundary Questions</Heading>
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
@@ -62,7 +62,7 @@ export default function Protocol() {
                 <h2 style={{color: "#2E4B6C"}}>
                   <AccordionButton>
                     <Box flex="1" textAlign="center">
-                      <Heading size="md">PICOC Criteria (Optional)</Heading>
+                      <Heading size="md">PICOC Criteria</Heading>
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>

@@ -1,4 +1,10 @@
-import { IconButton, Flex, Text, Center, useDisclosure } from "@chakra-ui/react";
+import {
+  // IconButton,
+  Flex,
+  Text,
+  // Center,
+  // useDisclosure,
+} from "@chakra-ui/react";
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
 
 interface IStudyDataFiel {
@@ -13,49 +19,91 @@ export default function StudyDataFiel({ studyData, type }: IStudyDataFiel) {
   const selectionSX = {
     bg: "white",
     width: "100%",
-    height: "300px",
+    height: "100%",
     flexDirection: "column",
     alignContent: "center",
     overflowY: "scroll",
-    padding: "3"
+    padding: "3",
   };
 
   if (isTypeValid) {
     if (isTypeSelection)
       return (
         <Flex sx={selectionSX}>
-
-            <Flex flexDirection="column" padding="60px">
-
-                <Flex display="flex" lineHeight="1" gap="5" flexDirection="column" w="100%" pt="10px" fontFamily={"Merriweather"}
-                 maxHeight="250px"
+          <Flex
+            flexDirection="column"
+            padding="2rem"
+            fontFamily="Times New Roman, serif"
+          >
+            <Flex
+              display="flex"
+              lineHeight="1"
+              gap="5"
+              flexDirection="column"
+              w="100%"
+              pt="1rem"
+              maxHeight="20rem"
+            >
+              <Flex>
+                <Text marginBottom={"7px"} w="30%" align={"left"}>
+                  <Text fontSize={"14px"} fontWeight={"bold"}>
+                    Type: {studyData.studyType}
+                  </Text>
+                </Text>
+                <Text
+                  fontSize={"20px"}
+                  align={"right"}
+                  as="i"
+                  fontWeight={"Bold"}
+                  w="70%"
                 >
-                  <Flex>
-                    <Text marginBottom={"7px"} w="30%" align={"left"}>
-                          <Text fontSize={"14px"} fontWeight={"bold"}>Type: {studyData.studyType}</Text> 
-                    </Text>
-                    <Text fontSize={"20px"} align={"right"} as="i" fontWeight={"Bold"} w="70%">
-                      {studyData.venue}, {studyData.year}
-                    </Text>
-                  </Flex>
-
-                  <Text fontSize={"35"} fontWeight={"bold"} fontFamily={"Boboni"} lineHeight="2.3rem" align={"center"}>
-                    {studyData.title}
-                  </Text>
-
-                  <Text p="1" lineHeight={'1.5rem'} fontWeight={"Bold"} align={"center"}>
-                    {studyData.authors}
-                  </Text>
-
-                <Flex fontFamily={"Literata"} flexDirection={"column"} align={"right"} gap="15px" pb="60px">
-                    <Text fontSize={"xxl"} lineHeight={'1.5rem'} ><b>Abstract.</b> {studyData.abstract}</Text> 
-                    <Text fontSize={"xxl"} lineHeight={'1.5rem'}><b>Keywords.</b> {studyData.keywords}</Text> 
-                </Flex>
-
+                  {studyData.venue}, {studyData.year}
+                </Text>
               </Flex>
-                
+
+              <Text
+                fontSize={"35"}
+                fontWeight={"bold"}
+                fontFamily={"Boboni"}
+                lineHeight="2.3rem"
+                align={"center"}
+              >
+                {studyData.title}
+              </Text>
+
+              <Text
+                p="1"
+                lineHeight={"1.5rem"}
+                fontWeight={"Bold"}
+                align={"center"}
+              >
+                {studyData.authors}
+              </Text>
+
+              <Flex
+                fontFamily={"Literata"}
+                flexDirection={"column"}
+                align={"right"}
+                gap="15px"
+                pb="60px"
+              >
+                <Text
+                  fontSize={"xxl"}
+                  lineHeight={"1.5rem"}
+                  textAlign="justify"
+                >
+                  <b>Abstract:</b> {studyData.abstract}
+                </Text>
+                <Text
+                  fontSize={"xxl"}
+                  lineHeight={"1.5rem"}
+                  textAlign="justify"
+                >
+                  <b>Keywords:</b> {studyData.keywords}
+                </Text>
+              </Flex>
             </Flex>
-        
+          </Flex>
         </Flex>
       );
   }

@@ -28,20 +28,23 @@ interface Props {
   sortConfig: { key: keyof ArticleInterface; direction: "asc" | "desc" } | null;
 }
 
-export default function Collapsed({ articles, handleHeaderClick, sortConfig }: Props) {
+export default function Collapsed({
+  articles,
+  handleHeaderClick,
+  sortConfig,
+}: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
   const setSelectionStudyIndex = context?.setSelectionStudyIndex;
 
   return (
     <TableContainer
-      width="97%"
-      mt={5}
+      width="100%"
       borderRadius="1rem"
       boxShadow="lg"
       bg="#EBF0F3"
       overflowY="auto"
-      maxH="63.5vh"
+      maxH="100%"
     >
       <Table variant="unstyled" colorScheme="#263C56" size="md">
         <Thead bg="#EBF0F3" borderRadius="1rem">
@@ -68,9 +71,16 @@ export default function Collapsed({ articles, handleHeaderClick, sortConfig }: P
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
                 w={col.width}
-                onClick={() => handleHeaderClick(col.key as keyof ArticleInterface)}
+                onClick={() =>
+                  handleHeaderClick(col.key as keyof ArticleInterface)
+                }
               >
-                <Box display="flex" gap=".75rem" justifyContent="center" alignItems="center">
+                <Box
+                  display="flex"
+                  gap=".75rem"
+                  justifyContent="center"
+                  alignItems="center"
+                >
                   {col.label}{" "}
                   {sortConfig?.key === col.key ? (
                     sortConfig.direction === "asc" ? (
@@ -114,17 +124,32 @@ export default function Collapsed({ articles, handleHeaderClick, sortConfig }: P
                   {String(e.studyReviewId).padStart(5, "0")}
                 </Td>
                 <Td sx={collapsedTdSX}>
-                  <Tooltip sx={tooltip} label={e.title} aria-label="Full Title" hasArrow>
+                  <Tooltip
+                    sx={tooltip}
+                    label={e.title}
+                    aria-label="Full Title"
+                    hasArrow
+                  >
                     <Text sx={collapsedSpanText}>{e.title}</Text>
                   </Tooltip>
                 </Td>
                 <Td sx={collapsedTdSX}>
-                  <Tooltip sx={tooltip} label={e.authors} aria-label="Full Author List" hasArrow>
+                  <Tooltip
+                    sx={tooltip}
+                    label={e.authors}
+                    aria-label="Full Author List"
+                    hasArrow
+                  >
                     <Text sx={collapsedSpanText}>{e.authors}</Text>
                   </Tooltip>
                 </Td>
                 <Td sx={collapsedTdSX}>
-                  <Tooltip sx={tooltip} label={e.venue} aria-label="Journal Name" hasArrow>
+                  <Tooltip
+                    sx={tooltip}
+                    label={e.venue}
+                    aria-label="Journal Name"
+                    hasArrow
+                  >
                     <Text sx={collapsedSpanText}>{e.venue}</Text>
                   </Tooltip>
                 </Td>

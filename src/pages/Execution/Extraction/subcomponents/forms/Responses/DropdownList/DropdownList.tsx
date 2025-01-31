@@ -10,8 +10,8 @@ interface DropdownListProps {
 }
 
 export default function DropdownList({ question, options }: DropdownListProps) {
-  const { value: selectedStatus, handleChange: handleSelectChange } = useInputState<string | null>(null);
-  console.log("select value of dropdown list", selectedStatus)
+  const { value: selectedStatus, handleChange: handleSelectChange } =
+    useInputState<string | null>(null);
 
   return (
     <FormControl sx={container}>
