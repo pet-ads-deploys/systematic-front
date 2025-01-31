@@ -17,6 +17,7 @@ import useFetchExclusionCriteria from "../../../../hooks/fetch/useFetchExclusion
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { PageLayout } from "./LayoutFactory";
+import useResetStatus from "../../../../hooks/useResetStatus";
 
 interface ButtonsForSelectionProps {
     page: PageLayout
@@ -25,6 +26,7 @@ interface ButtonsForSelectionProps {
 export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
   const context = useContext(AppContext);
   const selectionContext = useContext(StudySelectionContext);
+  const {handleResetStatusToUnclassified} = useResetStatus({page});
 
   const isIncluded = selectionContext?.isIncluded;
   const isExcluded = selectionContext?.isExcluded;
@@ -47,10 +49,6 @@ export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
       context?.setSelectionStudyIndex(newIndex);
       context?.setSelectionStudy((sortedStudies as StudyInterface[])[newIndex]);
     }
-  }
-
-  function ResetState() {
-    console.log("Preciso ver se a rota permite unclassified");
   }
 
   if (isExcluded != undefined && isIncluded != undefined)
@@ -93,7 +91,7 @@ export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
               transition="0.2s ease-in-out"
               boxShadow="md"
               p="1rem"
-              onClick={ResetState}
+              onClick={handleResetStatusToUnclassified}
               w={"7.5rem"}
             >
               Reset
