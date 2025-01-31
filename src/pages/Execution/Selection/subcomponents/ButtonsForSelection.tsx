@@ -16,8 +16,13 @@ import useFetchInclusionCriteria from "../../../../hooks/fetch/useFetchInclusion
 import useFetchExclusionCriteria from "../../../../hooks/fetch/useFetchExclusionCriterias";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { PageLayout } from "./LayoutFactory";
 
-export default function ButtonsForSelection() {
+interface ButtonsForSelectionProps {
+    page: PageLayout
+}
+
+export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
   const context = useContext(AppContext);
   const selectionContext = useContext(StudySelectionContext);
 
@@ -71,11 +76,13 @@ export default function ButtonsForSelection() {
               isDisabled={isExcluded}
               text="Include"
               options={criteriosInclusao}
+              page={page}
             />
             <ComboBox
               isDisabled={isIncluded}
               text="Exclude"
               options={criteriosExclusao}
+              page={page}
             />
             <Button
               borderRadius="6px"

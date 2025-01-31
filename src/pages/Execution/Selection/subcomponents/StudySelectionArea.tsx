@@ -34,7 +34,7 @@ export default function StudySelectionArea({type}:PageLayout) {
     <StudySelectionProvider>
       <Flex direction="column" borderRadius='1rem' bg="white" mb='20px' w="100%" h={type === "Extraction" ? "80%" : "100%"} p="5" alignItems={"center"}>
         <Flex justifyContent="center" w="100%">
-        <ButtonsForSelection />
+        <ButtonsForSelection page={{type}}/>
         </Flex>
         <Box w={"100%"} h="100%">
           <StudyDataFiel studyData={(studyData?.articles?.[studyIndex] as StudyInterface)} page={{type}} />

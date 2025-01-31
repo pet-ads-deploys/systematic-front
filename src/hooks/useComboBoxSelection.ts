@@ -1,9 +1,15 @@
 import { useContext } from "react";
 import StudySelectionContext from "../components/Context/StudiesSelectionContext";
 import AppContext from "../components/Context/AppContext";
-import { useChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
+import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
+import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";
+import { PageLayout } from "../pages/Execution/Selection/subcomponents/LayoutFactory";
 
-const useComboBoxSelection = () => {
+interface ComboBoxSelectionProps{
+  page: PageLayout
+}
+
+const useComboBoxSelection = ({page}: ComboBoxSelectionProps) => {
   const selectionContext = useContext(StudySelectionContext);
   const appContext = useContext(AppContext);
   const setIsIncluded = selectionContext?.setIsIncluded;
@@ -16,7 +22,7 @@ const useComboBoxSelection = () => {
     
     if(articles && articleIndex){
       const studyReviewId = articles[articleIndex].studyReviewId;
-      useChangeStudySelectionStatus({studyReviewId, status: 'INCLUDED'})
+      page.type === "Selection" ? UseChangeStudySelectionStatus({studyReviewId, status: 'INCLUDED'}) : UseChangeStudyExtractionStatus({studyReviewId, status: 'INCLUDED'})
     }
   };
 
@@ -27,7 +33,7 @@ const useComboBoxSelection = () => {
     
     if(articles && articleIndex){
       const studyReviewId = articles[articleIndex].studyReviewId;
-      useChangeStudySelectionStatus({studyReviewId, status: 'EXCLUDED'})
+      page.type === "Selection" ? UseChangeStudySelectionStatus({studyReviewId, status: 'EXCLUDED'}) : UseChangeStudyExtractionStatus({studyReviewId, status: 'EXCLUDED'})
     }
   }
 
