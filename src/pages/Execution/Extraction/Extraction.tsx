@@ -117,6 +117,7 @@ export default function Extraction() {
           >
             <Header text="Extraction" />
             <ButtonsLayout
+              layout={layout}
               handleDefaultLayout={handleDefaultLayout}
               handleHorizontalLayout={handleHorizontalLayout}
               handleVerticalLayout={handleVerticalLayout}
