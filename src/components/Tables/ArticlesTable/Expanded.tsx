@@ -226,12 +226,11 @@ export default function Collapsed({
                       justifyContent="center"
                       gap="0.5rem"
                     >
-                      {/* {renderStatusIcon(e.extraction)} */}
-                      {renderStatusIcon("UNCLASSIFIED")}
+                      {renderStatusIcon(e.extractionStatus)}
                       <Text sx={collapsedSpanText}>
                         {capitalize(
-                          e.extraction?.toString().toLowerCase() ||
-                            "Unclassified"
+                          e.extractionStatus?.toString().toLowerCase() ||
+                            ""
                         )}
                       </Text>
                     </Box>

@@ -8,7 +8,8 @@ interface ArticleInterface {
     selection: string,
     extraction: string,
     readingPriority: string;
-    selectionStatus: string
+    selectionStatus: string;
+    extractionStatus: string;
 }
 
 export default ArticleInterface;
