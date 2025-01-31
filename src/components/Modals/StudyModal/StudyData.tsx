@@ -8,6 +8,7 @@ import {
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
 import { PageLayout } from "../../../pages/Execution/Selection/subcomponents/LayoutFactory";
 import ArticlePreview from "./ArticlePreview";
+import ArticlesExtrationData from "./ArticleExtractionData";
 
 interface IStudyDataFiel {
   studyData: StudyInterface;
@@ -37,6 +38,6 @@ export default function StudyDataFiel({ studyData, page }: IStudyDataFiel) {
       <Flex sx={selectionSX}>
         <ArticlePreview studyData={studyData}/>
     </Flex>
-    ) : <>testesasdasd</>
+    ) : <ArticlesExtrationData studyData={studyData}/>
   )
 }
