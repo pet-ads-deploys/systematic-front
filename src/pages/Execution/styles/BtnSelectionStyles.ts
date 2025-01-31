@@ -3,6 +3,7 @@ export const conteiner = {
   m: "2",
   alignItems: "center",
   width: "100%",
+  gap: "2rem"
 };
 
 export const boxconteiner = {
@@ -17,7 +18,7 @@ export const buttonconteiner = {
 export const button = {
   display: "flex",
   borderRadius: ".5rem",
-  gap: ".5rem",
+  gap: ".25rem",
   justifyContent: "center",
   alignItems: "center",
   color: "white",
@@ -26,4 +27,5 @@ export const button = {
   p: "1rem",
   border:"2px solid white",
   bg: "black",
+  w: "6.5rem",
 };

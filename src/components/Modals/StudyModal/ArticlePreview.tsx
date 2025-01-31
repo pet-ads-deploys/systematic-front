@@ -7,6 +7,7 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
       flexDirection="column"
       padding="2rem"
       fontFamily="Times New Roman, serif"
+      h="fit-content"
     >
       <Flex
         display="flex"
@@ -14,8 +15,8 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
         gap="5"
         flexDirection="column"
         w="100%"
-        pt="1rem"
-        maxHeight="20rem"
+        p="1rem"
+        h="100%"
       >
         <Flex>
           <Text marginBottom={"7px"} w="30%" align={"left"}>

@@ -26,18 +26,20 @@ export default function StudyDataFiel({ studyData, page }: IStudyDataFiel) {
   const selectionSX = {
     bg: "white",
     width: "100%",
-    height: "100%",
+    height: "90%",
     flexDirection: "column",
     alignContent: "center",
     overflowY: "scroll",
     padding: "3",
   };
 
-  return (
-    page.type === "Selection" ? (
-      <Flex sx={selectionSX}>
-        <ArticlePreview studyData={studyData}/>
+  return page.type === "Selection" ? (
+    <Flex sx={selectionSX}>
+      <ArticlePreview studyData={studyData} />
     </Flex>
-    ) : <ArticlesExtrationData studyData={studyData}/>
-  )
+  ) : (
+    <Flex sx={selectionSX}>
+      <ArticlesExtrationData studyData={studyData} />
+    </Flex>
+  );
 }

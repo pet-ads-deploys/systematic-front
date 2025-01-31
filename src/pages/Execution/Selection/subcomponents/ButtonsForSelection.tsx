@@ -7,7 +7,6 @@ import {
   button,
 } from "../../styles/BtnSelectionStyles";
 import ComboBox from "../../../../components/Inputs/ComboBox";
-// import { FaPen } from "react-icons/fa6";
 import { useContext } from "react";
 import AppContext from "../../../../components/Context/AppContext";
 import StudySelectionContext from "../../../../components/Context/StudiesSelectionContext";
@@ -16,7 +15,6 @@ import { StudyInterface } from "../../../../../public/interfaces/IStudy";
 import useFetchInclusionCriteria from "../../../../hooks/fetch/useFetchInclusionCriteria";
 import useFetchExclusionCriteria from "../../../../hooks/fetch/useFetchExclusionCriterias";
 
-import { RiRestartFill } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export default function ButtonsForSelection() {
@@ -64,7 +62,7 @@ export default function ButtonsForSelection() {
               onClick={ChangeToPrevius}
               sx={button}
             >
-              <IoIosArrowBack size="1.5rem" /> Previous
+              <IoIosArrowBack size="1.5rem" /> Back
             </Button>
           </Flex>
 
