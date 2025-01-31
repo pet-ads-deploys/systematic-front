@@ -3,7 +3,7 @@ import axios from '../interceptor/interceptor';
 
 interface Props {
     studyReviewId: number,
-    status: 'INCLUDED' | 'EXCLUDED' | 'DUPLICATED';
+    status: 'INCLUDED' | 'EXCLUDED' | 'DUPLICATED' | 'UNCLASSIFIED';
 }
 
 export const UseChangeStudySelectionStatus = ({studyReviewId, status}: Props) => {
