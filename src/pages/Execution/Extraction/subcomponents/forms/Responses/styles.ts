@@ -1,9 +1,9 @@
 export const container = {
-    p: "1rem",
+    // p: "1rem",
     borderRadius: "1rem",
     w: "100%",
-    bg: "#f9f9f9",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    // bg: "#f9f9f9",
+    // boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     m: "2rem 0"
   };
 

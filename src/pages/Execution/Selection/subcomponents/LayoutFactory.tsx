@@ -70,6 +70,9 @@ export default function LayoutFactory({
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
+          w="100%"
+          // h="100%"
+          // gap="2rem"
         >
           <Box
             overflowY={page.type === "Extraction" ? "auto" : "unset"}

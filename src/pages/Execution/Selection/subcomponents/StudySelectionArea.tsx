@@ -32,7 +32,7 @@ export default function StudySelectionArea({type}:PageLayout) {
   
   return (
     <StudySelectionProvider>
-      <Flex direction="column" borderRadius='1rem' bg="white" mb='20px' w="100%" h="100%" p="5" alignItems={"center"}>
+      <Flex direction="column" borderRadius='1rem' bg="white" mb='20px' w="100%" h={type === "Extraction" ? "80%" : "100%"} p="5" alignItems={"center"}>
         <Flex justifyContent="center" w="100%">
         <ButtonsForSelection />
         </Flex>

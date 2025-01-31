@@ -71,45 +71,11 @@ export default function Extraction() {
   if (!studiesData) return <NoStudiesData />;
 
   return (
-    // <FlexLayout defaultOpen={1} navigationType="Accordion">
-    //   <Header text="Extraction" />
-    //   <Box sx={conteiner}>
-    //     <Box sx={inputconteiner}>
-    //       <InputText type="search" placeholder="Insert article's name" nome="search" setSearchString={setSearchString}/>
-    //       <SelectInput
-    //         names={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
-    //         values={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
-    //         onSelect={handleSelectChange}
-    //         selectedValue={selectedValue}
-    //         page={"protocol"}
-    //       />
-    //       <ComboBox
-    //         options={Object.values(headerData)}
-    //         handleCheckboxChange={handleCheckboxChange}
-    //         selectedItems={[
-    //           "title",
-    //           "author",
-    //           "year",
-    //           "status/selection",
-    //           "status/extraction",
-    //           "reading priority",
-    //           "score",
-    //         ]}
-    //         text={"filter options"}
-    //       />
-    //     </Box>
-    //   </Box>
-
-    //   <Box marginLeft={"3em"} marginRight={"3em"} w={"78vw"}>
-    //     <DynamicTable headerData={headerData} bodyData={studiesData} filteredColumns={checkedValues}
-    //     tableType={tableTypeEnum.EXTRACTION} searchString={""} selectedStatus={null} />
-    //   </Box>
-    // </FlexLayout>
     <AppProvider>
       <StudySelectionProvider>
         <FlexLayout defaultOpen={1} navigationType="Accordion">
           <Flex
-            w="98%"
+            w="96%"
             h="2.5rem"
             justifyContent="space-between"
             alignItems="center"
@@ -124,7 +90,8 @@ export default function Extraction() {
             />
           </Flex>
           <Box
-            h="50rem"
+            h="fit-content"
+            maxH="85vh"
             w="98%"
             // bg="red"
             ml="1.5rem"
@@ -141,7 +108,6 @@ export default function Extraction() {
                 onChange={(e) => setSearchString(e.target.value)}
                 value={searchString}
               />
-
               <Box
                 display="flex"
                 gap="1rem"
