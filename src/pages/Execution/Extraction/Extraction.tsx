@@ -48,14 +48,11 @@ export default function Extraction() {
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const selectionContext = useContext(StudySelectionContext);
   const [layout, setLayout] = useState<LayoutModel>({ orientation: "vertical" });
-  console.log("Valor do layout atual:", layout);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
   let articles: ArticleInterface[] = [];
   // articles = selectionContext.articles.filter((art) => art.selectionStatus === "INCLUDED");
   articles = selectionContext.articles;
-
-  console.log("artigos filtrados em extraction: ", articles);
 
   const filteredArticles = handleSearchAndFilter(
     searchString,
