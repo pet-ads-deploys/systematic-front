@@ -24,7 +24,9 @@ import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 // import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
 import ButtonsLayout from "../Selection/subcomponents/LayoutButtons";
 import { LayoutModel } from "../Selection/Selection";
-import LayoutFactory from "../Selection/subcomponents/LayoutFactory";
+import LayoutFactory, {
+  PageLayout,
+} from "../Selection/subcomponents/LayoutFactory";
 // import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
 
 export default function Extraction() {
@@ -47,18 +49,22 @@ export default function Extraction() {
   const [searchString, setSearchString] = useState<string>("");
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const selectionContext = useContext(StudySelectionContext);
-  const [layout, setLayout] = useState<LayoutModel>({ orientation: "vertical" });
+  const [layout, setLayout] = useState<LayoutModel>({
+    orientation: "vertical",
+  });
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
-  let articles: ArticleInterface[] = [];
   // articles = selectionContext.articles.filter((art) => art.selectionStatus === "INCLUDED");
-  articles = selectionContext.articles;
+  const articles: ArticleInterface[] = selectionContext.articles || [];
+
+  const page: PageLayout = { type: "Extraction" };
 
   const filteredArticles = handleSearchAndFilter(
     searchString,
     selectedStatus,
     selectedColumns,
-    articles
+    articles,
+    page
   );
 
   const handleDefaultLayout = () => setLayout({ orientation: "default" });
@@ -132,7 +138,7 @@ export default function Extraction() {
                   /> */}
               </Box>
             </Box>
-            <Box w="100%" >
+            <Box w="100%">
               <LayoutFactory
                 page={{ type: "Extraction" }}
                 layout={layout}

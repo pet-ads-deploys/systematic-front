@@ -12,7 +12,7 @@ export interface PageLayout {
 interface LayoutFactoryProps {
   layout: LayoutModel;
   articles: ArticleInterface[];
-  filteredArticles: ArticleInterface[];
+  filteredArticles: ArticleInterface[] | [];
   page: PageLayout;
 }
 
@@ -29,7 +29,7 @@ export default function LayoutFactory({
           <Box w="50%" h="100%">
             <ArticlesTable
               articles={
-                filteredArticles.length > 0 ? filteredArticles : articles
+                filteredArticles.length > 0 ? filteredArticles : []
               }
             />
           </Box>
@@ -50,7 +50,7 @@ export default function LayoutFactory({
           <Box w="100%" h="50%">
             <ArticlesTable
               articles={
-                filteredArticles.length > 0 ? filteredArticles : articles
+                filteredArticles.length > 0 ? filteredArticles : []
               }
             />
           </Box>
@@ -84,7 +84,7 @@ export default function LayoutFactory({
           <Box>
             <ArticlesTable
               articles={
-                filteredArticles.length > 0 ? filteredArticles : articles
+                filteredArticles.length > 0 ? filteredArticles : []
               }
             />
           </Box>
