@@ -19,10 +19,12 @@ export default function EditButton({
   handleEdit, 
   itemDescription,
   itemType }: editButtonProps) {
-    
+  
+  const validation = editIndex === index && itemDescription !== "" && itemType !== ""
+
   return (
     <>
-      {editIndex === index && itemDescription !== "" && itemType !== "" ? (
+      {validation ? (
         <Button variant="ghost" onClick={handleSaveEdit}>
           <i className="pi pi-save" style={{ color: 'black' }}></i>
         </Button>
