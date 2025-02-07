@@ -38,7 +38,7 @@ export default function LayoutFactory({
             w="100%"
             h="100%"
           >
-            <StudySelectionArea />
+            <StudySelectionArea type={page.type} />
             {page.type === "Extraction" && <ExtractionForm />}
           </Box>
         </Flex>
@@ -59,7 +59,7 @@ export default function LayoutFactory({
             w="100%"
             h="50%"
           >
-            <StudySelectionArea />
+            <StudySelectionArea type={page.type} />
             {page.type === "Extraction" && <ExtractionForm />}
           </Box>
         </Flex>
@@ -70,12 +70,15 @@ export default function LayoutFactory({
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
+          w="100%"
+          // h="100%"
+          // gap="2rem"
         >
           <Box
             overflowY={page.type === "Extraction" ? "auto" : "unset"}
             w="100%"
           >
-            <StudySelectionArea />
+            <StudySelectionArea type={page.type} />
             {page.type === "Extraction" && <ExtractionForm />}
           </Box>
           <Box>

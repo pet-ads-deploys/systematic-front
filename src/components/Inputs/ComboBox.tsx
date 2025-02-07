@@ -8,12 +8,14 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
+import { PageLayout } from "../../pages/Execution/Selection/subcomponents/LayoutFactory";
 
 interface IComboBoxProps {
   text: string;
   options: string[];
   isDisabled: boolean;
   onOptionchange?: (option: string, isChecked: boolean) => void;
+  page: PageLayout
 }
 
 export default function ComboBox({
@@ -21,9 +23,10 @@ export default function ComboBox({
   options,
   isDisabled,
   onOptionchange,
+  page,
 }: IComboBoxProps) {
   const { handleIncludeItemClick, handleExcludeItemClick } =
-    useComboBoxSelection();
+    useComboBoxSelection({page});
 
   return (
     <Menu closeOnSelect={false}>

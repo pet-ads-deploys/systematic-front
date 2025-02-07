@@ -7,7 +7,6 @@ import {
   button,
 } from "../../styles/BtnSelectionStyles";
 import ComboBox from "../../../../components/Inputs/ComboBox";
-// import { FaPen } from "react-icons/fa6";
 import { useContext } from "react";
 import AppContext from "../../../../components/Context/AppContext";
 import StudySelectionContext from "../../../../components/Context/StudiesSelectionContext";
@@ -16,12 +15,18 @@ import { StudyInterface } from "../../../../../public/interfaces/IStudy";
 import useFetchInclusionCriteria from "../../../../hooks/fetch/useFetchInclusionCriteria";
 import useFetchExclusionCriteria from "../../../../hooks/fetch/useFetchExclusionCriterias";
 
-import { RiRestartFill } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { PageLayout } from "./LayoutFactory";
+import useResetStatus from "../../../../hooks/useResetStatus";
 
-export default function ButtonsForSelection() {
+interface ButtonsForSelectionProps {
+    page: PageLayout
+}
+
+export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
   const context = useContext(AppContext);
   const selectionContext = useContext(StudySelectionContext);
+  const {handleResetStatusToUnclassified} = useResetStatus({page});
 
   const isIncluded = selectionContext?.isIncluded;
   const isExcluded = selectionContext?.isExcluded;
@@ -46,10 +51,6 @@ export default function ButtonsForSelection() {
     }
   }
 
-  function ResetState() {
-    console.log("Preciso ver se a rota permite unclassified");
-  }
-
   if (isExcluded != undefined && isIncluded != undefined)
     return (
       <>
@@ -64,7 +65,7 @@ export default function ButtonsForSelection() {
               onClick={ChangeToPrevius}
               sx={button}
             >
-              <IoIosArrowBack size="1.5rem" /> Previous
+              <IoIosArrowBack size="1.5rem" /> Back
             </Button>
           </Flex>
 
@@ -73,11 +74,13 @@ export default function ButtonsForSelection() {
               isDisabled={isExcluded}
               text="Include"
               options={criteriosInclusao}
+              page={page}
             />
             <ComboBox
               isDisabled={isIncluded}
               text="Exclude"
               options={criteriosExclusao}
+              page={page}
             />
             <Button
               borderRadius="6px"
@@ -88,7 +91,7 @@ export default function ButtonsForSelection() {
               transition="0.2s ease-in-out"
               boxShadow="md"
               p="1rem"
-              onClick={ResetState}
+              onClick={handleResetStatusToUnclassified}
               w={"7.5rem"}
             >
               Reset

@@ -6,107 +6,40 @@ import {
   // useDisclosure,
 } from "@chakra-ui/react";
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
+import { PageLayout } from "../../../pages/Execution/Selection/subcomponents/LayoutFactory";
+import ArticlePreview from "./ArticlePreview";
+import ArticlesExtrationData from "./ArticleExtractionData";
 
 interface IStudyDataFiel {
   studyData: StudyInterface;
-  type: "Selection" | "Extraction";
+  page: PageLayout;
 }
 
-export default function StudyDataFiel({ studyData, type }: IStudyDataFiel) {
-  const isTypeValid: boolean = type === "Selection" || type === "Extraction";
-  const isTypeSelection: boolean = type === "Selection";
+export interface ArticlePreviewProps {
+  studyData: StudyInterface;
+}
+
+export default function StudyDataFiel({ studyData, page }: IStudyDataFiel) {
+  // const isTypeValid: boolean = type === "Selection" || type === "Extraction";
+  // const isTypeSelection: boolean = type === "Selection";
 
   const selectionSX = {
     bg: "white",
     width: "100%",
-    height: "100%",
+    height: "90%",
     flexDirection: "column",
     alignContent: "center",
     overflowY: "scroll",
     padding: "3",
   };
 
-  if (isTypeValid) {
-    if (isTypeSelection)
-      return (
-        <Flex sx={selectionSX}>
-          <Flex
-            flexDirection="column"
-            padding="2rem"
-            fontFamily="Times New Roman, serif"
-          >
-            <Flex
-              display="flex"
-              lineHeight="1"
-              gap="5"
-              flexDirection="column"
-              w="100%"
-              pt="1rem"
-              maxHeight="20rem"
-            >
-              <Flex>
-                <Text marginBottom={"7px"} w="30%" align={"left"}>
-                  <Text fontSize={"14px"} fontWeight={"bold"}>
-                    Type: {studyData.studyType}
-                  </Text>
-                </Text>
-                <Text
-                  fontSize={"20px"}
-                  align={"right"}
-                  as="i"
-                  fontWeight={"Bold"}
-                  w="70%"
-                >
-                  {studyData.venue}, {studyData.year}
-                </Text>
-              </Flex>
-
-              <Text
-                fontSize={"35"}
-                fontWeight={"bold"}
-                fontFamily={"Boboni"}
-                lineHeight="2.3rem"
-                align={"center"}
-              >
-                {studyData.title}
-              </Text>
-
-              <Text
-                p="1"
-                lineHeight={"1.5rem"}
-                fontWeight={"Bold"}
-                align={"center"}
-              >
-                {studyData.authors}
-              </Text>
-
-              <Flex
-                fontFamily={"Literata"}
-                flexDirection={"column"}
-                align={"right"}
-                gap="15px"
-                pb="60px"
-              >
-                <Text
-                  fontSize={"xxl"}
-                  lineHeight={"1.5rem"}
-                  textAlign="justify"
-                >
-                  <b>Abstract:</b> {studyData.abstract}
-                </Text>
-                <Text
-                  fontSize={"xxl"}
-                  lineHeight={"1.5rem"}
-                  textAlign="justify"
-                >
-                  <b>Keywords:</b> {studyData.keywords}
-                </Text>
-              </Flex>
-            </Flex>
-          </Flex>
-        </Flex>
-      );
-  }
-
-  return <>Wrong value for type of component StudyData</>;
+  return page.type === "Selection" ? (
+    <Flex sx={selectionSX}>
+      <ArticlePreview studyData={studyData} />
+    </Flex>
+  ) : (
+    <Flex sx={selectionSX}>
+      <ArticlesExtrationData studyData={studyData} />
+    </Flex>
+  );
 }

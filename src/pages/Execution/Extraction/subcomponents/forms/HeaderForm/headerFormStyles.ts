@@ -1,7 +1,6 @@
 export const container = {
   bg: "white",
-  p: "1rem",
-  borderTop: "1rem solid #263C56",
+  // p: "1rem",
   w: "100%",
   borderRadius: ".5rem",
   h: "5rem",

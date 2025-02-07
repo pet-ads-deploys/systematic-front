@@ -6,10 +6,10 @@ interface Props {
     status: 'INCLUDED' | 'EXCLUDED' | 'DUPLICATED' | 'UNCLASSIFIED';
 }
 
-export const UseChangeStudySelectionStatus = ({studyReviewId, status}: Props) => {
+export const UseChangeStudyExtractionStatus = ({studyReviewId, status}: Props) => {
     const id = localStorage.getItem('systematicReviewId');
     const options = getRequestOptions();
-    const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/${studyReviewId}/selection-status`;
+    const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/${studyReviewId}/extraction-status`;
 
     axios.patch(path, { status }, options);
 }

@@ -78,7 +78,7 @@ export default function ExtractionForm() {
   };
 
   return (
-    <FormControl w="100%" gap="3rem" borderRadius="1rem">
+    <FormControl w="100%" gap="3rem" borderRadius="1rem" bg="white" p="0 1rem"   borderTop="1rem solid #263C56">
       <HeaderForm text="Formulário: teste" />
       <Box gap="5rem">
         {hasQuestions ? (

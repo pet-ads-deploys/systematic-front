@@ -6,8 +6,9 @@ import { useContext, useEffect } from "react";
 import AppContext from "../../../../components/Context/AppContext";
 import useGetAllReviewArticles from "../../../../hooks/useGetAllReviewArticles";
 import StudySelectionContext, { StudySelectionProvider } from "../../../../components/Context/StudiesSelectionContext";
+import { PageLayout } from "./LayoutFactory";
 
-export default function StudySelectionArea() {
+export default function StudySelectionArea({type}:PageLayout) {
   const context = useContext(AppContext);
   const selectionContext = useContext(StudySelectionContext);
   if(!selectionContext) throw new Error("Failed to get selection context on study Selection area");
@@ -31,12 +32,12 @@ export default function StudySelectionArea() {
   
   return (
     <StudySelectionProvider>
-      <Flex direction="column" borderRadius='1rem' bg="white" mb='20px' w="100%" h="100%" p="5" alignItems={"center"}>
+      <Flex direction="column" borderRadius='1rem' bg="white" mb='20px' w="100%" h={type === "Extraction" ? "80%" : "100%"} p="5" alignItems={"center"}>
         <Flex justifyContent="center" w="100%">
-        <ButtonsForSelection />
+        <ButtonsForSelection page={{type}}/>
         </Flex>
         <Box w={"100%"} h="100%">
-          <StudyDataFiel studyData={(studyData?.articles?.[studyIndex] as StudyInterface)} type="Selection" />
+          <StudyDataFiel studyData={(studyData?.articles?.[studyIndex] as StudyInterface)} page={{type}} />
         </Box>
       </Flex>
     </StudySelectionProvider>
