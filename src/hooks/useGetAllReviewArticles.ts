@@ -9,6 +9,8 @@ interface HttpResponse {
   studyReviews: ArticleInterface[] | StudyInterface[];
 }
 
+
+
 // const useGetAllReviewArticles = (reload: boolean) => {
 const useGetAllReviewArticles = () => {
     const id = localStorage.getItem('systematicReviewId');
@@ -31,7 +33,8 @@ const useGetAllReviewArticles = () => {
   
     const {data, mutate, error} = useSWR(`http://localhost:8080/api/v1/systematic-study/${id}/study-review`, fetchAllArticlesReview, {
       revalidateOnFocus: true,
-      revalidateOnMount: true
+      revalidateOnMount: true,
+      revalidateIfStale: true,
     })
 
     async function fetchAllArticlesReview(){

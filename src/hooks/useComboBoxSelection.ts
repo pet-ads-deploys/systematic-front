@@ -23,6 +23,7 @@ const useComboBoxSelection = ({page}: ComboBoxSelectionProps) => {
     if(articles && articleIndex){
       const studyReviewId = articles[articleIndex].studyReviewId;
       page.type === "Selection" ? UseChangeStudySelectionStatus({studyReviewId, status: 'INCLUDED'}) : UseChangeStudyExtractionStatus({studyReviewId, status: 'INCLUDED'})
+      selectionContext.reloadArticles();
     }
   };
 
@@ -34,6 +35,7 @@ const useComboBoxSelection = ({page}: ComboBoxSelectionProps) => {
     if(articles && articleIndex){
       const studyReviewId = articles[articleIndex].studyReviewId;
       page.type === "Selection" ? UseChangeStudySelectionStatus({studyReviewId, status: 'EXCLUDED'}) : UseChangeStudyExtractionStatus({studyReviewId, status: 'EXCLUDED'})
+      selectionContext.reloadArticles();
     }
   }
 
