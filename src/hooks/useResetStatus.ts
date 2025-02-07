@@ -29,6 +29,7 @@ const useResetStatus = ({ page }: ResetButtonProps) => {
             status: "UNCLASSIFIED",
           });
     }
+    selectionContext?.reloadArticles();
   };
 
   return { handleResetStatusToUnclassified };

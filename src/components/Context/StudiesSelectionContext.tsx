@@ -1,6 +1,7 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
 import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
+import { useSWRConfig } from "swr";
 
 interface AppContextType {
     isIncluded: boolean;
@@ -41,9 +42,6 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({ children })
   //   setReload(prevReload => !prevReload);
   // }
 
-  function reloadArticles() {
-    mutate();
-  }
 
   return (
     <StudySelectionContext.Provider
@@ -53,8 +51,8 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({ children })
         isExcluded,
         setIsExcluded,
         articles,
-        reloadArticles,
-        reload
+        reloadArticles: mutate,
+        reload,
       }}
     >
       {children}
