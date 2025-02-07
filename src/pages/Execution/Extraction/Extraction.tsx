@@ -142,8 +142,7 @@ export default function Extraction() {
               <LayoutFactory
                 page={{ type: "Extraction" }}
                 layout={layout}
-                articles={articles}
-                filteredArticles={filteredArticles}
+                articles={filteredArticles}
               />
             </Box>
           </Box>

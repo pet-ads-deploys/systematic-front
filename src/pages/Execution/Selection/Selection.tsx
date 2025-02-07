@@ -158,8 +158,7 @@ export default function Selection<
                 <LayoutFactory
                   page={{ type: "Selection" }}
                   layout={layout}
-                  articles={articles}
-                  filteredArticles={filteredArticles}
+                  articles={filteredArticles}
                 />
               </Box>
             </Box>
