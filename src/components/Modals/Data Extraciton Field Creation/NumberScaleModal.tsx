@@ -16,14 +16,14 @@ function NumberScaleModal({show, scaleHolder, values }: Props) {
     const { isOpen, onClose, onOpen } = useDisclosure();
 
     useEffect(() => {
-        console.log(values);
+        // console.log(values);
         onOpen();
         handleMinimalValue('', values[0]);
         handleMaximalValue('', values[1]);
     }, []);
 
     function handleSave(){
-        if (minimalValue <= maximalValue) {
+        if (minimalValue < maximalValue) {
             let array: number[] = [minimalValue, maximalValue];
             scaleHolder(array);
         }

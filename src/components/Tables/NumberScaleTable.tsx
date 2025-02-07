@@ -10,14 +10,14 @@ interface Props {
 
 const NumberScaleTable = ({handleMaximalValue, handleMinimalValue, minimalValue, maximalValue}: Props) => {
 
-    useEffect(() => {
-        console.log(minimalValue, maximalValue);
-    }, [])
+    // useEffect(() => {
+    //     console.log(minimalValue, maximalValue);
+    // }, [])
 
     return (
     <FormControl>
         <FormLabel>Min</FormLabel>
-        <NumberInput mb={"2rem"} defaultValue={minimalValue} onChange={handleMinimalValue} min={0}>
+        <NumberInput mb={"2rem"} defaultValue={minimalValue} onChange={handleMinimalValue} min={0} max={maximalValue-1}>
             <NumberInputField />
             <NumberInputStepper>
                 <NumberIncrementStepper />
@@ -26,7 +26,7 @@ const NumberScaleTable = ({handleMaximalValue, handleMinimalValue, minimalValue,
         </NumberInput>
 
         <FormLabel>Max</FormLabel>
-        <NumberInput defaultValue={maximalValue} onChange={handleMaximalValue} min={0} >
+        <NumberInput defaultValue={maximalValue} onChange={handleMaximalValue} min={minimalValue+1} max={10}>
             <NumberInputField />
             <NumberInputStepper>
                 <NumberIncrementStepper />
