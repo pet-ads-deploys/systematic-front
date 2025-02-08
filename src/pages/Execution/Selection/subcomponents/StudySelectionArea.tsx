@@ -24,7 +24,7 @@ export default function StudySelectionArea({type}:PageLayout) {
 
   if(setSelectionStudies && studyData?.articles) setSelectionStudies(studyData?.articles as StudyInterface[]);
 
-  if (!showSelectionModal || !studyIndex) return (
+  if (!showSelectionModal || studyIndex === null) return (
     <Flex direction="column" bg="gray.600" borderRadius='1rem' w="100%" mb='20px' p="5" alignItems="center">
       <Text color="white">Click on a study on the table</Text>
     </Flex>
