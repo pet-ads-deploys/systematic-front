@@ -50,7 +50,7 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
 
   useEffect(() => {
     async function fetchSessions() {
-      let response = await useGetSession(text);
+      const response = await useGetSession(text);
       console.log(response.data.searchSessions);
       setSessions(response.data.searchSessions);
     }
@@ -68,8 +68,12 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
     setShowDeleteModal(true);
   };
 
+  const generateRandomId = (): string => {
+    return `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+  };
+
   return (
-    <Card sx={card}>
+    <Card sx={card} key={generateRandomId()}>
       <Box
         sx={conteiner}
         display={"flex"}

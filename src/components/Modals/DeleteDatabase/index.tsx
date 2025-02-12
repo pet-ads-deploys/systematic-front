@@ -1,7 +1,7 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, FormControl, FormLabel, Input, Textarea, Box, IconButton, Flex, Divider } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import UseDeleteSession from "../../../hooks/reviews/useDeleteSession";
-import {useEffect, useState } from "react";
+import {Dispatch, SetStateAction, useEffect, useState } from "react";
 import { IoIosWarning } from "react-icons/io";
 import { useToast } from "@chakra-ui/react";
 
@@ -18,16 +18,7 @@ interface DeleteDatabaseModalProps {
         source: string, 
         numberOfRelatedStudies: number
     }[];
-    setSessions:{
-        id: string, 
-        systematicStudyd: string, 
-        userId: string,    
-        searchString: string, 
-        additionalInfo: string, 
-        timestamp: string, 
-        source: string, 
-        numberOfRelatedStudies: number
-    }[];
+    setSessions:Dispatch<SetStateAction<{ id: string; systematicStudyd: string; userId: string; searchString: string; additionalInfo: string; timestamp: string; source: string; numberOfRelatedStudies: number; }[]>>;
     databaseName: string;
 }
 
