@@ -104,22 +104,12 @@ if(label == 'Risk of Bias Questions') adress = 'rob-question';
     console.log(rows);
   }, [rows])
 
-  function handleSelect(index: number, newValue: string){
+  function handleSelect(index: number, newValue: string){ 
     handleTypeChange(index, newValue); // Atualiza o tipo primeiro
   
-    if (newValue === 'pick list') {
-      setModalType(newValue);  // Atualiza o tipo do modal
-      setShowModal(true);  // Abre o modal
-    }
-
-    if (newValue === 'number scale') {
-      setModalType(newValue);  // Atualiza o tipo do modal
-      setShowModal(true);  // Abre o modal
-    }
-
-    if (newValue === 'labeled list') {
-      setModalType(newValue);
-      setShowModal(true); 
+    if (newValue !== ''){
+      setModalType(newValue)
+      setShowModal(true)
     }
   }
 
@@ -234,6 +224,8 @@ if(label == 'Risk of Bias Questions') adress = 'rob-question';
               <Td>
                 <DeleteButton index={index} handleDelete={() => handleDelete(index)} />
                 <EditButton
+                  itemDescription={row.question}
+                  itemType={row.type}
                   index={index}
                   editIndex={editIndex}
                   handleEdit={() => {

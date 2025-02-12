@@ -2,10 +2,11 @@
     margin-left: .5vw;
     display: flex;
     padding: 1vh;
+    gap: .5rem;
 }
 
 .accordionLink {
     color: #c9d9e5;
-    margin-left: 1vw;
-    height: 80%
+    /* margin-left: .2vw; */
+    height: 95%;
 }

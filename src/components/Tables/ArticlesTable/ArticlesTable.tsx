@@ -44,9 +44,9 @@ function ArticlesTable({articles}: Props) {
       };
     
       return sidebarState === "open" ? (
-        <Collapsed articles={sortedArticles} handleHeaderClick={handleHeaderClick} />
+        <Collapsed articles={sortedArticles} handleHeaderClick={handleHeaderClick} sortConfig={sortConfig}/>
       ) : (
-        <Expanded articles={sortedArticles} handleHeaderClick={handleHeaderClick} />
+        <Expanded articles={sortedArticles} handleHeaderClick={handleHeaderClick} sortConfig={sortConfig}/>
       );
 }
 

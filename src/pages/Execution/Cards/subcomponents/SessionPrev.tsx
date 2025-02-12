@@ -1,5 +1,5 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Flex, Button, Text } from "@chakra-ui/react";
+import { Flex, Button, Text, Tr, Td } from "@chakra-ui/react";
 import { FaRegEye } from "react-icons/fa6";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -54,72 +54,72 @@ const SessionPrev = ({
   const sessionDate = day + "/" + month;
 
   return (
-    <Flex
-      flex={1}
-      justifyContent="space-between"
-      alignItems="center"
-      gap={"10px"}
-    >
-        <Flex gap="3rem">
-            <Text
-            textAlign="left"
-            width="100%"
-            textOverflow={"ellipsis"}
-            whiteSpace={"nowrap"}
-            overflow={"hidden"}
+    <Tr>
+      <Td>
+        <Text
+          textAlign="left"
+          whiteSpace={"nowrap"}
+          overflow={"hidden"}
         >
-            {sessionDate}
+          {sessionDate}
         </Text>
-        
-        <Text flex="1" textAlign="center" gap='10px'>
-            {numberOfStudies}
-        </Text>
-        </Flex>
-      <Flex justifyContent="flex-end" mt={2} gap="5px">
-     
+      </Td>
 
-        {numberOfStudies && numberOfStudies > 0 ? (
+      <Td>
+        <Text textAlign="center" width="100%">
+          {numberOfStudies}
+        </Text>
+      </Td>
+
+      <Td>
+        <Flex gap="5px">
+          {numberOfStudies && numberOfStudies > 0 ? (
+            <Button
+              as={Link}
+              to={`/newReview/identification/${sessionId}`}
+              colorScheme="gray"
+              height="35px"
+              flex={1}
+            >
+              <FaRegEye />
+            </Button>
+          ) : (
+            <Button
+              flex={1}
+              colorScheme="gray"
+              height="35px"
+              onClick={handleToastAlert}
+            >
+              <IoEyeOffOutline />
+            </Button>
+          )}
           <Button
-            as={Link}
-            to={`/newReview/identification/${sessionId}`}
             flex={1}
             colorScheme="gray"
-            height={"35px"}
+            height="35px"
+            onClick={() => handleOpenModal({ action: "update" })}
           >
-            <FaRegEye />
+            <EditIcon />
           </Button>
-        ) : (
-          <Button flex={1} colorScheme="gray" height={"35px"} onClick={() => handleToastAlert()}>
-            <IoEyeOffOutline />
+          <Button
+            flex={1}
+            colorScheme="gray"
+            height="35px"
+            onClick={() => handleDelete(sessionId)}
+          >
+            <DeleteIcon />
           </Button>
-        )}
-        <Button
-          flex={1}
-          colorScheme="gray"
-          height={"35px"}
-          onClick={() => handleOpenModal({ action: "update" })}
-        >
-          <EditIcon />
-        </Button>
-
-        <Button
-          flex={1}
-          colorScheme="gray"
-          height={"35px"}
-          onClick={() => handleDelete(sessionId)}
-        >
-          <DeleteIcon />
-        </Button>
-        <Button
-          flex={1}
-          colorScheme="gray"
-          height={"35px"}
-          onClick={() => handleInspectOpenModal({ action: "inspect" })}
-        >
-          <MdOutlineSdCardAlert />
-        </Button>
-      </Flex>
-    </Flex>
+          <Button
+            flex={1}
+            colorScheme="gray"
+            height="35px"
+            onClick={() => handleInspectOpenModal({ action: "inspect" })}
+          >
+            <MdOutlineSdCardAlert size="20px" />
+          </Button>
+        </Flex>
+      </Td>
+    </Tr>
   );
 };
 

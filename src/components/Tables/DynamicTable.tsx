@@ -8,8 +8,8 @@ import { TableHeadersInterface } from "../../../public/interfaces/ITableHeaders"
 import { KeywordInterface } from "../../../public/interfaces/KeywordInterface";
 import { KeyWordHeaderInterface } from "../../../public/interfaces/IKeyWordHeard";
 import { tableTypeEnum } from "../../../public/enums/tableTypeEnum";
-import { useContext } from "react";
-import AppContext from "../Context/AppContext";
+// import { useContext } from "react";
+// import AppContext from "../Context/AppContext";
 import useStudiesFilter from "../../hooks/useStudiesFilter";
 
 interface DynamicTableProps {
@@ -26,13 +26,13 @@ export default function DynamicTable({ headerData, bodyData, tableType, filtered
   const isSelectionTable = tableType == tableTypeEnum.SELECTION;
   const isExtractionTable = tableType === tableTypeEnum.EXTRACTION;
   const studiesToFilter = (bodyData as StudyInterface[]);
-  const context = useContext(AppContext);
+  // const context = useContext(AppContext);
 
   const getColumnVisibility = useColumnVisibility(filteredColumns);
-  const filteredStudies = useStudiesFilter({studiesToFilter, searchString, tableType, selectedStatus})
+  // const filteredStudies = useStudiesFilter({studiesToFilter, searchString, tableType, selectedStatus})
   const { handleSort, sortedData } = useTableSorting(bodyData, headerData);
 
-  context?.setSortedStudies((sortedData as StudyInterface[]));
+  // context?.setSortedStudies((sortedData as StudyInterface[]));
 
   return (
     <TableContainer sx={tbConteiner} h={isKeyWordTable ? 300 : 250} borderBottom={"1em solid #303D50"}>

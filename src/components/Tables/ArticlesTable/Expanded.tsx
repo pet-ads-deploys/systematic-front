@@ -11,13 +11,9 @@ import {
   Checkbox,
   Box,
 } from "@chakra-ui/react";
+import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import {
-  CheckCircleIcon,
-  InfoIcon,
-  CloseIcon,
-  WarningIcon,
-} from "@chakra-ui/icons";
-import {
+  chevronIcon,
   collapsedSpanText,
   tdSX,
   tooltip,
@@ -32,13 +28,20 @@ import {
   MdKeyboardArrowUp,
   MdKeyboardArrowDown,
 } from "react-icons/md";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { IoIosCloseCircle } from "react-icons/io";
 
 interface Props {
   articles: ArticleInterface[];
   handleHeaderClick: (key: keyof ArticleInterface) => void;
+  sortConfig: { key: keyof ArticleInterface; direction: "asc" | "desc" } | null;
 }
 
-export default function Collapsed({ articles, handleHeaderClick }: Props) {
+export default function Collapsed({
+  articles,
+  handleHeaderClick,
+  sortConfig,
+}: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
   const setSelectionStudyIndex = context?.setSelectionStudyIndex;
@@ -49,8 +52,8 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
         return <CheckCircleIcon color="green.500" />;
       case "DUPLICATED":
         return <InfoIcon color="blue.500" />;
-      case "REJECTED":
-        return <CloseIcon color="red.500" />;
+      case "EXCLUDED":
+        return <IoIosCloseCircle color="red" size="1.4rem" />;
       case "UNCLASSIFIED":
         return <WarningIcon color="yellow.500" />;
       default:
@@ -60,29 +63,38 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
 
   const renderPriorityIcon = (priority: string) => {
     switch (priority) {
-      case "VERY_HIGH":
+      case "VERY HIGH":
         return <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />;
       case "HIGH":
         return <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />;
       case "LOW":
         return <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />;
-      case "VERY_LOW":
+      case "VERY LOW":
         return <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />;
       default:
         return null;
     }
   };
 
+  const columns = [
+    { label: "ID", key: "studyReviewId", width: "10%" },
+    { label: "Title", key: "title", width: "30%" },
+    { label: "Author", key: "authors", width: "20%" },
+    { label: "Journal", key: "venue", width: "28%" },
+    { label: "Selection", key: "selectionStatus", width: "10%" },
+    { label: "Extraction", key: "extraction", width: "10%" },
+    { label: "Reading Priority", key: "readingPriority", width: "11%" },
+  ];
+
   if (setShowSelectionModal && setSelectionStudyIndex)
     return (
       <TableContainer
-        width={"97%"}
-        mt={5}
+        width={"100%"}
         borderRadius="1rem"
         boxShadow="lg"
         bg="#EBF0F3"
         overflowY={"auto"}
-        maxH="80vh"
+        maxH="100%"
       >
         <Table
           variant="unstyled"
@@ -98,97 +110,49 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                 fontSize="larger"
                 w={3}
               ></Th>
-              <Th
-                textAlign="center"
-                color="#263C56"
-                fontSize="larger"
-                p="2rem 0 1rem 0"
-                textTransform="capitalize"
-                borderBottom="3px solid #C9D9E5"
-                w="5%"
-                onClick={() => handleHeaderClick("studyReviewId")}
-              >
-                ID
-              </Th>
-              <Th
-                textAlign="center"
-                color="#263C56"
-                fontSize="larger"
-                p="2rem 0 1rem 0"
-                textTransform="capitalize"
-                borderBottom="3px solid #C9D9E5"
-                onClick={() => handleHeaderClick("title")}
-              >
-                Title
-              </Th>
-              <Th
-                textAlign="center"
-                color="#263C56"
-                fontSize="larger"
-                p="2rem 0 1rem 0"
-                textTransform="capitalize"
-                borderBottom="3px solid #C9D9E5"
-                onClick={() => handleHeaderClick("author")}
-              >
-                Author
-              </Th>
-              <Th
-                textAlign="center"
-                color="#263C56"
-                fontSize="larger"
-                p="2rem 0 1rem 0"
-                textTransform="capitalize"
-                borderBottom="3px solid #C9D9E5"
-                onClick={() => handleHeaderClick("venue")}
-              >
-
-                Journal
-              </Th>
-              <Th
-                textAlign="center"
-                color="#263C56"
-                fontSize="larger"
-                p="2rem 1rem 1rem 0"
-                textTransform="capitalize"
-                borderBottom="3px solid #C9D9E5"
-                w="8%"
-                onClick={() => handleHeaderClick("selectionStatus")}
-              >
-                Selection
-              </Th>
-              <Th
-                textAlign="center"
-                color="#263C56"
-                fontSize="larger"
-                p="2rem 1rem 1rem 0"
-                textTransform="capitalize"
-                borderBottom="3px solid #C9D9E5"
-                w="8%"
-                onClick={() => handleHeaderClick("extraction")}
-              >
-                Extraction
-              </Th>
-              <Th
-                textAlign="center"
-                color="#263C56"
-                fontSize="larger"
-                p="2rem 1rem 1rem 0"
-                textTransform="capitalize"
-                borderBottom="3px solid #C9D9E5"
-                w="8%"
-                onClick={() => handleHeaderClick("readingPriority")}
-              >
-                Reading Priority
-              </Th>
+              {columns.map((col) => (
+                <Th
+                  key={col.key}
+                  textAlign="center"
+                  color="#263C56"
+                  fontSize="larger"
+                  p="2rem 2rem 1rem 0"
+                  textTransform="capitalize"
+                  borderBottom="3px solid #C9D9E5"
+                  w={col.width}
+                  onClick={() =>
+                    handleHeaderClick(col.key as keyof ArticleInterface)
+                  }
+                  cursor="pointer"
+                >
+                  <Box
+                    display="flex"
+                    gap=".5rem"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                  >
+                    {col.label}
+                    {sortConfig?.key === col.key ? (
+                      sortConfig.direction === "asc" ? (
+                        <FaChevronUp style={chevronIcon} />
+                      ) : (
+                        <FaChevronDown style={chevronIcon} />
+                      )
+                    ) : (
+                      <FaChevronDown style={chevronIcon} />
+                    )}
+                  </Box>
+                </Th>
+              ))}
             </Tr>
           </Thead>
           <Tbody>
-            {articles ? (
+            {articles && articles.length ? (
               articles.map((e, index) => (
                 <Tr
                   onClick={() => {
-                    setSelectionStudyIndex(index);
-                    setShowSelectionModal(true);
+                    setSelectionStudyIndex?.(index);
+                    setShowSelectionModal?.(true);
                   }}
                   key={index}
                   _hover={{ bg: "#F5F8F9" }}
@@ -209,7 +173,8 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                   </Td>
                   <Td sx={tdSX}>{String(e.studyReviewId).padStart(5, "0")}</Td>
                   <Td sx={tdSX}>
-                    <Tooltip sx={tooltip}
+                    <Tooltip
+                      sx={tooltip}
                       label={e.title}
                       aria-label="Full Title"
                       hasArrow
@@ -218,7 +183,8 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX}>
-                    <Tooltip sx={tooltip}
+                    <Tooltip
+                      sx={tooltip}
                       label={e.authors}
                       aria-label="Full Author List"
                       hasArrow
@@ -227,7 +193,8 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX}>
-                    <Tooltip sx={tooltip}
+                    <Tooltip
+                      sx={tooltip}
                       label={e.venue}
                       aria-label="Journal Name"
                       hasArrow
@@ -236,7 +203,7 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                     </Tooltip>
                   </Td>
 
-                  <Td p=".5rem 0" w="5rem">
+                  <Td p=".5rem 0" w="8%">
                     <Box
                       display="flex"
                       alignItems="center"
@@ -252,24 +219,24 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                     </Box>
                   </Td>
 
-                  <Td p=".5rem 0" w="5rem">
+                  <Td p=".5rem 0" w="8%">
                     <Box
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                       gap="0.5rem"
                     >
-                      {renderStatusIcon("UNCLASSIFIED")}
+                      {renderStatusIcon(e.extractionStatus)}
                       <Text sx={collapsedSpanText}>
-                        {/* {capitalize(
-                          e.extraction?.toString().toLowerCase() || ""
-                        )} */}
-                        Unclassified
+                        {capitalize(
+                          e.extractionStatus?.toString().toLowerCase() ||
+                            ""
+                        )}
                       </Text>
                     </Box>
                   </Td>
 
-                  <Td p=".5rem 0" w="5rem">
+                  <Td p=".5rem 0" w="8%">
                     <Box
                       display="flex"
                       alignItems="center"
@@ -287,7 +254,11 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                 </Tr>
               ))
             ) : (
-              <p>No articles found</p>
+              <Tr>
+                <Td colSpan={8} textAlign="center">
+                  No articles found.
+                </Td>
+              </Tr>
             )}
           </Tbody>
         </Table>

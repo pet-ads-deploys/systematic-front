@@ -6,13 +6,14 @@ import { useContext, useEffect } from "react";
 import AppContext from "../../../../components/Context/AppContext";
 import useGetAllReviewArticles from "../../../../hooks/useGetAllReviewArticles";
 import StudySelectionContext, { StudySelectionProvider } from "../../../../components/Context/StudiesSelectionContext";
+import { PageLayout } from "./LayoutFactory";
 
-export default function StudySelectionArea() {
+export default function StudySelectionArea({type}:PageLayout) {
   const context = useContext(AppContext);
   const selectionContext = useContext(StudySelectionContext);
   if(!selectionContext) throw new Error("Failed to get selection context on study Selection area");
   const reload = selectionContext.reload;
-  const studyData = useGetAllReviewArticles(reload);
+  const studyData = useGetAllReviewArticles();
   const showSelectionModal = context?.showSelectionModal;
   const setSelectionStudies = context?.setSelectionStudies;
   const studyIndex = context?.selectionStudyIndex;
@@ -21,21 +22,22 @@ export default function StudySelectionArea() {
     console.log(studyIndex);
   }, [studyIndex])
 
-  if(setSelectionStudies) setSelectionStudies(studyData as StudyInterface[]);
+  if(setSelectionStudies && studyData?.articles) setSelectionStudies(studyData?.articles as StudyInterface[]);
 
-  if (!showSelectionModal || !studyIndex) return (
-    <Flex mt="10" direction="column" bg="gray.600" borderRadius='15px' w="97%" mb='20px' p="5" alignItems="center">
+  if (!showSelectionModal || studyIndex === null) return (
+    <Flex direction="column" bg="gray.600" borderRadius='1rem' w="100%" mb='20px' p="5" alignItems="center">
       <Text color="white">Click on a study on the table</Text>
     </Flex>
   );
   
   return (
     <StudySelectionProvider>
-      <Flex mt="10" direction="column" borderRadius='15px' bg="gray.600" mb='20px' w="80%" p="5" alignItems={"center"}>
-        <ButtonsForSelection />
-        
-        <Box w={"100%"} bg="gray.200">
-          <StudyDataFiel studyData={(studyData[studyIndex] as StudyInterface)} type="Selection" />
+      <Flex direction="column" borderRadius='1rem' bg="white" mb='20px' w="100%" h={type === "Extraction" ? "80%" : "100%"} p="5" alignItems={"center"}>
+        <Flex justifyContent="center" w="100%">
+        <ButtonsForSelection page={{type}}/>
+        </Flex>
+        <Box w={"100%"} h="100%">
+          <StudyDataFiel studyData={(studyData?.articles?.[studyIndex] as StudyInterface)} page={{type}} />
         </Box>
       </Flex>
     </StudySelectionProvider>

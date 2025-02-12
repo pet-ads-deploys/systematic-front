@@ -99,3 +99,8 @@ export const tooltip = {
   placement:"right",
   fontSize:"xs"
 }
+
+export const chevronIcon = {
+  fontsize: "xs",
+  color: "#263C56"
+}

@@ -9,42 +9,45 @@ import {
   Text,
   Tooltip,
   Checkbox,
+  Box,
 } from "@chakra-ui/react";
 import {
+  chevronIcon,
   collapsedSpanText,
   collapsedTdSX,
-  tdSX,
   tooltip,
 } from "../../../pages/Execution/styles/CardsStyle";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useContext } from "react";
 import AppContext from "../../Context/AppContext";
 
 interface Props {
   articles: ArticleInterface[];
   handleHeaderClick: (key: keyof ArticleInterface) => void;
+  sortConfig: { key: keyof ArticleInterface; direction: "asc" | "desc" } | null;
 }
 
-export default function Collapsed({ articles, handleHeaderClick }: Props) {
+export default function Collapsed({
+  articles,
+  handleHeaderClick,
+  sortConfig,
+}: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
   const setSelectionStudyIndex = context?.setSelectionStudyIndex;
 
   return (
     <TableContainer
-      width="97%"
-      mt={5}
+      width="100%"
       borderRadius="1rem"
       boxShadow="lg"
       bg="#EBF0F3"
       overflowY="auto"
-      maxH="75vh"
+      maxH="100%"
     >
       <Table variant="unstyled" colorScheme="#263C56" size="md">
-        <Thead
-          bg="#EBF0F3"
-          borderRadius="1rem"
-        >
+        <Thead bg="#EBF0F3" borderRadius="1rem">
           <Tr>
             <Th
               textAlign="center"
@@ -53,54 +56,44 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
               p="2rem 1rem 1rem 1rem"
               w="5%"
             ></Th>
-            <Th
+            {[
+              { label: "ID", key: "studyReviewId", width: "5%" },
+              { label: "Title", key: "title", width: "30%" },
+              { label: "Author", key: "authors", width: "20%" },
+              { label: "Journal", key: "venue", width: "35%" },
+            ].map((col) => (
+              <Th
+                key={col.key}
                 textAlign="center"
                 color="#263C56"
                 fontSize="larger"
                 p="2rem 1rem 1rem 1rem"
                 textTransform="capitalize"
                 borderBottom="3px solid #C9D9E5"
-                w="5%"
-                onClick={() => handleHeaderClick("studyReviewId")}
+                w={col.width}
+                onClick={() =>
+                  handleHeaderClick(col.key as keyof ArticleInterface)
+                }
               >
-                ID
+                <Box
+                  display="flex"
+                  gap=".75rem"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  {col.label}{" "}
+                  {sortConfig?.key === col.key ? (
+                    sortConfig.direction === "asc" ? (
+                      <FaChevronUp style={chevronIcon} />
+                    ) : (
+                      <FaChevronDown style={chevronIcon} />
+                    )
+                  ) : (
+                    <FaChevronDown style={chevronIcon} />
+                  )}
+                </Box>
               </Th>
-            <Th
-              textAlign="center"
-              color="#263C56"
-              fontSize="larger"
-              p="2rem 1rem 1rem 1rem"
-              textTransform="capitalize"
-              borderBottom="3px solid #C9D9E5"
-              w="30%"
-              onClick={() => handleHeaderClick("title")}
-            >
-              Title
-            </Th>
-            <Th
-              textAlign="center"
-              color="#263C56"
-              fontSize="larger"
-              p="2rem 1rem 1rem 1rem"
-              textTransform="capitalize"
-              borderBottom="3px solid #C9D9E5"
-              w="25%"
-              onClick={() => handleHeaderClick("authors")}
-            >
-              Author
-            </Th>
-            <Th
-              textAlign="center"
-              color="#263C56"
-              fontSize="larger"
-              p="2rem 1rem 1rem 1rem"
-              textTransform="capitalize"
-              borderBottom="3px solid #C9D9E5"
-              w="20%"
-              onClick={() => handleHeaderClick("venue")}
-            >
-              Journal
-            </Th>
+            ))}
           </Tr>
         </Thead>
         <Tbody>
@@ -131,7 +124,8 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                   {String(e.studyReviewId).padStart(5, "0")}
                 </Td>
                 <Td sx={collapsedTdSX}>
-                  <Tooltip sx={tooltip}
+                  <Tooltip
+                    sx={tooltip}
                     label={e.title}
                     aria-label="Full Title"
                     hasArrow
@@ -140,7 +134,8 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                   </Tooltip>
                 </Td>
                 <Td sx={collapsedTdSX}>
-                  <Tooltip sx={tooltip}
+                  <Tooltip
+                    sx={tooltip}
                     label={e.authors}
                     aria-label="Full Author List"
                     hasArrow
@@ -149,7 +144,8 @@ export default function Collapsed({ articles, handleHeaderClick }: Props) {
                   </Tooltip>
                 </Td>
                 <Td sx={collapsedTdSX}>
-                  <Tooltip sx={tooltip}
+                  <Tooltip
+                    sx={tooltip}
                     label={e.venue}
                     aria-label="Journal Name"
                     hasArrow

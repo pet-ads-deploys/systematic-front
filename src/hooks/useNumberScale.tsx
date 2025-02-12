@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const useNumberScale = () => {
   const [ minimalValue, setMinimalValue ] = useState(0);
-  const [ maximalValue, setMaximalValue] = useState(5);
+  const [ maximalValue, setMaximalValue] = useState(10);
 
   function handleMinimalValue(valueAsString: string, valueAsNumber: number){
     if (!isNaN(valueAsNumber)) {

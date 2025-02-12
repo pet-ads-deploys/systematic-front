@@ -1,14 +1,15 @@
 export const conteiner = {
   mt: 5,
+  w:"97%"
 };
 
 export const dataBaseconteiner = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(20rem, 1fr))",
+  gridTemplateColumns: "repeat(auto-fill, minmax(30rem, 1fr))",
   boxSizing: "border-box",
   p:"20px",
   w: "100%",
-  gap: "20px",
+  gap: "2rem",
   mt: 10,
   h: "100%",
   margin: "0 !important",

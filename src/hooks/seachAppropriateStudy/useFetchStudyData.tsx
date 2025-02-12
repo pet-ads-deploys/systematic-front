@@ -5,6 +5,7 @@ import { KeywordInterface } from "../../../public/interfaces/KeywordInterface"
 export default function useFetchStudyData<U extends StudyInterface | KeywordInterface> (url: string):  U[] | undefined {
   const [requestedData, setRequestedData] = useState<U[]>();
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -23,6 +24,9 @@ export default function useFetchStudyData<U extends StudyInterface | KeywordInte
     };
 
     fetchData();
+    return () => {
+      controller.abort()
+    }
   }, [url]);
 
   return requestedData;
