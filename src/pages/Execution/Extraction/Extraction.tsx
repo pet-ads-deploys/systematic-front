@@ -54,8 +54,7 @@ export default function Extraction() {
   });
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
-  // articles = selectionContext.articles.filter((art) => art.selectionStatus === "INCLUDED");
-  const articles: ArticleInterface[] = selectionContext.articles || [];
+  const articles: ArticleInterface[] = selectionContext.articles.filter((art) => art.selectionStatus === "INCLUDED");
 
   const page: PageLayout = { type: "Extraction" };
 
