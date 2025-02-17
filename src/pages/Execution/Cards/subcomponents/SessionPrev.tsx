@@ -5,22 +5,24 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { MdOutlineSdCardAlert } from "react-icons/md";
-
+import { InvalidEntry } from "../../../../components/Context/StudiesSelectionContext";
 
 interface actionsModal {
   action: "create" | "update";
 }
 
-interface inspectArticlesModal {
-  action: "inspect" | "refuse";
-}
+// interface inspectArticlesModal {
+//   action: "inspect" | "refuse";
+// }
 interface Props {
   handleOpenModal: (action: actionsModal) => void;
   handleDelete: (id: string) => void;
-  handleInspectOpenModal : (action: inspectArticlesModal) => void;
+  // handleInspectOpenModal: (action: inspectArticlesModal) => void;
   timestamp: string;
   numberOfStudies: number;
   sessionId: string;
+  invalidEntries: InvalidEntry[] | undefined;
+  sessionIndex: number;
 }
 
 const SessionPrev = ({
@@ -29,8 +31,10 @@ const SessionPrev = ({
   timestamp,
   numberOfStudies,
   sessionId,
-  handleInspectOpenModal,
-}: Props) => {
+  invalidEntries,
+  sessionIndex,
+}: // handleInspectOpenModal,
+Props) => {
   const date = new Date(timestamp);
   let day, month;
   const toast = useToast();
@@ -42,9 +46,9 @@ const SessionPrev = ({
       status: "info",
       duration: 4500,
       isClosable: true,
-      position: 'top'
+      position: "top",
     });
-  }
+  };
 
   day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
 
@@ -52,15 +56,24 @@ const SessionPrev = ({
   else month = `${date.getMonth() + 1}`;
 
   const sessionDate = day + "/" + month;
+  const hasErrors = (sessionIndex: number) => {
+    console.log(
+      "valores da minha função hasErrors:",
+      invalidEntries,
+      sessionIndex
+    );
+    return (
+      invalidEntries &&
+      invalidEntries[sessionIndex] &&
+      invalidEntries[sessionIndex].entries &&
+      invalidEntries[sessionIndex].entries.length > 0
+    );
+  };
 
   return (
     <Tr>
       <Td>
-        <Text
-          textAlign="left"
-          whiteSpace={"nowrap"}
-          overflow={"hidden"}
-        >
+        <Text textAlign="left" whiteSpace={"nowrap"} overflow={"hidden"}>
           {sessionDate}
         </Text>
       </Td>
@@ -109,14 +122,19 @@ const SessionPrev = ({
           >
             <DeleteIcon />
           </Button>
-          <Button
+          {/* <Button
             flex={1}
             colorScheme="gray"
             height="35px"
             onClick={() => handleInspectOpenModal({ action: "inspect" })}
           >
             <MdOutlineSdCardAlert size="20px" />
-          </Button>
+          </Button> */}
+          {hasErrors(sessionIndex) && (
+            <Button flex={1} colorScheme="red" height="35px">
+              <MdOutlineSdCardAlert size="20px" />
+            </Button>
+          )}
         </Flex>
       </Td>
     </Tr>

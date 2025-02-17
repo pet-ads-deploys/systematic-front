@@ -1,47 +1,48 @@
-import React, { ReactNode, createContext, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useState,
+} from "react";
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
 import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
-import { useSWRConfig } from "swr";
+import { StudyInterface } from "../../../public/interfaces/IStudy";
 
-interface AppContextType {
-    isIncluded: boolean;
-    setIsIncluded: React.Dispatch<React.SetStateAction<boolean>>;
-    isExcluded: boolean;
-    setIsExcluded: React.Dispatch<React.SetStateAction<boolean>>;
-    articles: ArticleInterface[];
-    reloadArticles: () => void;
-    reload: boolean;
+export interface InvalidEntry {
+  fileName: string;
+  entries: string[];
 }
 
-const StudySelectionContext = createContext<AppContextType | undefined>(undefined);
+interface AppContextType {
+  isIncluded: boolean;
+  setIsIncluded: React.Dispatch<React.SetStateAction<boolean>>;
+  isExcluded: boolean;
+  setIsExcluded: React.Dispatch<React.SetStateAction<boolean>>;
+  articles: ArticleInterface[] | StudyInterface[] | [];
+  reloadArticles: () => void;
+  reload: boolean;
+  invalidEntries: InvalidEntry[];
+  setInvalidEntries: Dispatch<SetStateAction<InvalidEntry[]>>;
+}
+
+const StudySelectionContext = createContext<AppContextType | undefined>(
+  undefined
+);
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
-export const StudySelectionProvider: React.FC<AppProviderProps> = ({ children }) => {
+export const StudySelectionProvider: React.FC<AppProviderProps> = ({
+  children,
+}) => {
   const [isIncluded, setIsIncluded] = useState(false);
   const [reload, setReload] = useState(false);
   const [isExcluded, setIsExcluded] = useState(false);
-  // const [articles, setArticles] = useState<ArticleInterface[]>([]);
-  
-  const {articles, mutate} = useGetAllReviewArticles();
+  const [invalidEntries, setInvalidEntries] = useState<InvalidEntry[]>([]);
 
-  // useEffect(() => {
-  //   console.log("Artigos fetchados:", fetchedArticles);
-  //   if (fetchedArticles && fetchedArticles.length > 0) {
-  //     // Usar uma verificação de igualdade para garantir re-renderização
-  //     if (JSON.stringify(fetchedArticles) !== JSON.stringify(articles)) {
-  //       console.log("Atualizando articles!!!");
-  //       setArticles([...fetchedArticles]); // Criar uma nova referência
-  //     }
-  //   }
-  // }, [fetchedArticles]); // Remover reloadArticles da dependência
-
-  // function reloadArticles() {
-  //   setReload(prevReload => !prevReload);
-  // }
-
+  const { articles, mutate } = useGetAllReviewArticles();
 
   return (
     <StudySelectionContext.Provider
@@ -53,6 +54,8 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({ children })
         articles,
         reloadArticles: mutate,
         reload,
+        invalidEntries,
+        setInvalidEntries,
       }}
     >
       {children}

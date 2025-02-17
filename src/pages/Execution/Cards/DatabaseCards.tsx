@@ -35,28 +35,7 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteModal, setdeleteModal] = useState<"delete" | "refuse">("delete");
 
-  const [sessions, setSessions] = useState<
-    {
-      id: string;
-      systematicStudyd: string;
-      userId: string;
-      searchString: string;
-      additionalInfo: string;
-      timestamp: string;
-      source: string;
-      numberOfRelatedStudies: number;
-    }[]
-  >([]);
-
-  useEffect(() => {
-    async function fetchSessions() {
-      const response = await useGetSession(text);
-      console.log(response.data.searchSessions);
-      setSessions(response.data.searchSessions);
-    }
-
-    fetchSessions();
-  }, []);
+  const { data, mutate } = useGetSession(text);
 
   const handleOpenModal = ({ action }: actionsModal) => {
     setActionModal(action);
@@ -112,7 +91,7 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
               bgColor={"#263C56"}
               w={"60px"}
               color={"#EBF0F3"}
-              icon={<AiOutlineDelete/>}
+              icon={<AiOutlineDelete />}
               borderRadius="50px"
               event={function (): void {
                 handleOpenDeleteModal({ action: "delete" });
@@ -128,23 +107,19 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
         <DeleteDatabaseModal
           show={setShowDeleteModal}
           action={deleteModal}
-          sessions={sessions}
-          setSessions={setSessions}
+          sessions={data}
+          mutate={mutate}
           databaseName={text}
         />
       )}
 
-      <AccordionDashboard
-        type={text}
-        sessions={sessions}
-        setSessions={setSessions}
-      />
+      <AccordionDashboard type={text} sessions={data} mutate={mutate} />
       {showModal && (
         <IdentificationModal
           show={setShowModal}
           action={actionModal}
           type={text}
-          setSessions={setSessions}
+          mutate={mutate}
         />
       )}
     </Card>
