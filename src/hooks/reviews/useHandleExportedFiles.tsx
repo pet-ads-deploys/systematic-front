@@ -67,6 +67,35 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
     }
   };
 
+  const getFileExtension = (file: File) => {
+    return file.name.split(".").pop()?.toLowerCase() || "";
+  };
+
+  const addInvalidEntries = (
+    formData: FormData,
+    invalidArticles: string[],
+    setInvalidEntries?: React.Dispatch<SetStateAction<InvalidEntry[]>>
+  ) => {
+    if (!setInvalidEntries) return;
+    const file = formData.get("file");
+    const fileName =
+      file && file instanceof File
+        ? file.name
+        : `Arquivo-${crypto.randomUUID()}`;
+    const fileExtension =
+      file && file instanceof File ? getFileExtension(file) : "";
+
+    setInvalidEntries((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        fileName,
+        fileExtension,
+        entries: invalidArticles,
+      },
+    ]);
+  };
+
   async function sendFilesToServer() {
     const formData = new FormData();
     const data = JSON.stringify({
@@ -82,29 +111,9 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
 
     try {
       const response = await axios.post(url, formData, options);
-      const invalidArticles = response.data.invalidEntries;
-
-      console.log(`Artigos invalidos: ${invalidArticles}`);
-
-      if (setInvalidEntries) {
-        const file = formData.get("file");
-
-        const fileName =
-          file && file instanceof File
-            ? file.name
-            : `Arquivo-${crypto.randomUUID()}`;
-
-        setInvalidEntries((prev) => [
-          ...prev,
-          {
-            fileName,
-            entries: ["teste"],
-          },
-        ]);
-      }
-
+      const invalidArticles: string[] = response.data.invalidEntries;
+      addInvalidEntries(formData, invalidArticles, setInvalidEntries);
       mutate();
-
       if (invalidArticles.length > 0) {
         toast({
           title: "Some files need revision",

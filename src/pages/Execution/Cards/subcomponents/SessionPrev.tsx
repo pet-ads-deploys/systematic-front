@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { MdOutlineSdCardAlert } from "react-icons/md";
 import { InvalidEntry } from "../../../../components/Context/StudiesSelectionContext";
+import useCreateFileToInvalidEntries, {
+  createFileToInvalidEntries,
+  downloadFile,
+} from "../../../../hooks/reviews/createFileToInvalidEntries";
+import { motion } from "framer-motion";
 
 interface actionsModal {
   action: "create" | "update";
@@ -56,18 +61,22 @@ Props) => {
   else month = `${date.getMonth() + 1}`;
 
   const sessionDate = day + "/" + month;
+
   const hasErrors = (sessionIndex: number) => {
-    console.log(
-      "valores da minha função hasErrors:",
-      invalidEntries,
-      sessionIndex
-    );
     return (
       invalidEntries &&
       invalidEntries[sessionIndex] &&
       invalidEntries[sessionIndex].entries &&
       invalidEntries[sessionIndex].entries.length > 0
     );
+  };
+
+  const handleDownloadInvalidFiles = () => {
+    if (!invalidEntries || !invalidEntries[sessionIndex]) return;
+    const { id, fileName, fileExtension, entries } =
+      invalidEntries[sessionIndex];
+    const file = createFileToInvalidEntries({ fileExtension, entries });
+    downloadFile(file, `${id}-${fileName}`);
   };
 
   return (
@@ -122,17 +131,23 @@ Props) => {
           >
             <DeleteIcon />
           </Button>
-          {/* <Button
-            flex={1}
-            colorScheme="gray"
-            height="35px"
-            onClick={() => handleInspectOpenModal({ action: "inspect" })}
-          >
-            <MdOutlineSdCardAlert size="20px" />
-          </Button> */}
           {hasErrors(sessionIndex) && (
-            <Button flex={1} colorScheme="red" height="35px">
-              <MdOutlineSdCardAlert size="20px" />
+            <Button
+              flex={1}
+              colorScheme="yellow"
+              height="35px"
+              onClick={handleDownloadInvalidFiles}
+            >
+              <motion.div
+                animate={{ y: [0, -2, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 0.5,
+                  ease: "easeInOut",
+                }}
+              >
+                <MdOutlineSdCardAlert size="20px" />
+              </motion.div>
             </Button>
           )}
         </Flex>

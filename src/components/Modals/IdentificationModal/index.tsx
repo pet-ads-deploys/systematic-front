@@ -59,7 +59,7 @@ function IdentificationModal({
     setReferenceFiles,
     sendFilesToServer,
     setSource,
-  } = useHandleExportedFiles({ mutate: mutate });
+  } = useHandleExportedFiles({ mutate: mutate, setInvalidEntries: selectionContext.setInvalidEntries });
 
   useEffect(() => {
     setSource(type);

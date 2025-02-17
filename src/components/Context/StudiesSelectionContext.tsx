@@ -10,7 +10,9 @@ import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
 import { StudyInterface } from "../../../public/interfaces/IStudy";
 
 export interface InvalidEntry {
+  id: string;
   fileName: string;
+  fileExtension: string;
   entries: string[];
 }
 
