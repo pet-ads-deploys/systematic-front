@@ -1,14 +1,48 @@
-import axios from "../../interceptor/interceptor"
+// External libraries
+import useSWR from "swr";
+import Axios from "../../interceptor/interceptor";
 
-const useGetSession = async (source: string) => {
-    const token = localStorage.getItem("accessToken");
-    const options = {
-        headers: { Authorization: `Bearer ${token}` }
-    }
-    const id = localStorage.getItem('systematicReviewId');
-    const url = `http://localhost:8080/api/v1/systematic-study/${id}/search-session-source/${source}`;
+// Utils
+import getRequestOptions from "../../utils/getRequestOptions";
 
-    return await axios.get(url, options);
+// Type
+interface HttpResponse {
+  searchSessions: {
+    id: string;
+    systematicStudyd: string;
+    userId: string;
+    searchString: string;
+    additionalInfo: string;
+    timestamp: string;
+    source: string;
+    numberOfRelatedStudies: number;
+  }[];
 }
 
-export default useGetSession;
+export default function useGetSession(source: string) {
+  const id = localStorage.getItem("systematicReviewId");
+  const path = `http://localhost:8080/api/v1/systematic-study/${id}/search-session-source/${source}`;
+  const options = getRequestOptions();
+
+  const { data, error, isLoading, mutate } = useSWR(path, fetchSessions, {
+    revalidateOnFocus: true,
+    revalidateOnMount: true,
+  });
+
+  async function fetchSessions() {
+    try {
+      const response = await Axios.get<HttpResponse>(path, options);
+      console.log("Dados recebidos:", response.data.searchSessions);
+      return response.data.searchSessions;
+    } catch (error) {
+      throw new Error(`Erro ao buscar sessões: ${error}`);
+    }
+  }
+
+  return {
+    data: data || [],
+    error,
+    isLoading,
+    mutate,
+  };
+}

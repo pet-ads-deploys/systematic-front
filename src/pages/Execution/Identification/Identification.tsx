@@ -1,15 +1,23 @@
+// External libraries
 import { Box } from "@chakra-ui/react";
+
+// Components
 import DataBaseCard from "../Cards/DatabaseCards";
 import Header from "../../../components/ui/Header/Header";
-import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
-import { conteiner, dataBaseconteiner } from "../styles/Identification";
 import FlexLayout from "../../../components/ui/Flex/Flex";
-import StudySelectionContext, { StudySelectionProvider } from "../../../components/Context/StudiesSelectionContext";
+
+// Context
+import { StudySelectionProvider } from "../../../components/Context/StudiesSelectionContext";
+
+// Hooks
+import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
+
+// Styles
+import { conteiner, dataBaseconteiner } from "../styles/Identification";
 
 export default function Identification() {
   const { databases } = useFetchDataBases();
-  console.log(databases);
-
+  // console.log(databases);
   return (
     <StudySelectionProvider>
       <FlexLayout defaultOpen={1} navigationType="Accordion">
@@ -23,10 +31,9 @@ export default function Identification() {
           flexDirection={"column"}
           w={"100%"}
         >
-          
           <Box sx={dataBaseconteiner}>
-            {databases.map((data) => {
-              return <DataBaseCard text={data} />;
+            {databases.map((data, index) => {
+              return <DataBaseCard text={data} key={index} />;
             })}
           </Box>
         </Box>

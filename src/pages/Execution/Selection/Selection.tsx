@@ -54,9 +54,7 @@ export default function Selection<
   // console.log("Valor do layout atual:", layout);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
-  // let articles: ArticleInterface[] = [];
   const articles: ArticleInterface[] = selectionContext.articles || [];
-  // articles = selectionContext.articles;
 
   // articles = studiesData;
 
