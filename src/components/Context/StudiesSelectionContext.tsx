@@ -1,3 +1,4 @@
+// External libraries
 import React, {
   Dispatch,
   ReactNode,
@@ -5,10 +6,16 @@ import React, {
   createContext,
   useState,
 } from "react";
-import ArticleInterface from "../../../public/interfaces/ArticleInterface";
-import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
-import { StudyInterface } from "../../../public/interfaces/IStudy";
+import { KeyedMutator } from "swr";
 
+// Hooks
+import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
+
+// Types
+import { StudyInterface } from "../../../public/interfaces/IStudy";
+import ArticleInterface from "../../../public/interfaces/ArticleInterface";
+
+// Types
 export interface InvalidEntry {
   id: string;
   fileName: string;
@@ -22,7 +29,7 @@ interface AppContextType {
   isExcluded: boolean;
   setIsExcluded: React.Dispatch<React.SetStateAction<boolean>>;
   articles: ArticleInterface[] | StudyInterface[] | [];
-  reloadArticles: () => void;
+  reloadArticles: KeyedMutator<ArticleInterface[] | StudyInterface[] | []>;
   reload: boolean;
   invalidEntries: InvalidEntry[];
   setInvalidEntries: Dispatch<SetStateAction<InvalidEntry[]>>;

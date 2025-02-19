@@ -1,7 +1,18 @@
+// External libraries
+import { useState } from "react";
 import { Card, Box, Text } from "@chakra-ui/react";
+
+// Componentes
 import EventButton from "../../../components/Buttons/EventButton";
 import DataBaseIcon from "../../../components/Icons/DataBaseIcon";
 import AccordionDashboard from "./subcomponents/AccordionDashboard";
+import IdentificationModal from "../../../components/Modals/IdentificationModal";
+import DeleteDatabaseModal from "../../../components/Modals/DeleteDatabase";
+
+// Hooks
+import useGetSession from "../../../hooks/reviews/useGetSession";
+
+// Styles
 import {
   btnConteiner,
   card,
@@ -9,13 +20,12 @@ import {
   iconConteiner,
   testo,
 } from "../styles/CardsStyle";
-import IdentificationModal from "../../../components/Modals/IdentificationModal";
-import { useEffect, useState } from "react";
-import useGetSession from "../../../hooks/reviews/useGetSession";
-import DeleteDatabaseModal from "../../../components/Modals/DeleteDatabase";
+
+// Icons
 import { AddIcon } from "@chakra-ui/icons";
 import { AiOutlineDelete } from "react-icons/ai";
 
+// Types
 interface DatabaseCardProps {
   text: string;
 }
@@ -35,8 +45,10 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteModal, setdeleteModal] = useState<"delete" | "refuse">("delete");
 
+  // Hook
   const { data, mutate } = useGetSession(text);
 
+  // Functions
   const handleOpenModal = ({ action }: actionsModal) => {
     setActionModal(action);
     setShowModal(true);
@@ -102,7 +114,6 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
           }
         </Box>
       </Box>
-
       {showDeleteModal && (
         <DeleteDatabaseModal
           show={setShowDeleteModal}
@@ -112,7 +123,6 @@ export default function DataBaseCard({ text }: DatabaseCardProps) {
           databaseName={text}
         />
       )}
-
       <AccordionDashboard type={text} sessions={data} mutate={mutate} />
       {showModal && (
         <IdentificationModal
