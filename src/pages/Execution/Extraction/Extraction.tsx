@@ -1,49 +1,49 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+// External libraries
+import { useContext, useState } from "react";
+import { Box, Flex } from "@chakra-ui/react";
+
+// Hooks
 import useInputState from "../../../hooks/useInputState";
+
+// Components
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import Header from "../../../components/ui/Header/Header";
-// import ComboBox from "../../../components/Inputs/ComboBox";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
-// import DynamicTable from "../../../components/Tables/DynamicTable";
-import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
-import { conteiner, inputconteiner } from "../styles/executionStyles";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-// import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
-import { useContext, useState } from "react";
-// import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
-import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
+import ButtonsLayout from "../Selection/subcomponents/LayoutButtons";
+import LayoutFactory from "../Selection/subcomponents/LayoutFactory";
+
+// Contexts
 import { AppProvider } from "../../../components/Context/AppContext";
 import StudySelectionContext, {
   StudySelectionProvider,
 } from "../../../components/Context/StudiesSelectionContext";
+
+// Utilities
 import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
+
+// Styles
+import { inputconteiner } from "../styles/executionStyles";
+
+// Types
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import { LayoutModel } from "../Selection/Selection";
+import { PageLayout } from "../Selection/subcomponents/LayoutFactory";
+
+// Unused imports
+// import ComboBox from "../../../components/Inputs/ComboBox";
+// import DynamicTable from "../../../components/Tables/DynamicTable";
+// import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
+// import { StudyInterface } from "../../../../public/interfaces/IStudy";
+// import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
+// import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
+// import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
 // import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 // import ExtractionForm from "./subcomponents/forms/ExtractionForm/ExtractionForm";
 // import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
-import ButtonsLayout from "../Selection/subcomponents/LayoutButtons";
-import { LayoutModel } from "../Selection/Selection";
-import LayoutFactory, {
-  PageLayout,
-} from "../Selection/subcomponents/LayoutFactory";
 // import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
 
 export default function Extraction() {
-  const studiesData: StudyInterface[] | undefined = useFetchTableData(
-    "/data/NewStudyData.json"
-  );
-  //   const headerData: TableHeadersInterface = {
-  //     title: "Title",
-  //     authors: "Author",
-  //     year: "Year",
-  //     selectionStatus: "Status/Selection",
-  //     extractionStatus: "Status/Extraction",
-  //     readingPriority: "Reading Priority"
-  // }
-
-  // const { value: checkedValues, handleChange: handleCheckboxChange } = useInputState<string[]>([]);
-  // const { value: selectedValue, handleChange: handleSelectChange } = useInputState<string | null>(null);
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
@@ -54,7 +54,12 @@ export default function Extraction() {
   });
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
-  const articles: ArticleInterface[] = selectionContext.articles.filter((art) => art.selectionStatus === "INCLUDED");
+  const articles: ArticleInterface[] = selectionContext.articles
+    .filter(
+      (art): art is ArticleInterface =>
+        "studyReviewId" in art && "selection" in art
+    )
+    .filter((art) => art.selectionStatus === "INCLUDED");
 
   const page: PageLayout = { type: "Extraction" };
 
@@ -69,8 +74,6 @@ export default function Extraction() {
   const handleDefaultLayout = () => setLayout({ orientation: "default" });
   const handleHorizontalLayout = () => setLayout({ orientation: "horizontal" });
   const handleVerticalLayout = () => setLayout({ orientation: "vertical" });
-
-  if (!studiesData) return <NoStudiesData />;
 
   return (
     <AppProvider>

@@ -1,48 +1,52 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+// External libraries
+import { useContext, useState } from "react";
+import { Box, Flex } from "@chakra-ui/react";
+
+// Hooks
 import useInputState from "../../../hooks/useInputState";
+
+// Components
 import Header from "../../../components/ui/Header/Header";
 import FlexLayout from "../../../components/ui/Flex/Flex";
-// import ComboBox from "../../../components/Inputs/ComboBox";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
+import LayoutFactory from "./subcomponents/LayoutFactory";
+import ButtonsLayout from "./subcomponents/LayoutButtons";
+
+// Contexts
+import { AppProvider } from "../../../components/Context/AppContext";
+import StudySelectionContext, {
+  StudySelectionProvider,
+} from "../../../components/Context/StudiesSelectionContext";
+
+// Utilities
+import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
+
+// Styles
+import { conteiner, inputconteiner } from "../styles/executionStyles";
+
+// Types
+import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import { PageLayout } from "./subcomponents/LayoutFactory";
+
+// Unused imports
+// import ComboBox from "../../../components/Inputs/ComboBox";
 // import StudySelectionArea from "./subcomponents/StudySelectionArea";
 // import DynamicTable from "../../../components/Tables/DynamicTable";
 // import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
-import { conteiner, inputconteiner } from "../styles/executionStyles";
-import { AppProvider } from "../../../components/Context/AppContext";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
+// import { StudyInterface } from "../../../../public/interfaces/IStudy";
 // import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
-import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
-import { useContext, useState } from "react";
+// import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
 // import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
 // import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
-import { StudySelectionProvider } from "../../../components/Context/StudiesSelectionContext";
-import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 // import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
-import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
 // import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
-import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
-import LayoutFactory, { PageLayout } from "./subcomponents/LayoutFactory";
-import ButtonsLayout from "./subcomponents/LayoutButtons";
 
 export interface LayoutModel {
   orientation: "default" | "horizontal" | "vertical";
 }
 
-export default function Selection<
-  U extends StudyInterface | KeywordInterface
->() {
-  // const studiesData: U[] | undefined = useFetchTableData(
-  //   "/data/NewStudyData.json"
-  // );
-  //   const headerData: TableHeadersInterface = {
-  //     title: "Title",
-  //     authors: "Author",
-  //     year: "Year",
-  //     selectionStatus: "Selection",
-  //     extractionStatus: "Extraction",
-  //     readingPriority: "Reading Priority"
-  // }
+export default function Selection() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
@@ -51,29 +55,18 @@ export default function Selection<
   const [layout, setLayout] = useState<LayoutModel>({
     orientation: "vertical",
   });
-  // console.log("Valor do layout atual:", layout);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
-  const articles: ArticleInterface[] = selectionContext.articles || [];
-
-  // articles = studiesData;
-
-  // if (!studiesData) return <NoStudiesData />;
-
-  // const handleComboBoxChange = (column: string, isChecked: boolean) => {
-  //   setSelectedColumns((prev) => {
-  //     if (isChecked && !prev.includes(column)) {
-  //       return [...prev, column];
-  //     }
-  //     if (!isChecked) {
-  //       return prev.filter((col) => col !== column);
-  //     }
-  //     return prev;
-  //   });
-  // };
+  const articles: ArticleInterface[] = selectionContext.articles
+    .filter(
+      (art): art is ArticleInterface =>
+        "studyReviewId" in art && "selection" in art
+    )
+    .filter((art) => art.selectionStatus === "INCLUDED");
 
   const page: PageLayout = { type: "Selection" };
 
+  // Functions
   const filteredArticles = handleSearchAndFilter(
     searchString,
     selectedStatus,
@@ -143,12 +136,6 @@ export default function Selection<
                   page={"selection"}
                   placeholder="Selection status"
                 />
-                {/* <ComboBox
-                    isDisabled={false}
-                    text="filter options"
-                    options={Object.values(headerData)}
-                    onOptionchange={handleComboBoxChange} 
-                  /> */}
               </Box>
             </Box>
             <Box w="100%">
