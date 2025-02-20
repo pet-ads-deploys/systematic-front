@@ -47,7 +47,6 @@ export default function Extraction() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
-  const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const selectionContext = useContext(StudySelectionContext);
   const [layout, setLayout] = useState<LayoutModel>({
     orientation: "vertical",
@@ -63,10 +62,10 @@ export default function Extraction() {
 
   const page: PageLayout = { type: "Extraction" };
 
+  // Functions
   const filteredArticles = handleSearchAndFilter(
     searchString,
     selectedStatus,
-    selectedColumns,
     articles,
     page
   );
@@ -86,7 +85,7 @@ export default function Extraction() {
             alignItems="center"
             m="1rem 0 2rem 1.5rem"
           >
-            <Header text="Extraction" />
+            <Header text="Selection" />
             <ButtonsLayout
               layout={layout}
               handleDefaultLayout={handleDefaultLayout}

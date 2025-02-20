@@ -31,7 +31,6 @@ import { PageLayout } from "./subcomponents/LayoutFactory";
 
 // Unused imports
 // import ComboBox from "../../../components/Inputs/ComboBox";
-// import StudySelectionArea from "./subcomponents/StudySelectionArea";
 // import DynamicTable from "../../../components/Tables/DynamicTable";
 // import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
 // import { StudyInterface } from "../../../../public/interfaces/IStudy";
@@ -40,7 +39,6 @@ import { PageLayout } from "./subcomponents/LayoutFactory";
 // import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
 // import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
 // import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
-// import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
 
 export interface LayoutModel {
   orientation: "default" | "horizontal" | "vertical";
@@ -50,7 +48,6 @@ export default function Selection() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
-  const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const selectionContext = useContext(StudySelectionContext);
   const [layout, setLayout] = useState<LayoutModel>({
     orientation: "vertical",
@@ -69,7 +66,6 @@ export default function Selection() {
   const filteredArticles = handleSearchAndFilter(
     searchString,
     selectedStatus,
-    selectedColumns,
     articles,
     page
   );
