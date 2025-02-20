@@ -60,9 +60,8 @@ export default function Selection() {
   const articles: ArticleInterface[] = selectionContext.articles
     .filter(
       (art): art is ArticleInterface =>
-        "studyReviewId" in art && "selection" in art
-    )
-    .filter((art) => art.selectionStatus === "INCLUDED");
+        "studyReviewId" in art
+    );
 
   const page: PageLayout = { type: "Selection" };
 
