@@ -57,7 +57,7 @@ export default function Extraction() {
   const articles: ArticleInterface[] = selectionContext.articles
     .filter(
       (art): art is ArticleInterface =>
-        "studyReviewId" in art && "selection" in art
+        "studyReviewId" in art
     )
     .filter((art) => art.selectionStatus === "INCLUDED");
 
