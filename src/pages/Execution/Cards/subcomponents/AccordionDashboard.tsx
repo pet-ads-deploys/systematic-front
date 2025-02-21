@@ -1,4 +1,19 @@
+// External libraries
 import { useContext, useState } from "react";
+
+// Components
+import IdentificationModal from "../../../../components/Modals/IdentificationModal";
+import SessionPrev from "./SessionPrev";
+
+// Hook
+import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
+
+// Context
+import StudySelectionContext, {
+  StudySelectionProvider,
+} from "../../../../components/Context/StudiesSelectionContext";
+
+// Styles
 import { Accordionbtn, accordion } from "../../styles/CardsStyle";
 import {
   Accordion,
@@ -6,7 +21,6 @@ import {
   AccordionButton,
   AccordionIcon,
   AccordionPanel,
-  Flex,
   Text,
   Box,
   Table,
@@ -15,15 +29,9 @@ import {
   Th,
   Tbody,
 } from "@chakra-ui/react";
-import IdentificationModal from "../../../../components/Modals/IdentificationModal";
-import SessionPrev from "./SessionPrev";
-import IAccordionDashBoard from "../../../../../public/interfaces/IAccordionDashboard";
-import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
-import StudySelectionContext, {
-  StudySelectionProvider,
-} from "../../../../components/Context/StudiesSelectionContext";
-// import InspectArticlesModal from "../../../../components/Modals/InspectArticles";
 
+// Types
+import IAccordionDashBoard from "../../../../../public/interfaces/IAccordionDashboard";
 interface actionsModal {
   action: "create" | "update";
 }
@@ -39,6 +47,7 @@ export default function AccordionDashboard({
 
   const selectionContext = useContext(StudySelectionContext);
 
+  // Functions
   const context = {
     invalidEntries: selectionContext?.invalidEntries,
     setInvalidEntries: selectionContext?.setInvalidEntries,
@@ -84,7 +93,7 @@ export default function AccordionDashboard({
           </AccordionButton>
           <AccordionPanel>
             {sessions && sessions.length > 0 ? (
-              <>
+              <Box maxH="10rem" overflowY="auto">
                 <Table>
                   <Thead>
                     <Tr>
@@ -132,13 +141,13 @@ export default function AccordionDashboard({
                     ))}
                   </Tbody>
                 </Table>
-                <Box>
-                  <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
-                </Box>
-              </>
+              </Box>
             ) : (
               <Text>Studies not found</Text>
             )}
+            <Box>
+              <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
+            </Box>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
