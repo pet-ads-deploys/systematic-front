@@ -1,3 +1,17 @@
+// External libraries
+import { useDisclosure } from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
+
+// Components
+import DragAndDrop from "../../Inputs/DragAndDropInput";
+
+// Hook
+import useHandleExportedFiles from "../../../hooks/reviews/useHandleExportedFiles";
+
+// Context
+import StudySelectionContext from "../../Context/StudiesSelectionContext";
+
+// Styles
 import {
   Button,
   Modal,
@@ -15,13 +29,11 @@ import {
   IconButton,
   Flex,
 } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
-// import { SetStateAction, useContext, useEffect } from "react";
-import { useContext, useEffect } from "react";
+
+// Icons
 import { DeleteIcon } from "@chakra-ui/icons";
-import useHandleExportedFiles from "../../../hooks/reviews/useHandleExportedFiles";
-import DragAndDrop from "../../Inputs/DragAndDropInput";
-import StudySelectionContext from "../../Context/StudiesSelectionContext";
+
+// Types
 import { KeyedMutator } from "swr";
 
 interface IdentificationModalProps {
@@ -59,19 +71,22 @@ function IdentificationModal({
     setReferenceFiles,
     sendFilesToServer,
     setSource,
-  } = useHandleExportedFiles({ mutate: mutate, setInvalidEntries: selectionContext.setInvalidEntries });
+  } = useHandleExportedFiles({
+    mutate: mutate,
+    setInvalidEntries: selectionContext.setInvalidEntries,
+  });
 
   useEffect(() => {
     setSource(type);
     onOpen();
   }, []);
 
-  function close() {
+  const handleClose = () => {
     sendFilesToServer();
     reloadArticles();
     show(false);
     onClose();
-  }
+  };
 
   const getCurrentDate = () => {
     const today = new Date();
@@ -86,7 +101,7 @@ function IdentificationModal({
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader color={"#263C56"}>
@@ -98,17 +113,14 @@ function IdentificationModal({
             <FormLabel>Date</FormLabel>
             <Input type="date" defaultValue={getCurrentDate()} />
           </FormControl>
-
           <FormControl mb={4}>
             <FormLabel>Search String</FormLabel>
             <Textarea placeholder="Enter your search string" />
           </FormControl>
-
           <FormControl mb={4}>
             <FormLabel>Comments</FormLabel>
             <Textarea placeholder="Add comments" />
           </FormControl>
-
           {action == "create" && (
             <FormControl mb={4}>
               <FormLabel>Reference Files</FormLabel>
@@ -126,7 +138,6 @@ function IdentificationModal({
                   />
                 </Flex>
               ))}
-
               <DragAndDrop handleFileChange={handleFile} />
             </FormControl>
           )}
