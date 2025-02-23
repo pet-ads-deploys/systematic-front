@@ -1,6 +1,6 @@
 // External libraries
 import { useDisclosure } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 
 // Hook
@@ -69,9 +69,9 @@ function DeleteDatabaseModal({
   const [nameOfDatabase, setNameOfDatabase] = useState<string>("");
   const toast = useToast();
 
-  const handleOpen = () => {
+  useEffect(() => {
     onOpen();
-  };
+  }, []);
 
   const handleClose = () => {
     show(false);
@@ -124,7 +124,7 @@ function DeleteDatabaseModal({
   };
 
   return (
-    <Modal isOpen={handleOpen} onClose={handleClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader color={"#263C56"}>

@@ -106,7 +106,7 @@ function IdentificationModal({
       <ModalContent>
         <ModalHeader color={"#263C56"}>
           {action == "create" ? "New Search Session" : "Update Session"}
-          <ModalCloseButton onClick={close} />
+          <ModalCloseButton onClick={handleClose} />
         </ModalHeader>
         <ModalBody>
           <FormControl mb={4}>
