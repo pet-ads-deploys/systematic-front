@@ -144,7 +144,7 @@ function IdentificationModal({
         </ModalBody>
         <ModalFooter>
           <Button
-            onClick={close}
+            onClick={handleClose}
             backgroundColor={"#263C56"}
             color={"#EBF0F3"}
             boxShadow="sm"

@@ -93,7 +93,7 @@ export default function AccordionDashboard({
           </AccordionButton>
           <AccordionPanel>
             {sessions && sessions.length > 0 ? (
-              <Box maxH="10rem" overflowY="auto">
+              <Box maxH="10rem" overflowY="auto" overflowX="hidden">
                 <Table>
                   <Thead>
                     <Tr>
@@ -145,9 +145,11 @@ export default function AccordionDashboard({
             ) : (
               <Text>Studies not found</Text>
             )}
-            <Box>
-              <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
-            </Box>
+            {sessions.length > 0 && (
+              <Box>
+                <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
+              </Box>
+            )}
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
