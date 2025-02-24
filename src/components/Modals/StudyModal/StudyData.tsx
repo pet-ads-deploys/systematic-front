@@ -1,14 +1,13 @@
-import {
-  // IconButton,
-  Flex,
-  Text,
-  // Center,
-  // useDisclosure,
-} from "@chakra-ui/react";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import { PageLayout } from "../../../pages/Execution/Selection/subcomponents/LayoutFactory";
+// External libraries
+import { Flex } from "@chakra-ui/react";
+
+// Components
 import ArticlePreview from "./ArticlePreview";
 import ArticlesExtrationData from "./ArticleExtractionData";
+
+// Types
+import { StudyInterface } from "../../../../public/interfaces/IStudy";
+import { PageLayout } from "../../../pages/Execution/Selection/subcomponents/LayoutFactory";
 
 interface IStudyDataFiel {
   studyData: StudyInterface;
@@ -20,13 +19,10 @@ export interface ArticlePreviewProps {
 }
 
 export default function StudyDataFiel({ studyData, page }: IStudyDataFiel) {
-  // const isTypeValid: boolean = type === "Selection" || type === "Extraction";
-  // const isTypeSelection: boolean = type === "Selection";
-
   const selectionSX = {
     bg: "white",
-    width: "100%",
-    height: "90%",
+    w: "100%",
+    h: "100%",
     flexDirection: "column",
     alignContent: "center",
     overflowY: "scroll",
