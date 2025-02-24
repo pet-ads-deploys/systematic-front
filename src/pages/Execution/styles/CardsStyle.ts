@@ -14,6 +14,7 @@ export const accordion = {
 export const card = {
   mb: 5,
   h: "fit-content",
+  w: "35rem",
 };
 
 export const conteiner = {
@@ -23,7 +24,6 @@ export const conteiner = {
   h: "6em",
   borderTopLeftRadius: "3px",
   borderTopRightRadius: "3px",
-
 };
 
 export const iconConteiner = {
@@ -32,7 +32,6 @@ export const iconConteiner = {
   alignContent: "center",
   justifyContent: "flex-start",
   w: "50%",
-  
 };
 
 export const testo = {
@@ -61,7 +60,7 @@ export const btnConteiner = {
 };
 
 export const tdSX = {
-  w:"20em",
+  w: "20em",
   textAlign: "center",
   alignSelf: "center",
   whiteSpace: "nowrap",
@@ -73,7 +72,7 @@ export const tdSX = {
 };
 
 export const collapsedTdSX = {
-  w:"28em",
+  w: "28em",
   textAlign: "center",
   alignSelf: "center",
   whiteSpace: "nowrap",
@@ -82,10 +81,10 @@ export const collapsedTdSX = {
   fontWeight: 500,
   cursor: "pointer",
   p: "0.5rem",
-}
+};
 
 export const collapsedSpanText = {
-  w:"inherit",
+  w: "inherit",
   textAlign: "center",
   whiteSpace: "nowrap",
   overflow: "hidden",
@@ -95,12 +94,12 @@ export const collapsedSpanText = {
 };
 
 export const tooltip = {
-  p:"1rem",
-  placement:"right",
-  fontSize:"xs"
-}
+  p: "1rem",
+  placement: "right",
+  fontSize: "xs",
+};
 
 export const chevronIcon = {
   fontsize: "xs",
-  color: "#263C56"
-}
+  color: "#263C56",
+};
