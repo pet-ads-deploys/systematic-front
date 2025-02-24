@@ -1,26 +1,37 @@
-import { useEffect, useState } from "react";
+// External libraries
+import useSWR from "swr";
 import axios from "../interceptor/interceptor";
+
+// Types
+interface HttpResponse {
+  studyReviews: ArticleInterface[];
+}
+
 import ArticleInterface from "../../public/interfaces/ArticleInterface";
 
-const useGetSessionStudies = (sessionId:string) => {
-    const reviewId = localStorage.getItem('systematicReviewId');
-    const token = localStorage.getItem('accessToken');
-    const url = `http://localhost:8080/api/v1/systematic-study/${reviewId}/find-by-search-session/${sessionId}`;
-    const [articles, setArticles] = useState<ArticleInterface[]>([]);
+// Utils
+import getRequestOptions from "../utils/getRequestOptions";
 
-    const options = {
-        headers: { Authorization: `Bearer ${token}` }
+const useGetSessionStudies = (sessionId: string) => {
+  const reviewId = localStorage.getItem("systematicReviewId");
+  const path = `http://localhost:8080/api/v1/systematic-study/${reviewId}/find-by-search-session/${sessionId}`;
+  const options = getRequestOptions();
+
+  const { data, error, isLoading } = useSWR(path, fetchArticlesSession, {
+    revalidateOnFocus: true,
+  });
+
+  async function fetchArticlesSession() {
+    try {
+      const response = await axios.get<HttpResponse>(path, options);
+      return response.data.studyReviews;
+    } catch (error) {
+      console.error("Error fetching articles", error);
+      throw error;
     }
+  }
 
-    useEffect(() => {
-        axios.get(url, options)
-            .then(res => {
-                console.log(res);
-                setArticles(res.data.studyReviews);
-            });
-    }, [])
-
-    return articles;
-}
+  return { articles: data || [], isLoading, error };
+};
 
 export default useGetSessionStudies;
