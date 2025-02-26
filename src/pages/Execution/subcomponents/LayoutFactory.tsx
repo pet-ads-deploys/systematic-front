@@ -1,5 +1,5 @@
 // External libraires
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 // Components
 import StudySelectionArea from "./StudySelectionArea";
@@ -7,7 +7,7 @@ import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTabl
 import ExtractionForm from "../Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
 
 // Icons
-import { TbArticleOff } from "react-icons/tb";
+// import { TbArticleOff } from "react-icons/tb";
 
 // Types
 import { LayoutModel } from "../Selection/Selection";
@@ -34,10 +34,10 @@ export default function LayoutFactory({
         <Flex w="100%" h="100%" gap="2rem">
           {articles && articles.length > 0 ? (
             <>
-              <Box w="58%" h="100%">
+              <Box maxW="60%" h="100%">
                 <ArticlesTable articles={articles || []} />
               </Box>
-              <Box w="40%" h="100%">
+              <Box maxW="40%" h="100%">
                 {articles && articles.length > 0 && (
                   <StudySelectionArea
                     articles={articles || []}
@@ -57,10 +57,10 @@ export default function LayoutFactory({
         <Flex flexDirection="column" w="100%" h="98%" gap="2rem">
           {articles && articles.length > 0 ? (
             <>
-              <Box w="100%" h="50%">
+              <Box w="100%" maxH="52%">
                 <ArticlesTable articles={articles || []} />
               </Box>
-              <Box w="100%" h="48%">
+              <Box w="100%" maxH="48%">
                 {articles && articles.length > 0 && (
                   <StudySelectionArea
                     articles={articles || []}
@@ -87,7 +87,7 @@ export default function LayoutFactory({
         >
           {articles && articles.length > 0 ? (
             <>
-              <Box w="100%" h="56%">
+              <Box w="100%" maxH="60%">
                 {articles && articles.length > 0 && (
                   <StudySelectionArea
                     articles={articles || []}
@@ -96,7 +96,7 @@ export default function LayoutFactory({
                 )}
                 {page.type === "Extraction" && <ExtractionForm />}
               </Box>
-              <Box h="40%" w="100%">
+              <Box maxH="40%" w="100%">
                 <ArticlesTable articles={articles || []} />
               </Box>
             </>

@@ -90,6 +90,8 @@ export default function ExtractionForm() {
       bg="white"
       p="0 1rem"
       borderTop="1rem solid #263C56"
+      mt="2rem"
+      overflowY="auto"
     >
       <HeaderForm text="Formulário: teste" />
       <Box gap="5rem">

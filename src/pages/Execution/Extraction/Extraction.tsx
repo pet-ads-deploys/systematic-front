@@ -75,23 +75,14 @@ export default function Extraction() {
     <AppProvider>
       <StudySelectionProvider>
         <FlexLayout defaultOpen={1} navigationType="Accordion">
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent={"space-evenly"}
-            alignItems={"flex-start"}
-            w="98%"
-            m="1rem"
-          >
+          <Box w="98%" m="1rem" h="fit-content">
             <Box
-              h="fit-content"
-              maxH="97vh"
               w="100%"
-              bg="red"
+              h="100%"
               display="flex"
               flexDirection="column"
               justifyContent="space-between"
-              overflowY="auto"
+              // overflowY="auto"
             >
               <Flex
                 w="100%"
@@ -142,14 +133,12 @@ export default function Extraction() {
                   />
                 </Box>
               </Box>
-              <Box w="100%">
-                <Box sx={conteiner}>
-                  <LayoutFactory
-                    page={{ type: "Extraction" }}
-                    layout={layout}
-                    articles={filteredArticles}
-                  />
-                </Box>
+              <Box w="100%" h="85vh">
+                <LayoutFactory
+                  page={{ type: "Extraction" }}
+                  layout={layout}
+                  articles={filteredArticles}
+                />
               </Box>
             </Box>
           </Box>
