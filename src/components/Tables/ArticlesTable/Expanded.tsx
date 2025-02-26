@@ -94,7 +94,7 @@ export default function Collapsed({
         boxShadow="lg"
         bg="#EBF0F3"
         overflowY={"auto"}
-        maxH="100%"
+        h="100%"
       >
         <Table
           variant="unstyled"

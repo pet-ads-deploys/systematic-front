@@ -1,15 +1,14 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import ButtonsForSelection from "./ButtonsForSelection";
-import StudyDataFiel from "../../../../components/Modals/StudyModal/StudyData";
-import { StudyInterface } from "../../../../../public/interfaces/IStudy";
+import StudyDataFiel from "../../../components/Modals/StudyModal/StudyData";
+import { StudyInterface } from "../../../../public/interfaces/IStudy";
 import { useContext, useEffect } from "react";
-import AppContext from "../../../../components/Context/AppContext";
-import useGetAllReviewArticles from "../../../../hooks/useGetAllReviewArticles";
+import AppContext from "../../../components/Context/AppContext";
 import StudySelectionContext, {
   StudySelectionProvider,
-} from "../../../../components/Context/StudiesSelectionContext";
+} from "../../../components/Context/StudiesSelectionContext";
 import { PageLayout } from "./LayoutFactory";
-import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 
 interface StudySelectionAreaProps {
   articles: ArticleInterface[] | StudyInterface[];
@@ -53,16 +52,16 @@ export default function StudySelectionArea({articles, page }: StudySelectionArea
         direction="column"
         borderRadius="1rem"
         bg="white"
-        mb="20px"
         w="100%"
         h={page.type === "Extraction" ? "80%" : "100%"}
         p="5"
         alignItems={"center"}
+        gap="1rem"
       >
         <Flex justifyContent="center" w="100%">
           <ButtonsForSelection page={page} />
         </Flex>
-        <Box w={"100%"} h="100%">
+        <Box w={"100%"} h="80%">
           {articles && typeof studyIndex === "number" ? (
             <StudyDataFiel
               studyData={articles?.[studyIndex] as StudyInterface}

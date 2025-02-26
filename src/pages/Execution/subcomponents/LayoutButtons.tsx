@@ -5,7 +5,7 @@ import { Button, Flex } from "@chakra-ui/react";
 import { MdHorizontalSplit, MdVerticalSplit } from "react-icons/md";
 
 // Types
-import { LayoutModel } from "../Selection";
+import { LayoutModel } from "../Selection/Selection";
 interface ButtonsLayoutProps {
   layout: LayoutModel;
   handleHorizontalLayout: () => void;

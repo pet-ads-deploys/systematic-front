@@ -7,7 +7,7 @@ import ArticlesExtrationData from "./ArticleExtractionData";
 
 // Types
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import { PageLayout } from "../../../pages/Execution/Selection/subcomponents/LayoutFactory";
+import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
 
 interface IStudyDataFiel {
   studyData: StudyInterface;

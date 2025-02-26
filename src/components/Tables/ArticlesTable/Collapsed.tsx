@@ -44,7 +44,7 @@ export default function Collapsed({
       boxShadow="lg"
       bg="#EBF0F3"
       overflowY="auto"
-      maxH="100%"
+      h="100%"
     >
       <Table variant="unstyled" colorScheme="#263C56" size="md">
         <Thead bg="#EBF0F3" borderRadius="1rem">

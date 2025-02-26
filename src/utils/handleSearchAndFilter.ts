@@ -1,6 +1,6 @@
 // Types
 import ArticleInterface from "../../public/interfaces/ArticleInterface";
-import { PageLayout } from "../pages/Execution/Selection/subcomponents/LayoutFactory";
+import { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
 
 export const handleSearchAndFilter = (
   searchString: string,
