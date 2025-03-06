@@ -20,13 +20,15 @@ import { PageLayout } from "./LayoutFactory";
 import useResetStatus from "../../../hooks/useResetStatus";
 
 interface ButtonsForSelectionProps {
-    page: PageLayout
+  page: PageLayout;
 }
 
-export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
+export default function ButtonsForSelection({
+  page,
+}: ButtonsForSelectionProps) {
   const context = useContext(AppContext);
   const selectionContext = useContext(StudySelectionContext);
-  const {handleResetStatusToUnclassified} = useResetStatus({page});
+  const { handleResetStatusToUnclassified } = useResetStatus({ page });
 
   const isIncluded = selectionContext?.isIncluded;
   const isExcluded = selectionContext?.isExcluded;
@@ -35,39 +37,39 @@ export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
   const criteriosExclusao: string[] = useFetchExclusionCriteria();
   const criteriosInclusao: string[] = useFetchInclusionCriteria();
 
+  const isUniqueArticle = sortedStudies.length == 1 ? true : false;
+
   function ChangeToNext() {
-    if (index < sortedStudies.length - 1) {
-      const newIndex = (index as number) + 1;
-      context?.setSelectionStudyIndex(newIndex);
-      context?.setSelectionStudy((sortedStudies as StudyInterface[])[newIndex]);
-    }
+    const newIndex = (index + 1) % sortedStudies.length;
+    context?.setSelectionStudyIndex(newIndex);
+    context?.setSelectionStudy(sortedStudies[newIndex]);
   }
 
   function ChangeToPrevius() {
-    if (index >= 1) {
-      const newIndex = (index as number) - 1;
-      context?.setSelectionStudyIndex(newIndex);
-      context?.setSelectionStudy((sortedStudies as StudyInterface[])[newIndex]);
-    }
+    const newIndex = (index - 1 + sortedStudies.length) % sortedStudies.length;
+    context?.setSelectionStudyIndex(newIndex);
+    context?.setSelectionStudy(sortedStudies[newIndex]);
   }
 
   if (isExcluded != undefined && isIncluded != undefined)
     return (
       <>
         <Flex sx={conteiner}>
-          <Flex sx={buttonconteiner}>
-            <Button
-              _hover={{
-                bg: "white",
-                color: "black",
-                border: "2px solid black",
-              }}
-              onClick={ChangeToPrevius}
-              sx={button}
-            >
-              <IoIosArrowBack size="1.5rem" /> Back
-            </Button>
-          </Flex>
+          {isUniqueArticle ? null : (
+            <Flex sx={buttonconteiner}>
+              <Button
+                _hover={{
+                  bg: "white",
+                  color: "black",
+                  border: "2px solid black",
+                }}
+                onClick={ChangeToPrevius}
+                sx={button}
+              >
+                <IoIosArrowBack size="1.5rem" /> Back
+              </Button>
+            </Flex>
+          )}
 
           <Flex sx={boxconteiner}>
             <ComboBox
@@ -87,7 +89,7 @@ export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
               bg="#eab308"
               color="white"
               border="2px solid #f6bb42"
-              _hover={{bg:"white", color:"#eab308"}}
+              _hover={{ bg: "white", color: "#eab308" }}
               transition="0.2s ease-in-out"
               boxShadow="md"
               p="1rem"
@@ -98,20 +100,22 @@ export default function ButtonsForSelection({page}:ButtonsForSelectionProps) {
             </Button>
           </Flex>
 
-          <Flex sx={buttonconteiner}>
-            <Button
-              _hover={{
-                bg: "white",
-                color: "black",
-                border: "2px solid black",
-              }}
-              onClick={ChangeToNext}
-              sx={button}
-            >
-              Next
-              <IoIosArrowForward size="1.5rem" />
-            </Button>
-          </Flex>
+          {isUniqueArticle ? null : (
+            <Flex sx={buttonconteiner}>
+              <Button
+                _hover={{
+                  bg: "white",
+                  color: "black",
+                  border: "2px solid black",
+                }}
+                onClick={ChangeToNext}
+                sx={button}
+              >
+                Next
+                <IoIosArrowForward size="1.5rem" />
+              </Button>
+            </Flex>
+          )}
         </Flex>
       </>
     );
