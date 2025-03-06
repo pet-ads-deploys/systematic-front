@@ -1,4 +1,3 @@
-// External libraries
 import React, {
   Dispatch,
   ReactNode,
@@ -8,14 +7,11 @@ import React, {
 } from "react";
 import { KeyedMutator } from "swr";
 
-// Hooks
 import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
 
-// Types
 import { StudyInterface } from "../../../public/interfaces/IStudy";
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
 
-// Types
 export interface InvalidEntry {
   id: string;
   fileName: string;

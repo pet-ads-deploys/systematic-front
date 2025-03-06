@@ -1,7 +1,5 @@
-// Components
 import Sidebar from "../../Sidebar/Sidebar";
 
-// Styles
 import { boxStyles, flexStyles, style } from "./FlexStyle";
 import { Flex, Box } from "@chakra-ui/react";
 

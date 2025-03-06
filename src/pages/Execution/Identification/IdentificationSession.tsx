@@ -1,14 +1,10 @@
-// External libraries
 import { useParams } from "react-router-dom";
 
-// Components
 import Header from "../../../components/ui/Header/Header";
 import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 
-// Hooks
 import useGetSessionStudies from "../../../hooks/useGetSessionStudies";
 
-// Styles
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import { Flex } from "@chakra-ui/react";
 

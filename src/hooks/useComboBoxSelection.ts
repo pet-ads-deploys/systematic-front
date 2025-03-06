@@ -1,15 +1,11 @@
-// External libraries
 import { useContext } from "react";
 
-// Contexts
 import StudySelectionContext from "../components/Context/StudiesSelectionContext";
 import AppContext from "../components/Context/AppContext";
 
-// Hooks
 import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";
 
-// Types
 import { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
 import ArticleInterface from "../../public/interfaces/ArticleInterface";
 import { StudyInterface } from "../../public/interfaces/IStudy";
@@ -29,7 +25,6 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
 
   if (articles && articleIndex) article = articles[articleIndex];
 
-  // Functions
   const handleIncludeItemClick = (isChecked: boolean) => {
     if (setIsIncluded) setIsIncluded(isChecked);
     if (articles && articleIndex) {

@@ -1,12 +1,9 @@
-// External libraries
 import { Button, Flex } from "@chakra-ui/react";
 
-// Icons
 import { MdVerticalSplit } from "react-icons/md";
 import { BsTable } from "react-icons/bs";
 import { PiArticleMediumBold } from "react-icons/pi";
 
-// Types
 import { ViewModel } from "../Selection/Selection";
 
 interface ButtonsLayoutProps {

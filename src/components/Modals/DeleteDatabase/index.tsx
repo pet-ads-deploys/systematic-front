@@ -1,12 +1,9 @@
-// External libraries
 import { useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 
-// Hook
 import UseDeleteSession from "../../../hooks/reviews/useDeleteSession";
 
-// Styles
 import {
   Button,
   Modal,
@@ -26,7 +23,6 @@ import {
 // Icon
 import { IoIosWarning } from "react-icons/io";
 
-// Types
 import { KeyedMutator } from "swr";
 
 interface DeleteDatabaseModalProps {

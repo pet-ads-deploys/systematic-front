@@ -1,15 +1,12 @@
-// External libraries
 import useSWR from "swr";
 import axios from "../interceptor/interceptor";
 
-// Types
 interface HttpResponse {
   studyReviews: ArticleInterface[];
 }
 
 import ArticleInterface from "../../public/interfaces/ArticleInterface";
 
-// Utils
 import getRequestOptions from "../utils/getRequestOptions";
 
 const useGetSessionStudies = (sessionId: string) => {

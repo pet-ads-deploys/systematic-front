@@ -1,11 +1,8 @@
-// External libraries
 import { useContext, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
-// Hooks
 import useInputState from "../../../hooks/useInputState";
 
-// Components
 import Header from "../../../components/ui/Header/Header";
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import InputText from "../../../components/Inputs/InputText";
@@ -13,19 +10,15 @@ import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 import ButtonsLayout from "../subcomponents/LayoutButtons";
 
-// Contexts
 import { AppProvider } from "../../../components/Context/AppContext";
 import StudySelectionContext, {
   StudySelectionProvider,
 } from "../../../components/Context/StudiesSelectionContext";
 
-// Utilities
 import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
 
-// Styles
 import { inputconteiner } from "../styles/executionStyles";
 
-// Types
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
 // import { flex } from "../../NovaRevisao/styles/finalizationStyles";
@@ -61,7 +54,6 @@ export default function Selection() {
 
   const page: PageLayout = { type: "Selection" };
 
-  // Functions
   const filteredArticles = handleSearchAndFilter(
     searchString,
     selectedStatus,

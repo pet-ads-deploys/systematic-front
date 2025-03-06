@@ -1,11 +1,8 @@
-// External libraries
 import { useContext, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
-// Hooks
 import useInputState from "../../../hooks/useInputState";
 
-// Components
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import Header from "../../../components/ui/Header/Header";
 import InputText from "../../../components/Inputs/InputText";
@@ -13,19 +10,15 @@ import SelectInput from "../../../components/Inputs/SelectInput";
 import ButtonsLayout from "../subcomponents/LayoutButtons";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 
-// Contexts
 import { AppProvider } from "../../../components/Context/AppContext";
 import StudySelectionContext, {
   StudySelectionProvider,
 } from "../../../components/Context/StudiesSelectionContext";
 
-// Utilities
 import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
 
-// Styles
 import { inputconteiner } from "../styles/executionStyles";
 
-// Types
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
 import { ViewModel } from "../Selection/Selection";
@@ -57,7 +50,6 @@ export default function Extraction() {
 
   const page: PageLayout = { type: "Extraction" };
 
-  // Functions
   const filteredArticles = handleSearchAndFilter(
     searchString,
     selectedStatus,
@@ -66,10 +58,8 @@ export default function Extraction() {
   );
 
   const handleArticleLayoutChange = () => setLayout("article");
-  const handleTableLayoutChange = () =>
-    setLayout("table");
-  const handleVerticalLayoutChange = () =>
-    setLayout("vertical");
+  const handleTableLayoutChange = () => setLayout("table");
+  const handleVerticalLayoutChange = () => setLayout("vertical");
 
   return (
     <AppProvider>

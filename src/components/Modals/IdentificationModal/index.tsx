@@ -1,17 +1,12 @@
-// External libraries
 import { useDisclosure } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 
-// Components
 import DragAndDrop from "../../Inputs/DragAndDropInput";
 
-// Hook
 import useHandleExportedFiles from "../../../hooks/reviews/useHandleExportedFiles";
 
-// Context
 import StudySelectionContext from "../../Context/StudiesSelectionContext";
 
-// Styles
 import {
   Button,
   Modal,
@@ -30,10 +25,8 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-// Icons
 import { DeleteIcon } from "@chakra-ui/icons";
 
-// Types
 import { KeyedMutator } from "swr";
 
 interface IdentificationModalProps {

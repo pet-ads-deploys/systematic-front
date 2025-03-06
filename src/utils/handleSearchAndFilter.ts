@@ -1,4 +1,3 @@
-// Types
 import ArticleInterface from "../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
 

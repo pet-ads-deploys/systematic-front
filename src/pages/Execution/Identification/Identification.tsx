@@ -1,18 +1,13 @@
-// External libraries
 import { Box } from "@chakra-ui/react";
 
-// Components
 import DataBaseCard from "../Cards/DatabaseCards";
 import Header from "../../../components/ui/Header/Header";
 import FlexLayout from "../../../components/ui/Flex/Flex";
 
-// Context
 import { StudySelectionProvider } from "../../../components/Context/StudiesSelectionContext";
 
-// Hooks
 import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
 
-// Styles
 import { conteiner, dataBaseconteiner } from "../styles/Identification";
 
 export default function Identification() {

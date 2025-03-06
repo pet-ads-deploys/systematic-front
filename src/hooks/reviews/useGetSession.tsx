@@ -1,11 +1,8 @@
-// External libraries
 import useSWR from "swr";
 import Axios from "../../interceptor/interceptor";
 
-// Utils
 import getRequestOptions from "../../utils/getRequestOptions";
 
-// Type
 interface HttpResponse {
   searchSessions: {
     id: string;

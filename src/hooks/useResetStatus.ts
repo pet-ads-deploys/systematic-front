@@ -1,11 +1,8 @@
-// External libraries
 import { useContext } from "react";
 
-// Contexts
 import StudySelectionContext from "../components/Context/StudiesSelectionContext";
 import AppContext from "../components/Context/AppContext";
 
-// Hooks
 import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";
 
@@ -20,7 +17,6 @@ const useResetStatus = ({ page }: ResetButtonProps) => {
   const selectionContext = useContext(StudySelectionContext);
   const appContext = useContext(AppContext);
 
-  // Functions
   const handleResetStatusToUnclassified = () => {
     const articles = selectionContext?.articles;
     const articleIndex = appContext?.selectionStudyIndex;

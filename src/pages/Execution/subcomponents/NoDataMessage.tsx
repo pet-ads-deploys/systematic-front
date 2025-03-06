@@ -1,7 +1,5 @@
-// Styles
 import { Flex, Text } from "@chakra-ui/react";
 
-// Icons
 import { TbArticleOff } from "react-icons/tb";
 
 export default function NoDataMessage() {

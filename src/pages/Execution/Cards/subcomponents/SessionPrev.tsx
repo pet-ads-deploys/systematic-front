@@ -1,25 +1,20 @@
-// External librairies
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-// Components
 import { InvalidEntry } from "../../../../components/Context/StudiesSelectionContext";
 
-// Hook
 import {
   createFileToInvalidEntries,
   downloadFile,
 } from "../../../../hooks/reviews/createFileToInvalidEntries";
 
-// Icons
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Flex, Button, Text, Tr, Td } from "@chakra-ui/react";
 import { FaRegEye } from "react-icons/fa6";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdOutlineSdCardAlert } from "react-icons/md";
 
-// Types
 interface actionsModal {
   action: "create" | "update";
 }
@@ -43,7 +38,6 @@ const SessionPrev = ({
   invalidEntries,
   sessionIndex,
 }: SessionPrevProps) => {
-  // Functions
   const toast = useToast();
 
   const handleToastAlert = () => {
@@ -60,7 +54,10 @@ const SessionPrev = ({
   const getDataCurrent = (): string => {
     const date = new Date(timestamp);
     const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-    const month = date.getMonth() < 9 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+    const month =
+      date.getMonth() < 9
+        ? `0${date.getMonth() + 1}`
+        : `${date.getMonth() + 1}`;
     const year = `${date.getFullYear()}`;
     return `${day}/${month}/${year}`;
   };

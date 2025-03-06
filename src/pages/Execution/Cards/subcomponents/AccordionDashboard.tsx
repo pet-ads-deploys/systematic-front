@@ -1,19 +1,14 @@
-// External libraries
 import { useContext, useState } from "react";
 
-// Components
 import IdentificationModal from "../../../../components/Modals/IdentificationModal";
 import SessionPrev from "./SessionPrev";
 
-// Hook
 import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 
-// Context
 import StudySelectionContext, {
   StudySelectionProvider,
 } from "../../../../components/Context/StudiesSelectionContext";
 
-// Styles
 import { Accordionbtn, accordion } from "../../styles/CardsStyle";
 import {
   Accordion,
@@ -30,7 +25,6 @@ import {
   Tbody,
 } from "@chakra-ui/react";
 
-// Types
 import IAccordionDashBoard from "../../../../../public/interfaces/IAccordionDashboard";
 interface actionsModal {
   action: "create" | "update";
@@ -47,7 +41,6 @@ export default function AccordionDashboard({
 
   const selectionContext = useContext(StudySelectionContext);
 
-  // Functions
   const context = {
     invalidEntries: selectionContext?.invalidEntries,
     setInvalidEntries: selectionContext?.setInvalidEntries,

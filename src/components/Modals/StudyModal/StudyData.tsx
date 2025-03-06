@@ -1,11 +1,8 @@
-// External libraries
 import { Flex } from "@chakra-ui/react";
 
-// Components
 import ArticlePreview from "./ArticlePreview";
 import ArticlesExtrationData from "./ArticleExtractionData";
 
-// Types
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
 

@@ -1,15 +1,11 @@
-// External libraires
 import { Box, Flex } from "@chakra-ui/react";
 
-// Components
 import StudySelectionArea from "./StudySelectionArea";
 import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 import ExtractionForm from "../Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
 
-// Icons
 // import { TbArticleOff } from "react-icons/tb";
 
-// Types
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import NoDataMessage from "./NoDataMessage";
 import { ViewModel } from "../Selection/Selection";

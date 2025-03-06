@@ -1,10 +1,7 @@
-// External libraries
 import { Button } from "@chakra-ui/react";
 
-// Icons
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
-// Types
 interface Props {
   handleToggle: () => void;
   className?: string;
