@@ -10,7 +10,6 @@ export default function FilteredStudies (type: ExcutionFaseEnum): (StudyInterfac
     
     const studies = useFetchStudyData("../../../public/data/NewStudyData.json");
     let filterStudies: StudyInterface[] = [];
-    console.log(filterStudies)
 
     if(studies){
         if (type == ExcutionFaseEnum.SELECTION) 
