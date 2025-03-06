@@ -1,7 +1,7 @@
 import { Box, Heading, Tooltip } from "@chakra-ui/react";
 import { container, header } from "./headerFormStyles";
 import { capitalize } from "../../../../../../utils/CapitalizeText";
-import useFetchTitleOfStudie from "../../../../../../hooks/fetch/useFetchTitleOfStudie";
+// import useFetchTitleOfStudie from "../../../../../../hooks/fetch/useFetchTitleOfStudie";
 
 interface HeaderFormProps {
   text: string;
@@ -13,12 +13,12 @@ export default function HeaderForm({ text }: HeaderFormProps) {
     return text.length <= MAX_VALUE;
   };
 
-  const {title} = useFetchTitleOfStudie();
+  // const {title} = useFetchTitleOfStudie();
  
   return (
     <Box sx={container}>
       <Tooltip label={text} isDisabled={handleDesactiveTooltip(text)} p="1rem">
-        <Heading sx={header}>{capitalize(title)}</Heading>
+        <Heading sx={header}>{capitalize(text)}</Heading>
       </Tooltip>
     </Box>
   );

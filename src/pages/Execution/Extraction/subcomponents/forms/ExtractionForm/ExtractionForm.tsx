@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa";
 import { button } from "./styles.ts";
 
+import { ArticlePreviewProps } from "../../../../../../components/Modals/StudyModal/StudyData.tsx";
+
 export interface Questions {
   code: string;
   description: string;
@@ -23,7 +25,9 @@ export interface Questions {
   systematicStudyId: string | null;
 }
 
-export default function ExtractionForm() {
+
+
+export default function ExtractionForm({studyData}: ArticlePreviewProps) {
   const reviewId = localStorage.getItem("systematicReviewId");
   const navigate = useNavigate();
   const { questions } = useFetchExtractionQuestions();
@@ -85,15 +89,13 @@ export default function ExtractionForm() {
   return (
     <FormControl
       w="100%"
+      height="100%"
       gap="3rem"
       borderRadius="1rem"
       bg="white"
-      p="0 1rem"
-      borderTop="1rem solid #263C56"
-      mt="2rem"
       overflowY="auto"
     >
-      <HeaderForm text="Formulário: teste" />
+      <HeaderForm text={studyData.title} />
       <Box gap="5rem">
         {hasQuestions ? (
           questions?.map((question) => createResponseComponent(question))

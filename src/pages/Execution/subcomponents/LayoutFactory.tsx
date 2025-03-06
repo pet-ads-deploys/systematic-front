@@ -60,7 +60,6 @@ export default function LayoutFactory({
                   articles={articles}
                   page={{ type: page.type }}
                 />
-                {page.type === "Extraction" && <ExtractionForm />}
               </Box>
             </>
           ) : (
@@ -86,7 +85,6 @@ export default function LayoutFactory({
                 articles={articles}
                 page={{ type: page.type }}
               />
-              {page.type === "Extraction" && <ExtractionForm />}
             </Box>
           ) : (
             <NoDataMessage />
