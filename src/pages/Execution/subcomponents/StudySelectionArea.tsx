@@ -9,13 +9,17 @@ import StudySelectionContext, {
 } from "../../../components/Context/StudiesSelectionContext";
 import { PageLayout } from "./LayoutFactory";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import { GrSelect } from "react-icons/gr";
 
 interface StudySelectionAreaProps {
   articles: ArticleInterface[] | StudyInterface[];
-  page: PageLayout
+  page: PageLayout;
 }
 
-export default function StudySelectionArea({articles, page }: StudySelectionAreaProps) {
+export default function StudySelectionArea({
+  articles,
+  page,
+}: StudySelectionAreaProps) {
   const context = useContext(AppContext);
   const selectionContext = useContext(StudySelectionContext);
   if (!selectionContext)
@@ -35,14 +39,26 @@ export default function StudySelectionArea({articles, page }: StudySelectionArea
     return (
       <Flex
         direction="column"
-        bg="gray.600"
+        bg="white"
         borderRadius="1rem"
         w="100%"
+        h="100%"
         mb="20px"
-        p="5"
+        p="6"
         alignItems="center"
+        justifyContent="center"
+        boxShadow="md"
       >
-        <Text color="white">Click on a study on the table</Text>
+        <GrSelect size="3.5rem" color="#263C56" />
+        <Text
+          color="#263C56"
+          fontSize="lg"
+          mt="4"
+          textAlign="center"
+          fontWeight="bold"
+        >
+          Select a study from the list to see a preview of its article.
+        </Text>
       </Flex>
     );
 

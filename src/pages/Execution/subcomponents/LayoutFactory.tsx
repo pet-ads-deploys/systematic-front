@@ -54,16 +54,14 @@ export default function LayoutFactory({
         <Flex w="100%" h="100%" gap="2rem">
           {articles && articles.length > 0 ? (
             <>
-              <Box maxW="58%" h="100%">
+              <Box maxW="60%" h="100%">
                 <ArticlesTable articles={articles || []} />
               </Box>
-              <Box maxW="40%" h="100%">
-                {articles && articles.length > 0 && (
-                  <StudySelectionArea
-                    articles={articles || []}
-                    page={{ type: page.type }}
-                  />
-                )}
+              <Box minW="38%" h="100%">
+                <StudySelectionArea
+                  articles={articles || []}
+                  page={{ type: page.type }}
+                />
                 {page.type === "Extraction" && <ExtractionForm />}
               </Box>
             </>
@@ -83,13 +81,11 @@ export default function LayoutFactory({
           // gap="2rem"
         >
           {articles && articles.length > 0 ? (
-            <Box w="100%" maxH="100%">
-              {articles && articles.length > 0 && (
-                <StudySelectionArea
-                  articles={articles || []}
-                  page={{ type: page.type }}
-                />
-              )}
+            <Box w="100%" minH="100%">
+              <StudySelectionArea
+                articles={articles || []}
+                page={{ type: page.type }}
+              />
               {page.type === "Extraction" && <ExtractionForm />}
             </Box>
           ) : (
