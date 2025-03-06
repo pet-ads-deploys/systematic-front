@@ -2,9 +2,6 @@ import { Box, Flex } from "@chakra-ui/react";
 
 import StudySelectionArea from "./StudySelectionArea";
 import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
-import ExtractionForm from "../Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
-
-// import { TbArticleOff } from "react-icons/tb";
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import NoDataMessage from "./NoDataMessage";

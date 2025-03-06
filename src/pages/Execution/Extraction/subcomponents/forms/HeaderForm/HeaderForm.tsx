@@ -9,7 +9,7 @@ interface HeaderFormProps {
 
 export default function HeaderForm({ text }: HeaderFormProps) {
   const handleDesactiveTooltip = (text: string) => {
-    const MAX_VALUE: number = 100;
+    const MAX_VALUE: number = 30;
     return text.length <= MAX_VALUE;
   };
 
