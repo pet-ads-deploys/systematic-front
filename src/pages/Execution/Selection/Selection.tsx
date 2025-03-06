@@ -41,18 +41,18 @@ import { PageLayout } from "../subcomponents/LayoutFactory";
 // import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
 // import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 
-export interface LayoutModel {
-  orientation: "default" | "horizontal" | "vertical";
-}
+// export interface LayoutModel {
+//   orientation: "article" | "table" | "vertical";
+// }
+
+export type ViewModel = "table" | "vertical" | "article";
 
 export default function Selection() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
   const selectionContext = useContext(StudySelectionContext);
-  const [layout, setLayout] = useState<LayoutModel>({
-    orientation: "vertical",
-  });
+  const [layout, setLayout] = useState<ViewModel>("vertical");
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
   const articles: ArticleInterface[] = selectionContext.articles.filter(
@@ -69,9 +69,9 @@ export default function Selection() {
     page
   );
 
-  const handleDefaultLayout = () => setLayout({ orientation: "default" });
-  const handleHorizontalLayout = () => setLayout({ orientation: "horizontal" });
-  const handleVerticalLayout = () => setLayout({ orientation: "vertical" });
+  const handleArticleLayoutChange = () => setLayout("article");
+  const handleTableLayoutChange = () => setLayout("table");
+  const handleVerticalLayoutChange = () => setLayout("vertical");
 
   return (
     <AppProvider>
@@ -96,9 +96,9 @@ export default function Selection() {
                 <Header text="Selection" />
                 <ButtonsLayout
                   layout={layout}
-                  handleDefaultLayout={handleDefaultLayout}
-                  handleHorizontalLayout={handleHorizontalLayout}
-                  handleVerticalLayout={handleVerticalLayout}
+                  handleArticleLayoutChange={handleArticleLayoutChange}
+                  handleTableLayoutChange={handleTableLayoutChange}
+                  handleVerticalLayoutChange={handleVerticalLayoutChange}
                 />
               </Flex>
               <Box sx={inputconteiner}>

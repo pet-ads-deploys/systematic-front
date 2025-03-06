@@ -2,21 +2,24 @@
 import { Button, Flex } from "@chakra-ui/react";
 
 // Icons
-import { MdHorizontalSplit, MdVerticalSplit } from "react-icons/md";
+import { MdVerticalSplit } from "react-icons/md";
+import { BsTable } from "react-icons/bs";
+import { PiArticleMediumBold } from "react-icons/pi";
 
 // Types
-import { LayoutModel } from "../Selection/Selection";
+import { ViewModel } from "../Selection/Selection";
+
 interface ButtonsLayoutProps {
-  layout: LayoutModel;
-  handleHorizontalLayout: () => void;
-  handleVerticalLayout: () => void;
-  handleDefaultLayout: () => void;
+  layout: ViewModel;
+  handleTableLayoutChange: () => void;
+  handleVerticalLayoutChange: () => void;
+  handleArticleLayoutChange: () => void;
 }
 
 export default function ButtonsLayout({
-  handleDefaultLayout,
-  handleHorizontalLayout,
-  handleVerticalLayout,
+  handleArticleLayoutChange,
+  handleTableLayoutChange,
+  handleVerticalLayoutChange,
   layout,
 }: ButtonsLayoutProps) {
   const buttonLayout = {
@@ -29,33 +32,33 @@ export default function ButtonsLayout({
   return (
     <Flex w="100%" justifyContent="end" alignItems="center" gap="1.5rem">
       <Button
-        onClick={handleHorizontalLayout}
-        bg={layout.orientation === "horizontal" ? "#263C56" : "white"}
+        onClick={handleVerticalLayoutChange}
+        bg={layout == "vertical" ? "#263C56" : "white"}
+        sx={buttonLayout}
+      >
+        <BsTable
+          color={layout == "vertical" ? "white" : "#263C56"}
+          size="2rem"
+        />
+      </Button>
+      <Button
+        onClick={handleTableLayoutChange}
+        bg={layout == "table" ? "#263C56" : "white"}
         sx={buttonLayout}
       >
         <MdVerticalSplit
-          color={layout.orientation === "horizontal" ? "white" : "#263C56"}
+          color={layout == "table" ? "white" : "#263C56"}
           size="2rem"
         />
       </Button>
       <Button
-        onClick={handleVerticalLayout}
-        bg={layout.orientation === "vertical" ? "#263C56" : "white"}
+        onClick={handleArticleLayoutChange}
+        bg={layout == "article" ? "#263C56" : "white"}
         sx={buttonLayout}
+        // transform="rotate(0.5turn)"
       >
-        <MdHorizontalSplit
-          color={layout.orientation === "vertical" ? "white" : "#263C56"}
-          size="2rem"
-        />
-      </Button>
-      <Button
-        onClick={handleDefaultLayout}
-        bg={layout.orientation === "default" ? "#263C56" : "white"}
-        sx={buttonLayout}
-        transform="rotate(0.5turn)"
-      >
-        <MdHorizontalSplit
-          color={layout.orientation === "default" ? "white" : "#263C56"}
+        <PiArticleMediumBold
+          color={layout == "article" ? "white" : "#263C56"}
           size="2rem"
         />
       </Button>
