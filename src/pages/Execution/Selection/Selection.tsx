@@ -132,6 +132,7 @@ export default function Selection() {
                   page={{ type: "Selection" }}
                   layout={layout}
                   articles={filteredArticles}
+                  isLoading={selectionContext.isLoading}
                 />
               </Box>
             </Box>

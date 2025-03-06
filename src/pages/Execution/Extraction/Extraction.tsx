@@ -128,6 +128,7 @@ export default function Extraction() {
                   page={{ type: "Extraction" }}
                   layout={layout}
                   articles={filteredArticles}
+                  isLoading={selectionContext.isLoading}
                 />
               </Box>
             </Box>
