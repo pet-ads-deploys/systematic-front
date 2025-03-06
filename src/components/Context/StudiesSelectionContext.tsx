@@ -27,8 +27,10 @@ interface AppContextType {
   articles: ArticleInterface[] | StudyInterface[] | [];
   reloadArticles: KeyedMutator<ArticleInterface[] | StudyInterface[] | []>;
   reload: boolean;
+  setReload: Dispatch<SetStateAction<boolean>>
   invalidEntries: InvalidEntry[];
   setInvalidEntries: Dispatch<SetStateAction<InvalidEntry[]>>;
+  isLoading: boolean;
 }
 
 const StudySelectionContext = createContext<AppContextType | undefined>(
@@ -47,7 +49,7 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
   const [isExcluded, setIsExcluded] = useState(false);
   const [invalidEntries, setInvalidEntries] = useState<InvalidEntry[]>([]);
 
-  const { articles, mutate } = useGetAllReviewArticles();
+  const { articles, mutate, isLoading } = useGetAllReviewArticles();
 
   return (
     <StudySelectionContext.Provider
@@ -59,8 +61,10 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
         articles,
         reloadArticles: mutate,
         reload,
+        setReload,
         invalidEntries,
         setInvalidEntries,
+        isLoading,
       }}
     >
       {children}
