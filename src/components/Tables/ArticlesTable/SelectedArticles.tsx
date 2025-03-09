@@ -21,9 +21,12 @@ export default function SelectedArticles({
   const [listArticles, setListArticles] = useState<
     { id: number; title: string }[]
   >([]);
-  
-    console.log("artigos selecionados que setão vindo aqui na tabela: ", articles)
-    
+
+  console.log(
+    "artigos selecionados que setão vindo aqui na tabela: ",
+    articles
+  );
+
   useEffect(() => {
     const mappedArticles = Object.values(articles).map(({ id, title }) => ({
       id,
@@ -37,7 +40,6 @@ export default function SelectedArticles({
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th></Th>
             <Th>Id</Th>
             <Th>Título</Th>
           </Tr>

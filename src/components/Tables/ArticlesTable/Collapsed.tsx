@@ -113,9 +113,14 @@ export default function Collapsed({
               >
                 <Td textAlign="center" w="5%">
                   <Checkbox
-                    isChecked={!!studyContext?.selectedArticles[e.studyReviewId]}
+                    isChecked={
+                      !!studyContext?.selectedArticles[e.studyReviewId]
+                    }
                     onChange={() =>
-                      studyContext?.toggleArticlesSelection(e.studyReviewId, e.title)
+                      studyContext?.toggleArticlesSelection(
+                        e.studyReviewId,
+                        e.title
+                      )
                     }
                     sx={{
                       borderColor: "#263C56",

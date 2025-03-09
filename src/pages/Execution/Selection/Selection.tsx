@@ -19,19 +19,6 @@ import { inputconteiner } from "../styles/executionStyles";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
 import SelectedArticles from "../../../components/Tables/ArticlesTable/SelectedArticles";
-// import SelectedArticles from "../../../components/Tables/ArticlesTable/SelectedArticles";
-// import SelectedArticlesContext, { SelectedArticlesProvider } from "../../../components/Context/SelectedArticlesContext";
-
-// Unused imports
-// import ComboBox from "../../../components/Inputs/ComboBox";
-// import DynamicTable from "../../../components/Tables/DynamicTable";
-// import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
-// import { StudyInterface } from "../../../../public/interfaces/IStudy";
-// import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
-// import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
-// import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
-// import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
-// import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 
 export type ViewModel = "table" | "vertical" | "article";
 
