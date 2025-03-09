@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
 import useInputState from "../../../hooks/useInputState";
@@ -21,7 +21,9 @@ import { inputconteiner } from "../styles/executionStyles";
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
-// import { flex } from "../../NovaRevisao/styles/finalizationStyles";
+import SelectedArticles from "../../../components/Tables/ArticlesTable/SelectedArticles";
+// import SelectedArticles from "../../../components/Tables/ArticlesTable/SelectedArticles";
+// import SelectedArticlesContext, { SelectedArticlesProvider } from "../../../components/Context/SelectedArticlesContext";
 
 // Unused imports
 // import ComboBox from "../../../components/Inputs/ComboBox";
@@ -34,10 +36,6 @@ import { PageLayout } from "../subcomponents/LayoutFactory";
 // import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
 // import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 
-// export interface LayoutModel {
-//   orientation: "article" | "table" | "vertical";
-// }
-
 export type ViewModel = "table" | "vertical" | "article";
 
 export default function Selection() {
@@ -45,6 +43,12 @@ export default function Selection() {
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
   const selectionContext = useContext(StudySelectionContext);
+
+  useEffect(() => {
+    console.log("context", selectionContext?.selectedArticles);
+  }, [selectionContext])
+
+
   const [layout, setLayout] = useState<ViewModel>("vertical");
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
@@ -65,6 +69,18 @@ export default function Selection() {
   const handleTableLayoutChange = () => setLayout("table");
   const handleVerticalLayoutChange = () => setLayout("vertical");
 
+  const renderSelectedArticlesTable = () => {
+    if (
+      !(
+        selectionContext &&
+        selectionContext.selectedArticles &&
+        Object.entries(selectionContext.selectedArticles).length > 1
+      )
+    )
+      return null;
+    return <SelectedArticles articles={selectionContext.selectedArticles} />;
+  };
+
   return (
     <AppProvider>
       <StudySelectionProvider>
@@ -76,7 +92,6 @@ export default function Selection() {
               display="flex"
               flexDirection="column"
               justifyContent="space-between"
-              // overflowY="auto"
             >
               <Flex
                 w="100%"
@@ -128,6 +143,7 @@ export default function Selection() {
                 </Box>
               </Box>
               <Box w="100%" h="82.5vh">
+                {renderSelectedArticlesTable()}
                 <LayoutFactory
                   page={{ type: "Selection" }}
                   layout={layout}
