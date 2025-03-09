@@ -10,10 +10,7 @@ import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 import ButtonsLayout from "../subcomponents/LayoutButtons";
 
-import { AppProvider } from "../../../components/Context/AppContext";
-import StudySelectionContext, {
-  StudySelectionProvider,
-} from "../../../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
 
 import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
 
@@ -46,8 +43,7 @@ export default function Selection() {
 
   useEffect(() => {
     console.log("context", selectionContext?.selectedArticles);
-  }, [selectionContext])
-
+  }, [selectionContext]);
 
   const [layout, setLayout] = useState<ViewModel>("vertical");
 
@@ -82,79 +78,65 @@ export default function Selection() {
   };
 
   return (
-    <AppProvider>
-      <StudySelectionProvider>
-        <FlexLayout defaultOpen={1} navigationType="Accordion">
-          <Box w="98%" m="1rem" h="fit-content">
+    <FlexLayout defaultOpen={1} navigationType="Accordion">
+      <Box w="98%" m="1rem" h="fit-content">
+        <Box
+          w="100%"
+          h="100%"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+        >
+          <Flex
+            w="100%"
+            h="2.5rem"
+            justifyContent="space-between"
+            alignItems="center"
+            mb="2rem"
+          >
+            <Header text="Selection" />
+            <ButtonsLayout
+              layout={layout}
+              handleArticleLayoutChange={handleArticleLayoutChange}
+              handleTableLayoutChange={handleTableLayoutChange}
+              handleVerticalLayoutChange={handleVerticalLayoutChange}
+            />
+          </Flex>
+          <Box sx={inputconteiner}>
+            <InputText
+              type="search"
+              placeholder="Insert article atribute"
+              nome="search"
+              onChange={(e) => setSearchString(e.target.value)}
+              value={searchString}
+            />
             <Box
-              w="100%"
-              h="100%"
               display="flex"
-              flexDirection="column"
+              gap="1rem"
               justifyContent="space-between"
+              alignItems="center"
             >
-              <Flex
-                w="100%"
-                h="2.5rem"
-                justifyContent="space-between"
-                alignItems="center"
-                mb="2rem"
-              >
-                <Header text="Selection" />
-                <ButtonsLayout
-                  layout={layout}
-                  handleArticleLayoutChange={handleArticleLayoutChange}
-                  handleTableLayoutChange={handleTableLayoutChange}
-                  handleVerticalLayoutChange={handleVerticalLayoutChange}
-                />
-              </Flex>
-              <Box sx={inputconteiner}>
-                <InputText
-                  type="search"
-                  placeholder="Insert article atribute"
-                  nome="search"
-                  onChange={(e) => setSearchString(e.target.value)}
-                  value={searchString}
-                />
-                <Box
-                  display="flex"
-                  gap="1rem"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <SelectInput
-                    names={[
-                      "INCLUDED",
-                      "DUPLICATED",
-                      "EXCLUDED",
-                      "UNCLASSIFIED",
-                    ]}
-                    values={[
-                      "INCLUDED",
-                      "DUPLICATED",
-                      "EXCLUDED",
-                      "UNCLASSIFIED",
-                    ]}
-                    onSelect={(value) => handleSelectChange(value)}
-                    selectedValue={selectedStatus}
-                    page={"selection"}
-                    placeholder="Selection status"
-                  />
-                </Box>
-              </Box>
-              <Box w="100%" h="82.5vh">
-                {renderSelectedArticlesTable()}
-                <LayoutFactory
-                  page={{ type: "Selection" }}
-                  layout={layout}
-                  articles={filteredArticles}
-                  isLoading={selectionContext.isLoading}
-                />
-              </Box>
+              <SelectInput
+                names={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
+                values={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
+                onSelect={(value) => handleSelectChange(value)}
+                selectedValue={selectedStatus}
+                page={"selection"}
+                placeholder="Selection status"
+              />
             </Box>
           </Box>
-        </FlexLayout>
-      </StudySelectionProvider>
-    </AppProvider>
+          <Box w="100%" h="82.5vh">
+            {renderSelectedArticlesTable()}
+            <LayoutFactory
+              page={{ type: "Selection" }}
+              layout={layout}
+              articles={filteredArticles}
+              isLoading={selectionContext.isLoading}
+            />
+          </Box>
+        </Box>
+      </Box>
+    </FlexLayout>
   );
 }
