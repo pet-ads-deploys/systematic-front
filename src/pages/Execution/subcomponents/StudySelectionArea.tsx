@@ -2,14 +2,13 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import ButtonsForSelection from "./ButtonsForSelection";
 import StudyDataFiel from "../../../components/Modals/StudyModal/StudyData";
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import AppContext from "../../../components/Context/AppContext";
-import StudySelectionContext, {
-  StudySelectionProvider,
-} from "../../../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
 import { PageLayout } from "./LayoutFactory";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { GrSelect } from "react-icons/gr";
+import SelectedArticles from "../../../components/Tables/ArticlesTable/SelectedArticles";
 
 interface StudySelectionAreaProps {
   articles: ArticleInterface[] | StudyInterface[];
@@ -28,9 +27,11 @@ export default function StudySelectionArea({
   const setSelectionStudies = context?.setSelectionStudies;
   const studyIndex = context?.selectionStudyIndex;
 
-  useEffect(() => {
-    console.log(studyIndex);
-  }, [studyIndex]);
+  const verifySelectedArticles =
+    selectionContext &&
+    selectionContext.selectedArticles &&
+    Object.entries(selectionContext.selectedArticles).length > 1;
+
 
   if (setSelectionStudies && articles)
     setSelectionStudies(articles as StudyInterface[]);
@@ -63,29 +64,33 @@ export default function StudySelectionArea({
     );
 
   return (
-    <StudySelectionProvider>
-      <Flex
-        direction="column"
-        borderRadius="1rem"
-        bg="white"
-        w="100%"
-        h={page.type === "Extraction" ? "80%" : "100%"}
-        p="5"
-        alignItems={"center"}
-        gap="1rem"
-      >
-        <Flex justifyContent="center" w="100%">
-          <ButtonsForSelection page={page} />
-        </Flex>
-        <Box w={"100%"} h="80%">
-          {articles && typeof studyIndex === "number" ? (
-            <StudyDataFiel
-              studyData={articles?.[studyIndex] as StudyInterface}
-              page={page}
-            />
-          ) : null}
-        </Box>
-      </Flex>
-    </StudySelectionProvider>
+    <Flex
+      direction="column"
+      borderRadius="1rem"
+      bg="white"
+      w="100%"
+      h={page.type === "Extraction" ? "80%" : "100%"}
+      p="5"
+      alignItems={"center"}
+      gap="1rem"
+    >
+      {verifySelectedArticles ? (
+        <SelectedArticles articles={selectionContext.selectedArticles} />
+      ) : (
+        <>
+          <Flex justifyContent="center" w="100%">
+            <ButtonsForSelection page={page} />
+          </Flex>
+          <Box w={"100%"} h="80%">
+            {articles && typeof studyIndex === "number" ? (
+              <StudyDataFiel
+                studyData={articles?.[studyIndex] as StudyInterface}
+                page={page}
+              />
+            ) : null}
+          </Box>
+        </>
+      )}
+    </Flex>
   );
 }

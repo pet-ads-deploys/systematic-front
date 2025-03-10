@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
 import useInputState from "../../../hooks/useInputState";
@@ -18,7 +18,6 @@ import { inputconteiner } from "../styles/executionStyles";
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
-import SelectedArticles from "../../../components/Tables/ArticlesTable/SelectedArticles";
 
 export type ViewModel = "table" | "vertical" | "article";
 
@@ -27,10 +26,6 @@ export default function Selection() {
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
   const selectionContext = useContext(StudySelectionContext);
-
-  useEffect(() => {
-    console.log("context", selectionContext?.selectedArticles);
-  }, [selectionContext]);
 
   const [layout, setLayout] = useState<ViewModel>("vertical");
 
@@ -51,18 +46,6 @@ export default function Selection() {
   const handleArticleLayoutChange = () => setLayout("article");
   const handleTableLayoutChange = () => setLayout("table");
   const handleVerticalLayoutChange = () => setLayout("vertical");
-
-  const renderSelectedArticlesTable = () => {
-    if (
-      !(
-        selectionContext &&
-        selectionContext.selectedArticles &&
-        Object.entries(selectionContext.selectedArticles).length > 1
-      )
-    )
-      return null;
-    return <SelectedArticles articles={selectionContext.selectedArticles} />;
-  };
 
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">
@@ -114,7 +97,6 @@ export default function Selection() {
             </Box>
           </Box>
           <Box w="100%" h="82.5vh">
-            {renderSelectedArticlesTable()}
             <LayoutFactory
               page={{ type: "Selection" }}
               layout={layout}

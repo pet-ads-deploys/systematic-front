@@ -8,9 +8,11 @@ import {
   Thead,
   Tr,
   Checkbox,
+  Tooltip,
 } from "@chakra-ui/react";
 
 import { SelectedArticlesProps } from "../../../hooks/tables/useSelectedArticles";
+import { tooltip } from "../../../pages/Execution/styles/CardsStyle";
 
 interface SelectArticlesTableProps {
   articles: Record<number, SelectedArticlesProps>;
@@ -57,22 +59,16 @@ export default function SelectedArticles({
 
   return (
     <TableContainer
-      w="90%"
-      h="20%"
-      borderRadius="1rem"
-      boxShadow="lg"
-      bg="#EBF0F3"
+      w="100%"
+      h="100%"
+      bg="white"
       overflowY="auto"
+      overflowX="hidden"
     >
-      <Table variant="unstyled" colorScheme="#263C56" size="md" boxShadow="md">
+      <Table variant="unstyled" colorScheme="#263C56" size="md">
         <Thead>
           <Tr>
-            <Th
-              textAlign="center"
-              color="#263C56"
-              fontSize="larger"
-              w="5%"
-            ></Th>
+            <Th textAlign="center" color="#263C56" fontSize="larger"></Th>
             <Th
               textAlign="center"
               color="#263C56"
@@ -80,7 +76,7 @@ export default function SelectedArticles({
               p="2rem 2rem 1rem 0"
               textTransform="capitalize"
               borderBottom="3px solid #C9D9E5"
-              w="10%"
+              w="15%"
               cursor="pointer"
             >
               ID
@@ -92,7 +88,7 @@ export default function SelectedArticles({
               p="2rem 2rem 1rem 0"
               textTransform="capitalize"
               borderBottom="3px solid #C9D9E5"
-              w="70%"
+              w="80%"
               cursor="pointer"
             >
               Título
@@ -107,9 +103,9 @@ export default function SelectedArticles({
             return (
               <Tr
                 key={art.id}
-                bg={isFirst ? "#A8E6A2" : isDeleted ? "#F5B7B1" : "transparent"} 
+                bg={isFirst ? "#A8E6A2" : isDeleted ? "#F5B7B1" : "transparent"}
               >
-                <Td>
+                <Td w="5%">
                   <Checkbox
                     isChecked={isDeleted}
                     onChange={() => handleCheckboxChange(art.id)}
@@ -122,8 +118,26 @@ export default function SelectedArticles({
                     }}
                   />
                 </Td>
-                <Td>{art.id}</Td>
-                <Td>{art.title}</Td>
+                <Td>
+                  <Tooltip
+                    borderRadius=".5rem"
+                    sx={tooltip}
+                    label={art.id.toString()}
+                    hasArrow
+                  >
+                    {String(art.id).padStart(5, "0")}
+                  </Tooltip>
+                </Td>
+                <Td>
+                  <Tooltip
+                    borderRadius=".5rem"
+                    sx={tooltip}
+                    label={art.title.toString()}
+                    hasArrow
+                  >
+                    {art.title}
+                  </Tooltip>
+                </Td>
               </Tr>
             );
           })}
