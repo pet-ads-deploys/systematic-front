@@ -13,6 +13,7 @@ import {
 
 import { SelectedArticlesProps } from "../../../hooks/tables/useSelectedArticles";
 import { tooltip } from "../../../pages/Execution/styles/CardsStyle";
+import SelectedArticlesButton from "../../../pages/Execution/subcomponents/SelectedArticlesButton";
 
 interface SelectArticlesTableProps {
   articles: Record<number, SelectedArticlesProps>;
@@ -58,91 +59,96 @@ export default function SelectedArticles({
   };
 
   return (
-    <TableContainer
-      w="100%"
-      h="100%"
-      bg="white"
-      overflowY="auto"
-      overflowX="hidden"
-    >
-      <Table variant="unstyled" colorScheme="#263C56" size="md">
-        <Thead>
-          <Tr>
-            <Th textAlign="center" color="#263C56" fontSize="larger"></Th>
-            <Th
-              textAlign="center"
-              color="#263C56"
-              fontSize="larger"
-              p="2rem 2rem 1rem 0"
-              textTransform="capitalize"
-              borderBottom="3px solid #C9D9E5"
-              w="15%"
-              cursor="pointer"
-            >
-              ID
-            </Th>
-            <Th
-              textAlign="center"
-              color="#263C56"
-              fontSize="larger"
-              p="2rem 2rem 1rem 0"
-              textTransform="capitalize"
-              borderBottom="3px solid #C9D9E5"
-              w="80%"
-              cursor="pointer"
-            >
-              Título
-            </Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {listArticles.map((art) => {
-            const isFirst = firstSelected === art.id;
-            const isDeleted = deletedArticles.includes(art.id);
-
-            return (
-              <Tr
-                key={art.id}
-                bg={isFirst ? "#A8E6A2" : isDeleted ? "#F5B7B1" : "transparent"}
+    <>
+      <SelectedArticlesButton/>
+      <TableContainer
+        w="100%"
+        h="100%"
+        bg="white"
+        overflowY="auto"
+        overflowX="hidden"
+      >
+        <Table variant="unstyled" colorScheme="#263C56" size="md">
+          <Thead>
+            <Tr>
+              <Th textAlign="center" color="#263C56" fontSize="larger"></Th>
+              <Th
+                textAlign="center"
+                color="#263C56"
+                fontSize="larger"
+                p="2rem 2rem 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
+                w="15%"
+                cursor="pointer"
               >
-                <Td w="5%">
-                  <Checkbox
-                    isChecked={isDeleted}
-                    onChange={() => handleCheckboxChange(art.id)}
-                    sx={{
-                      borderColor: "#263C56",
-                      _checked: {
-                        bg: "#263C56",
+                ID
+              </Th>
+              <Th
+                textAlign="center"
+                color="#263C56"
+                fontSize="larger"
+                p="2rem 2rem 1rem 0"
+                textTransform="capitalize"
+                borderBottom="3px solid #C9D9E5"
+                w="80%"
+                cursor="pointer"
+              >
+                Título
+              </Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {listArticles.map((art) => {
+              const isFirst = firstSelected === art.id;
+              const isDeleted = deletedArticles.includes(art.id);
+
+              return (
+                <Tr
+                  key={art.id}
+                  bg={
+                    isFirst ? "#A8E6A2" : isDeleted ? "#F5B7B1" : "transparent"
+                  }
+                >
+                  <Td w="5%">
+                    <Checkbox
+                      isChecked={isDeleted}
+                      onChange={() => handleCheckboxChange(art.id)}
+                      sx={{
                         borderColor: "#263C56",
-                      },
-                    }}
-                  />
-                </Td>
-                <Td>
-                  <Tooltip
-                    borderRadius=".5rem"
-                    sx={tooltip}
-                    label={art.id.toString()}
-                    hasArrow
-                  >
-                    {String(art.id).padStart(5, "0")}
-                  </Tooltip>
-                </Td>
-                <Td>
-                  <Tooltip
-                    borderRadius=".5rem"
-                    sx={tooltip}
-                    label={art.title.toString()}
-                    hasArrow
-                  >
-                    {art.title}
-                  </Tooltip>
-                </Td>
-              </Tr>
-            );
-          })}
-        </Tbody>
-      </Table>
-    </TableContainer>
+                        _checked: {
+                          bg: "#263C56",
+                          borderColor: "#263C56",
+                        },
+                      }}
+                    />
+                  </Td>
+                  <Td>
+                    <Tooltip
+                      borderRadius=".5rem"
+                      sx={tooltip}
+                      label={art.id.toString()}
+                      hasArrow
+                    >
+                      {String(art.id).padStart(5, "0")}
+                    </Tooltip>
+                  </Td>
+                  <Td>
+                    <Tooltip
+                      borderRadius=".5rem"
+                      sx={tooltip}
+                      label={art.title.toString()}
+                      hasArrow
+                    >
+                      {art.title}
+                    </Tooltip>
+                  </Td>
+                </Tr>
+              );
+            })}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
