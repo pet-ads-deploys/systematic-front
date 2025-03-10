@@ -11,6 +11,7 @@ import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
 
 import { StudyInterface } from "../../../public/interfaces/IStudy";
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
+import useSelectedArticles from "../../hooks/tables/useSelectedArticles";
 
 export interface InvalidEntry {
   id: string;
@@ -27,10 +28,15 @@ interface AppContextType {
   articles: ArticleInterface[] | StudyInterface[] | [];
   reloadArticles: KeyedMutator<ArticleInterface[] | StudyInterface[] | []>;
   reload: boolean;
-  setReload: Dispatch<SetStateAction<boolean>>
+  setReload: Dispatch<SetStateAction<boolean>>;
   invalidEntries: InvalidEntry[];
   setInvalidEntries: Dispatch<SetStateAction<InvalidEntry[]>>;
   isLoading: boolean;
+  selectedArticles: Record<
+    number,
+    { id: number; title: string; isChecked: boolean }
+  >;
+  toggleArticlesSelection: (id: number, tittle: string) => void;
 }
 
 const StudySelectionContext = createContext<AppContextType | undefined>(
@@ -51,6 +57,11 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
 
   const { articles, mutate, isLoading } = useGetAllReviewArticles();
 
+  const { selectedArticles, toggleArticlesSelection } = useSelectedArticles();
+
+  console.log("array de artigos selecionados dentro do contexto", selectedArticles);
+
+
   return (
     <StudySelectionContext.Provider
       value={{
@@ -65,6 +76,8 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
         invalidEntries,
         setInvalidEntries,
         isLoading,
+        selectedArticles,
+        toggleArticlesSelection,
       }}
     >
       {children}

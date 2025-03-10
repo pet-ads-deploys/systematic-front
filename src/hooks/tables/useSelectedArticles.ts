@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-interface SelectedArticlesProps {
+export interface SelectedArticlesProps {
   id:  number;
   isChecked: boolean;
   title: string;

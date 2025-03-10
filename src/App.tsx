@@ -36,28 +36,81 @@ function App() {
           <StudySelectionProvider>
             <Routes>
               <Route path="/" element={<Homepage />} />
-              <Route path="/landing" element={<ProtectedRoute element={<LandingPage />} />} />
-              <Route path="/test" element={<ProtectedRoute element={<TestPage />} />} />
-              <Route path="/user" element={<ProtectedRoute element={<UserArea />} />} />
-              <Route path="/collaborators" element={<ProtectedRoute element={<CollaboratorsPage />} />} />
+              <Route
+                path="/landing"
+                element={<ProtectedRoute element={<LandingPage />} />}
+              />
+              <Route
+                path="/test"
+                element={<ProtectedRoute element={<TestPage />} />}
+              />
+              <Route
+                path="/user"
+                element={<ProtectedRoute element={<UserArea />} />}
+              />
+              <Route
+                path="/collaborators"
+                element={<ProtectedRoute element={<CollaboratorsPage />} />}
+              />
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/serverError" element={<ServerError />} />
 
-              <Route path="/newReview" element={<ProtectedRoute element={<NovaRevisao />} />} />
-                <Route path="/newReview/protocol/:id" element={<ProtectedRoute element={<Protocol />} />} />
-                <Route path="/newReview/protocolpartTwo/:id" element={<ProtectedRoute element={<ProtocolPartTwo />} />} />
-                <Route path="/newReview/protocolpartThree/:id" element={<ProtectedRoute element={<ProtocolPartThree />} />} />
-                <Route path="/newReview/identification" element={<ProtectedRoute element={<Identification />} />} />
-                <Route path="/newReview/identification/:session" element={<IdentificationSession/>} />
-                <Route path="/newReview/keywords" element={<ProtectedRoute element={<KeyWordScreen />} />} />
-                <Route path="/newReview/selection" element={<ProtectedRoute element={<Selection />} />} />
-                <Route path="/newReview/extraction" element={<ProtectedRoute element={<Extraction />} />} />
-                <Route path="/newReview/insertion" element={<ProtectedRoute element={<Insertion />} />} />
-                <Route path="/newReview/graphics" element={<ProtectedRoute element={<Graphics />} />} />
-                <Route path="/newReview/finalization" element={<ProtectedRoute element={<Finalization />} />} />
-                <Route path="/newReview/visualization" element={<ProtectedRoute element={<Visualization />} />} />
-                <Route path="/newReview/searchSession" element={<ProtectedRoute element={<SearchSession />} />} />
-
+              <Route
+                path="/newReview"
+                element={<ProtectedRoute element={<NovaRevisao />} />}
+              />
+              <Route
+                path="/newReview/protocol/:id"
+                element={<ProtectedRoute element={<Protocol />} />}
+              />
+              <Route
+                path="/newReview/protocolpartTwo/:id"
+                element={<ProtectedRoute element={<ProtocolPartTwo />} />}
+              />
+              <Route
+                path="/newReview/protocolpartThree/:id"
+                element={<ProtectedRoute element={<ProtocolPartThree />} />}
+              />
+              <Route
+                path="/newReview/identification"
+                element={<ProtectedRoute element={<Identification />} />}
+              />
+              <Route
+                path="/newReview/identification/:session"
+                element={<IdentificationSession />}
+              />
+              <Route
+                path="/newReview/keywords"
+                element={<ProtectedRoute element={<KeyWordScreen />} />}
+              />
+              <Route
+                path="/newReview/selection"
+                element={<ProtectedRoute element={<Selection />} />}
+              />
+              <Route
+                path="/newReview/extraction"
+                element={<ProtectedRoute element={<Extraction />} />}
+              />
+              <Route
+                path="/newReview/insertion"
+                element={<ProtectedRoute element={<Insertion />} />}
+              />
+              <Route
+                path="/newReview/graphics"
+                element={<ProtectedRoute element={<Graphics />} />}
+              />
+              <Route
+                path="/newReview/finalization"
+                element={<ProtectedRoute element={<Finalization />} />}
+              />
+              <Route
+                path="/newReview/visualization"
+                element={<ProtectedRoute element={<Visualization />} />}
+              />
+              <Route
+                path="/newReview/searchSession"
+                element={<ProtectedRoute element={<SearchSession />} />}
+              />
             </Routes>
           </StudySelectionProvider>
         </AppProvider>
@@ -65,7 +118,7 @@ function App() {
     );
   }
 
-  const  button  = context;
+  const button = context;
   console.log("App -> button: " + button);
 
   return (
@@ -73,26 +126,71 @@ function App() {
       <AppProvider>
         <Routes>
           <Route path="/" element={<UserArea />} />
-          <Route path="/landing" element={<ProtectedRoute element={<LandingPage />} />} />
-          <Route path="/test" element={<ProtectedRoute element={<TestPage />} />} />
+          <Route
+            path="/landing"
+            element={<ProtectedRoute element={<LandingPage />} />}
+          />
+          <Route
+            path="/test"
+            element={<ProtectedRoute element={<TestPage />} />}
+          />
           <Route path="/homepage" element={<Homepage />} />
-          <Route path="/collaborators" element={<ProtectedRoute element={<CollaboratorsPage />} />} />
-          <Route path="/user" element={<ProtectedRoute element={<UserArea />} />} />
+          <Route
+            path="/collaborators"
+            element={<ProtectedRoute element={<CollaboratorsPage />} />}
+          />
+          <Route
+            path="/user"
+            element={<ProtectedRoute element={<UserArea />} />}
+          />
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/serverError" element={<ServerError />} />
 
-          <Route path="/newReview" element={<ProtectedRoute element={<NovaRevisao />} />} />
-            <Route path="/newReview/protocol" element={<ProtectedRoute element={<Protocol />} />} />
-            <Route path="/newReview/protocolpartTwo" element={<ProtectedRoute element={<ProtocolPartTwo />} />} />
-            <Route path="/newReview/identification" element={<ProtectedRoute element={<Identification />} />} />
-            <Route path="/newReview/keywords" element={<ProtectedRoute element={<KeyWordScreen />} />} />
-            <Route path="/newReview/selection" element={<ProtectedRoute element={<Selection />} />} />
-            <Route path="/newReview/extraction" element={<ProtectedRoute element={<Extraction />} />} />
-            <Route path="/newReview/insertion" element={<ProtectedRoute element={<Insertion />} />} />
-            <Route path="/newReview/graphics" element={<ProtectedRoute element={<Graphics />} />} />
-            <Route path="/newReview/finalization" element={<ProtectedRoute element={<Finalization />} />} />
-            <Route path="/newReview/searchSession" element={<ProtectedRoute element={<SearchSession />} />} />
-            {/* <Route path="/newReview/protocolpartThree" element={<ProtocolPartThree />} /> */}
+          <Route
+            path="/newReview"
+            element={<ProtectedRoute element={<NovaRevisao />} />}
+          />
+          <Route
+            path="/newReview/protocol"
+            element={<ProtectedRoute element={<Protocol />} />}
+          />
+          <Route
+            path="/newReview/protocolpartTwo"
+            element={<ProtectedRoute element={<ProtocolPartTwo />} />}
+          />
+          <Route
+            path="/newReview/identification"
+            element={<ProtectedRoute element={<Identification />} />}
+          />
+          <Route
+            path="/newReview/keywords"
+            element={<ProtectedRoute element={<KeyWordScreen />} />}
+          />
+          <Route
+            path="/newReview/selection"
+            element={<ProtectedRoute element={<Selection />} />}
+          />
+          <Route
+            path="/newReview/extraction"
+            element={<ProtectedRoute element={<Extraction />} />}
+          />
+          <Route
+            path="/newReview/insertion"
+            element={<ProtectedRoute element={<Insertion />} />}
+          />
+          <Route
+            path="/newReview/graphics"
+            element={<ProtectedRoute element={<Graphics />} />}
+          />
+          <Route
+            path="/newReview/finalization"
+            element={<ProtectedRoute element={<Finalization />} />}
+          />
+          <Route
+            path="/newReview/searchSession"
+            element={<ProtectedRoute element={<SearchSession />} />}
+          />
+          {/* <Route path="/newReview/protocolpartThree" element={<ProtocolPartThree />} /> */}
         </Routes>
       </AppProvider>
     </Router>

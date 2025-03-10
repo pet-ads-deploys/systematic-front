@@ -30,6 +30,7 @@ import {
 } from "react-icons/md";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
+import StudySelectionContext from "../../Context/StudiesSelectionContext";
 
 interface Props {
   articles: ArticleInterface[];
@@ -45,6 +46,9 @@ export default function Collapsed({
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
   const setSelectionStudyIndex = context?.setSelectionStudyIndex;
+
+    const studyContext = useContext(StudySelectionContext);
+
 
   const renderStatusIcon = (status: string) => {
     switch (status) {
@@ -161,9 +165,9 @@ export default function Collapsed({
                 >
                   <Td textAlign="center" w="5%">
                     <Checkbox
-                      isChecked={!!context.selectedArticles[e.studyReviewId]}
+                      isChecked={!!studyContext?.selectedArticles[e.studyReviewId]}
                       onChange={() =>
-                        context.toggleArticlesSelection(e.studyReviewId, e.title)
+                        studyContext?.toggleArticlesSelection(e.studyReviewId, e.title)
                       }
                       sx={{
                         borderColor: "#263C56",

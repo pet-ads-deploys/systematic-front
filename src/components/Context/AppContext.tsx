@@ -2,7 +2,6 @@ import React, { ReactNode, createContext, useState } from "react";
 import { StudyInterface } from "../../../public/interfaces/IStudy";
 import showFirstPossibleStudy from "../../hooks/seachAppropriateStudy/showFirstPossibleStudy";
 import { ExcutionFaseEnum } from "../../../public/enums/ExcutionFaseEnum";
-import useSelectedArticles from "../../hooks/tables/useSelectedArticles";
 
 interface AppContextType {
   button: string;
@@ -29,9 +28,6 @@ interface AppContextType {
   setSortedExtractionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   sidebarState: 'open' | 'collapsed' | 'semi-collapsed';
   setSidebarState: React.Dispatch<React.SetStateAction<'open' | 'collapsed' | 'semi-collapsed'>>;
-
-  selectedArticles: Record<number, { id: number, title: string, isChecked: boolean }>;
-  toggleArticlesSelection: (id: number, tittle: string) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -57,9 +53,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [selectionStudyIndex, setSelectionStudyIndex] = useState<number | undefined>();
   const [sortedExtractionStudyIndex, setSortedExtractionStudyIndex] = useState<number | undefined>();
   const [sidebarState, setSidebarState] = useState<'open' | 'collapsed' | 'semi-collapsed'>('open');
-
-  const {selectedArticles, toggleArticlesSelection } = useSelectedArticles();
-
 
   return (
     <AppContext.Provider
@@ -88,8 +81,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         setSortedExtractionStudyIndex,
         sidebarState,
         setSidebarState,
-        selectedArticles,
-        toggleArticlesSelection
       }}
     >
       {children}
