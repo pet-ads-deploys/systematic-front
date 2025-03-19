@@ -4,7 +4,7 @@ import StudySelectionArea from "./StudySelectionArea";
 import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
-import NoDataMessage from "./NoDataMessage";
+// import NoDataMessage from "./NoDataMessage";
 import { ViewModel } from "../Selection/Selection";
 import SkeletonLoader from "../../../components/ui/Skeleton/Skeleton";
 
@@ -38,7 +38,8 @@ export default function LayoutFactory({
               <ArticlesTable articles={articles} />
             </Box>
           ) : (
-            <NoDataMessage />
+            // <NoDataMessage />
+            <SkeletonLoader width="100%" height="100%" />
           )}
         </Flex>
       );
@@ -60,7 +61,9 @@ export default function LayoutFactory({
               </Box>
             </>
           ) : (
-            <NoDataMessage />
+            // <NoDataMessage />
+        <SkeletonLoader width="100%" height="100%" />
+
           )}
         </Flex>
       );
@@ -84,7 +87,9 @@ export default function LayoutFactory({
               />
             </Box>
           ) : (
-            <NoDataMessage />
+            // <NoDataMessage />
+        <SkeletonLoader width="100%" height="100%" />
+
           )}
         </Flex>
       );

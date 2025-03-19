@@ -11,9 +11,12 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 
-import { SelectedArticlesProps } from "../../../hooks/tables/useSelectedArticles";
+import useSelectedArticles, {
+  SelectedArticlesProps,
+} from "../../../hooks/tables/useSelectedArticles";
 import { tooltip } from "../../../pages/Execution/styles/CardsStyle";
 import SelectedArticlesButton from "../../../pages/Execution/subcomponents/SelectedArticlesButton";
+import useSendDuplicatedStudies from "../../../hooks/tables/useSendDuplicatedStudies";
 
 interface SelectArticlesTableProps {
   articles: Record<number, SelectedArticlesProps>;
@@ -58,9 +61,23 @@ export default function SelectedArticles({
     setDeletedArticles(newDeletedArticles);
   };
 
+  const { clearSelectedArticles } = useSelectedArticles();
+
+  const { sendDuplicatedStudies } = useSendDuplicatedStudies({
+    firstSelected: firstSelected,
+    duplicatedStudies: deletedArticles.filter((art) => art != firstSelected),
+  });
+
+  const handleSendDuplicates = () => {
+    sendDuplicatedStudies();
+  };
+
   return (
     <>
-      <SelectedArticlesButton/>
+      <SelectedArticlesButton
+        handleSendDuplicates={handleSendDuplicates}
+        handleClearSelectedArticles={clearSelectedArticles}
+      />
       <TableContainer
         w="100%"
         h="100%"
