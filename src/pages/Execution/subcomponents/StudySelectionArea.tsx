@@ -62,6 +62,8 @@ export default function StudySelectionArea({
         </Text>
       </Flex>
     );
+  
+  console.log("artigos depois de limpo", selectionContext.selectedArticles);
 
   return (
     <Flex

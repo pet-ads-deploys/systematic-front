@@ -1,7 +1,12 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { buttonconteiner } from "../styles/BtnSelectionStyles";
 
-export default function SelectedArticlesButton() {
+interface SelectedArticlesButtonProos {
+  handleSendDuplicates: () => void;
+  handleClearSelectedArticles: () => void;
+}
+
+export default function SelectedArticlesButton({ handleSendDuplicates, handleClearSelectedArticles}:SelectedArticlesButtonProos) {
   return (
     <Flex
       w="100%"
@@ -20,6 +25,7 @@ export default function SelectedArticlesButton() {
           color="white"
           bg="#8B0000"
           w="10rem"
+          onClick={handleSendDuplicates}
         >
           mark as duplicate
         </Button>
@@ -34,6 +40,7 @@ export default function SelectedArticlesButton() {
           transition="0.2s ease-in-out"
           boxShadow="md"
           p="1rem"
+          onClick={handleClearSelectedArticles}
         >
           reset
         </Button>
