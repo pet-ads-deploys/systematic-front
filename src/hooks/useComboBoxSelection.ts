@@ -31,11 +31,11 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
       if (article && "studyReviewId" in article) {
         page.type === "Selection"
           ? UseChangeStudySelectionStatus({
-              studyReviewId: article.studyReviewId,
+              studyReviewId: [article.studyReviewId],
               status: "INCLUDED",
             })
           : UseChangeStudyExtractionStatus({
-              studyReviewId: article.studyReviewId,
+              studyReviewId: [article.studyReviewId],
               status: "INCLUDED",
             });
         selectionContext.reloadArticles();
@@ -49,11 +49,11 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
       if (article && "studyReviewId" in article) {
         page.type === "Selection"
           ? UseChangeStudySelectionStatus({
-              studyReviewId: article.studyReviewId,
+              studyReviewId: [article.studyReviewId],
               status: "EXCLUDED",
             })
           : UseChangeStudyExtractionStatus({
-              studyReviewId: article.studyReviewId,
+              studyReviewId: [article.studyReviewId],
               status: "EXCLUDED",
             });
         selectionContext.reloadArticles();

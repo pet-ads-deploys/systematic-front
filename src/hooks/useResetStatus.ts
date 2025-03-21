@@ -26,11 +26,11 @@ const useResetStatus = ({ page }: ResetButtonProps) => {
       if (article && "studyReviewId" in article) {
         page.type === "Selection"
           ? UseChangeStudySelectionStatus({
-              studyReviewId: article.studyReviewId,
+              studyReviewId: [article.studyReviewId],
               status: "UNCLASSIFIED",
             })
           : UseChangeStudyExtractionStatus({
-              studyReviewId: article.studyReviewId,
+              studyReviewId: [article.studyReviewId],
               status: "UNCLASSIFIED",
             });
       }
