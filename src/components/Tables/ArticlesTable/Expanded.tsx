@@ -31,6 +31,8 @@ import {
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
 import StudySelectionContext from "../../Context/StudiesSelectionContext";
+import usePagination from "../../../hooks/tables/usePagination";
+import PaginationControl from "./PaginationControl";
 
 interface Props {
   articles: ArticleInterface[];
@@ -47,8 +49,7 @@ export default function Collapsed({
   const setShowSelectionModal = context?.setShowSelectionModal;
   const setSelectionStudyIndex = context?.setSelectionStudyIndex;
 
-    const studyContext = useContext(StudySelectionContext);
-
+  const studyContext = useContext(StudySelectionContext);
 
   const renderStatusIcon = (status: string) => {
     switch (status) {
@@ -90,184 +91,213 @@ export default function Collapsed({
     { label: "Reading Priority", key: "readingPriority", width: "11%" },
   ];
 
+  const {
+    currentPage,
+    setCurrentPage,
+    quantityOfPages,
+    paginatedArticles,
+    handleNextPage,
+    handlePrevPage,
+  } = usePagination(articles);
+
   if (setShowSelectionModal && setSelectionStudyIndex)
     return (
-      <TableContainer
-        width={"100%"}
-        borderRadius="1rem"
-        boxShadow="lg"
-        bg="#EBF0F3"
-        overflowY={"auto"}
-        h="100%"
-      >
-        <Table
-          variant="unstyled"
-          colorScheme="#263C56"
-          size="md"
-          boxShadow="md"
+      <Box width="100%">
+        <TableContainer
+          width="100%"
+          borderRadius="1rem"
+          boxShadow="lg"
+          bg="#EBF0F3"
+          overflowY={"auto"}
+          h="100%"
         >
-          <Thead bg="#EBF0F3" borderRadius="1rem" justifyContent="space-around">
-            <Tr alignItems="center" justifyContent="space-around">
-              <Th
-                textAlign="center"
-                color="#263C56"
-                fontSize="larger"
-                w={3}
-              ></Th>
-              {columns.map((col) => (
+          <Table
+            variant="unstyled"
+            colorScheme="#263C56"
+            size="md"
+            boxShadow="md"
+          >
+            <Thead
+              bg="#EBF0F3"
+              borderRadius="1rem"
+              justifyContent="space-around"
+            >
+              <Tr alignItems="center" justifyContent="space-around">
                 <Th
-                  key={col.key}
                   textAlign="center"
                   color="#263C56"
                   fontSize="larger"
-                  p="2rem 2rem 1rem 0"
-                  textTransform="capitalize"
-                  borderBottom="3px solid #C9D9E5"
-                  w={col.width}
-                  onClick={() =>
-                    handleHeaderClick(col.key as keyof ArticleInterface)
-                  }
-                  cursor="pointer"
-                >
-                  <Box
-                    display="flex"
-                    gap=".5rem"
-                    justifyContent="space-evenly"
-                    alignItems="center"
+                  w={3}
+                ></Th>
+                {columns.map((col) => (
+                  <Th
+                    key={col.key}
+                    textAlign="center"
+                    color="#263C56"
+                    fontSize="larger"
+                    p="2rem 2rem 1rem 0"
+                    textTransform="capitalize"
+                    borderBottom="3px solid #C9D9E5"
+                    w={col.width}
+                    onClick={() =>
+                      handleHeaderClick(col.key as keyof ArticleInterface)
+                    }
+                    cursor="pointer"
                   >
-                    {col.label}
-                    {sortConfig?.key === col.key ? (
-                      sortConfig.direction === "asc" ? (
-                        <FaChevronUp style={chevronIcon} />
+                    <Box
+                      display="flex"
+                      gap=".5rem"
+                      justifyContent="space-evenly"
+                      alignItems="center"
+                    >
+                      {col.label}
+                      {sortConfig?.key === col.key ? (
+                        sortConfig.direction === "asc" ? (
+                          <FaChevronUp style={chevronIcon} />
+                        ) : (
+                          <FaChevronDown style={chevronIcon} />
+                        )
                       ) : (
                         <FaChevronDown style={chevronIcon} />
-                      )
-                    ) : (
-                      <FaChevronDown style={chevronIcon} />
-                    )}
-                  </Box>
-                </Th>
-              ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {articles && articles.length ? (
-              articles.map((e, index) => (
-                <Tr
-                  onClick={() => {
-                    setSelectionStudyIndex?.(index);
-                    setShowSelectionModal?.(true);
-                  }}
-                  key={index}
-                  _hover={{ bg: "#F5F8F9" }}
-                  transition="background-color 0.3s, box-shadow 0.3s"
-                  borderBottom="none"
-                >
-                  <Td textAlign="center" w="5%">
-                    <Checkbox
-                      isChecked={!!studyContext?.selectedArticles[e.studyReviewId]}
-                      onChange={() =>
-                        studyContext?.toggleArticlesSelection(e.studyReviewId, e.title)
-                      }
-                      sx={{
-                        borderColor: "#263C56",
-                        _checked: {
-                          bg: "#263C56",
+                      )}
+                    </Box>
+                  </Th>
+                ))}
+              </Tr>
+            </Thead>
+            <Tbody>
+              {paginatedArticles.length > 0 ? (
+                paginatedArticles.map((e, index) => (
+                  <Tr
+                    onClick={() => {
+                      setSelectionStudyIndex?.(index);
+                      setShowSelectionModal?.(true);
+                    }}
+                    key={index}
+                    _hover={{ bg: "#F5F8F9" }}
+                    transition="background-color 0.3s, box-shadow 0.3s"
+                    borderBottom="none"
+                  >
+                    <Td textAlign="center" w="5%">
+                      <Checkbox
+                        isChecked={
+                          !!studyContext?.selectedArticles[e.studyReviewId]
+                        }
+                        onChange={() =>
+                          studyContext?.toggleArticlesSelection(
+                            e.studyReviewId,
+                            e.title
+                          )
+                        }
+                        sx={{
                           borderColor: "#263C56",
-                        },
-                      }}
-                    />
-                  </Td>
-                  <Td sx={tdSX}>{String(e.studyReviewId).padStart(5, "0")}</Td>
-                  <Td sx={tdSX}>
-                    <Tooltip
-                      sx={tooltip}
-                      label={e.title}
-                      aria-label="Full Title"
-                      hasArrow
-                    >
-                      <Text sx={collapsedSpanText}>{e.title}</Text>
-                    </Tooltip>
-                  </Td>
-                  <Td sx={tdSX}>
-                    <Tooltip
-                      sx={tooltip}
-                      label={e.authors}
-                      aria-label="Full Author List"
-                      hasArrow
-                    >
-                      <Text sx={collapsedSpanText}>{e.authors}</Text>
-                    </Tooltip>
-                  </Td>
-                  <Td sx={tdSX}>
-                    <Tooltip
-                      sx={tooltip}
-                      label={e.venue}
-                      aria-label="Journal Name"
-                      hasArrow
-                    >
-                      <Text sx={collapsedSpanText}>{e.venue}</Text>
-                    </Tooltip>
-                  </Td>
+                          _checked: {
+                            bg: "#263C56",
+                            borderColor: "#263C56",
+                          },
+                        }}
+                      />
+                    </Td>
+                    <Td sx={tdSX}>
+                      {String(e.studyReviewId).padStart(5, "0")}
+                    </Td>
+                    <Td sx={tdSX}>
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.title}
+                        aria-label="Full Title"
+                        hasArrow
+                      >
+                        <Text sx={collapsedSpanText}>{e.title}</Text>
+                      </Tooltip>
+                    </Td>
+                    <Td sx={tdSX}>
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.authors}
+                        aria-label="Full Author List"
+                        hasArrow
+                      >
+                        <Text sx={collapsedSpanText}>{e.authors}</Text>
+                      </Tooltip>
+                    </Td>
+                    <Td sx={tdSX}>
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.venue}
+                        aria-label="Journal Name"
+                        hasArrow
+                      >
+                        <Text sx={collapsedSpanText}>{e.venue}</Text>
+                      </Tooltip>
+                    </Td>
 
-                  <Td p=".5rem 0" w="8%">
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      gap="0.5rem"
-                    >
-                      {renderStatusIcon(e.selectionStatus)}
-                      <Text sx={collapsedSpanText}>
-                        {capitalize(
-                          e.selectionStatus?.toString().toLowerCase() || ""
-                        )}
-                      </Text>
-                    </Box>
-                  </Td>
+                    <Td p=".5rem 0" w="8%">
+                      <Box
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        gap="0.5rem"
+                      >
+                        {renderStatusIcon(e.selectionStatus)}
+                        <Text sx={collapsedSpanText}>
+                          {capitalize(
+                            e.selectionStatus?.toString().toLowerCase() || ""
+                          )}
+                        </Text>
+                      </Box>
+                    </Td>
 
-                  <Td p=".5rem 0" w="8%">
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      gap="0.5rem"
-                    >
-                      {renderStatusIcon(e.extractionStatus)}
-                      <Text sx={collapsedSpanText}>
-                        {capitalize(
-                          e.extractionStatus?.toString().toLowerCase() || ""
-                        )}
-                      </Text>
-                    </Box>
-                  </Td>
+                    <Td p=".5rem 0" w="8%">
+                      <Box
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        gap="0.5rem"
+                      >
+                        {renderStatusIcon(e.extractionStatus)}
+                        <Text sx={collapsedSpanText}>
+                          {capitalize(
+                            e.extractionStatus?.toString().toLowerCase() || ""
+                          )}
+                        </Text>
+                      </Box>
+                    </Td>
 
-                  <Td p=".5rem 0" w="8%">
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      gap="0.5rem"
-                    >
-                      {renderPriorityIcon(e.readingPriority)}
-                      <Text sx={collapsedSpanText}>
-                        {capitalize(
-                          e.readingPriority?.toString().toLowerCase() || ""
-                        )}
-                      </Text>
-                    </Box>
+                    <Td p=".5rem 0" w="8%">
+                      <Box
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        gap="0.5rem"
+                      >
+                        {renderPriorityIcon(e.readingPriority)}
+                        <Text sx={collapsedSpanText}>
+                          {capitalize(
+                            e.readingPriority?.toString().toLowerCase() || ""
+                          )}
+                        </Text>
+                      </Box>
+                    </Td>
+                  </Tr>
+                ))
+              ) : (
+                <Tr>
+                  <Td colSpan={8} textAlign="center">
+                    No articles found.
                   </Td>
                 </Tr>
-              ))
-            ) : (
-              <Tr>
-                <Td colSpan={8} textAlign="center">
-                  No articles found.
-                </Td>
-              </Tr>
-            )}
-          </Tbody>
-        </Table>
-      </TableContainer>
+              )}
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <PaginationControl
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          quantityOfPages={quantityOfPages}
+          handleNextPage={handleNextPage}
+          handlePrevPage={handlePrevPage}
+        />
+      </Box>
     );
 }

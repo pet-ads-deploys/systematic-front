@@ -25,6 +25,8 @@ export default function PaginationControl({
   handleNextPage,
   handlePrevPage,
 }: ControlsProps) {
+  const numberOfCases = String(quantityOfPages).length;
+
   return (
     <Flex
       justifyContent="center"
@@ -35,7 +37,8 @@ export default function PaginationControl({
     >
       <Button onClick={handlePrevPage}>Anterior</Button>
       <Text>
-        Página {currentPage} de {quantityOfPages}
+        Página {String(currentPage).padStart(numberOfCases, "0")} de
+        {" " + quantityOfPages}
       </Text>
       <NumberInput
         width="5rem"
