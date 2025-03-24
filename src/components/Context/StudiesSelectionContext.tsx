@@ -37,6 +37,9 @@ interface AppContextType {
     { id: number; title: string; isChecked: boolean }
   >;
   toggleArticlesSelection: (id: number, tittle: string) => void;
+  firstSelected: number | null;
+  deletedArticles: number[] | [];
+  clearSelectedArticles: () => void;
 }
 
 const StudySelectionContext = createContext<AppContextType | undefined>(
@@ -57,10 +60,8 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
 
   const { articles, mutate, isLoading } = useGetAllReviewArticles();
 
-  const { selectedArticles, toggleArticlesSelection } = useSelectedArticles();
-
-  console.log("array de artigos selecionados dentro do contexto", selectedArticles);
-
+  const { selectedArticles, toggleArticlesSelection, firstSelected, deletedArticles, clearSelectedArticles} =
+    useSelectedArticles();
 
   return (
     <StudySelectionContext.Provider
@@ -78,6 +79,9 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
         isLoading,
         selectedArticles,
         toggleArticlesSelection,
+        firstSelected,
+        deletedArticles,
+        clearSelectedArticles,
       }}
     >
       {children}

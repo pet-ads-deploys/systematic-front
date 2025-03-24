@@ -11,6 +11,9 @@ export default function useSelectedArticles() {
     Record<number, SelectedArticlesProps>
   >({});
 
+  const [firstSelected, setFirstSelected] = useState<number | null>(null);
+  const [deletedArticles, setDeletedArticles] = useState<number[]>([]);
+
   const isAlreadySelectedArticle = (
     content: Record<number, SelectedArticlesProps>,
     id: number
@@ -19,22 +22,44 @@ export default function useSelectedArticles() {
   };
 
   const toggleArticlesSelection = (id: number, title: string) => {
-    const updatedArticles = { ...selectedArticles };
-    const isAlreadyArticle = isAlreadySelectedArticle(updatedArticles, id);
-    isAlreadyArticle
-      ? delete updatedArticles[id]
-      : (updatedArticles[id] = { id, title, isChecked: true });
-    setSelectedArticles(updatedArticles);
+    const updatedSelectedArticles = { ...selectedArticles };
+    let newDeletedArticles = [...deletedArticles];
+    const isAlreadyArticle = isAlreadySelectedArticle(
+      updatedSelectedArticles,
+      id
+    );
+    if (isAlreadyArticle) {
+      delete updatedSelectedArticles[id];
+      newDeletedArticles = newDeletedArticles.filter(
+        (articleId) => articleId !== id
+      );
+      if (firstSelected === id) {
+        setFirstSelected(null);
+      }
+    } else {
+      if (firstSelected === null) {
+        setFirstSelected(id);
+      } else {
+        newDeletedArticles.push(id);
+      }
+      updatedSelectedArticles[id] = { id, title, isChecked: true };
+    }
+
+    setSelectedArticles(updatedSelectedArticles);
+    setDeletedArticles(newDeletedArticles);
   };
 
   const clearSelectedArticles = () => {
     setSelectedArticles({});
+    setFirstSelected(null);
+    setDeletedArticles([])
   };
-
 
   return {
     selectedArticles,
     toggleArticlesSelection,
     clearSelectedArticles,
+    firstSelected,
+    deletedArticles,
   };
 }
