@@ -18,6 +18,7 @@ import { inputconteiner } from "../styles/executionStyles";
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
+import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
 
 export type ViewModel = "table" | "vertical" | "article";
 
@@ -73,13 +74,16 @@ export default function Selection() {
             />
           </Flex>
           <Box sx={inputconteiner}>
-            <InputText
-              type="search"
-              placeholder="Insert article atribute"
-              nome="search"
-              onChange={(e) => setSearchString(e.target.value)}
-              value={searchString}
-            />
+            <Flex gap="1rem" w="35%" justifyContent="space-between">
+              <InputText
+                type="search"
+                placeholder="Insert article atribute"
+                nome="search"
+                onChange={(e) => setSearchString(e.target.value)}
+                value={searchString}
+              />
+              {layout !== "article" ? <ButtonsForMultipleSelection /> : null}
+            </Flex>
             <Box
               display="flex"
               gap="1rem"

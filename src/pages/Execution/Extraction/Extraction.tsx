@@ -22,6 +22,7 @@ import { inputconteiner } from "../styles/executionStyles";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
 import { ViewModel } from "../Selection/Selection";
+import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
 
 // Unused imports
 // import ComboBox from "../../../components/Inputs/ComboBox";
@@ -89,40 +90,33 @@ export default function Extraction() {
                   handleVerticalLayoutChange={handleVerticalLayoutChange}
                 />
               </Flex>
-              <Box sx={inputconteiner}>
-                <InputText
-                  type="search"
-                  placeholder="Insert article atribute"
-                  nome="search"
-                  onChange={(e) => setSearchString(e.target.value)}
-                  value={searchString}
-                />
-                <Box
-                  display="flex"
-                  gap="1rem"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <SelectInput
-                    names={[
-                      "INCLUDED",
-                      "DUPLICATED",
-                      "EXCLUDED",
-                      "UNCLASSIFIED",
-                    ]}
-                    values={[
-                      "INCLUDED",
-                      "DUPLICATED",
-                      "EXCLUDED",
-                      "UNCLASSIFIED",
-                    ]}
-                    onSelect={(value) => handleSelectChange(value)}
-                    selectedValue={selectedStatus}
-                    page={"selection"}
-                    placeholder="Selection status"
-                  />
-                </Box>
-              </Box>
+           <Box sx={inputconteiner}>
+             <Flex gap="1rem" w="35%" justifyContent="space-between">
+               <InputText
+                 type="search"
+                 placeholder="Insert article atribute"
+                 nome="search"
+                 onChange={(e) => setSearchString(e.target.value)}
+                 value={searchString}
+               />
+               {layout !== "article" ? <ButtonsForMultipleSelection /> : null}
+             </Flex>
+             <Box
+               display="flex"
+               gap="1rem"
+               justifyContent="space-between"
+               alignItems="center"
+             >
+               <SelectInput
+                 names={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
+                 values={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
+                 onSelect={(value) => handleSelectChange(value)}
+                 selectedValue={selectedStatus}
+                 page={"selection"}
+                 placeholder="Selection status"
+               />
+             </Box>
+           </Box>
               <Box w="100%" h="85vh">
                 <LayoutFactory
                   page={{ type: "Extraction" }}

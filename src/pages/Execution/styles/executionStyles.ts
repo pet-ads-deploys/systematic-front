@@ -12,6 +12,7 @@ export const inputconteiner = {
   m: "0 0 1rem 0",
   gap: "2rem",
   justifyContent: "space-between",
+  alingItems: "center",
 };
 
 export const ckconteiner = {

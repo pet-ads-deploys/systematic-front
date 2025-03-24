@@ -147,7 +147,7 @@ export default function Collapsed({
                     <Box
                       display="flex"
                       gap=".5rem"
-                      justifyContent="space-evenly"
+                      justifyContent="center"
                       alignItems="center"
                     >
                       {col.label}
@@ -169,14 +169,21 @@ export default function Collapsed({
               {paginatedArticles.length > 0 ? (
                 paginatedArticles.map((e, index) => (
                   <Tr
+                    key={index}
+                    bg={
+                      studyContext?.firstSelected == e.studyReviewId
+                        ? "#A8E6A2"
+                        : studyContext?.deletedArticles.find(
+                            (id) => id === e.studyReviewId
+                          )
+                        ? "#F5B7B1"
+                        : "transparent"
+                    }
                     onClick={() => {
                       setSelectionStudyIndex?.(index);
                       setShowSelectionModal?.(true);
                     }}
-                    key={index}
-                    _hover={{ bg: "#F5F8F9" }}
                     transition="background-color 0.3s, box-shadow 0.3s"
-                    borderBottom="none"
                   >
                     <Td textAlign="center" w="5%">
                       <Checkbox
