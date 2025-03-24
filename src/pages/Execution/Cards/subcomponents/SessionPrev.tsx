@@ -1,28 +1,27 @@
+import { Link } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+
+import { InvalidEntry } from "../../../../components/Context/StudiesSelectionContext";
+
+import {
+  createFileToInvalidEntries,
+  downloadFile,
+} from "../../../../hooks/reviews/createFileToInvalidEntries";
+
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Flex, Button, Text, Tr, Td } from "@chakra-ui/react";
 import { FaRegEye } from "react-icons/fa6";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
 import { MdOutlineSdCardAlert } from "react-icons/md";
-import { InvalidEntry } from "../../../../components/Context/StudiesSelectionContext";
-import useCreateFileToInvalidEntries, {
-  createFileToInvalidEntries,
-  downloadFile,
-} from "../../../../hooks/reviews/createFileToInvalidEntries";
-import { motion } from "framer-motion";
 
 interface actionsModal {
   action: "create" | "update";
 }
 
-// interface inspectArticlesModal {
-//   action: "inspect" | "refuse";
-// }
-interface Props {
+interface SessionPrevProps {
   handleOpenModal: (action: actionsModal) => void;
   handleDelete: (id: string) => void;
-  // handleInspectOpenModal: (action: inspectArticlesModal) => void;
   timestamp: string;
   numberOfStudies: number;
   sessionId: string;
@@ -38,10 +37,7 @@ const SessionPrev = ({
   sessionId,
   invalidEntries,
   sessionIndex,
-}: // handleInspectOpenModal,
-Props) => {
-  const date = new Date(timestamp);
-  let day, month;
+}: SessionPrevProps) => {
   const toast = useToast();
 
   const handleToastAlert = () => {
@@ -55,12 +51,16 @@ Props) => {
     });
   };
 
-  day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-
-  if (date.getMonth() < 9) month = `0${date.getMonth() + 1}`;
-  else month = `${date.getMonth() + 1}`;
-
-  const sessionDate = day + "/" + month;
+  const getDataCurrent = (): string => {
+    const date = new Date(timestamp);
+    const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+    const month =
+      date.getMonth() < 9
+        ? `0${date.getMonth() + 1}`
+        : `${date.getMonth() + 1}`;
+    const year = `${date.getFullYear()}`;
+    return `${day}/${month}/${year}`;
+  };
 
   const hasErrors = (sessionIndex: number) => {
     return (
@@ -82,17 +82,15 @@ Props) => {
   return (
     <Tr>
       <Td>
-        <Text textAlign="left" whiteSpace={"nowrap"} overflow={"hidden"}>
-          {sessionDate}
+        <Text textAlign="center" whiteSpace={"nowrap"} overflow={"hidden"}>
+          {getDataCurrent()}
         </Text>
       </Td>
-
       <Td>
         <Text textAlign="center" width="100%">
           {numberOfStudies}
         </Text>
       </Td>
-
       <Td>
         <Flex gap="5px">
           {numberOfStudies && numberOfStudies > 0 ? (

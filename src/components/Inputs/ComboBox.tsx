@@ -8,7 +8,7 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { PageLayout } from "../../pages/Execution/Selection/subcomponents/LayoutFactory";
+import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
 
 interface IComboBoxProps {
   text: string;

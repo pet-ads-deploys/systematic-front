@@ -12,7 +12,7 @@ interface HttpResponse {
 const useGetAllReviewArticles = () => {
   const id = localStorage.getItem("systematicReviewId");
   const options = getRequestOptions();
-  const { data, mutate, error } = useSWR(
+  const { data, mutate, error, isLoading } = useSWR(
     `http://localhost:8080/api/v1/systematic-study/${id}/study-review`,
     fetchAllArticlesReview,
     {
@@ -34,7 +34,7 @@ const useGetAllReviewArticles = () => {
     }
   }
 
-  return { articles: data || [], mutate, error };
+  return { articles: data || [], mutate, error, isLoading };
 };
 
 export default useGetAllReviewArticles;

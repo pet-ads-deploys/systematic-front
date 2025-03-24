@@ -1,3 +1,9 @@
+import { useDisclosure } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useToast } from "@chakra-ui/react";
+
+import UseDeleteSession from "../../../hooks/reviews/useDeleteSession";
+
 import {
   Button,
   Modal,
@@ -10,18 +16,13 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Textarea,
-  Box,
-  IconButton,
   Flex,
   Divider,
 } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
-import UseDeleteSession from "../../../hooks/reviews/useDeleteSession";
-// import {Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useState } from "react";
+
+// Icon
 import { IoIosWarning } from "react-icons/io";
-import { useToast } from "@chakra-ui/react";
+
 import { KeyedMutator } from "swr";
 
 interface DeleteDatabaseModalProps {
@@ -64,9 +65,9 @@ function DeleteDatabaseModal({
   const [nameOfDatabase, setNameOfDatabase] = useState<string>("");
   const toast = useToast();
 
-  const handleOpen = () => {
+  useEffect(() => {
     onOpen();
-  };
+  }, []);
 
   const handleClose = () => {
     show(false);
@@ -119,7 +120,7 @@ function DeleteDatabaseModal({
   };
 
   return (
-    <Modal isOpen={handleOpen} onClose={handleClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader color={"#263C56"}>

@@ -1,9 +1,13 @@
 import { useContext } from "react";
+
 import StudySelectionContext from "../components/Context/StudiesSelectionContext";
 import AppContext from "../components/Context/AppContext";
+
 import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";
-import { PageLayout } from "../pages/Execution/Selection/subcomponents/LayoutFactory";
+
+//Types
+import { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
 
 interface ResetButtonProps {
   page: PageLayout;
@@ -18,18 +22,20 @@ const useResetStatus = ({ page }: ResetButtonProps) => {
     const articleIndex = appContext?.selectionStudyIndex;
 
     if (articles && articleIndex) {
-      const studyReviewId = articles[articleIndex].studyReviewId;
-      page.type === "Selection"
-        ? UseChangeStudySelectionStatus({
-            studyReviewId,
-            status: "UNCLASSIFIED",
-          })
-        : UseChangeStudyExtractionStatus({
-            studyReviewId,
-            status: "UNCLASSIFIED",
-          });
+      const article = articles[articleIndex];
+      if (article && "studyReviewId" in article) {
+        page.type === "Selection"
+          ? UseChangeStudySelectionStatus({
+              studyReviewId: [article.studyReviewId],
+              status: "UNCLASSIFIED",
+            })
+          : UseChangeStudyExtractionStatus({
+              studyReviewId: [article.studyReviewId],
+              status: "UNCLASSIFIED",
+            });
+      }
+      selectionContext?.reloadArticles();
     }
-    selectionContext?.reloadArticles();
   };
 
   return { handleResetStatusToUnclassified };

@@ -54,8 +54,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [sortedExtractionStudyIndex, setSortedExtractionStudyIndex] = useState<number | undefined>();
   const [sidebarState, setSidebarState] = useState<'open' | 'collapsed' | 'semi-collapsed'>('open');
 
-
-
   return (
     <AppContext.Provider
       value={{
@@ -82,7 +80,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         sortedExtractionStudyIndex,
         setSortedExtractionStudyIndex,
         sidebarState,
-        setSidebarState
+        setSidebarState,
       }}
     >
       {children}

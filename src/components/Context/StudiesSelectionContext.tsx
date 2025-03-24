@@ -5,9 +5,13 @@ import React, {
   createContext,
   useState,
 } from "react";
-import ArticleInterface from "../../../public/interfaces/ArticleInterface";
+import { KeyedMutator } from "swr";
+
 import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
+
 import { StudyInterface } from "../../../public/interfaces/IStudy";
+import ArticleInterface from "../../../public/interfaces/ArticleInterface";
+import useSelectedArticles from "../../hooks/tables/useSelectedArticles";
 
 export interface InvalidEntry {
   id: string;
@@ -22,10 +26,20 @@ interface AppContextType {
   isExcluded: boolean;
   setIsExcluded: React.Dispatch<React.SetStateAction<boolean>>;
   articles: ArticleInterface[] | StudyInterface[] | [];
-  reloadArticles: () => void;
+  reloadArticles: KeyedMutator<ArticleInterface[] | StudyInterface[] | []>;
   reload: boolean;
+  setReload: Dispatch<SetStateAction<boolean>>;
   invalidEntries: InvalidEntry[];
   setInvalidEntries: Dispatch<SetStateAction<InvalidEntry[]>>;
+  isLoading: boolean;
+  selectedArticles: Record<
+    number,
+    { id: number; title: string; isChecked: boolean }
+  >;
+  toggleArticlesSelection: (id: number, tittle: string) => void;
+  firstSelected: number | null;
+  deletedArticles: number[] | [];
+  clearSelectedArticles: () => void;
 }
 
 const StudySelectionContext = createContext<AppContextType | undefined>(
@@ -44,7 +58,10 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
   const [isExcluded, setIsExcluded] = useState(false);
   const [invalidEntries, setInvalidEntries] = useState<InvalidEntry[]>([]);
 
-  const { articles, mutate } = useGetAllReviewArticles();
+  const { articles, mutate, isLoading } = useGetAllReviewArticles();
+
+  const { selectedArticles, toggleArticlesSelection, firstSelected, deletedArticles, clearSelectedArticles} =
+    useSelectedArticles();
 
   return (
     <StudySelectionContext.Provider
@@ -56,8 +73,15 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
         articles,
         reloadArticles: mutate,
         reload,
+        setReload,
         invalidEntries,
         setInvalidEntries,
+        isLoading,
+        selectedArticles,
+        toggleArticlesSelection,
+        firstSelected,
+        deletedArticles,
+        clearSelectedArticles,
       }}
     >
       {children}

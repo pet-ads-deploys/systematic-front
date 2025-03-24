@@ -2,22 +2,22 @@
     background-color: #263C56;
     display: flex;
     flex-direction: column;
-    height: 92.5vh;
-    width: 250px;
-    margin: 0 1em 2em 1em;
-    border-radius: 30px;
+    height: 96.5vh;
+    width: 16rem;
+    margin: 0 1rem 0 1rem;
 }
 
 .closeBtn {
-    margin-top: 20px;
-    margin-left: 10px;
+    position: relative;
+    top: .25rem;
+    left: .5rem;
 }
 
 .collapsed {
     display: flex;
     flex-direction: column;
     align-self: self-start;
-    margin: 1rem 2em 0 1em;
+    margin: 1rem 2em 0 1rem;
 }
 
 .navDiv {

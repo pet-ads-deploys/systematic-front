@@ -5,7 +5,7 @@ export const conteiner = {
 
 export const dataBaseconteiner = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(30rem, 1fr))",
+  gridTemplateColumns: "repeat(auto-fill, minmax(32rem, 1fr))",
   boxSizing: "border-box",
   p:"20px",
   w: "100%",

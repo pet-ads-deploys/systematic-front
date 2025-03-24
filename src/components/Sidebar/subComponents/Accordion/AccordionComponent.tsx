@@ -16,7 +16,7 @@ const AccordionComponent = () => {
     const id = localStorage.getItem('systematicReviewId');
 
     return (
-        <Accordion w='80%'>
+        <Accordion w='80%' allowToggle>
     <AccordionItem>
       <h2>
         <AccordionButton p='1.2vw 1vh' color="white">

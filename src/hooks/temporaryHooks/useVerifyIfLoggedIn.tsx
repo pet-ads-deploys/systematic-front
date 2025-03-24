@@ -11,7 +11,6 @@ export function useVerifyIfLoggedIn() {
                 let response = await axios.post("http://localhost:8080/api/v1/auth/refresh", {}, { withCredentials: true });
                 console.log(response);
                 if (response.status === 200) {
-                    console.log("Login successful");
                     setIsLoggedIn(true);
                 } else {
                     setIsLoggedIn(false);
