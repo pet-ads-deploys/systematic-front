@@ -32,11 +32,11 @@ export default function ButtonsLayout({
       icon: <BsTable size="3rem" />,
     },
     {
-      layoutType: "vertical",
+      layoutType: "horizontal",
       icon: <PiSquareSplitVerticalFill size="3rem" />,
     },
     {
-      layoutType: "horizontal",
+      layoutType: "vertical",
       icon: <PiSquareSplitHorizontalFill size="3rem" />,
     },
     {

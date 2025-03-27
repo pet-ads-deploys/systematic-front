@@ -105,9 +105,9 @@ export default function Collapsed({
       <Box width="100%">
         <TableContainer
           width="100%"
-          borderRadius="1rem"
+          borderRadius="1rem 1rem 0 0"
           boxShadow="lg"
-          bg="#EBF0F3"
+          bg="white"
           overflowY={"auto"}
           h="100%"
         >
@@ -118,7 +118,7 @@ export default function Collapsed({
             boxShadow="md"
           >
             <Thead
-              bg="#EBF0F3"
+              bg="white"
               borderRadius="1rem"
               justifyContent="space-around"
             >

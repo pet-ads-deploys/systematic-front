@@ -57,12 +57,12 @@ export default function Collapsed({
         width="100%"
         borderRadius="1rem"
         boxShadow="lg"
-        bg="#EBF0F3"
+        bg="white"
         overflowY="auto"
         h="100%"
       >
         <Table variant="unstyled" colorScheme="#263C56" size="md">
-          <Thead bg="#EBF0F3" borderRadius="1rem">
+          <Thead bg="white" borderRadius="1rem">
             <Tr>
               <Th
                 textAlign="center"

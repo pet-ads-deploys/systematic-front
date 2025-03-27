@@ -31,9 +31,11 @@ export default function PaginationControl({
     <Flex
       justifyContent="center"
       alignItems="center"
-      mt=".5rem"
       gap="1rem"
       w="100%"
+      bg="white"
+      p=".5rem 0"
+      borderRadius="0 0 1rem 1rem"
     >
       <Button onClick={handlePrevPage}>Anterior</Button>
       <Text>
