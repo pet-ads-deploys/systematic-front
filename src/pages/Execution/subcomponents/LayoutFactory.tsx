@@ -5,8 +5,8 @@ import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTabl
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 // import NoDataMessage from "./NoDataMessage";
-import { ViewModel } from "../Selection/Selection";
 import SkeletonLoader from "../../../components/ui/Skeleton/Skeleton";
+import { ViewModel } from "../../../hooks/useLayoutPage";
 
 export interface PageLayout {
   type: "Selection" | "Extraction";
@@ -38,7 +38,6 @@ export default function LayoutFactory({
               <ArticlesTable articles={articles} />
             </Box>
           ) : (
-            // <NoDataMessage />
             <SkeletonLoader width="100%" height="100%" />
           )}
         </Flex>
@@ -61,7 +60,6 @@ export default function LayoutFactory({
               </Box>
             </>
           ) : (
-            // <NoDataMessage />
         <SkeletonLoader width="100%" height="100%" />
 
           )}
@@ -87,7 +85,6 @@ export default function LayoutFactory({
               />
             </Box>
           ) : (
-            // <NoDataMessage />
         <SkeletonLoader width="100%" height="100%" />
 
           )}

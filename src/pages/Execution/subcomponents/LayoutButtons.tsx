@@ -1,23 +1,22 @@
 import { Button, Flex } from "@chakra-ui/react";
 
-import { MdVerticalSplit } from "react-icons/md";
 import { BsTable } from "react-icons/bs";
-import { PiArticleMediumBold } from "react-icons/pi";
+import {
+  PiArticleMediumBold,
+  PiSquareSplitHorizontalFill,
+  PiSquareSplitVerticalFill,
+} from "react-icons/pi";
 
-import { ViewModel } from "../Selection/Selection";
+import { ViewModel } from "../../../hooks/useLayoutPage";
 
 interface ButtonsLayoutProps {
   layout: ViewModel;
-  handleTableLayoutChange: () => void;
-  handleVerticalLayoutChange: () => void;
-  handleArticleLayoutChange: () => void;
+  handleChangeLayout: (newLayout: ViewModel) => void;
 }
 
 export default function ButtonsLayout({
-  handleArticleLayoutChange,
-  handleTableLayoutChange,
-  handleVerticalLayoutChange,
   layout,
+  handleChangeLayout,
 }: ButtonsLayoutProps) {
   const buttonLayout = {
     boxShadow: "md",
@@ -26,39 +25,39 @@ export default function ButtonsLayout({
     w: "3.25rem",
     borderRadius: ".5rem",
   };
+
+  const buttons = [
+    {
+      layoutType: "table",
+      icon: <BsTable size="3rem" />,
+    },
+    {
+      layoutType: "vertical",
+      icon: <PiSquareSplitVerticalFill size="3rem" />,
+    },
+    {
+      layoutType: "horizontal",
+      icon: <PiSquareSplitHorizontalFill size="3rem" />,
+    },
+    {
+      layoutType: "article",
+      icon: <PiArticleMediumBold size="3rem" />,
+    },
+  ];
+
   return (
-    <Flex w="100%" justifyContent="end" alignItems="center" gap="1.5rem">
-      <Button
-        onClick={handleVerticalLayoutChange}
-        bg={layout == "vertical" ? "#263C56" : "white"}
-        sx={buttonLayout}
-      >
-        <BsTable
-          color={layout == "vertical" ? "white" : "#263C56"}
-          size="2rem"
-        />
-      </Button>
-      <Button
-        onClick={handleTableLayoutChange}
-        bg={layout == "table" ? "#263C56" : "white"}
-        sx={buttonLayout}
-      >
-        <MdVerticalSplit
-          color={layout == "table" ? "white" : "#263C56"}
-          size="2rem"
-        />
-      </Button>
-      <Button
-        onClick={handleArticleLayoutChange}
-        bg={layout == "article" ? "#263C56" : "white"}
-        sx={buttonLayout}
-        // transform="rotate(0.5turn)"
-      >
-        <PiArticleMediumBold
-          color={layout == "article" ? "white" : "#263C56"}
-          size="2rem"
-        />
-      </Button>
+    <Flex w="20rem" justifyContent="end" alignItems="center" gap="1.5rem">
+      {buttons.map((element, index) => (
+        <Button
+          key={index}
+          onClick={() => handleChangeLayout(element.layoutType as ViewModel)}
+          bg={layout == element.layoutType ? "#263C56" : "white"}
+          color={layout == element.layoutType ? "white" : "#263C56"}
+          sx={buttonLayout}
+        >
+          {element.icon}
+        </Button>
+      ))}
     </Flex>
   );
 }

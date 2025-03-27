@@ -19,7 +19,7 @@ export default function SelectInput({ values, names, onSelect, selectedValue, pl
 
   const isProtocol = page === "protocol";
   return (
-    <FormControl sx={formcontrol} w={isProtocol ? "55%" : "15rem"}>
+    <FormControl sx={formcontrol} w={isProtocol ? "55%" : "20rem"}>
       <Select bgColor={"#EBF0F3"} color="#2E4B6C" placeholder={placeholder} value={selectedValue || ""} onChange={handleSelectChange}>
         {names.map((optionName, index) => (
           <option key={index} value={values[index]}>
