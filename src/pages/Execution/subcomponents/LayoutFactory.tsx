@@ -1,12 +1,12 @@
-import { Box, Flex } from "@chakra-ui/react";
-
-import StudySelectionArea from "./StudySelectionArea";
-import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
-
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
-// import NoDataMessage from "./NoDataMessage";
 import SkeletonLoader from "../../../components/ui/Skeleton/Skeleton";
 import { ViewModel } from "../../../hooks/useLayoutPage";
+import NoDataMessage from "./NoDataMessage";
+import React, { useState } from "react";
+import { SplitVertical } from "./Layouts/SplitVertical";
+import { FullTable } from "./Layouts/FullTable";
+import { SplitHorizontal } from "./Layouts/SplitHorizontal";
+import { FullArticle } from "./Layouts/FullArticle";
 
 export interface PageLayout {
   type: "Selection" | "Extraction";
@@ -25,70 +25,38 @@ export default function LayoutFactory({
   page,
   isLoading,
 }: LayoutFactoryProps) {
-  console.log("layout atual:", layout);
+  const [orderElement, setOrderElement] = useState(false);
 
-  switch (layout) {
-    case "vertical":
-      return isLoading ? (
-        <SkeletonLoader width="100%" height="100%" />
-      ) : (
-        <Flex flexDirection="column" w="100%" h="98%" gap="2rem">
-          {articles && articles.length > 0 ? (
-            <Box w="100%" maxH="100%">
-              <ArticlesTable articles={articles} />
-            </Box>
-          ) : (
-            <SkeletonLoader width="100%" height="100%" />
-          )}
-        </Flex>
-      );
-    case "table":
-      return isLoading ? (
-        <SkeletonLoader width="100%" height="100%" />
-      ) : (
-        <Flex w="100%" h="100%" gap="2rem">
-          {articles && articles.length > 0 ? (
-            <>
-              <Box maxW="60%" h="100%">
-                <ArticlesTable articles={articles} />
-              </Box>
-              <Box minW="38%" h="100%">
-                <StudySelectionArea
-                  articles={articles}
-                  page={{ type: page.type }}
-                />
-              </Box>
-            </>
-          ) : (
-        <SkeletonLoader width="100%" height="100%" />
+  const toggleLayoutOrder = () => {
+    setOrderElement((prev) => !prev);
+  };
 
-          )}
-        </Flex>
-      );
+  const layoutMap: Record<string, React.ReactNode> = {
+    table: <FullTable articles={articles} />,
+    vertical: (
+      <SplitVertical
+        articles={articles}
+        orderElement={orderElement}
+        toggleLayoutOrder={toggleLayoutOrder}
+        page={page}
+      />
+    ),
+    horizontal: (
+      <SplitHorizontal
+        articles={articles}
+        orderElement={orderElement}
+        toggleLayoutOrder={toggleLayoutOrder}
+        page={page}
+      />
+    ),
+    article: <FullArticle articles={articles} page={page} />,
+  };
 
-    case "article":
-      return isLoading ? (
-        <SkeletonLoader width="100%" height="100%" />
-      ) : (
-        <Flex
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          w="100%"
-          h="100%"
-        >
-          {articles && articles.length > 0 ? (
-            <Box w="100%" minH="100%">
-              <StudySelectionArea
-                articles={articles}
-                page={{ type: page.type }}
-              />
-            </Box>
-          ) : (
-        <SkeletonLoader width="100%" height="100%" />
+  if (isLoading) return <SkeletonLoader width="100%" height="100%" />;
 
-          )}
-        </Flex>
-      );
-  }
+  return articles && articles.length > 0 ? (
+    layoutMap[layout.toString()]
+  ) : (
+    <NoDataMessage />
+  );
 }
