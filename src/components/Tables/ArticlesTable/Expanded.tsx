@@ -19,7 +19,7 @@ import {
   tooltip,
 } from "../../../pages/Execution/styles/CardsStyle";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import AppContext from "../../Context/AppContext";
 import { capitalize } from "../../../utils/CapitalizeText";
 import {
@@ -33,6 +33,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import StudySelectionContext from "../../Context/StudiesSelectionContext";
 import usePagination from "../../../hooks/tables/usePagination";
 import PaginationControl from "./PaginationControl";
+import { IconType } from "react-icons";
 
 interface Props {
   articles: ArticleInterface[];
@@ -51,44 +52,33 @@ export default function Collapsed({
 
   const studyContext = useContext(StudySelectionContext);
 
-  const renderStatusIcon = (status: string) => {
-    switch (status) {
-      case "INCLUDED":
-        return <CheckCircleIcon color="green.500" />;
-      case "DUPLICATED":
-        return <InfoIcon color="blue.500" />;
-      case "EXCLUDED":
-        return <IoIosCloseCircle color="red" size="1.4rem" />;
-      case "UNCLASSIFIED":
-        return <WarningIcon color="yellow.500" />;
-      default:
-        return null;
-    }
+  const statusIconMap: Record<string, React.ReactElement> = {
+      "INCLUDED": <CheckCircleIcon color="green.500" />,
+      "DUPLICATED": <InfoIcon color="blue.500" />,
+      "EXCLUDED": <IoIosCloseCircle color="red" size="1.4rem" />,
+      "UNCLASSIFIED": <WarningIcon color="yellow.500" />,
   };
 
-  const renderPriorityIcon = (priority: string) => {
-    switch (priority) {
-      case "VERY HIGH":
-        return <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />;
-      case "HIGH":
-        return <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />;
-      case "LOW":
-        return <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />;
-      case "VERY LOW":
-        return <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />;
-      default:
-        return null;
-    }
+  const priorityIconMap: Record<string, React.ReactElement> = {
+    "VERY HIGH": <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
+    "HIGH": <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
+    "LOW": <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
+    "VERY LOW": <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
   };
+
+  const renderStatusIcon = (status: string) => statusIconMap[status] || null;
+  const renderPriorityIcon = (priority: string) =>
+    priorityIconMap[priority] || null;
 
   const columns = [
-    { label: "ID", key: "studyReviewId", width: "10%" },
-    { label: "Title", key: "title", width: "30%" },
-    { label: "Author", key: "authors", width: "20%" },
-    { label: "Journal", key: "venue", width: "28%" },
-    { label: "Selection", key: "selectionStatus", width: "10%" },
-    { label: "Extraction", key: "extraction", width: "10%" },
-    { label: "Reading Priority", key: "readingPriority", width: "11%" },
+    { label: "ID", key: "studyReviewId", width: "2%" },
+    { label: "Title", key: "title", width: "20%" },
+    { label: "Author", key: "authors", width: "15%" },
+    { label: "Journal", key: "venue", width: "10%" },
+    { label: "Year", key: "year", width: "2%" },
+    { label: "Selection", key: "selectionStatus", width: "15%" },
+    { label: "Extraction", key: "extraction", width: "15%" },
+    { label: "Reading Priority", key: "readingPriority", width: "15%" },
   ];
 
   const {
@@ -102,14 +92,13 @@ export default function Collapsed({
 
   if (setShowSelectionModal && setSelectionStudyIndex)
     return (
-      <Box width="100%">
+      <Box w="100%" maxH="82.5vh">
         <TableContainer
-          width="100%"
+          w="100%"
           borderRadius="1rem 1rem 0 0"
           boxShadow="lg"
           bg="white"
           overflowY={"auto"}
-          h="100%"
         >
           <Table
             variant="unstyled"
@@ -117,17 +106,13 @@ export default function Collapsed({
             size="md"
             boxShadow="md"
           >
-            <Thead
-              bg="white"
-              borderRadius="1rem"
-              justifyContent="space-around"
-            >
+            <Thead bg="white" borderRadius="1rem" justifyContent="space-around">
               <Tr alignItems="center" justifyContent="space-around">
                 <Th
                   textAlign="center"
                   color="#263C56"
                   fontSize="larger"
-                  w={3}
+                  w="5%"
                 ></Th>
                 {columns.map((col) => (
                   <Th
@@ -135,14 +120,14 @@ export default function Collapsed({
                     textAlign="center"
                     color="#263C56"
                     fontSize="larger"
-                    p="2rem 2rem 1rem 0"
+                    p="2rem 0 1rem 0"
                     textTransform="capitalize"
                     borderBottom="3px solid #C9D9E5"
-                    w={col.width}
                     onClick={() =>
                       handleHeaderClick(col.key as keyof ArticleInterface)
                     }
                     cursor="pointer"
+                    w={col.width}
                   >
                     <Box
                       display="flex"
@@ -184,6 +169,7 @@ export default function Collapsed({
                       setShowSelectionModal?.(true);
                     }}
                     transition="background-color 0.3s, box-shadow 0.3s"
+                    p="0"
                   >
                     <Td textAlign="center" w="5%">
                       <Checkbox
@@ -205,10 +191,10 @@ export default function Collapsed({
                         }}
                       />
                     </Td>
-                    <Td sx={tdSX}>
+                    <Td sx={tdSX} w="5%">
                       {String(e.studyReviewId).padStart(5, "0")}
                     </Td>
-                    <Td sx={tdSX}>
+                    <Td sx={tdSX} w="25%">
                       <Tooltip
                         sx={tooltip}
                         label={e.title}
@@ -218,7 +204,7 @@ export default function Collapsed({
                         <Text sx={collapsedSpanText}>{e.title}</Text>
                       </Tooltip>
                     </Td>
-                    <Td sx={tdSX}>
+                    <Td sx={tdSX} w="15%">
                       <Tooltip
                         sx={tooltip}
                         label={e.authors}
@@ -228,7 +214,7 @@ export default function Collapsed({
                         <Text sx={collapsedSpanText}>{e.authors}</Text>
                       </Tooltip>
                     </Td>
-                    <Td sx={tdSX}>
+                    <Td sx={tdSX} w="10">
                       <Tooltip
                         sx={tooltip}
                         label={e.venue}
@@ -238,8 +224,18 @@ export default function Collapsed({
                         <Text sx={collapsedSpanText}>{e.venue}</Text>
                       </Tooltip>
                     </Td>
+                    <Td sx={tdSX} w="5%">
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.year}
+                        aria-label="Year of published"
+                        hasArrow
+                      >
+                        <Text sx={collapsedSpanText}>{e.year}</Text>
+                      </Tooltip>
+                    </Td>
 
-                    <Td p=".5rem 0" w="8%">
+                    <Td sx={tdSX} w="8%">
                       <Box
                         display="flex"
                         alignItems="center"
@@ -255,7 +251,7 @@ export default function Collapsed({
                       </Box>
                     </Td>
 
-                    <Td p=".5rem 0" w="8%">
+                    <Td sx={tdSX} w="8%">
                       <Box
                         display="flex"
                         alignItems="center"
@@ -271,7 +267,7 @@ export default function Collapsed({
                       </Box>
                     </Td>
 
-                    <Td p=".5rem 0" w="8%">
+                    <Td sx={tdSX} w="8%">
                       <Box
                         display="flex"
                         alignItems="center"
