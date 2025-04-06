@@ -43,10 +43,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             exit="exit"
             style={{ maxWidth: "100%", maxHeight: "45%" }}
           >
-            <StudySelectionArea
-              articles={articles}
-              page={{ type: page.type }}
-            />
+            <StudySelectionArea articles={articles} page={page} />
           </motion.div>
         ) : (
           <motion.div
@@ -56,7 +53,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             animate="animate"
             exit="exit"
           >
-            <ArticlesTable articles={articles} />
+            <ArticlesTable articles={articles} page={page} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -88,7 +85,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             animate="animate"
             exit="exit"
           >
-            <ArticlesTable articles={articles} />
+            <ArticlesTable articles={articles} page={page} />
           </motion.div>
         ) : (
           <motion.div
@@ -101,7 +98,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
           >
             <StudySelectionArea
               articles={articles}
-              page={{ type: page.type }}
+              page={page}
             />
           </motion.div>
         )}

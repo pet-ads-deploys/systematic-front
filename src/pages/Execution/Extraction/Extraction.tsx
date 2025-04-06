@@ -7,7 +7,6 @@ import FlexLayout from "../../../components/ui/Flex/Flex";
 import Header from "../../../components/ui/Header/Header";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
-import ButtonsLayout from "../subcomponents/LayoutButtons";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 
 import { AppProvider } from "../../../components/Context/AppContext";
@@ -23,6 +22,7 @@ import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
 import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
 import useLayoutPage from "../../../hooks/useLayoutPage";
+import SelectLayout from "../subcomponents/LayoutButtons";
 
 export default function Extraction() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
@@ -37,7 +37,7 @@ export default function Extraction() {
 
   const { layout, handleChangeLayout } = useLayoutPage();
 
-  const page: PageLayout = { type: "Extraction" };
+  const page: PageLayout = "Extraction";
 
   const filteredArticles = handleSearchAndFilter(
     searchString,
@@ -66,10 +66,7 @@ export default function Extraction() {
                 mb="2rem"
               >
                 <Header text="Extraction" />
-                <ButtonsLayout
-                  layout={layout}
-                  handleChangeLayout={handleChangeLayout}
-                />
+                <SelectLayout handleChangeLayout={handleChangeLayout} />
               </Flex>
               <Box sx={inputconteiner}>
                 <Flex gap="1rem" w="35%" justifyContent="space-between">
@@ -110,9 +107,9 @@ export default function Extraction() {
                   />
                 </Box>
               </Box>
-              <Box w="100%" h="85vh">
+              <Box w="100%" h="82.5vh">
                 <LayoutFactory
-                  page={{ type: "Extraction" }}
+                  page="Extraction"
                   layout={layout}
                   articles={filteredArticles}
                   isLoading={selectionContext.isLoading}

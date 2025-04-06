@@ -15,8 +15,13 @@ export default function IdentificationSession() {
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">
       <Header text="Search Sessions" />
-      <Flex justifyContent={"center"} alignItems={"center"} w={"98%"} h={"90%"}>
-        <ArticlesTable articles={articles} />
+      <Flex
+        justifyContent="center"
+        alignItems="start"
+        w="calc(100% - 2rem)"
+        h="90vh"
+      >
+        <ArticlesTable articles={articles} page="Identification" />
       </Flex>
     </FlexLayout>
   );

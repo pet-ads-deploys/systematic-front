@@ -62,7 +62,7 @@ export default function StudySelectionArea({
       borderRadius="1rem"
       bg="white"
       w="100%"
-      h={page.type === "Extraction" ? "80%" : "100%"}
+      h={page === "Extraction" ? "80%" : "100%"}
       p="5"
       alignItems={"center"}
       gap="1rem"

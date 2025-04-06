@@ -4,7 +4,7 @@ import StudySelectionArea from "../StudySelectionArea";
 import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../LayoutFactory";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
-import { GrPowerCycle } from "react-icons/gr";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 
 interface VerticalProps {
   orderElement: boolean;
@@ -42,10 +42,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             exit="exit"
             style={{ minWidth: "38%", maxHeight: "100%" }}
           >
-            <StudySelectionArea
-              articles={articles}
-              page={{ type: page.type }}
-            />
+            <StudySelectionArea articles={articles} page={page} />
           </motion.div>
         ) : (
           <motion.div
@@ -56,7 +53,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             exit="exit"
             style={{ maxWidth: "60%", maxHeight: "100%" }}
           >
-            <ArticlesTable articles={articles} />
+            <ArticlesTable articles={articles} page={page} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -74,7 +71,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             animate={{ rotate: orderElement ? 0 : 180 }}
             transition={{ duration: 0.5 }}
           >
-            <GrPowerCycle color="white" />
+            <FaArrowRightArrowLeft color="white" />
           </motion.div>
         </motion.button>
       </Box>
@@ -89,7 +86,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             exit="exit"
             style={{ maxWidth: "60%", maxHeight: "100%" }}
           >
-            <ArticlesTable articles={articles} />
+            <ArticlesTable articles={articles} page={page} />
           </motion.div>
         ) : (
           <motion.div
@@ -100,10 +97,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             exit="exit"
             style={{ minWidth: "38.5%", maxHeight: "100%" }}
           >
-            <StudySelectionArea
-              articles={articles}
-              page={{ type: page.type }}
-            />
+            <StudySelectionArea articles={articles} page={page} />
           </motion.div>
         )}
       </AnimatePresence>

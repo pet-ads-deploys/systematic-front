@@ -8,9 +8,7 @@ import { FullTable } from "./Layouts/FullTable";
 import { SplitHorizontal } from "./Layouts/SplitHorizontal";
 import { FullArticle } from "./Layouts/FullArticle";
 
-export interface PageLayout {
-  type: "Selection" | "Extraction";
-}
+export type PageLayout = "Selection" | "Extraction" | "Identification";
 
 interface LayoutFactoryProps {
   layout: ViewModel;
@@ -31,8 +29,8 @@ export default function LayoutFactory({
     setOrderElement((prev) => !prev);
   };
 
-  const layoutMap: Record<string, React.ReactNode> = {
-    table: <FullTable articles={articles} />,
+  const layoutMap: Record<ViewModel, React.ReactNode> = {
+    table: <FullTable articles={articles} page={page} />,
     vertical: (
       <SplitVertical
         articles={articles}
@@ -52,10 +50,10 @@ export default function LayoutFactory({
     article: <FullArticle articles={articles} page={page} />,
   };
 
-  if (isLoading) return <SkeletonLoader width="100%" height="100%" />;
-
-  return articles && articles.length > 0 ? (
-    layoutMap[layout.toString()]
+  return isLoading ? (
+    <SkeletonLoader width="100%" height="100%" />
+  ) : articles && articles.length > 0 ? (
+    layoutMap[layout]
   ) : (
     <NoDataMessage />
   );

@@ -26,7 +26,7 @@ export default function StudyDataFiel({ studyData, page }: IStudyDataFiel) {
     padding: "3",
   };
 
-  return page.type === "Selection" ? (
+  return page === "Selection" ? (
     <Flex sx={selectionSX}>
       <ArticlePreview studyData={studyData} />
     </Flex>

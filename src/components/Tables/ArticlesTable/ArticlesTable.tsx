@@ -3,12 +3,14 @@ import AppContext from "../../Context/AppContext";
 import { useContext, useMemo, useState } from "react";
 import Expanded from "./Expanded";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
 
 interface Props {
   articles: ArticlesInterface[];
+  page: PageLayout;
 }
 
-export default function ArticlesTable({ articles }: Props) {
+export default function ArticlesTable({ articles, page }: Props) {
   const [sortConfig, setSortConfig] = useState<{
     key: keyof ArticleInterface;
     direction: "asc" | "desc";
@@ -51,6 +53,7 @@ export default function ArticlesTable({ articles }: Props) {
       articles={sortedArticles}
       handleHeaderClick={handleHeaderClick}
       sortConfig={sortConfig}
+      page={page}
     />
   );
 }

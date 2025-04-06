@@ -24,16 +24,17 @@ import useLayoutPage from "../../../hooks/useLayoutPage";
 export default function Selection() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
+
   const [searchString, setSearchString] = useState<string>("");
+  const { layout, handleChangeLayout } = useLayoutPage();
+  const page: PageLayout = "Selection";
+
   const selectionContext = useContext(StudySelectionContext);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
   const articles: ArticleInterface[] = selectionContext.articles.filter(
     (art): art is ArticleInterface => "studyReviewId" in art
   );
-
-  const page: PageLayout = { type: "Selection" };
-  const { layout, handleChangeLayout } = useLayoutPage();
 
   const filteredArticles = handleSearchAndFilter(
     searchString,
@@ -60,10 +61,7 @@ export default function Selection() {
             mb="2rem"
           >
             <Header text="Selection" />
-            <ButtonsLayout
-              layout={layout}
-              handleChangeLayout={handleChangeLayout}
-            />
+            <ButtonsLayout handleChangeLayout={handleChangeLayout} />
           </Flex>
           <Box sx={inputconteiner}>
             <Flex gap="1rem" w="35%" justifyContent="space-between">
@@ -94,7 +92,7 @@ export default function Selection() {
           </Box>
           <Box w="100%" h="82.5vh">
             <LayoutFactory
-              page={{ type: "Selection" }}
+              page="Selection"
               layout={layout}
               articles={filteredArticles}
               isLoading={selectionContext.isLoading}
