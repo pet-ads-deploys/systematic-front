@@ -27,6 +27,8 @@ export default function PaginationControl({
 }: ControlsProps) {
   const numberOfCases = String(quantityOfPages).length;
 
+  const isPaginationEnabled = quantityOfPages > 1;
+
   return (
     <Flex
       justifyContent="center"
@@ -34,10 +36,12 @@ export default function PaginationControl({
       gap="1rem"
       w="100%"
       bg="white"
-      p=".5rem 0"
+      p="1.5rem 0"
       borderRadius="0 0 1rem 1rem"
     >
-      <Button onClick={handlePrevPage}>Anterior</Button>
+      {isPaginationEnabled && (
+        <Button onClick={handlePrevPage}>Anterior</Button>
+      )}
       <Text>
         Página {String(currentPage).padStart(numberOfCases, "0")} de
         {" " + quantityOfPages}
@@ -60,7 +64,7 @@ export default function PaginationControl({
           <NumberDecrementStepper color="black" />
         </NumberInputStepper>
       </NumberInput>
-      <Button onClick={handleNextPage}>Próxima</Button>
+      {isPaginationEnabled && <Button onClick={handleNextPage}>Próxima</Button>}
     </Flex>
   );
 }
