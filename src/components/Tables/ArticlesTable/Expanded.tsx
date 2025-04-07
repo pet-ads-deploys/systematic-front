@@ -36,12 +36,14 @@ import usePagination from "../../../hooks/tables/usePagination";
 import PaginationControl from "./PaginationControl";
 import { Resizable } from "./Resizable";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
+import { ViewModel } from "../../../hooks/useLayoutPage";
 
 interface Props {
   articles: ArticleInterface[];
   handleHeaderClick: (key: keyof ArticleInterface) => void;
   sortConfig: { key: keyof ArticleInterface; direction: "asc" | "desc" } | null;
   page: PageLayout;
+  layout?: ViewModel;
 }
 
 type Column = {
@@ -55,6 +57,7 @@ export default function Expanded({
   handleHeaderClick,
   sortConfig,
   page,
+  layout
 }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
@@ -118,6 +121,8 @@ export default function Expanded({
     return true;
   };
 
+  console.log("layout q veio pro expanded:", layout);
+
   const {
     currentPage,
     setCurrentPage,
@@ -125,7 +130,7 @@ export default function Expanded({
     paginatedArticles,
     handleNextPage,
     handlePrevPage,
-  } = usePagination(articles);
+  } = usePagination(articles, layout);
 
   const handleColumnResize = (key: string, newWidth: number) => {
     setColumnWidths((prev) => ({

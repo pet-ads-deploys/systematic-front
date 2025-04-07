@@ -4,13 +4,15 @@ import { useContext, useMemo, useState } from "react";
 import Expanded from "./Expanded";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
+import { ViewModel } from "../../../hooks/useLayoutPage";
 
 interface Props {
   articles: ArticlesInterface[];
   page: PageLayout;
+  layout?: ViewModel;
 }
 
-export default function ArticlesTable({ articles, page }: Props) {
+export default function ArticlesTable({ articles, page, layout }: Props) {
   const [sortConfig, setSortConfig] = useState<{
     key: keyof ArticleInterface;
     direction: "asc" | "desc";
@@ -54,6 +56,7 @@ export default function ArticlesTable({ articles, page }: Props) {
       handleHeaderClick={handleHeaderClick}
       sortConfig={sortConfig}
       page={page}
+      layout={layout}
     />
   );
 }

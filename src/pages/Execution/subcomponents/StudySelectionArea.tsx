@@ -67,7 +67,7 @@ export default function StudySelectionArea({
       alignItems={"center"}
       gap="1rem"
     >
-      <Flex justifyContent="center" w="100%">
+      <Flex alignItems="center" justifyContent="center" w="100%" maxW="100%">
         <ButtonsForSelection page={page} />
       </Flex>
       <Box w={"100%"} h="80%">

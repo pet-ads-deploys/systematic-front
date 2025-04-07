@@ -4,17 +4,20 @@ import StudySelectionArea from "../StudySelectionArea";
 import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../LayoutFactory";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
+import { ViewModel } from "../../../../hooks/useLayoutPage";
 
 interface HorizontalProps {
   isInverted: boolean;
   articles: ArticleInterface[];
   page: PageLayout;
+  layout: ViewModel;
 }
 
 export const SplitHorizontal: React.FC<HorizontalProps> = ({
   isInverted,
   articles,
   page,
+  layout,
 }) => {
   const horizontalTransitionVariants = {
     initial: { opacity: 0, y: 5 },
@@ -49,7 +52,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             animate="animate"
             exit="exit"
           >
-            <ArticlesTable articles={articles} page={page} />
+            <ArticlesTable articles={articles} page={page} layout={layout} />
           </motion.div>
         </AnimatePresence>
       ) : (
@@ -61,7 +64,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             animate="animate"
             exit="exit"
           >
-            <ArticlesTable articles={articles} page={page} />
+            <ArticlesTable articles={articles} page={page} layout={layout} />
           </motion.div>
           <motion.div
             key="top"

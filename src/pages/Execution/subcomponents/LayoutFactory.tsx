@@ -2,7 +2,7 @@ import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import SkeletonLoader from "../../../components/ui/Skeleton/Skeleton";
 import { ViewModel } from "../../../hooks/useLayoutPage";
 import NoDataMessage from "./NoDataMessage";
-import React, { useState } from "react";
+import React from "react";
 import { SplitVertical } from "./Layouts/SplitVertical";
 import { FullTable } from "./Layouts/FullTable";
 import { SplitHorizontal } from "./Layouts/SplitHorizontal";
@@ -32,10 +32,10 @@ export default function LayoutFactory({
       <SplitVertical articles={articles} isInverted={true} page={page} />
     ),
     horizontal: (
-      <SplitHorizontal articles={articles} isInverted={false} page={page} />
+      <SplitHorizontal articles={articles} isInverted={false} page={page} layout={layout}/>
     ),
     "horizontal-invert": (
-      <SplitHorizontal articles={articles} isInverted={true} page={page} />
+      <SplitHorizontal articles={articles} isInverted={true} page={page} layout={layout}/>
     ),
     article: <FullArticle articles={articles} page={page} />,
   };
