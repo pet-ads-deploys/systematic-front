@@ -1,21 +1,18 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import StudySelectionArea from "../StudySelectionArea";
 import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../LayoutFactory";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
-import { GrPowerCycle } from "react-icons/gr";
 
 interface HorizontalProps {
-  orderElement: boolean;
-  toggleLayoutOrder: () => void;
+  isInverted: boolean;
   articles: ArticleInterface[];
   page: PageLayout;
 }
 
 export const SplitHorizontal: React.FC<HorizontalProps> = ({
-  orderElement,
-  toggleLayoutOrder,
+  isInverted,
   articles,
   page,
 }) => {
@@ -33,19 +30,18 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
       gap=".5rem"
       justifyContent="space-between"
     >
-      <AnimatePresence mode="wait">
-        {orderElement ? (
+      {isInverted ? (
+        <AnimatePresence mode="wait">
           <motion.div
             key="top"
             variants={horizontalTransitionVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ maxWidth: "100%", maxHeight: "45%" }}
+            style={{ maxWidth: "100%", maxHeight: "55%" }}
           >
             <StudySelectionArea articles={articles} page={page} />
           </motion.div>
-        ) : (
           <motion.div
             key="bottom"
             variants={horizontalTransitionVariants}
@@ -55,29 +51,9 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
           >
             <ArticlesTable articles={articles} page={page} />
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      <Box display="flex" alignItems="center" justifyContent="center">
-        <motion.button
-          onClick={toggleLayoutOrder}
-          style={{
-            background: "#263C56",
-            padding: ".75rem",
-            borderRadius: ".5rem",
-          }}
-        >
-          <motion.div
-            animate={{ rotate: orderElement ? 0 : 180 }}
-            transition={{ duration: 0.5 }}
-          >
-            <GrPowerCycle color="white" />
-          </motion.div>
-        </motion.button>
-      </Box>
-
-      <AnimatePresence mode="wait">
-        {orderElement ? (
+        </AnimatePresence>
+      ) : (
+        <AnimatePresence mode="wait">
           <motion.div
             key="bottom"
             variants={horizontalTransitionVariants}
@@ -87,22 +63,18 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
           >
             <ArticlesTable articles={articles} page={page} />
           </motion.div>
-        ) : (
           <motion.div
             key="top"
             variants={horizontalTransitionVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ maxWidth: "100%", maxHeight: "40%" }}
+            style={{ maxWidth: "100%", maxHeight: "55%" }}
           >
-            <StudySelectionArea
-              articles={articles}
-              page={page}
-            />
+            <StudySelectionArea articles={articles} page={page} />
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
     </Flex>
   );
 };

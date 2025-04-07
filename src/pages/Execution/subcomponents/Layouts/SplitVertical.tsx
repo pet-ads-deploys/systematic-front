@@ -1,21 +1,18 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import StudySelectionArea from "../StudySelectionArea";
 import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../LayoutFactory";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
-import { FaArrowRightArrowLeft } from "react-icons/fa6";
 
 interface VerticalProps {
-  orderElement: boolean;
-  toggleLayoutOrder: () => void;
+  isInverted: boolean;
   articles: ArticleInterface[];
   page: PageLayout;
 }
 
 export const SplitVertical: React.FC<VerticalProps> = ({
-  orderElement,
-  toggleLayoutOrder,
+  isInverted,
   articles,
   page,
 }) => {
@@ -32,8 +29,8 @@ export const SplitVertical: React.FC<VerticalProps> = ({
       gap=".5rem"
       justifyContent="space-between"
     >
-      <AnimatePresence mode="wait">
-        {orderElement ? (
+      {isInverted ? (
+        <AnimatePresence mode="wait">
           <motion.div
             key="top"
             variants={verticalTransitionVariants}
@@ -44,7 +41,6 @@ export const SplitVertical: React.FC<VerticalProps> = ({
           >
             <StudySelectionArea articles={articles} page={page} />
           </motion.div>
-        ) : (
           <motion.div
             key="bottom"
             variants={verticalTransitionVariants}
@@ -55,29 +51,9 @@ export const SplitVertical: React.FC<VerticalProps> = ({
           >
             <ArticlesTable articles={articles} page={page} />
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      <Box display="flex" alignItems="center" justifyContent="center">
-        <motion.button
-          onClick={toggleLayoutOrder}
-          style={{
-            background: "#263C56",
-            padding: ".75rem",
-            borderRadius: ".5rem",
-          }}
-        >
-          <motion.div
-            animate={{ rotate: orderElement ? 0 : 180 }}
-            transition={{ duration: 0.5 }}
-          >
-            <FaArrowRightArrowLeft color="white" />
-          </motion.div>
-        </motion.button>
-      </Box>
-
-      <AnimatePresence mode="wait">
-        {orderElement ? (
+        </AnimatePresence>
+      ) : (
+        <AnimatePresence mode="wait">
           <motion.div
             key="bottom"
             variants={verticalTransitionVariants}
@@ -88,7 +64,6 @@ export const SplitVertical: React.FC<VerticalProps> = ({
           >
             <ArticlesTable articles={articles} page={page} />
           </motion.div>
-        ) : (
           <motion.div
             key="top"
             variants={verticalTransitionVariants}
@@ -99,8 +74,8 @@ export const SplitVertical: React.FC<VerticalProps> = ({
           >
             <StudySelectionArea articles={articles} page={page} />
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
     </Flex>
   );
 };

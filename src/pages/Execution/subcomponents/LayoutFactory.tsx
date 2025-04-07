@@ -23,29 +23,19 @@ export default function LayoutFactory({
   page,
   isLoading,
 }: LayoutFactoryProps) {
-  const [orderElement, setOrderElement] = useState(false);
-
-  const toggleLayoutOrder = () => {
-    setOrderElement((prev) => !prev);
-  };
-
   const layoutMap: Record<ViewModel, React.ReactNode> = {
     table: <FullTable articles={articles} page={page} />,
     vertical: (
-      <SplitVertical
-        articles={articles}
-        orderElement={orderElement}
-        toggleLayoutOrder={toggleLayoutOrder}
-        page={page}
-      />
+      <SplitVertical articles={articles} isInverted={false} page={page} />
+    ),
+    "vertical-invert": (
+      <SplitVertical articles={articles} isInverted={true} page={page} />
     ),
     horizontal: (
-      <SplitHorizontal
-        articles={articles}
-        orderElement={orderElement}
-        toggleLayoutOrder={toggleLayoutOrder}
-        page={page}
-      />
+      <SplitHorizontal articles={articles} isInverted={false} page={page} />
+    ),
+    "horizontal-invert": (
+      <SplitHorizontal articles={articles} isInverted={true} page={page} />
     ),
     article: <FullArticle articles={articles} page={page} />,
   };

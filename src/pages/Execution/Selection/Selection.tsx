@@ -8,7 +8,6 @@ import FlexLayout from "../../../components/ui/Flex/Flex";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";
-import ButtonsLayout from "../subcomponents/LayoutButtons";
 
 import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
 
@@ -20,6 +19,7 @@ import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
 import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
 import useLayoutPage from "../../../hooks/useLayoutPage";
+import SelectLayout from "../subcomponents/LayoutButtons";
 
 export default function Selection() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
@@ -61,7 +61,7 @@ export default function Selection() {
             mb="2rem"
           >
             <Header text="Selection" />
-            <ButtonsLayout handleChangeLayout={handleChangeLayout} />
+            <SelectLayout handleChangeLayout={handleChangeLayout} />
           </Flex>
           <Box sx={inputconteiner}>
             <Flex gap="1rem" w="35%" justifyContent="space-between">

@@ -9,17 +9,16 @@ import {
 } from "@chakra-ui/react";
 
 import { BsTable } from "react-icons/bs";
-import {
-  PiArticleMediumBold,
-  PiSquareSplitHorizontalFill,
-  PiSquareSplitVerticalFill,
-} from "react-icons/pi";
+import { PiArticleMediumBold } from "react-icons/pi";
+
+import { RiFlipHorizontalLine } from "react-icons/ri";
 
 import { ViewModel } from "../../../hooks/useLayoutPage";
 
 import React from "react";
 import { capitalize } from "../../../utils/CapitalizeText";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { motion } from "framer-motion";
 
 interface SelectLayoutProps {
   handleChangeLayout: (newLayout: ViewModel) => void;
@@ -33,23 +32,36 @@ export default function SelectLayout({
     {
       layoutType: ViewModel;
       icon: React.ReactNode;
+      rotate?: string;
     }
   > = {
     table: {
       layoutType: "table",
-      icon: <BsTable size="1rem" color="black" />,
+      icon: <BsTable size=".85rem" color="black" />,
     },
     horizontal: {
       layoutType: "horizontal",
-      icon: <PiSquareSplitVerticalFill size="1rem" color="black" />,
+      icon: <RiFlipHorizontalLine size="1rem" color="black" />,
+      rotate: "-90deg",
+    },
+    "horizontal-invert": {
+      layoutType: "horizontal-invert",
+      icon: <RiFlipHorizontalLine size="1rem" color="black" />,
+      rotate: "90deg",
     },
     vertical: {
       layoutType: "vertical",
-      icon: <PiSquareSplitHorizontalFill size="1rem" color="black" />,
+      icon: <RiFlipHorizontalLine size="1rem" color="black" />,
+      rotate: "-180deg",
+    },
+    "vertical-invert": {
+      layoutType: "vertical-invert",
+      icon: <RiFlipHorizontalLine size="1rem" color="black" />,
+      rotate: "-360deg",
     },
     article: {
       layoutType: "article",
-      icon: <PiArticleMediumBold size="1rem" color="black" />,
+      icon: <PiArticleMediumBold size="1.2rem" color="black" />,
     },
   };
 
@@ -75,7 +87,13 @@ export default function SelectLayout({
             onClick={() => handleChangeLayout(element.layoutType)}
           >
             <Flex align="center" gap="1rem" w="inherit">
-              {element.icon}
+              <Box
+                transform={
+                  element.rotate ? `rotate(${element.rotate})` : undefined
+                }
+              >
+                {element.icon}
+              </Box>
               {capitalize(element.layoutType)}
             </Flex>
           </MenuItem>

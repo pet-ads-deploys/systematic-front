@@ -1,9 +1,15 @@
 import { useState } from "react";
 
-export type ViewModel = "table" | "vertical" | "article" | "horizontal";
+export type ViewModel =
+  | "table"
+  | "vertical"
+  | "vertical-invert"
+  | "article"
+  | "horizontal"
+  | "horizontal-invert";
 
 export default function useLayoutPage() {
-  const [layout, setLayout] = useState<ViewModel>("vertical");
+  const [layout, setLayout] = useState<ViewModel>("table");
 
   const handleChangeLayout = (newLayout: ViewModel) => {
     setLayout(newLayout);
