@@ -1,7 +1,36 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { ArticlePreviewProps } from "./StudyData";
+import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
+import { IoIosCloseCircle } from "react-icons/io";
 
 export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
+  const statusIconMap: Record<
+    string,
+    {
+      icon: React.ReactNode;
+      color: string;
+    }
+  > = {
+    INCLUDED: {
+      icon: <CheckCircleIcon color="green.500" />,
+      color: "green",
+    },
+    DUPLICATED: {
+      icon: <InfoIcon color="blue.500" />,
+      color: "blue",
+    },
+    EXCLUDED: {
+      icon: <IoIosCloseCircle color="red.500" size="1.4rem" />,
+      color: "red",
+    },
+    UNCLASSIFIED: {
+      icon: <WarningIcon color="yellow.500" />,
+      color: "yellow",
+    },
+  };
+
+  const selectionStatus = statusIconMap[studyData.selectionStatus];
+
   return (
     <Flex
       flexDirection="column"
@@ -18,6 +47,25 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
         p="1rem"
         h="100%"
       >
+        <Flex gap="2rem">
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            fontFamily="sans-serif"
+            fontSize="1rem"
+            p=".5rem .25rem"
+            gap="1rem"
+            borderRadius="1rem"
+            bg={`${selectionStatus.color}.200`}
+            color={`${selectionStatus.color}.800`}
+            maxW="10rem"
+            w="10rem"
+            h="2rem"
+          >
+            {selectionStatus.icon}
+            {studyData.selectionStatus}
+          </Flex>
+        </Flex>
         <Flex>
           <Text marginBottom={"7px"} w="30%" align={"left"}>
             <Text fontSize={"14px"} fontWeight={"bold"}>

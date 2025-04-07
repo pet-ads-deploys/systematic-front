@@ -12,6 +12,8 @@ import { FaPlusCircle } from "react-icons/fa";
 import { button } from "./styles.ts";
 
 import { ArticlePreviewProps } from "../../../../../../components/Modals/StudyModal/StudyData.tsx";
+import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
+import { IoIosCloseCircle } from "react-icons/io";
 
 export interface Questions {
   code: string;
@@ -25,9 +27,7 @@ export interface Questions {
   systematicStudyId: string | null;
 }
 
-
-
-export default function ExtractionForm({studyData}: ArticlePreviewProps) {
+export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
   const reviewId = localStorage.getItem("systematicReviewId");
   const navigate = useNavigate();
   const { questions } = useFetchExtractionQuestions();
@@ -86,15 +86,54 @@ export default function ExtractionForm({studyData}: ArticlePreviewProps) {
     }
   };
 
+  const statusIconMap: Record<
+    string,
+    {
+      icon: React.ReactNode;
+      color: string;
+    }
+  > = {
+    INCLUDED: {
+      icon: <CheckCircleIcon color="green.500" />,
+      color: "green",
+    },
+    DUPLICATED: {
+      icon: <InfoIcon color="blue.500" />,
+      color: "blue",
+    },
+    EXCLUDED: {
+      icon: <IoIosCloseCircle color="red.500" size="1.4rem" />,
+      color: "red",
+    },
+    UNCLASSIFIED: {
+      icon: <WarningIcon color="yellow.500" />,
+      color: "yellow",
+    },
+  };
+
+  const extractionStatus = statusIconMap[studyData.extractionStatus];
+
   return (
-    <FormControl
-      w="100%"
-      height="100%"
-      gap="3rem"
-      borderRadius="1rem"
-      bg="white"
-      overflowY="auto"
-    >
+    <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">
+      <Flex gap="2rem">
+        <Flex
+          justifyContent="center"
+          alignItems="center"
+          fontFamily="sans-serif"
+          fontSize="1rem"
+          p=".5rem .25rem"
+          gap="1rem"
+          borderRadius="1rem"
+          bg={`${extractionStatus.color}.200`}
+          color={`${extractionStatus.color}.800`}
+          maxW="10rem"
+          w="10rem"
+          h="2rem"
+        >
+          {extractionStatus.icon}
+          {studyData.extractionStatus}
+        </Flex>
+      </Flex>
       <HeaderForm text={studyData.title} />
       <Box gap="5rem">
         {hasQuestions ? (
