@@ -29,7 +29,7 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
     if (setIsIncluded) setIsIncluded(isChecked);
     if (articles && articleIndex) {
       if (article && "studyReviewId" in article) {
-        page.type === "Selection"
+        page === "Selection"
           ? UseChangeStudySelectionStatus({
               studyReviewId: [article.studyReviewId],
               status: "INCLUDED",
@@ -47,7 +47,7 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
     if (setIsExcluded) setIsExcluded(isChecked);
     if (articles && articleIndex) {
       if (article && "studyReviewId" in article) {
-        page.type === "Selection"
+        page === "Selection"
           ? UseChangeStudySelectionStatus({
               studyReviewId: [article.studyReviewId],
               status: "EXCLUDED",
