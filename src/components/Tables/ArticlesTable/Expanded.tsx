@@ -18,8 +18,9 @@ import {
   tdSX,
   tooltip,
 } from "../../../pages/Execution/styles/CardsStyle";
+
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../../Context/AppContext";
 import { capitalize } from "../../../utils/CapitalizeText";
 import {
@@ -33,17 +34,41 @@ import { IoIosCloseCircle } from "react-icons/io";
 import StudySelectionContext from "../../Context/StudiesSelectionContext";
 import usePagination from "../../../hooks/tables/usePagination";
 import PaginationControl from "./PaginationControl";
+import { Resizable } from "./Resizable";
+import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
+import { ViewModel } from "../../../hooks/useLayoutPage";
+import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
 
 interface Props {
   articles: ArticleInterface[];
   handleHeaderClick: (key: keyof ArticleInterface) => void;
   sortConfig: { key: keyof ArticleInterface; direction: "asc" | "desc" } | null;
+  page: PageLayout;
+  layout?: ViewModel;
 }
 
-export default function Collapsed({
+type HeaderKeys =
+  | "studyReviewId"
+  | "title"
+  | "authors"
+  | "venue"
+  | "year"
+  | "selectionStatus"
+  | "extractionStatus"
+  | "score"
+  | "readingPriority";
+
+type Column = {
+  key: HeaderKeys;
+  label: string;
+  width: string | number;
+};
+
+export default function Expanded({
   articles,
   handleHeaderClick,
   sortConfig,
+  page,
 }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
@@ -51,45 +76,63 @@ export default function Collapsed({
 
   const studyContext = useContext(StudySelectionContext);
 
-  const renderStatusIcon = (status: string) => {
-    switch (status) {
-      case "INCLUDED":
-        return <CheckCircleIcon color="green.500" />;
-      case "DUPLICATED":
-        return <InfoIcon color="blue.500" />;
-      case "EXCLUDED":
-        return <IoIosCloseCircle color="red" size="1.4rem" />;
-      case "UNCLASSIFIED":
-        return <WarningIcon color="yellow.500" />;
-      default:
-        return null;
-    }
+  const statusIconMap: Record<string, React.ReactElement> = {
+    INCLUDED: <CheckCircleIcon color="green.500" />,
+    DUPLICATED: <InfoIcon color="blue.500" />,
+    EXCLUDED: <IoIosCloseCircle color="red" size="1.4rem" />,
+    UNCLASSIFIED: <WarningIcon color="yellow.500" />,
   };
 
-  const renderPriorityIcon = (priority: string) => {
-    switch (priority) {
-      case "VERY HIGH":
-        return <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />;
-      case "HIGH":
-        return <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />;
-      case "LOW":
-        return <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />;
-      case "VERY LOW":
-        return <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />;
-      default:
-        return null;
-    }
+  const priorityIconMap: Record<string, React.ReactElement> = {
+    "VERY HIGH": <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
+    HIGH: <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
+    LOW: <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
+    "VERY LOW": <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
   };
 
-  const columns = [
-    { label: "ID", key: "studyReviewId", width: "10%" },
-    { label: "Title", key: "title", width: "30%" },
-    { label: "Author", key: "authors", width: "20%" },
-    { label: "Journal", key: "venue", width: "28%" },
-    { label: "Selection", key: "selectionStatus", width: "10%" },
-    { label: "Extraction", key: "extraction", width: "10%" },
-    { label: "Reading Priority", key: "readingPriority", width: "11%" },
+  const renderStatusIcon = (status: string) => statusIconMap[status] || null;
+  const renderPriorityIcon = (priority: string) =>
+    priorityIconMap[priority] || null;
+
+  const [columnWidths, setColumnWidths] = useState({
+    studyReviewId: "3rem",
+    title: "8rem",
+    authors: "8rem",
+    venue: "5rem",
+    year: "3rem",
+    selectionStatus: "5rem ",
+    extractionStatus: "5rem ",
+    score: "3rem",
+    priority: "5rem ",
+  });
+
+  const columns: Column[] = [
+    { label: "ID", key: "studyReviewId", width: columnWidths.studyReviewId },
+    { label: "Title", key: "title", width: columnWidths.title },
+    { label: "Author", key: "authors", width: columnWidths.authors },
+    { label: "Journal", key: "venue", width: columnWidths.venue },
+    { label: "Year", key: "year", width: columnWidths.year },
+    {
+      label: "Selection",
+      key: "selectionStatus",
+      width: columnWidths.selectionStatus,
+    },
+    {
+      label: "Extraction",
+      key: "extractionStatus",
+      width: columnWidths.selectionStatus,
+    },
+    { label: "Score", key: "score", width: columnWidths.score },
+    { label: "Priority", key: "readingPriority", width: columnWidths.priority },
   ];
+
+  const shouldShowColumn = (colKey: string) => {
+    if (colKey === "selectionStatus")
+      return page === "Selection" || page === "Identification";
+    if (colKey === "extractionStatus")
+      return page === "Extraction" || page === "Identification";
+    return true;
+  };
 
   const {
     currentPage,
@@ -100,69 +143,121 @@ export default function Collapsed({
     handlePrevPage,
   } = usePagination(articles);
 
+  const handleColumnResize = (key: string, newWidth: number) => {
+    setColumnWidths((prev) => ({
+      ...prev,
+      [key]: `${newWidth}px`,
+    }));
+  };
+
   if (setShowSelectionModal && setSelectionStudyIndex)
     return (
-      <Box width="100%">
+      <Box w="100%" maxH="82.5vh">
         <TableContainer
-          width="100%"
-          borderRadius="1rem"
+          w="100%"
+          borderRadius="1rem 1rem 0 0"
           boxShadow="lg"
-          bg="#EBF0F3"
-          overflowY={"auto"}
-          h="100%"
+          bg="white"
+          overflowY="auto"
         >
           <Table
             variant="unstyled"
             colorScheme="#263C56"
             size="md"
             boxShadow="md"
+            layout="fixed"
           >
             <Thead
-              bg="#EBF0F3"
+              bg="white"
               borderRadius="1rem"
               justifyContent="space-around"
+              position="sticky"
+              top="0"
+              zIndex="1"
+              borderBottom=".5rem solid #C9D9E5"
             >
-              <Tr alignItems="center" justifyContent="space-around">
+              <Tr>
                 <Th
-                  textAlign="center"
+                  alignItems="center"
+                  justifyContent="center"
                   color="#263C56"
-                  fontSize="larger"
-                  w={3}
-                ></Th>
-                {columns.map((col) => (
-                  <Th
-                    key={col.key}
-                    textAlign="center"
-                    color="#263C56"
-                    fontSize="larger"
-                    p="2rem 2rem 1rem 0"
-                    textTransform="capitalize"
-                    borderBottom="3px solid #C9D9E5"
-                    w={col.width}
-                    onClick={() =>
-                      handleHeaderClick(col.key as keyof ArticleInterface)
-                    }
-                    cursor="pointer"
-                  >
-                    <Box
-                      display="flex"
-                      gap=".5rem"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      {col.label}
-                      {sortConfig?.key === col.key ? (
-                        sortConfig.direction === "asc" ? (
-                          <FaChevronUp style={chevronIcon} />
-                        ) : (
-                          <FaChevronDown style={chevronIcon} />
-                        )
-                      ) : (
-                        <FaChevronDown style={chevronIcon} />
-                      )}
-                    </Box>
-                  </Th>
-                ))}
+                  w="1rem"
+                  bg="white"
+                >
+                  <RiCheckboxMultipleBlankFill size="1.25rem" />
+                </Th>
+                {columns.map(
+                  (col) =>
+                    shouldShowColumn(col.key) && (
+                      <Th
+                        key={col.key}
+                        textAlign="center"
+                        color="#263C56"
+                        fontSize="larger"
+                        p="0"
+                        textTransform="capitalize"
+                        cursor="pointer"
+                        w={col.width}
+                      >
+                        <Resizable
+                          direction="horizontal"
+                          minWidth={50}
+                          onResize={(width) =>
+                            handleColumnResize(col.key, width)
+                          }
+                        >
+                          {({ ref, isResizing }) => (
+                            <Box
+                              ref={ref}
+                              position="relative"
+                              h="100%"
+                              w="100%"
+                              display="flex"
+                              alignItems="center"
+                              justifyContent="center"
+                              onClick={() =>
+                                !isResizing &&
+                                handleHeaderClick(
+                                  col.key as keyof ArticleInterface
+                                )
+                              }
+                            >
+                              <Box
+                                display="flex"
+                                gap=".5rem"
+                                justifyContent="center"
+                                alignItems="center"
+                                w="100%"
+                                p="2rem 0 1rem 0"
+                              >
+                                {col.label}
+                                {sortConfig?.key === col.key ? (
+                                  sortConfig.direction === "asc" ? (
+                                    <FaChevronUp style={chevronIcon} />
+                                  ) : (
+                                    <FaChevronDown style={chevronIcon} />
+                                  )
+                                ) : (
+                                  <FaChevronDown style={chevronIcon} />
+                                )}
+                              </Box>
+                              <Box
+                                className="resize-handle"
+                                position="absolute"
+                                right="0"
+                                top="0"
+                                bottom="0"
+                                width=".5rem"
+                                cursor="col-resize"
+                                zIndex={2}
+                                _hover={{ bg: "#263C56" }}
+                              />
+                            </Box>
+                          )}
+                        </Resizable>
+                      </Th>
+                    )
+                )}
               </Tr>
             </Thead>
             <Tbody>
@@ -184,6 +279,7 @@ export default function Collapsed({
                       setShowSelectionModal?.(true);
                     }}
                     transition="background-color 0.3s, box-shadow 0.3s"
+                    p="0"
                   >
                     <Td textAlign="center" w="5%">
                       <Checkbox
@@ -205,10 +301,19 @@ export default function Collapsed({
                         }}
                       />
                     </Td>
-                    <Td sx={tdSX}>
-                      {String(e.studyReviewId).padStart(5, "0")}
+                    <Td sx={tdSX} w={columnWidths.studyReviewId}>
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.title}
+                        aria-label="Full ID"
+                        hasArrow
+                      >
+                        <Text sx={collapsedSpanText}>
+                          {String(e.studyReviewId).padStart(5, "0")}
+                        </Text>
+                      </Tooltip>
                     </Td>
-                    <Td sx={tdSX}>
+                    <Td sx={tdSX} w={columnWidths.title}>
                       <Tooltip
                         sx={tooltip}
                         label={e.title}
@@ -218,7 +323,7 @@ export default function Collapsed({
                         <Text sx={collapsedSpanText}>{e.title}</Text>
                       </Tooltip>
                     </Td>
-                    <Td sx={tdSX}>
+                    <Td sx={tdSX} w={columnWidths.authors}>
                       <Tooltip
                         sx={tooltip}
                         label={e.authors}
@@ -228,7 +333,7 @@ export default function Collapsed({
                         <Text sx={collapsedSpanText}>{e.authors}</Text>
                       </Tooltip>
                     </Td>
-                    <Td sx={tdSX}>
+                    <Td sx={tdSX} w={columnWidths.venue}>
                       <Tooltip
                         sx={tooltip}
                         label={e.venue}
@@ -238,40 +343,61 @@ export default function Collapsed({
                         <Text sx={collapsedSpanText}>{e.venue}</Text>
                       </Tooltip>
                     </Td>
-
-                    <Td p=".5rem 0" w="8%">
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        gap="0.5rem"
+                    <Td sx={tdSX} w={columnWidths.year}>
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.year}
+                        aria-label="Year of published"
+                        hasArrow
                       >
-                        {renderStatusIcon(e.selectionStatus)}
-                        <Text sx={collapsedSpanText}>
-                          {capitalize(
-                            e.selectionStatus?.toString().toLowerCase() || ""
-                          )}
-                        </Text>
-                      </Box>
+                        <Text sx={collapsedSpanText}>{e.year}</Text>
+                      </Tooltip>
                     </Td>
-
-                    <Td p=".5rem 0" w="8%">
-                      <Box
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        gap="0.5rem"
+                    {page == "Selection" || page == "Identification" ? (
+                      <Td sx={tdSX} w={columnWidths.selectionStatus}>
+                        <Box
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          gap="0.5rem"
+                        >
+                          {renderStatusIcon(e.selectionStatus)}
+                          <Text sx={collapsedSpanText}>
+                            {capitalize(
+                              e.selectionStatus?.toString().toLowerCase() || ""
+                            )}
+                          </Text>
+                        </Box>
+                      </Td>
+                    ) : null}
+                    {page == "Extraction" || page == "Identification" ? (
+                      <Td sx={tdSX} w={columnWidths.extractionStatus}>
+                        <Box
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          gap="0.5rem"
+                        >
+                          {renderStatusIcon(e.extractionStatus)}
+                          <Text sx={collapsedSpanText}>
+                            {capitalize(
+                              e.extractionStatus?.toString().toLowerCase() || ""
+                            )}
+                          </Text>
+                        </Box>
+                      </Td>
+                    ) : null}
+                    <Td sx={tdSX} w={columnWidths.score}>
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.score}
+                        aria-label="score of article"
+                        hasArrow
                       >
-                        {renderStatusIcon(e.extractionStatus)}
-                        <Text sx={collapsedSpanText}>
-                          {capitalize(
-                            e.extractionStatus?.toString().toLowerCase() || ""
-                          )}
-                        </Text>
-                      </Box>
+                        <Text sx={collapsedSpanText}>{e.score}</Text>
+                      </Tooltip>
                     </Td>
-
-                    <Td p=".5rem 0" w="8%">
+                    <Td sx={tdSX} w={columnWidths.priority}>
                       <Box
                         display="flex"
                         alignItems="center"

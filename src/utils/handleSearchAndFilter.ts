@@ -13,7 +13,7 @@ export const handleSearchAndFilter = (
       value?.toString().toLowerCase().includes(lowerCaseSearch)
     );
     const matchesStatus =
-      page.type === "Selection"
+      page === "Selection"
         ? !selectedStatus || article.selectionStatus === selectedStatus
         : !selectedStatus || article.extractionStatus === selectedStatus;
 

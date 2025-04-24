@@ -7,6 +7,8 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Tooltip,
+  Text,
 } from "@chakra-ui/react";
 import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
 
@@ -15,7 +17,7 @@ interface IComboBoxProps {
   options: string[];
   isDisabled: boolean;
   onOptionchange?: (option: string, isChecked: boolean) => void;
-  page: PageLayout
+  page: PageLayout;
 }
 
 export default function ComboBox({
@@ -26,7 +28,7 @@ export default function ComboBox({
   page,
 }: IComboBoxProps) {
   const { handleIncludeItemClick, handleExcludeItemClick } =
-    useComboBoxSelection({page});
+    useComboBoxSelection({ page });
 
   return (
     <Menu closeOnSelect={false}>
@@ -79,22 +81,40 @@ export default function ComboBox({
         {text}
       </MenuButton>
 
-      <MenuList>
+      <MenuList maxH="10rem" overflowY="auto">
         {options.map((option, index) => (
-          <MenuItem key={index}>
+          <MenuItem key={index} maxW="25rem" overflow="auto">
             {text === "Include" ? (
               <Checkbox
                 isDisabled={isDisabled}
                 onChange={(e) => handleIncludeItemClick(e.target.checked)}
               >
-                {option}
+                <Tooltip
+                  label={option}
+                  aria-label="Full criteria"
+                  p="1rem"
+                  hasArrow
+                >
+                  <Text isTruncated maxW="20rem">
+                    {option}
+                  </Text>
+                </Tooltip>
               </Checkbox>
             ) : text === "Exclude" ? (
               <Checkbox
                 isDisabled={isDisabled}
                 onChange={(e) => handleExcludeItemClick(e.target.checked)}
               >
-                {option}
+                <Tooltip
+                  label={option}
+                  aria-label="Full criteria"
+                  p="1rem"
+                  hasArrow
+                >
+                  <Text isTruncated maxW="20rem">
+                    {option}
+                  </Text>
+                </Tooltip>
               </Checkbox>
             ) : text === "filter options" && onOptionchange ? (
               <Checkbox

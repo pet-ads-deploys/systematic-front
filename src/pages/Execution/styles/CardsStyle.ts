@@ -60,15 +60,15 @@ export const btnConteiner = {
 };
 
 export const tdSX = {
-  w: "20em",
+  minw: "5rem",
   textAlign: "center",
   alignSelf: "center",
+  justifyContent: "center",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
   fontWeight: 500,
   cursor: "pointer",
-  p: "0rem 1rem",
 };
 
 export const collapsedTdSX = {

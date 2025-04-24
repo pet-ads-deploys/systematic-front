@@ -27,5 +27,5 @@ export const button = {
   p: "1rem",
   border:"2px solid white",
   bg: "black",
-  w: "6.5rem",
+  w: "6rem",
 };

@@ -39,6 +39,20 @@ export default function ButtonsForMultipleSelection() {
 
   const articles = studyContext?.selectedArticles;
 
+  const handleSendDuplicatedStudies = () => {
+    sendDuplicatedStudies();
+    studyContext?.clearSelectedArticles();
+  };
+
+  const handleSendExcludedStudies = () => {
+    if (!articles || Object.keys(articles).length <= 1) return;
+    UseChangeStudySelectionStatus({
+      status: "EXCLUDED",
+      studyReviewId: [...Object.values(articles).map((art) => art.id)],
+    });
+    studyContext?.clearSelectedArticles();
+  };
+
   return articles && Object.keys(articles).length > 1 ? (
     <Flex gap=".5rem">
       <Button
@@ -65,7 +79,7 @@ export default function ButtonsForMultipleSelection() {
         border="2px solid #3182CE"
         _hover={{ bg: "white", color: "#3182CE" }}
         transition="0.2s ease-in-out"
-        onClick={sendDuplicatedStudies}
+        onClick={handleSendDuplicatedStudies}
         leftIcon={<FaCheckCircle />}
       >
         Mark to duplicated
@@ -76,12 +90,7 @@ export default function ButtonsForMultipleSelection() {
         border="2px solid #951717"
         _hover={{ bg: "white", color: "#951717" }}
         transition="0.2s ease-in-out"
-        onClick={() =>
-          UseChangeStudySelectionStatus({
-            status: "EXCLUDED",
-            studyReviewId: [...Object.values(articles).map((art) => art.id)],
-          })
-        }
+        onClick={handleSendExcludedStudies}
         leftIcon={<FaTrashAlt />}
       >
         Mark to excluded

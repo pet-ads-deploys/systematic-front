@@ -53,70 +53,68 @@ export default function ButtonsForSelection({
 
   if (isExcluded != undefined && isIncluded != undefined)
     return (
-      <>
-        <Flex sx={conteiner}>
-          {isUniqueArticle ? null : (
-            <Flex sx={buttonconteiner}>
-              <Button
-                _hover={{
-                  bg: "white",
-                  color: "black",
-                  border: "2px solid black",
-                }}
-                onClick={ChangeToPrevius}
-                sx={button}
-              >
-                <IoIosArrowBack size="1.5rem" /> Back
-              </Button>
-            </Flex>
-          )}
-
-          <Flex sx={boxconteiner}>
-            <ComboBox
-              isDisabled={isExcluded}
-              text="Include"
-              options={criteriosInclusao}
-              page={page}
-            />
-            <ComboBox
-              isDisabled={isIncluded}
-              text="Exclude"
-              options={criteriosExclusao}
-              page={page}
-            />
+      <Flex sx={conteiner}>
+        {isUniqueArticle ? null : (
+          <Flex sx={buttonconteiner}>
             <Button
-              borderRadius="6px"
-              bg="#eab308"
-              color="white"
-              border="2px solid #f6bb42"
-              _hover={{ bg: "white", color: "#eab308" }}
-              transition="0.2s ease-in-out"
-              boxShadow="md"
-              p="1rem"
-              onClick={handleResetStatusToUnclassified}
-              w={"7.5rem"}
+              _hover={{
+                bg: "white",
+                color: "black",
+                border: "2px solid black",
+              }}
+              onClick={ChangeToPrevius}
+              sx={button}
             >
-              Reset
+              <IoIosArrowBack size="1.5rem" /> Back
             </Button>
           </Flex>
+        )}
 
-          {isUniqueArticle ? null : (
-            <Flex sx={buttonconteiner}>
-              <Button
-                _hover={{
-                  bg: "white",
-                  color: "black",
-                  border: "2px solid black",
-                }}
-                onClick={ChangeToNext}
-                sx={button}
-              >
-                Next
-                <IoIosArrowForward size="1.5rem" />
-              </Button>
-            </Flex>
-          )}
+        <Flex sx={boxconteiner}>
+          <ComboBox
+            isDisabled={isExcluded}
+            text="Include"
+            options={criteriosInclusao}
+            page={page}
+          />
+          <ComboBox
+            isDisabled={isIncluded}
+            text="Exclude"
+            options={criteriosExclusao}
+            page={page}
+          />
+          <Button
+            borderRadius="6px"
+            bg="#eab308"
+            color="white"
+            border="2px solid #f6bb42"
+            _hover={{ bg: "white", color: "#eab308" }}
+            transition="0.2s ease-in-out"
+            boxShadow="md"
+            p="1rem"
+            onClick={handleResetStatusToUnclassified}
+            w={"7.5rem"}
+          >
+            Reset
+          </Button>
         </Flex>
-      </>
+
+        {isUniqueArticle ? null : (
+          <Flex sx={buttonconteiner}>
+            <Button
+              _hover={{
+                bg: "white",
+                color: "black",
+                border: "2px solid black",
+              }}
+              onClick={ChangeToNext}
+              sx={button}
+            >
+              Next
+              <IoIosArrowForward size="1.5rem" />
+            </Button>
+          </Flex>
+        )}
+      </Flex>
     );
 }

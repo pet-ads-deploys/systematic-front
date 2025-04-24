@@ -7,7 +7,6 @@ import FlexLayout from "../../../components/ui/Flex/Flex";
 import Header from "../../../components/ui/Header/Header";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
-import ButtonsLayout from "../subcomponents/LayoutButtons";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 
 import { AppProvider } from "../../../components/Context/AppContext";
@@ -21,35 +20,24 @@ import { inputconteiner } from "../styles/executionStyles";
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
-import { ViewModel } from "../Selection/Selection";
 import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
-
-// Unused imports
-// import ComboBox from "../../../components/Inputs/ComboBox";
-// import DynamicTable from "../../../components/Tables/DynamicTable";
-// import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
-// import { StudyInterface } from "../../../../public/interfaces/IStudy";
-// import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
-// import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
-// import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
-// import ArticlesTable from "../../../components/Tables/ArticlesTable/ArticlesTable";
-// import ExtractionForm from "./subcomponents/forms/ExtractionForm/ExtractionForm";
-// import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
-// import StudySelectionArea from "../Selection/subcomponents/StudySelectionArea";
+import useLayoutPage from "../../../hooks/useLayoutPage";
+import SelectLayout from "../subcomponents/LayoutButtons";
 
 export default function Extraction() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
   const selectionContext = useContext(StudySelectionContext);
-  const [layout, setLayout] = useState<ViewModel>("vertical");
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
   const articles: ArticleInterface[] = selectionContext.articles
     .filter((art): art is ArticleInterface => "studyReviewId" in art)
     .filter((art) => art.selectionStatus === "INCLUDED");
 
-  const page: PageLayout = { type: "Extraction" };
+  const { layout, handleChangeLayout } = useLayoutPage();
+
+  const page: PageLayout = "Extraction";
 
   const filteredArticles = handleSearchAndFilter(
     searchString,
@@ -57,10 +45,6 @@ export default function Extraction() {
     articles,
     page
   );
-
-  const handleArticleLayoutChange = () => setLayout("article");
-  const handleTableLayoutChange = () => setLayout("table");
-  const handleVerticalLayoutChange = () => setLayout("vertical");
 
   return (
     <AppProvider>
@@ -73,7 +57,6 @@ export default function Extraction() {
               display="flex"
               flexDirection="column"
               justifyContent="space-between"
-              // overflowY="auto"
             >
               <Flex
                 w="100%"
@@ -83,43 +66,50 @@ export default function Extraction() {
                 mb="2rem"
               >
                 <Header text="Extraction" />
-                <ButtonsLayout
-                  layout={layout}
-                  handleArticleLayoutChange={handleArticleLayoutChange}
-                  handleTableLayoutChange={handleTableLayoutChange}
-                  handleVerticalLayoutChange={handleVerticalLayoutChange}
-                />
+                <SelectLayout handleChangeLayout={handleChangeLayout} />
               </Flex>
-           <Box sx={inputconteiner}>
-             <Flex gap="1rem" w="35%" justifyContent="space-between">
-               <InputText
-                 type="search"
-                 placeholder="Insert article atribute"
-                 nome="search"
-                 onChange={(e) => setSearchString(e.target.value)}
-                 value={searchString}
-               />
-               {layout !== "article" ? <ButtonsForMultipleSelection /> : null}
-             </Flex>
-             <Box
-               display="flex"
-               gap="1rem"
-               justifyContent="space-between"
-               alignItems="center"
-             >
-               <SelectInput
-                 names={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
-                 values={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
-                 onSelect={(value) => handleSelectChange(value)}
-                 selectedValue={selectedStatus}
-                 page={"selection"}
-                 placeholder="Selection status"
-               />
-             </Box>
-           </Box>
-              <Box w="100%" h="85vh">
+              <Box sx={inputconteiner}>
+                <Flex gap="1rem" w="35%" justifyContent="space-between">
+                  <InputText
+                    type="search"
+                    placeholder="Insert article atribute"
+                    nome="search"
+                    onChange={(e) => setSearchString(e.target.value)}
+                    value={searchString}
+                  />
+                  {layout !== "article" ? (
+                    <ButtonsForMultipleSelection />
+                  ) : null}
+                </Flex>
+                <Box
+                  display="flex"
+                  gap="1rem"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <SelectInput
+                    names={[
+                      "INCLUDED",
+                      "DUPLICATED",
+                      "EXCLUDED",
+                      "UNCLASSIFIED",
+                    ]}
+                    values={[
+                      "INCLUDED",
+                      "DUPLICATED",
+                      "EXCLUDED",
+                      "UNCLASSIFIED",
+                    ]}
+                    onSelect={(value) => handleSelectChange(value)}
+                    selectedValue={selectedStatus}
+                    page={"selection"}
+                    placeholder="Selection status"
+                  />
+                </Box>
+              </Box>
+              <Box w="100%" h="82.5vh">
                 <LayoutFactory
-                  page={{ type: "Extraction" }}
+                  page="Extraction"
                   layout={layout}
                   articles={filteredArticles}
                   isLoading={selectionContext.isLoading}

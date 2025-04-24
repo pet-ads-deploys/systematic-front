@@ -62,15 +62,15 @@ export default function StudySelectionArea({
       borderRadius="1rem"
       bg="white"
       w="100%"
-      h={page.type === "Extraction" ? "80%" : "100%"}
-      p="5"
-      alignItems={"center"}
+      h={page === "Extraction" ? "80%" : "100%"}
+      p="2"
+      alignItems="center"
       gap="1rem"
     >
-      <Flex justifyContent="center" w="100%">
+      <Flex alignItems="center" justifyContent="center" w="100%" maxW="100%">
         <ButtonsForSelection page={page} />
       </Flex>
-      <Box w={"100%"} h="80%">
+      <Box w="100%" h="80%">
         {articles && typeof studyIndex === "number" ? (
           <StudyDataFiel
             studyData={articles?.[studyIndex] as StudyInterface}
