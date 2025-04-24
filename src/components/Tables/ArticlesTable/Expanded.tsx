@@ -37,6 +37,7 @@ import PaginationControl from "./PaginationControl";
 import { Resizable } from "./Resizable";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
 import { ViewModel } from "../../../hooks/useLayoutPage";
+import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
 
 interface Props {
   articles: ArticleInterface[];
@@ -46,8 +47,19 @@ interface Props {
   layout?: ViewModel;
 }
 
+type HeaderKeys =
+  | "studyReviewId"
+  | "title"
+  | "authors"
+  | "venue"
+  | "year"
+  | "selectionStatus"
+  | "extractionStatus"
+  | "score"
+  | "readingPriority";
+
 type Column = {
-  key: string;
+  key: HeaderKeys;
   label: string;
   width: string | number;
 };
@@ -57,7 +69,6 @@ export default function Expanded({
   handleHeaderClick,
   sortConfig,
   page,
-  layout,
 }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
@@ -85,14 +96,14 @@ export default function Expanded({
 
   const [columnWidths, setColumnWidths] = useState({
     studyReviewId: "3rem",
-    title: "25%",
-    authors: "25%",
-    venue: "fit-content",
-    year: "50px",
-    selectionStatus: "fit-content ",
-    extractionStatus: "fit-content ",
-    score: "fit-content",
-    priority: "fit-content ",
+    title: "8rem",
+    authors: "8rem",
+    venue: "5rem",
+    year: "3rem",
+    selectionStatus: "5rem ",
+    extractionStatus: "5rem ",
+    score: "3rem",
+    priority: "5rem ",
   });
 
   const columns: Column[] = [
@@ -111,11 +122,9 @@ export default function Expanded({
       key: "extractionStatus",
       width: columnWidths.selectionStatus,
     },
-    { label: "Score", key: "Score", width: columnWidths.score },
+    { label: "Score", key: "score", width: columnWidths.score },
     { label: "Priority", key: "readingPriority", width: columnWidths.priority },
   ];
-
-  console.log("artigos com score sei la mano", articles);
 
   const shouldShowColumn = (colKey: string) => {
     if (colKey === "selectionStatus")
@@ -132,7 +141,7 @@ export default function Expanded({
     paginatedArticles,
     handleNextPage,
     handlePrevPage,
-  } = usePagination(articles, layout);
+  } = usePagination(articles);
 
   const handleColumnResize = (key: string, newWidth: number) => {
     setColumnWidths((prev) => ({
@@ -149,7 +158,7 @@ export default function Expanded({
           borderRadius="1rem 1rem 0 0"
           boxShadow="lg"
           bg="white"
-          overflowY={"auto"}
+          overflowY="auto"
         >
           <Table
             variant="unstyled"
@@ -158,14 +167,25 @@ export default function Expanded({
             boxShadow="md"
             layout="fixed"
           >
-            <Thead bg="white" borderRadius="1rem" justifyContent="space-around">
-              <Tr alignItems="center" justifyContent="space-around">
+            <Thead
+              bg="white"
+              borderRadius="1rem"
+              justifyContent="space-around"
+              position="sticky"
+              top="0"
+              zIndex="1"
+              borderBottom=".5rem solid #C9D9E5"
+            >
+              <Tr>
                 <Th
-                  textAlign="center"
+                  alignItems="center"
+                  justifyContent="center"
                   color="#263C56"
-                  fontSize="larger"
-                  w="5%"
-                ></Th>
+                  w="1rem"
+                  bg="white"
+                >
+                  <RiCheckboxMultipleBlankFill size="1.25rem" />
+                </Th>
                 {columns.map(
                   (col) =>
                     shouldShowColumn(col.key) && (
@@ -176,7 +196,6 @@ export default function Expanded({
                         fontSize="larger"
                         p="0"
                         textTransform="capitalize"
-                        borderBottom="3px solid #C9D9E5"
                         cursor="pointer"
                         w={col.width}
                       >
@@ -283,7 +302,16 @@ export default function Expanded({
                       />
                     </Td>
                     <Td sx={tdSX} w={columnWidths.studyReviewId}>
-                      {String(e.studyReviewId).padStart(5, "0")}
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.title}
+                        aria-label="Full ID"
+                        hasArrow
+                      >
+                        <Text sx={collapsedSpanText}>
+                          {String(e.studyReviewId).padStart(5, "0")}
+                        </Text>
+                      </Tooltip>
                     </Td>
                     <Td sx={tdSX} w={columnWidths.title}>
                       <Tooltip

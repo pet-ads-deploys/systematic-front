@@ -18,7 +18,6 @@ import { ViewModel } from "../../../hooks/useLayoutPage";
 import React from "react";
 import { capitalize } from "../../../utils/CapitalizeText";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { motion } from "framer-motion";
 
 interface SelectLayoutProps {
   handleChangeLayout: (newLayout: ViewModel) => void;
@@ -80,7 +79,7 @@ export default function SelectLayout({
           <ChevronDownIcon fontSize="1.25rem" />
         </Flex>
       </MenuButton>
-      <MenuList bg={"#EBF0F3"} color="#2E4B6C">
+      <MenuList bg={"#EBF0F3"} color="#2E4B6C" zIndex="2">
         {Object.values(buttons).map((element, index) => (
           <MenuItem
             key={index}

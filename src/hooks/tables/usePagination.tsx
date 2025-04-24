@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
-import { ViewModel } from "../useLayoutPage";
 
-const MAX_ITENS_PER_PAGE = 11;
+const MAX_ITENS_PER_PAGE = 15;
 
-export default function usePagination(
-  articles: ArticleInterface[],
-  layout?: ViewModel
-) {
+export default function usePagination(articles: ArticleInterface[]) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itensPerPage, setItensPerPage] = useState<number>(MAX_ITENS_PER_PAGE);
 
@@ -38,12 +34,6 @@ export default function usePagination(
     setItensPerPage(quantity);
     console.log(itensPerPage);
   };
-
-  useEffect(() => {
-    if (layout === "horizontal" || layout === "horizontal-invert") {
-      changeQuantityOfItens(3);
-    }
-  }, [layout]);
 
   return {
     currentPage,
