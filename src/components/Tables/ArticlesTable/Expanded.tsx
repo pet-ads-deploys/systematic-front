@@ -57,7 +57,7 @@ export default function Expanded({
   handleHeaderClick,
   sortConfig,
   page,
-  layout
+  layout,
 }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
@@ -91,6 +91,7 @@ export default function Expanded({
     year: "50px",
     selectionStatus: "fit-content ",
     extractionStatus: "fit-content ",
+    score: "fit-content",
     priority: "fit-content ",
   });
 
@@ -110,8 +111,11 @@ export default function Expanded({
       key: "extractionStatus",
       width: columnWidths.selectionStatus,
     },
+    { label: "Score", key: "Score", width: columnWidths.score },
     { label: "Priority", key: "readingPriority", width: columnWidths.priority },
   ];
+
+  console.log("artigos com score sei la mano", articles);
 
   const shouldShowColumn = (colKey: string) => {
     if (colKey === "selectionStatus")
@@ -120,8 +124,6 @@ export default function Expanded({
       return page === "Extraction" || page === "Identification";
     return true;
   };
-
-  console.log("layout q veio pro expanded:", layout);
 
   const {
     currentPage,
@@ -357,6 +359,16 @@ export default function Expanded({
                         </Box>
                       </Td>
                     ) : null}
+                    <Td sx={tdSX} w={columnWidths.score}>
+                      <Tooltip
+                        sx={tooltip}
+                        label={e.score}
+                        aria-label="score of article"
+                        hasArrow
+                      >
+                        <Text sx={collapsedSpanText}>{e.score}</Text>
+                      </Tooltip>
+                    </Td>
                     <Td sx={tdSX} w={columnWidths.priority}>
                       <Box
                         display="flex"
