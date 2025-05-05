@@ -10,7 +10,7 @@ interface TableProps {
 
 export const FullArticle: React.FC<TableProps> = ({ articles, page }) => {
   return (
-    <Box w="100%" maxH="100%">
+    <Box w="100%" h="100%">
       <StudySelectionArea articles={articles} page={page} />
     </Box>
   );
