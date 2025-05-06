@@ -69,6 +69,7 @@ export default function Expanded({
   handleHeaderClick,
   sortConfig,
   page,
+  layout,
 }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
@@ -155,6 +156,11 @@ export default function Expanded({
       <Box w="100%" maxH="82.5vh">
         <TableContainer
           w="100%"
+          maxH={
+            layout == "horizontal" || layout == "horizontal-invert"
+              ? "15rem"
+              : "calc(100vh - 15.5rem)"
+          }
           borderRadius="1rem 1rem 0 0"
           boxShadow="lg"
           bg="white"
