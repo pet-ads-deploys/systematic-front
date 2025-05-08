@@ -29,6 +29,7 @@ export default function MenuOptions({
   const handleChangeSelect = (value: string) => {
     setSelected(value);
     onOptionToggle(value);
+    setSelected("");
   };
 
   return (
