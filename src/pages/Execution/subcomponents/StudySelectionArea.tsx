@@ -37,11 +37,14 @@ export default function StudySelectionArea({
         borderRadius="1rem"
         w="100%"
         h="100%"
+        maxH="100%"
         mb="20px"
         p="6"
         alignItems="center"
         justifyContent="center"
         boxShadow="md"
+        border="3px solid #263C56"
+        borderStyle="dashed"
       >
         <GrSelect size="3.5rem" color="#263C56" />
         <Text

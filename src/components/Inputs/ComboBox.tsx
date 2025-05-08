@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
+// import { ChevronDownIcon } from "@chakra-ui/icons";
 import useComboBoxSelection from "../../hooks/useComboBoxSelection";
 import {
   Button,
@@ -11,6 +11,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import { RiMenuAddFill } from "react-icons/ri";
+import { MdOutlinePlaylistRemove } from "react-icons/md";
 
 interface IComboBoxProps {
   text: string;
@@ -33,52 +35,18 @@ export default function ComboBox({
   return (
     <Menu closeOnSelect={false}>
       <MenuButton
-        bgColor={
-          text === "Include"
-            ? "#6B8E23"
-            : text === "Exclude"
-            ? "#8B0000"
-            : text === "filter options"
-            ? "#EBF0F3"
-            : "#303D50"
-        }
-        color={text === "filter options" ? "#2E4B6C" : "#ffff"}
-        borderRadius={"6px"}
-        border={
-          text === "Include"
-            ? "2px solid #6B8E23"
-            : text === "Exclude"
-            ? "2px solid #8B0000"
-            : text === "filter options"
-            ? "2px solid #CFE2F3"
-            : "#2F3E52"
-        }
         as={Button}
-        _hover={{
-          bg:
-            text === "Include"
-              ? "white"
-              : text === "Exclude"
-              ? "white"
-              : text === "filter options"
-              ? "#CFE2F3"
-              : "#2F3E52",
-          color:
-            text === "Include"
-              ? "#6B8E23"
-              : text === "Exclude"
-              ? "#8B0000"
-              : text === "filter options"
-              ? "#CFE2F3"
-              : "#2F3E52",
-          transition: "0.2s ease-in-out",
-        }}
-        transition="0.2s ease-in-out"
-        boxShadow="md"
-        rightIcon={<ChevronDownIcon fontSize="1.5rem" />}
-        w={"7.5rem"}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        bg="white"
+        color="black"
       >
-        {text}
+        {text === "Include" ? (
+          <RiMenuAddFill size="1.5rem" />
+        ) : (
+          <MdOutlinePlaylistRemove size="2rem" />
+        )}
       </MenuButton>
 
       <MenuList maxH="10rem" overflowY="auto">
