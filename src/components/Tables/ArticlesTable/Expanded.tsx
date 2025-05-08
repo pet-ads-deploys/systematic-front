@@ -69,6 +69,7 @@ export default function Expanded({
   handleHeaderClick,
   sortConfig,
   page,
+  layout,
 }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
@@ -84,10 +85,10 @@ export default function Expanded({
   };
 
   const priorityIconMap: Record<string, React.ReactElement> = {
-    "VERY HIGH": <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
-    HIGH: <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
-    LOW: <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
-    "VERY LOW": <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
+    "VERY_LOW": <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
+    "LOW": <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
+    "HIGH": <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
+    "VERY_HIGH": <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
   };
 
   const renderStatusIcon = (status: string) => statusIconMap[status] || null;
@@ -155,6 +156,11 @@ export default function Expanded({
       <Box w="100%" maxH="82.5vh">
         <TableContainer
           w="100%"
+          maxH={
+            layout == "horizontal" || layout == "horizontal-invert"
+              ? "15rem"
+              : "calc(100vh - 15.5rem)"
+          }
           borderRadius="1rem 1rem 0 0"
           boxShadow="lg"
           bg="white"
@@ -162,7 +168,7 @@ export default function Expanded({
         >
           <Table
             variant="unstyled"
-            colorScheme="#263C56"
+            colorScheme="black"
             size="md"
             boxShadow="md"
             layout="fixed"
@@ -408,7 +414,7 @@ export default function Expanded({
                         <Text sx={collapsedSpanText}>
                           {capitalize(
                             e.readingPriority?.toString().toLowerCase() || ""
-                          )}
+                          ).replace("_", " ")}
                         </Text>
                       </Box>
                     </Td>

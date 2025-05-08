@@ -1,8 +1,17 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
+
 import { ArticlePreviewProps } from "./StudyData";
+
 import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { IoIosCloseCircle } from "react-icons/io";
 import { LuFeather } from "react-icons/lu";
+import {
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
+  MdKeyboardDoubleArrowDown,
+  MdKeyboardDoubleArrowUp,
+} from "react-icons/md";
+import { capitalize } from "../../../utils/CapitalizeText";
 
 export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
   const statusIconMap: Record<
@@ -30,7 +39,33 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
     },
   };
 
+  const priorityIconMap: Record<
+    string,
+    {
+      icon: React.ReactNode;
+      color: string;
+    }
+  > = {
+    VERY_LOW: {
+      icon: <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
+      color: "red",
+    },
+    LOW: {
+      icon: <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
+      color: "yellow",
+    },
+    HIGH: {
+      icon: <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
+      color: "orange",
+    },
+    VERY_HIGH: {
+      icon: <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
+      color: "green",
+    },
+  };
+
   const selectionStatus = statusIconMap[studyData.selectionStatus];
+  const priorityLevel = priorityIconMap[studyData.readingPriority];
 
   const pathToReference = studyData.doi;
 
@@ -59,6 +94,7 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
         <Flex
           alignItems="center"
           justifyContent={pathToReference ? "space-between" : "end"}
+          gap="1rem"
         >
           {pathToReference ? (
             <Button
@@ -93,7 +129,7 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
             bg={`${selectionStatus.color}.100`}
             color={`${selectionStatus.color}.700`}
             fontWeight="semibold"
-            fontSize="0.9rem"
+            fontSize="1rem"
             borderRadius="lg"
             boxShadow="md"
             transition="all 0.3s ease"
@@ -103,6 +139,29 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
           >
             {selectionStatus.icon}
             {studyData.selectionStatus}
+          </Flex>
+          <Flex
+            alignItems="center"
+            justifyContent="center"
+            h="2rem"
+            px={4}
+            py={2}
+            gap={2}
+            bg={`${priorityLevel.color}.100`}
+            color={`${priorityLevel.color}.700`}
+            fontWeight="semibold"
+            fontSize="1rem"
+            borderRadius="lg"
+            boxShadow="md"
+            transition="all 0.3s ease"
+            _hover={{
+              bg: `${priorityLevel.color}.200`,
+            }}
+          >
+            {priorityLevel.icon}
+            {capitalize(
+              studyData.readingPriority.toString().toLowerCase() || ""
+            ).replace("_", " ")}
           </Flex>
         </Flex>
         <Flex>
