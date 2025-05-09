@@ -1,18 +1,21 @@
-import { Box, Button, Flex, FormControl, Text } from "@chakra-ui/react";
-import HeaderForm from "../HeaderForm/HeaderForm";
-
-import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
 import { useState } from "react";
-import DropdownList from "../Responses/DropdownList/DropdownList";
-import LabeledList from "../Responses/LabeledList/LabeledList";
+import { useNavigate } from "react-router-dom";
+import { Box, Button, Flex, FormControl, Text } from "@chakra-ui/react";
+
+import HeaderForm from "../HeaderForm/HeaderForm";
 import TextualResponse from "../Responses/Textual/Textual.tsx";
 import NumberScale from "../Responses/NumberScale/NumberScale.tsx";
-import { useNavigate } from "react-router-dom";
-import { FaPlusCircle } from "react-icons/fa";
-import { button } from "./styles.ts";
+import DropdownList from "../Responses/DropdownList/DropdownList";
+import LabeledList from "../Responses/LabeledList/LabeledList";
+
+import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
 
 import { ArticlePreviewProps } from "../../../../../../components/Modals/StudyModal/StudyData.tsx";
+
+import { button } from "./styles.ts";
+
 import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
+import { FaPlusCircle } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
 
 export interface Questions {
@@ -25,22 +28,22 @@ export interface Questions {
   questionType: string | null;
   scales: Record<string, number>;
   systematicStudyId: string | null;
+  context: string;
 }
 
 export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
-  const reviewId = localStorage.getItem("systematicReviewId");
-  const navigate = useNavigate();
-  const { questions } = useFetchExtractionQuestions();
-  const hasQuestions = questions ? questions.length > 0 : false;
-
   const [responses, setResponses] = useState<Record<string, string>>({});
-
   const updateResponse = (questionId: string, response: string) => {
     setResponses((prev) => ({ ...prev, [questionId]: response }));
   };
+  const reviewId = localStorage.getItem("systematicReviewId");
+
+  const { questions } = useFetchExtractionQuestions();
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
-    console.log("Dados enviados:", responses);
+    const responseMap = Object.entries(responses).map((res) => res);
+    console.log("Dados enviados:", responseMap);
   };
 
   const createResponseComponent = (question: Questions) => {
@@ -73,6 +76,9 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
             key={question.code}
             question={question.description}
             options={question.options || []}
+            onResponse={(response) =>
+              updateResponse(question.questionId || "", response)
+            }
           />
         );
       case "LABELED_SCALE":
@@ -81,6 +87,9 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
             key={question.code}
             question={question.description}
             scales={question.scales}
+            onResponse={(response) =>
+              updateResponse(question.questionId || "", response)
+            }
           />
         );
     }
@@ -112,6 +121,8 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
   };
 
   const extractionStatus = statusIconMap[studyData.extractionStatus];
+
+  const hasQuestions = questions ? questions.length > 0 : false;
 
   return (
     <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">

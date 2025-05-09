@@ -9,16 +9,17 @@ interface TextualResponseProps {
   onResponse: (response: string) => void;
 }
 
-export default function TextualResponse({ question, onResponse }: TextualResponseProps) {
+export default function TextualResponse({
+  question,
+  onResponse,
+}: TextualResponseProps) {
   const [response, setResponse] = useState<string>("");
-
-  console.log("resposta do textual", response);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setResponse(value);
     onResponse(value);
-  }
+  };
 
   return (
     <FormControl sx={container}>
