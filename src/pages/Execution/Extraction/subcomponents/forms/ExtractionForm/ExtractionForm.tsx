@@ -9,6 +9,7 @@ import DropdownList from "../Responses/DropdownList/DropdownList";
 import LabeledList from "../Responses/LabeledList/LabeledList";
 
 import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
+import { useSendAnswerExtractionQuestions } from "../../../../../../hooks/tables/useSendAnswerExtractionQuestions.ts";
 
 import { ArticlePreviewProps } from "../../../../../../components/Modals/StudyModal/StudyData.tsx";
 
@@ -31,19 +32,44 @@ export interface Questions {
   context: string;
 }
 
+export type TypeOfQuestions =
+  | "TEXTUAL"
+  | "NUMBERED_SCALE"
+  | "LABELED_SCALE"
+  | "PICK_LIST";
+
+type AnswerProps = {
+  value: string;
+  type: TypeOfQuestions;
+};
+
 export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
-  const [responses, setResponses] = useState<Record<string, string>>({});
-  const updateResponse = (questionId: string, response: string) => {
-    setResponses((prev) => ({ ...prev, [questionId]: response }));
+  const [responses, setResponses] = useState<Record<string, AnswerProps>>({});
+  const updateResponse = (questionId: string, response: AnswerProps) => {
+    setResponses((prev) => ({
+      ...prev,
+      [questionId]: {
+        value: response.value,
+        type: response.type,
+      },
+    }));
   };
   const reviewId = localStorage.getItem("systematicReviewId");
 
   const { questions } = useFetchExtractionQuestions();
+  const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    const responseMap = Object.entries(responses).map((res) => res);
-    console.log("Dados enviados:", responseMap);
+    const requests = Object.entries(responses).map(([questionId, answer]) => {
+      return sendAnswerExtractionQuestions({
+        answer: answer.value,
+        questionId,
+        type: answer.type,
+      });
+    });
+
+    console.log("Dados enviados:", requests);
   };
 
   const createResponseComponent = (question: Questions) => {
@@ -54,7 +80,10 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
             key={question.code}
             question={question.description}
             onResponse={(response) =>
-              updateResponse(question.questionId || "", response)
+              updateResponse(question.questionId || "", {
+                value: response,
+                type: "TEXTUAL",
+              })
             }
           />
         );
@@ -66,7 +95,10 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
             minValue={question.lower}
             maxValue={question.higher}
             onResponse={(response) =>
-              updateResponse(question.questionId || "", response)
+              updateResponse(question.questionId || "", {
+                value: response,
+                type: "NUMBERED_SCALE",
+              })
             }
           />
         );
@@ -77,7 +109,10 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
             question={question.description}
             options={question.options || []}
             onResponse={(response) =>
-              updateResponse(question.questionId || "", response)
+              updateResponse(question.questionId || "", {
+                value: response,
+                type: "PICK_LIST",
+              })
             }
           />
         );
@@ -88,7 +123,10 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
             question={question.description}
             scales={question.scales}
             onResponse={(response) =>
-              updateResponse(question.questionId || "", response)
+              updateResponse(question.questionId || "", {
+                value: response,
+                type: "LABELED_SCALE",
+              })
             }
           />
         );
