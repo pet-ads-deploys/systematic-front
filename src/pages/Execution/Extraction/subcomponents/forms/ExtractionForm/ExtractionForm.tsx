@@ -3,16 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, Flex, FormControl, Text } from "@chakra-ui/react";
 
 import HeaderForm from "../HeaderForm/HeaderForm";
-import TextualResponse from "../Responses/Textual/Textual.tsx";
-import NumberScale from "../Responses/NumberScale/NumberScale.tsx";
-import DropdownList from "../Responses/DropdownList/DropdownList";
-import LabeledList from "../Responses/LabeledList/LabeledList";
 
 import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
 import { useSendAnswerExtractionQuestions } from "../../../../../../hooks/tables/useSendAnswerExtractionQuestions.ts";
 
-import { AnswerProps, Questions } from "../types.ts";
+import { AnswerProps } from "../types.ts";
 import { ArticlePreviewProps } from "../../../../../../components/Modals/StudyModal/StudyData.tsx";
+
+import { createResponseComponent } from "../utils/createResponseComponents.tsx";
 
 import { button } from "../styles.ts";
 
@@ -38,70 +36,9 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
   const { questions } = useFetchExtractionQuestions();
   const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
   const { handleSubmitAnswer } = useSubmitAnswerForm({
-    responses: responses,
+    responses,
     handleSendAnswer: sendAnswerExtractionQuestions,
   });
-
-  const createResponseComponent = (question: Questions) => {
-    switch (question.questionType) {
-      case "TEXTUAL":
-        return (
-          <TextualResponse
-            key={question.code}
-            question={question.description}
-            onResponse={(response) =>
-              updateResponse(question.questionId || "", {
-                value: response,
-                type: "TEXTUAL",
-              })
-            }
-          />
-        );
-      case "NUMBERED_SCALE":
-        return (
-          <NumberScale
-            key={question.code}
-            question={question.description}
-            minValue={question.lower}
-            maxValue={question.higher}
-            onResponse={(response) =>
-              updateResponse(question.questionId || "", {
-                value: response,
-                type: "NUMBERED_SCALE",
-              })
-            }
-          />
-        );
-      case "PICK_LIST":
-        return (
-          <DropdownList
-            key={question.code}
-            question={question.description}
-            options={question.options || []}
-            onResponse={(response) =>
-              updateResponse(question.questionId || "", {
-                value: response,
-                type: "PICK_LIST",
-              })
-            }
-          />
-        );
-      case "LABELED_SCALE":
-        return (
-          <LabeledList
-            key={question.code}
-            question={question.description}
-            scales={question.scales}
-            onResponse={(response) =>
-              updateResponse(question.questionId || "", {
-                value: response,
-                type: "LABELED_SCALE",
-              })
-            }
-          />
-        );
-    }
-  };
 
   const statusIconMap: Record<
     string,
@@ -156,7 +93,9 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
       <HeaderForm text={studyData.title} />
       <Box gap="5rem">
         {hasQuestions ? (
-          questions?.map((question) => createResponseComponent(question))
+          questions?.map((question) =>
+            createResponseComponent({ question, updateResponse })
+          )
         ) : (
           <Flex
             flexDirection="column"
