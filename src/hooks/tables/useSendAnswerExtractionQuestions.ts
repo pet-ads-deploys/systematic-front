@@ -1,17 +1,14 @@
 import { useContext } from "react";
 import Axios from "../../interceptor/interceptor";
-import getRequestOptions from "../../utils/getRequestOptions";
+
 import StudySelectionContext from "../../components/Context/StudiesSelectionContext";
 import AppContext from "../../components/Context/AppContext";
+
 import { StudyInterface } from "../../../public/interfaces/IStudy";
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
-import { TypeOfQuestions } from "../../pages/Execution/Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
+import { HandleSendAnswerProps } from "../../pages/Execution/Extraction/subcomponents/forms/types";
 
-interface SendAnswerExtractionQuestionsProps {
-  questionId: string;
-  answer: string | number | { name: string; value: number };
-  type: TypeOfQuestions;
-}
+import getRequestOptions from "../../utils/getRequestOptions";
 
 export function useSendAnswerExtractionQuestions() {
   const selectionContext = useContext(StudySelectionContext);
@@ -26,7 +23,7 @@ export function useSendAnswerExtractionQuestions() {
     questionId,
     type,
     answer,
-  }: SendAnswerExtractionQuestionsProps) => {
+  }: HandleSendAnswerProps) => {
     if (articleIndex === undefined || !selectionContext) {
       console.warn("Context not available, cannot change priority.");
       return;

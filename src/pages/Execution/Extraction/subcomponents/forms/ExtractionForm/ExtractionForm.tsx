@@ -11,37 +11,15 @@ import LabeledList from "../Responses/LabeledList/LabeledList";
 import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
 import { useSendAnswerExtractionQuestions } from "../../../../../../hooks/tables/useSendAnswerExtractionQuestions.ts";
 
+import { AnswerProps, Questions } from "../types.ts";
 import { ArticlePreviewProps } from "../../../../../../components/Modals/StudyModal/StudyData.tsx";
 
-import { button } from "./styles.ts";
+import { button } from "../styles.ts";
 
 import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { FaPlusCircle } from "react-icons/fa";
 import { IoIosCloseCircle } from "react-icons/io";
-
-export interface Questions {
-  code: string;
-  description: string;
-  lower: number;
-  higher: number;
-  options: string[] | null;
-  questionId: string | null;
-  questionType: string | null;
-  scales: Record<string, number>;
-  systematicStudyId: string | null;
-  context: string;
-}
-
-export type TypeOfQuestions =
-  | "TEXTUAL"
-  | "NUMBERED_SCALE"
-  | "LABELED_SCALE"
-  | "PICK_LIST";
-
-type AnswerProps = {
-  value: string | number | { name: string; value: number };
-  type: TypeOfQuestions;
-};
+import { useSubmitAnswerForm } from "../../../../../../hooks/reviews/forms/useSubmitAnswerForm.tsx";
 
 export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
   const [responses, setResponses] = useState<Record<string, AnswerProps>>({});
@@ -56,26 +34,13 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
   };
   const reviewId = localStorage.getItem("systematicReviewId");
 
+  const navigate = useNavigate();
   const { questions } = useFetchExtractionQuestions();
   const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
-  const navigate = useNavigate();
-
-  const handleSubmit = () => {
-    const requests = Object.entries(responses).map(([questionId, answer]) => {
-      return sendAnswerExtractionQuestions({
-        answer:
-          answer.type === "NUMBERED_SCALE"
-            ? parseInt(answer.value as string)
-            : answer.type === "LABELED_SCALE"
-            ? answer.value
-            : answer.value,
-        questionId,
-        type: answer.type,
-      });
-    });
-
-    console.log("Dados enviados:", requests);
-  };
+  const { handleSubmitAnswer } = useSubmitAnswerForm({
+    responses: responses,
+    handleSendAnswer: sendAnswerExtractionQuestions,
+  });
 
   const createResponseComponent = (question: Questions) => {
     switch (question.questionType) {
@@ -232,7 +197,7 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
       </Box>
       <Flex w="100%" justifyContent="space-between" pb="1rem">
         {hasQuestions ? (
-          <Button type="submit" onClick={handleSubmit}>
+          <Button type="submit" onClick={handleSubmitAnswer}>
             Enviar
           </Button>
         ) : null}
