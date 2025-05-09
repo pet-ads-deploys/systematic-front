@@ -39,7 +39,7 @@ export type TypeOfQuestions =
   | "PICK_LIST";
 
 type AnswerProps = {
-  value: string;
+  value: string | number | { name: string; value: number };
   type: TypeOfQuestions;
 };
 
@@ -63,7 +63,12 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
   const handleSubmit = () => {
     const requests = Object.entries(responses).map(([questionId, answer]) => {
       return sendAnswerExtractionQuestions({
-        answer: answer.value,
+        answer:
+          answer.type === "NUMBERED_SCALE"
+            ? parseInt(answer.value as string)
+            : answer.type === "LABELED_SCALE"
+            ? answer.value
+            : answer.value,
         questionId,
         type: answer.type,
       });

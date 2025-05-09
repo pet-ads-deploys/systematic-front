@@ -10,7 +10,7 @@ import { container, label } from "../styles";
 interface LabeledListProps {
   question: string;
   scales: Record<string, number>;
-  onResponse: (response: string) => void;
+  onResponse: (response: { name: string; value: number }) => void;
 }
 
 export default function LabeledList({
@@ -22,7 +22,8 @@ export default function LabeledList({
 
   const handleSelectChange = (value: string) => {
     setSelected(value);
-    onResponse(value);
+    const [label, num] = value.split(":");
+    onResponse({ name: label.trim(), value: parseInt(num.trim()) });
   };
 
   const transformToStringScales = Object.entries(scales).map(

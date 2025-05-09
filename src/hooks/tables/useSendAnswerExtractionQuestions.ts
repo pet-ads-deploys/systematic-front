@@ -9,7 +9,7 @@ import { TypeOfQuestions } from "../../pages/Execution/Extraction/subcomponents/
 
 interface SendAnswerExtractionQuestionsProps {
   questionId: string;
-  answer: string;
+  answer: string | number | { name: string; value: number };
   type: TypeOfQuestions;
 }
 
@@ -55,7 +55,6 @@ export function useSendAnswerExtractionQuestions() {
     } catch (error) {
       console.log(error);
     }
-    console.log(`teste do hook novo: ${questionId},${type},${answer}`);
   };
 
   return {
