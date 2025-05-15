@@ -1,4 +1,3 @@
-import { getHoverColor } from "chart.js/helpers";
 
 export const buttonstyles = {
   ml: ".4rem",
