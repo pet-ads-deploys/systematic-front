@@ -35,6 +35,7 @@ export default function AddSelectTable({ options, label, placeholder }: AddSelec
         typeField="select"
         onDeleteAddedText={(index) => handleDeleteSelect(index)}
         AddTexts={selectedValues}
+        context={label}
       />
     </FormControl>
   );
