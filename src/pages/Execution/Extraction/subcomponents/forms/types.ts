@@ -18,7 +18,7 @@ export type TypeOfQuestions =
   | "PICK_LIST";
 
 export type AnswerProps = {
-  value: string | number | { name: string; value: number };
+  value: string | number | { name: string; value: number } | null;
   type: TypeOfQuestions;
 };
 
