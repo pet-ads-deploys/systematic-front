@@ -4,12 +4,11 @@ import AppContext from "../../components/Context/AppContext";
 import StudySelectionContext from "../../components/Context/StudiesSelectionContext";
 
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
-import { StudyInterface } from "../../../public/interfaces/IStudy";
 import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
 import useFetchAllClassifiedArticles from "../fetch/useFetchAllClassifiedArticles";
 
 type FocusedArticleOutputProps = {
-  articleInFocus?: ArticleInterface | StudyInterface;
+  articleInFocus?: ArticleInterface;
 };
 
 type FocusedArticleInputProps = {
