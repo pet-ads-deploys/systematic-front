@@ -1,48 +1,66 @@
-import {
-  ArcElement,
-  Chart as ChartJs,
-  Legend,
-  Tooltip,
-  defaults,
-} from "chart.js";
 
-ChartJs.register(ArcElement, Tooltip, Legend);
+import { ApexOptions } from 'apexcharts';
 
-import { Pie } from "react-chartjs-2";
 import useFetchGraphicsData from "../../../hooks/fetch/useFetchGraphicsData";
+import Chart from "react-apexcharts";
+import { useState } from 'react';
 
-interface iGraphicsData {
-  label: string;
-  value: number;
-}
+//montar um array com o nome das bases;
+//usar foreach para pegar o total de estudos de cada base; -montar um objeto
+ 
 
 function PieChart() {
-  const barChartData: iGraphicsData[] = useFetchGraphicsData(
-    "/data/pieChartTest.json"
-  );
-  const data = {
-    labels: barChartData.map((data) => data.label),
-    datasets: [
-      {
-        label: "Source",
-        data: barChartData.map((data) => data.value),
-        backgroundColor: ["purple", "blue", "green", "lightblue"],
+ const [chartConfig, setChartConfig] = useState<{
+    series: number[];
+    options: ApexOptions;
+  }>({
+    series: [44, 55, 13, 43],
+    options: {
+      chart: {
+        toolbar: {
+          show: true,
+          offsetX: 0,
+          offsetY: 0,
+          tools: {
+            download: true,
+            selection: true,
+          },
+          export: {
+            width: 800,
+        
+          },
+        },
       },
-    ],
-  };
-
-  const options = {
-    plugins: {
+      labels: ["PubMed", " Scopus", "Web of Science", "SciELO"],
       title: {
-        text: "Source",
+        text: "Retrieved Studies by Search Source",
+        align: "left",
       },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
     },
-  };
+  });
 
-  defaults.maintainAspectRatio = false;
-  defaults.responsive = true;
+  return (
 
-  return <Pie data={data} options={options} />;
+        <Chart
+          options={chartConfig.options}
+          series={chartConfig.series}
+          type="pie"
+          width={380}
+        />
+  );
 }
 
 export default PieChart;

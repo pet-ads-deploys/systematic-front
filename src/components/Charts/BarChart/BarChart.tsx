@@ -1,44 +1,73 @@
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJs,
-  Legend,
-  LinearScale,
-  Tooltip,
-  defaults,
-} from "chart.js";
 
-import { Bar } from "react-chartjs-2";
+import { useState } from "react";
 import useFetchGraphicsData from "../../../hooks/fetch/useFetchGraphicsData";
+import { ApexOptions } from "apexcharts";
+import Chart from "react-apexcharts";
 
-ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
-
-interface iGraphicsData {
-  label: string;
-  value: number;
-}
 
 function BarChart() {
-  const barChartData: iGraphicsData[] = useFetchGraphicsData(
-    "/data/barChartTest.json"
-  );
-  const data = {
-    labels: barChartData.map((data) => data.label),
-    datasets: [
+  const[chartConfig,setChartConfig] = useState<{
+    series:{ name: string; data: number[] }[];
+    options:ApexOptions;
+  }>({
+    series:[
       {
-        label: "Extraction",
-        data: barChartData.map((data) => data.value),
-        backgroundColor: ["purple", "blue", "green", "lightblue"],
-      },
+            name: "included studies",
+            data: [7, 2, 5,10],
+
+      }
     ],
-  };
+    options:{
+      chart:{
+        toolbar:{
+          show:true,
+          offsetX:0,
+          offsetY:0,
+          tools:{
+            selection:true,
+            download:true,
+          },
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal:false,
+          dataLabels:{
+            position:'top' 
+          }
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: ['C1','C2','C3','C4'],
+      },
+      grid:{
+        xaxis:{
+          lines:{
+              show:true
+          }
+        }
+      },
 
-  const options = {};
+      title:{
+        text:"Included Studies by Inclusion Criteria",
+        align:"left"
+      }
+    }
+    
+  });
+  return(
+    <Chart
+      options={chartConfig.options}
+      series={chartConfig.series}
+      type="bar"
+      height={500}
+    />
 
-  defaults.maintainAspectRatio = false;
-  defaults.responsive = true;
+  );
 
-  return <Bar data={data} options={options} />;
 }
 
 export default BarChart;
