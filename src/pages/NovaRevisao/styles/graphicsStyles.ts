@@ -24,5 +24,5 @@ export const barchartBox = {
 export const piechartBox = {
   widthL: "50%",
   padding: "2px",
-  borderLeft: "1px",
+  margin:"5px",
 };
