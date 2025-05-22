@@ -1,20 +1,17 @@
 import { Box } from "@chakra-ui/react";
 import Header from "../../../components/ui/Header/Header";
-import BarChart from "../../../components/Charts/BarChart/BarChart";
+
 import PieChart from "../../../components/Charts/PieChart/PieChart";
 import { barchartBox, conteiner, graphicsconteiner, piechartBox } from "../styles/graphicsStyles";
 import FlexLayout from "../../../components/ui/Flex/Flex";
+import BarChart from "../../../components/Charts/BarChart/BarChart";
 
 export default function Graphics() {
   return (
     <FlexLayout navigationType="Accordion" defaultOpen={2}>
       <Header text="Graphics" />
-      <Box sx={conteiner}>
+      <Box sx={conteiner} bg={'red'}>
         <Box sx={graphicsconteiner}>
-          <Box sx={barchartBox}>
-            <BarChart />
-          </Box>
-
           <Box sx={piechartBox}>
             <PieChart />
           </Box>
@@ -22,10 +19,6 @@ export default function Graphics() {
         <Box sx={graphicsconteiner}>
           <Box sx={barchartBox}>
             <BarChart />
-          </Box>
-
-          <Box sx={piechartBox}>
-            <PieChart />
           </Box>
         </Box>
       </Box>
