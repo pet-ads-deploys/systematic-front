@@ -10,6 +10,8 @@ interface Props {
 
 const Navigation = ({type}: Props) => {
 
+    //const id = localStorage.getItem('systematicReviewId');
+
     return type == 'Default' ? (
         <Flex direction='column' justifyContent='space-between' height='100%'>
             <Box className={Styles.navDiv} >
