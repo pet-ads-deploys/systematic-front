@@ -41,11 +41,10 @@ export default function AddLabeledListField({ onAddText, text }: IAddTextFieldPr
       <TextAreaInput value={inputValue} label="" placeholder={text} onChange={handleInputChange} />
       
       <FormLabel>Value</FormLabel>
-      <NumberInput mb={"2rem"} defaultValue={0} onChange={(valueAsString: string, valueAsNumber: number) => {
-        
-        if(!isNaN(valueAsNumber)) setValue(valueAsNumber);
-        
-        }}>
+      <NumberInput mb={"2rem"} defaultValue={0} onChange={(_, valueAsNumber: number) => {
+        //valueAsString
+        if (!isNaN(valueAsNumber)) setValue(valueAsNumber);
+      }}>
         
           <NumberInputField />
           <NumberInputStepper>
