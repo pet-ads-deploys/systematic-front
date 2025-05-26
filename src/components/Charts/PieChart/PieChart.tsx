@@ -1,66 +1,59 @@
-
-import { ApexOptions } from 'apexcharts';
-
-import useFetchGraphicsData from "../../../hooks/fetch/useFetchGraphicsData";
+import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
-import { useState } from 'react';
+import { useEffect, useState } from "react";
+import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
+import { FetchStudiesBySource } from "../../../hooks/reports/fetchStudiesBySources";
+import useFetchStudiesBySource from "../../../hooks/reports/useFetchStudiesBySource";
 
-//montar um array com o nome das bases;
-//usar foreach para pegar o total de estudos de cada base; -montar um objeto
- 
+export default function PieChart() {
+  const { databases } = useFetchDataBases();
+  const [loading, setLoading] = useState(true);
+  const [series, setSeries] = useState<number[]>([]);
+  const [labels, setLabels] = useState<string[]>([]);
 
-function PieChart() {
- const [chartConfig, setChartConfig] = useState<{
-    series: number[];
-    options: ApexOptions;
-  }>({
-    series: [44, 55, 13, 43],
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true); 
+      if (databases.length === 0) return;
+
+      try {
+        const data = await FetchStudiesBySource(databases);
+        setLabels(data.map((item) => item.label));
+        setSeries(data.map((item) => item.total));
+      } catch (error) {
+        console.error("Erro ao carregar gráfico:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [databases]);
+
+  const chartConfig = {
+    series:series,
     options: {
       chart: {
         toolbar: {
           show: true,
-          offsetX: 0,
-          offsetY: 0,
-          tools: {
-            download: true,
-            selection: true,
-          },
-          export: {
-            width: 800,
-        
-          },
         },
       },
-      labels: ["PubMed", " Scopus", "Web of Science", "SciELO"],
+      labels:labels,
       title: {
         text: "Retrieved Studies by Search Source",
         align: "left",
       },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: "bottom",
-            },
-          },
-        },
-      ],
-    },
-  });
+    } as ApexOptions,
+  };
+
+  if (loading) return <p>Loading chart...</p>;
 
   return (
-
-        <Chart
-          options={chartConfig.options}
-          series={chartConfig.series}
-          type="pie"
-          width={380}
-        />
+    <Chart
+      options={chartConfig.options}
+      series={chartConfig.series}
+      type="pie"
+      width={400}
+    />
   );
 }
-
-export default PieChart;
