@@ -1,11 +1,16 @@
 
 import { useState } from "react";
-import useFetchGraphicsData from "../../../hooks/fetch/useFetchGraphicsData";
 import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 
+type Props={
+  criteria:"inclusion"|"exclusion"
+};
 
-function BarChart() {
+export default function BarChart({criteria}:Props) {
+const color = criteria === "inclusion" ? "#3c73b6" : "#C21807";
+
+
   const[chartConfig,setChartConfig] = useState<{
     series:{ name: string; data: number[] }[];
     options:ApexOptions;
@@ -29,6 +34,7 @@ function BarChart() {
           },
         }
       },
+      colors: [color], 
       plotOptions: {
         bar: {
           horizontal:false,
@@ -43,16 +49,9 @@ function BarChart() {
       xaxis: {
         categories: ['C1','C2','C3','C4'],
       },
-      grid:{
-        xaxis:{
-          lines:{
-              show:true
-          }
-        }
-      },
 
       title:{
-        text:"Included Studies by Inclusion Criteria",
+        text: criteria == "inclusion"?"Inclusion Criteria":"Exclusion Criteria",
         align:"left"
       }
     }
@@ -63,11 +62,11 @@ function BarChart() {
       options={chartConfig.options}
       series={chartConfig.series}
       type="bar"
-      height={500}
+      height={450}
     />
 
   );
 
 }
 
-export default BarChart;
+
