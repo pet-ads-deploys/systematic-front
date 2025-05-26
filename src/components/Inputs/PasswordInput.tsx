@@ -1,10 +1,9 @@
-import { SetStateAction } from "react";
 import { FormControl, Input, InputGroup } from "@chakra-ui/react";
 import { formControl, inputGroup } from "./styles/PasswordInputStyle";
 
 interface iPasswordProps {
   text: string;
-  handlechange: (e: { target: { value: SetStateAction<string> } }) => void;
+  handlechange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isValid?: boolean;
 }
 

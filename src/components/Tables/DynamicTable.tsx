@@ -10,7 +10,6 @@ import { KeyWordHeaderInterface } from "../../../public/interfaces/IKeyWordHeard
 import { tableTypeEnum } from "../../../public/enums/tableTypeEnum";
 // import { useContext } from "react";
 // import AppContext from "../Context/AppContext";
-import useStudiesFilter from "../../hooks/useStudiesFilter";
 
 interface DynamicTableProps {
   headerData: TableHeadersInterface | KeyWordHeaderInterface;
