@@ -73,7 +73,7 @@ export default function Expanded({
 }: Props) {
   const context = useContext(AppContext);
   const setShowSelectionModal = context?.setShowSelectionModal;
-  const setSelectionStudyIndex = context?.setSelectionStudyIndex;
+  const setSelectionStudyIndex = context?.setSortedSelectionStudyIndex;
 
   const studyContext = useContext(StudySelectionContext);
 
