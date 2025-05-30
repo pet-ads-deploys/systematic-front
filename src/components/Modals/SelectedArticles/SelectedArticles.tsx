@@ -7,7 +7,7 @@ import {
   Th,
   Thead,
   Tr,
-  Checkbox,
+  //Checkbox,
   Tooltip,
   Modal,
   useDisclosure,
