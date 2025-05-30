@@ -23,7 +23,7 @@ interface AppContextType {
   selectionStudies: StudyInterface[] | undefined;
   setSelectionStudies: React.Dispatch<React.SetStateAction<StudyInterface[] | undefined>>;
   selectionStudyIndex: number | undefined;
-  setSelectionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setSortedSelectionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   sortedExtractionStudyIndex: number | undefined;
   setSortedExtractionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   sidebarState: 'open' | 'collapsed' | 'semi-collapsed';
