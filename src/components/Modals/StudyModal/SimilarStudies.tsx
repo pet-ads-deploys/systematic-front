@@ -4,6 +4,7 @@ import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStud
 import useInputState from "../../../hooks/useInputState";
 import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
 import {NoStudiesData} from "../../NotFound/NoStudiesData";
+import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
 
 export default function SimilarStudies() {
   const studies = useFetchTableData("/data/NewStudyData.json");
@@ -26,7 +27,7 @@ export default function SimilarStudies() {
       </Heading>
 
       <Box style={{ maxHeight: "350px", overflowY: "auto" }} w="39rem">
-        <DynamicTable headerData={headerData} tableType="modal" bodyData={studies} filteredColumns={checkedValues} />
+        <DynamicTable headerData={headerData} tableType={tableTypeEnum.MODAL} bodyData={studies} filteredColumns={checkedValues} searchString={""} selectedStatus={null} />
       </Box>
     </Container>
   );
