@@ -6,6 +6,8 @@ interface ITextInputProps {
   value: string | null;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   mt?: number;
+  w?: string;
+  variant?: string;
 }
 
 export default function TextAreaInput({ label, placeholder, onChange, value, ...textareaProps }: ITextInputProps) {
