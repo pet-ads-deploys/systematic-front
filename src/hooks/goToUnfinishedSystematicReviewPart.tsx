@@ -35,9 +35,9 @@ function isProtocolPartThreeFinished(response:  Protocol) {
            response.analysisAndSynthesisProcess !== null
     }
 
-function isSelectionProcessFinished(response:  StudyReview[]) { 
-    return false;
-}
+//function isSelectionProcessFinished(response:  StudyReview[]) { 
+//    return false;
+//}
 
 function isExtractionProcessFinished(response:  StudyReview[]) { 
     return false;
