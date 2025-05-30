@@ -28,27 +28,26 @@ export function useFetchQuestionById({ questionId, type }: QuestionByIdProps) {
     RISK_OF_BIAS: `http://localhost:8080/api/v1/systematic-study/${id}/protocol/rob-question/${questionId}`,
   };
 
-  const { data, isLoading, mutate } = useSWR(
-    pathMap[type],
-    fetchExtractionQuestion,
-    {
-      revalidateOnFocus: false,
-    }
-  );
+  const endpoint = id ? pathMap[type] : null;
 
-  async function fetchExtractionQuestion() {
+  const fetcher = async (url: string) => {
     try {
+      if (!questionId) return;
       const options = getRequestOptions();
-      const response = await Axios.get<HttpResponse>(pathMap[type], options);
-      return response.data;
+      const response = await Axios.get<HttpResponse>(url, options);
+      return response.data.question;
     } catch (error) {
-      console.error(`error of ${type} Questions`, error);
+      console.error(`Error fetching ${type} question:`, error);
       throw error;
     }
-  }
+  };
+
+  const { data, isLoading, mutate } = useSWR(endpoint, fetcher, {
+    revalidateOnMount: false,
+  });
 
   return {
-    question: data?.question,
+    question: data,
     isLoading,
     mutate,
   };
