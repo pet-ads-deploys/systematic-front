@@ -22,10 +22,6 @@ export interface QuestionAnswer {
 }
 
 export interface HttpResponse {
-  userId: string;
-  systematicStudyId: string;
-  studyReviewId: number;
-  year: number;
   includedBy: string[];
   extractionQuestions: QuestionAnswer[];
   robQuestions: QuestionAnswer[];
