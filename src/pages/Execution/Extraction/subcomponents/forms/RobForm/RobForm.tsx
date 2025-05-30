@@ -1,48 +1,54 @@
-import { useState } from "react";
+// External library
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Flex, FormControl, Text } from "@chakra-ui/react";
+import { FaPlusCircle } from "react-icons/fa";
 
-import { useFetchRobQuestions } from "../../../../../../hooks/fetch/useFetchRobQuestions.tsx";
+// Component
+import CreateResponseComponent from "../utils/CreateResponseComponents.tsx";
+
+// Hooks
+import useFetchAllQuestionsByArticle from "../../../../../../hooks/fetch/useFetchAllQuestionsByArticle.ts";
 import { useSendAnswerROBQuestions } from "../../../../../../hooks/tables/useSendAnswerROBQuestions.ts";
 import { useSubmitAnswerForm } from "../../../../../../hooks/reviews/forms/useSubmitAnswerForm.tsx";
 
-import { AnswerProps } from "../types.ts";
+// Types
+import type { FormsToExtractionData } from "../../../../../../hooks/fetch/useFetchAllQuestionsByArticle.ts";
 
-import { createResponseComponent } from "../utils/createResponseComponents.tsx";
-
+// Styles
 import { button } from "../styles.ts";
 
-import { FaPlusCircle } from "react-icons/fa";
-
-export default function RiskOfBiasForm() {
-  const [responses, setResponses] = useState<Record<string, AnswerProps>>({});
-  const updateResponse = (questionId: string, response: AnswerProps) => {
-    setResponses((prev) => ({
-      ...prev,
-      [questionId]: {
-        value: response.value,
-        type: response.type,
-      },
-    }));
-  };
+export default function RiskOfBiasForm({
+  questionsFiltered,
+  handlerUpdateAnswer,
+}: FormsToExtractionData) {
   const reviewId = localStorage.getItem("systematicReviewId");
 
+  const { currentArticleId } = useFetchAllQuestionsByArticle();
+
   const navigate = useNavigate();
-  const { questions } = useFetchRobQuestions();
   const { sendAnswerROBQuestions } = useSendAnswerROBQuestions();
   const { handleSubmitAnswer } = useSubmitAnswerForm({
-    responses,
+    responses: questionsFiltered[currentArticleId || -1] ?? {},
     handleSendAnswer: sendAnswerROBQuestions,
   });
 
-  const hasQuestions = questions ? questions.length > 0 : false;
+  const hasQuestions = Object.entries(questionsFiltered).length > 0;
 
   return (
     <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">
       <Box gap="5rem">
         {hasQuestions ? (
-          questions?.map((question) =>
-            createResponseComponent({ question, updateResponse })
+          Object.entries(questionsFiltered).map(([articleId, formAnswers]) =>
+            Object.entries(formAnswers).map(([questionId, answer]) => (
+              <CreateResponseComponent
+                key={`RISK_OF_BIAS-${articleId}-${questionId}`}
+                articleId={Number(articleId)}
+                questionId={questionId}
+                updateResponse={handlerUpdateAnswer}
+                typeform="RISK_OF_BIAS"
+                answer={answer}
+              />
+            ))
           )
         ) : (
           <Flex
@@ -61,9 +67,9 @@ export default function RiskOfBiasForm() {
               No questions found
             </Text>
             <Text fontSize="md" color="gray.600">
-              Create questions to register your answers in the extraction form.
+              Create questions to register your answers in the risk of bias
+              form.
             </Text>
-
             <Button
               leftIcon={<FaPlusCircle />}
               sx={button}

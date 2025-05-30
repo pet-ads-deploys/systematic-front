@@ -1,27 +1,61 @@
+// External library
 import { ReactNode } from "react";
+
+// Components
 import DropdownList from "../Responses/DropdownList/DropdownList";
 import LabeledList from "../Responses/LabeledList/LabeledList";
 import NumberScale from "../Responses/NumberScale/NumberScale";
 import TextualResponse from "../Responses/Textual/Textual";
 
-import { AnswerProps, Questions, TypeOfQuestions } from "../types";
+// Hooks
+import useFetchAllQuestionsByArticle from "../../../../../../hooks/fetch/useFetchAllQuestionsByArticle";
+
+// Types
+import type { AnswerProps, Questions, TypeOfQuestions } from "../types";
+import type { FormType } from "../../../../../../components/Modals/StudyModal/ArticleExtractionData";
 
 interface CreateResponseProps {
-  question: Questions;
-  updateResponse: (questionId: string, response: AnswerProps) => void;
+  articleId: number;
+  questionId: string;
+  answer: AnswerProps;
+  typeform: FormType;
+  updateResponse: (
+    articleId: number,
+    type: FormType,
+    questionId: string,
+    response: AnswerProps
+  ) => void;
 }
 
-export const createResponseComponent = ({
-  question,
+export default function CreateResponseComponent({
+  articleId,
+  questionId,
   updateResponse,
-}: CreateResponseProps) => {
+  typeform,
+  answer,
+}: CreateResponseProps) {
+  const { extractionQuestions, riskOfBiasQuestions } =
+    useFetchAllQuestionsByArticle();
+
+  const questionsMap: Record<FormType, Questions[] | undefined> = {
+    EXTRACTION: extractionQuestions.questions,
+    RISK_OF_BIAS: riskOfBiasQuestions.questions,
+  };
+
+  const question = questionsMap[typeform]?.find(
+    (q) => q.questionId === questionId
+  );
+
+  if (!question) return;
+
   const questionTypesMap: Record<TypeOfQuestions, ReactNode> = {
     TEXTUAL: (
       <TextualResponse
         key={question.code}
         question={question.description}
+        answer={answer.value as string}
         onResponse={(response) =>
-          updateResponse(question.questionId || "", {
+          updateResponse(articleId, typeform, question.questionId || "", {
             value: response,
             type: "TEXTUAL",
           })
@@ -32,10 +66,11 @@ export const createResponseComponent = ({
       <NumberScale
         key={question.code}
         question={question.description}
+        answer={answer.value as string}
         minValue={question.lower}
         maxValue={question.higher}
         onResponse={(response) =>
-          updateResponse(question.questionId || "", {
+          updateResponse(articleId, typeform, question.questionId || "", {
             value: response,
             type: "NUMBERED_SCALE",
           })
@@ -48,7 +83,7 @@ export const createResponseComponent = ({
         question={question.description}
         scales={question.scales}
         onResponse={(response) =>
-          updateResponse(question.questionId || "", {
+          updateResponse(articleId, typeform, question.questionId || "", {
             value: response,
             type: "LABELED_SCALE",
           })
@@ -61,7 +96,7 @@ export const createResponseComponent = ({
         question={question.description}
         options={question.options || []}
         onResponse={(response) =>
-          updateResponse(question.questionId || "", {
+          updateResponse(articleId, typeform, question.questionId || "", {
             value: response,
             type: "PICK_LIST",
           })
@@ -71,4 +106,4 @@ export const createResponseComponent = ({
   };
 
   return questionTypesMap[question.questionType as TypeOfQuestions];
-};
+}

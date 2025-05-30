@@ -1,48 +1,54 @@
-import { useState } from "react";
+// External library
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Flex, FormControl, Text } from "@chakra-ui/react";
-
-import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
-import { useSendAnswerExtractionQuestions } from "../../../../../../hooks/tables/useSendAnswerExtractionQuestions.ts";
-
-import { AnswerProps } from "../types.ts";
-import { useSubmitAnswerForm } from "../../../../../../hooks/reviews/forms/useSubmitAnswerForm.tsx";
-
-import { createResponseComponent } from "../utils/createResponseComponents.tsx";
-
-import { button } from "../styles.ts";
-
 import { FaPlusCircle } from "react-icons/fa";
 
-export default function ExtractionForm() {
-  const [responses, setResponses] = useState<Record<string, AnswerProps>>({});
-  const updateResponse = (questionId: string, response: AnswerProps) => {
-    setResponses((prev) => ({
-      ...prev,
-      [questionId]: {
-        value: response.value,
-        type: response.type,
-      },
-    }));
-  };
+// Component
+import CreateResponseComponent from "../utils/CreateResponseComponents.tsx";
+
+// Hooks
+import useFetchAllQuestionsByArticle from "../../../../../../hooks/fetch/useFetchAllQuestionsByArticle.ts";
+import { useSendAnswerExtractionQuestions } from "../../../../../../hooks/tables/useSendAnswerExtractionQuestions.ts";
+import { useSubmitAnswerForm } from "../../../../../../hooks/reviews/forms/useSubmitAnswerForm.tsx";
+
+// Types
+import type { FormsToExtractionData } from "../../../../../../hooks/fetch/useFetchAllQuestionsByArticle.ts";
+
+// Styles
+import { button } from "../styles.ts";
+
+export default function ExtractionForm({
+  questionsFiltered,
+  handlerUpdateAnswer,
+}: FormsToExtractionData) {
   const reviewId = localStorage.getItem("systematicReviewId");
 
+  const { currentArticleId } = useFetchAllQuestionsByArticle();
+
   const navigate = useNavigate();
-  const { questions } = useFetchExtractionQuestions();
   const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
   const { handleSubmitAnswer } = useSubmitAnswerForm({
-    responses,
+    responses: questionsFiltered[currentArticleId || -1] ?? {},
     handleSendAnswer: sendAnswerExtractionQuestions,
   });
 
-  const hasQuestions = questions ? questions.length > 0 : false;
+  const hasQuestions = Object.entries(questionsFiltered).length > 0;
 
   return (
     <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">
       <Box gap="5rem">
         {hasQuestions ? (
-          questions?.map((question) =>
-            createResponseComponent({ question, updateResponse })
+          Object.entries(questionsFiltered).map(([articleId, formAnswers]) =>
+            Object.entries(formAnswers).map(([questionId, answer]) => (
+              <CreateResponseComponent
+                key={`EXTRACTION-${articleId}-${questionId}`}
+                articleId={Number(articleId)}
+                questionId={questionId}
+                updateResponse={handlerUpdateAnswer}
+                typeform="EXTRACTION"
+                answer={answer}
+              />
+            ))
           )
         ) : (
           <Flex
@@ -63,7 +69,6 @@ export default function ExtractionForm() {
             <Text fontSize="md" color="gray.600">
               Create questions to register your answers in the extraction form.
             </Text>
-
             <Button
               leftIcon={<FaPlusCircle />}
               sx={button}

@@ -6,14 +6,21 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { radiosGroup, radios, radioBox, clearButton, radiosLabel } from "./numberScale";
+import {
+  radiosGroup,
+  radios,
+  radioBox,
+  clearButton,
+  radiosLabel,
+} from "./numberScale";
 import { capitalize } from "../../../../../../../utils/CapitalizeText";
 import { container, label } from "../styles";
 
 interface NumberScaleProps {
+  answer: string;
   question: string;
   minValue: number;
   maxValue: number;
@@ -22,11 +29,12 @@ interface NumberScaleProps {
 
 export default function NumberScale({
   question,
+  answer,
   minValue,
   maxValue,
-  onResponse
+  onResponse,
 }: NumberScaleProps) {
-  const [checkedOption, setCheckedOption] = useState<string>("");
+  const [checkedOption, setCheckedOption] = useState<string>(answer);
 
   const scaleValues = Array.from(
     { length: maxValue - minValue + 1 },
@@ -40,7 +48,7 @@ export default function NumberScale({
   const handleChange = (value: string) => {
     setCheckedOption(value);
     onResponse(value);
-  }
+  };
 
   return (
     <FormControl sx={container}>
