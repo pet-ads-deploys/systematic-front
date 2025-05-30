@@ -24,6 +24,6 @@ export type AnswerProps = {
 
 export interface HandleSendAnswerProps {
   questionId: string;
-  answer: string | number | { name: string; value: number };
+  answer: string | number | { name: string; value: number } | null;
   type: TypeOfQuestions;
 }
