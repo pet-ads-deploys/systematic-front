@@ -23,7 +23,7 @@ interface AppContextType {
   selectionStudies: StudyInterface[] | undefined;
   setSelectionStudies: React.Dispatch<React.SetStateAction<StudyInterface[] | undefined>>;
   selectionStudyIndex: number | undefined;
-  setSortedSelectionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setSelectionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   sortedExtractionStudyIndex: number | undefined;
   setSortedExtractionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
     sidebarState: 'open' | 'collapsed' | 'semi-collapsed';
@@ -50,7 +50,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   );
   const [activeButton, setActiveButton] = useState<string>("");
   const [selectionStudies, setSelectionStudies] = useState<StudyInterface[]>();
-  const [selectionStudyIndex, setSortedSelectionStudyIndex] = useState<number | undefined>();
+  const [selectionStudyIndex, setSelectionStudyIndex] = useState<number | undefined>();
   const [sortedExtractionStudyIndex, setSortedExtractionStudyIndex] = useState<number | undefined>();
   const [sidebarState, setSidebarState] = useState<'open' | 'collapsed' | 'semi-collapsed'>('open');
 
@@ -76,7 +76,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         selectionStudies,
         setSelectionStudies,
         selectionStudyIndex,
-        setSortedSelectionStudyIndex,
+        setSelectionStudyIndex,
         sortedExtractionStudyIndex,
         setSortedExtractionStudyIndex,
         sidebarState,
