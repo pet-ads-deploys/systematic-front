@@ -15,7 +15,7 @@ export default function Register({ handleRender }: iRegisterProps) {
   const {
     handleNameChange,
     selectedValue,
-    handleSelectChange,
+    setState,
     handleEmailChange,
     handleAffiliationChange,
     passwordMatch,
@@ -25,7 +25,8 @@ export default function Register({ handleRender }: iRegisterProps) {
   } = useHandleRegister(() => handleRender("Register"));
   return (
     <>
-      <FormControl sx={formcontrol}>
+      <form onSubmit={handleRegister}>
+        <FormControl sx={formcontrol}>
         <RegisterInputs id="nome" placeholder={"Name ..."} handlechange={handleNameChange} />
         <RegisterInputs id="mail" placeholder={"Email ..."} handlechange={handleEmailChange} />
         <RegisterInputs id="affiliation" placeholder={"Affiliation ..."} handlechange={handleAffiliationChange} />
@@ -33,7 +34,7 @@ export default function Register({ handleRender }: iRegisterProps) {
         <SelectInput
           values={["Select a country", "Brazil", "England", "France", "Spain"]}
           names={["Select a country", "Brazil", "England", "France", "Spain"]}
-          onSelect={handleSelectChange}
+          onSelect={(value: string) => setState(value)}
           selectedValue={selectedValue}
           page={"register"}
         />
@@ -45,10 +46,11 @@ export default function Register({ handleRender }: iRegisterProps) {
         />
 
         <Box sx={bxconteiner}>
-          <EventButton event={handleRegister} text={"Create Account"} sx={evbtn} />
+          <EventButton type="submit" text="Create Account" sx={evbtn} />
           <FormOptions text="Already have an account? " onClick={() => handleRender("Login")} />
         </Box>
       </FormControl>
+      </form>
     </>
   );
 }
