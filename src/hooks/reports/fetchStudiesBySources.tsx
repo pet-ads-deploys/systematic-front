@@ -1,8 +1,7 @@
 import Axios from "../../interceptor/interceptor";
 import getRequestOptions from "../../utils/getRequestOptions";
 
-
-type HttpResponse = {
+ export type HttpResponse = {
   userId: string;
   systematicStudyId: string;
   source: string;
@@ -12,16 +11,11 @@ type HttpResponse = {
   totalOfStudies: number;
 };
 
-type StudyTotalByDatabase = {
-  label: string;
-  total: number;
-};
-
-
-export async function FetchStudiesBySource(
+export async function fetchStudiesBySource(
   databases: string[],
-): Promise<StudyTotalByDatabase[]> {
-const systematicReviewId = localStorage.getItem("systematicReviewId");
+): Promise<HttpResponse[]> {
+  const systematicReviewId = localStorage.getItem("systematicReviewId");
+  console.log(systematicReviewId);
   if (!systematicReviewId || databases.length === 0) return [];
 
   const options = getRequestOptions();
@@ -31,15 +25,12 @@ const systematicReviewId = localStorage.getItem("systematicReviewId");
       databases.map(async (db) => {
         const path = `http://localhost:8080/api/v1/systematic-study/${systematicReviewId}/report/source/${db}`;
         const res = await Axios.get<HttpResponse>(path, options);
-        return {
-          label: db,
-          total: res.data.totalOfStudies,
-        };
+        return res.data;
       })
     );
     return results;
   } catch (error) {
-    console.error("Erro ao buscar dados para o gráfico de total de estudos por fonte:", error);
+    console.error("Erro ao buscar dados para os estudos por fonte:", error);
     return [];
   }
 }
