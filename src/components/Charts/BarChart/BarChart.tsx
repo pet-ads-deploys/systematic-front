@@ -1,44 +1,69 @@
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJs,
-  Legend,
-  LinearScale,
-  Tooltip,
-  defaults,
-} from "chart.js";
+import { useState } from "react";
+import { ApexOptions } from "apexcharts";
+import Chart from "react-apexcharts";
 
-import { Bar } from "react-chartjs-2";
-import useFetchGraphicsData from "../../../hooks/fetch/useFetchGraphicsData";
+type Props={
+  criteria:"inclusion"|"exclusion"
+};
 
-ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+export default function BarChart({criteria}:Props) {
+const color = criteria === "inclusion" ? "#3c73b6" : "#C21807";
 
-interface iGraphicsData {
-  label: string;
-  value: number;
-}
 
-function BarChart() {
-  const barChartData: iGraphicsData[] = useFetchGraphicsData(
-    "/data/barChartTest.json"
-  );
-  const data = {
-    labels: barChartData.map((data) => data.label),
-    datasets: [
+  const[chartConfig,setChartConfig] = useState<{
+    series:{ name: string; data: number[] }[];
+    options:ApexOptions;
+  }>({
+    series:[
       {
-        label: "Extraction",
-        data: barChartData.map((data) => data.value),
-        backgroundColor: ["purple", "blue", "green", "lightblue"],
-      },
+            name: "studies",
+            data: [7, 2, 5,10],
+      }
     ],
-  };
+    options:{
+      chart:{
+        toolbar:{
+          show:true,
+          tools:{
+            selection:true,
+            download:true,
+          },
+        }
+      },
+      colors: [color], 
+      plotOptions: {
+        bar: {
+          horizontal:false,
+          dataLabels:{
+            position:'top' ,
+          
+          }
+        }
+      },
+      dataLabels: {
+        enabled: true
+      },
+      xaxis: {
+        categories: ['C1','C2','C3','C4'],
+      },
 
-  const options = {};
+      title:{
+        text: criteria == "inclusion"?"Inclusion Criteria":"Exclusion Criteria",
+        align:"left"
+      }
+    }
+    
+  });
+  return(
+    <Chart
+      options={chartConfig.options}
+      series={chartConfig.series}
+      type="bar"
+      height={450}
+    />
 
-  defaults.maintainAspectRatio = false;
-  defaults.responsive = true;
+  );
 
-  return <Bar data={data} options={options} />;
 }
 
-export default BarChart;
+
