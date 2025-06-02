@@ -24,7 +24,7 @@ const useResetStatus = ({ page }: ResetButtonProps) => {
     if (articles && articleIndex) {
       const article = articles[articleIndex];
       if (article && "studyReviewId" in article) {
-        page.type === "Selection"
+        page === "Selection"
           ? UseChangeStudySelectionStatus({
               studyReviewId: [article.studyReviewId],
               status: "UNCLASSIFIED",

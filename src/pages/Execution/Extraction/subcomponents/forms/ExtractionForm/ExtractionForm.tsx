@@ -1,143 +1,52 @@
-import { Box, Button, Flex, FormControl, Text } from "@chakra-ui/react";
-import HeaderForm from "../HeaderForm/HeaderForm";
-
-import { useFetchExtractionQuestions } from "../../../../../../hooks/fetch/useFetchExtractionQuestions";
-import { useState } from "react";
-import DropdownList from "../Responses/DropdownList/DropdownList";
-import LabeledList from "../Responses/LabeledList/LabeledList";
-import TextualResponse from "../Responses/Textual/Textual.tsx";
-import NumberScale from "../Responses/NumberScale/NumberScale.tsx";
+// External library
 import { useNavigate } from "react-router-dom";
+import { Box, Button, Flex, FormControl, Text } from "@chakra-ui/react";
 import { FaPlusCircle } from "react-icons/fa";
-import { button } from "./styles.ts";
 
-import { ArticlePreviewProps } from "../../../../../../components/Modals/StudyModal/StudyData.tsx";
-import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
-import { IoIosCloseCircle } from "react-icons/io";
+// Component
+import CreateResponseComponent from "../utils/CreateResponseComponents.tsx";
 
-export interface Questions {
-  code: string;
-  description: string;
-  lower: number;
-  higher: number;
-  options: string[] | null;
-  questionId: string | null;
-  questionType: string | null;
-  scales: Record<string, number>;
-  systematicStudyId: string | null;
-}
+// Hooks
+import { useSendAnswerExtractionQuestions } from "../../../../../../hooks/tables/useSendAnswerExtractionQuestions.ts";
+import { useSubmitAnswerForm } from "../../../../../../hooks/reviews/forms/useSubmitAnswerForm.tsx";
 
-export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
+// Types
+import { FormStructure } from "../types.ts";
+
+// Styles
+import { button } from "../styles.ts";
+
+export default function ExtractionForm({
+  currentId,
+  article,
+  questionsFiltered,
+  handlerUpdateAnswer,
+}: FormStructure) {
   const reviewId = localStorage.getItem("systematicReviewId");
+
   const navigate = useNavigate();
-  const { questions } = useFetchExtractionQuestions();
-  const hasQuestions = questions ? questions.length > 0 : false;
+  const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
+  const { handleSubmitAnswer } = useSubmitAnswerForm({
+    responses: article[currentId]?.extractionQuestions ?? {},
+    handleSendAnswer: sendAnswerExtractionQuestions,
+  });
 
-  const [responses, setResponses] = useState<Record<string, string>>({});
-
-  const updateResponse = (questionId: string, response: string) => {
-    setResponses((prev) => ({ ...prev, [questionId]: response }));
-  };
-
-  const handleSubmit = () => {
-    console.log("Dados enviados:", responses);
-  };
-
-  const createResponseComponent = (question: Questions) => {
-    switch (question.questionType) {
-      case "TEXTUAL":
-        return (
-          <TextualResponse
-            key={question.code}
-            question={question.description}
-            onResponse={(response) =>
-              updateResponse(question.questionId || "", response)
-            }
-          />
-        );
-      case "NUMBERED_SCALE":
-        return (
-          <NumberScale
-            key={question.code}
-            question={question.description}
-            minValue={question.lower}
-            maxValue={question.higher}
-            onResponse={(response) =>
-              updateResponse(question.questionId || "", response)
-            }
-          />
-        );
-      case "PICK_LIST":
-        return (
-          <DropdownList
-            key={question.code}
-            question={question.description}
-            options={question.options || []}
-          />
-        );
-      case "LABELED_SCALE":
-        return (
-          <LabeledList
-            key={question.code}
-            question={question.description}
-            scales={question.scales}
-          />
-        );
-    }
-  };
-
-  const statusIconMap: Record<
-    string,
-    {
-      icon: React.ReactNode;
-      color: string;
-    }
-  > = {
-    INCLUDED: {
-      icon: <CheckCircleIcon color="green.500" />,
-      color: "green",
-    },
-    DUPLICATED: {
-      icon: <InfoIcon color="blue.500" />,
-      color: "blue",
-    },
-    EXCLUDED: {
-      icon: <IoIosCloseCircle color="red.500" size="1.4rem" />,
-      color: "red",
-    },
-    UNCLASSIFIED: {
-      icon: <WarningIcon color="yellow.500" />,
-      color: "yellow",
-    },
-  };
-
-  const extractionStatus = statusIconMap[studyData.extractionStatus];
+  const hasQuestions = questionsFiltered.length > 0;
 
   return (
     <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">
-      <Flex gap="2rem">
-        <Flex
-          justifyContent="center"
-          alignItems="center"
-          fontFamily="sans-serif"
-          fontSize="1rem"
-          p=".5rem .25rem"
-          gap="1rem"
-          borderRadius="1rem"
-          bg={`${extractionStatus.color}.200`}
-          color={`${extractionStatus.color}.800`}
-          maxW="10rem"
-          w="10rem"
-          h="2rem"
-        >
-          {extractionStatus.icon}
-          {studyData.extractionStatus}
-        </Flex>
-      </Flex>
-      <HeaderForm text={studyData.title} />
       <Box gap="5rem">
         {hasQuestions ? (
-          questions?.map((question) => createResponseComponent(question))
+          questionsFiltered.map((question) => (
+            <CreateResponseComponent
+              key={`EXTRACTION-${currentId}-${question.questionId}`}
+              articleId={currentId}
+              questionId={question.questionId}
+              updateResponse={handlerUpdateAnswer}
+              typeform="EXTRACTION"
+              answer={question.answer}
+            />
+          ))
         ) : (
           <Flex
             flexDirection="column"
@@ -157,7 +66,6 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
             <Text fontSize="md" color="gray.600">
               Create questions to register your answers in the extraction form.
             </Text>
-
             <Button
               leftIcon={<FaPlusCircle />}
               sx={button}
@@ -178,7 +86,7 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
       </Box>
       <Flex w="100%" justifyContent="space-between" pb="1rem">
         {hasQuestions ? (
-          <Button type="submit" onClick={handleSubmit}>
+          <Button type="submit" onClick={handleSubmitAnswer}>
             Enviar
           </Button>
         ) : null}

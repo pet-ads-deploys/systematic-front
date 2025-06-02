@@ -20,5 +20,3 @@ export const Navigation = ({defaultOpen, type} : ISidebarProps) => (
       <MenuItem defaultOpen={defaultOpen} type={type} />
   </motion.ul>
 );
-
-const itemIds = [0, 1, 2, 3, 4];

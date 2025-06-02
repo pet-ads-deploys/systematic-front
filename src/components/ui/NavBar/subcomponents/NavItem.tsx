@@ -11,7 +11,7 @@ interface INavItemProps {
   submenu: boolean;
 }
 
-export default function NavItem({ navSize, icon, title, submenu }: INavItemProps): JSX.Element {
+export default function NavItem({ navSize, icon, title }: INavItemProps): JSX.Element {
   const context = useContext(AppContext);
   const location = useLocation();
 
@@ -23,7 +23,6 @@ export default function NavItem({ navSize, icon, title, submenu }: INavItemProps
 
   const isSmallSize = navSize === "small";
   const isSelected = button === title || location.pathname.includes(title.toLowerCase());
-  const isSubMenu = submenu;
 
   const handleClick = () => {
     console.log("last button: " + button);

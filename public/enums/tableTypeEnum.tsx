@@ -1,5 +1,6 @@
 export enum tableTypeEnum {
     SELECTION = "selection",
     EXTRACTION = "extraction",
-    KEYWORD = "keyword"
+    KEYWORD = "keyword",
+    MODAL = "modal"
 }

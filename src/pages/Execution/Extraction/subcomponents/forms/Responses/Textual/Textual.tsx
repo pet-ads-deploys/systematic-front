@@ -3,22 +3,26 @@ import { responseArea } from "./textual";
 import React, { useState } from "react";
 import { capitalize } from "../../../../../../../utils/CapitalizeText";
 import { container, label } from "../styles";
-
 interface TextualResponseProps {
   question: string;
+  answer: string;
   onResponse: (response: string) => void;
 }
 
-export default function TextualResponse({ question, onResponse }: TextualResponseProps) {
-  const [response, setResponse] = useState<string>("");
-
-  console.log("resposta do textual", response);
+export default function TextualResponse({
+  question,
+  answer,
+  onResponse,
+}: TextualResponseProps) {
+  const [response, setResponse] = useState<string>(answer);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setResponse(value);
     onResponse(value);
-  }
+  };
+
+  console.log("teestual", response);
 
   return (
     <FormControl sx={container}>

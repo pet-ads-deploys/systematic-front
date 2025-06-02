@@ -1,17 +1,33 @@
+import { useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
+
 import SelectInput from "../../../../../../../components/Inputs/SelectInput";
-import useInputState from "../../../../../../../hooks/useInputState";
+
 import { capitalize } from "../../../../../../../utils/CapitalizeText";
+
 import { container, label } from "../styles";
 
 interface DropdownListProps {
   question: string;
   options: string[];
+  answer: string;
+  onResponse: (response: string) => void;
 }
 
-export default function DropdownList({ question, options }: DropdownListProps) {
-  const { value: selectedStatus, handleChange: handleSelectChange } =
-    useInputState<string | null>(null);
+export default function DropdownList({
+  question,
+  options,
+  answer,
+  onResponse,
+}: DropdownListProps) {
+  const [selected, setSelected] = useState(answer);
+
+  const handleSelectChange = (value: string) => {
+    setSelected(value);
+    onResponse(value);
+  };
+
+  console.log("pick", selected);
 
   return (
     <FormControl sx={container}>
@@ -20,8 +36,8 @@ export default function DropdownList({ question, options }: DropdownListProps) {
         names={[...options]}
         values={[...options]}
         onSelect={(value) => handleSelectChange(value)}
-        selectedValue={selectedStatus}
-        page={"extraction"}
+        selectedValue={selected}
+        page="extraction"
         placeholder="Options"
       />
     </FormControl>

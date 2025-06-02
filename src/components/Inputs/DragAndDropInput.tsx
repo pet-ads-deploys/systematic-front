@@ -2,7 +2,11 @@ import { useDropzone } from "react-dropzone";
 import { Box, Icon, Text, VStack } from "@chakra-ui/react";
 import { FaFileAlt } from "react-icons/fa";
 
-export default function DragAndDrop({ handleFileChange }) {
+interface DragAndDropProps {
+  handleFileChange: (files: { acceptedFiles: File[] }) => void;
+}
+
+export default function DragAndDrop({ handleFileChange }: DragAndDropProps) {
   const onDrop = (acceptedFiles: File[]) => {
     handleFileChange({ acceptedFiles });
 };

@@ -25,6 +25,15 @@ const useHandleRegister = ( redirectFormLogin: () => void ) => {
         return re.test(String(email).toLowerCase());
     };
 
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value);
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+    const handleAffiliationChange = (e: React.ChangeEvent<HTMLInputElement>) => setAffiliation(e.target.value);
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => setState(e.target.value);
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
+    const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value);
+
+    const passwordMatch = password === confirmPassword;
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let isValid = true;
@@ -157,7 +166,16 @@ const useHandleRegister = ( redirectFormLogin: () => void ) => {
         confirmPasswordError,
         setConfirmPasswordError,
         handleSubmit,
-        isSubmitting
+        isSubmitting,
+        handleNameChange,
+        handleEmailChange,
+        handleAffiliationChange,
+        handleSelectChange,
+        handlePasswordChange,
+        handleConfirmPasswordChange,
+        passwordMatch,
+        handleRegister: handleSubmit,
+        selectedValue: state,
     };
 };
 

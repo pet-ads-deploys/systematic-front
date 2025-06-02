@@ -32,7 +32,7 @@ const ReferenceCard: React.FC<Props> = (props) => {
         <TextAreaInput
           w="24em"
           variant="filled"
-          style={{ maxHeight: "200px", overflowY: "auto" }}
+          // style={{ maxHeight: "200px", overflowY: "auto" }}
           value={props.fullReference}
           label={""}
           placeholder={""}

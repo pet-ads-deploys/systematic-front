@@ -35,13 +35,19 @@ function isProtocolPartThreeFinished(response:  Protocol) {
            response.analysisAndSynthesisProcess !== null
     }
 
-function isSelectionProcessFinished(response:  StudyReview[]) { 
-    return false;
-}
+//function isSelectionProcessFinished(response:  StudyReview[]) { 
+//    return false;
+//}
 
 function isExtractionProcessFinished(response:  StudyReview[]) { 
-    return false;
-}
+    for (let i = 0; i < response.length; i++) {
+      if (response[i].extractionStatus !== "Finished") {
+        return false;
+      }
+    }
+    return true;
+} // i couldn't find what are the possible states that extractionStatus can have, so this may need to be changed later;
+// also, why isn't this an enum??
 
 
 

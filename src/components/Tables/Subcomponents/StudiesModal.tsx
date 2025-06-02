@@ -64,7 +64,7 @@ export default function StudiesModal({ isOpen, onClose }: IStudy) {
           <ModalBody>
             <Flex gap="25px">
               {modalContext?.StudyDataButtonState ? (
-                <StudyDataFiel studyData={study} type={"Extraction"} />
+                <StudyDataFiel studyData={study} page={"Extraction"} />
               ) : (
                 <></>
               )}

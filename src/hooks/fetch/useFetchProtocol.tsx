@@ -4,7 +4,7 @@ export default async function fetchProtocol(systematicStudyId: string) {
     const url = "http://localhost:8080/";
     try {
         const accessToken = localStorage.getItem('accessToken');
-        let options = {
+        const options = {
             headers: { Authorization: `Bearer ${accessToken}` }
         }
 

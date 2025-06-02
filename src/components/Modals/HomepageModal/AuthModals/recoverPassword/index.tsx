@@ -2,9 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../index.css";
 
-interface iRecoverProps {
-    onClose: () => void;
-}
 
 export default function ForgotPassword({ redirectFormLogin }: { redirectFormLogin: () => void }) {
     const [email, setEmail] = useState<string>("");

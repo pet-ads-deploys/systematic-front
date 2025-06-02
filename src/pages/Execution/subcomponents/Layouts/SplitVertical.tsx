@@ -32,7 +32,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ minWidth: "38%", maxHeight: "100%" }}
+            style={{ minWidth: "35%", maxHeight: "100%" }}
           >
             <StudySelectionArea articles={articles} page={page} />
           </motion.div>
@@ -42,7 +42,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ maxWidth: "60%", maxHeight: "100%" }}
+            style={{ maxWidth: "65%", maxHeight: "100%" }}
           >
             <ArticlesTable articles={articles} page={page} />
           </motion.div>
@@ -55,7 +55,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ maxWidth: "60%", maxHeight: "100%" }}
+            style={{ maxWidth: "65%", maxHeight: "100%" }}
           >
             <ArticlesTable articles={articles} page={page} />
           </motion.div>
@@ -65,7 +65,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ minWidth: "38.5%", maxHeight: "100%" }}
+            style={{ minWidth: "35%", maxHeight: "100%" }}
           >
             <StudySelectionArea articles={articles} page={page} />
           </motion.div>

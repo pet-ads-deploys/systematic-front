@@ -1,7 +1,7 @@
-import useFetchAllStudies from "./fetch/useFetchAllStudies";
+//import useFetchAllStudies from "./fetch/useFetchAllStudies";
 import useFetchProtocol from "./fetch/useFetchProtocol";
 import {Protocol} from "../../public/interfaces/protocolInterface";
-import {StudyReview} from "../../public/interfaces/studyReviewInterface";
+//import {StudyReview} from "../../public/interfaces/studyReviewInterface";
 
 
 function isProtocolPartOneFinished(response:  Protocol) {
@@ -35,13 +35,13 @@ function isProtocolPartThreeFinished(response:  Protocol) {
            response.analysisAndSynthesisProcess !== null
     }
 
-function isSelectionProcessFinished(response:  StudyReview[]) { 
-    return false;
-}
+//function isSelectionProcessFinished(response:  StudyReview[]) { 
+//    return false;
+//}
 
-function isExtractionProcessFinished(response:  StudyReview[]) { 
-    return false;
-}
+//function isExtractionProcessFinished(response:  StudyReview[]) { 
+//    return false;
+//}
 
 
 
@@ -49,7 +49,7 @@ function isExtractionProcessFinished(response:  StudyReview[]) {
 
 export default async function verifyUnfinishedStudy(revisionId: string) {
     const protocolData = await useFetchProtocol(revisionId);
-    const studiesData = await useFetchAllStudies(revisionId);
+    //const studiesData = await useFetchAllStudies(revisionId);
 
     
     if(!isProtocolPartOneFinished(protocolData)) {

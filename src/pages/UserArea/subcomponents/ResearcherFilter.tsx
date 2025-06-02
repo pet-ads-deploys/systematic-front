@@ -11,6 +11,7 @@ interface IResearcherData {
 export default function ResearcherFilter() {
   const [researchers, setResearchers] = useState<IResearcherData[]>([]);
   const [filteredResearchers, setFilteredResearchers] = useState<IResearcherData[]>([]);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     fetch("src/data/test.json")
@@ -20,6 +21,8 @@ export default function ResearcherFilter() {
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
     setFilteredResearchers(researchers.filter((researcher) => researcher.name.includes(e.target.value)));
     console.log(filteredResearchers);
   };
@@ -30,6 +33,7 @@ export default function ResearcherFilter() {
         label="Researchers"
         placeholder={"Enter the name of the researchers "}
         onChange={handleInputChange}
+        value={inputValue}
       ></TextAreaInput>
     </FormControl>
   );

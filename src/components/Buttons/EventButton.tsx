@@ -1,9 +1,9 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { Button, ButtonProps } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 interface IEventButtonProps extends ButtonProps {
-  event: () => void;
+  event?: () => void;
   text?: string;
   icon?: ReactElement;
   variant?: "default" | "dark";
@@ -36,10 +36,10 @@ export default function EventButton({
   ...buttonProps
 }: IEventButtonProps) {
   const handleClick = () => {
-    event();
+    if (event) event();
   };
 
-  const { bgColor, color, hoverBgColor, hoverColor, borderRadius, boxShadow } =
+  const { bgColor, color, borderRadius, boxShadow } =
     variants[variant];
 
   return (
@@ -53,7 +53,7 @@ export default function EventButton({
       }}
       borderRadius={borderRadius}
       boxShadow={boxShadow}
-      onClick={handleClick}
+      onClick={event ? handleClick : undefined}
       {...buttonProps}
       lineHeight="1"
       transition="all 0.3s ease"

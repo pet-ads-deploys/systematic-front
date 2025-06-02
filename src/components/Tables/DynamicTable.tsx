@@ -10,7 +10,6 @@ import { KeyWordHeaderInterface } from "../../../public/interfaces/IKeyWordHeard
 import { tableTypeEnum } from "../../../public/enums/tableTypeEnum";
 // import { useContext } from "react";
 // import AppContext from "../Context/AppContext";
-import useStudiesFilter from "../../hooks/useStudiesFilter";
 
 interface DynamicTableProps {
   headerData: TableHeadersInterface | KeyWordHeaderInterface;
@@ -21,11 +20,12 @@ interface DynamicTableProps {
   selectedStatus: string | null;
 }
 
-export default function DynamicTable({ headerData, bodyData, tableType, filteredColumns, searchString, selectedStatus }: DynamicTableProps) {
+//searchString, selectedStatus
+export default function DynamicTable({ headerData, bodyData, tableType, filteredColumns }: DynamicTableProps) {
   const isKeyWordTable = tableType == tableTypeEnum.KEYWORD;
   const isSelectionTable = tableType == tableTypeEnum.SELECTION;
   const isExtractionTable = tableType === tableTypeEnum.EXTRACTION;
-  const studiesToFilter = (bodyData as StudyInterface[]);
+  //const studiesToFilter = (bodyData as StudyInterface[]);
   // const context = useContext(AppContext);
 
   const getColumnVisibility = useColumnVisibility(filteredColumns);

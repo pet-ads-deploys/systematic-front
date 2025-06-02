@@ -1,11 +1,5 @@
-import { Accordion } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import AccordionElement from "./subcomponents/AccordionItem";
 import { LARGE_SIZE } from "./styles/sidebarStyles";
-import { Link } from "react-router-dom";
-import NavItem from "./subcomponents/NavItem";
-import LogoutButton from "./subcomponents/LogoutButton";
-import { IoLibrarySharp } from "react-icons/io5";
 import DefaultNavigation from "./subcomponents/DefaultNav";
 import AccordionNav from "./subcomponents/AccordionNavigation";
 
