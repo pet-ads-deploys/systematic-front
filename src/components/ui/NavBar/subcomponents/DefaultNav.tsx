@@ -1,6 +1,6 @@
 import NavItem from "./NavItem";
 import { Link } from "react-router-dom";
-import { SiAddthis } from "react-icons/si";
+import { IoCreateOutline } from "react-icons/io5";
 import { IoLibrarySharp } from "react-icons/io5";
 import LogoutButton from "./LogoutButton";
 
@@ -10,7 +10,7 @@ interface IDefaultNavigation {
 
 const routes = [
   { path: "/user", icon: IoLibrarySharp, title: "My reviews" },
-  { path: "/newReview", icon: SiAddthis, title: "New Revision" }
+  { path: "/newReview", icon: IoCreateOutline, title: "New Revision" },
 ];
 
 export default function DefaultNavigation({ navSize }: IDefaultNavigation) {

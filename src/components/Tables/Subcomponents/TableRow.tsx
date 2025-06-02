@@ -47,7 +47,7 @@ U extends StudyInterface | KeywordInterface
     }
     if (isSelectionTable) {
       context?.setSelectionStudy((rowData as StudyInterface))
-      context?.setSortedSelectionStudyIndex(rowIndex);
+      context?.setSelectionStudyIndex(rowIndex);
     }
   }
 

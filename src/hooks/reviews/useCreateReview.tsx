@@ -105,6 +105,11 @@ const useCreateReview = () => {
 
     function handleDescription(e: React.ChangeEvent<HTMLTextAreaElement>) { setDescription(e.target.value); }
 
+    function handleCollaborators(e: React.ChangeEvent<HTMLTextAreaElement>) {
+        const value = e.target.value;
+        setCollaborators(value.split(',')); //Separe a string por vírgula!!!
+    }
+
     async function handlePost() {
         if(title === '') setIsTitleValid(false);
 
@@ -127,7 +132,7 @@ const useCreateReview = () => {
     }
 
     return { useCreateReviewPut, useCreateReviewPost, title, description, collaborators, isReturn,
-    handleTitle, handleDescription, setDescription, setTitle, setIsTitleValid, handlePost, handlePut, isTitleValid };
+    handleTitle, handleDescription, handleCollaborators, setDescription, setTitle, setIsTitleValid, handlePost, handlePut, isTitleValid };
 }
 
 export default useCreateReview;

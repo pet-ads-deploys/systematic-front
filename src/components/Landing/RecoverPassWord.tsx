@@ -10,11 +10,15 @@ interface iRecoverProps {
 }
 
 export default function RecoverPassWord({ handleRender }: iRecoverProps) {
-  const { handleEmailchange } = useHandleRegister();
+  const { handleEmailChange } = useHandleRegister(() => {});
   return (
     <Box w={"100%"} mb={"13em"} ml={"20%"}>
       <FormControl sx={formcontrolConteiner}>
-        <RegisterInputs id="mail" placeholder={"Email ..."} handlechange={handleEmailchange} />
+        <RegisterInputs
+          id="mail"
+          placeholder={"Email ..."}
+          handlechange={handleEmailChange}
+        />
         <Box sx={bxconteiner}>
           <EventButton
             event={() => {

@@ -26,8 +26,8 @@ interface AppContextType {
   setSelectionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   sortedExtractionStudyIndex: number | undefined;
   setSortedExtractionStudyIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
-  sidebarState: 'open' | 'collapsed' | 'semi-collapsed';
-  setSidebarState: React.Dispatch<React.SetStateAction<'open' | 'collapsed' | 'semi-collapsed'>>;
+    sidebarState: 'open' | 'collapsed' | 'semi-collapsed';
+    setSidebarState: React.Dispatch<React.SetStateAction<'open' | 'collapsed' | 'semi-collapsed'>>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);

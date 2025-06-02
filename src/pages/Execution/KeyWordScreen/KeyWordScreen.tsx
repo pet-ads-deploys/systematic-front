@@ -6,9 +6,10 @@ import FlexLayout from "../../../components/ui/Flex/Flex";
 import { KeyWordHeaderInterface } from "../../../../public/interfaces/IKeyWordHeard";
 // import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
 import KeywordsTable from "../../../components/Tables/KeywordsTable/KeywordsTable";
+import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
 
 export default function KeyWordScreen() {
-  const keyWords = useFetchStudyData("/data/keywordData.json");
+  const keyWords = useFetchStudyData("/data/keywordData.json") as KeywordInterface[];
   const headerData: KeyWordHeaderInterface = {
     keyword: "Keywords",
     frequency: "Frequency"

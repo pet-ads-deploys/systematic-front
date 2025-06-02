@@ -18,8 +18,8 @@ function NumberScaleModal({show, scaleHolder, values }: Props) {
     useEffect(() => {
         // console.log(values);
         onOpen();
-        handleMinimalValue('', values[0]);
-        handleMaximalValue('', values[1]);
+        handleMinimalValue(values[0]);
+        handleMaximalValue(values[1]);
     }, []);
 
     function handleSave(){
