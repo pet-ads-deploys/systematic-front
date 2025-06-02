@@ -2,11 +2,13 @@ import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 import { useEffect, useState } from "react";
 import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
-import { FetchStudiesBySource } from "../../../hooks/reports/fetchStudiesBySources";
-import useFetchStudiesBySource from "../../../hooks/reports/useFetchStudiesBySource";
+import { fetchStudiesBySource } from "../../../hooks/reports/fetchStudiesBySources";
+
 
 export default function PieChart() {
-  const { databases } = useFetchDataBases();
+
+
+   const { databases } = useFetchDataBases();
   const [loading, setLoading] = useState(true);
   const [series, setSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
@@ -15,11 +17,10 @@ export default function PieChart() {
     const loadData = async () => {
       setLoading(true); 
       if (databases.length === 0) return;
-
       try {
-        const data = await FetchStudiesBySource(databases);
-        setLabels(data.map((item) => item.label));
-        setSeries(data.map((item) => item.total));
+        const data = await fetchStudiesBySource(databases);
+        setLabels(data.map((item) => item.source));
+        setSeries(data.map((item) => item.totalOfStudies));
       } catch (error) {
         console.error("Erro ao carregar gráfico:", error);
       } finally {
@@ -36,6 +37,9 @@ export default function PieChart() {
       chart: {
         toolbar: {
           show: true,
+          export:{
+            width:700
+          }
         },
       },
       labels:labels,
@@ -43,6 +47,14 @@ export default function PieChart() {
         text: "Retrieved Studies by Search Source",
         align: "left",
       },
+      /*
+      dataLabels: {
+        enabled: true,
+        formatter: (_val, opts) =>{
+          return opts.w.config.series[opts.seriesIndex];
+        }
+      },*/
+
     } as ApexOptions,
   };
 
@@ -53,7 +65,7 @@ export default function PieChart() {
       options={chartConfig.options}
       series={chartConfig.series}
       type="pie"
-      width={400}
+      width={550}
     />
   );
 }

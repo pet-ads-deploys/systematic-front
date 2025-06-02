@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
@@ -17,17 +16,14 @@ const color = criteria === "inclusion" ? "#3c73b6" : "#C21807";
   }>({
     series:[
       {
-            name: "included studies",
+            name: "studies",
             data: [7, 2, 5,10],
-
       }
     ],
     options:{
       chart:{
         toolbar:{
           show:true,
-          offsetX:0,
-          offsetY:0,
           tools:{
             selection:true,
             download:true,
@@ -39,12 +35,13 @@ const color = criteria === "inclusion" ? "#3c73b6" : "#C21807";
         bar: {
           horizontal:false,
           dataLabels:{
-            position:'top' 
+            position:'top' ,
+          
           }
         }
       },
       dataLabels: {
-        enabled: false
+        enabled: true
       },
       xaxis: {
         categories: ['C1','C2','C3','C4'],
