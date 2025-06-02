@@ -10,20 +10,24 @@ import { container, label } from "../styles";
 interface DropdownListProps {
   question: string;
   options: string[];
+  answer: string;
   onResponse: (response: string) => void;
 }
 
 export default function DropdownList({
   question,
   options,
+  answer,
   onResponse,
 }: DropdownListProps) {
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(answer);
 
   const handleSelectChange = (value: string) => {
     setSelected(value);
     onResponse(value);
   };
+
+  console.log("pick", selected);
 
   return (
     <FormControl sx={container}>

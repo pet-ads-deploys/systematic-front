@@ -22,6 +22,8 @@ export default function TextualResponse({
     onResponse(value);
   };
 
+  console.log("teestual", response);
+
   return (
     <FormControl sx={container}>
       <FormLabel sx={label}>{capitalize(question)}</FormLabel>

@@ -7,49 +7,46 @@ import { FaPlusCircle } from "react-icons/fa";
 import CreateResponseComponent from "../utils/CreateResponseComponents.tsx";
 
 // Hooks
-import useFetchAllQuestionsByArticle from "../../../../../../hooks/fetch/useFetchAllQuestionsByArticle.ts";
 import { useSendAnswerExtractionQuestions } from "../../../../../../hooks/tables/useSendAnswerExtractionQuestions.ts";
 import { useSubmitAnswerForm } from "../../../../../../hooks/reviews/forms/useSubmitAnswerForm.tsx";
 
 // Types
-import type { FormsToExtractionData } from "../../../../../../hooks/fetch/useFetchAllQuestionsByArticle.ts";
+import { FormStructure } from "../types.ts";
 
 // Styles
 import { button } from "../styles.ts";
 
 export default function ExtractionForm({
+  currentId,
+  article,
   questionsFiltered,
   handlerUpdateAnswer,
-}: FormsToExtractionData) {
+}: FormStructure) {
   const reviewId = localStorage.getItem("systematicReviewId");
-
-  const { currentArticleId } = useFetchAllQuestionsByArticle();
 
   const navigate = useNavigate();
   const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
   const { handleSubmitAnswer } = useSubmitAnswerForm({
-    responses: questionsFiltered[currentArticleId || -1] ?? {},
+    responses: article[currentId]?.extractionQuestions ?? {},
     handleSendAnswer: sendAnswerExtractionQuestions,
   });
 
-  const hasQuestions = Object.entries(questionsFiltered).length > 0;
+  const hasQuestions = questionsFiltered.length > 0;
 
   return (
     <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">
       <Box gap="5rem">
         {hasQuestions ? (
-          Object.entries(questionsFiltered).map(([articleId, formAnswers]) =>
-            Object.entries(formAnswers).map(([questionId, answer]) => (
-              <CreateResponseComponent
-                key={`EXTRACTION-${articleId}-${questionId}`}
-                articleId={Number(articleId)}
-                questionId={questionId}
-                updateResponse={handlerUpdateAnswer}
-                typeform="EXTRACTION"
-                answer={answer}
-              />
-            ))
-          )
+          questionsFiltered.map((question) => (
+            <CreateResponseComponent
+              key={`EXTRACTION-${currentId}-${question.questionId}`}
+              articleId={currentId}
+              questionId={question.questionId}
+              updateResponse={handlerUpdateAnswer}
+              typeform="EXTRACTION"
+              answer={question.answer}
+            />
+          ))
         ) : (
           <Flex
             flexDirection="column"

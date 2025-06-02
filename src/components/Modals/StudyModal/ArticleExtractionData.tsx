@@ -91,12 +91,13 @@ export default function ArticlesExtrationData({
 }: ArticlePreviewProps) {
   const [formVisible, setFormVisible] = useState<FormType>("EXTRACTION");
 
-  const { questions, currentArticleId, handlerUpdateAnswer } =
+  const { question, currentArticleId, handlerUpdateAnswerStructure } =
     useFetchAllQuestionsByArticle();
 
-  if (!questions || !currentArticleId) return;
+  if (!question || !currentArticleId || !question[currentArticleId])
+    return null;
 
-  console.log("Questoes todas", questions);
+  const { extractionQuestions, robQuestions } = question[currentArticleId];
 
   const extractionStatus = statusIconMap[studyData.extractionStatus];
   const priorityLevel = priorityIconMap[studyData.readingPriority];
@@ -168,13 +169,17 @@ export default function ArticlesExtrationData({
       <Box mt="2rem">
         {formVisible === "EXTRACTION" ? (
           <ExtractionForm
-            questionsFiltered={questions.extractionQuestions}
-            handlerUpdateAnswer={handlerUpdateAnswer}
+            article={question}
+            questionsFiltered={extractionQuestions}
+            currentId={currentArticleId}
+            handlerUpdateAnswer={handlerUpdateAnswerStructure}
           />
         ) : (
           <RiskOfBiasForm
-            questionsFiltered={questions.extractionQuestions}
-            handlerUpdateAnswer={handlerUpdateAnswer}
+            article={question}
+            questionsFiltered={robQuestions}
+            currentId={currentArticleId}
+            handlerUpdateAnswer={handlerUpdateAnswerStructure}
           />
         )}
       </Box>

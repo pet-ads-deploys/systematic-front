@@ -8,43 +8,22 @@ import NumberScale from "../Responses/NumberScale/NumberScale";
 import TextualResponse from "../Responses/Textual/Textual";
 
 // Hooks
-import useFetchAllQuestionsByArticle from "../../../../../../hooks/fetch/useFetchAllQuestionsByArticle";
+import { useFetchQuestionById } from "../../../../../../hooks/fetch/useFetchQuestionById";
 
 // Types
-import type { AnswerProps, Questions, TypeOfQuestions } from "../types";
-import type { FormType } from "../../../../../../components/Modals/StudyModal/ArticleExtractionData";
-
-interface CreateResponseProps {
-  articleId: number;
-  questionId: string;
-  answer: AnswerProps;
-  typeform: FormType;
-  updateResponse: (
-    articleId: number,
-    type: FormType,
-    questionId: string,
-    response: AnswerProps
-  ) => void;
-}
+import type { CreateResponseProps, TypeOfQuestions } from "../types";
 
 export default function CreateResponseComponent({
   articleId,
   questionId,
-  updateResponse,
   typeform,
   answer,
+  updateResponse,
 }: CreateResponseProps) {
-  const { extractionQuestions, riskOfBiasQuestions } =
-    useFetchAllQuestionsByArticle();
-
-  const questionsMap: Record<FormType, Questions[] | undefined> = {
-    EXTRACTION: extractionQuestions.questions,
-    RISK_OF_BIAS: riskOfBiasQuestions.questions,
-  };
-
-  const question = questionsMap[typeform]?.find(
-    (q) => q.questionId === questionId
-  );
+  const question = useFetchQuestionById({
+    questionId,
+    type: typeform,
+  });
 
   if (!question) return;
 
@@ -55,7 +34,7 @@ export default function CreateResponseComponent({
         question={question.description}
         answer={answer.value as string}
         onResponse={(response) =>
-          updateResponse(articleId, typeform, question.questionId || "", {
+          updateResponse(articleId, questionId, typeform, {
             value: response,
             type: "TEXTUAL",
           })
@@ -70,7 +49,7 @@ export default function CreateResponseComponent({
         minValue={question.lower}
         maxValue={question.higher}
         onResponse={(response) =>
-          updateResponse(articleId, typeform, question.questionId || "", {
+          updateResponse(articleId, questionId, typeform, {
             value: response,
             type: "NUMBERED_SCALE",
           })
@@ -82,8 +61,14 @@ export default function CreateResponseComponent({
         key={question.code}
         question={question.description}
         scales={question.scales}
+        answer={
+          answer.value as {
+            name: string;
+            value: number;
+          }
+        }
         onResponse={(response) =>
-          updateResponse(articleId, typeform, question.questionId || "", {
+          updateResponse(articleId, questionId, typeform, {
             value: response,
             type: "LABELED_SCALE",
           })
@@ -95,8 +80,9 @@ export default function CreateResponseComponent({
         key={question.code}
         question={question.description}
         options={question.options || []}
+        answer={answer.value as string}
         onResponse={(response) =>
-          updateResponse(articleId, typeform, question.questionId || "", {
+          updateResponse(articleId, questionId, typeform, {
             value: response,
             type: "PICK_LIST",
           })
