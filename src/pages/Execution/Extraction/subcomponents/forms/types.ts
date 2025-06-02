@@ -27,3 +27,47 @@ export interface HandleSendAnswerProps {
   answer: string | number | { name: string; value: number } | null;
   type: TypeOfQuestions;
 }
+
+export type FormType = "EXTRACTION" | "RISK_OF_BIAS";
+
+export type Answer = {
+  value: string | number | { name: string; value: number } | null;
+};
+
+export type AnswerStrucuture = {
+  questionId: string;
+  description: string;
+  code: string;
+  type: TypeOfQuestions;
+  answer: Answer;
+};
+
+export type ArticleAnswerStrucuture = {
+  extractionQuestions: AnswerStrucuture[];
+  robQuestions: AnswerStrucuture[];
+};
+
+export interface FormStructure {
+  currentId: number;
+  article: Record<number, ArticleAnswerStrucuture>;
+  questionsFiltered: AnswerStrucuture[];
+  handlerUpdateAnswer: (
+    articleId: number | undefined,
+    questionId: string,
+    type: FormType,
+    response: AnswerProps
+  ) => void;
+}
+
+export interface CreateResponseProps {
+  articleId: number;
+  questionId: string;
+  answer: Answer;
+  typeform: FormType;
+  updateResponse: (
+    articleId: number,
+    questionId: string,
+    type: FormType,
+    response: AnswerProps
+  ) => void;
+}
