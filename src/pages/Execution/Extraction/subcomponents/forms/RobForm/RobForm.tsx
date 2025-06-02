@@ -27,7 +27,7 @@ export default function RiskOfBiasForm({
   const navigate = useNavigate();
   const { sendAnswerROBQuestions } = useSendAnswerROBQuestions();
   const { handleSubmitAnswer } = useSubmitAnswerForm({
-    responses: article[currentId]?.extractionQuestions ?? {},
+    responses: article[currentId]?.robQuestions ?? {},
     handleSendAnswer: sendAnswerROBQuestions,
   });
 
