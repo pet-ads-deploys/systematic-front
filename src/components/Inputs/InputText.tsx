@@ -1,5 +1,4 @@
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
-import SearchButton from "../Buttons/SearchButton";
 import { inputconteiner } from "./styles/inputTextStyle";
 
 interface ITextFieldProps {
@@ -7,7 +6,7 @@ interface ITextFieldProps {
   placeholder: string;
   type: string;
   nome: string;
-  onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: React.ChangeEvent<HTMLInputElement>) => void;
   labelAbove?: boolean; 
   value?: string;
 }

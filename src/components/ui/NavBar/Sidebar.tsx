@@ -1,10 +1,6 @@
-import { Flex } from "@chakra-ui/react";
+
 import { useContext, useRef, useState } from "react";
-import DefaultNavigation from "./subcomponents/DefaultNav";
-import AccordionNav from "./subcomponents/AccordionNavigation";
-import UserInfos from "./subcomponents/UserInfos";
-import MenuButton from "./subcomponents/MenuButton";
-import { LARGE_SIZE, SMALL_SIZE, conteiner, content } from "./styles/sidebarStyles";
+import { LARGE_SIZE, SMALL_SIZE} from "./styles/sidebarStyles";
 import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "./use-dimensions";
 import "./styles.css"

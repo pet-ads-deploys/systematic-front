@@ -5,8 +5,8 @@ import ProtocolAccordionSubItem from "./AccordionNavItem";
 
 import { MdRule, MdOutlineArticle} from "react-icons/md";
 import { LuFileSearch, LuFileCheck2, LuTextSelect } from "react-icons/lu";
-import { CgFileAdd, CgCheckR } from "react-icons/cg";
-import { IoText, IoBarChartSharp} from "react-icons/io5";
+import { CgCheckR } from "react-icons/cg";
+import { IoBarChartSharp} from "react-icons/io5";
 import { GrTag } from "react-icons/gr";
 import { TbFilterSearch } from "react-icons/tb";
 import { VscOpenPreview } from "react-icons/vsc";

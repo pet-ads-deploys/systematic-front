@@ -11,8 +11,7 @@ interface iFlexLayout {
 
 export default function FlexLayout({
   navigationType,
-  children,
-  defaultOpen,
+  children
 }: iFlexLayout) {
   return (
     <Flex sx={flexStyles}>

@@ -8,8 +8,8 @@ interface editButtonProps {
   index: number;
   handleSaveEdit: () => void;
   handleEdit: (index: number) => void;
-  itemDescription: String;
-  itemType: String
+  itemDescription?: String;
+  itemType?: String
 }
 
 export default function EditButton({ 
@@ -20,7 +20,7 @@ export default function EditButton({
   itemDescription,
   itemType }: editButtonProps) {
   
-  const validation = editIndex === index && itemDescription !== "" && itemType !== ""
+  const validation = editIndex === index && itemDescription?.trim() !== "" && itemType?.trim() !== ""
 
   return (
     <>

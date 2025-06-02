@@ -16,19 +16,19 @@ export default function Register({ handleRender }: iRegisterProps) {
     handleNameChange,
     selectedValue,
     handleSelectChange,
-    handleEmailchange,
-    handleAffiliattionChange,
+    handleEmailChange,
+    handleAffiliationChange,
     passwordMatch,
     handlePasswordChange,
     handleConfirmPasswordChange,
     handleRegister,
-  } = useHandleRegister();
+  } = useHandleRegister(() => handleRender("Register"));
   return (
     <>
       <FormControl sx={formcontrol}>
         <RegisterInputs id="nome" placeholder={"Name ..."} handlechange={handleNameChange} />
-        <RegisterInputs id="mail" placeholder={"Email ..."} handlechange={handleEmailchange} />
-        <RegisterInputs id="affiliation" placeholder={"Affiliation ..."} handlechange={handleAffiliattionChange} />
+        <RegisterInputs id="mail" placeholder={"Email ..."} handlechange={handleEmailChange} />
+        <RegisterInputs id="affiliation" placeholder={"Affiliation ..."} handlechange={handleAffiliationChange} />
 
         <SelectInput
           values={["Select a country", "Brazil", "England", "France", "Spain"]}

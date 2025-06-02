@@ -9,7 +9,6 @@ import FlexLayout from "../../components/ui/Flex/Flex";
 //importin hooks
 import useCreateReview from "../../hooks/reviews/useCreateReview";
 import AlertInputText from "../../components/Inputs/AlertInputText";
-import { useEffect } from "react";
 
 export default function NovaRevisao() {
   const { description, title, handleDescription, handleTitle, handlePost, 

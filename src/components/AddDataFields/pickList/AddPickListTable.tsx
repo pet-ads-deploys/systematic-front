@@ -14,7 +14,7 @@ interface AddTextTableProps {
 }
 
 export default function AddPickListTable({ questions, text, placeholder, questionHolder }: AddTextTableProps) {
-  const { AddText, handleAddText, setAddText } = useAddText();
+  const { AddText, handleAddText, setAddText } = useAddText("");
   const { handleDeletePickList } = useDeletePickList();
   questionHolder(AddText);
 
