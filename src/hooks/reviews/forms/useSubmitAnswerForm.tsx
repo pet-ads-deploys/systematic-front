@@ -1,10 +1,10 @@
-import {
-  AnswerProps,
+import type {
+  AnswerStrucuture,
   HandleSendAnswerProps,
 } from "../../../pages/Execution/Extraction/subcomponents/forms/types";
 
 interface SubmitAnswerFormProps {
-  responses: Record<string, AnswerProps>;
+  responses: AnswerStrucuture[];
   handleSendAnswer: ({
     questionId,
     type,
@@ -17,16 +17,14 @@ export function useSubmitAnswerForm({
   handleSendAnswer,
 }: SubmitAnswerFormProps) {
   const handleSubmitAnswer = () => {
-    Object.entries(responses).map(([questionId, answer]) => {
-      return handleSendAnswer({
+    responses.forEach((res) => {
+      handleSendAnswer({
         answer:
-          answer.type === "NUMBERED_SCALE"
-            ? parseInt(answer.value as string)
-            : answer.type === "LABELED_SCALE"
-            ? answer.value
-            : answer.value,
-        questionId,
-        type: answer.type,
+          res.type === "NUMBERED_SCALE"
+            ? Number(res.answer.value)
+            : res.answer.value,
+        questionId: res.questionId,
+        type: res.type,
       });
     });
   };
