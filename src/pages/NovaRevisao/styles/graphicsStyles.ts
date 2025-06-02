@@ -22,8 +22,6 @@ export const graphicsconteiner = {
   alignItems:"center",
   boxShadow: "md",
 };
-
-
 export const barchartBox = {
   width: "45%",
   padding: "2px",
@@ -36,7 +34,7 @@ export const piechartBox = {
 
 
 export const textDescription={
-  as: "h2",
+  as: "h3",
   textAlign: "left",
   mb: 4, 
   mt:8,
@@ -45,5 +43,15 @@ export const textDescription={
   color: "#263C56",
   pt: "0.5em",
   pb: "0.5em",
-  tw:"font-bold",
+}
+export const textSection={
+  as:"h2",
+  textAlign:"center",
+  mb: 4, 
+  mt:8,
+  fontWeight: "bold", 
+  color: "#263C56",
+  fontSize:"26",
+  pt: "0.5em",
+  pb: "0.5em",
 }
