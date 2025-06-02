@@ -1,54 +1,25 @@
-// External library
-import useSWR from "swr";
-
-// Service
-import Axios from "../../interceptor/interceptor";
-
-// Utils
-import getRequestOptions from "../../utils/getRequestOptions";
+// Hooks
+import { useFetchExtractionQuestions } from "./useFetchExtractionQuestions";
+import { useFetchRobQuestions } from "./useFetchRobQuestions";
 
 // Types
-import type { Questions } from "../../pages/Execution/Extraction/subcomponents/forms/types";
-import type { FormType } from "./useFetchAllQuestionsByArticle";
+import { FormType } from "../../components/Modals/StudyModal/ArticleExtractionData";
 
 type QuestionByIdProps = {
   questionId: string;
   type: FormType;
 };
 
-type HttpResponse = {
-  question: Questions;
-};
-
 export function useFetchQuestionById({ questionId, type }: QuestionByIdProps) {
-  const id = localStorage.getItem("systematicReviewId");
+  const { questions: extractionQuestions } = useFetchExtractionQuestions();
+  const { questions: robQuestions } = useFetchRobQuestions();
 
-  const pathMap: Record<FormType, string> = {
-    EXTRACTION: `http://localhost:8080/api/v1/systematic-study/${id}/protocol/extraction-question/${questionId}`,
-    RISK_OF_BIAS: `http://localhost:8080/api/v1/systematic-study/${id}/protocol/rob-question/${questionId}`,
-  };
+  if (!extractionQuestions || !robQuestions) return;
 
-  const endpoint = id ? pathMap[type] : null;
+  const data =
+    type === "EXTRACTION"
+      ? extractionQuestions.find((q) => q.questionId == questionId)
+      : robQuestions.find((q) => q.questionId == questionId);
 
-  const fetcher = async (url: string) => {
-    try {
-      if (!questionId) return;
-      const options = getRequestOptions();
-      const response = await Axios.get<HttpResponse>(url, options);
-      return response.data.question;
-    } catch (error) {
-      console.error(`Error fetching ${type} question:`, error);
-      throw error;
-    }
-  };
-
-  const { data, isLoading, mutate } = useSWR(endpoint, fetcher, {
-    revalidateOnMount: false,
-  });
-
-  return {
-    question: data,
-    isLoading,
-    mutate,
-  };
+  return data;
 }
