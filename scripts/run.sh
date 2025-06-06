@@ -12,18 +12,18 @@ colorize_output() {
   done
 }
 
-echo -e "\033[34m==> Iniciando build do Next.js...\033[0m"
+echo -e "\033[34m==> Initializing build...\033[0m"
 
 npm run build 2>&1 | colorize_output
 
 if [ "${PIPESTATUS[0]}" -ne 0 ]; then
-  echo -e "\033[31mBuild falhou. Abortando.\033[0m"
+  echo -e "\033[31mFailure during build. Exiting.\033[0m"
   exit 1
 fi
 
-echo -e "\033[32mBuild concluído com sucesso!\033[0m"
+echo -e "\033[32mBuild complete!\033[0m"
 echo ""
 
-echo -e "\033[34m==> Iniciando o servidor (yarn dev)...\033[0m"
+echo -e "\033[34m==> Running development server (yarn dev)...\033[0m"
 
 yarn dev 2>&1 | colorize_output
