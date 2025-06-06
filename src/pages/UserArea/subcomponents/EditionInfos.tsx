@@ -5,7 +5,8 @@ import { conteiner, infosconteiner, text } from "../styles/EditionINfosStyles";
 interface IEditionInfosProps {
   status?: string;
   lastModification: string;
-  // isEdited: boolean;
+  creation: string;
+  isEdited: boolean;
 }
 
 export default function EditionInfos({ lastModification, status, /* isEdited */ }: IEditionInfosProps) {

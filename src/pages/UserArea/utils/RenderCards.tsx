@@ -8,20 +8,18 @@ interface RenderCardsProps {
 const RenderCards = ({ data }: RenderCardsProps) => {
   return (
     <>
-    
       {data.map((item) => (
         <RevisionCard
           key={item.id}
           revisionId={item.id}
           id={item.key}
           title={item.title}
-          reviewers={item.collaborators}
+          RevisorNames={item.collaborators}
           status={item.status}
           creation={item.creation}
           isEdited={item.isEdited}
         />
       ))}
-    
     </>
   );
 };
