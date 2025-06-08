@@ -12,6 +12,7 @@ import { btnStyles, conteiner, flex, inputconteiner, tableconteiner, textArea } 
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
 import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
+import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
 
 export default function Finalization() {
   const bodyData = useFetchTableData("/data/tableData.json");
@@ -44,7 +45,7 @@ export default function Finalization() {
             />
             <ComboBox
               options={Object.values(headerData)}
-              handleCheckboxChange={handleCheckboxChange}
+              onOptionchange={handleCheckboxChange}
               selectedItems={[
                 "title",
                 "author",
@@ -64,7 +65,7 @@ export default function Finalization() {
           headerData={headerData}
           bodyData={bodyData}
           filteredColumns={checkedValues}
-          tableType={"selection"}
+          tableType={tableTypeEnum.SELECTION}
         />
         <Textarea sx={textArea} placeholder="Write stuff here..."></Textarea>
         <Flex justifyContent="flex-end">

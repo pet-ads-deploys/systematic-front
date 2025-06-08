@@ -12,6 +12,7 @@ import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStud
 import { btnconteiner, conteiner, inputconteiner } from "../styles/executionStyles";
 import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
 import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
+import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
 
 export default function Insertion() {
   const bodyData = useFetchTableData("/data/tableData.json");
@@ -63,7 +64,7 @@ export default function Insertion() {
           headerData={headerData}
           bodyData={bodyData}
           filteredColumns={checkedValues}
-          tableType={"selection"}
+          tableType={tableTypeEnum.SELECTION}
         />
         <Box sx={btnconteiner}>
           <NavButton text={"Back"} path={"/newReview/identification"} w={"200px"} />

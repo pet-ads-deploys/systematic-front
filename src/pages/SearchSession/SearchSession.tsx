@@ -13,6 +13,7 @@ import EventButton from "../../components/Buttons/EventButton";
 import FlexLayout from "../../components/ui/Flex/Flex";
 import { TableHeadersInterface } from "../../../public/interfaces/ITableHeaders";
 import { NoStudiesData } from "../../components/NotFound/NoStudiesData";
+import { tableTypeEnum } from "../../../public/enums/tableTypeEnum";
 
 export default function SearchSession() {
   const bodyData = useFetchTableData("/data/tableData.json");
@@ -66,7 +67,7 @@ export default function SearchSession() {
             headerData={headerData}
             bodyData={bodyData}
             filteredColumns={checkedValues}
-            tableType={"selection"}
+            tableType={tableTypeEnum.SELECTION}
           />
           <NavButton text={"Back"} path={"/newReview/identification"} sx={navbtnStyles} />
         </Box>
