@@ -14,7 +14,7 @@ import useChangePriority from "../../../hooks/tables/useChangePriority";
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
 import { PageLayout } from "./LayoutFactory";
 
-import { Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import {
   boxconteiner,
   buttonconteiner,
@@ -23,6 +23,8 @@ import {
 import { RiResetLeftLine } from "react-icons/ri";
 import { MdOutlineLowPriority } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+import { Tooltip } from "@chakra-ui/react";
 
 interface ButtonsForSelectionProps {
   page: PageLayout;
@@ -68,46 +70,65 @@ export default function ButtonsForSelection({
     <Flex sx={conteiner}>
       {isUniqueArticle ? null : (
         <Flex sx={buttonconteiner}>
-          <Button onClick={ChangeToPrevius} bg="white">
-            <IoIosArrowBack color="black" size="1.5rem" />
-            prev
-          </Button>
+          <Tooltip label="Previous article">
+            <Button onClick={ChangeToPrevius} bg="white">
+              <IoIosArrowBack color="black" size="1.5rem" />
+              prev
+            </Button>
+          </Tooltip>
         </Flex>
       )}
       <Flex sx={boxconteiner}>
-        <ComboBox
-          isDisabled={status.isExcluded}
-          text="Include"
-          options={criterias.inclusion}
-          page={page}
-        />
-        <ComboBox
-          isDisabled={status.isIncluded}
-          text="Exclude"
-          options={criterias.exclusion}
-          page={page}
-        />
-        <Button
-          color="black"
-          bg="white"
-          p="1rem"
-          onClick={handleResetStatusToUnclassified}
-        >
-          <RiResetLeftLine color="black" size="1.5rem" />
-        </Button>
-        <MenuOptions
+        <Tooltip label="Add inclusion criteria">
+          <Box style={{ display: 'inline-block' }}>
+            <ComboBox
+              isDisabled={status.isExcluded}
+              text="Include"
+              options={criterias.inclusion}
+              page={page}
+            />
+          </Box>
+        </Tooltip>
+        <Tooltip label="Add exclusion criteria">
+          <Box style={{ display: 'inline-block' }}>
+            <ComboBox
+              isDisabled={status.isIncluded}
+              text="Exclude"
+              options={criterias.exclusion}
+              page={page}
+            />
+          </Box>
+        </Tooltip>
+        <Tooltip label="Reset article">
+          <Button
+            color="black"
+            bg="white"
+            p="1rem"
+            onClick={handleResetStatusToUnclassified}
+          >
+            <RiResetLeftLine color="black" size="1.5rem" />
+          </Button>
+        </Tooltip>
+
+        <Tooltip label="Select reading priority">
+          <Box style={{ display: 'inline-block' }}>
+            <MenuOptions
           options={["Very Low", "Low", "High", "Very High"]}
           onOptionToggle={(option) => handleChangePriority({ status: option })}
           icon={<MdOutlineLowPriority color="black" size="1.75rem" />}
         />
+          </Box>
+        </Tooltip>
       </Flex>
 
       {isUniqueArticle ? null : (
         <Flex sx={buttonconteiner}>
-          <Button onClick={ChangeToNext} bg="white">
-            next
-            <IoIosArrowForward color="black" size="1.5rem" />
-          </Button>
+          <Tooltip label="Next article">
+            <Button onClick={ChangeToNext} bg="white">
+              next
+              <IoIosArrowForward color="black" size="1.5rem" />
+            </Button>
+          </Tooltip>
         </Flex>
       )}
     </Flex>
