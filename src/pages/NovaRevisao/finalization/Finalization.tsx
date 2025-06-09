@@ -8,7 +8,14 @@ import SelectInput from "../../../components/Inputs/SelectInput";
 import EventButton from "../../../components/Buttons/EventButton";
 import DynamicTable from "../../../components/Tables/DynamicTable";
 import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
-import { btnStyles, conteiner, flex, inputconteiner, tableconteiner, textArea } from "../styles/finalizationStyles";
+import {
+  btnStyles,
+  conteiner,
+  flex,
+  inputconteiner,
+  tableconteiner,
+  textArea,
+} from "../styles/finalizationStyles";
 import FlexLayout from "../../../components/ui/Flex/Flex";
 import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
 import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
@@ -16,18 +23,30 @@ import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
 
 export default function Finalization() {
   const bodyData = useFetchTableData("/data/tableData.json");
+
   const headerData: TableHeadersInterface = {
     title: "Title",
     authors: "Author",
     year: "Year",
     selectionStatus: "Status/Selection",
     extractionStatus: "Status/Extraction",
-    readingPriority: "Reading Priority"
-}
-  const { value: selectedValue, handleChange: handleSelectChange } = useInputState<string | null>(null);
-  const { value: checkedValues, handleChange: handleCheckboxChange } = useInputState<string[]>([]);
+    readingPriority: "Reading Priority",
+  };
 
-  if(!bodyData) return <NoStudiesData/>
+  const { value: selectedValue, handleChange: handleSelectChange } =
+    useInputState<string | null>(null);
+  const { value: checkedValues, handleChange: setCheckedValues } =
+    useInputState<string[]>([]);
+
+  const handleCheckboxChange = (option: string, isChecked: boolean) => {
+    if (isChecked) {
+      setCheckedValues([...checkedValues, option]);
+    } else {
+      setCheckedValues(checkedValues.filter((item) => item !== option));
+    }
+  };
+
+  if (!bodyData) return <NoStudiesData />;
 
   return (
     <FlexLayout defaultOpen={2} navigationType="Accordion">
@@ -35,10 +54,20 @@ export default function Finalization() {
       <Flex sx={flex}>
         <Box sx={conteiner} ml={"2rem"}>
           <Box sx={inputconteiner}>
-            <InputText type="search" placeholder="Insert article's name" nome="search" />
+            <InputText
+              type="search"
+              placeholder="Insert article's name"
+              nome="search"
+            />
             <SelectInput
               names={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
-              values={["", "Accepted", "Duplicated", "Rejected", "Unclassified"]}
+              values={[
+                "",
+                "Accepted",
+                "Duplicated",
+                "Rejected",
+                "Unclassified",
+              ]}
               onSelect={handleSelectChange}
               selectedValue={selectedValue}
               page={""}
@@ -46,16 +75,10 @@ export default function Finalization() {
             <ComboBox
               options={Object.values(headerData)}
               onOptionchange={handleCheckboxChange}
-              selectedItems={[
-                "title",
-                "author",
-                "year",
-                "status/selection",
-                "status/extraction",
-                "reading priority",
-                "score",
-              ]}
+              selectedItems={checkedValues}
               text={"filter options"}
+              isDisabled={false}
+              page={"Extraction"}
             />
           </Box>
         </Box>
@@ -67,12 +90,12 @@ export default function Finalization() {
           filteredColumns={checkedValues}
           tableType={tableTypeEnum.SELECTION}
         />
-        <Textarea sx={textArea} placeholder="Write stuff here..."></Textarea>
+        <Textarea sx={textArea} placeholder="Write stuff here..." />
         <Flex justifyContent="flex-end">
           <EventButton
             sx={btnStyles}
             text={"Export"}
-            event={function (): void {
+            event={() => {
               console.log("Export the Review!");
             }}
           />

@@ -80,12 +80,14 @@ export default function ButtonsForSelection({
           text="Include"
           options={criterias.inclusion}
           page={page}
+          selectedItems={}
         />
         <ComboBox
           isDisabled={status.isIncluded}
           text="Exclude"
           options={criterias.exclusion}
           page={page}
+          selectedItems={}
         />
         <Button
           color="black"
