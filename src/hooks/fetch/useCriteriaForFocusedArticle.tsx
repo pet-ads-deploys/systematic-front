@@ -4,15 +4,10 @@ import useSWR from "swr";
 // Service
 import Axios from "../../interceptor/interceptor";
 
-// Hooks
-import useFocusedArticle from "../reviews/useFocusedArticle";
-
 // Utils
 import getRequestOptions from "../../utils/getRequestOptions";
 
 // Types
-import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
-
 interface HttpResponse {
   criteria: {
     inclusion: string[];
@@ -20,19 +15,15 @@ interface HttpResponse {
   };
 }
 
-interface CriteriaByArticleProps {
-  page: PageLayout;
+interface CriteriaForFocusedArticleProps {
+  articleId: number;
 }
 
-export default function useFetchCriteriaByArticle({
-  page,
-}: CriteriaByArticleProps) {
+export default function useFetchCriteriaForFocusedArticle({
+  articleId,
+}: CriteriaForFocusedArticleProps) {
   const id = localStorage.getItem("systematicReviewId");
   const options = getRequestOptions();
-
-  const { articleInFocus } = useFocusedArticle({ page });
-
-  const articleId = articleInFocus ? articleInFocus.studyReviewId : null;
 
   const path =
     id && articleId
@@ -40,7 +31,7 @@ export default function useFetchCriteriaByArticle({
       : null;
 
   const { data, isLoading, error, mutate } = useSWR(path, fetchAllCriteria, {
-    revalidateOnFocus: false,
+    revalidateOnFocus: true,
     revalidateOnMount: true,
   });
 

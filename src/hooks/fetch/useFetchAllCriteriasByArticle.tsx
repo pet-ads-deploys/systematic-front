@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 
 // Hooks
+import useFetchCriteriaForFocusedArticle from "./useCriteriaForFocusedArticle";
 import useFetchInclusionCriteria from "./useFetchInclusionCriteria";
 import useFetchExclusionCriteria from "./useFetchExclusionCriterias";
 import useFocusedArticle from "../reviews/useFocusedArticle";
@@ -38,39 +39,53 @@ export default function useFetchAllCriteriasByArticle({
   );
 
   const { articleInFocus } = useFocusedArticle({ page });
+  const articleId = articleInFocus ? articleInFocus.studyReviewId : -1;
+  const { criteria } = useFetchCriteriaForFocusedArticle({
+    articleId: articleId,
+  });
   const inclusion = useFetchInclusionCriteria() || [];
   const exclusion = useFetchExclusionCriteria() || [];
-
-  const articleId = articleInFocus ? articleInFocus.studyReviewId : -1;
 
   useEffect(() => {
     if (!inclusion || !exclusion || !articleInFocus) return;
 
+    const groupOfCriteria: Record<OptionType, string[]> = {
+      INCLUSION: criteria?.inclusion || [],
+      EXCLUSION: criteria?.exclusion || [],
+    };
+
     if (criterias[articleId]) return;
+
+    const inclusionMapped = inclusion.map((content) => ({
+      text: content,
+      isChecked: groupOfCriteria["INCLUSION"].includes(content),
+    }));
+
+    const inclusionStatus = inclusionMapped.some((crit) => crit.isChecked);
+
+    const exclusionMapped = exclusion.map((content) => ({
+      text: content,
+      isChecked: groupOfCriteria["EXCLUSION"].includes(content),
+    }));
+
+    const exclusionStatus = exclusionMapped.some((crit) => crit.isChecked);
 
     setCriterias((prev) => ({
       ...prev,
       [articleId]: {
         options: {
           INCLUSION: {
-            content: inclusion.map((content) => ({
-              text: content,
-              isChecked: false,
-            })),
-            isActive: false,
+            content: inclusionMapped,
+            isActive: inclusionStatus,
           },
           EXCLUSION: {
-            content: exclusion.map((content) => ({
-              text: content,
-              isChecked: false,
-            })),
-            isActive: false,
+            content: exclusionMapped,
+            isActive: exclusionStatus,
           },
         },
       },
     }));
   }, [inclusion, exclusion, articleInFocus]);
-
 
   const handlerUpdateCriteriasStructure = (
     key: OptionType,
