@@ -4,19 +4,17 @@ import axios from "../interceptor/interceptor";
 interface Props {
   studyReviewId: number[];
   status: "INCLUDED" | "EXCLUDED" | "UNCLASSIFIED";
+  criterias: string[];
 }
 
 export const UseChangeStudyExtractionStatus = ({
   studyReviewId,
   status,
+  criterias,
 }: Props) => {
   const id = localStorage.getItem("systematicReviewId");
   const options = getRequestOptions();
-    const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/extraction-status`;
-    
-  axios.patch(
-    path,
-    { status, criteria: [], studyReviewId },
-    options
-  );
+  const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/extraction-status`;
+
+  axios.patch(path, { status, criteria: criterias, studyReviewId }, options);
 };
