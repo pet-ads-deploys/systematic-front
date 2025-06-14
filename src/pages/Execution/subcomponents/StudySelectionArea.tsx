@@ -38,35 +38,6 @@ export default function StudySelectionArea({
   if (!articles || articles.length === 0) return null;
 
   const selectedIndex = typeof studyIndex === "number" ? studyIndex : 0;
-  // if (!showSelectionModal || studyIndex === null)
-  //   return (
-  //     <Flex
-  //       direction="column"
-  //       bg="white"
-  //       borderRadius="1rem"
-  //       w="100%"
-  //       h="100%"
-  //       maxH="100%"
-  //       mb="20px"
-  //       p="6"
-  //       alignItems="center"
-  //       justifyContent="center"
-  //       boxShadow="md"
-  //       border="3px solid rgb(93, 115, 141)"
-  //       borderStyle="dashed"
-  //     >
-  //       <GrSelect size="3.5rem" color="#263C56" />
-  //       <Text
-  //         color="#263C56"
-  //         fontSize="lg"
-  //         mt="4"
-  //         textAlign="center"
-  //         fontWeight="bold"
-  //       >
-  //         Select a study from the list to see a preview of its article.
-  //       </Text>
-  //     </Flex>
-  //   );
 
   return (
     <Flex
