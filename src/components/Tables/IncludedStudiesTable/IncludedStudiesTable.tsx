@@ -112,7 +112,7 @@ export const IncludedStudiesTable = () => {
     </Thead>
     <Tbody>
       {studies.map((studies)=>(
-        <Tr _hover={{ bg: 'gray.300' }}>
+        <Tr key={studies.id} _hover={{ bg: 'gray.300' }}>
           <Td>{studies.id}</Td>
           <Td>{studies.title}</Td>
           <Td>{studies.author}</Td>
