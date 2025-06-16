@@ -7,29 +7,27 @@ import { fetchStudiesBySource } from "../../../hooks/reports/fetchStudiesBySourc
 
 export default function PieChart() {
 
-
-   const { databases } = useFetchDataBases();
-  const [loading, setLoading] = useState(true);
+  const { databases } = useFetchDataBases();
+  const [isLoading, setIsLoading] = useState(true);
   const [series, setSeries] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
 
   useEffect(() => {
-    const loadData = async () => {
-      setLoading(true); 
-      if (databases.length === 0) return;
-      try {
-        const data = await fetchStudiesBySource(databases);
-        setLabels(data.map((item) => item.source));
-        setSeries(data.map((item) => item.totalOfStudies));
-      } catch (error) {
-        console.error("Erro ao carregar gráfico:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const loadData = async () => {
+    setIsLoading(true);
+    if (databases.length === 0) {
+      setIsLoading(false);
+      return;
+    }
+    const data = await fetchStudiesBySource(databases);
+    setLabels(data.map((item) => item.source));
+    setSeries(data.map((item) => item.totalOfStudies));
+    setIsLoading(false);
+  };
 
-    loadData();
-  }, [databases]);
+  loadData();
+}, [databases]);
+
 
   const chartConfig = {
     series:series,
@@ -58,7 +56,7 @@ export default function PieChart() {
     } as ApexOptions,
   };
 
-  if (loading) return <p>Loading chart...</p>;
+  if (isLoading) return <p>Loading chart...</p>;
 
   return (
     <Chart
