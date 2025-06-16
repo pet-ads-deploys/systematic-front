@@ -31,6 +31,12 @@ export const piechartBox = {
   padding: "2px",   
   margin: "0 auto",       
 };
+export const fluxogramaBox={
+  width:'100vw', 
+  height: '100vh'
+
+
+}
 
 
 export const textDescription={
