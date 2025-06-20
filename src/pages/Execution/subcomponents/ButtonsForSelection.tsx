@@ -46,52 +46,71 @@ export default function ButtonsForSelection({
 
   const { handleResetStatusToUnclassified } = useResetStatus({ page });
   const { handleChangePriority } = useChangePriority();
-  const { criterias, handlerUpdateCriteriasStructure } =
+  const { criterias: fetchedCriterias, handlerUpdateCriteriasStructure } =
     useFetchAllCriteriasByArticle({ page });
 
-  if (!criterias) return;
+  if (!fetchedCriterias) return;
 
-  // console.log("criterios aqui no componente", criterias);
+  const criteriaOptions = fetchedCriterias.options;
 
-  const criteriaBase = criterias.options;
-
-  const groupCriteriaMap: Record<
+  const criteriaGroupDataMap: Record<
     OptionType,
     { data: OptionProps[]; isActive: boolean }
   > = {
     INCLUSION: {
-      data: criteriaBase.INCLUSION.content,
-      isActive: criteriaBase.INCLUSION.isActive,
+      data: criteriaOptions.INCLUSION.content,
+      isActive: criteriaOptions.INCLUSION.isActive,
     },
     EXCLUSION: {
-      data: criteriaBase.EXCLUSION.content,
-      isActive: criteriaBase.EXCLUSION.isActive,
+      data: criteriaOptions.EXCLUSION.content,
+      isActive: criteriaOptions.EXCLUSION.isActive,
     },
   };
 
-  if (!groupCriteriaMap["INCLUSION"] || !groupCriteriaMap["EXCLUSION"]) return;
+  if (!criteriaGroupDataMap["INCLUSION"] || !criteriaGroupDataMap["EXCLUSION"]) return;
 
-  const isInclusionActive = criteriaBase.INCLUSION.isActive;
-  const isExclusionActive = criteriaBase.EXCLUSION.isActive;
-
-  // console.log("todos criterios", groupCriteriaMap);
+  const isInclusionActive = criteriaOptions.INCLUSION.isActive;
+  const isExclusionActive = criteriaOptions.EXCLUSION.isActive;
 
   const sortedStudies = context?.selectionStudies as StudyInterface[];
   const index = context?.selectionStudyIndex as number;
 
   const isUniqueArticle = sortedStudies.length == 1 ? true : false;
 
-  function ChangeToNext() {
+  function goToNextArticle() {
     const newIndex = (index + 1) % sortedStudies.length;
     context?.setSelectionStudyIndex(newIndex);
     context?.setSelectionStudy(sortedStudies[newIndex]);
   }
 
-  function ChangeToPrevius() {
+  function goToPreviousArticle() {
     const newIndex = (index - 1 + sortedStudies.length) % sortedStudies.length;
     context?.setSelectionStudyIndex(newIndex);
     context?.setSelectionStudy(sortedStudies[newIndex]);
   }
+
+  const comboBoxGroups: Record<
+    OptionType,
+    {
+      label: string;
+      description: string;
+      options: OptionProps[];
+      isDisabled: boolean;
+    }
+  > = {
+    INCLUSION: {
+      label: "Include",
+      description: "Add inclusion criteria",
+      isDisabled: isExclusionActive,
+      options: criteriaGroupDataMap["INCLUSION"].data || [],
+    },
+    EXCLUSION: {
+      label: "Exclude",
+      description: "Add exclusion criteria",
+      isDisabled: isInclusionActive,
+      options: criteriaGroupDataMap["EXCLUSION"].data || [],
+    },
+  };
 
   return (
     <Flex sx={conteiner}>
@@ -104,7 +123,7 @@ export default function ButtonsForSelection({
             p=".5rem"
             borderRadius=".25rem"
           >
-            <Button onClick={ChangeToPrevius} bg="white">
+            <Button onClick={goToPreviousArticle} bg="white">
               <IoIosArrowBack color="black" size="1.5rem" />
               prev
             </Button>
@@ -112,42 +131,29 @@ export default function ButtonsForSelection({
         </Flex>
       )}
       <Flex sx={boxconteiner}>
-        <Tooltip
-          label="Add inclusion criteria"
-          placement="top"
-          hasArrow
-          p=".5rem"
-          borderRadius=".25rem"
-        >
-          <Box style={{ display: "inline-block" }}>
-            <ComboBox
-              page={page}
-              text="Include"
-              groupKey="INCLUSION"
-              options={groupCriteriaMap["INCLUSION"].data}
-              isDisabled={isExclusionActive}
-              handlerUpdateCriteriasStructure={handlerUpdateCriteriasStructure}
-            />
-          </Box>
-        </Tooltip>
-        <Tooltip
-          label="Add exclusion criteria"
-          placement="top"
-          hasArrow
-          p=".5rem"
-          borderRadius=".25rem"
-        >
-          <Box style={{ display: "inline-block" }}>
-            <ComboBox
-              page={page}
-              text="Exclude"
-              groupKey="EXCLUSION"
-              options={groupCriteriaMap["EXCLUSION"].data}
-              isDisabled={isInclusionActive}
-              handlerUpdateCriteriasStructure={handlerUpdateCriteriasStructure}
-            />
-          </Box>
-        </Tooltip>
+        {Object.entries(comboBoxGroups).map(([groupKey, group]) => (
+          <Tooltip
+            key={groupKey}
+            label={group.description}
+            placement="top"
+            hasArrow
+            p=".5rem"
+            borderRadius=".25rem"
+          >
+            <Box style={{ display: "inline-block" }}>
+              <ComboBox
+                page={page}
+                text={group.label}
+                groupKey={groupKey as OptionType}
+                options={group.options}
+                isDisabled={group.isDisabled}
+                handlerUpdateCriteriasStructure={
+                  handlerUpdateCriteriasStructure
+                }
+              />
+            </Box>
+          </Tooltip>
+        ))}
         <Tooltip
           label="Reset article"
           placement="top"
@@ -193,7 +199,7 @@ export default function ButtonsForSelection({
             p=".5rem"
             borderRadius=".25rem"
           >
-            <Button onClick={ChangeToNext} bg="white">
+            <Button onClick={goToNextArticle} bg="white">
               next
               <IoIosArrowForward color="black" size="1.5rem" />
             </Button>
