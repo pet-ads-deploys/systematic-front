@@ -16,8 +16,8 @@ interface DynamicTableProps {
   bodyData: (StudyInterface | KeywordInterface)[];
   tableType: tableTypeEnum;
   filteredColumns: string[];
-  searchString: string;
-  selectedStatus: string | null;
+  searchString?: string;
+  selectedStatus?: string | null;
 }
 
 //searchString, selectedStatus

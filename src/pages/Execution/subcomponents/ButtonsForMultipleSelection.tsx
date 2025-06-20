@@ -49,6 +49,7 @@ export default function ButtonsForMultipleSelection() {
     UseChangeStudySelectionStatus({
       status: "EXCLUDED",
       studyReviewId: [...Object.values(articles).map((art) => art.id)],
+      criterias: [],
     });
     studyContext?.clearSelectedArticles();
   };

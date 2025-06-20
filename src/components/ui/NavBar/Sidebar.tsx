@@ -1,6 +1,6 @@
 
-import { useContext, useRef, useState } from "react";
-import { LARGE_SIZE, SMALL_SIZE} from "./styles/sidebarStyles";
+import { useContext, useRef, /*useState*/ } from "react";
+//import { LARGE_SIZE, SMALL_SIZE} from "./styles/sidebarStyles";
 import { motion, useCycle } from "framer-motion";
 import { useDimensions } from "./use-dimensions";
 import "./styles.css"
@@ -39,14 +39,14 @@ export default function Sidebar({defaultOpen, type}: ISidebarProps): JSX.Element
     throw new Error("Failed to get the app context on sidebar");
   }
   const { sidebarState, setSidebarState } = context;
-  const [isOpen, toggleOpen] = useCycle(false, true); 
+  const [isOpen, /*toggleOpen*/] = useCycle(false, true); 
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef); 
-  const [navSize, setNavSize] = useState(LARGE_SIZE);
+  //const [navSize, setNavSize] = useState(LARGE_SIZE); 
 
-  const toggleNavSize = (): void => {
+  /*const toggleNavSize = (): void => {
     setNavSize(navSize === SMALL_SIZE ? LARGE_SIZE : SMALL_SIZE);
-  };
+  };*/ //Função não está sendo utilizada
 
   const handleSidebarToggle = () => {
     console.log("Antes da mudança de estado:", sidebarState);

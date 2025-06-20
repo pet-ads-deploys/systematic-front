@@ -42,6 +42,7 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
             });
         selectionContext.reloadArticles();
       }
+      selectionContext?.reloadArticles?.();
     }
   };
 
@@ -62,6 +63,7 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
             });
         selectionContext.reloadArticles();
       }
+      selectionContext?.reloadArticles?.();
     }
   };
 

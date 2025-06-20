@@ -1,12 +1,15 @@
+// External library
 import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
-import { useState } from "react";
+
+// Types
+interface LineChartProps {
+  series: { name: string; data: number[] }[];
+  options: ApexOptions;
+}
 
 export default function LineChart() {
-  const [chartConfig, setChartConfig] = useState<{
-    series: { name: string; data: number[] }[];
-    options: ApexOptions;
-  }>({
+  const chartConfig: LineChartProps = {
     series: [
       {
         name: "studies",
@@ -42,7 +45,7 @@ export default function LineChart() {
       },
       grid: {
         row: {
-          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          colors: ["#f3f3f3", "transparent"],
           opacity: 0.5,
         },
       },
@@ -53,7 +56,8 @@ export default function LineChart() {
         ],
       },
     },
-  });
+  };
+
   return (
     <Chart
       options={chartConfig.options}
