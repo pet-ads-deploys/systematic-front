@@ -1,48 +1,69 @@
-import {
-  ArcElement,
-  Chart as ChartJs,
-  Legend,
-  Tooltip,
-  defaults,
-} from "chart.js";
+import { ApexOptions } from "apexcharts";
+import Chart from "react-apexcharts";
+import { useEffect, useState } from "react";
+import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
+import { fetchStudiesBySource } from "../../../hooks/reports/fetchStudiesBySources";
 
-ChartJs.register(ArcElement, Tooltip, Legend);
 
-import { Pie } from "react-chartjs-2";
-import useFetchGraphicsData from "../../../hooks/fetch/useFetchGraphicsData";
+export default function PieChart() {
 
-interface iGraphicsData {
-  label: string;
-  value: number;
-}
+  const { databases } = useFetchDataBases();
+  const [isLoading, setIsLoading] = useState(true);
+  const [series, setSeries] = useState<number[]>([]);
+  const [labels, setLabels] = useState<string[]>([]);
 
-function PieChart() {
-  const barChartData: iGraphicsData[] = useFetchGraphicsData(
-    "/data/pieChartTest.json"
-  );
-  const data = {
-    labels: barChartData.map((data) => data.label),
-    datasets: [
-      {
-        label: "Source",
-        data: barChartData.map((data) => data.value),
-        backgroundColor: ["purple", "blue", "green", "lightblue"],
-      },
-    ],
+  useEffect(() => {
+  const loadData = async () => {
+    setIsLoading(true);
+    if (databases.length === 0) {
+      setIsLoading(false);
+      return;
+    }
+    const data = await fetchStudiesBySource(databases);
+    setLabels(data.map((item) => item.source));
+    setSeries(data.map((item) => item.totalOfStudies));
+    setIsLoading(false);
   };
 
-  const options = {
-    plugins: {
+  loadData();
+}, [databases]);
+
+
+  const chartConfig = {
+    series:series,
+    options: {
+      chart: {
+        toolbar: {
+          show: true,
+          export:{
+            width:700
+          }
+        },
+      },
+      labels:labels,
       title: {
-        text: "Source",
+        text: "Retrieved Studies by Search Source",
+        align: "left",
       },
-    },
+      /*
+      dataLabels: {
+        enabled: true,
+        formatter: (_val, opts) =>{
+          return opts.w.config.series[opts.seriesIndex];
+        }
+      },*/
+
+    } as ApexOptions,
   };
 
-  defaults.maintainAspectRatio = false;
-  defaults.responsive = true;
+  if (isLoading) return <p>Loading chart...</p>;
 
-  return <Pie data={data} options={options} />;
+  return (
+    <Chart
+      options={chartConfig.options}
+      series={chartConfig.series}
+      type="pie"
+      width={550}
+    />
+  );
 }
-
-export default PieChart;

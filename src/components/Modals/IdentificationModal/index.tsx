@@ -74,9 +74,15 @@ function IdentificationModal({
     onOpen();
   }, []);
 
-  const handleClose = () => {
+
+  const handleSubmit = () => {
     sendFilesToServer();
     reloadArticles();
+    show(false);
+    onClose();
+  };
+
+  const handleClose = () => {
     show(false);
     onClose();
   };
@@ -137,7 +143,7 @@ function IdentificationModal({
         </ModalBody>
         <ModalFooter>
           <Button
-            onClick={handleClose}
+            onClick={handleSubmit}
             backgroundColor={"#263C56"}
             color={"#EBF0F3"}
             boxShadow="sm"

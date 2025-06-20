@@ -7,7 +7,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import CreateResponseComponent from "../utils/CreateResponseComponents.tsx";
 
 // Hooks
-import { useSendAnswerExtractionQuestions } from "../../../../../../hooks/tables/useSendAnswerExtractionQuestions.ts";
+import { useSendAnswerROBQuestions } from "../../../../../../hooks/tables/useSendAnswerROBQuestions.ts";
 import { useSubmitAnswerForm } from "../../../../../../hooks/reviews/forms/useSubmitAnswerForm.tsx";
 
 // Types
@@ -16,7 +16,7 @@ import { FormStructure } from "../types.ts";
 // Styles
 import { button } from "../styles.ts";
 
-export default function ExtractionForm({
+export default function RiskOfBiasForm({
   currentId,
   article,
   questionsFiltered,
@@ -25,13 +25,13 @@ export default function ExtractionForm({
   const reviewId = localStorage.getItem("systematicReviewId");
 
   const navigate = useNavigate();
-  const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
+  const { sendAnswerROBQuestions } = useSendAnswerROBQuestions();
   const { handleSubmitAnswer } = useSubmitAnswerForm({
-    responses: article[currentId]?.extractionQuestions ?? {},
-    handleSendAnswer: sendAnswerExtractionQuestions,
+    responses: article[currentId]?.robQuestions ?? {},
+    handleSendAnswer: sendAnswerROBQuestions,
   });
 
-  const hasQuestions = questionsFiltered.length > 0;
+  const hasQuestions = Object.entries(questionsFiltered).length > 0;
 
   return (
     <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">
@@ -39,11 +39,11 @@ export default function ExtractionForm({
         {hasQuestions ? (
           questionsFiltered.map((question) => (
             <CreateResponseComponent
-              key={`EXTRACTION-${currentId}-${question.questionId}`}
+              key={`RISK_OF_BIAS-${currentId}-${question.questionId}`}
               articleId={currentId}
               questionId={question.questionId}
               updateResponse={handlerUpdateAnswer}
-              typeform="EXTRACTION"
+              typeform="RISK_OF_BIAS"
               answer={question.answer}
             />
           ))
@@ -64,7 +64,8 @@ export default function ExtractionForm({
               No questions found
             </Text>
             <Text fontSize="md" color="gray.600">
-              Create questions to register your answers in the extraction form.
+              Create questions to register your answers in the risk of bias
+              form.
             </Text>
             <Button
               leftIcon={<FaPlusCircle />}

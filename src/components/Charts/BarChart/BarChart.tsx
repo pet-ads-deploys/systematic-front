@@ -1,44 +1,89 @@
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJs,
-  Legend,
-  LinearScale,
-  Tooltip,
-  defaults,
-} from "chart.js";
+import { ApexOptions } from "apexcharts";
+import Chart from "react-apexcharts";
 
-import { Bar } from "react-chartjs-2";
-import useFetchGraphicsData from "../../../hooks/fetch/useFetchGraphicsData";
+import useFetchStudiesByCriteria from "../../../hooks/reports/useFetchStudiesByCriteria";
+import { useFetchStudiesByStage } from "../../../hooks/reports/useFetchStudiesByStage";
+import { Text } from "@chakra-ui/react";
 
-ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+type Props = {
+  criteria: "inclusion" | "exclusion";
+  stage: "selection"| "extraction";
+};
 
-interface iGraphicsData {
-  label: string;
-  value: number;
-}
+export default function BarChart({ criteria,stage }: Props) {
+  const color = criteria === "inclusion" ? "#3c73b6" : "#C21807";
 
-function BarChart() {
-  const barChartData: iGraphicsData[] = useFetchGraphicsData(
-    "/data/barChartTest.json"
+  const {studiesByStage,isLoadingByStage}=useFetchStudiesByStage(stage);
+  const {studiesByCriteria, isLoadingByCriteria} = useFetchStudiesByCriteria(criteria);
+  console.log(studiesByCriteria?.criteria+"aaaaaaa"+criteria);
+  console.log(studiesByStage?.excludedStudies.ids+"aaaaaaa"+stage);
+  console.log(studiesByStage?.includedStudies.ids+"aaaaaaa"+stage);
+  
+  const studiesByStageIds=  criteria === "inclusion" ? studiesByStage?.includedStudies.ids ?? [] : studiesByStage?.excludedStudies.ids ?? [];
+
+  const criterias = Object.entries(studiesByCriteria?.criteria ?? {});
+  const labels = criterias.map(([description]) => description);
+  const data = criterias.map(([, studyIds]) =>
+    studyIds.filter(id =>  studiesByStageIds.includes(id)).length
   );
-  const data = {
-    labels: barChartData.map((data) => data.label),
-    datasets: [
+
+  const chartConfig = {
+    series: [
       {
-        label: "Extraction",
-        data: barChartData.map((data) => data.value),
-        backgroundColor: ["purple", "blue", "green", "lightblue"],
+        name: "Studies",
+        data: data/* labels.map(()=>Math.floor(Math.random()*10)+1)*/
+
       },
     ],
+    options: {
+      chart: {
+        toolbar: {
+          show: true,
+          tools: {
+            selection: true,
+            download: true,
+          },
+        },
+      },
+      colors: [color],
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          dataLabels: {
+            position: "top",
+          },
+        },
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      tooltip: {
+        custom: ({ dataPointIndex }: { dataPointIndex: number }) => {
+          const fullText = labels[dataPointIndex];
+          return `
+            <Box style="padding: 8px; max-width: 300px; white-space: normal;">
+              <Text>C${dataPointIndex + 1}: ${fullText}</Text>
+            </Box>`;
+        },
+      },
+      xaxis: {
+        categories: labels.map((_,indexOf)=>(`C${indexOf+1}`))
+      },
+      title: {
+        text: criteria === "inclusion" ? "Inclusion Criteria" : "Exclusion Criteria",
+        align: "left",
+      },
+    } as ApexOptions,
   };
 
-  const options = {};
+  if (isLoadingByCriteria || isLoadingByStage) return <Text>Loading chart...</Text>;
 
-  defaults.maintainAspectRatio = false;
-  defaults.responsive = true;
-
-  return <Bar data={data} options={options} />;
+  return (
+    <Chart
+      options={chartConfig.options}
+      series={chartConfig.series}
+      type="bar"
+      height={450}
+    />
+  );
 }
-
-export default BarChart;

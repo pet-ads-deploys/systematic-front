@@ -1,28 +1,63 @@
-export const conteiner = {
-  maxW: "100%",
-  maxH: "100%",
-  borderWidth: "1px",
-  borderRadius: "lg",
-  padding: "2em",
-  display: "column",
-};
 
-export const graphicsconteiner = {
-  maxW: "100%",
-  maxH: "100%",
+
+export const conteiner = {
+  w: "100%",
   borderWidth: "1px",
   borderRadius: "lg",
   padding: "2em",
   display: "flex",
+  flexDirection: "column",
 };
 
+
+export const graphicsconteiner = {
+  maxW: "100%",
+  borderWidth: "1px",
+  borderRadius: "lg",
+  padding: "2em",
+  display: "flex",
+  flexWrap: "wrap",            
+  gap: "2em",                 
+  justifyContent: "center",   
+  alignItems:"center",
+  boxShadow: "md",
+};
 export const barchartBox = {
-  width: "50%",
+  width: "45%",
   padding: "2px",
-};
 
-export const piechartBox = {
-  widthL: "50%",
-  padding: "2px",
-  borderLeft: "1px",
 };
+export const piechartBox = {
+  padding: "2px",   
+  margin: "0 auto",       
+};
+export const fluxogramaBox={
+  width:'100vw', 
+  height: '100vh'
+
+
+}
+
+
+export const textDescription={
+  as: "h3",
+  textAlign: "left",
+  mb: 4, 
+  mt:8,
+  fontWeight: "bold", 
+  fontSize: "lg" ,
+  color: "#263C56",
+  pt: "0.5em",
+  pb: "0.5em",
+}
+export const textSection={
+  as:"h2",
+  textAlign:"center",
+  mb: 4, 
+  mt:8,
+  fontWeight: "bold", 
+  color: "#263C56",
+  fontSize:"26",
+  pt: "0.5em",
+  pb: "0.5em",
+}

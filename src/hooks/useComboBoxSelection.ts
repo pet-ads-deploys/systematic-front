@@ -25,6 +25,7 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
 
   if (articles && articleIndex) article = articles[articleIndex];
 
+<<<<<<< HEAD
   const handleIncludeItemClick = (option: string, isChecked: boolean) => {
     console.log(`Include ${option}: ${isChecked}`);
     if (setIsIncluded) setIsIncluded(isChecked);
@@ -40,11 +41,30 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
           studyReviewId: [article.studyReviewId],
           status: "INCLUDED",
         });
+=======
+  const handleIncludeItemClick = (isChecked: boolean, criterias: string[]) => {
+    if (setIsIncluded) setIsIncluded(isChecked);
+    if (articles && articleIndex) {
+      if (article && "studyReviewId" in article) {
+        page === "Selection"
+          ? UseChangeStudySelectionStatus({
+              studyReviewId: [article.studyReviewId],
+              status: "INCLUDED",
+              criterias,
+            })
+          : UseChangeStudyExtractionStatus({
+              studyReviewId: [article.studyReviewId],
+              status: "INCLUDED",
+              criterias,
+            });
+        selectionContext.reloadArticles();
+>>>>>>> development
       }
       selectionContext?.reloadArticles?.();
     }
   };
 
+<<<<<<< HEAD
   const handleExcludeItemClick = (option: string, isChecked: boolean) => {
     console.log(`Exclude ${option}: ${isChecked}`);
     if (setIsExcluded) setIsExcluded(isChecked);
@@ -60,6 +80,24 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
           studyReviewId: [article.studyReviewId],
           status: "EXCLUDED",
         });
+=======
+  const handleExcludeItemClick = (isChecked: boolean, criterias: string[]) => {
+    if (setIsExcluded) setIsExcluded(isChecked);
+    if (articles && articleIndex) {
+      if (article && "studyReviewId" in article) {
+        page === "Selection"
+          ? UseChangeStudySelectionStatus({
+              studyReviewId: [article.studyReviewId],
+              status: "EXCLUDED",
+              criterias,
+            })
+          : UseChangeStudyExtractionStatus({
+              studyReviewId: [article.studyReviewId],
+              status: "EXCLUDED",
+              criterias,
+            });
+        selectionContext.reloadArticles();
+>>>>>>> development
       }
       selectionContext?.reloadArticles?.();
     }
