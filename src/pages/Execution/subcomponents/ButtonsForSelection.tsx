@@ -1,9 +1,9 @@
 // External library
 import { useContext } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
-import { RiResetLeftLine } from "react-icons/ri";
 import { MdOutlineLowPriority } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { RiResetLeftLine } from "react-icons/ri";
 import { Tooltip } from "@chakra-ui/react";
 
 // Context
@@ -97,7 +97,13 @@ export default function ButtonsForSelection({
     <Flex sx={conteiner}>
       {isUniqueArticle ? null : (
         <Flex sx={buttonconteiner}>
-          <Tooltip label="Previous article">
+          <Tooltip
+            label="Previous article"
+            placement="top"
+            hasArrow
+            p=".5rem"
+            borderRadius=".25rem"
+          >
             <Button onClick={ChangeToPrevius} bg="white">
               <IoIosArrowBack color="black" size="1.5rem" />
               prev
@@ -106,7 +112,13 @@ export default function ButtonsForSelection({
         </Flex>
       )}
       <Flex sx={boxconteiner}>
-        <Tooltip label="Add inclusion criteria">
+        <Tooltip
+          label="Add inclusion criteria"
+          placement="top"
+          hasArrow
+          p=".5rem"
+          borderRadius=".25rem"
+        >
           <Box style={{ display: "inline-block" }}>
             <ComboBox
               page={page}
@@ -118,7 +130,13 @@ export default function ButtonsForSelection({
             />
           </Box>
         </Tooltip>
-        <Tooltip label="Add exclusion criteria">
+        <Tooltip
+          label="Add exclusion criteria"
+          placement="top"
+          hasArrow
+          p=".5rem"
+          borderRadius=".25rem"
+        >
           <Box style={{ display: "inline-block" }}>
             <ComboBox
               page={page}
@@ -130,7 +148,13 @@ export default function ButtonsForSelection({
             />
           </Box>
         </Tooltip>
-        <Tooltip label="Reset article">
+        <Tooltip
+          label="Reset article"
+          placement="top"
+          hasArrow
+          p=".5rem"
+          borderRadius=".25rem"
+        >
           <Button
             color="black"
             bg="white"
@@ -141,7 +165,13 @@ export default function ButtonsForSelection({
           </Button>
         </Tooltip>
 
-        <Tooltip label="Select reading priority">
+        <Tooltip
+          label="Select reading priority"
+          placement="top"
+          hasArrow
+          p=".5rem"
+          borderRadius=".25rem"
+        >
           <Box style={{ display: "inline-block" }}>
             <MenuOptions
               options={["Very Low", "Low", "High", "Very High"]}
@@ -156,7 +186,13 @@ export default function ButtonsForSelection({
 
       {isUniqueArticle ? null : (
         <Flex sx={buttonconteiner}>
-          <Tooltip label="Next article">
+          <Tooltip
+            label="Next article"
+            placement="top"
+            hasArrow
+            p=".5rem"
+            borderRadius=".25rem"
+          >
             <Button onClick={ChangeToNext} bg="white">
               next
               <IoIosArrowForward color="black" size="1.5rem" />
