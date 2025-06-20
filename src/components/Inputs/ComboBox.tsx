@@ -1,5 +1,4 @@
-// import { ChevronDownIcon } from "@chakra-ui/icons";
-import useComboBoxSelection from "../../hooks/useComboBoxSelection";
+// External libraries
 import {
   Button,
   Checkbox,
@@ -10,16 +9,31 @@ import {
   Tooltip,
   Text,
 } from "@chakra-ui/react";
-import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
 import { RiMenuAddFill } from "react-icons/ri";
 import { MdOutlinePlaylistRemove } from "react-icons/md";
 
+// Hooks
+import useComboBoxSelection from "../../hooks/useComboBoxSelection";
+
+// Types
+import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import {
+  OptionProps,
+  OptionType,
+} from "../../hooks/fetch/useFetchAllCriteriasByArticle";
+
 interface IComboBoxProps {
   text: string;
-  options: string[];
+  options: OptionProps[];
   isDisabled: boolean;
   onOptionchange?: (option: string, isChecked: boolean) => void;
   page: PageLayout;
+  groupKey: OptionType;
+  handlerUpdateCriteriasStructure: (
+    key: OptionType,
+    optionText: string,
+    newValue: boolean
+  ) => void;
 }
 
 export default function ComboBox({
@@ -28,6 +42,8 @@ export default function ComboBox({
   isDisabled,
   onOptionchange,
   page,
+  groupKey,
+  handlerUpdateCriteriasStructure,
 }: IComboBoxProps) {
   const { handleIncludeItemClick, handleExcludeItemClick } =
     useComboBoxSelection({ page });
@@ -55,44 +71,90 @@ export default function ComboBox({
             {text === "Include" ? (
               <Checkbox
                 isDisabled={isDisabled}
-                onChange={(e) => handleIncludeItemClick(e.target.checked)}
+                isChecked={option.isChecked}
+                onChange={(e) => {
+                  const newValue = e.target.checked;
+
+                  handlerUpdateCriteriasStructure(
+                    groupKey,
+                    option.text,
+                    newValue
+                  );
+
+                  const updatedList = options.map((item) =>
+                    item.text === option.text
+                      ? { ...item, isChecked: newValue }
+                      : item
+                  );
+
+                  handleIncludeItemClick(
+                    newValue,
+                    updatedList
+                      .filter((data) => data.isChecked == true)
+                      .map((item) => item.text)
+                  );
+                }}
               >
                 <Tooltip
-                  label={option}
+                  label={option.text}
                   aria-label="Full criteria"
                   p="1rem"
                   hasArrow
                 >
                   <Text isTruncated maxW="20rem">
-                    {option}
+                    {option.text}
                   </Text>
                 </Tooltip>
               </Checkbox>
             ) : text === "Exclude" ? (
               <Checkbox
                 isDisabled={isDisabled}
-                onChange={(e) => handleExcludeItemClick(e.target.checked)}
+                isChecked={option.isChecked}
+                onChange={(e) => {
+                  const newValue = e.target.checked;
+
+                  handlerUpdateCriteriasStructure(
+                    groupKey,
+                    option.text,
+                    newValue
+                  );
+
+                  const updatedList = options.map((item) =>
+                    item.text === option.text
+                      ? { ...item, isChecked: newValue }
+                      : item
+                  );
+
+                  handleExcludeItemClick(
+                    newValue,
+                    updatedList
+                      .filter((data) => data.isChecked == true)
+                      .map((item) => item.text)
+                  );
+                }}
               >
                 <Tooltip
-                  label={option}
+                  label={option.text}
                   aria-label="Full criteria"
                   p="1rem"
                   hasArrow
                 >
                   <Text isTruncated maxW="20rem">
-                    {option}
+                    {option.text}
                   </Text>
                 </Tooltip>
               </Checkbox>
             ) : text === "filter options" && onOptionchange ? (
               <Checkbox
                 isDisabled={isDisabled}
-                onChange={(e) => onOptionchange?.(option, e.target.checked)}
+                onChange={(e) =>
+                  onOptionchange?.(option.text, e.target.checked)
+                }
               >
-                {option}
+                {option.text}
               </Checkbox>
             ) : (
-              <Checkbox isDisabled={isDisabled}>{option}</Checkbox>
+              <Checkbox isDisabled={isDisabled}>{option.text}</Checkbox>
             )}
           </MenuItem>
         ))}
