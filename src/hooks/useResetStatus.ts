@@ -1,13 +1,16 @@
+// External library
 import { useContext } from "react";
 
+// Context
 import StudySelectionContext from "../components/Context/StudiesSelectionContext";
-import AppContext from "../components/Context/AppContext";
 
+// Hooks
 import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";
 
 //Types
 import { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
+import useFocusedArticle from "./reviews/useFocusedArticle";
 
 interface ResetButtonProps {
   page: PageLayout;
@@ -15,27 +18,24 @@ interface ResetButtonProps {
 
 const useResetStatus = ({ page }: ResetButtonProps) => {
   const selectionContext = useContext(StudySelectionContext);
-  const appContext = useContext(AppContext);
+
+  const { articleInFocus } = useFocusedArticle({ page });
 
   const handleResetStatusToUnclassified = () => {
-    const articles = selectionContext?.articles;
-    const articleIndex = appContext?.selectionStudyIndex;
+    const articleId = articleInFocus ? articleInFocus?.studyReviewId : -1;
 
-    if (articles && articleIndex) {
-      const article = articles[articleIndex];
-      if (article && "studyReviewId" in article) {
-        page === "Selection"
-          ? UseChangeStudySelectionStatus({
-              studyReviewId: [article.studyReviewId],
-              status: "UNCLASSIFIED",
-            })
-          : UseChangeStudyExtractionStatus({
-              studyReviewId: [article.studyReviewId],
-              status: "UNCLASSIFIED",
-            });
-      }
-      selectionContext?.reloadArticles();
-    }
+    page === "Selection"
+      ? UseChangeStudySelectionStatus({
+          studyReviewId: [articleId],
+          status: "UNCLASSIFIED",
+          criterias: [],
+        })
+      : UseChangeStudyExtractionStatus({
+          studyReviewId: [articleId],
+          status: "UNCLASSIFIED",
+          criterias: [],
+        });
+    selectionContext?.reloadArticles();
   };
 
   return { handleResetStatusToUnclassified };
