@@ -49,12 +49,18 @@ export default function useFetchAllCriteriasByArticle({
   useEffect(() => {
     if (!inclusion || !exclusion || !articleInFocus) return;
 
+
     const groupOfCriteria: Record<OptionType, string[]> = {
-      INCLUSION: criteria?.inclusion || [],
-      EXCLUSION: criteria?.exclusion || [],
+      INCLUSION: criteria?.inclusionCriteria || [],
+      EXCLUSION: criteria?.exclusionCriteria || [],
     };
 
-    if (criterias[articleId]) return;
+    if (
+      criterias[articleId] &&
+      criteria?.inclusionCriteria.length === 0 &&
+      criteria?.exclusionCriteria.length === 0
+    )
+      return;
 
     const inclusionMapped = inclusion.map((content) => ({
       text: content,
@@ -85,7 +91,7 @@ export default function useFetchAllCriteriasByArticle({
         },
       },
     }));
-  }, [inclusion, exclusion, articleInFocus]);
+  }, [inclusion, exclusion, articleInFocus, criteria]);
 
   const handlerUpdateCriteriasStructure = (
     key: OptionType,

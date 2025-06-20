@@ -75,7 +75,11 @@ export default function ComboBox({
                 onChange={(e) => {
                   const newValue = e.target.checked;
 
-                  handlerUpdateCriteriasStructure(groupKey, option.text, true);
+                  handlerUpdateCriteriasStructure(
+                    groupKey,
+                    option.text,
+                    newValue
+                  );
 
                   const updatedList = options.map((item) =>
                     item.text === option.text
@@ -109,7 +113,11 @@ export default function ComboBox({
                 onChange={(e) => {
                   const newValue = e.target.checked;
 
-                  handlerUpdateCriteriasStructure(groupKey, option.text, true);
+                  handlerUpdateCriteriasStructure(
+                    groupKey,
+                    option.text,
+                    newValue
+                  );
 
                   const updatedList = options.map((item) =>
                     item.text === option.text

@@ -9,10 +9,8 @@ import getRequestOptions from "../../utils/getRequestOptions";
 
 // Types
 interface HttpResponse {
-  criteria: {
-    inclusion: string[];
-    exclusion: string[];
-  };
+  inclusionCriteria: string[];
+  exclusionCriteria: string[];
 }
 
 interface CriteriaForFocusedArticleProps {
@@ -31,15 +29,15 @@ export default function useFetchCriteriaForFocusedArticle({
       : null;
 
   const { data, isLoading, error, mutate } = useSWR(path, fetchAllCriteria, {
-    revalidateOnFocus: true,
-    revalidateOnMount: true,
+    revalidateOnFocus: false,
+    revalidateOnMount: false,
   });
 
   async function fetchAllCriteria() {
     try {
       if (!path) return;
       const response = await Axios.get<HttpResponse>(path, options);
-      return response.data.criteria;
+      return response.data;
     } catch (error) {
       console.error("Error fetching criteria", error);
       throw error;
