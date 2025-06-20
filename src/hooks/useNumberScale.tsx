@@ -5,13 +5,13 @@ const useNumberScale = () => {
   const [maximalValue, setMaximalValue] = useState(10);
 
   // valueAsString: string
-  function handleMinimalValue(valueAsNumber: number) {
+  function handleMinimalValue(_valueAsString: string, valueAsNumber: number) {
     if (!isNaN(valueAsNumber)) {
       setMinimalValue(valueAsNumber);
     }
   }
   // valueAsString: string
-  function handleMaximalValue(valueAsNumber: number) {
+  function handleMaximalValue(_valueAsString: string, valueAsNumber: number) {
     if (!isNaN(valueAsNumber)) {
       setMaximalValue(valueAsNumber);
     }

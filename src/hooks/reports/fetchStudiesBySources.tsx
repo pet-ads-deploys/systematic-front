@@ -15,7 +15,6 @@ export async function fetchStudiesBySource(
   databases: string[],
 ): Promise<HttpResponse[]> {
   const systematicReviewId = localStorage.getItem("systematicReviewId");
-  console.log(systematicReviewId);
   if (!systematicReviewId || databases.length === 0) return [];
 
   const options = getRequestOptions();

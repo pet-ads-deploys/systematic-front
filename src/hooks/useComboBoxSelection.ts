@@ -25,7 +25,7 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
 
   if (articles && articleIndex) article = articles[articleIndex];
 
-  const handleIncludeItemClick = (isChecked: boolean) => {
+  const handleIncludeItemClick = (isChecked: boolean, criterias: string[]) => {
     if (setIsIncluded) setIsIncluded(isChecked);
     if (articles && articleIndex) {
       if (article && "studyReviewId" in article) {
@@ -33,17 +33,20 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
           ? UseChangeStudySelectionStatus({
               studyReviewId: [article.studyReviewId],
               status: "INCLUDED",
+              criterias,
             })
           : UseChangeStudyExtractionStatus({
               studyReviewId: [article.studyReviewId],
               status: "INCLUDED",
+              criterias,
             });
         selectionContext.reloadArticles();
       }
+      selectionContext?.reloadArticles?.();
     }
   };
 
-  const handleExcludeItemClick = (isChecked: boolean) => {
+  const handleExcludeItemClick = (isChecked: boolean, criterias: string[]) => {
     if (setIsExcluded) setIsExcluded(isChecked);
     if (articles && articleIndex) {
       if (article && "studyReviewId" in article) {
@@ -51,13 +54,16 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
           ? UseChangeStudySelectionStatus({
               studyReviewId: [article.studyReviewId],
               status: "EXCLUDED",
+              criterias,
             })
           : UseChangeStudyExtractionStatus({
               studyReviewId: [article.studyReviewId],
               status: "EXCLUDED",
+              criterias,
             });
         selectionContext.reloadArticles();
       }
+      selectionContext?.reloadArticles?.();
     }
   };
 

@@ -48,7 +48,9 @@ export default function useFocusedArticle({
     return {};
   }
 
-  const articleInFocus = availableArticlesList[selectedArticleIndex];
+  const articleInFocus = availableArticlesList[
+    selectedArticleIndex
+  ] as ArticleInterface;
 
-  return { articleInFocus };
+  return { articleInFocus: articleInFocus };
 }

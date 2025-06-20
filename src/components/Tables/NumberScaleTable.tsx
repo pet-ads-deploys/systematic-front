@@ -1,5 +1,5 @@
 import { FormControl, FormLabel, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper } from '@chakra-ui/react'
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface Props {
     handleMinimalValue: (valueAsString: string, valueAsNumber: number) => void;
@@ -10,9 +10,9 @@ interface Props {
 
 const NumberScaleTable = ({handleMaximalValue, handleMinimalValue, minimalValue, maximalValue}: Props) => {
 
-    // useEffect(() => {
-    //     console.log(minimalValue, maximalValue);
-    // }, [])
+    useEffect(() => {
+        console.log(minimalValue, maximalValue);
+    }, [])
 
     return (
     <FormControl>
