@@ -25,23 +25,6 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
 
   if (articles && articleIndex) article = articles[articleIndex];
 
-<<<<<<< HEAD
-  const handleIncludeItemClick = (option: string, isChecked: boolean) => {
-    console.log(`Include ${option}: ${isChecked}`);
-    if (setIsIncluded) setIsIncluded(isChecked);
-
-    if (article && "studyReviewId" in article) {
-      if (page === "Selection") {
-        UseChangeStudySelectionStatus({
-          studyReviewId: [article.studyReviewId],
-          status: "INCLUDED",
-        });
-      } else {
-        UseChangeStudyExtractionStatus({
-          studyReviewId: [article.studyReviewId],
-          status: "INCLUDED",
-        });
-=======
   const handleIncludeItemClick = (isChecked: boolean, criterias: string[]) => {
     if (setIsIncluded) setIsIncluded(isChecked);
     if (articles && articleIndex) {
@@ -58,29 +41,11 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
               criterias,
             });
         selectionContext.reloadArticles();
->>>>>>> development
       }
       selectionContext?.reloadArticles?.();
     }
   };
 
-<<<<<<< HEAD
-  const handleExcludeItemClick = (option: string, isChecked: boolean) => {
-    console.log(`Exclude ${option}: ${isChecked}`);
-    if (setIsExcluded) setIsExcluded(isChecked);
-
-    if (article && "studyReviewId" in article) {
-      if (page === "Selection") {
-        UseChangeStudySelectionStatus({
-          studyReviewId: [article.studyReviewId],
-          status: "EXCLUDED",
-        });
-      } else {
-        UseChangeStudyExtractionStatus({
-          studyReviewId: [article.studyReviewId],
-          status: "EXCLUDED",
-        });
-=======
   const handleExcludeItemClick = (isChecked: boolean, criterias: string[]) => {
     if (setIsExcluded) setIsExcluded(isChecked);
     if (articles && articleIndex) {
@@ -97,7 +62,6 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
               criterias,
             });
         selectionContext.reloadArticles();
->>>>>>> development
       }
       selectionContext?.reloadArticles?.();
     }

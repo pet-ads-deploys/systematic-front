@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import useComboBoxSelection from "../../hooks/useComboBoxSelection";
-=======
 // External libraries
->>>>>>> development
 import {
   Button,
   Checkbox,
@@ -32,16 +28,12 @@ interface IComboBoxProps {
   isDisabled: boolean;
   onOptionchange?: (option: string, isChecked: boolean) => void;
   page: PageLayout;
-<<<<<<< HEAD
-  selectedItems: string[];
-=======
   groupKey: OptionType;
   handlerUpdateCriteriasStructure: (
     key: OptionType,
     optionText: string,
     newValue: boolean
   ) => void;
->>>>>>> development
 }
 
 export default function ComboBox({
@@ -76,32 +68,6 @@ export default function ComboBox({
       <MenuList maxH="10rem" overflowY="auto">
         {options.map((option, index) => (
           <MenuItem key={index} maxW="25rem" overflow="auto">
-<<<<<<< HEAD
-            <Checkbox
-              isDisabled={isDisabled}
-              onChange={(e) => {
-                const isChecked = e.target.checked;
-                if (text === "Include") {
-                  handleIncludeItemClick(option, isChecked);
-                } else if (text === "Exclude") {
-                  handleExcludeItemClick(option, isChecked);
-                } else if (text === "filter options" && onOptionchange) {
-                  onOptionchange(option, isChecked);
-                }
-              }}
-            >
-              <Tooltip
-                label={option}
-                aria-label="Full criteria"
-                p="1rem"
-                hasArrow
-              >
-                <Text isTruncated maxW="20rem">
-                  {option}
-                </Text>
-              </Tooltip>
-            </Checkbox>
-=======
             {text === "Include" ? (
               <Checkbox
                 isDisabled={isDisabled}
@@ -190,7 +156,6 @@ export default function ComboBox({
             ) : (
               <Checkbox isDisabled={isDisabled}>{option.text}</Checkbox>
             )}
->>>>>>> development
           </MenuItem>
         ))}
       </MenuList>
