@@ -7,7 +7,7 @@ import DynamicTable from "../../components/Tables/DynamicTable";
 import useFetchTableData from "../../hooks/seachAppropriateStudy/useFetchStudyData";
 import SearchInformations from "./subcomponents/searchInformations";
 import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";
-import ComboBox from "../../components/Inputs/ComboBox";
+// import ComboBox from "../../components/Inputs/ComboBox";
 import { flex } from "../NovaRevisao/styles/finalizationStyles";
 import EventButton from "../../components/Buttons/EventButton";
 import FlexLayout from "../../components/ui/Flex/Flex";
@@ -27,18 +27,17 @@ export default function SearchSession() {
     readingPriority: "Reading Priority",
   };
 
-  const { value: checkedValues, handleChange: setCheckedValues } =
-    useInputState<string[]>([]);
+  const { value: checkedValues } = useInputState<string[]>([]);
 
-  const handleFilterOptionChange = (option: string, isChecked: boolean) => {
-    if (isChecked) {
-      if (!checkedValues.includes(option)) {
-        setCheckedValues([...checkedValues, option]);
-      }
-    } else {
-      setCheckedValues(checkedValues.filter((item) => item !== option));
-    }
-  };
+  // const handleFilterOptionChange = (option: string, isChecked: boolean) => {
+  //   if (isChecked) {
+  //     if (!checkedValues.includes(option)) {
+  //       setCheckedValues([...checkedValues, option]);
+  //     }
+  //   } else {
+  //     setCheckedValues(checkedValues.filter((item) => item !== option));
+  //   }
+  // };
 
   if (!bodyData) return <NoStudiesData />;
 
@@ -62,14 +61,14 @@ export default function SearchSession() {
               flexDir={"row"}
               justifyContent={"space-evenly"}
             >
-              <ComboBox
+              {/* <ComboBox
                 options={Object.values(headerData)}
                 onOptionchange={handleFilterOptionChange}
                 selectedItems={checkedValues}
                 text={"filter options"}
                 isDisabled={false}
                 page={"Identification"}
-              />
+              /> */}
               <EventButton
                 ml={4}
                 event={function (): void {

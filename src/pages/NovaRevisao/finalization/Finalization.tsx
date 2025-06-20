@@ -2,7 +2,7 @@ import { Box, Flex, Textarea } from "@chakra-ui/react";
 import useInputState from "../../../hooks/useInputState";
 
 import Header from "../../../components/ui/Header/Header";
-import ComboBox from "../../../components/Inputs/ComboBox";
+// import ComboBox from "../../../components/Inputs/ComboBox";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import EventButton from "../../../components/Buttons/EventButton";
@@ -35,16 +35,15 @@ export default function Finalization() {
 
   const { value: selectedValue, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
-  const { value: checkedValues, handleChange: setCheckedValues } =
-    useInputState<string[]>([]);
+  const { value: checkedValues } = useInputState<string[]>([]);
 
-  const handleCheckboxChange = (option: string, isChecked: boolean) => {
-    if (isChecked) {
-      setCheckedValues([...checkedValues, option]);
-    } else {
-      setCheckedValues(checkedValues.filter((item) => item !== option));
-    }
-  };
+  // const handleCheckboxChange = (option: string, isChecked: boolean) => {
+  //   if (isChecked) {
+  //     setCheckedValues([...checkedValues, option]);
+  //   } else {
+  //     setCheckedValues(checkedValues.filter((item) => item !== option));
+  //   }
+  // };
 
   if (!bodyData) return <NoStudiesData />;
 
@@ -72,14 +71,14 @@ export default function Finalization() {
               selectedValue={selectedValue}
               page={""}
             />
-            <ComboBox
+            {/* <ComboBox
               options={Object.values(headerData)}
               onOptionchange={handleCheckboxChange}
               selectedItems={checkedValues}
               text={"filter options"}
               isDisabled={false}
               page={"Extraction"}
-            />
+            /> */}
           </Box>
         </Box>
       </Flex>
