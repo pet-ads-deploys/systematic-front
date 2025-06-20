@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import useInputState from "../../../hooks/useInputState";
 import Header from "../../../components/ui/Header/Header";
 import FlexLayout from "../../../components/ui/Flex/Flex";
-import ComboBox from "../../../components/Inputs/ComboBox";
+// import ComboBox from "../../../components/Inputs/ComboBox";
 import InputText from "../../../components/Inputs/InputText";
 import NavButton from "../../../components/Buttons/NavButton";
 import SelectInput from "../../../components/Inputs/SelectInput";
@@ -32,23 +32,22 @@ export default function Insertion() {
 
   const { value: selectedValue, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
-  const { value: checkedValues, handleChange: setCheckedValues } =
-    useInputState<string[]>([
-      "title",
-      "authors",
-      "year",
-      "selectionStatus",
-      "extractionStatus",
-      "readingPriority",
-    ]);
+  const { value: checkedValues } = useInputState<string[]>([
+    "title",
+    "authors",
+    "year",
+    "selectionStatus",
+    "extractionStatus",
+    "readingPriority",
+  ]);
 
-  const handleCheckboxChange = (option: string, isChecked: boolean) => {
-    if (isChecked) {
-      setCheckedValues([...checkedValues, option]);
-    } else {
-      setCheckedValues(checkedValues.filter((item) => item !== option));
-    }
-  };
+  // const handleCheckboxChange = (option: string, isChecked: boolean) => {
+  //   if (isChecked) {
+  //     setCheckedValues([...checkedValues, option]);
+  //   } else {
+  //     setCheckedValues(checkedValues.filter((item) => item !== option));
+  //   }
+  // };
 
   if (!bodyData) return <NoStudiesData />;
 
@@ -69,14 +68,14 @@ export default function Insertion() {
             selectedValue={selectedValue}
             page={"insertion"}
           />
-          <ComboBox
+          {/* <ComboBox
             options={Object.keys(headerData)}
             onOptionchange={handleCheckboxChange}
             selectedItems={checkedValues}
             text={"filter options"}
             isDisabled={!headerData}
             page={"Selection"}
-          />
+          /> */}
         </Box>
       </Box>
 
