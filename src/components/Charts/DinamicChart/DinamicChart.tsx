@@ -3,31 +3,29 @@ import Chart from "react-apexcharts";
 import { useEffect, useState } from "react";
 import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
 import { fetchStudiesBySource } from "../../../hooks/reports/fetchStudiesBySources";
-import { Box, Select } from "@chakra-ui/react";
+import { Box, Select, Text } from "@chakra-ui/react";
 
 export default function DinamicChart() {
-   const { databases } = useFetchDataBases();
-  const [loading, setLoading] = useState(true);
+  const { databases } = useFetchDataBases();
+  const [isLoading, setIsLoading] = useState(true);
   const [studiesData, setStudiesData] = useState<{ source: string; totalOfStudies: number }[]>([]);
   const [chartType, setChartType] = useState<"pie" | "bar">("pie");
 
-  useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
-      if (databases.length === 0) return;
-
-      try {
-        const data = await fetchStudiesBySource(databases);
+    useEffect(() => {
+      const loadData = async () => {
+        setIsLoading(true);
+        if (databases.length === 0) {
+          setIsLoading(false);
+          return;
+        }
+        const data = await fetchStudiesBySource(databases); 
         setStudiesData(data);
-      } catch (error) {
-        console.error("Erro ao carregar gráfico:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+        setIsLoading(false);
+      };
+  
+      loadData(); 
+    }, [databases]);
 
-    loadData();
-  }, [databases]);
 
   const series =
     chartType === "pie" ? studiesData.map((item) => item.totalOfStudies)
@@ -80,7 +78,7 @@ export default function DinamicChart() {
         }),
   };
 
-  if (loading) return <p>Loading chart...</p>;
+  if (isLoading) return <Text>Loading chart...</Text>;
 
 
  const width = chartType === "pie"? 550:700;
