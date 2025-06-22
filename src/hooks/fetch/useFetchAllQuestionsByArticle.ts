@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 
 // Hooks
 import useFocusedArticle from "../reviews/useFocusedArticle";
-import useFetchIncludedStudiesAnswers from "./useFetchIncludedStudiesAnswers";
+import useFetchIncludedStudiesAnswers, {
+  QuestionAnswer,
+} from "./useFetchIncludedStudiesAnswers";
 
 // Types
 import type {
@@ -49,6 +51,17 @@ export default function useFetchAllQuestionsByArticle() {
     }));
   };
 
+  function formatLabel(label: string): string {
+    console.log("label aqui", label);
+    const regex = /^Label\(name:\s(.+?),\svalue:\s(\d+)\)$/;
+    const match = label.match(regex);
+    if (!match) {
+      throw new Error("String não está no formato esperado");
+    }
+    const [, name, value] = match;
+    return `${name}: ${value}`;
+  }
+
   useEffect(() => {
     if (!question || !articleInFocus?.studyReviewId) return;
 
@@ -58,14 +71,19 @@ export default function useFetchAllQuestionsByArticle() {
       if (prev[articleId]) return prev;
 
       const mapToStructure = (
-        questions: typeof question.extractionQuestions
+        questions: QuestionAnswer[]
       ): AnswerStrucuture[] =>
-        questions.map((q) => ({
-          questionId: q.questionId,
-          description: q.description,
-          code: q.code,
-          type: q.type,
-          answer: { value: q.answer },
+        questions.map((quest) => ({
+          questionId: quest.questionId,
+          description: quest.description,
+          code: quest.code,
+          type: quest.type,
+          answer: {
+            value:
+              quest.type == "LABELED_SCALE" && quest.answer
+                ? formatLabel(quest.answer as string)
+                : quest.answer,
+          },
         }));
 
       const structuredAnswers: ArticleAnswerStrucuture = {
@@ -78,7 +96,7 @@ export default function useFetchAllQuestionsByArticle() {
         [articleId]: structuredAnswers,
       };
     });
-  }, [question, articleInFocus?.studyReviewId, articlesStructureAnswers]);
+  }, [question, articleInFocus?.studyReviewId]);
 
   return {
     question: articlesStructureAnswers,
