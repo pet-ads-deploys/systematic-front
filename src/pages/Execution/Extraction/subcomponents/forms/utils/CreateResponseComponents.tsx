@@ -4,8 +4,8 @@ import { ReactNode } from "react";
 // Components
 import DropdownList from "../Responses/DropdownList/DropdownList";
 import LabeledList from "../Responses/LabeledList/LabeledList";
-import NumberScale from "../Responses/NumberScale/NumberScale";
-import TextualResponse from "../Responses/Textual/Textual";
+import NumberScale from "../Responses/NumberScale/NumberScale.tsx";
+import TextualResponse from "../Responses/Textual/Textual.tsx";
 
 // Hooks
 import { useFetchQuestionById } from "../../../../../../hooks/fetch/useFetchQuestionById";
