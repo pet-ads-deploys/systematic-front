@@ -14,6 +14,7 @@ import type {
   ArticleAnswerStrucuture,
   FormType,
 } from "../../pages/Execution/Extraction/subcomponents/forms/types";
+import { UseChangeStudyExtractionStatus } from "../useChangeStudyExtractionStatus";
 
 export default function useFetchAllQuestionsByArticle() {
   const [articlesStructureAnswers, setArticlesStructureAnswers] = useState<
@@ -24,6 +25,7 @@ export default function useFetchAllQuestionsByArticle() {
   const { question } = useFetchIncludedStudiesAnswers({
     articleId: articleInFocus?.studyReviewId || -1,
   });
+  const articleId = articleInFocus ? articleInFocus.studyReviewId : -1;
 
   const handlerUpdateAnswerStructure = (
     articleId: number = Number(articleInFocus?.studyReviewId) || -1,
@@ -63,9 +65,7 @@ export default function useFetchAllQuestionsByArticle() {
   }
 
   useEffect(() => {
-    if (!question || !articleInFocus?.studyReviewId) return;
-
-    const articleId = articleInFocus.studyReviewId;
+    if (!question || !articleInFocus) return;
 
     setArticlesStructureAnswers((prev) => {
       if (prev[articleId]) return prev;
@@ -96,7 +96,30 @@ export default function useFetchAllQuestionsByArticle() {
         [articleId]: structuredAnswers,
       };
     });
-  }, [question, articleInFocus?.studyReviewId]);
+
+    const articleAnswers = articlesStructureAnswers[articleId];
+    if (!articleAnswers) return;
+
+    const isAnswerAllQuestionsOfExtraction =
+      articleAnswers.extractionQuestions.every(
+        (quest) => quest.answer.value != null
+      );
+    const isAnswerAllQuestionsOfRiskOfBias = articleAnswers.robQuestions.every(
+      (quest) => quest.answer.value != null
+    );
+
+    if (
+      articleInFocus.extractionStatus == "UNCLASSIFIED" &&
+      isAnswerAllQuestionsOfExtraction &&
+      isAnswerAllQuestionsOfRiskOfBias
+    ) {
+      UseChangeStudyExtractionStatus({
+        studyReviewId: [articleId],
+        criterias: [],
+        status: "INCLUDED",
+      });
+    }
+  }, [question, articleInFocus, articleId, articlesStructureAnswers]);
 
   return {
     question: articlesStructureAnswers,
