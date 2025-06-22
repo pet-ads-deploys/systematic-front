@@ -9,6 +9,7 @@ import useFocusedArticle from "../reviews/useFocusedArticle";
 
 // Types
 import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import useRevertCriterionState from "../reviews/useRevertCriterionState";
 
 export type OptionType = "INCLUSION" | "EXCLUSION";
 
@@ -45,10 +46,10 @@ export default function useFetchAllCriteriasByArticle({
   });
   const inclusion = useFetchInclusionCriteria() || [];
   const exclusion = useFetchExclusionCriteria() || [];
+  const { revertCriterionState } = useRevertCriterionState({ page });
 
   useEffect(() => {
     if (!inclusion || !exclusion || !articleInFocus) return;
-
 
     const groupOfCriteria: Record<OptionType, string[]> = {
       INCLUSION: criteria?.inclusionCriteria || [],
@@ -121,6 +122,14 @@ export default function useFetchAllCriteriasByArticle({
       );
 
       const isNowActive = updatedContent.some((crit) => crit.isChecked);
+
+      const currentOption = groupCriteria[key].content.find(
+        (crit) => crit.text === optionText
+      );
+
+      if (currentOption?.isChecked && newValue === false) {
+        revertCriterionState([optionText]);
+      }
 
       return {
         ...prev,
