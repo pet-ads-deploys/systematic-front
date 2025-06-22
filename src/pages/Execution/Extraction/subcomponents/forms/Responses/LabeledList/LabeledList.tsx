@@ -32,9 +32,9 @@ export default function LabeledList({
   };
 
   useEffect(() => {
-    if (!answer) return;
+    if (typeof answer !== "string" || !answer.includes(":")) return;
     handleSelectChange(answer);
-  }, []);
+  }, [answer]);
 
   return (
     <FormControl sx={container}>
