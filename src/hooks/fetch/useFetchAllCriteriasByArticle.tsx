@@ -127,7 +127,11 @@ export default function useFetchAllCriteriasByArticle({
         (crit) => crit.text === optionText
       );
 
-      if (currentOption?.isChecked && newValue === false) {
+      if (
+        currentOption &&
+        currentOption.isChecked === true &&
+        newValue === false
+      ) {
         revertCriterionState([optionText]);
       }
 
