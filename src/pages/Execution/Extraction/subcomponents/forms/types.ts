@@ -28,6 +28,10 @@ export interface HandleSendAnswerProps {
   type: TypeOfQuestions;
 }
 
+export interface SendAnswerProps {
+  answers: HandleSendAnswerProps[];
+}
+
 export type FormType = "EXTRACTION" | "RISK_OF_BIAS";
 
 export type Answer = {

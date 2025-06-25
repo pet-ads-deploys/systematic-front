@@ -3,13 +3,12 @@ import type {
   HandleSendAnswerProps,
 } from "../../../pages/Execution/Extraction/subcomponents/forms/types";
 
+interface SendAnswerProps {
+  answers: HandleSendAnswerProps[];
+}
 interface SubmitAnswerFormProps {
   responses: AnswerStrucuture[];
-  handleSendAnswer: ({
-    questionId,
-    type,
-    answer,
-  }: HandleSendAnswerProps) => Promise<void>;
+  handleSendAnswer: ({ answers }: SendAnswerProps) => Promise<void>;
 }
 
 export function useSubmitAnswerForm({
@@ -17,16 +16,19 @@ export function useSubmitAnswerForm({
   handleSendAnswer,
 }: SubmitAnswerFormProps) {
   const handleSubmitAnswer = () => {
-    responses.forEach((res) => {
-      handleSendAnswer({
+    const formatedResponses = responses.map((res) => {
+      const response = {
         answer:
           res.type === "NUMBERED_SCALE"
             ? Number(res.answer.value)
             : res.answer.value,
         questionId: res.questionId,
         type: res.type,
-      });
+      };
+      return response;
     });
+
+    handleSendAnswer({ answers: formatedResponses });
   };
 
   return { handleSubmitAnswer };
