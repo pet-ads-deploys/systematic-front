@@ -13,6 +13,7 @@ import {
 import HeaderForm from "../../../pages/Execution/Extraction/subcomponents/forms/HeaderForm/HeaderForm";
 import ExtractionForm from "../../../pages/Execution/Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
 import RiskOfBiasForm from "../../../pages/Execution/Extraction/subcomponents/forms/RobForm/RobForm";
+import SkeletonLoader from "../../ui/Skeleton/Skeleton";
 
 // Hooks
 import useFetchAllQuestionsByArticle from "../../../hooks/fetch/useFetchAllQuestionsByArticle";
@@ -84,7 +85,10 @@ export default function ArticlesExtrationData({
     currentArticleId,
     handlerUpdateAnswerStructure,
     mutateQuestion,
+    isLoading,
   } = useFetchAllQuestionsByArticle();
+
+  if (isLoading) return <SkeletonLoader height="100%" width="100%" />;
 
   if (!question || !currentArticleId || !question[currentArticleId])
     return null;

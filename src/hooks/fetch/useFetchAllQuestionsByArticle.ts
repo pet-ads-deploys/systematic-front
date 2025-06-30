@@ -22,7 +22,7 @@ export default function useFetchAllQuestionsByArticle() {
   >({});
 
   const { articleInFocus } = useFocusedArticle({ page: "Extraction" });
-  const { question, mutate } = useFetchIncludedStudiesAnswers({
+  const { question, mutate, isLoading } = useFetchIncludedStudiesAnswers({
     articleId: articleInFocus?.studyReviewId || -1,
   });
   const articleId = articleInFocus ? articleInFocus.studyReviewId : -1;
@@ -41,6 +41,8 @@ export default function useFetchAllQuestionsByArticle() {
     const updatedQuestions = article[key].map((quest) =>
       quest.questionId === questionId ? { ...quest, answer: response } : quest
     );
+
+    console.log("questão atualizada", updatedQuestions);
 
     const updatedArticle: ArticleAnswerStrucuture = {
       ...article,
@@ -120,10 +122,13 @@ export default function useFetchAllQuestionsByArticle() {
     }
   }, [question, articleInFocus, articleId, articlesStructureAnswers]);
 
+  console.log("todos os dados", articlesStructureAnswers[articleId]);
+
   return {
     question: articlesStructureAnswers,
     currentArticleId: articleInFocus?.studyReviewId,
     handlerUpdateAnswerStructure,
     mutateQuestion: mutate,
+    isLoading,
   };
 }
