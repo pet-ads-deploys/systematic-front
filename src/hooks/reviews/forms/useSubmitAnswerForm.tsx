@@ -1,3 +1,6 @@
+//
+import { useToast } from "@chakra-ui/react";
+
 import type {
   AnswerStrucuture,
   HandleSendAnswerProps,
@@ -17,6 +20,8 @@ export function useSubmitAnswerForm({
   handleSendAnswer,
   mutateQuestion,
 }: SubmitAnswerFormProps) {
+  const toast = useToast();
+
   const handleSubmitAnswer = () => {
     const formatedResponses = responses.map((res) => {
       const response = {
@@ -30,8 +35,27 @@ export function useSubmitAnswerForm({
       return response;
     });
 
-    handleSendAnswer({ answers: formatedResponses });
-    mutateQuestion();
+    try {
+      handleSendAnswer({ answers: formatedResponses });
+      mutateQuestion();
+
+      toast({
+        title: "Response sent successfully!",
+        status: "success",
+        duration: 4500,
+        isClosable: true,
+        position: "top",
+      });
+    } catch (error) {
+      toast({
+        title: "Error sending response",
+        description: "Try again later.",
+        status: "error",
+        duration: 4500,
+        isClosable: true,
+        position: "top",
+      });
+    }
   };
 
   return { handleSubmitAnswer };
