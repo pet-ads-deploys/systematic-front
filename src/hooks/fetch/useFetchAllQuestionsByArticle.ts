@@ -22,7 +22,7 @@ export default function useFetchAllQuestionsByArticle() {
   >({});
 
   const { articleInFocus } = useFocusedArticle({ page: "Extraction" });
-  const { question } = useFetchIncludedStudiesAnswers({
+  const { question, mutate } = useFetchIncludedStudiesAnswers({
     articleId: articleInFocus?.studyReviewId || -1,
   });
   const articleId = articleInFocus ? articleInFocus.studyReviewId : -1;
@@ -54,7 +54,6 @@ export default function useFetchAllQuestionsByArticle() {
   };
 
   function formatLabel(label: string): string {
-    console.log("label aqui", label);
     const regex = /^Label\(name:\s(.+?),\svalue:\s(\d+)\)$/;
     const match = label.match(regex);
     if (!match) {
@@ -125,5 +124,6 @@ export default function useFetchAllQuestionsByArticle() {
     question: articlesStructureAnswers,
     currentArticleId: articleInFocus?.studyReviewId,
     handlerUpdateAnswerStructure,
+    mutateQuestion: mutate,
   };
 }

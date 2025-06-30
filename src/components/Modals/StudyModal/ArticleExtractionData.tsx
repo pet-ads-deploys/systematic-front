@@ -79,8 +79,12 @@ const priorityIconMap: Record<
 export default function ArticlesExtrationData({
   studyData,
 }: ArticlePreviewProps) {
-  const { question, currentArticleId, handlerUpdateAnswerStructure } =
-    useFetchAllQuestionsByArticle();
+  const {
+    question,
+    currentArticleId,
+    handlerUpdateAnswerStructure,
+    mutateQuestion,
+  } = useFetchAllQuestionsByArticle();
 
   if (!question || !currentArticleId || !question[currentArticleId])
     return null;
@@ -181,6 +185,7 @@ export default function ArticlesExtrationData({
                 questionsFiltered={questions}
                 currentId={currentArticleId}
                 handlerUpdateAnswer={handlerUpdateAnswerStructure}
+                mutateQuestion={mutateQuestion}
               />
             </Box>
             {index < sections.length - 1 && (

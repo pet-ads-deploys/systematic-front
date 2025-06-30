@@ -9,11 +9,13 @@ interface SendAnswerProps {
 interface SubmitAnswerFormProps {
   responses: AnswerStrucuture[];
   handleSendAnswer: ({ answers }: SendAnswerProps) => Promise<void>;
+  mutateQuestion: () => void;
 }
 
 export function useSubmitAnswerForm({
   responses,
   handleSendAnswer,
+  mutateQuestion,
 }: SubmitAnswerFormProps) {
   const handleSubmitAnswer = () => {
     const formatedResponses = responses.map((res) => {
@@ -29,6 +31,7 @@ export function useSubmitAnswerForm({
     });
 
     handleSendAnswer({ answers: formatedResponses });
+    mutateQuestion();
   };
 
   return { handleSubmitAnswer };

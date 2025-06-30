@@ -55,6 +55,7 @@ export interface FormStructure {
   currentId: number;
   article: Record<number, ArticleAnswerStrucuture>;
   questionsFiltered: AnswerStrucuture[];
+  mutateQuestion: () => void;
   handlerUpdateAnswer: (
     articleId: number | undefined,
     questionId: string,
