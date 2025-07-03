@@ -11,8 +11,6 @@ import LayoutFactory from "../subcomponents/LayoutFactory";
 
 import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
 
-import { useHandleAndFilter } from "../../../utils/handleSearchAndFilter";
-
 import { inputconteiner } from "../styles/executionStyles";
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
@@ -20,6 +18,7 @@ import { PageLayout } from "../subcomponents/LayoutFactory";
 import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
 import useLayoutPage from "../../../hooks/useLayoutPage";
 import SelectLayout from "../subcomponents/LayoutButtons";
+import { useFilterReviewArticles } from "../hooks/useFilterReviewArticles";
 
 export default function Selection() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
@@ -38,7 +37,7 @@ export default function Selection() {
     );
   }, [selectionContext.articles]);
 
-  const filteredArticles = useHandleAndFilter(
+  const filteredArticles = useFilterReviewArticles(
     searchString,
     selectedStatus,
     articles,

@@ -14,7 +14,6 @@ import StudySelectionContext, {
   StudySelectionProvider,
 } from "../../../components/Context/StudiesSelectionContext";
 
-import { useHandleAndFilter } from "../../../utils/handleSearchAndFilter";
 
 import { inputconteiner } from "../styles/executionStyles";
 
@@ -23,6 +22,7 @@ import { PageLayout } from "../subcomponents/LayoutFactory";
 import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
 import useLayoutPage from "../../../hooks/useLayoutPage";
 import SelectLayout from "../subcomponents/LayoutButtons";
+import { useFilterReviewArticles } from "../hooks/useFilterReviewArticles";
 
 export default function Extraction() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
@@ -42,7 +42,7 @@ export default function Extraction() {
 
   const page: PageLayout = "Extraction";
 
-  const filteredArticles = useHandleAndFilter(
+  const filteredArticles = useFilterReviewArticles(
     searchString,
     selectedStatus,
     articles,
