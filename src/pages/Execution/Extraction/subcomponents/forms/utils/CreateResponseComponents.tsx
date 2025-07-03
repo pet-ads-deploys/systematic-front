@@ -61,7 +61,7 @@ export default function CreateResponseComponent({
         key={question.code}
         question={question.description}
         scales={question.scales}
-        answer={answer.value as string}
+        answer={answer.value as { name: string; value: number }}
         onResponse={(response) =>
           updateResponse(articleId, questionId, typeform, {
             value: response,

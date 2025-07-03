@@ -9,7 +9,7 @@ import { container, label } from "../styles";
 interface LabeledListProps {
   question: string;
   scales: Record<string, number>;
-  answer: string;
+  answer: string | { name: string; value: number } | null;
   onResponse: (response: { name: string; value: number }) => void;
 }
 
@@ -32,8 +32,15 @@ export default function LabeledList({
   };
 
   useEffect(() => {
-    if (typeof answer !== "string" || !answer.includes(":")) return;
-    handleSelectChange(answer);
+    if (!answer) return;
+
+    if (typeof answer === "string") {
+      setSelected(answer);
+      return;
+    }
+
+    const formattedAnswer = `${answer.name}: ${answer.value}`;
+    setSelected(formattedAnswer);
   }, [answer]);
 
   return (
