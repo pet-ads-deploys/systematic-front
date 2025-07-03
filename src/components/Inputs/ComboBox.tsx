@@ -9,15 +9,14 @@ import {
   Tooltip,
   Text,
 } from "@chakra-ui/react";
-import { RiMenuAddFill } from "react-icons/ri";
-import { MdOutlinePlaylistRemove } from "react-icons/md";
+import { HiOutlineCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 
 // Hooks
 import useComboBoxSelection from "../../hooks/useComboBoxSelection";
 
 // Types
-import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
-import {
+import type { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import type {
   OptionProps,
   OptionType,
 } from "../../hooks/fetch/useFetchAllCriteriasByArticle";
@@ -59,9 +58,9 @@ export default function ComboBox({
         color="black"
       >
         {text === "Include" ? (
-          <RiMenuAddFill size="1.5rem" />
+          <HiOutlineCheckCircle size="1.75rem" />
         ) : (
-          <MdOutlinePlaylistRemove size="2rem" />
+          <HiOutlineXCircle size="1.75rem" />
         )}
       </MenuButton>
 

@@ -21,6 +21,7 @@ export default function ExtractionForm({
   article,
   questionsFiltered,
   handlerUpdateAnswer,
+  mutateQuestion,
 }: FormStructure) {
   const reviewId = localStorage.getItem("systematicReviewId");
 
@@ -29,6 +30,7 @@ export default function ExtractionForm({
   const { handleSubmitAnswer } = useSubmitAnswerForm({
     responses: article[currentId]?.extractionQuestions ?? {},
     handleSendAnswer: sendAnswerExtractionQuestions,
+    mutateQuestion,
   });
 
   const hasQuestions = questionsFiltered.length > 0;

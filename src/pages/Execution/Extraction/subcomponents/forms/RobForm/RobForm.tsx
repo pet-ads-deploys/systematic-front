@@ -21,6 +21,7 @@ export default function RiskOfBiasForm({
   article,
   questionsFiltered,
   handlerUpdateAnswer,
+  mutateQuestion,
 }: FormStructure) {
   const reviewId = localStorage.getItem("systematicReviewId");
 
@@ -29,6 +30,7 @@ export default function RiskOfBiasForm({
   const { handleSubmitAnswer } = useSubmitAnswerForm({
     responses: article[currentId]?.robQuestions ?? {},
     handleSendAnswer: sendAnswerROBQuestions,
+    mutateQuestion,
   });
 
   const hasQuestions = Object.entries(questionsFiltered).length > 0;

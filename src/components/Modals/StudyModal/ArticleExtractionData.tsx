@@ -1,6 +1,5 @@
 // External libraries
-import { useState } from "react";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Divider, Flex, Heading } from "@chakra-ui/react";
 import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { IoIosCloseCircle } from "react-icons/io";
 import {
@@ -14,6 +13,7 @@ import {
 import HeaderForm from "../../../pages/Execution/Extraction/subcomponents/forms/HeaderForm/HeaderForm";
 import ExtractionForm from "../../../pages/Execution/Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
 import RiskOfBiasForm from "../../../pages/Execution/Extraction/subcomponents/forms/RobForm/RobForm";
+import SkeletonLoader from "../../ui/Skeleton/Skeleton";
 
 // Hooks
 import useFetchAllQuestionsByArticle from "../../../hooks/fetch/useFetchAllQuestionsByArticle";
@@ -23,18 +23,9 @@ import { capitalize } from "../../../utils/CapitalizeText";
 
 // Types
 import type { ArticlePreviewProps } from "./StudyData";
+import React from "react";
 
 export type FormType = "EXTRACTION" | "RISK_OF_BIAS";
-
-const buttonStyles = {
-  bg: "white",
-  borderRadius: ".5rem .5rem 0 0",
-};
-
-const forms = [
-  { label: "Extraction", type: "EXTRACTION" },
-  { label: "Risk Of Bias", type: "RISK_OF_BIAS" },
-] as const;
 
 const statusIconMap: Record<
   string,
@@ -89,10 +80,15 @@ const priorityIconMap: Record<
 export default function ArticlesExtrationData({
   studyData,
 }: ArticlePreviewProps) {
-  const [formVisible, setFormVisible] = useState<FormType>("EXTRACTION");
+  const {
+    question,
+    currentArticleId,
+    handlerUpdateAnswerStructure,
+    mutateQuestion,
+    isLoading,
+  } = useFetchAllQuestionsByArticle();
 
-  const { question, currentArticleId, handlerUpdateAnswerStructure } =
-    useFetchAllQuestionsByArticle();
+  if (isLoading) return <SkeletonLoader height="100%" width="100%" />;
 
   if (!question || !currentArticleId || !question[currentArticleId])
     return null;
@@ -102,15 +98,27 @@ export default function ArticlesExtrationData({
   const extractionStatus = statusIconMap[studyData.extractionStatus];
   const priorityLevel = priorityIconMap[studyData.readingPriority];
 
+  const sections = [
+    {
+      title: "Extraction Form",
+      Component: ExtractionForm,
+      questions: extractionQuestions,
+    },
+    {
+      title: "Risk of Bias",
+      Component: RiskOfBiasForm,
+      questions: robQuestions,
+    },
+  ];
+
   return (
     <Box w="100%" h="calc(100vh - 10rem)" bg="white" gap="3rem">
       <HeaderForm text={studyData.title} />
-      <Flex gap="2rem">
+      <Flex gap="2rem" justifyContent="end">
         <Flex
           alignItems="center"
           justifyContent="center"
           h="2rem"
-          px={4}
           py={2}
           gap={2}
           bg={`${extractionStatus.color}.100`}
@@ -151,37 +159,49 @@ export default function ArticlesExtrationData({
           ).replace("_", " ")}
         </Flex>
       </Flex>
-      <Flex w="100%" alignItems="center" justifyContent="start" mt="1rem">
-        {forms.map((form) => (
-          <Button
-            key={form.type}
-            sx={buttonStyles}
-            border={formVisible === form.type ? "2px solid black" : "none"}
-            borderBottom={
-              formVisible === form.type ? "none" : "2px solid black"
-            }
-            onClick={() => setFormVisible(form.type)}
-          >
-            {form.label}
-          </Button>
+      <Box w="100%" alignItems="center" mt="2rem">
+        {sections.map(({ title, Component, questions }, index) => (
+          <React.Fragment key={title}>
+            <Box>
+              <Flex align="center" borderRadius="md" h="3.5rem" boxShadow="sm">
+                <Heading
+                  as="h1"
+                  size="lg"
+                  color="#263C56"
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  position="relative"
+                  _after={{
+                    content: '""',
+                    position: "absolute",
+                    bottom: "-5px",
+                    left: "0",
+                    width: "3.5rem",
+                    height: ".5rem",
+                    bg: "#263C56",
+                  }}
+                >
+                  {title}
+                </Heading>
+              </Flex>
+              <Component
+                article={question}
+                questionsFiltered={questions}
+                currentId={currentArticleId}
+                handlerUpdateAnswer={handlerUpdateAnswerStructure}
+                mutateQuestion={mutateQuestion}
+              />
+            </Box>
+            {index < sections.length - 1 && (
+              <Divider
+                orientation="vertical"
+                h=".5rem"
+                bg="#263C56"
+                m="2rem 0"
+              />
+            )}
+          </React.Fragment>
         ))}
-      </Flex>
-      <Box mt="2rem">
-        {formVisible === "EXTRACTION" ? (
-          <ExtractionForm
-            article={question}
-            questionsFiltered={extractionQuestions}
-            currentId={currentArticleId}
-            handlerUpdateAnswer={handlerUpdateAnswerStructure}
-          />
-        ) : (
-          <RiskOfBiasForm
-            article={question}
-            questionsFiltered={robQuestions}
-            currentId={currentArticleId}
-            handlerUpdateAnswer={handlerUpdateAnswerStructure}
-          />
-        )}
       </Box>
     </Box>
   );
