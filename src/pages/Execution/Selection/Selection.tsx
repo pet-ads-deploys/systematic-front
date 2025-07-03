@@ -11,7 +11,7 @@ import LayoutFactory from "../subcomponents/LayoutFactory";
 
 import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
 
-import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
+import { useHandleAndFilter } from "../../../utils/handleSearchAndFilter";
 
 import { inputconteiner } from "../styles/executionStyles";
 
@@ -36,7 +36,7 @@ export default function Selection() {
     (art): art is ArticleInterface => "studyReviewId" in art
   );
 
-  const filteredArticles = handleSearchAndFilter(
+  const filteredArticles = useHandleAndFilter(
     searchString,
     selectedStatus,
     articles,

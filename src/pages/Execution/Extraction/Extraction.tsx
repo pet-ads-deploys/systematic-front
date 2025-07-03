@@ -14,7 +14,7 @@ import StudySelectionContext, {
   StudySelectionProvider,
 } from "../../../components/Context/StudiesSelectionContext";
 
-import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
+import { useHandleAndFilter } from "../../../utils/handleSearchAndFilter";
 
 import { inputconteiner } from "../styles/executionStyles";
 
@@ -39,7 +39,7 @@ export default function Extraction() {
 
   const page: PageLayout = "Extraction";
 
-  const filteredArticles = handleSearchAndFilter(
+  const filteredArticles = useHandleAndFilter(
     searchString,
     selectedStatus,
     articles,
