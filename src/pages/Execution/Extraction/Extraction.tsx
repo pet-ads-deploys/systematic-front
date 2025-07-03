@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
 import useInputState from "../../../hooks/useInputState";
@@ -31,9 +31,12 @@ export default function Extraction() {
   const selectionContext = useContext(StudySelectionContext);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
-  const articles: ArticleInterface[] = selectionContext.articles
-    .filter((art): art is ArticleInterface => "studyReviewId" in art)
-    .filter((art) => art.selectionStatus === "INCLUDED");
+
+  const articles: ArticleInterface[] = useMemo(() => {
+    return selectionContext.articles
+      .filter((art): art is ArticleInterface => "studyReviewId" in art)
+      .filter((art) => art.selectionStatus === "INCLUDED");
+  }, [selectionContext.articles]);
 
   const { layout, handleChangeLayout } = useLayoutPage();
 
