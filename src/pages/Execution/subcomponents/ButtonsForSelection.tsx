@@ -1,5 +1,4 @@
 // External library
-import { useContext } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { MdOutlineLowPriority } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -7,7 +6,7 @@ import { RiResetLeftLine } from "react-icons/ri";
 import { Tooltip } from "@chakra-ui/react";
 
 // Context
-import AppContext from "../../../context/AppContext";
+// import AppContext from "../../../context/AppContext";
 
 // Hooks
 import useFetchAllCriteriasByArticle from "../../../hooks/fetch/useFetchAllCriteriasByArticle";
@@ -34,16 +33,21 @@ import type {
   OptionProps,
   OptionType,
 } from "../../../hooks/fetch/useFetchAllCriteriasByArticle";
+import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 
 interface ButtonsForSelectionProps {
   page: PageLayout;
+  articles: ArticleInterface[] | StudyInterface[];
+  articleIndex: number;
+  setSelectedArticleReview: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function ButtonsForSelection({
   page,
+  articles,
+  articleIndex,
+  setSelectedArticleReview,
 }: ButtonsForSelectionProps) {
-  const context = useContext(AppContext);
-
   const { handleResetStatusToUnclassified } = useResetStatus({ page });
   const { handleChangePriority } = useChangePriority();
   const { criterias: fetchedCriterias, handlerUpdateCriteriasStructure } =
@@ -67,26 +71,24 @@ export default function ButtonsForSelection({
     },
   };
 
-  if (!criteriaGroupDataMap["INCLUSION"] || !criteriaGroupDataMap["EXCLUSION"]) return;
+  if (!criteriaGroupDataMap["INCLUSION"] || !criteriaGroupDataMap["EXCLUSION"])
+    return;
 
   const isInclusionActive = criteriaOptions.INCLUSION.isActive;
   const isExclusionActive = criteriaOptions.EXCLUSION.isActive;
 
-  const sortedStudies = context?.selectionStudies as StudyInterface[];
-  const index = context?.selectionStudyIndex as number;
-
-  const isUniqueArticle = sortedStudies.length == 1 ? true : false;
+  const isUniqueArticle = articles.length == 1 ? true : false;
 
   function goToNextArticle() {
-    const newIndex = (index + 1) % sortedStudies.length;
-    context?.setSelectionStudyIndex(newIndex);
-    context?.setSelectionStudy(sortedStudies[newIndex]);
+    const nextIndex = (articleIndex + 1) % articles.length;
+    const nextArticle = articles[nextIndex] as ArticleInterface;
+    setSelectedArticleReview(nextArticle.studyReviewId);
   }
 
   function goToPreviousArticle() {
-    const newIndex = (index - 1 + sortedStudies.length) % sortedStudies.length;
-    context?.setSelectionStudyIndex(newIndex);
-    context?.setSelectionStudy(sortedStudies[newIndex]);
+    const prevIndex = (articleIndex - 1 + articles.length) % articles.length;
+    const prevArticle = articles[prevIndex] as ArticleInterface;
+    setSelectedArticleReview(prevArticle.studyReviewId);
   }
 
   const comboBoxGroups: Record<
