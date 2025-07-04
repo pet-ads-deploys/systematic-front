@@ -1,3 +1,5 @@
+// External library
+import React, { useContext, useState } from "react";
 import {
   TableContainer,
   Table,
@@ -12,6 +14,27 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { IoIosCloseCircle } from "react-icons/io";
+import {
+  MdKeyboardDoubleArrowUp,
+  MdKeyboardDoubleArrowDown,
+  MdKeyboardArrowUp,
+  MdKeyboardArrowDown,
+} from "react-icons/md";
+import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
+
+// Context
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
+
+// Hook
+import usePagination from "../../../hooks/tables/usePagination";
+
+// Components
+import PaginationControl from "./PaginationControl";
+import { Resizable } from "./Resizable";
+
+// Style
 import {
   chevronIcon,
   collapsedSpanText,
@@ -19,27 +42,13 @@ import {
   tooltip,
 } from "../../../pages/Execution/styles/CardsStyle";
 
-import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
-import React, { useContext, useState } from "react";
-
+// Utils
 import { capitalize } from "../../../utils/CapitalizeText";
-import {
-  MdKeyboardDoubleArrowUp,
-  MdKeyboardDoubleArrowDown,
-  MdKeyboardArrowUp,
-  MdKeyboardArrowDown,
-} from "react-icons/md";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
-import { IoIosCloseCircle } from "react-icons/io";
 
-import usePagination from "../../../hooks/tables/usePagination";
-import PaginationControl from "./PaginationControl";
-import { Resizable } from "./Resizable";
-import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
-import { ViewModel } from "../../../hooks/useLayoutPage";
-import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
-import AppContext from "../../../context/AppContext";
-import StudySelectionContext from "../../../context/StudiesSelectionContext";
+// Type
+import type ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import type { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
+import type { ViewModel } from "../../../hooks/useLayoutPage";
 
 interface Props {
   articles: ArticleInterface[];
@@ -84,7 +93,6 @@ export default function Expanded({
     score: "3rem",
     priority: "5rem ",
   });
-  const context = useContext(AppContext);
   const studyContext = useContext(StudySelectionContext);
 
   const columns: Column[] = [
@@ -149,9 +157,8 @@ export default function Expanded({
     }));
   };
 
-  if (!context || !studyContext) return;
+  if (!studyContext) return;
 
-  const { setShowSelectionModal, setSelectionStudyIndex } = context;
   const {
     firstSelected,
     deletedArticles,
@@ -286,9 +293,7 @@ export default function Expanded({
                       : "transparent"
                   }
                   onClick={() => {
-                    setSelectionStudyIndex?.(index);
                     setSelectedArticleReview(reference.studyReviewId);
-                    setShowSelectionModal?.(true);
                   }}
                   transition="background-color 0.3s, box-shadow 0.3s"
                   p="0"
