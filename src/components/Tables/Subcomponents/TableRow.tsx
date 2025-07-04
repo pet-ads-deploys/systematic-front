@@ -7,7 +7,8 @@ import ColoredIcon from "../../Icons/ColoredIcon";
 import { KeyWordHeaderInterface } from "../../../../public/interfaces/IKeyWordHeard";
 import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
 import { useContext } from "react";
-import AppContext from "../../Context/AppContext";
+import AppContext from "../../../context/AppContext";
+
 
 interface IStudy <T, U> {
   rowData: U;

@@ -9,11 +9,10 @@ import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 
-import { AppProvider } from "../../../components/Context/AppContext";
+import { AppProvider } from "../../../context/AppContext";
 import StudySelectionContext, {
   StudySelectionProvider,
-} from "../../../components/Context/StudiesSelectionContext";
-
+} from "../../../context/StudiesSelectionContext";
 
 import { inputconteiner } from "../styles/executionStyles";
 

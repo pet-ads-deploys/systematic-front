@@ -5,7 +5,7 @@ import { useContext } from "react";
 import Axios from "../../interceptor/interceptor";
 
 // Context
-import StudySelectionContext from "../../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../../context/StudiesSelectionContext";
 
 // Hooks
 import useFocusedArticle from "../reviews/useFocusedArticle";

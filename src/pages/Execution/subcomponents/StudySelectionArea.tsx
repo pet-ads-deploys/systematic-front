@@ -7,8 +7,7 @@ import ButtonsForSelection from "./ButtonsForSelection";
 import StudyDataFiel from "../../../components/Modals/StudyModal/StudyData";
 
 // Context
-import AppContext from "../../../components/Context/AppContext";
-import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 // Types
 import type { StudyInterface } from "../../../../public/interfaces/IStudy";
@@ -24,20 +23,24 @@ export default function StudySelectionArea({
   articles,
   page,
 }: StudySelectionAreaProps) {
-  const context = useContext(AppContext);
   const selectionContext = useContext(StudySelectionContext);
+
   if (!selectionContext)
     throw new Error("Failed to get selection context on study Selection area");
-  // const showSelectionModal = context?.showSelectionModal;
-  const setSelectionStudies = context?.setSelectionStudies;
-  const studyIndex = context?.selectionStudyIndex;
 
-  if (setSelectionStudies && articles)
-    setSelectionStudies(articles as StudyInterface[]);
+  const { selectedArticleReview, setSelectedArticleReview } = selectionContext;
 
   if (!articles || articles.length === 0) return null;
 
-  const selectedIndex = typeof studyIndex === "number" ? studyIndex : 0;
+  const typedArticles = articles.filter(
+    (art): art is ArticleInterface => "studyReviewId" in art
+  );
+
+  const findSelectedArticle = typedArticles.findIndex(
+    (art) => art.studyReviewId === selectedArticleReview
+  );
+
+  const studyIndex = findSelectedArticle >= 0 ? findSelectedArticle : 0;
 
   return (
     <Flex
@@ -51,11 +54,16 @@ export default function StudySelectionArea({
       gap="1rem"
     >
       <Flex alignItems="center" justifyContent="center" w="100%" maxW="100%">
-        <ButtonsForSelection page={page} />
+        <ButtonsForSelection
+          page={page}
+          articles={articles as StudyInterface[]}
+          articleIndex={studyIndex}
+          setSelectedArticleReview={setSelectedArticleReview}
+        />
       </Flex>
       <Box w="100%" h="80%">
         <StudyDataFiel
-          studyData={articles?.[selectedIndex] as StudyInterface}
+          studyData={articles?.[studyIndex] as StudyInterface}
           page={page}
         />
       </Box>

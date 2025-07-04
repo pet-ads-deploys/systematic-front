@@ -7,7 +7,7 @@ import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 
 import StudySelectionContext, {
   StudySelectionProvider,
-} from "../../../../components/Context/StudiesSelectionContext";
+} from "../../../../context/StudiesSelectionContext";
 
 import { Accordionbtn, accordion } from "../../styles/CardsStyle";
 import {

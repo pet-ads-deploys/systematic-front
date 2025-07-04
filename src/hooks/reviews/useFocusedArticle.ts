@@ -1,11 +1,15 @@
+// External library
 import { useContext, useMemo } from "react";
 
-import AppContext from "../../components/Context/AppContext";
-import StudySelectionContext from "../../components/Context/StudiesSelectionContext";
+// Context
+import StudySelectionContext from "../../context/StudiesSelectionContext";
 
-import ArticleInterface from "../../../public/interfaces/ArticleInterface";
-import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+// Hook
 import useFetchAllClassifiedArticles from "../fetch/useFetchAllClassifiedArticles";
+
+// Type
+import type ArticleInterface from "../../../public/interfaces/ArticleInterface";
+import type { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
 
 type FocusedArticleOutputProps = {
   articleInFocus?: ArticleInterface;
@@ -19,38 +23,37 @@ export default function useFocusedArticle({
   page,
 }: FocusedArticleInputProps): FocusedArticleOutputProps {
   const selectionContext = useContext(StudySelectionContext);
-  const appContext = useContext(AppContext);
 
+  if (!selectionContext) throw new Error("Context not available");
+
+  const { selectedArticleReview, articles } = selectionContext;
   const { includedArticlesList } = useFetchAllClassifiedArticles();
 
-  const selectedArticleIndex = appContext?.selectionStudyIndex;
-
   const availableArticlesList = useMemo(() => {
-    if (!selectionContext?.articles) return [];
+    if (!articles) return [];
 
-    if (page === "Selection" || page === "Identification")
-      return selectionContext.articles;
+    if (page === "Selection" || page === "Identification") return articles;
 
     return includedArticlesList;
-  }, [includedArticlesList]);
+  }, [includedArticlesList, articles, page]);
 
-  if (
-    selectedArticleIndex === undefined ||
-    !selectionContext ||
-    !availableArticlesList.length ||
-    !availableArticlesList[selectedArticleIndex] ||
-    !("studyReviewId" in availableArticlesList[selectedArticleIndex])
-  ) {
-    console.warn("Missing context or invalid article index.", {
-      selectedArticleIndex,
+  const articleInFocus = useMemo(() => {
+    if (selectedArticleReview === undefined || !availableArticlesList.length)
+      return undefined;
+
+    return availableArticlesList.find(
+      (art): art is ArticleInterface =>
+        "studyReviewId" in art && art.studyReviewId === selectedArticleReview
+    );
+  }, [availableArticlesList, selectedArticleReview]);
+
+  if (!articleInFocus) {
+    console.warn("Focus article not found or invalid.", {
+      selectedArticleReview,
       availableArticlesLength: availableArticlesList.length,
     });
     return {};
   }
-
-  const articleInFocus = availableArticlesList[
-    selectedArticleIndex
-  ] as ArticleInterface;
 
   return { articleInFocus: articleInFocus };
 }

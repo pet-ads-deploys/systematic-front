@@ -1,10 +1,11 @@
 import ArticlesInterface from "../../../../public/interfaces/ArticleInterface";
-import AppContext from "../../Context/AppContext";
+
 import { useContext, useMemo, useState } from "react";
 import Expanded from "./Expanded";
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
 import { ViewModel } from "../../../hooks/useLayoutPage";
+import AppContext from "../../../context/AppContext";
 
 interface Props {
   articles: ArticlesInterface[];
