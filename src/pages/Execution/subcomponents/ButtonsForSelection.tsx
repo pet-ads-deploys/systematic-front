@@ -115,7 +115,10 @@ export default function ButtonsForSelection({
   };
 
   return (
-    <Flex sx={conteiner}>
+    <Flex
+      sx={conteiner}
+      justifyContent={isUniqueArticle ? "center" : "space-between"}
+    >
       {isUniqueArticle ? null : (
         <Flex sx={buttonconteiner}>
           <Tooltip
