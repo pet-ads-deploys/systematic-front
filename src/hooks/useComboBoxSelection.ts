@@ -1,70 +1,61 @@
+// External library
 import { useContext } from "react";
 
+// Context
 import StudySelectionContext from "../context/StudiesSelectionContext";
-import AppContext from "../context/AppContext";
 
+// Hook
 import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";
 
-import { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
-import ArticleInterface from "../../public/interfaces/ArticleInterface";
-import { StudyInterface } from "../../public/interfaces/IStudy";
-
+// Type
+import type { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
 interface ComboBoxSelectionProps {
   page: PageLayout;
 }
 
 const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
   const selectionContext = useContext(StudySelectionContext);
-  const appContext = useContext(AppContext);
-  const setIsIncluded = selectionContext?.setIsIncluded;
-  const setIsExcluded = selectionContext?.setIsExcluded;
-  const articles = selectionContext?.articles;
-  const articleIndex = appContext?.selectionStudyIndex;
-  let article: ArticleInterface | StudyInterface;
 
-  if (articles && articleIndex) article = articles[articleIndex];
+  if (!selectionContext) throw new Error("Context not available");
+
+  const {
+    reloadArticles,
+    selectedArticleReview,
+    setIsIncluded,
+    setIsExcluded,
+  } = selectionContext;
 
   const handleIncludeItemClick = (isChecked: boolean, criterias: string[]) => {
     if (setIsIncluded) setIsIncluded(isChecked);
-    if (articles && articleIndex) {
-      if (article && "studyReviewId" in article) {
-        page === "Selection"
-          ? UseChangeStudySelectionStatus({
-              studyReviewId: [article.studyReviewId],
-              status: "INCLUDED",
-              criterias,
-            })
-          : UseChangeStudyExtractionStatus({
-              studyReviewId: [article.studyReviewId],
-              status: "INCLUDED",
-              criterias,
-            });
-        selectionContext.reloadArticles();
-      }
-      selectionContext?.reloadArticles?.();
-    }
+    page === "Selection"
+      ? UseChangeStudySelectionStatus({
+          studyReviewId: [selectedArticleReview],
+          status: "INCLUDED",
+          criterias,
+        })
+      : UseChangeStudyExtractionStatus({
+          studyReviewId: [selectedArticleReview],
+          status: "INCLUDED",
+          criterias,
+        });
+    reloadArticles();
   };
 
   const handleExcludeItemClick = (isChecked: boolean, criterias: string[]) => {
     if (setIsExcluded) setIsExcluded(isChecked);
-    if (articles && articleIndex) {
-      if (article && "studyReviewId" in article) {
-        page === "Selection"
-          ? UseChangeStudySelectionStatus({
-              studyReviewId: [article.studyReviewId],
-              status: "EXCLUDED",
-              criterias,
-            })
-          : UseChangeStudyExtractionStatus({
-              studyReviewId: [article.studyReviewId],
-              status: "EXCLUDED",
-              criterias,
-            });
-        selectionContext.reloadArticles();
-      }
-      selectionContext?.reloadArticles?.();
-    }
+    page === "Selection"
+      ? UseChangeStudySelectionStatus({
+          studyReviewId: [selectedArticleReview],
+          status: "EXCLUDED",
+          criterias,
+        })
+      : UseChangeStudyExtractionStatus({
+          studyReviewId: [selectedArticleReview],
+          status: "EXCLUDED",
+          criterias,
+        });
+    reloadArticles();
   };
 
   return { handleIncludeItemClick, handleExcludeItemClick };
