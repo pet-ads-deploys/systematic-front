@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
-import StudySelectionContext from "../components/Context/StudiesSelectionContext";
-import AppContext from "../components/Context/AppContext";
+import StudySelectionContext from "../context/StudiesSelectionContext";
+import AppContext from "../context/AppContext";
 
 import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";

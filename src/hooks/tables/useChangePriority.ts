@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import AppContext from "../../components/Context/AppContext";
+import AppContext from "../../context/AppContext";
 
 import axios from "axios";
 import getRequestOptions from "../../utils/getRequestOptions";
-import StudySelectionContext from "../../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../../context/StudiesSelectionContext";
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
 import { StudyInterface } from "../../../public/interfaces/IStudy";
 

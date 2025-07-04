@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 
-import AppContext from "../../components/Context/AppContext";
-import StudySelectionContext from "../../components/Context/StudiesSelectionContext";
+import AppContext from "../../context/AppContext";
+import StudySelectionContext from "../../context/StudiesSelectionContext";
 
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
 import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";

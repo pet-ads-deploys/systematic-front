@@ -2,7 +2,7 @@
 import { useContext } from "react";
 
 // Context
-import StudySelectionContext from "../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../context/StudiesSelectionContext";
 
 // Hooks
 import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";

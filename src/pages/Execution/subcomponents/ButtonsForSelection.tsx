@@ -7,7 +7,7 @@ import { RiResetLeftLine } from "react-icons/ri";
 import { Tooltip } from "@chakra-ui/react";
 
 // Context
-import AppContext from "../../../components/Context/AppContext";
+import AppContext from "../../../context/AppContext";
 
 // Hooks
 import useFetchAllCriteriasByArticle from "../../../hooks/fetch/useFetchAllCriteriasByArticle";

@@ -1,5 +1,5 @@
 import { Route, HashRouter as Router, Routes } from "react-router-dom";
-import AppContext, { AppProvider } from "./components/Context/AppContext";
+import AppContext, { AppProvider } from "./context/AppContext";
 import { useContext } from "react";
 
 import CollaboratorsPage from "./pages/CollaboratorsPage/CollaboratorsPage";
@@ -24,7 +24,7 @@ import TestPage from "./pages/TestPage/TestPage";
 import Unauthorized from "./pages/UnauthorizedPage/UnauthorizedPage";
 import UserArea from "./pages/UserArea/UserArea";
 import Visualization from "./pages/NovaRevisao/visualization/Visualization";
-import { StudySelectionProvider } from "./components/Context/StudiesSelectionContext";
+import { StudySelectionProvider } from "./context/StudiesSelectionContext";
 
 function App() {
   const context = useContext(AppContext);
