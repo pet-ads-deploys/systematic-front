@@ -1,9 +1,8 @@
 export const conteiner = {
-  justifyContent: "space-between",
   m: "2",
   alignItems: "center",
   width: "100%",
-  gap: "2rem"
+  gap: "2rem",
 };
 
 export const boxconteiner = {
@@ -25,7 +24,7 @@ export const button = {
   transition: "0.3s ease-in-out",
   boxShadow: "md",
   p: "1rem",
-  border:"2px solid white",
+  border: "2px solid white",
   bg: "black",
   w: "6rem",
 };
