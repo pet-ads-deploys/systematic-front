@@ -7,11 +7,11 @@ import React, {
 } from "react";
 import { KeyedMutator } from "swr";
 
-import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
+import useGetAllReviewArticles from "../hooks/useGetAllReviewArticles";
 
-import { StudyInterface } from "../../../public/interfaces/IStudy";
-import ArticleInterface from "../../../public/interfaces/ArticleInterface";
-import useSelectedArticles from "../../hooks/tables/useSelectedArticles";
+import { StudyInterface } from "../../public/interfaces/IStudy";
+import ArticleInterface from "../../public/interfaces/ArticleInterface";
+import useSelectedArticles from "../hooks/tables/useSelectedArticles";
 
 export interface InvalidEntry {
   id: string;
@@ -60,8 +60,13 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
 
   const { articles, mutate, isLoading } = useGetAllReviewArticles();
 
-  const { selectedArticles, toggleArticlesSelection, firstSelected, deletedArticles, clearSelectedArticles} =
-    useSelectedArticles();
+  const {
+    selectedArticles,
+    toggleArticlesSelection,
+    firstSelected,
+    deletedArticles,
+    clearSelectedArticles,
+  } = useSelectedArticles();
 
   return (
     <StudySelectionContext.Provider

@@ -9,7 +9,7 @@ import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 
-import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 import { inputconteiner } from "../styles/executionStyles";
 

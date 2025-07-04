@@ -21,7 +21,7 @@ import {
 
 import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import React, { useContext, useState } from "react";
-import AppContext from "../../Context/AppContext";
+
 import { capitalize } from "../../../utils/CapitalizeText";
 import {
   MdKeyboardDoubleArrowUp,
@@ -31,13 +31,15 @@ import {
 } from "react-icons/md";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
-import StudySelectionContext from "../../Context/StudiesSelectionContext";
+
 import usePagination from "../../../hooks/tables/usePagination";
 import PaginationControl from "./PaginationControl";
 import { Resizable } from "./Resizable";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
 import { ViewModel } from "../../../hooks/useLayoutPage";
 import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
+import AppContext from "../../../context/AppContext";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 interface Props {
   articles: ArticleInterface[];
@@ -85,10 +87,10 @@ export default function Expanded({
   };
 
   const priorityIconMap: Record<string, React.ReactElement> = {
-    "VERY_LOW": <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
-    "LOW": <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
-    "HIGH": <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
-    "VERY_HIGH": <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
+    VERY_LOW: <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
+    LOW: <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
+    HIGH: <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
+    VERY_HIGH: <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
   };
 
   const renderStatusIcon = (status: string) => statusIconMap[status] || null;

@@ -3,7 +3,7 @@ import { SetStateAction, useState } from "react";
 import axios from "../../interceptor/interceptor";
 // import useGetSession from "./useGetSession";
 import { useToast } from "@chakra-ui/react";
-import { InvalidEntry } from "../../components/Context/StudiesSelectionContext";
+import { InvalidEntry } from "../../context/StudiesSelectionContext";
 import getRequestOptions from "../../utils/getRequestOptions";
 import { KeyedMutator } from "swr";
 

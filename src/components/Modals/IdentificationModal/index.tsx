@@ -5,8 +5,6 @@ import DragAndDrop from "../../Inputs/DragAndDropInput";
 
 import useHandleExportedFiles from "../../../hooks/reviews/useHandleExportedFiles";
 
-import StudySelectionContext from "../../Context/StudiesSelectionContext";
-
 import {
   Button,
   Modal,
@@ -28,6 +26,7 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 
 import { KeyedMutator } from "swr";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 interface IdentificationModalProps {
   show: (value: boolean) => void;
@@ -73,7 +72,6 @@ function IdentificationModal({
     setSource(type);
     onOpen();
   }, []);
-
 
   const handleSubmit = () => {
     sendFilesToServer();

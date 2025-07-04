@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Button, Flex } from "@chakra-ui/react";
 
 import SelectedArticles from "../../../components/Modals/SelectedArticles/SelectedArticles";
-import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 import { UseChangeStudySelectionStatus } from "../../../hooks/useChangeStudySelectionStatus";
 import useSendDuplicatedStudies from "../../../hooks/tables/useSendDuplicatedStudies";
 import { FaCheckCircle, FaEye, FaTrashAlt } from "react-icons/fa";

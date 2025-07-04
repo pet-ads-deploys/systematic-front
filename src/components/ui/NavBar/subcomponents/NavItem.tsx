@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { flexconteiner } from "../styles/Navitemstyles";
 import { useLocation } from "react-router-dom";
-import AppContext from "../../../Context/AppContext";
+
 import { Flex, Icon, Menu, MenuButton, Text } from "@chakra-ui/react";
+import AppContext from "../../../../context/AppContext";
 
 interface INavItemProps {
   navSize: string;
@@ -11,7 +12,11 @@ interface INavItemProps {
   submenu: boolean;
 }
 
-export default function NavItem({ navSize, icon, title }: INavItemProps): JSX.Element {
+export default function NavItem({
+  navSize,
+  icon,
+  title,
+}: INavItemProps): JSX.Element {
   const context = useContext(AppContext);
   const location = useLocation();
 
@@ -22,7 +27,8 @@ export default function NavItem({ navSize, icon, title }: INavItemProps): JSX.El
   const { button, setButton } = context;
 
   const isSmallSize = navSize === "small";
-  const isSelected = button === title || location.pathname.includes(title.toLowerCase());
+  const isSelected =
+    button === title || location.pathname.includes(title.toLowerCase());
 
   const handleClick = () => {
     console.log("last button: " + button);
@@ -44,8 +50,15 @@ export default function NavItem({ navSize, icon, title }: INavItemProps): JSX.El
           //borderRadius={"20px"}
           bg={isSelected ? "#C9D9E5" : "#263C56"}
         >
-          <Icon color={isSelected ? "#263C56" : "#C9D9E5"} boxSize={isSmallSize ? "1.8em" : "1.1em"} as={icon} />
-          <Text display={isSmallSize ? "none" : "flex"} textColor={isSelected ? "#263C56" : "#C9D9E5"}>
+          <Icon
+            color={isSelected ? "#263C56" : "#C9D9E5"}
+            boxSize={isSmallSize ? "1.8em" : "1.1em"}
+            as={icon}
+          />
+          <Text
+            display={isSmallSize ? "none" : "flex"}
+            textColor={isSelected ? "#263C56" : "#C9D9E5"}
+          >
             {title}
           </Text>
         </Flex>

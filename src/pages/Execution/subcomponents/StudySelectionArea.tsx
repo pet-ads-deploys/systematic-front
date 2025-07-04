@@ -7,8 +7,8 @@ import ButtonsForSelection from "./ButtonsForSelection";
 import StudyDataFiel from "../../../components/Modals/StudyModal/StudyData";
 
 // Context
-import AppContext from "../../../components/Context/AppContext";
-import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
+import AppContext from "../../../context/AppContext";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 // Types
 import type { StudyInterface } from "../../../../public/interfaces/IStudy";
