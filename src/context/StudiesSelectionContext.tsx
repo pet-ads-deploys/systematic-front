@@ -40,6 +40,8 @@ interface AppContextType {
   firstSelected: number | null;
   deletedArticles: number[] | [];
   clearSelectedArticles: () => void;
+  selectedArticleReview: number;
+  setSelectedArticleReview: Dispatch<SetStateAction<number>>;
 }
 
 const StudySelectionContext = createContext<AppContextType | undefined>(
@@ -57,6 +59,7 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
   const [reload, setReload] = useState(false);
   const [isExcluded, setIsExcluded] = useState(false);
   const [invalidEntries, setInvalidEntries] = useState<InvalidEntry[]>([]);
+  const [selectedArticleReview, setSelectedArticleReview] = useState(-1);
 
   const { articles, mutate, isLoading } = useGetAllReviewArticles();
 
@@ -87,6 +90,8 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
         firstSelected,
         deletedArticles,
         clearSelectedArticles,
+        selectedArticleReview,
+        setSelectedArticleReview,
       }}
     >
       {children}
