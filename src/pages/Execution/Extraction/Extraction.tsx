@@ -3,16 +3,13 @@ import { Box, Flex } from "@chakra-ui/react";
 
 import useInputState from "../../../hooks/useInputState";
 
-import FlexLayout from "../../../components/ui/Flex/Flex";
 import Header from "../../../components/ui/Header/Header";
+import FlexLayout from "../../../components/ui/Flex/Flex";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 
-import { AppProvider } from "../../../context/AppContext";
-import StudySelectionContext, {
-  StudySelectionProvider,
-} from "../../../context/StudiesSelectionContext";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 import { inputconteiner } from "../styles/executionStyles";
 
@@ -49,78 +46,62 @@ export default function Extraction() {
   );
 
   return (
-    <AppProvider>
-      <StudySelectionProvider>
-        <FlexLayout defaultOpen={1} navigationType="Accordion">
-          <Box w="98%" m="1rem" h="fit-content">
+    <FlexLayout defaultOpen={1} navigationType="Accordion">
+      <Box w="98%" m="1rem" h="fit-content">
+        <Box
+          w="100%"
+          h="100%"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+        >
+          <Flex
+            w="100%"
+            h="2.5rem"
+            justifyContent="space-between"
+            alignItems="center"
+            mb="2rem"
+          >
+            <Header text="Extraction" />
+            <SelectLayout handleChangeLayout={handleChangeLayout} />
+          </Flex>
+          <Box sx={inputconteiner}>
+            <Flex gap="1rem" w="35%" justifyContent="space-between">
+              <InputText
+                type="search"
+                placeholder="Insert article atribute"
+                nome="search"
+                onChange={(e) => setSearchString(e.target.value)}
+                value={searchString}
+              />
+              {layout !== "article" ? <ButtonsForMultipleSelection /> : null}
+            </Flex>
             <Box
-              w="100%"
-              h="100%"
               display="flex"
-              flexDirection="column"
+              gap="1rem"
               justifyContent="space-between"
+              alignItems="center"
             >
-              <Flex
-                w="100%"
-                h="2.5rem"
-                justifyContent="space-between"
-                alignItems="center"
-                mb="2rem"
-              >
-                <Header text="Extraction" />
-                <SelectLayout handleChangeLayout={handleChangeLayout} />
-              </Flex>
-              <Box sx={inputconteiner}>
-                <Flex gap="1rem" w="35%" justifyContent="space-between">
-                  <InputText
-                    type="search"
-                    placeholder="Insert article atribute"
-                    nome="search"
-                    onChange={(e) => setSearchString(e.target.value)}
-                    value={searchString}
-                  />
-                  {layout !== "article" ? (
-                    <ButtonsForMultipleSelection />
-                  ) : null}
-                </Flex>
-                <Box
-                  display="flex"
-                  gap="1rem"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <SelectInput
-                    names={[
-                      "INCLUDED",
-                      "DUPLICATED",
-                      "EXCLUDED",
-                      "UNCLASSIFIED",
-                    ]}
-                    values={[
-                      "INCLUDED",
-                      "DUPLICATED",
-                      "EXCLUDED",
-                      "UNCLASSIFIED",
-                    ]}
-                    onSelect={(value) => handleSelectChange(value)}
-                    selectedValue={selectedStatus}
-                    page={"selection"}
-                    placeholder="Selection status"
-                  />
-                </Box>
-              </Box>
-              <Box w="100%" h="82.5vh">
-                <LayoutFactory
-                  page="Extraction"
-                  layout={layout}
-                  articles={filteredArticles}
-                  isLoading={selectionContext.isLoading}
-                />
-              </Box>
+              <SelectInput
+                names={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
+                values={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
+                onSelect={(value) => handleSelectChange(value)}
+                selectedValue={selectedStatus}
+                page={"selection"}
+                placeholder="Selection status"
+              />
             </Box>
           </Box>
-        </FlexLayout>
-      </StudySelectionProvider>
-    </AppProvider>
+          <Box w="100%" h="82.5vh">
+            <LayoutFactory
+              page="Extraction"
+              layout={layout}
+              articles={filteredArticles}
+              isLoading={selectionContext.isLoading}
+            />
+          </Box>
+        </Box>
+      </Box>
+    </FlexLayout>
   );
 }

@@ -42,6 +42,10 @@ export default function StudySelectionArea({
 
   const studyIndex = findSelectedArticle >= 0 ? findSelectedArticle : 0;
 
+  if (studyIndex == 0) {
+    setSelectedArticleReview(typedArticles[studyIndex].studyReviewId);
+  }
+
   return (
     <Flex
       direction="column"
