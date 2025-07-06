@@ -22,9 +22,10 @@ type StudiesFunnelData={
     totalExcludedByCriterion: {
         [criteria:string]:number
     },
-    totalIncluded: 0,
+    totalIncluded: number,
 
 }
+
 
 export const useFetchStudiesFunnel = () => {
 
@@ -43,7 +44,7 @@ export const useFetchStudiesFunnel = () => {
             return  response.data;
 
         }catch(error){
-            console.error("Failed to get studies funnel");
+            console.error("Error fetching studeis funnel:", error);
 
         }   
     }

@@ -4,20 +4,22 @@ import Header from "../../../components/ui/Header/Header";
 
 import { barchartBox, conteiner, fluxogramaBox, graphicsconteiner, piechartBox, textDescription, textSection } from "../styles/graphicsStyles";
 import FlexLayout from "../../../components/ui/Flex/Flex";
-import BarChart from "../../../components/Charts/BarChart/BarChart";
 import { SearchSorcesTable } from "../../../components/Tables/SearchSoucesTable/SearchSorcesTable";
 import DinamicChart from "../../../components/Charts/DinamicChart/DinamicChart";
 import { IncludedStudiesTable } from "../../../components/Tables/IncludedStudiesTable/IncludedStudiesTable";
-import LineChart from "../../../components/Charts/LineChart.tsx/LineChart";
-import FlowChart from "../../../components/Charts/FunnelChart/FlowChart";
-
+import CriteriaBarChart from "./subComponents/CriteriaBarChart";
+import StudiesFunnelChart from "./subComponents/StudiesFunnelChart";
+import { IncludedStudiesLineChart } from "./subComponents/IncludedStudiesLineChart";
+import { QuestionsCharts } from "./subComponents/QuestionsCharts";
 
 
 export default function Graphics() {
   return (
+    
     <FlexLayout navigationType="Accordion" defaultOpen={2}>
       <Header text="Graphics" />
       <Box sx={conteiner}>
+        
 
         {/* SEÇÃO:GENERAL INFORMATION*/}
         <Box>
@@ -27,20 +29,21 @@ export default function Graphics() {
           {/* Serach sources*/}
           <Text sx={textDescription}>Search Sources</Text>
           <Box sx={graphicsconteiner}>
-            <Box sx={piechartBox}>
-              <DinamicChart/>
-            </Box>
+              <Box sx={piechartBox}>
+                <DinamicChart/>
+              </Box>
             <SearchSorcesTable />
+          
           </Box>
 
           {/*First Selection*/}
           <Text sx={textDescription}>First Selection</Text>
           <Box sx={graphicsconteiner}>
             <Box sx={barchartBox}>
-              <BarChart criteria="inclusion" stage="selection" />
+              <CriteriaBarChart criteria="inclusion" stage="selection" />
             </Box>
             <Box sx={barchartBox}>
-              <BarChart criteria="exclusion" stage="selection" />
+              <CriteriaBarChart criteria="exclusion" stage="selection" />
             </Box>
           </Box>
 
@@ -48,10 +51,10 @@ export default function Graphics() {
           <Text sx={textDescription}>Second Selection</Text>
           <Box sx={graphicsconteiner}>
             <Box sx={barchartBox}>
-              <BarChart criteria="inclusion" stage="extraction"  />
+              <CriteriaBarChart criteria="inclusion" stage="extraction"  />
             </Box>
             <Box sx={barchartBox}>
-              <BarChart criteria="exclusion" stage="extraction"  />
+              <CriteriaBarChart criteria="exclusion" stage="extraction"  />
             </Box>
           </Box>
 
@@ -59,7 +62,7 @@ export default function Graphics() {
           <Text sx={textDescription}>Studies Funnel</Text>
           <Box sx={graphicsconteiner}>
             <Box sx={fluxogramaBox}>
-             <FlowChart/>
+             <StudiesFunnelChart/>
             </Box>
           </Box>
 
@@ -69,16 +72,17 @@ export default function Graphics() {
           <Box sx={graphicsconteiner}>
             
               <IncludedStudiesTable/>
-              <LineChart/>
+              <IncludedStudiesLineChart/>
             
           </Box>
         </Box>
 
         {/* SEÇÃO:FORM QUESTIONS*/}
-        <Box>
+      
           <Text sx={textSection}>Form Questions</Text>
+          <QuestionsCharts/>
         
-        </Box>
+
 
       </Box>
     </FlexLayout>

@@ -66,7 +66,7 @@ export const SearchSorcesTable = () => {
     const includedTotal = studiesData.reduce((sum, data) => sum + data.included.length,0);
     const excludedTotal = studiesData.reduce((sum, data) => sum + data.excluded.length,0);
     const total = studiesData.reduce((sum, data) => sum + data.totalOfStudies,0);
-    const indexingRate = 0
+    const indexingRate = 0;
     const precisionRate = total > 0 ? ((includedTotal / total) * 100): 0;
 
     setDataStatistics({
@@ -103,8 +103,8 @@ export const SearchSorcesTable = () => {
                 <Td>{data.included.length}</Td>
                 <Td>{data.excluded.length}</Td>
                 <Td>{data.totalOfStudies}</Td>
-                <Td>{indexingRating}%</Td>
-                <Td>{precisionRate}%</Td>
+                <Td>{indexingRating.toFixed(2)}%</Td>
+                <Td>{precisionRate.toFixed(2)}%</Td>
               </Tr>
             );
           })}
@@ -115,8 +115,8 @@ export const SearchSorcesTable = () => {
             <Td>{dataStatistics.included}</Td>
             <Td>{dataStatistics.excluded}</Td>
             <Td>{dataStatistics.total}</Td>
-            <Td>{dataStatistics.indexingRate}%</Td>
-            <Td>{dataStatistics.precisionRate}%</Td>
+            <Td>{dataStatistics.indexingRate.toFixed(2)}%</Td>
+            <Td>{dataStatistics.precisionRate.toFixed(2)}%</Td>
           </Tr>
         </Tfoot>
       </Table>

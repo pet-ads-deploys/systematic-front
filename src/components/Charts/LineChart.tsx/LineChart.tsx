@@ -3,17 +3,23 @@ import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 
 // Types
-interface LineChartProps {
-  series: { name: string; data: number[] }[];
-  options: ApexOptions;
+type Props ={
+  title:string;
+  categories:(string| number)[];
+  data:number[];
+  color?:string;
+  height?:number;
+  width?:number;
 }
 
-export default function LineChart() {
-  const chartConfig: LineChartProps = {
+export default function LineChart({title,categories,data,color="#3c73b6",height=450,width=700}:Props) {
+   
+
+  const chartConfig ={
     series: [
       {
-        name: "studies",
-        data: [3, 4, 6, 8, 13, 7, 24, 3, 6, 9, 12, 23],
+        name: "Studies",
+        data: data,
       },
     ],
     options: {
@@ -32,7 +38,7 @@ export default function LineChart() {
           },
         },
       },
-      colors: ["#3c73b6"],
+      colors: [color],
       dataLabels: {
         enabled: false,
       },
@@ -40,7 +46,7 @@ export default function LineChart() {
         curve: "straight",
       },
       title: {
-        text: "Included Studies by Year",
+        text:title ,
         align: "left",
       },
       grid: {
@@ -50,12 +56,9 @@ export default function LineChart() {
         },
       },
       xaxis: {
-        categories: [
-          2013, 2014, 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024,
-          2025,
-        ],
+        categories: categories
       },
-    },
+    }as ApexOptions,
   };
 
   return (
@@ -63,8 +66,9 @@ export default function LineChart() {
       options={chartConfig.options}
       series={chartConfig.series}
       type="line"
-      height={450}
-      width={700}
+      height={height}
+      width={width}
+
     />
   );
 }
