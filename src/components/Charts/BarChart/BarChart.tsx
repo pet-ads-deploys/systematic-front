@@ -1,38 +1,20 @@
 import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 
-import useFetchStudiesByCriteria from "../../../hooks/reports/useFetchStudiesByCriteria";
-import { useFetchStudiesByStage } from "../../../hooks/reports/useFetchStudiesByStage";
-import { Text } from "@chakra-ui/react";
-
 type Props = {
-  criteria: "inclusion" | "exclusion";
-  stage: "selection"| "extraction";
+  title: string;
+  labels: (string |number)[];
+  data: number[];
+  color?: string;
+  height?: number;
 };
 
-export default function BarChart({ criteria,stage }: Props) {
-  const color = criteria === "inclusion" ? "#3c73b6" : "#C21807";
-
-  const {studiesByStage,isLoadingByStage}=useFetchStudiesByStage(stage);
-  const {studiesByCriteria, isLoadingByCriteria} = useFetchStudiesByCriteria(criteria);
-  console.log(studiesByCriteria?.criteria+"aaaaaaa"+criteria);
-  console.log(studiesByStage?.excludedStudies.ids+"aaaaaaa"+stage);
-  console.log(studiesByStage?.includedStudies.ids+"aaaaaaa"+stage);
-  
-  const studiesByStageIds=  criteria === "inclusion" ? studiesByStage?.includedStudies.ids ?? [] : studiesByStage?.excludedStudies.ids ?? [];
-
-  const criterias = Object.entries(studiesByCriteria?.criteria ?? {});
-  const labels = criterias.map(([description]) => description);
-  const data = criterias.map(([, studyIds]) =>
-    studyIds.filter(id =>  studiesByStageIds.includes(id)).length
-  );
-
+export default function BarChart({ title, labels, data, color = "#3c73b6", height = 450 }: Props) {
   const chartConfig = {
     series: [
       {
         name: "Studies",
-        data: data/* labels.map(()=>Math.floor(Math.random()*10)+1)*/
-
+        data,
       },
     ],
     options: {
@@ -70,20 +52,11 @@ export default function BarChart({ criteria,stage }: Props) {
         categories: labels.map((_,indexOf)=>(`C${indexOf+1}`))
       },
       title: {
-        text: criteria === "inclusion" ? "Inclusion Criteria" : "Exclusion Criteria",
+        text: title,
         align: "left",
       },
     } as ApexOptions,
   };
 
-  if (isLoadingByCriteria || isLoadingByStage) return <Text>Loading chart...</Text>;
-
-  return (
-    <Chart
-      options={chartConfig.options}
-      series={chartConfig.series}
-      type="bar"
-      height={450}
-    />
-  );
+  return <Chart options={chartConfig.options} series={chartConfig.series} type="bar" height={height} />;
 }
