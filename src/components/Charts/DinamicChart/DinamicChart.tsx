@@ -1,30 +1,17 @@
 import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
-import { fetchStudiesBySource } from "../../../hooks/reports/fetchStudiesBySources";
+
 import { Box, Select, Text } from "@chakra-ui/react";
+import useFetchStudiesBySource from "../../../hooks/reports/useFetchStudiesBySource";
 
 export default function DinamicChart() {
   const { databases } = useFetchDataBases();
-  const [isLoading, setIsLoading] = useState(true);
-  const [studiesData, setStudiesData] = useState<{ source: string; totalOfStudies: number }[]>([]);
+  
+  const { studiesData, isLoading } = useFetchStudiesBySource(databases);
   const [chartType, setChartType] = useState<"pie" | "bar">("pie");
 
-    useEffect(() => {
-      const loadData = async () => {
-        setIsLoading(true);
-        if (databases.length === 0) {
-          setIsLoading(false);
-          return;
-        }
-        const data = await fetchStudiesBySource(databases); 
-        setStudiesData(data);
-        setIsLoading(false);
-      };
-  
-      loadData(); 
-    }, [databases]);
 
 
   const series =
@@ -49,13 +36,7 @@ export default function DinamicChart() {
     },
     dataLabels: {
       enabled: true,
-      /*
-      formatter: (val, opts) => {
-        if (chartType === "pie") {
-          return series[opts.seriesIndex] as number;
-        }
-        return val;
-      },*/
+      
     },
     ...(chartType === "bar"
       ? {
@@ -81,7 +62,7 @@ export default function DinamicChart() {
   if (isLoading) return <Text>Loading chart...</Text>;
 
 
- const width = chartType === "pie"? 550:700;
+ const width = chartType === "pie"? 650:700;
   return (
     <Box>
       <Box mb={4} maxW="200px">
