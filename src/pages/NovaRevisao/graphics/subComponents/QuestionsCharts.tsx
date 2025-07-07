@@ -3,6 +3,7 @@ import { barchartBox, graphicsconteiner, piechartBox, textDescription } from "..
 import useFetchQuestionAnswers from "../../../../hooks/reports/useFetchQuestionAnwers"
 import PieChart from "../../../../components/Charts/PieChart/PieChart";
 import BarChart from "../../../../components/Charts/BarChart/BarChart";
+import { QuestionsTable } from "../../../../components/Tables/QuestionsTable/QuestionsTable";
 
 type Question={
     questionId: string;
@@ -18,7 +19,25 @@ type Question={
 }
 
 
-function updateData(labels: (string | number)[], entries: [string, any[]][]): number[] {
+function parseLabel(labelStr: string) {
+  const match = labelStr.match(/Label\(name:\s*(.+),\s*value:\s*(\d+)\)/);
+  if (match) {
+    return { name: match[1], value: Number(match[2]) };
+  }
+  return null;
+}
+
+function updateData(labels: (string | number)[], entries: [string, any[]][],questionType:string): number[] {
+    if(questionType ==="LABELED_SCALE"){
+        return labels.map((label) => {
+            const entry = entries.find(([entryLabel]) => {
+            const match= parseLabel(entryLabel);
+            if (!match) return false;
+            return match.name=== label;
+    });
+    return entry ? entry[1].length : 0;
+  });
+    }
   return labels.map((label) => {
     const isPresent = entries.find(([entryLabel]) => entryLabel === label.toString());
     return isPresent? isPresent[1].length : 0;
@@ -37,19 +56,17 @@ function updateLabel(question:Question):(string|number)[]{
        
     }else if(questionType ==="LABELED_SCALE"){
        labels = Object.entries(question.scales ?? {}).map(
-        ([key, value]) => `${key} : ${value}`
-    );
-                   
+            ([key]) => `${key}`
+        );              
     }else{
         labels = question.options ?? [];
     }
     return labels;
-
 }
 
 export const QuestionsCharts = () => {
     const {extractionAnswers,isLoadingExtractionAnswers} = useFetchQuestionAnswers();
-
+    console.log(extractionAnswers);
     if(isLoadingExtractionAnswers) return <Text>loading charts...</Text>
     return (
     <Box  display="flex" flexDirection="column" gap={6}>
@@ -65,13 +82,13 @@ export const QuestionsCharts = () => {
                 const questionType = question.question.questionType;
                 let chart = null;
                 const labels=updateLabel(question.question);
-                const data= updateData(labels,entries);
+                const data= updateData(labels,entries,questionType);
 
                 if (questionType === "LABELED_SCALE" || questionType === "NUMBERED_SCALE") {
                     chart = (
                         <Box sx={graphicsconteiner}>
                             <Box sx={piechartBox}>
-                                <PieChart title={`Question code: ${code}`} labels={labels} data={data} />
+                                <PieChart title={`Question code: ${code}`} labels={labels} data={data}/>
                             </Box>
                         </Box>
                     );
@@ -84,6 +101,13 @@ export const QuestionsCharts = () => {
                         </Box>
                     );
                     
+                }else{
+                    chart=(
+                        <Box sx={graphicsconteiner}>
+                            <QuestionsTable data={question.answer?? {}}></QuestionsTable>
+                        </Box>
+                    )
+
                 }
 
         if (!chart) return null; 

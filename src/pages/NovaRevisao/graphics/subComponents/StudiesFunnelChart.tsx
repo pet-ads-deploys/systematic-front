@@ -50,7 +50,7 @@ export default function StudiesFunnelChart() {
     funnelData?.totalScreened ?? 0
   ];*/
 
-  const selectionExcludedIds = selectionStage?.includedStudies.ids ?? [];
+  const selectionExcludedIds = selectionStage?.excludedStudies.ids ?? [];
   const studiesExcludedInScreened = [
     ...Object.values(exclusionCriteria?.criteria ?? {}).map(
       (ids) => ids.filter((id) => selectionExcludedIds.includes(id)).length
@@ -68,13 +68,14 @@ export default function StudiesFunnelChart() {
     funnelData?.totalFullTextAssessed ?? 0
   ];*/
 
-  const extractionExcludedIds = extractionStage?.includedStudies.ids ?? [];
+  const extractionExcludedIds = extractionStage?.excludedStudies.ids ?? [];
   const studiesExcludedInFullText = [
     ...Object.values(exclusionCriteria?.criteria ?? {}).map(
       (ids) => ids.filter((id) => extractionExcludedIds.includes(id)).length
     ),
     funnelData?.totalExcludedInFullText ?? 0
   ];
+
 
 
   const totalIdentified = Object.values(funnelData?.totalIdentifiedBySource ?? {}).reduce((acc, n) => acc + n, 0);
