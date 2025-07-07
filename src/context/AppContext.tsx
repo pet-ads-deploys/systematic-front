@@ -1,7 +1,8 @@
-import React, { ReactNode, createContext, useState } from "react";
-import { StudyInterface } from "../../../public/interfaces/IStudy";
-import showFirstPossibleStudy from "../../hooks/seachAppropriateStudy/showFirstPossibleStudy";
-import { ExcutionFaseEnum } from "../../../public/enums/ExcutionFaseEnum";
+import { createContext, ReactNode, useState } from "react";
+import { StudyInterface } from "../../public/interfaces/IStudy";
+import showFirstPossibleStudy from "../hooks/seachAppropriateStudy/showFirstPossibleStudy";
+import { ExcutionFaseEnum } from "../../public/enums/ExcutionFaseEnum";
+
 
 interface AppContextType {
   button: string;
@@ -16,8 +17,6 @@ interface AppContextType {
   setSelectionStudy: React.Dispatch<React.SetStateAction<StudyInterface | undefined>>;
   extractionStudy: StudyInterface | undefined;
   setExtractionStudy: React.Dispatch<React.SetStateAction<StudyInterface | undefined>>;
-  showSelectionModal: boolean;
-  setShowSelectionModal: React.Dispatch<React.SetStateAction<boolean>>
   showExtractionModal: boolean;
   setShowExtractionModal: React.Dispatch<React.SetStateAction<boolean>>
   selectionStudies: StudyInterface[] | undefined;
@@ -43,7 +42,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [selectionStudy, setSelectionStudy] = useState<StudyInterface | undefined>(
     showFirstPossibleStudy(ExcutionFaseEnum.SELECTION)
   );
-  const [showSelectionModal, setShowSelectionModal] = useState(false);
   const [showExtractionModal, setShowExtractionModal] = useState(false);
   const [extractionStudy, setExtractionStudy] = useState<StudyInterface | undefined>(
     showFirstPossibleStudy(ExcutionFaseEnum.EXTRACTION)
@@ -66,8 +64,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         selectionStudy,
         setSelectionStudy,
         extractionStudy,
-        showSelectionModal,
-        setShowSelectionModal,
         setExtractionStudy,
         showExtractionModal,
         setShowExtractionModal,

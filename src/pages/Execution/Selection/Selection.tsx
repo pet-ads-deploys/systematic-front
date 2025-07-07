@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
 import useInputState from "../../../hooks/useInputState";
@@ -9,9 +9,7 @@ import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 
-import StudySelectionContext from "../../../components/Context/StudiesSelectionContext";
-
-import { handleSearchAndFilter } from "../../../utils/handleSearchAndFilter";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 import { inputconteiner } from "../styles/executionStyles";
 
@@ -20,6 +18,7 @@ import { PageLayout } from "../subcomponents/LayoutFactory";
 import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
 import useLayoutPage from "../../../hooks/useLayoutPage";
 import SelectLayout from "../subcomponents/LayoutButtons";
+import { useFilterReviewArticles } from "../hooks/useFilterReviewArticles";
 
 export default function Selection() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
@@ -32,11 +31,13 @@ export default function Selection() {
   const selectionContext = useContext(StudySelectionContext);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
-  const articles: ArticleInterface[] = selectionContext.articles.filter(
-    (art): art is ArticleInterface => "studyReviewId" in art
-  );
+  const articles: ArticleInterface[] = useMemo(() => {
+    return selectionContext.articles.filter(
+      (art): art is ArticleInterface => "studyReviewId" in art
+    );
+  }, [selectionContext.articles]);
 
-  const filteredArticles = handleSearchAndFilter(
+  const filteredArticles = useFilterReviewArticles(
     searchString,
     selectedStatus,
     articles,

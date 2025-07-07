@@ -7,11 +7,11 @@ import React, {
 } from "react";
 import { KeyedMutator } from "swr";
 
-import useGetAllReviewArticles from "../../hooks/useGetAllReviewArticles";
+import useGetAllReviewArticles from "../hooks/useGetAllReviewArticles";
 
-import { StudyInterface } from "../../../public/interfaces/IStudy";
-import ArticleInterface from "../../../public/interfaces/ArticleInterface";
-import useSelectedArticles from "../../hooks/tables/useSelectedArticles";
+import { StudyInterface } from "../../public/interfaces/IStudy";
+import ArticleInterface from "../../public/interfaces/ArticleInterface";
+import useSelectedArticles from "../hooks/tables/useSelectedArticles";
 
 export interface InvalidEntry {
   id: string;
@@ -40,6 +40,8 @@ interface AppContextType {
   firstSelected: number | null;
   deletedArticles: number[] | [];
   clearSelectedArticles: () => void;
+  selectedArticleReview: number;
+  setSelectedArticleReview: Dispatch<SetStateAction<number>>;
 }
 
 const StudySelectionContext = createContext<AppContextType | undefined>(
@@ -57,11 +59,17 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
   const [reload, setReload] = useState(false);
   const [isExcluded, setIsExcluded] = useState(false);
   const [invalidEntries, setInvalidEntries] = useState<InvalidEntry[]>([]);
+  const [selectedArticleReview, setSelectedArticleReview] = useState(-1);
 
   const { articles, mutate, isLoading } = useGetAllReviewArticles();
 
-  const { selectedArticles, toggleArticlesSelection, firstSelected, deletedArticles, clearSelectedArticles} =
-    useSelectedArticles();
+  const {
+    selectedArticles,
+    toggleArticlesSelection,
+    firstSelected,
+    deletedArticles,
+    clearSelectedArticles,
+  } = useSelectedArticles();
 
   return (
     <StudySelectionContext.Provider
@@ -82,6 +90,8 @@ export const StudySelectionProvider: React.FC<AppProviderProps> = ({
         firstSelected,
         deletedArticles,
         clearSelectedArticles,
+        selectedArticleReview,
+        setSelectedArticleReview,
       }}
     >
       {children}

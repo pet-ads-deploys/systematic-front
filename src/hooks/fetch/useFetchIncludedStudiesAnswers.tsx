@@ -4,7 +4,6 @@ import useSWR from "swr";
 // Service
 import Axios from "../../interceptor/interceptor";
 
-
 // Types
 import type { TypeOfQuestions } from "../../pages/Execution/Extraction/subcomponents/forms/types";
 import getRequestOptions from "../../utils/getRequestOptions";
@@ -36,6 +35,7 @@ export default function useFetchIncludedStudiesAnswers({
 
   const { data, isLoading, mutate } = useSWR(path, fetcher, {
     revalidateOnFocus: false,
+    revalidateOnMount: false,
   });
 
   async function fetcher() {
@@ -45,8 +45,8 @@ export default function useFetchIncludedStudiesAnswers({
       const response = await Axios.get<HttpResponse>(path, options);
       return response.data;
     } catch (error) {
-        console.error("Error fetching included studies answers", error);
-        throw error;
+      console.error("Error fetching included studies answers", error);
+      throw error;
     }
   }
 

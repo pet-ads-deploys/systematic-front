@@ -17,7 +17,8 @@ import NavegationIconsPanel from "./TableRowSubcomponents/NavigationIconsPanel/N
 import OtherStudyPanels from "./OtherStudyPanels";
 import ModalContext from "./ModalContext";
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import AppContext from "../../Context/AppContext";
+import AppContext from "../../../context/AppContext";
+
 
 interface IStudy {
   isOpen: boolean;

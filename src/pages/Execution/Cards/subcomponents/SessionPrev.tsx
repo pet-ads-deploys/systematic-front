@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-import { InvalidEntry } from "../../../../components/Context/StudiesSelectionContext";
+import { InvalidEntry } from "../../../../context/StudiesSelectionContext";
 
 import {
   createFileToInvalidEntries,

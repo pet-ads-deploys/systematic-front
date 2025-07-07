@@ -9,6 +9,7 @@ import useFocusedArticle from "../reviews/useFocusedArticle";
 
 // Types
 import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import useRevertCriterionState from "../reviews/useRevertCriterionState";
 
 export type OptionType = "INCLUSION" | "EXCLUSION";
 
@@ -45,10 +46,10 @@ export default function useFetchAllCriteriasByArticle({
   });
   const inclusion = useFetchInclusionCriteria() || [];
   const exclusion = useFetchExclusionCriteria() || [];
+  const { revertCriterionState } = useRevertCriterionState({ page });
 
   useEffect(() => {
     if (!inclusion || !exclusion || !articleInFocus) return;
-
 
     const groupOfCriteria: Record<OptionType, string[]> = {
       INCLUSION: criteria?.inclusionCriteria || [],
@@ -93,6 +94,44 @@ export default function useFetchAllCriteriasByArticle({
     }));
   }, [inclusion, exclusion, articleInFocus, criteria]);
 
+  const captureGroupOfCriteria = (current: CriteiriaProps, key: OptionType) => {
+    const groupCriteria = current.options;
+
+    const oppositeKey: OptionType =
+      key === "INCLUSION" ? "EXCLUSION" : "INCLUSION";
+
+    return { groupCriteria, oppositeKey };
+  };
+
+  function hasConflictWithOppositeGroup(
+    groupCriteria: CriteiriaProps["options"],
+    oppositeKey: OptionType
+  ) {
+    return groupCriteria[oppositeKey].content.some((crit) => crit.isChecked);
+  }
+
+  function updateCriteriaContent(
+    content: OptionProps[],
+    optionText: string,
+    newValue: boolean
+  ): { updatedContent: OptionProps[]; isNowActive: boolean } {
+    const updated = content.map((crit) =>
+      crit.text === optionText ? { ...crit, isChecked: newValue } : crit
+    );
+    const isActive = updated.some((crit) => crit.isChecked);
+    return { updatedContent: updated, isNowActive: isActive };
+  }
+
+  const shouldRevertState = (
+    currentContent: OptionProps[],
+    optionText: string,
+    newValue: boolean
+  ) => {
+    const criteria = currentContent.find((crit) => crit.text === optionText);
+    if (!criteria) return;
+    return criteria.isChecked === true && newValue === false;
+  };
+
   const handlerUpdateCriteriasStructure = (
     key: OptionType,
     optionText: string,
@@ -104,23 +143,28 @@ export default function useFetchAllCriteriasByArticle({
       const current = prev[articleId];
       if (!current) return prev;
 
-      const groupCriteria = current.options;
+      const { groupCriteria, oppositeKey } = captureGroupOfCriteria(
+        current,
+        key
+      );
       if (!groupCriteria) return prev;
 
-      const oppositeKey: OptionType =
-        key === "INCLUSION" ? "EXCLUSION" : "INCLUSION";
+      if (
+        newValue &&
+        hasConflictWithOppositeGroup(groupCriteria, oppositeKey)
+      ) {
+        return prev;
+      }
 
-      const oppositeHasActive = groupCriteria[oppositeKey].content.some(
-        (crit) => crit.isChecked
+      const { updatedContent, isNowActive } = updateCriteriaContent(
+        groupCriteria[key].content,
+        optionText,
+        newValue
       );
 
-      if (newValue && oppositeHasActive) return prev;
-
-      const updatedContent = groupCriteria[key].content.map((crit) =>
-        crit.text === optionText ? { ...crit, isChecked: newValue } : crit
-      );
-
-      const isNowActive = updatedContent.some((crit) => crit.isChecked);
+      if (shouldRevertState(groupCriteria[key].content, optionText, newValue)) {
+        revertCriterionState([optionText]);
+      }
 
       return {
         ...prev,

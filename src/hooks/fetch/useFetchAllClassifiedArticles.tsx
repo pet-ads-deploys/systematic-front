@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 
-import StudySelectionContext from "../../components/Context/StudiesSelectionContext";
+import StudySelectionContext from "../../context/StudiesSelectionContext";
 
 import ArticleInterface from "../../../public/interfaces/ArticleInterface";
 

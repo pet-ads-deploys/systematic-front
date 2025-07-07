@@ -28,6 +28,10 @@ export interface HandleSendAnswerProps {
   type: TypeOfQuestions;
 }
 
+export interface SendAnswerProps {
+  answers: HandleSendAnswerProps[];
+}
+
 export type FormType = "EXTRACTION" | "RISK_OF_BIAS";
 
 export type Answer = {
@@ -51,6 +55,7 @@ export interface FormStructure {
   currentId: number;
   article: Record<number, ArticleAnswerStrucuture>;
   questionsFiltered: AnswerStrucuture[];
+  mutateQuestion: () => void;
   handlerUpdateAnswer: (
     articleId: number | undefined,
     questionId: string,

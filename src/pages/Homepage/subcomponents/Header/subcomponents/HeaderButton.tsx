@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { buttonTheme } from "./styles/ButtonTheme";
-import AppContext from "../../../../../components/Context/AppContext";
+import AppContext from "../../../../../context/AppContext";
 
 interface IHeaderButton {
   text: string;
@@ -12,7 +12,8 @@ interface IHeaderButton {
 export default function HeaderButton({ text, type }: IHeaderButton) {
   const location = useLocation();
   const context = useContext(AppContext);
-  const isActive = context?.activeButton === type && location.pathname === "/landing";
+  const isActive =
+    context?.activeButton === type && location.pathname === "/landing";
 
   function handleClick() {
     if (context) {

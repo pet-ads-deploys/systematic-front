@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 
 // Hooks
 import useFocusedArticle from "../reviews/useFocusedArticle";
-import useFetchIncludedStudiesAnswers from "./useFetchIncludedStudiesAnswers";
+import useFetchIncludedStudiesAnswers, {
+  QuestionAnswer,
+} from "./useFetchIncludedStudiesAnswers";
 
 // Types
 import type {
@@ -12,6 +14,7 @@ import type {
   ArticleAnswerStrucuture,
   FormType,
 } from "../../pages/Execution/Extraction/subcomponents/forms/types";
+import { UseChangeStudyExtractionStatus } from "../useChangeStudyExtractionStatus";
 
 export default function useFetchAllQuestionsByArticle() {
   const [articlesStructureAnswers, setArticlesStructureAnswers] = useState<
@@ -19,9 +22,10 @@ export default function useFetchAllQuestionsByArticle() {
   >({});
 
   const { articleInFocus } = useFocusedArticle({ page: "Extraction" });
-  const { question } = useFetchIncludedStudiesAnswers({
+  const { question, mutate, isLoading } = useFetchIncludedStudiesAnswers({
     articleId: articleInFocus?.studyReviewId || -1,
   });
+  const articleId = articleInFocus ? articleInFocus.studyReviewId : -1;
 
   const handlerUpdateAnswerStructure = (
     articleId: number = Number(articleInFocus?.studyReviewId) || -1,
@@ -38,6 +42,8 @@ export default function useFetchAllQuestionsByArticle() {
       quest.questionId === questionId ? { ...quest, answer: response } : quest
     );
 
+    console.log("questão atualizada", updatedQuestions);
+
     const updatedArticle: ArticleAnswerStrucuture = {
       ...article,
       [key]: updatedQuestions,
@@ -49,23 +55,36 @@ export default function useFetchAllQuestionsByArticle() {
     }));
   };
 
-  useEffect(() => {
-    if (!question || !articleInFocus?.studyReviewId) return;
+  function formatLabel(label: string): string {
+    const regex = /^Label\(name:\s(.+?),\svalue:\s(\d+)\)$/;
+    const match = label.match(regex);
+    if (!match) {
+      throw new Error("String não está no formato esperado");
+    }
+    const [, name, value] = match;
+    return `${name}: ${value}`;
+  }
 
-    const articleId = articleInFocus.studyReviewId;
+  useEffect(() => {
+    if (!question || !articleInFocus) return;
 
     setArticlesStructureAnswers((prev) => {
       if (prev[articleId]) return prev;
 
       const mapToStructure = (
-        questions: typeof question.extractionQuestions
+        questions: QuestionAnswer[]
       ): AnswerStrucuture[] =>
-        questions.map((q) => ({
-          questionId: q.questionId,
-          description: q.description,
-          code: q.code,
-          type: q.type,
-          answer: { value: q.answer },
+        questions.map((quest) => ({
+          questionId: quest.questionId,
+          description: quest.description,
+          code: quest.code,
+          type: quest.type,
+          answer: {
+            value:
+              quest.type == "LABELED_SCALE" && quest.answer
+                ? formatLabel(quest.answer as string)
+                : quest.answer,
+          },
         }));
 
       const structuredAnswers: ArticleAnswerStrucuture = {
@@ -78,11 +97,38 @@ export default function useFetchAllQuestionsByArticle() {
         [articleId]: structuredAnswers,
       };
     });
-  }, [question, articleInFocus?.studyReviewId, articlesStructureAnswers]);
+
+    const articleAnswers = articlesStructureAnswers[articleId];
+    if (!articleAnswers) return;
+
+    const isAnswerAllQuestionsOfExtraction =
+      articleAnswers.extractionQuestions.every(
+        (quest) => quest.answer.value != null
+      );
+    const isAnswerAllQuestionsOfRiskOfBias = articleAnswers.robQuestions.every(
+      (quest) => quest.answer.value != null
+    );
+
+    if (
+      articleInFocus.extractionStatus == "UNCLASSIFIED" &&
+      isAnswerAllQuestionsOfExtraction &&
+      isAnswerAllQuestionsOfRiskOfBias
+    ) {
+      UseChangeStudyExtractionStatus({
+        studyReviewId: [articleId],
+        criterias: [],
+        status: "INCLUDED",
+      });
+    }
+  }, [question, articleInFocus, articleId, articlesStructureAnswers]);
+
+  console.log("todos os dados", articlesStructureAnswers[articleId]);
 
   return {
     question: articlesStructureAnswers,
     currentArticleId: articleInFocus?.studyReviewId,
     handlerUpdateAnswerStructure,
+    mutateQuestion: mutate,
+    isLoading,
   };
 }
