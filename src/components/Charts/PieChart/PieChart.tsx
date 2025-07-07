@@ -25,11 +25,14 @@ export default function PieChart({ title, labels, data, width = 700} :Props) {
         text: title,
         align: "left",
       },
-      dataLabels: {
+     /* dataLabels: {
         enabled: true,
         formatter: (_val, opts) =>{
           return opts.w.config.series[opts.seriesIndex];
         }
+      },*/
+      legend: {
+        position: "bottom"
       },
 
     } as ApexOptions,
