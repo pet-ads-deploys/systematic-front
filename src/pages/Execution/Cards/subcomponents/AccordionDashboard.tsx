@@ -5,9 +5,7 @@ import SessionPrev from "./SessionPrev";
 
 import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 
-import StudySelectionContext, {
-  StudySelectionProvider,
-} from "../../../../context/StudiesSelectionContext";
+import StudySelectionContext from "../../../../context/StudiesSelectionContext";
 
 import { Accordionbtn, accordion } from "../../styles/CardsStyle";
 import {
@@ -70,82 +68,80 @@ export default function AccordionDashboard({
   };
 
   return (
-    <StudySelectionProvider>
-      <Accordion allowToggle sx={accordion} onChange={handleAccordionToggle}>
-        {showModal == true && (
-          <IdentificationModal
-            show={setShowModal}
-            action={actionModal}
-            type={type}
-            mutate={mutate}
-          />
-        )}
-        <AccordionItem>
-          <AccordionButton sx={Accordionbtn}>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel>
-            {sessions && sessions.length > 0 ? (
-              <Box maxH="10rem" overflowY="auto" overflowX="hidden">
-                <Table>
-                  <Thead>
-                    <Tr>
-                      <Th
-                        textAlign="center"
-                        fontWeight="bold"
-                        color="white"
-                        textTransform="capitalize"
-                        fontSize="md"
-                      >
-                        Date
-                      </Th>
-                      <Th
-                        textAlign="center"
-                        fontWeight="bold"
-                        color="white"
-                        textTransform="capitalize"
-                        fontSize="md"
-                      >
-                        Studies
-                      </Th>
-                      <Th
-                        textAlign="center"
-                        fontWeight="bold"
-                        color="white"
-                        textTransform="capitalize"
-                        fontSize="md"
-                      >
-                        Actions
-                      </Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {sessions.map((item, index) => (
-                      <SessionPrev
-                        key={index}
-                        sessionId={item.id}
-                        handleOpenModal={handleOpenModal}
-                        handleDelete={handleDeleteStudies}
-                        invalidEntries={context.invalidEntries}
-                        sessionIndex={index}
-                        timestamp={item.timestamp}
-                        numberOfStudies={item.numberOfRelatedStudies}
-                      />
-                    ))}
-                  </Tbody>
-                </Table>
-              </Box>
-            ) : (
-              <Text>Studies not found</Text>
-            )}
-            {sessions.length > 0 && (
-              <Box>
-                <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
-              </Box>
-            )}
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </StudySelectionProvider>
+    <Accordion allowToggle sx={accordion} onChange={handleAccordionToggle}>
+      {showModal == true && (
+        <IdentificationModal
+          show={setShowModal}
+          action={actionModal}
+          type={type}
+          mutate={mutate}
+        />
+      )}
+      <AccordionItem>
+        <AccordionButton sx={Accordionbtn}>
+          <AccordionIcon />
+        </AccordionButton>
+        <AccordionPanel>
+          {sessions && sessions.length > 0 ? (
+            <Box maxH="10rem" overflowY="auto" overflowX="hidden">
+              <Table>
+                <Thead>
+                  <Tr>
+                    <Th
+                      textAlign="center"
+                      fontWeight="bold"
+                      color="white"
+                      textTransform="capitalize"
+                      fontSize="md"
+                    >
+                      Date
+                    </Th>
+                    <Th
+                      textAlign="center"
+                      fontWeight="bold"
+                      color="white"
+                      textTransform="capitalize"
+                      fontSize="md"
+                    >
+                      Studies
+                    </Th>
+                    <Th
+                      textAlign="center"
+                      fontWeight="bold"
+                      color="white"
+                      textTransform="capitalize"
+                      fontSize="md"
+                    >
+                      Actions
+                    </Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {sessions.map((item, index) => (
+                    <SessionPrev
+                      key={index}
+                      sessionId={item.id}
+                      handleOpenModal={handleOpenModal}
+                      handleDelete={handleDeleteStudies}
+                      invalidEntries={context.invalidEntries}
+                      sessionIndex={index}
+                      timestamp={item.timestamp}
+                      numberOfStudies={item.numberOfRelatedStudies}
+                    />
+                  ))}
+                </Tbody>
+              </Table>
+            </Box>
+          ) : (
+            <Text>Studies not found</Text>
+          )}
+          {sessions.length > 0 && (
+            <Box>
+              <Text mt="1rem">Total: {getTotalStudiesRelated()}</Text>
+            </Box>
+          )}
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   );
 }
