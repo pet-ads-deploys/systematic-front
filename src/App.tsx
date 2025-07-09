@@ -20,7 +20,6 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import SearchSession from "./pages/SearchSession/SearchSession";
 import Selection from "./pages/Execution/Selection/Selection";
 import ServerError from "./pages/ServerErrorPage/ServerErrorPage";
-import TestPage from "./pages/TestPage/TestPage";
 import Unauthorized from "./pages/UnauthorizedPage/UnauthorizedPage";
 import UserArea from "./pages/UserArea/UserArea";
 import Visualization from "./pages/NovaRevisao/visualization/Visualization";
@@ -39,10 +38,6 @@ function App() {
               <Route
                 path="/landing"
                 element={<ProtectedRoute element={<LandingPage />} />}
-              />
-              <Route
-                path="/test"
-                element={<ProtectedRoute element={<TestPage />} />}
               />
               <Route
                 path="/user"
@@ -118,9 +113,6 @@ function App() {
     );
   }
 
-  const button = context;
-  console.log("App -> button: " + button);
-
   return (
     <Router>
       <AppProvider>
@@ -129,10 +121,6 @@ function App() {
           <Route
             path="/landing"
             element={<ProtectedRoute element={<LandingPage />} />}
-          />
-          <Route
-            path="/test"
-            element={<ProtectedRoute element={<TestPage />} />}
           />
           <Route path="/homepage" element={<Homepage />} />
           <Route
