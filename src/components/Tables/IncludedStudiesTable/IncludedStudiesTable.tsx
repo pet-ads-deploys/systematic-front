@@ -7,14 +7,19 @@ import {
   Tbody,
   Th,
 } from "@chakra-ui/react";
+
+// Hooks
 import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import useFetchInclusionCriteria from "../../../hooks/fetch/useFetchInclusionCriteria";
-import { StudyTd } from "./StudyTd";
+
+// Components
+import { ReportTd } from "../Subcomponents/ReportTd";
 
 
 // Types
+import type ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import type { StudyInterface } from "../../../../public/interfaces/IStudy";
+
 type Column = {
   label: string;
 };
@@ -63,13 +68,13 @@ export const IncludedStudiesTable = () => {
 
             return (
               <Tr key={id} _hover={{ bg: "gray.300" }}>
-                <StudyTd text={id.toString()}/>
-                <StudyTd text={study.title} />
-                <StudyTd text={study.authors} />
-                <StudyTd text={study.year.toString()} />
-                <StudyTd text={study.venue} />
-                <StudyTd text={sourceText} />
-                <StudyTd text={criteriaText} />
+                <ReportTd text={id.toString()}/>
+                <ReportTd text={study.title} />
+                <ReportTd text={study.authors} />
+                <ReportTd text={study.year.toString()} />
+                <ReportTd text={study.venue} />
+                <ReportTd text={sourceText} />
+                <ReportTd text={criteriaText} />
               </Tr>
             );
           })}
