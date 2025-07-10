@@ -1,10 +1,18 @@
+// External library
 import { Box, Text } from "@chakra-ui/react"
-import { barchartBox, graphicsconteiner, piechartBox, textDescription } from "../../styles/graphicsStyles"
+
+// Hooks
 import useFetchQuestionAnswers from "../../../../hooks/reports/useFetchQuestionAnwers"
+
+// components
 import PieChart from "../../../../components/Charts/PieChart/PieChart";
 import BarChart from "../../../../components/Charts/BarChart/BarChart";
 import { QuestionsTable } from "../../../../components/Tables/QuestionsTable/QuestionsTable";
 
+// Styles
+import { barchartBox, graphicsconteiner, piechartBox, textDescription } from "../../styles/graphicsStyles"
+
+// Types
 type Question={
     questionId: string;
     systematicStudyId: string;
@@ -38,6 +46,7 @@ function updateData(labels: (string | number)[], entries: [string, any[]][],ques
     return entry ? entry[1].length : 0;
   });
     }
+
   return labels.map((label) => {
     const isPresent = entries.find(([entryLabel]) => entryLabel === label.toString());
     return isPresent? isPresent[1].length : 0;
@@ -66,7 +75,7 @@ function updateLabel(question:Question):(string|number)[]{
 
 export const QuestionsCharts = () => {
     const {extractionAnswers,isLoadingExtractionAnswers} = useFetchQuestionAnswers();
-    console.log(extractionAnswers);
+               
     if(isLoadingExtractionAnswers) return <Text>loading charts...</Text>
     return (
     <Box  display="flex" flexDirection="column" gap={6}>
@@ -100,14 +109,12 @@ export const QuestionsCharts = () => {
                             </Box>
                         </Box>
                     );
-                    
                 }else{
                     chart=(
                         <Box sx={graphicsconteiner}>
                             <QuestionsTable data={question.answer?? {}}></QuestionsTable>
                         </Box>
                     )
-
                 }
 
         if (!chart) return null; 
@@ -118,14 +125,9 @@ export const QuestionsCharts = () => {
             {chart}
           </Box>
         );
-               
-
-           
             })
 
         }
-        
-
     </Box>
   )
 }

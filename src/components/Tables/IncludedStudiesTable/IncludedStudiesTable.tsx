@@ -7,15 +7,19 @@ import {
   Tbody,
   Th,
 } from "@chakra-ui/react";
+
+// Hooks
 import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 import useFetchInclusionCriteria from "../../../hooks/fetch/useFetchInclusionCriteria";
+
+// Components
 import { ReportTd } from "../Subcomponents/ReportTd";
 
 
-
 // Types
+import type ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import type { StudyInterface } from "../../../../public/interfaces/IStudy";
+
 type Column = {
   label: string;
 };

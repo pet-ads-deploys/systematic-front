@@ -12,31 +12,32 @@ type Props = {
 
 export default function PieChart({ title, labels, data, width = 700} :Props) {
 
-  const chartConfig = {
-    series:data,
+const chartConfig = {
+    series: data,
     options: {
       chart: {
         toolbar: {
           show: true,
         },
       },
-      labels:labels,
+      labels: labels,
       title: {
         text: title,
         align: "left",
       },
-     /* dataLabels: {
+      dataLabels: {
         enabled: true,
-        formatter: (_val, opts) =>{
+        formatter: (_val, opts) => {
           return opts.w.config.series[opts.seriesIndex];
         }
-      },*/
+      },
       legend: {
         position: "bottom"
       },
-
     } as ApexOptions,
   };
+
+  
   return (
     <Chart
       options={chartConfig.options}

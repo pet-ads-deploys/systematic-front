@@ -1,11 +1,16 @@
+// External library
+import { Node, Edge } from "@xyflow/react";
 import { Text } from "@chakra-ui/react";
 
-import { Node, Edge } from "@xyflow/react";
-import { useFetchStudiesFunnel } from "../../../../hooks/reports/useFetchStudiesFunnel";
-import FlowChart from "../../../../components/Charts/FunnelChart/FlowChart";
+// Hooks
 import { useFetchStudiesByStage } from "../../../../hooks/reports/useFetchStudiesByStage";
 import useFetchStudiesByCriteria from "../../../../hooks/reports/useFetchStudiesByCriteria";
+import { useFetchStudiesFunnel } from "../../../../hooks/reports/useFetchStudiesFunnel";
 
+// Components
+import FlowChart from "../../../../components/Charts/FunnelChart/FlowChart";
+
+// Mock
 const baseNodes: Node[] = [
   { id: "0", data: { label: "Studies identified in searched sources" }, position: { x: 200, y: 150 } },
   { id: "1", data: { label: "Studies after removing duplicates" }, position: { x: 200, y: 250 } },
@@ -17,11 +22,7 @@ const baseNodes: Node[] = [
   { id: "7", data: { label: "Studies included in quantitative synthesis (meta-analysis)" }, position: { x: 200, y: 650 } },
 ];
 
-
-
-export default function StudiesFunnelChart() {
-
-    const edges: Edge[] = [
+const edges: Edge[] = [
     { id: "e0_1", source: "0", target: "1", type: 'straight' },
     { id: "e1_2", source: "1", target: "2", type: 'straight' },
     { id: "e2_3", source: "2", target: "3", type: 'straight' },
@@ -30,6 +31,10 @@ export default function StudiesFunnelChart() {
     { id: "e4_6", source: "4", target: "6", type: 'straight' },
     { id: "e6_7", source: "6", target: "7", type: 'straight' },
   ];
+
+export default function StudiesFunnelChart() {
+
+
 
   const { funnelData, isLoading } = useFetchStudiesFunnel();
   const selectionStage = useFetchStudiesByStage("selection").studiesByStage;
@@ -49,6 +54,7 @@ export default function StudiesFunnelChart() {
     ),
     funnelData?.totalScreened ?? 0
   ];*/
+
 
   const selectionExcludedIds = selectionStage?.excludedStudies.ids ?? [];
   const studiesExcludedInScreened = [
@@ -75,8 +81,6 @@ export default function StudiesFunnelChart() {
     ),
     funnelData?.totalExcludedInFullText ?? 0
   ];
-
-
 
   const totalIdentified = Object.values(funnelData?.totalIdentifiedBySource ?? {}).reduce((acc, n) => acc + n, 0);
   const totalAfterDuplicates = Object.values(funnelData?.totalAfterDuplicatesRemovedBySource ?? {}).reduce((acc, n) => acc + n, 0);
