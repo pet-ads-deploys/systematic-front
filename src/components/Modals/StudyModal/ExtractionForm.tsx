@@ -95,7 +95,6 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
 
   return (
     <Box w="100%" h="calc(100vh - 10rem)" bg="white" gap="3rem">
-      <HeaderForm text={studyData.title} />
       <Flex gap="2rem" justifyContent="end">
         <Flex
           alignItems="center"
@@ -141,6 +140,7 @@ export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
           ).replace("_", " ")}
         </Flex>
       </Flex>
+      <HeaderForm text={studyData.title} />
       <Box w="100%" alignItems="center" mt="2rem">
         <DataExtraction
           currentId={currentArticleId}

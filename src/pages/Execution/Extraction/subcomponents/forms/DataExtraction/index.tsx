@@ -176,7 +176,7 @@ export default function DataExtraction({
                       bg: "#263C56",
                     }}
                   >
-                    {typeFormKey}
+                    {formatedFormKey}
                   </Heading>
                 </Flex>
                 {sectionQuestions.map((question) => (
