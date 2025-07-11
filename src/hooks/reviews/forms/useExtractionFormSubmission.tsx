@@ -61,19 +61,20 @@ export function useExtractionFormSubmission({
       type: answer.type,
     }));
 
-  const submitResponses = () => {
+  const submitResponses = async () => {
     const combinedAnswers = [...extractionQuestions, ...robQuestions];
 
     if (hasIncompleteAnswers(combinedAnswers)) return;
 
     try {
-      sendAnswerExtractionQuestions({
-        answers: mapAnswersToPayload(extractionQuestions),
-      });
-
-      sendAnswerROBQuestions({
-        answers: mapAnswersToPayload(robQuestions),
-      });
+      await Promise.all([
+        sendAnswerExtractionQuestions({
+          answers: mapAnswersToPayload(extractionQuestions),
+        }),
+        sendAnswerROBQuestions({
+          answers: mapAnswersToPayload(robQuestions),
+        }),
+      ]);
 
       onQuestionsMutated();
 
