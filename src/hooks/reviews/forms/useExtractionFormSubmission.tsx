@@ -1,7 +1,11 @@
 // External libraries
+import { useContext } from "react";
 import { useToast } from "@chakra-ui/react";
 
-// Internal hooks
+// Context
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
+
+// Hooks
 import { useSendAnswerExtractionQuestions } from "../../tables/useSendAnswerExtractionQuestions";
 import { useSendAnswerROBQuestions } from "../../tables/useSendAnswerROBQuestions";
 
@@ -22,6 +26,7 @@ export function useExtractionFormSubmission({
 }: UseFormSubmissionProps) {
   const toast = useToast();
 
+  const selectionContext = useContext(StudySelectionContext);
   const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
   const { sendAnswerROBQuestions } = useSendAnswerROBQuestions();
 
@@ -71,6 +76,12 @@ export function useExtractionFormSubmission({
       });
 
       onQuestionsMutated();
+
+      if (!selectionContext) {
+        console.warn("Context not available");
+        return;
+      }
+      selectionContext.reloadArticles();
 
       toast({
         title: "Respostas enviadas com sucesso!",
