@@ -3,7 +3,7 @@ import { useFetchExtractionQuestions } from "./useFetchExtractionQuestions";
 import { useFetchRobQuestions } from "./useFetchRobQuestions";
 
 // Types
-import { FormType } from "../../components/Modals/StudyModal/ArticleExtractionData";
+import type { FormType } from "../../components/Modals/StudyModal/ExtractionForm";
 
 type QuestionByIdProps = {
   questionId: string;

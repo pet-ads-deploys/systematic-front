@@ -7,9 +7,6 @@ import Axios from "../../interceptor/interceptor";
 // Context
 import StudySelectionContext from "../../context/StudiesSelectionContext";
 
-// Hooks
-import useFocusedArticle from "../reviews/useFocusedArticle";
-
 // Utils
 import getRequestOptions from "../../utils/getRequestOptions";
 
@@ -18,10 +15,9 @@ import type { SendAnswerProps } from "../../pages/Execution/Extraction/subcompon
 
 export function useSendAnswerROBQuestions() {
   const selectionContext = useContext(StudySelectionContext);
-  const { articleInFocus } = useFocusedArticle({ page: "Extraction" });
 
   const sendAnswerROBQuestions = async ({ answers }: SendAnswerProps) => {
-    if (!articleInFocus || !selectionContext) {
+    if (!selectionContext) {
       console.warn(
         "Context not available, cannot send answer from the question."
       );
@@ -30,7 +26,7 @@ export function useSendAnswerROBQuestions() {
     try {
       const id = localStorage.getItem("systematicReviewId");
       const options = getRequestOptions();
-      const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/${articleInFocus.studyReviewId}/batch-riskOfBias-answers`;
+      const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/${selectionContext.selectedArticleReview}/batch-riskOfBias-answers`;
       await Axios.patch(
         path,
         {
@@ -38,12 +34,10 @@ export function useSendAnswerROBQuestions() {
         },
         options
       );
-      selectionContext.reloadArticles();
     } catch (error) {
       console.log(error);
     }
   };
-
   return {
     sendAnswerROBQuestions,
   };

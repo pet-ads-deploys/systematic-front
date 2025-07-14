@@ -1,10 +1,10 @@
 import { Flex } from "@chakra-ui/react";
 
 import ArticlePreview from "./ArticlePreview";
-import ArticlesExtrationData from "./ArticleExtractionData";
 
 import { StudyInterface } from "../../../../public/interfaces/IStudy";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
+import ExtractionForm from "./ExtractionForm";
 
 interface IStudyDataFiel {
   studyData: StudyInterface;
@@ -26,13 +26,13 @@ export default function StudyDataFiel({ studyData, page }: IStudyDataFiel) {
     padding: "3",
   };
 
-  return page === "Selection" ? (
+  return (
     <Flex sx={selectionSX}>
-      <ArticlePreview studyData={studyData} />
-    </Flex>
-  ) : (
-    <Flex sx={selectionSX}>
-      <ArticlesExtrationData studyData={studyData} />
+      {page == "Selection" || page == "Identification" ? (
+        <ArticlePreview studyData={studyData} />
+      ) : (
+        <ExtractionForm studyData={studyData} />
+      )}
     </Flex>
   );
 }

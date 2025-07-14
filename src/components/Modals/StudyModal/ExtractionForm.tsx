@@ -1,5 +1,5 @@
 // External libraries
-import { Box, Divider, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { IoIosCloseCircle } from "react-icons/io";
 import {
@@ -11,8 +11,6 @@ import {
 
 // Components
 import HeaderForm from "../../../pages/Execution/Extraction/subcomponents/forms/HeaderForm/HeaderForm";
-import ExtractionForm from "../../../pages/Execution/Extraction/subcomponents/forms/ExtractionForm/ExtractionForm";
-import RiskOfBiasForm from "../../../pages/Execution/Extraction/subcomponents/forms/RobForm/RobForm";
 import SkeletonLoader from "../../ui/Skeleton/Skeleton";
 
 // Hooks
@@ -24,6 +22,7 @@ import { capitalize } from "../../../utils/CapitalizeText";
 // Types
 import type { ArticlePreviewProps } from "./StudyData";
 import React from "react";
+import DataExtraction from "../../../pages/Execution/Extraction/subcomponents/forms/DataExtraction";
 
 export type FormType = "EXTRACTION" | "RISK_OF_BIAS";
 
@@ -77,9 +76,7 @@ const priorityIconMap: Record<
   },
 };
 
-export default function ArticlesExtrationData({
-  studyData,
-}: ArticlePreviewProps) {
+export default function ExtractionForm({ studyData }: ArticlePreviewProps) {
   const {
     question,
     currentArticleId,
@@ -93,27 +90,11 @@ export default function ArticlesExtrationData({
   if (!question || !currentArticleId || !question[currentArticleId])
     return null;
 
-  const { extractionQuestions, robQuestions } = question[currentArticleId];
-
   const extractionStatus = statusIconMap[studyData.extractionStatus];
   const priorityLevel = priorityIconMap[studyData.readingPriority];
 
-  const sections = [
-    {
-      title: "Extraction Form",
-      Component: ExtractionForm,
-      questions: extractionQuestions,
-    },
-    {
-      title: "Risk of Bias",
-      Component: RiskOfBiasForm,
-      questions: robQuestions,
-    },
-  ];
-
   return (
     <Box w="100%" h="calc(100vh - 10rem)" bg="white" gap="3rem">
-      <HeaderForm text={studyData.title} />
       <Flex gap="2rem" justifyContent="end">
         <Flex
           alignItems="center"
@@ -159,49 +140,14 @@ export default function ArticlesExtrationData({
           ).replace("_", " ")}
         </Flex>
       </Flex>
+      <HeaderForm text={studyData.title} />
       <Box w="100%" alignItems="center" mt="2rem">
-        {sections.map(({ title, Component, questions }, index) => (
-          <React.Fragment key={title}>
-            <Box>
-              <Flex align="center" borderRadius="md" h="3.5rem" boxShadow="sm">
-                <Heading
-                  as="h1"
-                  size="lg"
-                  color="#263C56"
-                  fontWeight="semibold"
-                  letterSpacing="wide"
-                  position="relative"
-                  _after={{
-                    content: '""',
-                    position: "absolute",
-                    bottom: "-5px",
-                    left: "0",
-                    width: "3.5rem",
-                    height: ".5rem",
-                    bg: "#263C56",
-                  }}
-                >
-                  {title}
-                </Heading>
-              </Flex>
-              <Component
-                article={question}
-                questionsFiltered={questions}
-                currentId={currentArticleId}
-                handlerUpdateAnswer={handlerUpdateAnswerStructure}
-                mutateQuestion={mutateQuestion}
-              />
-            </Box>
-            {index < sections.length - 1 && (
-              <Divider
-                orientation="vertical"
-                h=".5rem"
-                bg="#263C56"
-                m="2rem 0"
-              />
-            )}
-          </React.Fragment>
-        ))}
+        <DataExtraction
+          currentId={currentArticleId}
+          handlerUpdateAnswer={handlerUpdateAnswerStructure}
+          questions={question[currentArticleId]}
+          mutateQuestion={mutateQuestion}
+        />
       </Box>
     </Box>
   );
