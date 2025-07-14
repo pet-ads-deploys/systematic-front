@@ -8,6 +8,8 @@ import StudySelectionContext from "../../../context/StudiesSelectionContext";
 // Hooks
 import { useSendAnswerExtractionQuestions } from "../../tables/useSendAnswerExtractionQuestions";
 import { useSendAnswerROBQuestions } from "../../tables/useSendAnswerROBQuestions";
+import { UseChangeStudyExtractionStatus } from "../../useChangeStudyExtractionStatus";
+import useFocusedArticle from "../useFocusedArticle";
 
 // Types
 import type {
@@ -25,31 +27,20 @@ export function useExtractionFormSubmission({
   onQuestionsMutated,
 }: UseFormSubmissionProps) {
   const toast = useToast();
-
   const selectionContext = useContext(StudySelectionContext);
+  const { articleInFocus } = useFocusedArticle({ page: "Extraction" });
   const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
   const { sendAnswerROBQuestions } = useSendAnswerROBQuestions();
 
   const { extractionQuestions, robQuestions } = responses;
 
-  const hasIncompleteAnswers = (answers: AnswerStrucuture[]): boolean => {
-    const missingAnswers = answers.some((answer) => {
-      if (!answer.answer) return true;
-      return answer.answer.value === "" || answer.answer.value == null;
-    });
-
-    if (missingAnswers) {
-      toast({
-        title: "Preencha todas as respostas antes de enviar.",
-        status: "warning",
-        duration: 4500,
-        isClosable: true,
-        position: "top",
-      });
-    }
-
-    return missingAnswers;
-  };
+  const hasIncompleteAnswers = (answers: AnswerStrucuture[]): boolean =>
+    answers.some(
+      (answer) =>
+        !answer.answer ||
+        answer.answer.value === "" ||
+        answer.answer.value == null
+    );
 
   const mapAnswersToPayload = (answers: AnswerStrucuture[]) =>
     answers.map((answer) => ({
@@ -61,10 +52,29 @@ export function useExtractionFormSubmission({
       type: answer.type,
     }));
 
+  const updateStudyStatus = () => {
+    if (!articleInFocus || !selectionContext) return;
+    if (articleInFocus.extractionStatus !== "UNCLASSIFIED") return;
+    UseChangeStudyExtractionStatus({
+      studyReviewId: [selectionContext.selectedArticleReview],
+      criterias: [],
+      status: "INCLUDED",
+    });
+  };
+
   const submitResponses = async () => {
     const combinedAnswers = [...extractionQuestions, ...robQuestions];
 
-    if (hasIncompleteAnswers(combinedAnswers)) return;
+    if (hasIncompleteAnswers(combinedAnswers)) {
+      toast({
+        title: "Preencha todas as respostas antes de enviar.",
+        status: "warning",
+        duration: 4500,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
 
     try {
       await Promise.all([
@@ -77,12 +87,11 @@ export function useExtractionFormSubmission({
       ]);
 
       onQuestionsMutated();
+      updateStudyStatus();
 
-      if (!selectionContext) {
-        console.warn("Context not available");
-        return;
+      if (selectionContext) {
+        selectionContext.reloadArticles();
       }
-      selectionContext.reloadArticles();
 
       toast({
         title: "Respostas enviadas com sucesso!",

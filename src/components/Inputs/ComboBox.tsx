@@ -87,7 +87,6 @@ export default function ComboBox({
                   );
 
                   handleIncludeItemClick(
-                    newValue,
                     updatedList
                       .filter((data) => data.isChecked == true)
                       .map((item) => item.text)
@@ -125,7 +124,6 @@ export default function ComboBox({
                   );
 
                   handleExcludeItemClick(
-                    newValue,
                     updatedList
                       .filter((data) => data.isChecked == true)
                       .map((item) => item.text)

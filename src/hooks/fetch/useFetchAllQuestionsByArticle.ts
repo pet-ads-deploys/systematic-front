@@ -1,11 +1,11 @@
 // External library
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
+// Context
+import StudySelectionContext from "../../context/StudiesSelectionContext";
 
 // Hooks
-import useFocusedArticle from "../reviews/useFocusedArticle";
-import useFetchIncludedStudiesAnswers, {
-  QuestionAnswer,
-} from "./useFetchIncludedStudiesAnswers";
+import useFetchIncludedStudiesAnswers from "./useFetchIncludedStudiesAnswers";
 
 // Types
 import type {
@@ -14,21 +14,25 @@ import type {
   ArticleAnswerStrucuture,
   FormType,
 } from "../../pages/Execution/Extraction/subcomponents/forms/types";
-import { UseChangeStudyExtractionStatus } from "../useChangeStudyExtractionStatus";
+import type { QuestionAnswer } from "./useFetchIncludedStudiesAnswers";
 
 export default function useFetchAllQuestionsByArticle() {
   const [articlesStructureAnswers, setArticlesStructureAnswers] = useState<
     Record<number, ArticleAnswerStrucuture>
   >({});
 
-  const { articleInFocus } = useFocusedArticle({ page: "Extraction" });
+  const selectionContext = useContext(StudySelectionContext);
+
+  const articleId = selectionContext
+    ? selectionContext.selectedArticleReview
+    : -1;
+
   const { question, mutate, isLoading } = useFetchIncludedStudiesAnswers({
-    articleId: articleInFocus?.studyReviewId || -1,
+    articleId,
   });
-  const articleId = articleInFocus ? articleInFocus.studyReviewId : -1;
 
   const handlerUpdateAnswerStructure = (
-    articleId: number = Number(articleInFocus?.studyReviewId) || -1,
+    articleId: number = Number(selectionContext?.selectedArticleReview) || -1,
     questionId: string,
     type: FormType,
     response: AnswerProps
@@ -41,8 +45,6 @@ export default function useFetchAllQuestionsByArticle() {
     const updatedQuestions = article[key].map((quest) =>
       quest.questionId === questionId ? { ...quest, answer: response } : quest
     );
-
-    console.log("questão atualizada", updatedQuestions);
 
     const updatedArticle: ArticleAnswerStrucuture = {
       ...article,
@@ -66,7 +68,7 @@ export default function useFetchAllQuestionsByArticle() {
   }
 
   useEffect(() => {
-    if (!question || !articleInFocus) return;
+    if (!question) return;
 
     setArticlesStructureAnswers((prev) => {
       if (prev[articleId]) return prev;
@@ -97,36 +99,11 @@ export default function useFetchAllQuestionsByArticle() {
         [articleId]: structuredAnswers,
       };
     });
-
-    const articleAnswers = articlesStructureAnswers[articleId];
-    if (!articleAnswers) return;
-
-    const isAnswerAllQuestionsOfExtraction =
-      articleAnswers.extractionQuestions.every(
-        (quest) => quest.answer.value != null
-      );
-    const isAnswerAllQuestionsOfRiskOfBias = articleAnswers.robQuestions.every(
-      (quest) => quest.answer.value != null
-    );
-
-    if (
-      articleInFocus.extractionStatus == "UNCLASSIFIED" &&
-      isAnswerAllQuestionsOfExtraction &&
-      isAnswerAllQuestionsOfRiskOfBias
-    ) {
-      UseChangeStudyExtractionStatus({
-        studyReviewId: [articleId],
-        criterias: [],
-        status: "INCLUDED",
-      });
-    }
-  }, [question, articleInFocus, articleId, articlesStructureAnswers]);
-
-  console.log("todos os dados", articlesStructureAnswers[articleId]);
+  }, [question, articleId, articlesStructureAnswers]);
 
   return {
     question: articlesStructureAnswers,
-    currentArticleId: articleInFocus?.studyReviewId,
+    currentArticleId: articleId,
     handlerUpdateAnswerStructure,
     mutateQuestion: mutate,
     isLoading,
