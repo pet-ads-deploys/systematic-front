@@ -8,6 +8,7 @@ import {
   MenuList,
   Tooltip,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { HiOutlineCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 
@@ -26,6 +27,10 @@ interface IComboBoxProps {
   options: OptionProps[];
   isDisabled: boolean;
   onOptionchange?: (option: string, isChecked: boolean) => void;
+  status: {
+    selectionStatus: string;
+    extractionStatus: string;
+  };
   page: PageLayout;
   groupKey: OptionType;
   handlerUpdateCriteriasStructure: (
@@ -41,11 +46,29 @@ export default function ComboBox({
   isDisabled,
   onOptionchange,
   page,
+  status,
   groupKey,
   handlerUpdateCriteriasStructure,
 }: IComboBoxProps) {
   const { handleIncludeItemClick, handleExcludeItemClick } =
     useComboBoxSelection({ page });
+  const toast = useToast();
+
+  const { selectionStatus, extractionStatus } = status;
+
+  const hasInvalidStatus =
+    selectionStatus == "DUPLICATED" || extractionStatus == "DUPLICATED";
+
+  const showDuplicatedWarning = () =>
+    toast({
+      title: "Ação não permitida",
+      description:
+        "Você não pode incluir ou excluir critérios de um artigo marcado como duplicado pelo sistema.",
+      status: "warning",
+      duration: 4500,
+      isClosable: true,
+      position: "top",
+    });
 
   return (
     <Menu closeOnSelect={false}>
@@ -72,6 +95,11 @@ export default function ComboBox({
                 isDisabled={isDisabled}
                 isChecked={option.isChecked}
                 onChange={(e) => {
+                  if (hasInvalidStatus) {
+                    showDuplicatedWarning();
+                    return;
+                  }
+
                   const newValue = e.target.checked;
 
                   handlerUpdateCriteriasStructure(
@@ -109,6 +137,11 @@ export default function ComboBox({
                 isDisabled={isDisabled}
                 isChecked={option.isChecked}
                 onChange={(e) => {
+                  if (hasInvalidStatus) {
+                    showDuplicatedWarning();
+                    return;
+                  }
+
                   const newValue = e.target.checked;
 
                   handlerUpdateCriteriasStructure(
