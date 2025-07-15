@@ -6,8 +6,7 @@ import { useToast } from "@chakra-ui/react";
 import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 // Hooks
-import { useSendAnswerExtractionQuestions } from "../../tables/useSendAnswerExtractionQuestions";
-import { useSendAnswerROBQuestions } from "../../tables/useSendAnswerROBQuestions";
+import { useSendBatchAnswers } from "../extractionForm/useSendBatchAnswers";
 import { UseChangeStudyExtractionStatus } from "../../useChangeStudyExtractionStatus";
 import useFocusedArticle from "../useFocusedArticle";
 
@@ -29,8 +28,7 @@ export function useExtractionFormSubmission({
   const toast = useToast();
   const selectionContext = useContext(StudySelectionContext);
   const { articleInFocus } = useFocusedArticle({ page: "Extraction" });
-  const { sendAnswerExtractionQuestions } = useSendAnswerExtractionQuestions();
-  const { sendAnswerROBQuestions } = useSendAnswerROBQuestions();
+  const { sendBatchAnswers } = useSendBatchAnswers();
 
   const { extractionQuestions, robQuestions } = responses;
 
@@ -52,7 +50,7 @@ export function useExtractionFormSubmission({
       type: answer.type,
     }));
 
-  const updateStudyStatus = () => {
+  const updateStudyStatus = async () => {
     if (!articleInFocus || !selectionContext) return;
     if (articleInFocus.extractionStatus !== "UNCLASSIFIED") return;
     UseChangeStudyExtractionStatus({
@@ -77,17 +75,10 @@ export function useExtractionFormSubmission({
     }
 
     try {
-      await Promise.all([
-        sendAnswerExtractionQuestions({
-          answers: mapAnswersToPayload(extractionQuestions),
-        }),
-        sendAnswerROBQuestions({
-          answers: mapAnswersToPayload(robQuestions),
-        }),
-      ]);
+      await sendBatchAnswers({ answers: mapAnswersToPayload(combinedAnswers) });
 
       onQuestionsMutated();
-      updateStudyStatus();
+      await updateStudyStatus();
 
       if (selectionContext) {
         selectionContext.reloadArticles();
