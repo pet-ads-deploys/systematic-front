@@ -55,6 +55,13 @@ export default function ButtonsForSelection({
 
   if (!fetchedCriterias) return;
 
+  const currentArticle = articles[articleIndex];
+
+  const currentArticleStatus = {
+    selectionStatus: currentArticle.selectionStatus,
+    extractionStatus: currentArticle.extractionStatus,
+  };
+
   const criteriaOptions = fetchedCriterias.options;
 
   const criteriaGroupDataMap: Record<
@@ -149,6 +156,7 @@ export default function ButtonsForSelection({
               <ComboBox
                 page={page}
                 text={group.label}
+                status={currentArticleStatus}
                 groupKey={groupKey as OptionType}
                 options={group.options}
                 isDisabled={group.isDisabled}

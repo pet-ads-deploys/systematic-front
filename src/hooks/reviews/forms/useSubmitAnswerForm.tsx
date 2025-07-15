@@ -35,6 +35,22 @@ export function useSubmitAnswerForm({
       return response;
     });
 
+    const hasIncompleteAnswers = responses.some((res) => {
+      if (res.answer == null) return true;
+      return res.answer.value === "" || res.answer.value == null;
+    });
+
+    if (hasIncompleteAnswers) {
+      toast({
+        title: "Please complete all answers before submitting.",
+        status: "warning",
+        duration: 4500,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+
     try {
       handleSendAnswer({ answers: formatedResponses });
       mutateQuestion();

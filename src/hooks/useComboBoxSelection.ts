@@ -19,42 +19,31 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
 
   if (!selectionContext) throw new Error("Context not available");
 
-  const {
-    reloadArticles,
-    selectedArticleReview,
-    setIsIncluded,
-    setIsExcluded,
-  } = selectionContext;
+  const { reloadArticles, selectedArticleReview } = selectionContext;
 
-  const handleIncludeItemClick = (isChecked: boolean, criterias: string[]) => {
-    if (setIsIncluded) setIsIncluded(isChecked);
-    page === "Selection"
-      ? UseChangeStudySelectionStatus({
-          studyReviewId: [selectedArticleReview],
-          status: "INCLUDED",
-          criterias,
-        })
-      : UseChangeStudyExtractionStatus({
-          studyReviewId: [selectedArticleReview],
-          status: "INCLUDED",
-          criterias,
-        });
+  const changeStatus = (
+    status: "INCLUDED" | "EXCLUDED",
+    criterias: string[]
+  ) => {
+    const getFunction =
+      page == "Selection"
+        ? UseChangeStudySelectionStatus
+        : UseChangeStudyExtractionStatus;
+
+    getFunction({
+      studyReviewId: [selectedArticleReview],
+      criterias,
+      status,
+    });
+  };
+
+  const handleIncludeItemClick = (criterias: string[]) => {
+    changeStatus("INCLUDED", criterias);
     reloadArticles();
   };
 
-  const handleExcludeItemClick = (isChecked: boolean, criterias: string[]) => {
-    if (setIsExcluded) setIsExcluded(isChecked);
-    page === "Selection"
-      ? UseChangeStudySelectionStatus({
-          studyReviewId: [selectedArticleReview],
-          status: "EXCLUDED",
-          criterias,
-        })
-      : UseChangeStudyExtractionStatus({
-          studyReviewId: [selectedArticleReview],
-          status: "EXCLUDED",
-          criterias,
-        });
+  const handleExcludeItemClick = (criterias: string[]) => {
+    changeStatus("EXCLUDED", criterias);
     reloadArticles();
   };
 

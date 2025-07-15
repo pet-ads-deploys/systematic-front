@@ -2,21 +2,21 @@
 import { useContext } from "react";
 
 // Service
-import Axios from "../../interceptor/interceptor";
+import Axios from "../../../interceptor/interceptor";
 
 // Context
-import StudySelectionContext from "../../context/StudiesSelectionContext";
+import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 // Utils
-import getRequestOptions from "../../utils/getRequestOptions";
+import getRequestOptions from "../../../utils/getRequestOptions";
 
 // Types
-import type { SendAnswerProps } from "../../pages/Execution/Extraction/subcomponents/forms/types";
+import type { SendAnswerProps } from "../../../pages/Execution/Extraction/subcomponents/forms/types";
 
-export function useSendAnswerROBQuestions() {
+export function useSendBatchAnswers() {
   const selectionContext = useContext(StudySelectionContext);
 
-  const sendAnswerROBQuestions = async ({ answers }: SendAnswerProps) => {
+  const sendBatchAnswers = async ({ answers }: SendAnswerProps) => {
     if (!selectionContext) {
       console.warn(
         "Context not available, cannot send answer from the question."
@@ -26,7 +26,7 @@ export function useSendAnswerROBQuestions() {
     try {
       const id = localStorage.getItem("systematicReviewId");
       const options = getRequestOptions();
-      const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/${selectionContext.selectedArticleReview}/batch-riskOfBias-answers`;
+      const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/${selectionContext.selectedArticleReview}/batch-answer-question`;
       await Axios.patch(
         path,
         {
@@ -39,6 +39,6 @@ export function useSendAnswerROBQuestions() {
     }
   };
   return {
-    sendAnswerROBQuestions,
+    sendBatchAnswers,
   };
 }
