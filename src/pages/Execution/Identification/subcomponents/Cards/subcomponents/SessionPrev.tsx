@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-import { InvalidEntry } from "../../../../context/StudiesSelectionContext";
+import { InvalidEntry } from "../../../../../../context/StudiesSelectionContext";
 
 import {
   createFileToInvalidEntries,
   downloadFile,
-} from "../../../../hooks/reviews/createFileToInvalidEntries";
+} from "../../../../../../hooks/reviews/createFileToInvalidEntries";
 
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Flex, Button, Text, Tr, Td } from "@chakra-ui/react";
