@@ -11,7 +11,9 @@ const textTheme = {
 };
 
 export default function QualityForm() {
-  const qualityForm = useFetchQualityFormData("../../../../public/data/qualityFormData.json");
+  const qualityForm = useFetchQualityFormData(
+    "../../../../public/mocks/qualityFormData.json"
+  );
   return (
     <Container flex="row" style={{ maxHeight: "350px", overflowY: "auto" }}>
       <Heading textAlign="center" my="1rem">

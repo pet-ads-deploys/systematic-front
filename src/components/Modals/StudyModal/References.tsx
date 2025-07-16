@@ -4,7 +4,9 @@ import ReferenceCard from "./References Cards/ReferenceCard";
 import useFetchReferenceData from "../../../hooks/fetch/useFetchReferenceData";
 
 export default function References() {
-  const referenceData = useFetchReferenceData("../../../../public/data/referenceData.json");
+  const referenceData = useFetchReferenceData(
+    "../../../../public/mocks/referenceData.json"
+  );
 
   return (
     <Container p="2px" style={{ maxHeight: "350px", overflowY: "auto" }}>
@@ -13,7 +15,11 @@ export default function References() {
       </Heading>
       <Container pl="1px">
         {referenceData.map((card) => (
-          <ReferenceCard authors={card.authors} year={card.year} fullReference={card.fullReference} />
+          <ReferenceCard
+            authors={card.authors}
+            year={card.year}
+            fullReference={card.fullReference}
+          />
         ))}
       </Container>
     </Container>
