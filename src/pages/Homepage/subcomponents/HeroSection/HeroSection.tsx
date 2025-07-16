@@ -12,33 +12,40 @@ export default function HeroSection() {
       minHeight="100vh"
       justifyContent={"center"}
     >
-      <Flex gap="5px" direction="row" alignItems={"center"} justifyContent={"center"}>
-
-        <Flex direction="column"  justifyContent={"flex-start"}>
-
+      <Flex
+        gap="5px"
+        direction="row"
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Flex direction="column" justifyContent={"flex-start"}>
           <Heading color="white" alignSelf={"center"} fontSize={"60"} pb="50px">
             Pesquise mais, de qualquer lugar!
           </Heading>
 
-          <Text color="white" fontSize={"16"}>{`Potencialize suas pesquisas! Experimente nossa 
+          <Text color="white" fontSize={"16"}>
+            {`Potencialize suas pesquisas! Experimente nossa 
                   ferramenta gratuita para revisões sistemáticas - fácil de usar e ideal 
                   para pesquisadores e estudantes.`}
           </Text>
 
-          <Button mt="4em" borderRadius={"3px"} w="30%" colorScheme="whiteAlpha">
+          <Button
+            mt="4em"
+            borderRadius={"3px"}
+            w="30%"
+            colorScheme="whiteAlpha"
+          >
             Cadastre-se já
           </Button>
-
         </Flex>
 
         <Image
-          src="/photos/homepagePhotos/HeroSectionPic.png"
+          src="src/assets/images/landing/homepagePhotos/HeroSectionPic.png"
           alt={`Foto de diferentes dispositivos eletronicos conectados a ferramenta StArt 
               - computador deskot, smart phone e tablet.`}
-              marginTop={"4em"}
+          marginTop={"4em"}
         />
       </Flex>
-
     </Flex>
   );
 }

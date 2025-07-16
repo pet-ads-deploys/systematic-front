@@ -4,9 +4,9 @@ import Footer from "./subcomponents/Footer/Footer";
 import Article from "./subcomponents/Article/Article";
 import CollaboratorsCarousel from "./subcomponents/CollaboratorsCaroulse/collaboratorsCarousel";
 import HeroSection from "./subcomponents/HeroSection/HeroSection";
-import img2 from "/photos/homepagePhotos/examploPhoto02.png";
-import img1 from "/photos/homepagePhotos/examploPhoto01.png";
-import exemple from "/photos/homepagePhotos/examploPhoto01.png";
+import img1 from "../../assets/images/landing/homepagePhotos/examploPhoto01.png";
+import img2 from "../../assets/images/landing/homepagePhotos/examploPhoto02.png";
+import exemple from "../../assets/images/landing/homepagePhotos/examploPhoto01.png";
 import "../../index.css";
 
 export default function Homepage() {
