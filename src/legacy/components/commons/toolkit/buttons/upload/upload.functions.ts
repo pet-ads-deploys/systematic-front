@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { FormatFileSize } from "../../utils/FormatFileSize";
+
 import axios, { CancelTokenSource } from "axios";
 import { v4 } from "uuid";
+import { FormatFileSize } from "../../../../../../utils/FormatFileSize";
 
 interface IFileCustom extends File {
   sizeFormatted: number;

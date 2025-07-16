@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { Upload } from "../../components/upload/Upload";
+import { Upload } from "../../legacy/components/commons/toolkit/buttons/upload/Upload";
 import useInputState from "../../hooks/useInputState";
 import Header from "../../components/ui/Header/Header";
 import NavButton from "../../components/Buttons/NavButton";

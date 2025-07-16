@@ -1,4 +1,4 @@
-import { useUploadHandler } from "../../hooks/useUploadHandler";
+import { useUploadHandler } from "../../../../../../hooks/useUploadHandler";
 import CloudIcon from "/assets/CloudArrowUp.svg";
 import FailedProgressIcon from "/assets/FailedProgress.svg";
 import FinishProgressIcon from "/assets/FinishedProgress.svg";
@@ -9,8 +9,11 @@ import "./upload.css";
 import { useState } from "react";
 
 const Upload = () => {
-  const { dropHandler, dragOverHandler, files, abortList, reloadUploadFile } = useUploadHandler();
-  const [visibilities, setVisibilities] = useState(Array(files.length).fill("block"));
+  const { dropHandler, dragOverHandler, files, abortList, reloadUploadFile } =
+    useUploadHandler();
+  const [visibilities, setVisibilities] = useState(
+    Array(files.length).fill("block")
+  );
 
   const abortUploadProgress = (index: number) => {
     if (abortList[index]) {
@@ -32,7 +35,11 @@ const Upload = () => {
         </div>
         <div className="container-list-files">
           {files.map((file, key) => (
-            <div key={key} className="content-card-list-files" style={{ display: visibilities[key] }}>
+            <div
+              key={key}
+              className="content-card-list-files"
+              style={{ display: visibilities[key] }}
+            >
               <div className="thumb-image">
                 <img
                   src={
@@ -47,7 +54,9 @@ const Upload = () => {
               </div>
               <div className="content-file">
                 <div className="file-title primary-text">{file.name}</div>
-                <div className="file-size secondary-text">{file.sizeFormatted}</div>
+                <div className="file-size secondary-text">
+                  {file.sizeFormatted}
+                </div>
                 <div className="file-progress">
                   <div className="bar-progress">
                     <div
@@ -55,7 +64,9 @@ const Upload = () => {
                       style={{ width: `${file.progress ?? 0}%` }}
                     ></div>
                   </div>
-                  <div className="count-progress secondary-text">{`${file.progress ?? 0}%`}</div>
+                  <div className="count-progress secondary-text">{`${
+                    file.progress ?? 0
+                  }%`}</div>
                 </div>
               </div>
               <div className="handle-action-upload">
