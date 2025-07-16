@@ -1,10 +1,10 @@
 import { useUploadHandler } from "../../../../../../hooks/useUploadHandler";
-import CloudIcon from "/assets/CloudArrowUp.svg";
-import FailedProgressIcon from "/assets/FailedProgress.svg";
-import FinishProgressIcon from "/assets/FinishedProgress.svg";
-import InProgressIcon from "/assets/InProgress.svg";
-import CloseIcon from "/assets/Close.svg";
-import ReloadIcon from "/assets/Reload.svg";
+import CloudIcon from "../../../../../assets/icons/CloudArrowUp.svg";
+import FailedProgressIcon from "../../../../../assets/icons//FailedProgress.svg";
+import FinishProgressIcon from "../../../../../assets/icons//FinishedProgress.svg";
+import InProgressIcon from "../../../../../assets/icons//InProgress.svg";
+import CloseIcon from "../../../../../assets/icons//Close.svg";
+import ReloadIcon from "../../../../../assets/icons//Reload.svg";
 import "./upload.css";
 import { useState } from "react";
 
