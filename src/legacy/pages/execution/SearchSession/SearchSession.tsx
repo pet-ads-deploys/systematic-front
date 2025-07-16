@@ -1,19 +1,19 @@
 import { Box } from "@chakra-ui/react";
-import { Upload } from "../../legacy/components/commons/toolkit/buttons/upload/Upload";
-import useInputState from "../../hooks/useInputState";
-import Header from "../../components/ui/Header/Header";
-import NavButton from "../../components/Buttons/NavButton";
-import DynamicTable from "../../components/Tables/DynamicTable";
-import useFetchTableData from "../../hooks/seachAppropriateStudy/useFetchStudyData";
+import { Upload } from "../../../components/commons/toolkit/buttons/upload/Upload";
+import useInputState from "../../../../hooks/useInputState";
+import Header from "../../../../components/ui/Header/Header";
+import NavButton from "../../../../components/Buttons/NavButton";
+import DynamicTable from "../../../../components/Tables/DynamicTable";
+import useFetchTableData from "../../../../hooks/seachAppropriateStudy/useFetchStudyData";
 import SearchInformations from "./subcomponents/searchInformations";
 import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";
 // import ComboBox from "../../components/Inputs/ComboBox";
-import { flex } from "../NovaRevisao/styles/finalizationStyles";
-import EventButton from "../../components/Buttons/EventButton";
-import FlexLayout from "../../components/ui/Flex/Flex";
-import { TableHeadersInterface } from "../../../public/interfaces/ITableHeaders";
-import { NoStudiesData } from "../../components/NotFound/NoStudiesData";
-import { tableTypeEnum } from "../../../public/enums/tableTypeEnum";
+import { flex } from "../../../../pages/NovaRevisao/styles/finalizationStyles";
+import EventButton from "../../../../components/Buttons/EventButton";
+import FlexLayout from "../../../../components/ui/Flex/Flex";
+import { TableHeadersInterface } from "../../../../../public/interfaces/ITableHeaders";
+import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
+import { tableTypeEnum } from "../../../../../public/enums/tableTypeEnum";
 
 export default function SearchSession() {
   const bodyData = useFetchTableData("/data/tableData.json");

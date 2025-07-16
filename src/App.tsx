@@ -17,7 +17,7 @@ import Protocol from "./pages/Protocolo/Protocol";
 import ProtocolPartThree from "./pages/Protocolo/ProtocolPartThree";
 import ProtocolPartTwo from "./pages/Protocolo/Protocol-Part-Two";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import SearchSession from "./pages/SearchSession/SearchSession";
+import SearchSession from "./legacy/pages/execution/SearchSession/SearchSession";
 import Selection from "./pages/Execution/Selection/Selection";
 import ServerError from "./pages/ServerErrorPage/ServerErrorPage";
 import Unauthorized from "./pages/UnauthorizedPage/UnauthorizedPage";
