@@ -44,7 +44,7 @@ export default function BarChart({ title, labels, data, color = "#3c73b6", heigh
           const fullText = labels[dataPointIndex];
           return `
             <Box style="padding: 8px; max-width: 300px; white-space: normal;">
-              <Text>C${dataPointIndex + 1}: ${fullText}</Text>
+              <Text>C${dataPointIndex + 1} - ${fullText}</Text>
             </Box>`;
         },
       },
