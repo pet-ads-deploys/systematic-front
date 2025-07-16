@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import axios, { CancelTokenSource } from "axios";
 import { v4 } from "uuid";
-import { FormatFileSize } from "../../../../../../utils/FormatFileSize";
+import { FormatFileSize } from "../../../../../utils/helpers/FormatFileSize";
 
 interface IFileCustom extends File {
   sizeFormatted: number;
