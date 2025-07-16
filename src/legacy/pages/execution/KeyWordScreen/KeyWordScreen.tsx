@@ -2,13 +2,11 @@
 
 import { Flex } from "@chakra-ui/react";
 import useFetchStudyData from "../../../../hooks/seachAppropriateStudy/useFetchStudyData";
-import { KeywordInterface } from "../../../../../public/interfaces/KeywordInterface";
-import { KeyWordHeaderInterface } from "../../../../../public/interfaces/IKeyWordHeard";
+
 import FlexLayout from "../../../../components/ui/Flex/Flex";
 import Header from "../../../../components/ui/Header/Header";
 import KeywordsTable from "../../../../components/Tables/KeywordsTable/KeywordsTable";
-
-// import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
+import type { KeyWordHeaderInterface, KeywordInterface } from "./types";
 
 export default function KeyWordScreen() {
   const keyWords = useFetchStudyData(
@@ -24,9 +22,7 @@ export default function KeyWordScreen() {
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">
       <Header text="Keywords" />
-
       <Flex marginLeft={"4em"} marginRight={"4em"} w={"78vw"}>
-        {/* <DynamicTable headerData={headerData} bodyData={keyWords} tableType={tableTypeEnum.KEYWORD} filteredColumns={[]} searchString="" selectedStatus={null}/> */}
         <KeywordsTable keywords={keyWords} />
       </Flex>
     </FlexLayout>
