@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 
 import showFirstPossibleStudy from "../legacy/hooks/execution/showFirstPossibleStudy";
-import { ExcutionFaseEnum } from "../../public/enums/ExcutionFaseEnum";
+import { ExcutionFaseEnum } from "../types/enums/ExcutionFaseEnum";
 import { StudyInterface } from "../types/IStudy";
 
 interface AppContextType {

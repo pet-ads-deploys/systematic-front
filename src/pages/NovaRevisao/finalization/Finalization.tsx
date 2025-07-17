@@ -19,7 +19,7 @@ import {
 import FlexLayout from "../../../components/ui/Flex/Flex";
 
 import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
-import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
+import { tableTypeEnum } from "../../../types/enums/tableTypeEnum";
 import { TableHeadersInterface } from "../../../types/ITableHeaders";
 
 export default function Finalization() {

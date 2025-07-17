@@ -1,5 +1,5 @@
 import FilteredStudies from "./FilteredStudies";
-import { ExcutionFaseEnum } from "../../../../public/enums/ExcutionFaseEnum";
+import { ExcutionFaseEnum } from "../../../types/enums/ExcutionFaseEnum";
 import { StudyInterface } from "../../../types/IStudy";
 
 export default function showFirstPossibleStudy(

@@ -1,8 +1,8 @@
-import { StudyType } from "../../public/enums/studyType";
+import { StudyType } from "./enums/studyType";
 //import { CriteriaType } from "../enums/criteriaType";
-import { ReadingPriority } from "../../public/enums/readingPriority";
-import { SelectionStatus } from "../../public/enums/selectionStatus";
-import { ExtractionStatus } from "../../public/enums/extractionStatus";
+import { ReadingPriority } from "./enums/readingPriority";
+import { SelectionStatus } from "./enums/selectionStatus";
+import { ExtractionStatus } from "./enums/extractionStatus";
 
 export interface StudyInterface {
   studyId: number;

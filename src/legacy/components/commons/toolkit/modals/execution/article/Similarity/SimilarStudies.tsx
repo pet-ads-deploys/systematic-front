@@ -4,7 +4,7 @@ import useFetchTableData from "../../../../../../../hooks/execution/useFetchStud
 import useInputState from "../../../../../../../../hooks/useInputState";
 
 import { NoStudiesData } from "../../../../../../../../components/NotFound/NoStudiesData";
-import { tableTypeEnum } from "../../../../../../../../../public/enums/tableTypeEnum";
+import { tableTypeEnum } from "../../../../../../../../types/enums/tableTypeEnum";
 import { TableHeadersInterface } from "../../../../../../../../types/ITableHeaders";
 
 export default function SimilarStudies() {

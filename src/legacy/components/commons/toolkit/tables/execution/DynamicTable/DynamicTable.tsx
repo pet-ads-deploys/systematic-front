@@ -4,7 +4,7 @@ import useColumnVisibility from "../../../../../../hooks/execution/useColumnVisi
 import { tbConteiner } from "../../../../../../../components/Tables/styles/DynamicTableStyle";
 import { Table, TableContainer, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 
-import { tableTypeEnum } from "../../../../../../../../public/enums/tableTypeEnum";
+import { tableTypeEnum } from "../../../../../../../types/enums/tableTypeEnum";
 import { TableHeadersInterface } from "../../../../../../../types/ITableHeaders";
 import { StudyInterface } from "../../../../../../../types/IStudy";
 import { KeywordInterface } from "../../../../../../../types/KeywordInterface";

@@ -1,8 +1,8 @@
-import { ExtractionStatus } from "../../../../public/enums/extractionStatus";
-import { SelectionStatus } from "../../../../public/enums/selectionStatus";
+import { ExtractionStatus } from "../../../types/enums/extractionStatus";
+import { SelectionStatus } from "../../../types/enums/selectionStatus";
 
 import useFetchStudyData from "./useFetchStudyData";
-import { ExcutionFaseEnum } from "../../../../public/enums/ExcutionFaseEnum";
+import { ExcutionFaseEnum } from "../../../types/enums/ExcutionFaseEnum";
 import { StudyInterface } from "../../../types/IStudy";
 import { KeywordInterface } from "../../../types/KeywordInterface";
 
