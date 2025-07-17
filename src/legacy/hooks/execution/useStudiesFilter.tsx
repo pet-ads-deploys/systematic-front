@@ -1,4 +1,4 @@
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
+import { StudyInterface } from "../../../types/IStudy";
 
 interface StudieFilterProps {
   studiesToFilter: StudyInterface[];

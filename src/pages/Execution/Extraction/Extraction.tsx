@@ -13,7 +13,7 @@ import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 import { inputconteiner } from "../styles/executionStyles";
 
-import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../../../types/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
 import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
 import useLayoutPage from "../../../hooks/useLayoutPage";

@@ -14,9 +14,10 @@ import {
   conteiner,
   inputconteiner,
 } from "../../../../pages/Execution/styles/executionStyles";
-import { TableHeadersInterface } from "../../../../../public/interfaces/ITableHeaders";
+
 import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
 import { tableTypeEnum } from "../../../../../public/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../../types/ITableHeaders";
 
 export default function Insertion() {
   const bodyData = useFetchTableData("/data/tableData.json");

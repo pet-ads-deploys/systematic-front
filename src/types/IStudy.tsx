@@ -1,8 +1,8 @@
-import { StudyType } from "../enums/studyType";
+import { StudyType } from "../../public/enums/studyType";
 //import { CriteriaType } from "../enums/criteriaType";
-import { ReadingPriority } from "../enums/readingPriority";
-import { SelectionStatus } from "../enums/selectionStatus";
-import { ExtractionStatus } from "../enums/extractionStatus";
+import { ReadingPriority } from "../../public/enums/readingPriority";
+import { SelectionStatus } from "../../public/enums/selectionStatus";
+import { ExtractionStatus } from "../../public/enums/extractionStatus";
 
 export interface StudyInterface {
   studyId: number;
@@ -17,7 +17,7 @@ export interface StudyInterface {
   keywords: string[];
   searchSources: string[];
   references: string[];
-  criteria: string[]  /*CriteriaType*/;
+  criteria: string[] /*CriteriaType*/;
   formAnswers: unknown[]; // Defina o tipo correto para a resposta do formulário
   robAnswers: unknown[]; // Defina o tipo correto para a resposta do ROB
   comments: string;

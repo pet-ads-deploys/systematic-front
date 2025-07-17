@@ -16,8 +16,9 @@ import StudyDataFiel from "../../../../../../../../components/Modals/StudyModal/
 import NavegationIconsPanel from "./NavigationIconPanel";
 import OtherStudyPanels from "./OtherStudyPanels";
 import ModalContext from "../../../../../../../context/ModalContext";
-import { StudyInterface } from "../../../../../../../../../public/interfaces/IStudy";
+
 import AppContext from "../../../../../../../../context/AppContext";
+import { StudyInterface } from "../../../../../../../../types/IStudy";
 
 interface IStudy {
   isOpen: boolean;

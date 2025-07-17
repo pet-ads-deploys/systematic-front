@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
-import { KeyWordHeaderInterface } from "../../../../public/interfaces/IKeyWordHeard";
-import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
+import { TableHeadersInterface } from "../../../types/ITableHeaders";
+import { KeyWordHeaderInterface } from "../../../types/IKeyWordHeard";
+import { KeywordInterface } from "../../../types/KeywordInterface";
+import { StudyInterface } from "../../../types/IStudy";
 
 interface SortOptions {
   sortBy: string | null;

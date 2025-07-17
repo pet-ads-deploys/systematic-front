@@ -1,7 +1,8 @@
 import { createContext, ReactNode, useState } from "react";
-import { StudyInterface } from "../../public/interfaces/IStudy";
+
 import showFirstPossibleStudy from "../legacy/hooks/execution/showFirstPossibleStudy";
 import { ExcutionFaseEnum } from "../../public/enums/ExcutionFaseEnum";
+import { StudyInterface } from "../types/IStudy";
 
 interface AppContextType {
   button: string;

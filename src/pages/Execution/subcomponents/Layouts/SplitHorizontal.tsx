@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import StudySelectionArea from "../StudySelectionArea";
-import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../../../../types/ArticleInterface";
 import { PageLayout } from "../LayoutFactory";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
 import { ViewModel } from "../../../../hooks/useLayoutPage";

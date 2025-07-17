@@ -23,7 +23,7 @@ import {
   Tbody,
 } from "@chakra-ui/react";
 
-import IAccordionDashBoard from "../../../../../../../public/interfaces/IAccordionDashboard";
+import IAccordionDashBoard from "../../../../../../types/IAccordionDashboard";
 interface actionsModal {
   action: "create" | "update";
 }

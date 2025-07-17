@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
+import { StudyInterface } from "../../../types/IStudy";
+import { KeywordInterface } from "../../../types/KeywordInterface";
 
 export default function useFetchStudyData<
   U extends StudyInterface | KeywordInterface

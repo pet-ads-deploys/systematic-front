@@ -1,13 +1,14 @@
 import { useDisclosure, Tr, Td, Checkbox } from "@chakra-ui/react";
 import StudiesModal from "./StudiesModal";
 import { ModalProvider } from "../../../../../../../context/ModalContext";
-import { StudyInterface } from "../../../../../../../../../public/interfaces/IStudy";
-import { TableHeadersInterface } from "../../../../../../../../../public/interfaces/ITableHeaders";
-import ColoredIcon from "../../../../../../../../components/Icons/ColoredIcon";
-import { KeyWordHeaderInterface } from "../../../../../../../../../public/interfaces/IKeyWordHeard";
-import { KeywordInterface } from "../../../../../../../../../public/interfaces/KeywordInterface";
+
 import { useContext } from "react";
+import ColoredIcon from "../../../../../../../../components/Icons/ColoredIcon";
 import AppContext from "../../../../../../../../context/AppContext";
+import { TableHeadersInterface } from "../../../../../../../../types/ITableHeaders";
+import { KeyWordHeaderInterface } from "../../../../../../../../types/IKeyWordHeard";
+import { KeywordInterface } from "../../../../../../../../types/KeywordInterface";
+import { StudyInterface } from "../../../../../../../../types/IStudy";
 
 interface IStudy<T, U> {
   rowData: U;

@@ -1,9 +1,10 @@
 // import { useEffect, useState } from 'react';
-import ArticleInterface from "../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../types/ArticleInterface";
 import axios from "../interceptor/interceptor";
-import { StudyInterface } from "../../public/interfaces/IStudy";
+
 import getRequestOptions from "../utils/getRequestOptions";
 import useSWR from "swr";
+import { StudyInterface } from "../types/IStudy";
 
 interface HttpResponse {
   studyReviews: ArticleInterface[] | StudyInterface[];

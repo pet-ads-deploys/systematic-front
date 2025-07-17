@@ -25,15 +25,14 @@ import {
 } from "../styles/BtnSelectionStyles";
 
 // Types
-import type { StudyInterface } from "../../../../public/interfaces/IStudy";
-
-import type { PageLayout } from "./LayoutFactory";
+import ArticleInterface from "../../../types/ArticleInterface";
+import { StudyInterface } from "../../../types/IStudy";
+import { PageLayout } from "./LayoutFactory";
 
 import type {
   OptionProps,
   OptionType,
 } from "../../../hooks/fetch/useFetchAllCriteriasByArticle";
-import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
 
 interface ButtonsForSelectionProps {
   page: PageLayout;

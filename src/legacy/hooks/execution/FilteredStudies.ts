@@ -1,9 +1,10 @@
 import { ExtractionStatus } from "../../../../public/enums/extractionStatus";
 import { SelectionStatus } from "../../../../public/enums/selectionStatus";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
+
 import useFetchStudyData from "./useFetchStudyData";
 import { ExcutionFaseEnum } from "../../../../public/enums/ExcutionFaseEnum";
+import { StudyInterface } from "../../../types/IStudy";
+import { KeywordInterface } from "../../../types/KeywordInterface";
 
 export default function FilteredStudies(
   type: ExcutionFaseEnum

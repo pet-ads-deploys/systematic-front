@@ -17,9 +17,10 @@ import {
   textArea,
 } from "../styles/finalizationStyles";
 import FlexLayout from "../../../components/ui/Flex/Flex";
-import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
+
 import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
 import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../types/ITableHeaders";
 
 export default function Finalization() {
   const bodyData = useFetchTableData("/data/tableData.json");

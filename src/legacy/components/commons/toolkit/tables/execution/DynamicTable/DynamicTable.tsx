@@ -3,11 +3,12 @@ import useTableSorting from "../../../../../../hooks/execution/useTableSorting";
 import useColumnVisibility from "../../../../../../hooks/execution/useColumnVisibility";
 import { tbConteiner } from "../../../../../../../components/Tables/styles/DynamicTableStyle";
 import { Table, TableContainer, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
-import { StudyInterface } from "../../../../../../../../public/interfaces/IStudy";
-import { TableHeadersInterface } from "../../../../../../../../public/interfaces/ITableHeaders";
-import { KeywordInterface } from "../../../../../../../../public/interfaces/KeywordInterface";
-import { KeyWordHeaderInterface } from "../../../../../../../../public/interfaces/IKeyWordHeard";
+
 import { tableTypeEnum } from "../../../../../../../../public/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../../../../../types/ITableHeaders";
+import { StudyInterface } from "../../../../../../../types/IStudy";
+import { KeywordInterface } from "../../../../../../../types/KeywordInterface";
+import { KeyWordHeaderInterface } from "../../../../../../../types/IKeyWordHeard";
 // import { useContext } from "react";
 // import AppContext from "../Context/AppContext";
 

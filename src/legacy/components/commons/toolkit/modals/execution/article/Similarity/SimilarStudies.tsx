@@ -2,9 +2,10 @@ import { Container, Box, Heading } from "@chakra-ui/react";
 import DynamicTable from "../../../../tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../../../../../hooks/execution/useFetchStudyData";
 import useInputState from "../../../../../../../../hooks/useInputState";
-import { TableHeadersInterface } from "../../../../../../../../../public/interfaces/ITableHeaders";
+
 import { NoStudiesData } from "../../../../../../../../components/NotFound/NoStudiesData";
 import { tableTypeEnum } from "../../../../../../../../../public/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../../../../../../types/ITableHeaders";
 
 export default function SimilarStudies() {
   const studies = useFetchTableData("/data/NewStudyData.json");

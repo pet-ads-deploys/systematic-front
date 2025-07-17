@@ -1,5 +1,6 @@
 import axios from "../../interceptor/interceptor";
-import userToLoginProp from "../../../public/interfaces/userToLogin";
+import userToLoginProp from "../../types/userToLogin";
+
 import useStorageUserData from "./useStorageUserData";
 
 export default async function useLoginUser(data: userToLoginProp) {
