@@ -1,7 +1,7 @@
 import React from "react";
 
 import { HStack, Container, Text, Input, Flex, Button } from "@chakra-ui/react";
-import TextAreaInput from "../../../Inputs/InputTextArea";
+import TextAreaInput from "../../../../../../../../../components/Inputs/InputTextArea";
 
 interface Props {
   authors: string;
@@ -10,7 +10,12 @@ interface Props {
 }
 const ReferenceCard: React.FC<Props> = (props) => {
   return (
-    <Container background="gray.300" border="1px solid black" my=".5rem" w="520px">
+    <Container
+      background="gray.300"
+      border="1px solid black"
+      my=".5rem"
+      w="520px"
+    >
       <Flex>
         <HStack spacing=".2em" mt=".5em">
           <Text fontWeight="bold" my=".5rem" mr=".3em">
@@ -22,7 +27,13 @@ const ReferenceCard: React.FC<Props> = (props) => {
           <Text fontWeight="bold" my=".5rem" ml="1.1em" mr=".3em">
             Year:
           </Text>
-          <Input w="3.5em" p=".5em" variant="filled" type="text" value={props.year}></Input>
+          <Input
+            w="3.5em"
+            p=".5em"
+            variant="filled"
+            type="text"
+            value={props.year}
+          ></Input>
         </Flex>
       </Flex>
       <Text mt=".7rem" fontWeight="bold">

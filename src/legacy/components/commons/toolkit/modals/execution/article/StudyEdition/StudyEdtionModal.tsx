@@ -10,9 +10,9 @@ import {
     FormControl,
     FormLabel
   } from '@chakra-ui/react'
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
+import { StudyInterface } from "../../../../../../../../../public/interfaces/IStudy";
 import { useState } from 'react';
-import StudyEditingInput from '../../Inputs/StudyEditingInput';
+import StudyEditingInput from '../../../../../../../../components/Inputs/StudyEditingInput';
 
   interface StudyEdtionModalProps {
     isOpen: boolean;

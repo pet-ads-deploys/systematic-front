@@ -8,7 +8,7 @@ import {
   Spacer,
   Stack,
 } from "@chakra-ui/react";
-import useFetchTextualData from "./../../../hooks/fetch/useFetchTextualData";
+import useFetchTextualData from "../../../../../../../../hooks/fetch/useFetchTextualData";
 
 export default function SelectionData() {
   // Corrigido para "SelectionData"
