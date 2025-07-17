@@ -1,6 +1,6 @@
 import { Icon } from "@chakra-ui/react";
 import { FaRegCircle } from "react-icons/fa";
-import { useIconColor } from "../../hooks/useIconColor";
+import { useIconColor } from "../../legacy/hooks/execution/useIconColor";
 
 interface ColoredIconProps {
   frequency: number;

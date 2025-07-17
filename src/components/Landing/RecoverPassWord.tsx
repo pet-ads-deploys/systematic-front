@@ -2,8 +2,12 @@ import EventButton from "../Buttons/EventButton";
 import FormOptions from "./subcomponents/FormOptions";
 import { FormControl, Box } from "@chakra-ui/react";
 import RegisterInputs from "./subcomponents/inputs/RegisterInputs";
-import useHandleRegister from "../../hooks/validation/useHandleRegister";
-import { bxconteiner, evbtn, formcontrolConteiner } from "./styles/recoverStyles";
+import useHandleRegister from "../../hooks/auth/useHandleRegister";
+import {
+  bxconteiner,
+  evbtn,
+  formcontrolConteiner,
+} from "./styles/recoverStyles";
 
 interface iRecoverProps {
   handleRender: (renderForm: string) => void;

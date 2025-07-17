@@ -9,18 +9,17 @@ import Graphics from "./pages/NovaRevisao/graphics/Graphics";
 import Homepage from "./pages/Homepage/Homepage";
 import Identification from "./pages/Execution/Identification/Identification";
 import IdentificationSession from "./pages/Execution/Identification/IdentificationSession";
-import Insertion from "./pages/Execution/Insertion/Insertion";
-import KeyWordScreen from "./pages/Execution/KeyWordScreen/KeyWordScreen";
+import Insertion from "./legacy/pages/execution/Insertion/Insertion";
+import KeyWordScreen from "./legacy/pages/execution/KeyWordScreen/KeyWordScreen";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import NovaRevisao from "./pages/NovaRevisao/novaRevisao";
 import Protocol from "./pages/Protocolo/Protocol";
 import ProtocolPartThree from "./pages/Protocolo/ProtocolPartThree";
 import ProtocolPartTwo from "./pages/Protocolo/Protocol-Part-Two";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import SearchSession from "./pages/SearchSession/SearchSession";
+import SearchSession from "./legacy/pages/execution/SearchSession/SearchSession";
 import Selection from "./pages/Execution/Selection/Selection";
 import ServerError from "./pages/ServerErrorPage/ServerErrorPage";
-import TestPage from "./pages/TestPage/TestPage";
 import Unauthorized from "./pages/UnauthorizedPage/UnauthorizedPage";
 import UserArea from "./pages/UserArea/UserArea";
 import Visualization from "./pages/NovaRevisao/visualization/Visualization";
@@ -39,10 +38,6 @@ function App() {
               <Route
                 path="/landing"
                 element={<ProtectedRoute element={<LandingPage />} />}
-              />
-              <Route
-                path="/test"
-                element={<ProtectedRoute element={<TestPage />} />}
               />
               <Route
                 path="/user"
@@ -118,9 +113,6 @@ function App() {
     );
   }
 
-  const button = context;
-  console.log("App -> button: " + button);
-
   return (
     <Router>
       <AppProvider>
@@ -129,10 +121,6 @@ function App() {
           <Route
             path="/landing"
             element={<ProtectedRoute element={<LandingPage />} />}
-          />
-          <Route
-            path="/test"
-            element={<ProtectedRoute element={<TestPage />} />}
           />
           <Route path="/homepage" element={<Homepage />} />
           <Route

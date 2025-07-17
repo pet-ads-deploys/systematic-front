@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../../../../types/ArticleInterface";
 import { PageLayout } from "../LayoutFactory";
 import StudySelectionArea from "../StudySelectionArea";
 

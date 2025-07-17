@@ -6,8 +6,8 @@ import Header from "../../../components/ui/Header/Header";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import EventButton from "../../../components/Buttons/EventButton";
-import DynamicTable from "../../../components/Tables/DynamicTable";
-import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
+import DynamicTable from "../../../legacy/components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
+import useFetchTableData from "../../../legacy/hooks/execution/useFetchStudyData";
 import {
   btnStyles,
   conteiner,
@@ -17,9 +17,10 @@ import {
   textArea,
 } from "../styles/finalizationStyles";
 import FlexLayout from "../../../components/ui/Flex/Flex";
-import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
+
 import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
-import { tableTypeEnum } from "../../../../public/enums/tableTypeEnum";
+import { tableTypeEnum } from "../../../types/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../types/ITableHeaders";
 
 export default function Finalization() {
   const bodyData = useFetchTableData("/data/tableData.json");

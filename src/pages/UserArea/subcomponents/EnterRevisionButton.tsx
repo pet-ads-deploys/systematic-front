@@ -1,14 +1,9 @@
-import Dashboard from "../../../components/ui/Dashboard/Dashboard";
+import Dashboard from "../../../components/Modals/Dashboard/Dashboard";
 
-interface IButtonProps {
-  text: string;
-}
-
-export default function EnterRevisionButton({ /*text, event*/ }: IButtonProps) {
+export default function EnterRevisionButton() {
   return (
     <div>
-      <Dashboard></Dashboard>
-      {/*<Button sx={buttonstyles} onClick={event}>{text}</Button>*/}
+      <Dashboard />
     </div>
   );
 }

@@ -9,13 +9,12 @@ interface IEditionInfosProps {
   isEdited: boolean;
 }
 
-export default function EditionInfos({ lastModification, status, /* isEdited */ }: IEditionInfosProps) {
+export default function EditionInfos({ status }: IEditionInfosProps) {
   return (
     <Box sx={conteiner}>
-      {/* <EditionIcon/> */}
       <Box sx={infosconteiner}>
         <Text sx={text}>Status: {status}</Text>
-        <Text sx={text}>Last Modification: {lastModification}</Text>
+        {/* <Text sx={text}>Last Modification: {lastModification}</Text> */}
       </Box>
     </Box>
   );
