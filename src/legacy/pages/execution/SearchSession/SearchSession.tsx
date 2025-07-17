@@ -4,7 +4,7 @@ import useInputState from "../../../../hooks/useInputState";
 import Header from "../../../../components/ui/Header/Header";
 import NavButton from "../../../../components/Buttons/NavButton";
 import DynamicTable from "../../../components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
-import useFetchTableData from "../../../../hooks/seachAppropriateStudy/useFetchStudyData";
+import useFetchTableData from "../../../hooks/execution/useFetchStudyData";
 import SearchInformations from "./subcomponents/searchInformations";
 import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";
 // import ComboBox from "../../components/Inputs/ComboBox";

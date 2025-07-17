@@ -8,7 +8,7 @@ import NavButton from "../../../../components/Buttons/NavButton";
 import SelectInput from "../../../../components/Inputs/SelectInput";
 import EventButton from "../../../../components/Buttons/EventButton";
 import DynamicTable from "../../../components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
-import useFetchTableData from "../../../../hooks/seachAppropriateStudy/useFetchStudyData";
+import useFetchTableData from "../../../hooks/execution/useFetchStudyData";
 import {
   btnconteiner,
   conteiner,

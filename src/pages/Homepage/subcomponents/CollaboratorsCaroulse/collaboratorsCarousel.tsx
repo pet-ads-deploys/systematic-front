@@ -2,7 +2,7 @@ import { Button, Flex, Heading } from "@chakra-ui/react";
 import collaborators from "../../../../mocks/collaborators";
 import Carousel from "../../../../components/carousel/Carousel";
 import CollaboratorCard from "../../../CollaboratorsPage/subcomponents/collaboratorCards";
-import shuffleElements from "../../../../hooks/shuffleElements/shuffleElements";
+import shuffleElements from "../../../CollaboratorsPage/subcomponents/shuffleElements";
 import { Link } from "react-router-dom";
 
 export default function CollaboratorsCarousel() {

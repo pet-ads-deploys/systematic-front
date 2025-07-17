@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
+import { StudyInterface } from "../../../../public/interfaces/IStudy";
+import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
 
-interface IStudyData {
-  title: string;
-  authors: string[];
-  year: string;
-  venue: string;
-  abstract: string;
-  keywords: string[];
-  studyType: string;
-}
-
-const useFetchStudyData = (url: string) => {
-  const [studyData, setStudyData] = useState<IStudyData[]>([]);
+export default function useFetchStudyData<
+  U extends StudyInterface | KeywordInterface
+>(url: string): U[] | undefined {
+  const [requestedData, setRequestedData] = useState<U[]>();
   useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -21,7 +16,7 @@ const useFetchStudyData = (url: string) => {
         }
         const data = await response.json();
         if (Array.isArray(data)) {
-          setStudyData(data);
+          setRequestedData(data);
         } else {
           console.error("O arquivo JSON não possui a estrutura esperada.");
         }
@@ -31,9 +26,10 @@ const useFetchStudyData = (url: string) => {
     };
 
     fetchData();
+    return () => {
+      controller.abort();
+    };
   }, [url]);
 
-  return studyData;
-};
-
-export default useFetchStudyData;
+  return requestedData;
+}

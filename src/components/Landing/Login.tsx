@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import EventButton from "../Buttons/EventButton";
-import { useGetTokens } from '../../hooks/validation/useGetTokens';
+import { useGetTokens } from '../../hooks/auth/useGetTokens';
 import { FormControl, Box } from "@chakra-ui/react";
 import PasswordInput from "../Inputs/PasswordInput";
 import FormOptions from "./subcomponents/FormOptions";

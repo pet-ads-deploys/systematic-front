@@ -1,17 +1,17 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useVerifyIfLoggedIn } from '../../hooks/temporaryHooks/useVerifyIfLoggedIn';
-import LoadingPage from '../../pages/LoadingPage/loadingPage';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useVerifyIfLoggedIn } from "../../hooks/auth/useVerifyIfLoggedIn";
+import LoadingPage from "../../pages/LoadingPage/loadingPage";
 
 interface ProtectedRouteProps {
   element: JSX.Element;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { isLoggedIn, isChecking } = useVerifyIfLoggedIn(); 
+  const { isLoggedIn, isChecking } = useVerifyIfLoggedIn();
 
   if (isChecking) {
-    return  <LoadingPage />;
+    return <LoadingPage />;
   }
 
   if (!isLoggedIn) {

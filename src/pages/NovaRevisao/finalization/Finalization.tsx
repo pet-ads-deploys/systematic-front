@@ -7,7 +7,7 @@ import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import EventButton from "../../../components/Buttons/EventButton";
 import DynamicTable from "../../../legacy/components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
-import useFetchTableData from "../../../hooks/seachAppropriateStudy/useFetchStudyData";
+import useFetchTableData from "../../../legacy/hooks/execution/useFetchStudyData";
 import {
   btnStyles,
   conteiner,

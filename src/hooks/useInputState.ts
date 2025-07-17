@@ -5,7 +5,6 @@ const useInputState = <T>(initialValue: T) => {
 
   const handleChange = (newValue: T) => {
     setValue(newValue);
-    console.log("clicou: " + newValue);
   };
 
   return { value, handleChange };

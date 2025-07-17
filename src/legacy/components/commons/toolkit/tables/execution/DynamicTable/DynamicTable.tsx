@@ -1,6 +1,6 @@
 import TableRow from "./subcomponents/TableRow";
-import useTableSorting from "../../../../../../../hooks/useTableSorting";
-import useColumnVisibility from "../../../../../../../hooks/useColumnVisibility";
+import useTableSorting from "../../../../../../hooks/execution/useTableSorting";
+import useColumnVisibility from "../../../../../../hooks/execution/useColumnVisibility";
 import { tbConteiner } from "../../../../../../../components/Tables/styles/DynamicTableStyle";
 import { Table, TableContainer, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 import { StudyInterface } from "../../../../../../../../public/interfaces/IStudy";

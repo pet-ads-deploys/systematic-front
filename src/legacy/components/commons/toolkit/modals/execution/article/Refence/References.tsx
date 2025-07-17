@@ -1,7 +1,7 @@
 import { Container, Heading } from "@chakra-ui/react";
 
 import ReferenceCard from "./subcomponents/ReferenceCard";
-import useFetchReferenceData from "../../../../../../../../hooks/fetch/useFetchReferenceData";
+import useFetchReferenceData from "../../../../../../../hooks/execution/useFetchReferenceData";
 
 export default function References() {
   const referenceData = useFetchReferenceData(

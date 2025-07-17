@@ -2,7 +2,7 @@
 import { Flex } from "@chakra-ui/react";
 
 // Hooks
-import useGetReviewCard from "../../hooks/reviewCard/useGetReviewCard";
+import useGetReviewCard from "../../hooks/reviews/useGetReviewCard";
 
 // Components
 import FlexLayout from "../../components/ui/Flex/Flex";

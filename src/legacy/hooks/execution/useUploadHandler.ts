@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { FormatFileSize } from "../legacy/utils/helpers/FormatFileSize";
+import { FormatFileSize } from "../../utils/helpers/FormatFileSize";
 import axios, { CancelTokenSource } from "axios";
 import { v4 } from "uuid";
 

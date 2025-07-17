@@ -1,7 +1,7 @@
 // import DynamicTable from "../../../components/Tables/DynamicTable";
 
 import { Flex } from "@chakra-ui/react";
-import useFetchStudyData from "../../../../hooks/seachAppropriateStudy/useFetchStudyData";
+import useFetchStudyData from "../../../hooks/execution/useFetchStudyData";
 
 import FlexLayout from "../../../../components/ui/Flex/Flex";
 import Header from "../../../../components/ui/Header/Header";
