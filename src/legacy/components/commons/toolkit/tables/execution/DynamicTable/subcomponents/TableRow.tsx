@@ -1,16 +1,15 @@
 import { useDisclosure, Tr, Td, Checkbox } from "@chakra-ui/react";
-import StudiesModal from "./StudiesModal";
-import { ModalProvider } from "./ModalContext";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import { TableHeadersInterface } from "../../../../public/interfaces/ITableHeaders";
-import ColoredIcon from "../../Icons/ColoredIcon";
-import { KeyWordHeaderInterface } from "../../../../public/interfaces/IKeyWordHeard";
-import { KeywordInterface } from "../../../../public/interfaces/KeywordInterface";
+import StudiesModal from "../../../../../../../../components/Tables/Subcomponents/StudiesModal";
+import { ModalProvider } from "../../../../../../../../components/Tables/Subcomponents/ModalContext";
+import { StudyInterface } from "../../../../../../../../../public/interfaces/IStudy";
+import { TableHeadersInterface } from "../../../../../../../../../public/interfaces/ITableHeaders";
+import ColoredIcon from "../../../../../../../../components/Icons/ColoredIcon";
+import { KeyWordHeaderInterface } from "../../../../../../../../../public/interfaces/IKeyWordHeard";
+import { KeywordInterface } from "../../../../../../../../../public/interfaces/KeywordInterface";
 import { useContext } from "react";
-import AppContext from "../../../context/AppContext";
+import AppContext from "../../../../../../../../context/AppContext";
 
-
-interface IStudy <T, U> {
+interface IStudy<T, U> {
   rowData: U;
   rowIndex: number;
   isKeyWordTable: boolean;
@@ -25,9 +24,9 @@ interface IStudy <T, U> {
   isExtractionTable: boolean;
 }
 
-export default function TableRow <
-T extends TableHeadersInterface | KeyWordHeaderInterface,
-U extends StudyInterface | KeywordInterface
+export default function TableRow<
+  T extends TableHeadersInterface | KeyWordHeaderInterface,
+  U extends StudyInterface | KeywordInterface
 >({
   rowData,
   rowIndex,
@@ -36,30 +35,28 @@ U extends StudyInterface | KeywordInterface
   isExtractionTable,
   getColumnVisibility,
   headerData,
-}: IStudy <T, U>) {
+}: IStudy<T, U>) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const context = useContext(AppContext);
 
   function handleClick(rowData: U) {
     if (isExtractionTable) {
       onOpen();
-      context?.setExtractionStudy((rowData as StudyInterface))
+      context?.setExtractionStudy(rowData as StudyInterface);
       context?.setSortedExtractionStudyIndex(rowIndex);
     }
     if (isSelectionTable) {
-      context?.setSelectionStudy((rowData as StudyInterface))
+      context?.setSelectionStudy(rowData as StudyInterface);
       context?.setSelectionStudyIndex(rowIndex);
     }
   }
-
-
 
   return (
     <>
       <Tr key={rowIndex}>
         {!isKeyWordTable && (
           <Td bgColor={"#9CB0C0"}>
-            <Checkbox borderColor={"#2A4F6C"}/>
+            <Checkbox borderColor={"#2A4F6C"} />
           </Td>
         )}
         {isKeyWordTable && (
@@ -67,14 +64,23 @@ U extends StudyInterface | KeywordInterface
             <ColoredIcon frequency={rowData[0 as keyof U] as number} />
           </Td>
         )}
-        
-        {Object.keys(headerData)
-        .map((key, keyIndex) => (
+
+        {Object.keys(headerData).map((key, keyIndex) => (
           <Td
             cursor={"pointer"}
-            onClick={ () => {handleClick(rowData)}}
+            onClick={() => {
+              handleClick(rowData);
+            }}
             key={keyIndex}
-            display={isKeyWordTable ? "" : getColumnVisibility((headerData[key as keyof T] as string).toLowerCase()) ? "none" : ""}
+            display={
+              isKeyWordTable
+                ? ""
+                : getColumnVisibility(
+                    (headerData[key as keyof T] as string).toLowerCase()
+                  )
+                ? "none"
+                : ""
+            }
             textAlign={"center"}
             bgColor={"#9CB0C0"}
           >

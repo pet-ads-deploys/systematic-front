@@ -1,13 +1,13 @@
-import TableRow from "./Subcomponents/TableRow";
-import useTableSorting from "../../hooks/useTableSorting";
-import useColumnVisibility from "../../hooks/useColumnVisibility";
-import { tbConteiner } from "./styles/DynamicTableStyle";
+import TableRow from "./subcomponents/TableRow";
+import useTableSorting from "../../../../../../../hooks/useTableSorting";
+import useColumnVisibility from "../../../../../../../hooks/useColumnVisibility";
+import { tbConteiner } from "../../../../../../../components/Tables/styles/DynamicTableStyle";
 import { Table, TableContainer, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
-import { StudyInterface } from "../../../public/interfaces/IStudy";
-import { TableHeadersInterface } from "../../../public/interfaces/ITableHeaders";
-import { KeywordInterface } from "../../../public/interfaces/KeywordInterface";
-import { KeyWordHeaderInterface } from "../../../public/interfaces/IKeyWordHeard";
-import { tableTypeEnum } from "../../../public/enums/tableTypeEnum";
+import { StudyInterface } from "../../../../../../../../public/interfaces/IStudy";
+import { TableHeadersInterface } from "../../../../../../../../public/interfaces/ITableHeaders";
+import { KeywordInterface } from "../../../../../../../../public/interfaces/KeywordInterface";
+import { KeyWordHeaderInterface } from "../../../../../../../../public/interfaces/IKeyWordHeard";
+import { tableTypeEnum } from "../../../../../../../../public/enums/tableTypeEnum";
 // import { useContext } from "react";
 // import AppContext from "../Context/AppContext";
 
@@ -21,7 +21,12 @@ interface DynamicTableProps {
 }
 
 //searchString, selectedStatus
-export default function DynamicTable({ headerData, bodyData, tableType, filteredColumns }: DynamicTableProps) {
+export default function DynamicTable({
+  headerData,
+  bodyData,
+  tableType,
+  filteredColumns,
+}: DynamicTableProps) {
   const isKeyWordTable = tableType == tableTypeEnum.KEYWORD;
   const isSelectionTable = tableType == tableTypeEnum.SELECTION;
   const isExtractionTable = tableType === tableTypeEnum.EXTRACTION;
@@ -35,7 +40,11 @@ export default function DynamicTable({ headerData, bodyData, tableType, filtered
   // context?.setSortedStudies((sortedData as StudyInterface[]));
 
   return (
-    <TableContainer sx={tbConteiner} h={isKeyWordTable ? 300 : 250} borderBottom={"1em solid #303D50"}>
+    <TableContainer
+      sx={tbConteiner}
+      h={isKeyWordTable ? 300 : 250}
+      borderBottom={"1em solid #303D50"}
+    >
       <Table variant={"striped"}>
         <Thead bgColor={"#303D50"}>
           <Tr>
@@ -46,7 +55,9 @@ export default function DynamicTable({ headerData, bodyData, tableType, filtered
                 onClick={() => handleSort(header)}
                 _hover={{ cursor: "pointer" }}
                 id={header.toLowerCase()}
-                display={getColumnVisibility(header.toLowerCase()) ? "none" : ""}
+                display={
+                  getColumnVisibility(header.toLowerCase()) ? "none" : ""
+                }
                 textAlign={"center"}
                 color={"#FDF0D5"}
               >
@@ -55,7 +66,7 @@ export default function DynamicTable({ headerData, bodyData, tableType, filtered
             ))}
           </Tr>
         </Thead>
-        
+
         <Tbody>
           {sortedData.map((rowData, rowIndex) => (
             <TableRow
@@ -69,9 +80,8 @@ export default function DynamicTable({ headerData, bodyData, tableType, filtered
               readingPriority={"Very high"}
               searchSession={"Scopus"}
               score={0}
-              isSelectionTable = {isSelectionTable}
-              isExtractionTable = {isExtractionTable}
-
+              isSelectionTable={isSelectionTable}
+              isExtractionTable={isExtractionTable}
             />
           ))}
         </Tbody>

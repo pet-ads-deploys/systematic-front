@@ -3,7 +3,7 @@ import { Upload } from "../../../components/commons/toolkit/buttons/upload/Uploa
 import useInputState from "../../../../hooks/useInputState";
 import Header from "../../../../components/ui/Header/Header";
 import NavButton from "../../../../components/Buttons/NavButton";
-import DynamicTable from "../../../../components/Tables/DynamicTable";
+import DynamicTable from "../../../components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../../hooks/seachAppropriateStudy/useFetchStudyData";
 import SearchInformations from "./subcomponents/searchInformations";
 import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";

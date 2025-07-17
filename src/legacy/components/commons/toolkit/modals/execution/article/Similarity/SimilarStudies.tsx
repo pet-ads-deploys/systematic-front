@@ -1,5 +1,5 @@
 import { Container, Box, Heading } from "@chakra-ui/react";
-import DynamicTable from "../../../../../../../../components/Tables/DynamicTable";
+import DynamicTable from "../../../../tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../../../../../../hooks/seachAppropriateStudy/useFetchStudyData";
 import useInputState from "../../../../../../../../hooks/useInputState";
 import { TableHeadersInterface } from "../../../../../../../../../public/interfaces/ITableHeaders";
