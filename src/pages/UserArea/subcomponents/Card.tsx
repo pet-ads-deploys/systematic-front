@@ -26,7 +26,7 @@ export default function RevisionCard({
         <CardIcon />
         <CardInfos title={title} RevisorNames={RevisorNames} />
         <Box sx={infoconteiner}>
-          <EnterRevisionButton text="Ver Revisão" />
+          <EnterRevisionButton />
           <EditionInfos
             lastModification={lastModification}
             creation={creation}
