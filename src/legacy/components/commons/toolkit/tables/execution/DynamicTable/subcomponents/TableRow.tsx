@@ -1,6 +1,6 @@
 import { useDisclosure, Tr, Td, Checkbox } from "@chakra-ui/react";
-import StudiesModal from "../../../../../../../../components/Tables/Subcomponents/StudiesModal";
-import { ModalProvider } from "../../../../../../../../components/Tables/Subcomponents/ModalContext";
+import StudiesModal from "./StudiesModal";
+import { ModalProvider } from "../../../../../../../context/ModalContext";
 import { StudyInterface } from "../../../../../../../../../public/interfaces/IStudy";
 import { TableHeadersInterface } from "../../../../../../../../../public/interfaces/ITableHeaders";
 import ColoredIcon from "../../../../../../../../components/Icons/ColoredIcon";

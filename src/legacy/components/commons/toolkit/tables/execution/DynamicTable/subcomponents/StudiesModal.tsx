@@ -11,14 +11,13 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import StatusSelection from "./TableRowSubcomponents/StatusSelection";
-import StudyDataFiel from "../../Modals/StudyModal/StudyData";
-import NavegationIconsPanel from "./TableRowSubcomponents/NavigationIconsPanel/NavigationIconPanel";
+import StatusSelection from "./StatusSelection";
+import StudyDataFiel from "../../../../../../../../components/Modals/StudyModal/StudyData";
+import NavegationIconsPanel from "./NavigationIconPanel";
 import OtherStudyPanels from "./OtherStudyPanels";
-import ModalContext from "./ModalContext";
-import { StudyInterface } from "../../../../public/interfaces/IStudy";
-import AppContext from "../../../context/AppContext";
-
+import ModalContext from "../../../../../../../context/ModalContext";
+import { StudyInterface } from "../../../../../../../../../public/interfaces/IStudy";
+import AppContext from "../../../../../../../../context/AppContext";
 
 interface IStudy {
   isOpen: boolean;
@@ -28,25 +27,27 @@ interface IStudy {
 export default function StudiesModal({ isOpen, onClose }: IStudy) {
   const modalContext = useContext(ModalContext);
   const appContext = useContext(AppContext);
-  const study = (appContext?.extractionStudy as StudyInterface);
-  const sortedStudies = (appContext?.selectionStudies as StudyInterface[])
-  const index = (appContext?.selectionStudyIndex as number);
-
-
+  const study = appContext?.extractionStudy as StudyInterface;
+  const sortedStudies = appContext?.selectionStudies as StudyInterface[];
+  const index = appContext?.selectionStudyIndex as number;
 
   function ChangeToNext() {
     if (index < sortedStudies.length - 1) {
       const newIndex = (index as number) + 1;
-      appContext?.setSortedExtractionStudyIndex(newIndex)
-      appContext?.setExtractionStudy((sortedStudies as StudyInterface[])[newIndex])
-   }
+      appContext?.setSortedExtractionStudyIndex(newIndex);
+      appContext?.setExtractionStudy(
+        (sortedStudies as StudyInterface[])[newIndex]
+      );
+    }
   }
 
   function ChangeToPrevius() {
     if (index >= 1) {
       const newIndex = (index as number) - 1;
-      appContext?.setSortedExtractionStudyIndex(newIndex)
-      appContext?.setExtractionStudy((sortedStudies as StudyInterface[])[newIndex])
+      appContext?.setSortedExtractionStudyIndex(newIndex);
+      appContext?.setExtractionStudy(
+        (sortedStudies as StudyInterface[])[newIndex]
+      );
     }
   }
 
