@@ -1,5 +1,5 @@
 import { Button, Text } from "@chakra-ui/react";
-import { SelectionDataIcon } from "../../../../../../../../public/icons/StudyModal/SelectionDataIcon";
+import { SelectionDataIcon } from "../../../icons/SelectionDataIcon";
 import { useContext } from "react";
 import ModalContext from "../../../../../../context/ModalContext";
 

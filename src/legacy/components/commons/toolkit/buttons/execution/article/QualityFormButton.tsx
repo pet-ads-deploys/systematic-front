@@ -1,5 +1,5 @@
 import { Button, Text } from "@chakra-ui/react";
-import { QualityFormIcon } from "../../../../../../../../public/icons/StudyModal/QualityFormIcon";
+import { QualityFormIcon } from "../../../icons/QualityFormIcon";
 import ModalContext from "../../../../../../context/ModalContext";
 import { useContext } from "react";
 

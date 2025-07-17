@@ -1,5 +1,5 @@
 import { Button, Text } from "@chakra-ui/react";
-import { DataExtractionFormIcon } from "../../../../../../../../public/icons/StudyModal/DataExtractionFormIcon";
+import { DataExtractionFormIcon } from "../../../icons/DataExtractionFormIcon";
 import ModalContext from "../../../../../../context/ModalContext";
 import { useContext } from "react";
 

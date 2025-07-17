@@ -1,5 +1,5 @@
 import { Button, Text } from "@chakra-ui/react";
-import { StudyDataIcon } from "../../../../../../../../public/icons/StudyModal/StudyDataIcon";
+import { StudyDataIcon } from "../../../icons/StudyDataIcon";
 import { useContext, useState } from "react";
 import ModalContext from "../../../../../../context/ModalContext";
 
