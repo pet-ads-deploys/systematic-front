@@ -1,8 +1,8 @@
-import ArticlesInterface from "../../../../public/interfaces/ArticleInterface";
+import ArticlesInterface from "../../../types/ArticleInterface";
 
 import { useContext, useMemo, useState } from "react";
 import Expanded from "./Expanded";
-import ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../../../types/ArticleInterface";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
 import { ViewModel } from "../../../hooks/useLayoutPage";
 import AppContext from "../../../context/AppContext";

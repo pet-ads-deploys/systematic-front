@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 
 // Type
-import type ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import type ArticleInterface from "../../../types/ArticleInterface";
 import type { PageLayout } from "../subcomponents/LayoutFactory";
 
 export const useFilterReviewArticles = (

@@ -5,7 +5,6 @@ import { Box, Card } from "@chakra-ui/react";
 import CardIcon from "./CardIcon";
 import CardInfos from "./CardInfos";
 import EditionInfos from "./EditionInfos";
-import EnterRevisionButton from "./EnterRevisionButton";
 
 // Hook
 import useNavigateToPendingStage from "../../../hooks/useNavigateToPendingStage";
@@ -48,7 +47,7 @@ export default function RevisionCard({
       <CardIcon />
       <CardInfos title={title} RevisorNames={RevisorNames} />
       <Box sx={CardInfosConteiner} id={id}>
-        <EnterRevisionButton text="Review Info" />
+        {/* <EnterRevisionButton text="Review Info" /> */}
         <EditionInfos
           lastModification={lastModification as string}
           status={stage}

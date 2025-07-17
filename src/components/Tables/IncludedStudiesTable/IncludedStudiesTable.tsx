@@ -1,12 +1,5 @@
 // External library
-import {
-  Table,
-  TableContainer,
-  Thead,
-  Tr,
-  Tbody,
-  Th,
-} from "@chakra-ui/react";
+import { Table, TableContainer, Thead, Tr, Tbody, Th } from "@chakra-ui/react";
 
 // Hooks
 import useGetAllReviewArticles from "../../../hooks/useGetAllReviewArticles";
@@ -15,10 +8,9 @@ import useFetchInclusionCriteria from "../../../hooks/fetch/useFetchInclusionCri
 // Components
 import { ReportTd } from "../Subcomponents/ReportTd";
 
-
 // Types
-import type ArticleInterface from "../../../../public/interfaces/ArticleInterface";
-import type { StudyInterface } from "../../../../public/interfaces/IStudy";
+import type ArticleInterface from "../../../types/ArticleInterface";
+import { StudyInterface } from "../../../types/IStudy";
 
 type Column = {
   label: string;
@@ -42,7 +34,6 @@ export const IncludedStudiesTable = () => {
 
   const inclusionCriterias = useFetchInclusionCriteria();
 
-
   return (
     <TableContainer>
       <Table>
@@ -55,20 +46,25 @@ export const IncludedStudiesTable = () => {
         </Thead>
         <Tbody>
           {studies.map((study, index) => {
-            const id = "studyReviewId" in study ? study.studyReviewId : index.toString();
-            const sourceText = "searchSources" in study ? study.searchSources.join(", ") : "";
-           const criteriaText = "criteria" in study
-              ? study.criteria
-                  .map((cr) => {
-                    const idx = inclusionCriterias.findIndex((item) => item === cr);
-                    return `C${idx + 1} : ${cr}`;
-                  })
-                  .join(" , ")
-              : "";
+            const id =
+              "studyReviewId" in study ? study.studyReviewId : index.toString();
+            const sourceText =
+              "searchSources" in study ? study.searchSources.join(", ") : "";
+            const criteriaText =
+              "criteria" in study
+                ? study.criteria
+                    .map((cr) => {
+                      const idx = inclusionCriterias.findIndex(
+                        (item) => item === cr
+                      );
+                      return `C${idx + 1} : ${cr}`;
+                    })
+                    .join(" , ")
+                : "";
 
             return (
               <Tr key={id} _hover={{ bg: "gray.300" }}>
-                <ReportTd text={id.toString()}/>
+                <ReportTd text={id.toString()} />
                 <ReportTd text={study.title} />
                 <ReportTd text={study.authors} />
                 <ReportTd text={study.year.toString()} />

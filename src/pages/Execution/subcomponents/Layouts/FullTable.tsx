@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import ArticleInterface from "../../../../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../../../../types/ArticleInterface";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
 import { PageLayout } from "../LayoutFactory";
 

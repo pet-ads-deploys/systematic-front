@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 
 import StudySelectionContext from "../../context/StudiesSelectionContext";
 
-import ArticleInterface from "../../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../../types/ArticleInterface";
 
 type ArticleStatus = "INCLUDED" | "UNCLASSIFIED" | "DUPLICATED" | "EXCLUDED";
 

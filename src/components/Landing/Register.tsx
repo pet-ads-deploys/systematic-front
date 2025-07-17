@@ -4,7 +4,7 @@ import { FormControl, Box } from "@chakra-ui/react";
 import PasswordInput from "../Inputs/PasswordInput";
 import FormOptions from "./subcomponents/FormOptions";
 import RegisterInputs from "./subcomponents/inputs/RegisterInputs";
-import useHandleRegister from "../../hooks/validation/useHandleRegister";
+import useHandleRegister from "../../hooks/auth/useHandleRegister";
 import { bxconteiner, evbtn, formcontrol } from "./styles/RegisterStyle";
 
 interface iRegisterProps {
@@ -27,29 +27,54 @@ export default function Register({ handleRender }: iRegisterProps) {
     <>
       <form onSubmit={handleRegister}>
         <FormControl sx={formcontrol}>
-        <RegisterInputs id="nome" placeholder={"Name ..."} handlechange={handleNameChange} />
-        <RegisterInputs id="mail" placeholder={"Email ..."} handlechange={handleEmailChange} />
-        <RegisterInputs id="affiliation" placeholder={"Affiliation ..."} handlechange={handleAffiliationChange} />
+          <RegisterInputs
+            id="nome"
+            placeholder={"Name ..."}
+            handlechange={handleNameChange}
+          />
+          <RegisterInputs
+            id="mail"
+            placeholder={"Email ..."}
+            handlechange={handleEmailChange}
+          />
+          <RegisterInputs
+            id="affiliation"
+            placeholder={"Affiliation ..."}
+            handlechange={handleAffiliationChange}
+          />
 
-        <SelectInput
-          values={["Select a country", "Brazil", "England", "France", "Spain"]}
-          names={["Select a country", "Brazil", "England", "France", "Spain"]}
-          onSelect={(value: string) => setState(value)}
-          selectedValue={selectedValue}
-          page={"register"}
-        />
-        <PasswordInput text="Password..." handlechange={handlePasswordChange} isValid={passwordMatch} />
-        <PasswordInput
-          text="Confirm  password... "
-          handlechange={handleConfirmPasswordChange}
-          isValid={passwordMatch}
-        />
+          <SelectInput
+            values={[
+              "Select a country",
+              "Brazil",
+              "England",
+              "France",
+              "Spain",
+            ]}
+            names={["Select a country", "Brazil", "England", "France", "Spain"]}
+            onSelect={(value: string) => setState(value)}
+            selectedValue={selectedValue}
+            page={"register"}
+          />
+          <PasswordInput
+            text="Password..."
+            handlechange={handlePasswordChange}
+            isValid={passwordMatch}
+          />
+          <PasswordInput
+            text="Confirm  password... "
+            handlechange={handleConfirmPasswordChange}
+            isValid={passwordMatch}
+          />
 
-        <Box sx={bxconteiner}>
-          <EventButton type="submit" text="Create Account" sx={evbtn} />
-          <FormOptions text="Already have an account? " onClick={() => handleRender("Login")} />
-        </Box>
-      </FormControl>
+          <Box sx={bxconteiner}>
+            <EventButton type="submit" text="Create Account" sx={evbtn} />
+            <FormOptions
+              text="Already have an account? "
+              onClick={() => handleRender("Login")}
+            />
+          </Box>
+        </FormControl>
       </form>
     </>
   );

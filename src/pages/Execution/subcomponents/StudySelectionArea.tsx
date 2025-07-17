@@ -10,9 +10,9 @@ import StudyDataFiel from "../../../components/Modals/StudyModal/StudyData";
 import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 // Types
-import type { StudyInterface } from "../../../../public/interfaces/IStudy";
 import type { PageLayout } from "./LayoutFactory";
-import type ArticleInterface from "../../../../public/interfaces/ArticleInterface";
+import type ArticleInterface from "../../../types/ArticleInterface";
+import type { StudyInterface } from "../../../types/IStudy";
 
 interface StudySelectionAreaProps {
   articles: ArticleInterface[] | StudyInterface[];

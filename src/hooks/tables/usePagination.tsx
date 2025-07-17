@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ArticleInterface from "../../../public/interfaces/ArticleInterface";
+import ArticleInterface from "../../types/ArticleInterface";
 
 const MAX_ITENS_PER_PAGE = 15;
 

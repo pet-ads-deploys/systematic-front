@@ -1,0 +1,6 @@
+export enum SelectionStatus {
+  UNCLASSIFIED = "UNCLASSIFIED",
+  DUPLICATED = "DUPLICATED",
+  INCLUDED = "INCLUDED",
+  EXCLUDED = "EXCLUDED",
+}

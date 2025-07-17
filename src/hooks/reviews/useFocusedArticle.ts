@@ -8,7 +8,7 @@ import StudySelectionContext from "../../context/StudiesSelectionContext";
 import useFetchAllClassifiedArticles from "../fetch/useFetchAllClassifiedArticles";
 
 // Type
-import type ArticleInterface from "../../../public/interfaces/ArticleInterface";
+import type ArticleInterface from "../../types/ArticleInterface";
 import type { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
 
 type FocusedArticleOutputProps = {
