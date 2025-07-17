@@ -12,7 +12,7 @@ const textTheme = {
 
 export default function QualityForm() {
   const qualityForm = useFetchQualityFormData(
-    "../../../../public/mocks/qualityFormData.json"
+    "../../../mocks/qualityFormData.json"
   );
   return (
     <Container flex="row" style={{ maxHeight: "350px", overflowY: "auto" }}>

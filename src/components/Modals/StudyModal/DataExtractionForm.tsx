@@ -22,13 +22,13 @@ const textTheme = {
 
 export default function DataExtractionForm() {
   const extractionForm = useFetchExtractionForm(
-    "../../../../public/mocks/dataExtractionForm.json"
+    "../../../mocks/dataExtractionForm.json"
   );
   const selectBox = useFetchSelectBox(
-    "../../../../public/mocks/protocolData/extractionPickList.json"
+    "../../../mocks/protocolData/extractionPickList.json"
   );
   const checkBox = useFetchSelectBox(
-    "../../../../public/mocks/protocolData/extractionCheckBoxData.json"
+    "../../../mocks/protocolData/extractionCheckBoxData.json"
   );
 
   console.log(extractionForm);

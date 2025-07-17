@@ -13,9 +13,7 @@ import useFetchTextualData from "./../../../hooks/fetch/useFetchTextualData";
 export default function SelectionData() {
   // Corrigido para "SelectionData"
   const { selectionInclusionData, selectionExclusionData } =
-    useFetchTextualData(
-      "./../../../public/mocks/protocolData/extractionCriterionDto.json"
-    ); // Corrigido para "useFetchTextualData"
+    useFetchTextualData(""); // Corrigido para "useFetchTextualData"
   console.log(selectionInclusionData, selectionExclusionData);
   return (
     <Container style={{ maxHeight: "350px", overflowY: "auto" }}>

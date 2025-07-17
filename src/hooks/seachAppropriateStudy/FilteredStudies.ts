@@ -8,7 +8,7 @@ import { ExcutionFaseEnum } from "../../../public/enums/ExcutionFaseEnum";
 export default function FilteredStudies(
   type: ExcutionFaseEnum
 ): (StudyInterface | KeywordInterface)[] | undefined {
-  const studies = useFetchStudyData("../../../public/mocks/NewStudyData.json");
+  const studies = useFetchStudyData("../../mocks/NewStudyData.json");
   let filterStudies: StudyInterface[] = [];
 
   if (studies) {

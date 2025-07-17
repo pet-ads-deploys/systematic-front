@@ -1,21 +1,32 @@
 import { Box, Flex, Image, Link, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa6";
+import { Collaborator } from "../../../mocks/collaborators";
 
-interface CollaboratorType {
-  photo: string;
-  name: string;
-  github: string;
-  filiacao: string;
+interface CollaboratorCardProps {
+  collaborator: Collaborator;
 }
 
-export default function CollaboratorCard({ collaborator }: { collaborator: CollaboratorType }) {
-  const withBlur = { filter: "blur(2px) grayscale(70%) brightness(0.5)", transition: "0.3s" };
+export default function CollaboratorCard({
+  collaborator,
+}: CollaboratorCardProps) {
+  const withBlur = {
+    filter: "blur(2px) grayscale(70%) brightness(0.5)",
+    transition: "0.3s",
+  };
   const noBlur = { filter: "blur(0px) grayscale(0%)", transition: "0.3s" };
   const [imageStyle, SetImageStyle] = useState(noBlur);
 
-  const iconAppears = { filter: "opacity(100%)", color: "#53CABE", transition: "top 3s ease-out-in" };
-  const iconDesappears = { filter: "opacity(0%)", color: "#53CABE", transition: "top 3s ease-in-out" };
+  const iconAppears = {
+    filter: "opacity(100%)",
+    color: "#53CABE",
+    transition: "top 3s ease-out-in",
+  };
+  const iconDesappears = {
+    filter: "opacity(0%)",
+    color: "#53CABE",
+    transition: "top 3s ease-in-out",
+  };
   const [isIconAppeating, SetIsIconAppearing] = useState(false);
   const [iconStyle, SetIconStyle] = useState(iconDesappears);
 
@@ -29,6 +40,8 @@ export default function CollaboratorCard({ collaborator }: { collaborator: Colla
     SetIconStyle(iconDesappears);
     SetIsIconAppearing(false);
   }
+
+  const { filiacao, github, name, photo } = collaborator;
 
   return (
     <>
@@ -45,8 +58,8 @@ export default function CollaboratorCard({ collaborator }: { collaborator: Colla
           h={"auto"}
         >
           <Image
-            src={collaborator.photo}
-            alt={"Foto de integrante " + collaborator.name}
+            src={photo}
+            alt={"Foto de integrante " + name}
             borderRadius="100px"
             h="150px"
             w="160px"
@@ -61,17 +74,16 @@ export default function CollaboratorCard({ collaborator }: { collaborator: Colla
             w="32px"
             h="32px"
           >
-            <Link href={collaborator.github}>
+            <Link href={github}>
               <FaGithub size={32} style={iconStyle} />
             </Link>
           </Box>
         </Flex>
 
         <Flex mt="0.5em" direction={"column"} textAlign={"center"}>
-          <Text fontWeight={"bold"}>{collaborator.name}</Text>
-          <Text>{collaborator.filiacao}</Text>
+          <Text fontWeight={"bold"}>{name}</Text>
+          <Text>{filiacao}</Text>
         </Flex>
-        
       </Flex>
     </>
   );

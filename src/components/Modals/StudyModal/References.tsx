@@ -5,7 +5,7 @@ import useFetchReferenceData from "../../../hooks/fetch/useFetchReferenceData";
 
 export default function References() {
   const referenceData = useFetchReferenceData(
-    "../../../../public/mocks/referenceData.json"
+    "../../../mocks/referenceData.json"
   );
 
   return (
