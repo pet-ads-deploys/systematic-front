@@ -9,8 +9,8 @@ import {
   Stack,
   Checkbox,
 } from "@chakra-ui/react";
-import useFetchExtractionForm from "../../../../../../../../hooks/fetch/useFetchExtractionForm";
-import useFetchSelectBox from "../../../../../../../../hooks/fetch/useFetchSelectBox";
+import useFetchExtractionForm from "../../../../../../../hooks/execution/useFetchExtractionForm";
+import useFetchSelectBox from "../../../../../../../hooks/execution/useFetchSelectBox";
 
 const boxTheme = {
   my: "1rem",
