@@ -5,7 +5,7 @@ import useFetchStudyData from "../../../../hooks/seachAppropriateStudy/useFetchS
 
 import FlexLayout from "../../../../components/ui/Flex/Flex";
 import Header from "../../../../components/ui/Header/Header";
-import KeywordsTable from "../../../../components/Tables/KeywordsTable/KeywordsTable";
+import KeywordsTable from "../../../components/commons/toolkit/tables/execution/Keywords/KeywordsTable";
 import type { KeyWordHeaderInterface, KeywordInterface } from "./types";
 
 export default function KeyWordScreen() {

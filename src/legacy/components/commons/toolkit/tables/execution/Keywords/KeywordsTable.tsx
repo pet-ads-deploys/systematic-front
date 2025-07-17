@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import KeysTable from "./KeysTable";
+import KeysTable from "./subcomponents/KeysTable";
 
 interface keywordsInterface {
   keyword: string;
