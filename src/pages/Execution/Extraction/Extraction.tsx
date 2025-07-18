@@ -24,11 +24,14 @@ export default function Extraction() {
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
+
+  const [showSelected, setShowSelected] = useState<boolean>(false);
+
   const selectionContext = useContext(StudySelectionContext);
 
   if (!selectionContext) throw new Error("Failed to get the selection context");
 
-  const articles: ArticleInterface[] = useMemo(() => {
+  const allArticles: ArticleInterface[] = useMemo(() => {
     return selectionContext.articles
       .filter((art): art is ArticleInterface => "studyReviewId" in art)
       .filter((art) => art.selectionStatus === "INCLUDED");
@@ -38,12 +41,28 @@ export default function Extraction() {
 
   const page: PageLayout = "Extraction";
 
-  const filteredArticles = useFilterReviewArticles(
+  const startFilteredArticles = useFilterReviewArticles(
     searchString,
     selectedStatus,
-    articles,
+    allArticles,
     page
   );
+
+  const finalFilteredArticles = useMemo(() => {
+    if (showSelected && selectionContext.selectedArticles) {
+      const selectedIds = Object.keys(selectionContext.selectedArticles).map(
+        Number
+      );
+      return startFilteredArticles.filter((article) =>
+        selectedIds.includes(article.studyReviewId)
+      );
+    }
+    return startFilteredArticles;
+  }, [
+    showSelected,
+    startFilteredArticles,
+    selectionContext.selectedArticles,
+  ]);
 
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">
@@ -74,7 +93,9 @@ export default function Extraction() {
                 onChange={(e) => setSearchString(e.target.value)}
                 value={searchString}
               />
-              {layout !== "article" ? <ButtonsForMultipleSelection /> : null}
+              {layout !== "article" ? (
+                <ButtonsForMultipleSelection onShowSelectedArticles={setShowSelected}/>
+              ) : null}
             </Flex>
             <Box
               display="flex"
@@ -96,7 +117,7 @@ export default function Extraction() {
             <LayoutFactory
               page="Extraction"
               layout={layout}
-              articles={filteredArticles}
+              articles={finalFilteredArticles}
               isLoading={selectionContext.isLoading}
             />
           </Box>
