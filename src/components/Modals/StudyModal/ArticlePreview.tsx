@@ -78,7 +78,8 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
     <Flex
       w="100%"
       flexDirection="column"
-      padding="2rem"
+      padding="1rem"
+      paddingTop="0rem"
       fontFamily="Times New Roman, serif"
       h="fit-content"
     >

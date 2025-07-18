@@ -16,7 +16,7 @@ const sidebar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 20,
       restDelta: 2,
     },
@@ -25,9 +25,18 @@ const sidebar = {
     clipPath: "circle(30px at 40px 40px)",
     transition: {
       delay: 0.2,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 400,
       damping: 40,
+    },
+  },
+  "semi-collapsed": {
+    clipPath: "circle(60px at 40px 40px)",
+    transition: {
+      delay: 0.1,
+      type: "spring" as const,
+      stiffness: 300,
+      damping: 30,
     },
   },
 };
@@ -69,7 +78,7 @@ export default function Sidebar({
       variants={sidebar}
       style={{
         width: sidebarState === "open" ? "350px" : "140px",
-        transition: !isOpen ? "0s" : "1.5s",
+        transition: !isOpen ? "0s" : "2.5s",
       }}
     >
       <motion.nav

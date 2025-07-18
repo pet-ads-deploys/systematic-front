@@ -32,7 +32,7 @@ const Sidebar = ({ type }: Props) => {
         width: isOpen ? "16rem" : "0px",
         borderRadius: "1.25rem",
       }}
-      transition={{ type: "just", duration: 0.25 }}
+      transition={{ type: "tween", duration: 0.25 }}
     >
       {isOpen ? (
         <>
