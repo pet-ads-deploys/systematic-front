@@ -94,7 +94,10 @@ export default function Extraction() {
                 value={searchString}
               />
               {layout !== "article" ? (
-                <ButtonsForMultipleSelection onShowSelectedArticles={setShowSelected}/>
+                <ButtonsForMultipleSelection 
+                  onShowSelectedArticles={setShowSelected}
+                  isShown={showSelected}
+                />
               ) : null}
             </Flex>
             <Box

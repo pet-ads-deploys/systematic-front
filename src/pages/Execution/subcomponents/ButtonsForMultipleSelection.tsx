@@ -23,10 +23,12 @@ const buttonSX = {
 
 interface ButtonsForMultipleSelectionProps {
   onShowSelectedArticles: (showSelected: boolean) => void;
+  isShown: boolean;
 }
 
 export default function ButtonsForMultipleSelection({
   onShowSelectedArticles,
+  isShown
 }: ButtonsForMultipleSelectionProps) {
 
   const studyContext = useContext(StudySelectionContext);
@@ -45,6 +47,7 @@ export default function ButtonsForMultipleSelection({
   const handleSendDuplicatedStudies = () => {
     sendDuplicatedStudies();
     studyContext?.clearSelectedArticles();
+    onShowSelectedArticles(false);
   };
 
   const handleSendExcludedStudies = () => {
@@ -55,23 +58,42 @@ export default function ButtonsForMultipleSelection({
       criterias: [],
     });
     studyContext?.clearSelectedArticles();
+    onShowSelectedArticles(false);
   };
 
   return articles && Object.keys(articles).length > 1 ? (
     <Flex gap=".5rem">
-      <Button
+      
+      {!isShown ? (
+        <Button
         sx={buttonSX}
         bg="#6B8E23"
         border="2px solid #6B8E23"
         _hover={{ bg: "white", color: "#6B8E23" }}
         transition="0.2s ease-in-out"
         onClick={() => {
-          onShowSelectedArticles(true);
+          onShowSelectedArticles(!isShown);
         }}
         leftIcon={<FaEye />}
       >
         Show selected
       </Button>
+      ) : (
+        <Button
+        sx={buttonSX}
+        bg="#6B8E23"
+        border="2px solid #6B8E23"
+        _hover={{ bg: "white", color: "#6B8E23" }}
+        transition="0.2s ease-in-out"
+        onClick={() => {
+          onShowSelectedArticles(!isShown);
+        }}
+        leftIcon={<FaEye />}
+      >
+        Show all
+      </Button>
+      )}
+      
       <Button
         sx={buttonSX}
         bg="#3182CE"
@@ -102,7 +124,7 @@ export default function ButtonsForMultipleSelection({
         transition="0.2s ease-in-out"
         onClick={() => {
           studyContext.clearSelectedArticles();
-          onShowSelectedArticles(false); // Show all articles again after clearing selection
+          onShowSelectedArticles(false);
         }}
         leftIcon={<MdOutlineCleaningServices />}
       >
