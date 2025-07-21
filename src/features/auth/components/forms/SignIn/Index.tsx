@@ -1,6 +1,11 @@
+// External library
 import { Link } from "react-router-dom";
-import "../index.css";
+
+// Hooks
 import useHandleLogin from "../../../../../hooks/auth/useHandleLogin";
+
+// Styles
+import "../styles.css";
 
 export default function FormLogin({
   redirectForgotPassword,

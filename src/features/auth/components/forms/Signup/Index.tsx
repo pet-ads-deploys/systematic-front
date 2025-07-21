@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../index.css";
+import "../styles.css";
 import useHandleSignup from "../../../../../hooks/auth/useHandleRegister";
 
 export default function FormSignup({
