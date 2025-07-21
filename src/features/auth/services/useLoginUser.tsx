@@ -1,5 +1,5 @@
 import axios from "../../../interceptor/interceptor";
-import userToLoginProp from "../../../types/userToLogin";
+import userToLoginProp from "../types/userToLogin";
 
 import useStorageUserData from "../hooks/useStorageUserData";
 

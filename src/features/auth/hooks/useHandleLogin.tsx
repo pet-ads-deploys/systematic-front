@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import useLoginUser from "../services/useLoginUser";
-import userToLoginProp from "../../../types/userToLogin";
+import userToLoginProp from "../types/userToLogin";
 
 export default function useHandleLogin() {
   const [username, setUsername] = useState<string>("");

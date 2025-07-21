@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 
 import useRegisterUser from "../services/useRegisterUser";
-import userToRegisterProp from "../../../types/userToRegisterInterface";
+import userToRegisterProp from "../types/userToRegisterInterface";
 
 const useHandleRegister = (redirectFormLogin: () => void) => {
   const [name, setName] = useState<string>("");
