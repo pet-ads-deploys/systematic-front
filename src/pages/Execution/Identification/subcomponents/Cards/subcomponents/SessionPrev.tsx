@@ -26,7 +26,6 @@ interface SessionPrevProps {
   numberOfStudies: number;
   sessionId: string;
   invalidEntries: InvalidEntry[] | undefined;
-  sessionIndex: number;
 }
 
 const SessionPrev = ({
@@ -36,10 +35,8 @@ const SessionPrev = ({
   numberOfStudies,
   sessionId,
   invalidEntries,
-  sessionIndex,
 }: SessionPrevProps) => {
   const toast = useToast();
-
   const handleToastAlert = () => {
     toast({
       title: "Studies without references associated",
@@ -62,19 +59,18 @@ const SessionPrev = ({
     return `${day}/${month}/${year}`;
   };
 
-  const hasErrors = (sessionIndex: number) => {
-    return (
-      invalidEntries &&
-      invalidEntries[sessionIndex] &&
-      invalidEntries[sessionIndex].entries &&
-      invalidEntries[sessionIndex].entries.length > 0
+  const hasErrorsBySessionId = (id: string) => {
+    const has = invalidEntries?.some(
+      (entry) => entry?.id === id && entry?.entries?.length > 0
     );
+    return has;
   };
 
   const handleDownloadInvalidFiles = () => {
-    if (!invalidEntries || !invalidEntries[sessionIndex]) return;
-    const { id, fileName, fileExtension, entries } =
-      invalidEntries[sessionIndex];
+    const entry = invalidEntries?.find((entry) => entry?.id === sessionId);
+    if (!entry) return;
+
+    const { id, fileName, fileExtension, entries } = entry;
     const file = createFileToInvalidEntries({ fileExtension, entries });
     downloadFile(file, `${id}-${fileName}`);
   };
@@ -129,7 +125,7 @@ const SessionPrev = ({
           >
             <DeleteIcon />
           </Button>
-          {hasErrors(sessionIndex) && (
+          {hasErrorsBySessionId(sessionId) && (
             <Button
               flex={1}
               colorScheme="yellow"

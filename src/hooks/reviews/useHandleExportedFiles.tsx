@@ -72,6 +72,7 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
   };
 
   const addInvalidEntries = (
+    sessionId: string,
     formData: FormData,
     invalidArticles: string[],
     setInvalidEntries?: React.Dispatch<SetStateAction<InvalidEntry[]>>
@@ -88,7 +89,7 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
     setInvalidEntries((prev) => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        id: sessionId,
         fileName,
         fileExtension,
         entries: invalidArticles,
@@ -111,10 +112,12 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
 
     try {
       const response = await axios.post(url, formData, options);
-      const invalidArticles: string[] = response.data.invalidEntries;
-      addInvalidEntries(formData, invalidArticles, setInvalidEntries);
+      const sessionId = response.data.sessionId;
+      const invalidArticles: string[] = response.data.invalidEntries ?? [];
       mutate();
-      if (invalidArticles.length > 0) {
+      if (invalidArticles.length > 0 && setInvalidEntries) {
+        addInvalidEntries(sessionId, formData, invalidArticles, setInvalidEntries);
+
         toast({
           title: "Some files need revision",
           description: `${invalidArticles.length} file(s) could not be processed.`,
