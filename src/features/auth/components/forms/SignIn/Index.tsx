@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 
 // Hooks
-import useHandleLogin from "../../../../../hooks/auth/useHandleLogin";
+import useHandleLogin from "../../../hooks/useHandleLogin";
 
 // Styles
 import "../styles.css";

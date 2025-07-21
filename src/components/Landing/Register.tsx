@@ -4,7 +4,7 @@ import { FormControl, Box } from "@chakra-ui/react";
 import PasswordInput from "../Inputs/PasswordInput";
 import FormOptions from "./subcomponents/FormOptions";
 import RegisterInputs from "./subcomponents/inputs/RegisterInputs";
-import useHandleRegister from "../../hooks/auth/useHandleRegister";
+import useHandleRegister from "../../features/auth/hooks/useHandleRegister";
 import { bxconteiner, evbtn, formcontrol } from "./styles/RegisterStyle";
 
 interface iRegisterProps {

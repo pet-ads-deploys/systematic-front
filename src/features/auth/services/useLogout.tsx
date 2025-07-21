@@ -1,5 +1,5 @@
 import axios from "axios";
-import useDeleteUserData from "./useDeleteUserData";
+import useDeleteUserData from "../hooks/useDeleteUserData";
 
 export default function useLogout() {
   const url = "http://localhost:8080/";

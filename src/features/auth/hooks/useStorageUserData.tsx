@@ -1,4 +1,4 @@
-import userToLoginProp from "../../types/userToLogin";
+import userToLoginProp from "../../../types/userToLogin";
 
 export default function useStorageUserData(data: userToLoginProp) {
   function storageUserData() {

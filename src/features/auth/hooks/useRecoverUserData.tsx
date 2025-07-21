@@ -1,4 +1,4 @@
-import { useVerifyIfLoggedIn } from "./useVerifyIfLoggedIn";
+import { useVerifyIfLoggedIn } from "../services/useVerifyIfLoggedIn";
 
 export default async function useRecoverUserData(
   setUsername: React.Dispatch<React.SetStateAction<string | null>>

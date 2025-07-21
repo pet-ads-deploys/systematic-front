@@ -1,7 +1,7 @@
-import axios from "../../interceptor/interceptor";
-import userToLoginProp from "../../types/userToLogin";
+import axios from "../../../interceptor/interceptor";
+import userToLoginProp from "../../../types/userToLogin";
 
-import useStorageUserData from "./useStorageUserData";
+import useStorageUserData from "../hooks/useStorageUserData";
 
 export default async function useLoginUser(data: userToLoginProp) {
   const url = "http://localhost:8080/";

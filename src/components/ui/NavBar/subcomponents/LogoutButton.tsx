@@ -1,7 +1,7 @@
 import { flexconteiner } from "../styles/Navitemstyles";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Flex, Icon, Menu, MenuButton, Text } from "@chakra-ui/react";
-import useLogout from "../../../../hooks/auth/useLogout";
+import useLogout from "../../../../features/auth/services/useLogout";
 import { useNavigate } from "react-router-dom";
 
 interface ILogoutButtonProps {

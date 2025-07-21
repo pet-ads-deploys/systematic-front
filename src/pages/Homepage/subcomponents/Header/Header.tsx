@@ -9,7 +9,7 @@ import HomepageModal from "../../../../components/Modals/HomepageModal/Index";
 import FormLogin from "../../../../features/auth/components/forms/SignIn/Index";
 import FormSignup from "../../../../features/auth/components/forms/Signup/Index";
 import ForgotPassword from "../../../../features/auth/components/forms/ForgotPassword";
-import useRecoverUserData from "../../../../hooks/auth/useRecoverUserData";
+import useRecoverUserData from "../../../../features/auth/hooks/useRecoverUserData";
 
 interface IHeaderProps {
   show: boolean;

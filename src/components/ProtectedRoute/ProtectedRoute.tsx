@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useVerifyIfLoggedIn } from "../../hooks/auth/useVerifyIfLoggedIn";
+import { useVerifyIfLoggedIn } from "../../features/auth/services/useVerifyIfLoggedIn";
 import LoadingPage from "../../pages/LoadingPage/loadingPage";
 
 interface ProtectedRouteProps {
