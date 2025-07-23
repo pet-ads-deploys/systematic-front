@@ -49,7 +49,7 @@ export default function Extraction() {
   );
 
   const finalFilteredArticles = useMemo(() => {
-    if (showSelected && selectionContext.selectedArticles) {
+    if (showSelected && Object.keys(selectionContext.selectedArticles).length > 0) {
       const selectedIds = Object.keys(selectionContext.selectedArticles).map(
         Number
       );
