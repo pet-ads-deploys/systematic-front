@@ -1,4 +1,4 @@
-import EventButton from "../Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import FormOptions from "./subcomponents/FormOptions";
 import { FormControl, Box } from "@chakra-ui/react";
 import RegisterInputs from "./subcomponents/inputs/RegisterInputs";

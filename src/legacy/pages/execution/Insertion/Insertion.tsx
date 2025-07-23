@@ -4,9 +4,9 @@ import Header from "../../../../components/structure/Header/Header";
 import FlexLayout from "../../../../components/structure/Flex/Flex";
 // import ComboBox from "../../../components/Inputs/ComboBox";
 import InputText from "../../../../components/Inputs/InputText";
-import NavButton from "../../../../components/Buttons/NavButton";
+import NavButton from "@components/common/buttons/NavigationButton";
 import SelectInput from "../../../../components/Inputs/SelectInput";
-import EventButton from "../../../../components/Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import DynamicTable from "../../../components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../hooks/execution/useFetchStudyData";
 import {

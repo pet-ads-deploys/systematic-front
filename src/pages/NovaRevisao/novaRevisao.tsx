@@ -1,7 +1,7 @@
 import { Box, FormControl } from "@chakra-ui/react";
 import Header from "../../components/structure/Header/Header";
 import InputText from "../../components/Inputs/InputText";
-import NavButton from "../../components/Buttons/NavButton";
+import NavButton from "@components/common/buttons/NavigationButton";
 import InputTextArea from "../../components/Inputs/InputTextArea";
 import ResearcherFilter from "../UserArea/subcomponents/ResearcherFilter";
 import FlexLayout from "../../components/structure/Flex/Flex";

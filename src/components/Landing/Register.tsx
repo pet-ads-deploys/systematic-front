@@ -1,5 +1,5 @@
 import SelectInput from "../Inputs/SelectInput";
-import EventButton from "../Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import { FormControl, Box } from "@chakra-ui/react";
 import PasswordInput from "../Inputs/PasswordInput";
 import FormOptions from "./subcomponents/FormOptions";

@@ -12,7 +12,7 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import Header from "../../components/structure/Header/Header";
-import NavButton from "../../components/Buttons/NavButton";
+import NavButton from "@components/common/buttons/NavigationButton";
 import { btnBox, formControl } from "./styles/partOneStyles";
 import TextAreaInput from "../../components/Inputs/InputTextArea";
 import FlexLayout from "../../components/structure/Flex/Flex";

@@ -5,7 +5,7 @@ import Header from "../../../components/structure/Header/Header";
 // import ComboBox from "../../../components/Inputs/ComboBox";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
-import EventButton from "../../../components/Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import DynamicTable from "../../../legacy/components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../legacy/hooks/execution/useFetchStudyData";
 import {

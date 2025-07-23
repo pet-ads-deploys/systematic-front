@@ -15,8 +15,7 @@ const variants = {
     hoverBgColor: "#C9D9E5",
     hoverColor: "#263C56",
     borderRadius: "8px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", 
-
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   },
   dark: {
     bgColor: "#FDF0D5",
@@ -24,13 +23,19 @@ const variants = {
     hoverBgColor: "#301E1A",
     hoverColor: "#FDF0D5",
     borderRadius: "8px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", 
-
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   },
-}
+};
 
-export default function NavButton({ text, path = '', variant = "default", event = '', ...buttonProps }: iButtonProps) {
-  const { bgColor, color, hoverBgColor, hoverColor, borderRadius } = variants[variant];
+export default function NavButton({
+  text,
+  path = "",
+  variant = "default",
+  event = "",
+  ...buttonProps
+}: iButtonProps) {
+  const { bgColor, color, hoverBgColor, hoverColor, borderRadius } =
+    variants[variant];
 
   const handleClick = async () => {
     if (typeof event === "function") {
@@ -39,32 +44,27 @@ export default function NavButton({ text, path = '', variant = "default", event 
   };
 
   return (
-    <Link to={path}> 
-    
-      <Button 
-        ml='2rem'
+    <Link to={path}>
+      <Button
+        ml="2rem"
         onClick={handleClick}
-        bgColor={bgColor} 
+        bgColor={bgColor}
         color={color}
         borderRadius={borderRadius}
-        _hover={{ 
+        _hover={{
           bgColor: hoverBgColor,
           color: hoverColor,
-          boxShadow: "0 6px 8px rgba(0, 0, 0, 0.15)" 
-
+          boxShadow: "0 6px 8px rgba(0, 0, 0, 0.15)",
         }}
         {...buttonProps}
-        transition="all 0.3s ease" 
-        outline="none" 
+        transition="all 0.3s ease"
+        outline="none"
         _focus={{
-          boxShadow: "0 0 0 3px rgba(66, 153, 225, 0.6)", 
+          boxShadow: "0 0 0 3px rgba(66, 153, 225, 0.6)",
         }}
-        
-        
-        >
-          {text}
-      </Button> 
-
+      >
+        {text}
+      </Button>
     </Link>
   );
 }

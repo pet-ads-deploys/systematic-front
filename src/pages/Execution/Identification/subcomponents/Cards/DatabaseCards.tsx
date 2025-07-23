@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, Box, Text } from "@chakra-ui/react";
 
-import EventButton from "../../../../../components/Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import DataBaseIcon from "../../../../../components/Icons/DataBaseIcon";
 import AccordionDashboard from "./subcomponents/AccordionDashboard";
 import IdentificationModal from "../../../../../components/Modals/IdentificationModal";

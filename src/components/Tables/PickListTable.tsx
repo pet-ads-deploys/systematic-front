@@ -1,5 +1,5 @@
-import EditButton from "../Buttons/EditButton";
-import DeleteButton from "../Buttons/DeleteButton";
+import EditButton from "@components/common/buttons/EditButton";
+import DeleteButton from "@components/common/buttons/DeleteButton";
 import { useEditState } from "../../hooks/useEdit";
 import { tbConteiner } from "./styles/infosTableStyles";
 import { Table, Tbody, Tr, Td, TableContainer, Input } from "@chakra-ui/react";
@@ -10,13 +10,18 @@ interface InfosTableProps {
   typeField: string;
 }
 
-export default function InfosPickList({ AddTexts, onDeleteAddedText, typeField }: InfosTableProps) {
-  const { editIndex, handleEdit, handleSaveEdit, editedValue, handleChange } = useEditState({
-    AddTexts,
-    onSaveEdit: (editedValue, editIndex) => {
-      AddTexts[editIndex] = editedValue;
-    },
-  });
+export default function InfosPickList({
+  AddTexts,
+  onDeleteAddedText,
+  typeField,
+}: InfosTableProps) {
+  const { editIndex, handleEdit, handleSaveEdit, editedValue, handleChange } =
+    useEditState({
+      AddTexts,
+      onSaveEdit: (editedValue, editIndex) => {
+        AddTexts[editIndex] = editedValue;
+      },
+    });
 
   return (
     <TableContainer sx={tbConteiner}>
@@ -24,9 +29,18 @@ export default function InfosPickList({ AddTexts, onDeleteAddedText, typeField }
         <Tbody className="tableBody">
           {AddTexts.map((addText, index) => (
             <Tr key={index}>
-              <Td>{editIndex === index ? <Input value={editedValue} onChange={handleChange} /> : addText}</Td>
+              <Td>
+                {editIndex === index ? (
+                  <Input value={editedValue} onChange={handleChange} />
+                ) : (
+                  addText
+                )}
+              </Td>
               <Td textAlign={"right"}>
-                <DeleteButton index={index} handleDelete={() => onDeleteAddedText(index)} />
+                <DeleteButton
+                  index={index}
+                  handleDelete={() => onDeleteAddedText(index)}
+                />
                 {typeField !== "select" ? (
                   <EditButton
                     index={index}

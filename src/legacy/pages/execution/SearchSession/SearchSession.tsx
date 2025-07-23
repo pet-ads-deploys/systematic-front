@@ -2,14 +2,14 @@ import { Box } from "@chakra-ui/react";
 import { Upload } from "../../../components/commons/toolkit/buttons/upload/Upload";
 import useInputState from "../../../../hooks/useInputState";
 import Header from "../../../../components/structure/Header/Header";
-import NavButton from "../../../../components/Buttons/NavButton";
+import NavButton from "@components/common/buttons/NavigationButton";
 import DynamicTable from "../../../components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../hooks/execution/useFetchStudyData";
 import SearchInformations from "./subcomponents/searchInformations";
 import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";
 // import ComboBox from "../../components/Inputs/ComboBox";
 import { flex } from "../../../../pages/NovaRevisao/styles/finalizationStyles";
-import EventButton from "../../../../components/Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import FlexLayout from "../../../../components/structure/Flex/Flex";
 
 import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";

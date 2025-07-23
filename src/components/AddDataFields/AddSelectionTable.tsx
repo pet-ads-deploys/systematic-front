@@ -1,7 +1,7 @@
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import SelectInput from "../Inputs/SelectInput";
 import InfosTable from "../Tables/InfosTable";
-import EventButton from "../Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import { useSelect } from "../../hooks/useSelect";
 import { conteiner, formcontrol } from "./styles/AddSelectionStyles";
 
@@ -12,9 +12,18 @@ interface AddSelectTableProps {
   label: string;
 }
 
-export default function AddSelectTable({ options, label, placeholder }: AddSelectTableProps) {
-  const { selectedValue, selectedValues, handleSelectChange, handleSelectAddButtonClick, handleDeleteSelect } =
-    useSelect( [], label );
+export default function AddSelectTable({
+  options,
+  label,
+  placeholder,
+}: AddSelectTableProps) {
+  const {
+    selectedValue,
+    selectedValues,
+    handleSelectChange,
+    handleSelectAddButtonClick,
+    handleDeleteSelect,
+  } = useSelect([], label);
 
   return (
     <FormControl sx={conteiner} alignContent={"center"}>

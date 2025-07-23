@@ -30,7 +30,6 @@ const variants = {
 
 export default function EventButton({
   event,
-  text,
   icon = <AddIcon />,
   variant = "default",
   ...buttonProps
@@ -39,8 +38,7 @@ export default function EventButton({
     if (event) event();
   };
 
-  const { bgColor, color, borderRadius, boxShadow } =
-    variants[variant];
+  const { bgColor, color, borderRadius, boxShadow } = variants[variant];
 
   return (
     <Button
@@ -63,7 +61,6 @@ export default function EventButton({
       }}
     >
       {icon}
-      {/* {text} */}
     </Button>
   );
 }

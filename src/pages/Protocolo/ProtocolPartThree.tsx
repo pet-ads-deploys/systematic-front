@@ -1,5 +1,5 @@
 import Header from "../../components/structure/Header/Header";
-import NavButton from "../../components/Buttons/NavButton";
+import NavButton from "@components/common/buttons/NavigationButton";
 import { Progress, FormControl, Box } from "@chakra-ui/react";
 import { buttonBox, formControl } from "./styles/partThreeStyles";
 import TextAreaInput from "../../components/Inputs/InputTextArea";

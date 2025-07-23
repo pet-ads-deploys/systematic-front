@@ -1,17 +1,27 @@
-import { FormControl, FormLabel, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+} from "@chakra-ui/react";
 import TextAreaInput from "../../Inputs/InputTextArea";
-import EventButton from "../../Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import { useState } from "react";
 import { formcontrol } from "../styles/AddTextFieldStyle";
 import { useToast } from "@chakra-ui/react";
 
-
 interface IAddTextFieldProps {
-  onAddText: (newKeyword: {label: string, value: number}) => void;
+  onAddText: (newKeyword: { label: string; value: number }) => void;
   text: string;
 }
 
-export default function AddLabeledListField({ onAddText, text }: IAddTextFieldProps) {
+export default function AddLabeledListField({
+  onAddText,
+  text,
+}: IAddTextFieldProps) {
   const [inputValue, setInputValue] = useState<string>("");
   const [value, setValue] = useState(0);
   const toast = useToast;
@@ -22,7 +32,7 @@ export default function AddLabeledListField({ onAddText, text }: IAddTextFieldPr
 
   const handleAddText = () => {
     if (inputValue.trim() !== "") {
-      onAddText({label: inputValue.trim(), value});
+      onAddText({ label: inputValue.trim(), value });
       setInputValue("");
     } else {
       toast({
@@ -31,27 +41,34 @@ export default function AddLabeledListField({ onAddText, text }: IAddTextFieldPr
         status: "warning",
         duration: 4500,
         isClosable: true,
-        position: 'top'
+        position: "top",
       });
     }
   };
 
   return (
     <FormControl sx={formcontrol}>
-      <TextAreaInput value={inputValue} label="" placeholder={text} onChange={handleInputChange} />
-      
+      <TextAreaInput
+        value={inputValue}
+        label=""
+        placeholder={text}
+        onChange={handleInputChange}
+      />
+
       <FormLabel>Value</FormLabel>
-      <NumberInput mb={"2rem"} defaultValue={0} onChange={(_, valueAsNumber: number) => {
-        //valueAsString
-        if (!isNaN(valueAsNumber)) setValue(valueAsNumber);
-      }}>
-        
-          <NumberInputField />
-          <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-          </NumberInputStepper>
-      
+      <NumberInput
+        mb={"2rem"}
+        defaultValue={0}
+        onChange={(_, valueAsNumber: number) => {
+          //valueAsString
+          if (!isNaN(valueAsNumber)) setValue(valueAsNumber);
+        }}
+      >
+        <NumberInputField />
+        <NumberInputStepper>
+          <NumberIncrementStepper />
+          <NumberDecrementStepper />
+        </NumberInputStepper>
       </NumberInput>
 
       <EventButton event={handleAddText} text="ADD" mt={2} w={"10%"} />

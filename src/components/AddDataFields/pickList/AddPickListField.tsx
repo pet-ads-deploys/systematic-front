@@ -1,6 +1,6 @@
 import { FormControl, useToast } from "@chakra-ui/react";
 import TextAreaInput from "../../Inputs/InputTextArea";
-import EventButton from "../../Buttons/EventButton";
+import EventButton from "@components/common/buttons/EventButton";
 import { useState } from "react";
 import { formcontrol } from "../styles/AddTextFieldStyle";
 
@@ -9,7 +9,10 @@ interface IAddTextFieldProps {
   text: string;
 }
 
-export default function AddPickListField({ onAddText, text }: IAddTextFieldProps) {
+export default function AddPickListField({
+  onAddText,
+  text,
+}: IAddTextFieldProps) {
   const [inputValue, setInputValue] = useState<string>("");
   const toast = useToast();
 
@@ -28,14 +31,19 @@ export default function AddPickListField({ onAddText, text }: IAddTextFieldProps
         status: "warning",
         duration: 4500,
         isClosable: true,
-        position: 'top'
+        position: "top",
       });
     }
   };
 
   return (
     <FormControl sx={formcontrol}>
-      <TextAreaInput value={inputValue} label="" placeholder={text} onChange={handleInputChange}></TextAreaInput>
+      <TextAreaInput
+        value={inputValue}
+        label=""
+        placeholder={text}
+        onChange={handleInputChange}
+      ></TextAreaInput>
       <EventButton event={handleAddText} text="ADD" mt={2} w={"10%"} />
     </FormControl>
   );
