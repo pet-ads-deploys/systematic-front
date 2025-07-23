@@ -1,7 +1,7 @@
 import { Box, Flex, Textarea } from "@chakra-ui/react";
 import useInputState from "../../../hooks/useInputState";
 
-import Header from "../../../components/ui/Header/Header";
+import Header from "../../../components/structure/Header/Header";
 // import ComboBox from "../../../components/Inputs/ComboBox";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
@@ -16,7 +16,7 @@ import {
   tableconteiner,
   textArea,
 } from "../styles/finalizationStyles";
-import FlexLayout from "../../../components/ui/Flex/Flex";
+import FlexLayout from "../../../components/structure/Flex/Flex";
 
 import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
 import { tableTypeEnum } from "../../../types/enums/tableTypeEnum";

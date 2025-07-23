@@ -3,8 +3,8 @@ import { Box, Flex } from "@chakra-ui/react";
 
 import useInputState from "../../../hooks/useInputState";
 
-import Header from "../../../components/ui/Header/Header";
-import FlexLayout from "../../../components/ui/Flex/Flex";
+import Header from "../../../components/structure/Header/Header";
+import FlexLayout from "../../../components/structure/Flex/Flex";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";

@@ -1,5 +1,5 @@
 import ArticleInterface from "../../../types/ArticleInterface";
-import SkeletonLoader from "../../../components/ui/Skeleton/Skeleton";
+import SkeletonLoader from "../../../components/feedback/Skeleton/Skeleton";
 import { ViewModel } from "../../../hooks/useLayoutPage";
 import NoDataMessage from "./NoDataMessage";
 import React from "react";

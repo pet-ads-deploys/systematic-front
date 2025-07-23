@@ -1,11 +1,11 @@
-import Header from "../../components/ui/Header/Header";
+import Header from "../../components/structure/Header/Header";
 import NavButton from "../../components/Buttons/NavButton";
 import { Progress, FormControl, Box } from "@chakra-ui/react";
 import { btnBox, conteiner, flex } from "./styles/partTwooStyles";
 import TextAreaInput from "../../components/Inputs/InputTextArea";
 import AddTextTable from "../../components/AddDataFields/AddTextTable";
 import AddSelectionTable from "../../components/AddDataFields/AddSelectionTable";
-import FlexLayout from "../../components/ui/Flex/Flex";
+import FlexLayout from "../../components/structure/Flex/Flex";
 
 //importimg hook
 import useCreateProtocol from "../../hooks/reviews/useCreateProtocol";

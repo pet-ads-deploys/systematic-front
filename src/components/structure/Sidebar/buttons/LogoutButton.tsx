@@ -2,7 +2,7 @@ import { Box, Icon } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ImExit } from "react-icons/im";
 import Style from "./LogouButton.module.css";
-import useLogout from "../../../features/auth/services/useLogout";
+import useLogout from "../../../../features/auth/services/useLogout";
 
 const LogoutButton = () => {
   const logout = useLogout();

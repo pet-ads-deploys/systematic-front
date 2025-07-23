@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 
 import DataBaseCard from "./subcomponents/Cards/DatabaseCards";
-import Header from "../../../components/ui/Header/Header";
-import FlexLayout from "../../../components/ui/Flex/Flex";
+import Header from "../../../components/structure/Header/Header";
+import FlexLayout from "../../../components/structure/Flex/Flex";
 
 import { StudySelectionProvider } from "../../../context/StudiesSelectionContext";
 
