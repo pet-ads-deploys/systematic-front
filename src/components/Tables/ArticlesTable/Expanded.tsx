@@ -43,7 +43,7 @@ import {
 } from "../../../pages/Execution/styles/CardsStyle";
 
 // Utils
-import { capitalize } from "../../../utils/CapitalizeText";
+import { capitalize } from "../../../features/shared/utils/helpers/formatters/CapitalizeText";
 
 // Type
 import type ArticleInterface from "../../../types/ArticleInterface";
@@ -167,9 +167,9 @@ export default function Expanded({
   } = studyContext;
 
   const collapsedSpanTextChanged = {
-  ...collapsedSpanText,
-  w: "auto",
-};
+    ...collapsedSpanText,
+    w: "auto",
+  };
 
   return (
     <Box w="100%" maxH="82.5vh">
@@ -344,7 +344,9 @@ export default function Expanded({
                       aria-label="Full Title"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.title}</Text>
+                      <Text sx={collapsedSpanTextChanged}>
+                        {reference.title}
+                      </Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.authors}>
@@ -354,7 +356,9 @@ export default function Expanded({
                       aria-label="Full Author List"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.authors}</Text>
+                      <Text sx={collapsedSpanTextChanged}>
+                        {reference.authors}
+                      </Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.venue}>
@@ -364,7 +368,9 @@ export default function Expanded({
                       aria-label="Journal Name"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.venue}</Text>
+                      <Text sx={collapsedSpanTextChanged}>
+                        {reference.venue}
+                      </Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.year}>
@@ -374,7 +380,9 @@ export default function Expanded({
                       aria-label="Year of published"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.year}</Text>
+                      <Text sx={collapsedSpanTextChanged}>
+                        {reference.year}
+                      </Text>
                     </Tooltip>
                   </Td>
                   {page == "Selection" || page == "Identification" ? (
@@ -422,7 +430,9 @@ export default function Expanded({
                       aria-label="score of article"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.score}</Text>
+                      <Text sx={collapsedSpanTextChanged}>
+                        {reference.score}
+                      </Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.priority}>

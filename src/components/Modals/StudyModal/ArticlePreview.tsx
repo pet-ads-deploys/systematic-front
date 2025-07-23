@@ -11,7 +11,7 @@ import {
   MdKeyboardDoubleArrowDown,
   MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
-import { capitalize } from "../../../utils/CapitalizeText";
+import { capitalize } from "../../../features/shared/utils/helpers/formatters/CapitalizeText";
 
 export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
   const statusIconMap: Record<

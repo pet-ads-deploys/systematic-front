@@ -1,5 +1,5 @@
 import { useState, useCallback, ChangeEvent } from "react";
-import { capitalize } from "../utils/CapitalizeText";
+import { capitalize } from "../features/shared/utils/helpers/formatters/CapitalizeText";
 
 interface UseEditStateProps {
   AddTexts: string[];
@@ -27,7 +27,7 @@ export function useEditState({ AddTexts, onSaveEdit }: UseEditStateProps) {
   }, [editIndex, editedValue, onSaveEdit]);
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const value = capitalize(e.target.value)
+    const value = capitalize(e.target.value);
     setEditedValue(value);
   }, []);
 

@@ -3,7 +3,7 @@ import TextAreaInput from "../Inputs/InputTextArea";
 import EventButton from "../Buttons/EventButton";
 import { useState } from "react";
 import { formcontrol } from "./styles/AddTextFieldStyle";
-import { capitalize } from "../../utils/CapitalizeText";
+import { capitalize } from "../../features/shared/utils/helpers/formatters/CapitalizeText";
 import { useToast } from "@chakra-ui/react";
 
 interface IAddTextFieldProps {
@@ -12,7 +12,11 @@ interface IAddTextFieldProps {
   label: string;
 }
 
-export default function AddTextField({ onAddText, text, label }: IAddTextFieldProps) {
+export default function AddTextField({
+  onAddText,
+  text,
+  label,
+}: IAddTextFieldProps) {
   const [inputValue, setInputValue] = useState<string>("");
   const toast = useToast();
 
@@ -32,7 +36,7 @@ export default function AddTextField({ onAddText, text, label }: IAddTextFieldPr
         status: "warning",
         duration: 4500,
         isClosable: true,
-        position: 'top'
+        position: "top",
       });
     }
   };
@@ -43,7 +47,12 @@ export default function AddTextField({ onAddText, text, label }: IAddTextFieldPr
         <FormLabel>{label}</FormLabel>
         <EventButton event={handleAddText} text="ADD" w={"2%"} />
       </Box>
-      <TextAreaInput value={inputValue} label="" placeholder={text} onChange={handleInputChange}></TextAreaInput>
+      <TextAreaInput
+        value={inputValue}
+        label=""
+        placeholder={text}
+        onChange={handleInputChange}
+      ></TextAreaInput>
     </FormControl>
   );
 }

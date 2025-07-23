@@ -16,7 +16,7 @@ import { RiFlipHorizontalLine } from "react-icons/ri";
 import { ViewModel } from "../../../hooks/useLayoutPage";
 
 import React, { useState } from "react";
-import { capitalize } from "../../../utils/CapitalizeText";
+import { capitalize } from "../../../features/shared/utils/helpers/formatters/CapitalizeText";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 interface SelectLayoutProps {
@@ -85,8 +85,13 @@ export default function SelectLayout({
         {Object.values(buttons).map((element, index) => (
           <MenuItem
             key={index}
-            onClick={() => {handleChangeLayout(element.layoutType); setSelectedLayout(element.layoutType);}}
-            bg={selectedLayout === element.layoutType ? "blue.100" : "transparent"}
+            onClick={() => {
+              handleChangeLayout(element.layoutType);
+              setSelectedLayout(element.layoutType);
+            }}
+            bg={
+              selectedLayout === element.layoutType ? "blue.100" : "transparent"
+            }
             _hover={{ bg: "blue.200" }}
           >
             <Flex align="center" gap="1rem" w="inherit">

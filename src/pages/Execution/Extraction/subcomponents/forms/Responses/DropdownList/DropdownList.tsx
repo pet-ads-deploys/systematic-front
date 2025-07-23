@@ -3,7 +3,7 @@ import { FormControl, FormLabel } from "@chakra-ui/react";
 
 import SelectInput from "../../../../../../../components/Inputs/SelectInput";
 
-import { capitalize } from "../../../../../../../utils/CapitalizeText";
+import { capitalize } from "../../../../../../../features/shared/utils/helpers/formatters/CapitalizeText";
 
 import { container, label } from "../styles";
 

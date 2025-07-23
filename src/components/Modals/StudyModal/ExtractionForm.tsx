@@ -17,7 +17,7 @@ import SkeletonLoader from "../../ui/Skeleton/Skeleton";
 import useFetchAllQuestionsByArticle from "../../../hooks/fetch/useFetchAllQuestionsByArticle";
 
 // Utils
-import { capitalize } from "../../../utils/CapitalizeText";
+import { capitalize } from "../../../features/shared/utils/helpers/formatters/CapitalizeText";
 
 // Types
 import type { ArticlePreviewProps } from "./StudyData";

@@ -1,7 +1,7 @@
 import { FormControl, FormLabel, Textarea } from "@chakra-ui/react";
 import { responseArea } from "./textual";
 import React, { useState } from "react";
-import { capitalize } from "../../../../../../../utils/CapitalizeText";
+import { capitalize } from "../../../../../../../features/shared/utils/helpers/formatters/CapitalizeText";
 import { container, label } from "../styles";
 interface TextualResponseProps {
   question: string;

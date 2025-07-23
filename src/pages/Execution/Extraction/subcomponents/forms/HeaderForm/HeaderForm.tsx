@@ -1,6 +1,6 @@
 import { Box, Heading, Tooltip } from "@chakra-ui/react";
 import { container, header } from "./headerFormStyles";
-import { capitalize } from "../../../../../../utils/CapitalizeText";
+import { capitalize } from "../../../../../../features/shared/utils/helpers/formatters/CapitalizeText";
 
 interface HeaderFormProps {
   text: string;
