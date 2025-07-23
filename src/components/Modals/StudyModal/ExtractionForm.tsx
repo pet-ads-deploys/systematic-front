@@ -11,7 +11,7 @@ import {
 
 // Components
 import HeaderForm from "../../../pages/Execution/Extraction/subcomponents/forms/HeaderForm/HeaderForm";
-import SkeletonLoader from "../../feedback/Skeleton/Skeleton";
+import SkeletonLoader from "@components/feedback/Skeleton";
 
 // Hooks
 import useFetchAllQuestionsByArticle from "../../../hooks/fetch/useFetchAllQuestionsByArticle";
