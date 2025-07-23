@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 
-import IdentificationModal from "../../../../../../components/Modals/IdentificationModal";
-import SessionPrev from "./SessionPrev";
+import IdentificationModal from "../../../../components/Modals/IdentificationModal";
 
-import UseDeleteSession from "../../../../../../hooks/reviews/useDeleteSession";
+import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 
-import StudySelectionContext from "../../../../../../context/StudiesSelectionContext";
+import StudySelectionContext from "../../../../context/StudiesSelectionContext";
+import type IAcordionDashboard from "../../../../types/IAccordionDashboard";
 
-import { Accordionbtn, accordion } from "../../../../styles/CardsStyle";
+import { Accordionbtn, accordion } from "../../styles/CardsStyle";
 import {
   Accordion,
   AccordionItem,
@@ -22,8 +22,8 @@ import {
   Th,
   Tbody,
 } from "@chakra-ui/react";
+import SessionPrev from "../../Identification/subcomponents/Cards/subcomponents/SessionPrev";
 
-import IAccordionDashBoard from "../../../../../../types/IAccordionDashboard";
 interface actionsModal {
   action: "create" | "update";
 }
@@ -32,7 +32,7 @@ export default function AccordionDashboard({
   type,
   sessions,
   mutate,
-}: IAccordionDashBoard) {
+}: IAcordionDashboard) {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [actionModal, setActionModal] = useState<"create" | "update">("create");
@@ -124,7 +124,6 @@ export default function AccordionDashboard({
                       handleOpenModal={handleOpenModal}
                       handleDelete={handleDeleteStudies}
                       invalidEntries={context.invalidEntries}
-                      // sessionIndex={index}
                       timestamp={item.timestamp}
                       numberOfStudies={item.numberOfRelatedStudies}
                     />
