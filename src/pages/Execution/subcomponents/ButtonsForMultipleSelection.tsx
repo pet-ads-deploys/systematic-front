@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Button, Flex } from "@chakra-ui/react";
 
-import SelectedArticles from "../../../components/Modals/SelectedArticles/SelectedArticles";
 import StudySelectionContext from "../../../context/StudiesSelectionContext";
 import { UseChangeStudySelectionStatus } from "../../../hooks/useChangeStudySelectionStatus";
 import useSendDuplicatedStudies from "../../../hooks/tables/useSendDuplicatedStudies";
@@ -22,9 +21,15 @@ const buttonSX = {
   color: "white",
 };
 
-export default function ButtonsForMultipleSelection() {
-  const [showMultipleArticlesModal, setShowMultipleArticlesModal] =
-    useState<boolean>(false);
+interface ButtonsForMultipleSelectionProps {
+  onShowSelectedArticles: (showSelected: boolean) => void;
+  isShown: boolean;
+}
+
+export default function ButtonsForMultipleSelection({
+  onShowSelectedArticles,
+  isShown
+}: ButtonsForMultipleSelectionProps) {
 
   const studyContext = useContext(StudySelectionContext);
 
@@ -42,6 +47,7 @@ export default function ButtonsForMultipleSelection() {
   const handleSendDuplicatedStudies = () => {
     sendDuplicatedStudies();
     studyContext?.clearSelectedArticles();
+    onShowSelectedArticles(false);
   };
 
   const handleSendExcludedStudies = () => {
@@ -52,28 +58,42 @@ export default function ButtonsForMultipleSelection() {
       criterias: [],
     });
     studyContext?.clearSelectedArticles();
+    onShowSelectedArticles(false);
   };
 
-  return articles && Object.keys(articles).length > 1 ? (
+  return articles && Object.keys(articles).length >= 1 ? (
     <Flex gap=".5rem">
-      <Button
+      
+      {!isShown ? (
+        <Button
         sx={buttonSX}
         bg="#6B8E23"
         border="2px solid #6B8E23"
         _hover={{ bg: "white", color: "#6B8E23" }}
         transition="0.2s ease-in-out"
-        onClick={() => setShowMultipleArticlesModal((prev) => !prev)}
+        onClick={() => {
+          onShowSelectedArticles(!isShown);
+        }}
         leftIcon={<FaEye />}
       >
         Show selected
       </Button>
-      {showMultipleArticlesModal && (
-        <SelectedArticles
-          articles={articles}
-          showModal={showMultipleArticlesModal}
-          setShowModal={setShowMultipleArticlesModal}
-        />
+      ) : (
+        <Button
+        sx={buttonSX}
+        bg="#6B8E23"
+        border="2px solid #6B8E23"
+        _hover={{ bg: "white", color: "#6B8E23" }}
+        transition="0.2s ease-in-out"
+        onClick={() => {
+          onShowSelectedArticles(!isShown);
+        }}
+        leftIcon={<FaEye />}
+      >
+        Show all
+      </Button>
       )}
+      
       <Button
         sx={buttonSX}
         bg="#3182CE"
@@ -102,7 +122,10 @@ export default function ButtonsForMultipleSelection() {
         border="2px solid #F6BB42"
         _hover={{ bg: "white", color: "#F6BB42" }}
         transition="0.2s ease-in-out"
-        onClick={studyContext.clearSelectedArticles}
+        onClick={() => {
+          studyContext.clearSelectedArticles();
+          onShowSelectedArticles(false);
+        }}
         leftIcon={<MdOutlineCleaningServices />}
       >
         Clear selection
