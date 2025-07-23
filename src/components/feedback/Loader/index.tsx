@@ -1,5 +1,5 @@
 // Icons
-import loader from "../../assets/icons/loader.svg";
+import loader from "../../../assets/icons/loader.svg";
 
 // Styles
 import Style from "./Loader.module.css";

@@ -7,7 +7,7 @@ import useGetReviewCard from "../../hooks/reviews/useGetReviewCard";
 // Components
 import FlexLayout from "../../components/structure/Flex/Flex";
 import Header from "../../components/structure/Header/Header";
-import Loader from "../../components/Icons/Loader";
+import Loader from "../../components/feedback/Loader";
 import RenderCards from "./utils/RenderCards";
 import RenderCreateNewReview from "./utils/RenderCreateNewReview";
 
