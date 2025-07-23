@@ -1,8 +1,14 @@
+// External library
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useVerifyIfLoggedIn } from "../../features/auth/services/useVerifyIfLoggedIn";
-import LoadingPage from "../../pages/LoadingPage/loadingPage";
 
+// Services
+import { useVerifyIfLoggedIn } from "../services/useVerifyIfLoggedIn";
+
+// Page Component
+import LoadingPage from "../../../pages/LoadingPage/loadingPage";
+
+// Types
 interface ProtectedRouteProps {
   element: JSX.Element;
 }

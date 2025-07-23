@@ -2,7 +2,7 @@
 import { RouteObject, useRoutes } from "react-router-dom";
 
 // Guard Component
-import ProtectedRoute from "@components/ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "@features/auth/guards/ProtectedRoute";
 
 // Pages Components
 import CollaboratorsPage from "./pages/CollaboratorsPage/CollaboratorsPage";
