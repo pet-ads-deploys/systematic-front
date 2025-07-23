@@ -5,7 +5,7 @@ import { useDimensions } from "./use-dimensions";
 import "./styles.css";
 import { Navigation } from "./Navigation";
 import { MenuToggle } from "./MenuToggle";
-import AppContext from "../../../context/AppContext";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 interface ISidebarProps {
   type: string;

@@ -17,8 +17,8 @@ import NavegationIconsPanel from "./NavigationIconPanel";
 import OtherStudyPanels from "./OtherStudyPanels";
 import ModalContext from "../../../../../../../context/ModalContext";
 
-import AppContext from "../../../../../../../../context/AppContext";
 import { StudyInterface } from "../../../../../../../../types/IStudy";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 interface IStudy {
   isOpen: boolean;

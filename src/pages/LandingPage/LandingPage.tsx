@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import Header from "../Homepage/subcomponents/Header/Header";
-import AppContext from "../../context/AppContext";
+
 import { conteiner, content, formConteiner } from "./styles/styles";
 import RenderForm from "../../components/Landing/subcomponents/RenderForm";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 export default function LandingPage() {
   const context = useContext(AppContext);

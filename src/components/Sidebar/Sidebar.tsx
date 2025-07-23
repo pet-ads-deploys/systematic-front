@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 import Style from "./Sidebar.module.css";
 import CloseButton from "./buttons/CloseButton";
 import Navigation from "./Navigation";
-import AppContext from "../../context/AppContext";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 interface Props {
   type: string;

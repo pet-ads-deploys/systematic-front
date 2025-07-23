@@ -3,7 +3,7 @@ import { flexconteiner } from "../styles/Navitemstyles";
 import { useLocation } from "react-router-dom";
 
 import { Flex, Icon, Menu, MenuButton, Text } from "@chakra-ui/react";
-import AppContext from "../../../../context/AppContext";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 interface INavItemProps {
   navSize: string;

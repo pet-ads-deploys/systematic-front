@@ -5,7 +5,7 @@ import Expanded from "./Expanded";
 import ArticleInterface from "../../../types/ArticleInterface";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
 import { ViewModel } from "../../../hooks/useLayoutPage";
-import AppContext from "../../../context/AppContext";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 interface Props {
   articles: ArticlesInterface[];

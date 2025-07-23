@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { buttonTheme } from "./styles/ButtonTheme";
-import AppContext from "../../../../../context/AppContext";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 interface IHeaderButton {
   text: string;

@@ -4,11 +4,12 @@ import { ModalProvider } from "../../../../../../../context/ModalContext";
 
 import { useContext } from "react";
 import ColoredIcon from "../../../../../../../../components/Icons/ColoredIcon";
-import AppContext from "../../../../../../../../context/AppContext";
+
 import { TableHeadersInterface } from "../../../../../../../../types/ITableHeaders";
 import { KeyWordHeaderInterface } from "../../../../../../../../types/IKeyWordHeard";
 import { KeywordInterface } from "../../../../../../../../types/KeywordInterface";
 import { StudyInterface } from "../../../../../../../../types/IStudy";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 interface IStudy<T, U> {
   rowData: U;

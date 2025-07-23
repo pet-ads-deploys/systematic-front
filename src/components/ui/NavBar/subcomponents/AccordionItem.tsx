@@ -11,7 +11,7 @@ import {
   AccordionPanel,
 } from "@chakra-ui/react";
 import { iconbox } from "../styles/AccordionItenStyles";
-import AppContext from "../../../../context/AppContext";
+import AppContext from "@features/shared/context/ApplicationContext";
 
 interface IAccordionElementProps {
   navSize: string;
