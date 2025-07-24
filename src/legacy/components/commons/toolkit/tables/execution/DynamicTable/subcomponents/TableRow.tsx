@@ -3,7 +3,7 @@ import StudiesModal from "./StudiesModal";
 import { ModalProvider } from "../../../../../../../context/ModalContext";
 
 import { useContext } from "react";
-import ColoredIcon from "../../../../../../../../components/Icons/ColoredIcon";
+import ColoredIcon from "../../../../../../../../components/common/icons/ColoredIcon";
 
 import { TableHeadersInterface } from "../../../../../../../../types/ITableHeaders";
 import { KeyWordHeaderInterface } from "../../../../../../../../types/IKeyWordHeard";
