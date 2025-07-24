@@ -8,7 +8,7 @@ import axios from "axios";
 import StudySelectionContext from "../../context/StudiesSelectionContext";
 
 // Utils
-import getRequestOptions from "../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Type
 type PriorityValue = "VERY_LOW" | "LOW" | "HIGH" | "VERY_HIGH";

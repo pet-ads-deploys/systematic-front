@@ -1,4 +1,4 @@
-import getRequestOptions from "../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import axios from "../interceptor/interceptor";
 
 interface Props {

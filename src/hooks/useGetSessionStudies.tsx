@@ -7,7 +7,7 @@ interface HttpResponse {
 
 import ArticleInterface from "../types/ArticleInterface";
 
-import getRequestOptions from "../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 const useGetSessionStudies = (sessionId: string) => {
   const reviewId = localStorage.getItem("systematicReviewId");

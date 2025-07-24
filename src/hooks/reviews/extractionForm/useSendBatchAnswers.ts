@@ -8,7 +8,7 @@ import Axios from "../../../interceptor/interceptor";
 import StudySelectionContext from "../../../context/StudiesSelectionContext";
 
 // Utils
-import getRequestOptions from "../../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Types
 import type { SendAnswerProps } from "../../../pages/Execution/Extraction/subcomponents/forms/types";

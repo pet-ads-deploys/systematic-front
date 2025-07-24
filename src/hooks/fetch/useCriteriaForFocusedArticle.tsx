@@ -5,7 +5,7 @@ import useSWR from "swr";
 import Axios from "../../interceptor/interceptor";
 
 // Utils
-import getRequestOptions from "../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Types
 interface HttpResponse {

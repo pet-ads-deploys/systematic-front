@@ -5,7 +5,7 @@ import Axios from "../../interceptor/interceptor";
 import useFocusedArticle from "./useFocusedArticle";
 
 // Utils
-import getRequestOptions from "../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Types
 import type { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";

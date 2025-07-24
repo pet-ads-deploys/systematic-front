@@ -1,7 +1,7 @@
 import Axios from "../../interceptor/interceptor";
-import getRequestOptions from "../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
- export type HttpResponse = {
+export type HttpResponse = {
   userId: string;
   systematicStudyId: string;
   source: string;
@@ -12,7 +12,7 @@ import getRequestOptions from "../../utils/getRequestOptions";
 };
 
 export async function fetchStudiesBySource(
-  databases: string[],
+  databases: string[]
 ): Promise<HttpResponse[]> {
   const systematicReviewId = localStorage.getItem("systematicReviewId");
   if (!systematicReviewId || databases.length === 0) return [];

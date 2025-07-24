@@ -4,7 +4,7 @@ import axios from "../../interceptor/interceptor";
 // import useGetSession from "./useGetSession";
 import { useToast } from "@chakra-ui/react";
 import { InvalidEntry } from "../../context/StudiesSelectionContext";
-import getRequestOptions from "../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import { KeyedMutator } from "swr";
 
 interface Props {
@@ -116,7 +116,12 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
       const invalidArticles: string[] = response.data.invalidEntries ?? [];
       mutate();
       if (invalidArticles.length > 0 && setInvalidEntries) {
-        addInvalidEntries(sessionId, formData, invalidArticles, setInvalidEntries);
+        addInvalidEntries(
+          sessionId,
+          formData,
+          invalidArticles,
+          setInvalidEntries
+        );
 
         toast({
           title: "Some files need revision",

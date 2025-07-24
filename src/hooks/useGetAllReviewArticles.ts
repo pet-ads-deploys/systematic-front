@@ -2,7 +2,7 @@
 import ArticleInterface from "../types/ArticleInterface";
 import axios from "../interceptor/interceptor";
 
-import getRequestOptions from "../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import useSWR from "swr";
 import { StudyInterface } from "../types/IStudy";
 

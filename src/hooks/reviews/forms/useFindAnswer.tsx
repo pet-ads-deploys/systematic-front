@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import Axios from "../../../interceptor/interceptor";
-import getRequestOptions from "../../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 interface FindAnswerResponse {
   linksFactory: object;

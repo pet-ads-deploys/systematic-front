@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import Axios from "../../interceptor/interceptor";
-import getRequestOptions from "../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import { useFetchExtractionQuestions } from "../fetch/useFetchExtractionQuestions";
 import { useFetchRobQuestions } from "../fetch/useFetchRobQuestions";
 
@@ -22,7 +22,10 @@ export type AnswerData = {
   answer: Record<string, number[]>;
 };
 
-const fetcher = async (systematicStudyId: string, questionIds:(string|null)[] ): Promise<AnswerData[]> => {
+const fetcher = async (
+  systematicStudyId: string,
+  questionIds: (string | null)[]
+): Promise<AnswerData[]> => {
   if (!systematicStudyId || questionIds.length === 0) return [];
 
   const options = getRequestOptions();

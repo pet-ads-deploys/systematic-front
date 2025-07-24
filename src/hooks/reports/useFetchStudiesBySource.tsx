@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import Axios from "../../interceptor/interceptor";
-import getRequestOptions from "../../utils/getRequestOptions";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 export type HttpResponse = {
   userId: string;
@@ -12,7 +12,10 @@ export type HttpResponse = {
   totalOfStudies: number;
 };
 
-const fetcher = async (systematicReviewId: string, databases: string[]): Promise<HttpResponse[]> => {
+const fetcher = async (
+  systematicReviewId: string,
+  databases: string[]
+): Promise<HttpResponse[]> => {
   if (!systematicReviewId || databases.length === 0) return [];
 
   const options = getRequestOptions();
