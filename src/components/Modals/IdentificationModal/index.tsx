@@ -26,7 +26,7 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 
 import { KeyedMutator } from "swr";
-import StudySelectionContext from "../../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 interface IdentificationModalProps {
   show: (value: boolean) => void;

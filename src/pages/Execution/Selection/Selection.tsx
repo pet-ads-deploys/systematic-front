@@ -9,7 +9,7 @@ import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
 import LayoutFactory from "../subcomponents/LayoutFactory";
 
-import StudySelectionContext from "../../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 import { inputconteiner } from "../styles/executionStyles";
 
@@ -49,7 +49,10 @@ export default function Selection() {
   );
 
   const finalFilteredArticles = useMemo(() => {
-    if (showSelected && Object.keys(selectionContext.selectedArticles).length > 0) {
+    if (
+      showSelected &&
+      Object.keys(selectionContext.selectedArticles).length > 0
+    ) {
       const selectedIds = Object.keys(selectionContext.selectedArticles).map(
         Number
       );
@@ -90,10 +93,10 @@ export default function Selection() {
                 value={searchString}
               />
               {layout !== "article" ? (
-                <ButtonsForMultipleSelection 
+                <ButtonsForMultipleSelection
                   onShowSelectedArticles={setShowSelected}
                   isShown={showSelected}
-                  />
+                />
               ) : null}
             </Flex>
             <Box

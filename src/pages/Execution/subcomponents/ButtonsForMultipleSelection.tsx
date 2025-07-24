@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Button, Flex } from "@chakra-ui/react";
 
-import StudySelectionContext from "../../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 import { UseChangeStudySelectionStatus } from "../../../hooks/useChangeStudySelectionStatus";
 import useSendDuplicatedStudies from "../../../hooks/tables/useSendDuplicatedStudies";
 import { FaCheckCircle, FaEye, FaTrashAlt } from "react-icons/fa";
@@ -28,9 +28,8 @@ interface ButtonsForMultipleSelectionProps {
 
 export default function ButtonsForMultipleSelection({
   onShowSelectedArticles,
-  isShown
+  isShown,
 }: ButtonsForMultipleSelectionProps) {
-
   const studyContext = useContext(StudySelectionContext);
 
   const duplicatedStudies = studyContext?.deletedArticles.filter(
@@ -63,37 +62,36 @@ export default function ButtonsForMultipleSelection({
 
   return articles && Object.keys(articles).length >= 1 ? (
     <Flex gap=".5rem">
-      
       {!isShown ? (
         <Button
-        sx={buttonSX}
-        bg="#6B8E23"
-        border="2px solid #6B8E23"
-        _hover={{ bg: "white", color: "#6B8E23" }}
-        transition="0.2s ease-in-out"
-        onClick={() => {
-          onShowSelectedArticles(!isShown);
-        }}
-        leftIcon={<FaEye />}
-      >
-        Show selected
-      </Button>
+          sx={buttonSX}
+          bg="#6B8E23"
+          border="2px solid #6B8E23"
+          _hover={{ bg: "white", color: "#6B8E23" }}
+          transition="0.2s ease-in-out"
+          onClick={() => {
+            onShowSelectedArticles(!isShown);
+          }}
+          leftIcon={<FaEye />}
+        >
+          Show selected
+        </Button>
       ) : (
         <Button
-        sx={buttonSX}
-        bg="#6B8E23"
-        border="2px solid #6B8E23"
-        _hover={{ bg: "white", color: "#6B8E23" }}
-        transition="0.2s ease-in-out"
-        onClick={() => {
-          onShowSelectedArticles(!isShown);
-        }}
-        leftIcon={<FaEye />}
-      >
-        Show all
-      </Button>
+          sx={buttonSX}
+          bg="#6B8E23"
+          border="2px solid #6B8E23"
+          _hover={{ bg: "white", color: "#6B8E23" }}
+          transition="0.2s ease-in-out"
+          onClick={() => {
+            onShowSelectedArticles(!isShown);
+          }}
+          leftIcon={<FaEye />}
+        >
+          Show all
+        </Button>
       )}
-      
+
       <Button
         sx={buttonSX}
         bg="#3182CE"

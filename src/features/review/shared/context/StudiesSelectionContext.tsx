@@ -7,11 +7,11 @@ import React, {
 } from "react";
 import { KeyedMutator } from "swr";
 
-import useGetAllReviewArticles from "../hooks/useGetAllReviewArticles";
+import useGetAllReviewArticles from "../../../../hooks/useGetAllReviewArticles";
 
-import ArticleInterface from "../types/ArticleInterface";
-import useSelectedArticles from "../hooks/tables/useSelectedArticles";
-import { StudyInterface } from "../types/IStudy";
+import ArticleInterface from "../../../../types/ArticleInterface";
+import useSelectedArticles from "../../../../hooks/tables/useSelectedArticles";
+import { StudyInterface } from "../../../../types/IStudy";
 
 export interface InvalidEntry {
   id: string;

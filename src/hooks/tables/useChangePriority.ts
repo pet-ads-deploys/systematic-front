@@ -5,7 +5,7 @@ import { useContext } from "react";
 import axios from "axios";
 
 // Contenxt
-import StudySelectionContext from "../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 // Utils
 import getRequestOptions from "@features/auth/utils/getRequestOptions";

@@ -25,7 +25,7 @@ import {
 import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
 
 // Context
-import StudySelectionContext from "../../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 // Hook
 import usePagination from "../../../hooks/tables/usePagination";

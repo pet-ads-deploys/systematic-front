@@ -7,7 +7,7 @@ import ButtonsForSelection from "./ButtonsForSelection";
 import StudyDataFiel from "../../../components/Modals/StudyModal/StudyData";
 
 // Context
-import StudySelectionContext from "../../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 // Types
 import type { PageLayout } from "./LayoutFactory";

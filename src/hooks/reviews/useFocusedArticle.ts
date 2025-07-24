@@ -2,7 +2,7 @@
 import { useContext, useMemo } from "react";
 
 // Context
-import StudySelectionContext from "../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 // Hook
 import useFetchAllClassifiedArticles from "../fetch/useFetchAllClassifiedArticles";

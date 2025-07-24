@@ -5,7 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 // Contexts
 import { AppProvider } from "./features/shared/context/ApplicationContext";
-import { StudySelectionProvider } from "./context/StudiesSelectionContext";
+import { StudySelectionProvider } from "@features/review/shared/context/StudiesSelectionContext.tsx";
 
 // Components
 import App from "./App.tsx";

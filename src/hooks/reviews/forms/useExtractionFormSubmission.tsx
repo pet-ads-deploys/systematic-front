@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useToast } from "@chakra-ui/react";
 
 // Context
-import StudySelectionContext from "../../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 // Hooks
 import { useSendBatchAnswers } from "../extractionForm/useSendBatchAnswers";

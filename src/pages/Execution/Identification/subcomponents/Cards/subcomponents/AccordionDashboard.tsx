@@ -5,7 +5,7 @@ import SessionPrev from "./SessionPrev";
 
 import UseDeleteSession from "../../../../../../hooks/reviews/useDeleteSession";
 
-import StudySelectionContext from "../../../../../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 import { Accordionbtn, accordion } from "../../../../styles/CardsStyle";
 import {

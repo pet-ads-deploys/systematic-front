@@ -4,7 +4,7 @@ import IdentificationModal from "../../../../components/Modals/IdentificationMod
 
 import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
 
-import StudySelectionContext from "../../../../context/StudiesSelectionContext";
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 import type IAcordionDashboard from "../../../../types/IAccordionDashboard";
 
 import { Accordionbtn, accordion } from "../../styles/CardsStyle";

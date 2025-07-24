@@ -4,7 +4,7 @@ import DataBaseCard from "./subcomponents/Cards/DatabaseCards";
 import Header from "../../../components/structure/Header/Header";
 import FlexLayout from "../../../components/structure/Flex/Flex";
 
-import { StudySelectionProvider } from "../../../context/StudiesSelectionContext";
+import { StudySelectionProvider } from "@features/review/shared/context/StudiesSelectionContext";
 
 import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
 
