@@ -1,18 +1,19 @@
-import axios from "axios";
-import useDeleteUserData from "../hooks/useDeleteUserData";
+// Service
+import Axios from "../../../interceptor/interceptor";
+
+// Hooks
+import useDeleteUserData from "@features/auth/hooks/useDeleteUserData";
 
 export default function useLogout() {
-  const url = "http://localhost:8080/";
   const deleteUserData = useDeleteUserData();
 
   const logout = async () => {
     try {
-      const response = await axios.post(
-        url + "api/v1/auth/logout",
+      await Axios.post(
+        "http://localhost:8080/api/v1/auth/logout",
         {},
         { withCredentials: true }
       );
-      console.log(response);
       deleteUserData();
     } catch (error) {
       console.log(error);

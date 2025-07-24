@@ -1,8 +1,12 @@
+// External library
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-import useLoginUser from "../services/useLoginUser";
-import userToLoginProp from "../types/userToLogin";
+
+// Services
+import login from "../services/useLoginUser";
+
+// Types
+import type { AccessCredentials } from "../types";
 
 export default function useHandleLogin() {
   const [username, setUsername] = useState<string>("");
@@ -13,7 +17,7 @@ export default function useHandleLogin() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const isValid = error === "" && username !== "" && password !== "";
-  const data: userToLoginProp = {
+  const data: AccessCredentials = {
     username: username,
     password: password,
   };
@@ -41,8 +45,8 @@ export default function useHandleLogin() {
     if (isValid) {
       setIsSubmitting(true);
       try {
-        const response = await useLoginUser(data);
-        if ((await response).status == 200) {
+        const response = await login(data);
+        if (response?.status == 200) {
           localStorage.setItem("accessToken", response.data.accessToken);
           navigate("/user");
         }
@@ -56,6 +60,7 @@ export default function useHandleLogin() {
       }
     }
   };
+
   return {
     username,
     setUsername,

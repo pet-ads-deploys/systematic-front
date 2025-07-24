@@ -1,8 +1,12 @@
+// External library
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 
+// Services
 import useRegisterUser from "../services/useRegisterUser";
-import userToRegisterProp from "../types/userToRegisterInterface";
+
+// Types
+import type { User } from "../types";
 
 const useHandleRegister = (redirectFormLogin: () => void) => {
   const [name, setName] = useState<string>("");
@@ -100,7 +104,7 @@ const useHandleRegister = (redirectFormLogin: () => void) => {
 
     if (isValid) {
       setIsSubmitting(true);
-      const data: userToRegisterProp = {
+      const data: User = {
         username: name,
         password: password,
         email: email,

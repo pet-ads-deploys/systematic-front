@@ -1,25 +1,33 @@
-import axios from "../../../interceptor/interceptor";
-import userToLoginProp from "../types/userToLogin";
+// Service
+import Axios from "../../../interceptor/interceptor";
 
-import useStorageUserData from "../hooks/useStorageUserData";
+// Hooks
+import useStorageUserData from "@features/auth/hooks/useStorageUserData";
 
-export default async function useLoginUser(data: userToLoginProp) {
-  const url = "http://localhost:8080/";
+// Factory
+import errorFactory from "@features/shared/errors/factory/errorFactory";
+
+// Types
+import { AccessCredentials } from "../types";
+
+export default async function useLoginUser(data: AccessCredentials) {
   const storageUserData = useStorageUserData(data);
 
   try {
-    const response = await axios.post(url + "api/v1/auth", data, {
-      withCredentials: true,
-    });
-    console.log(response);
+    const response = await Axios.post(
+      "http://localhost:8080/api/v1/auth",
+      data,
+      {
+        withCredentials: true,
+      }
+    );
     localStorage.setItem(
       "myReviewsLink",
       response.data._links["find-my-reviews"].href
     );
-
     storageUserData();
     return response;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    errorFactory("unauthorized", (error as Error).message);
   }
 }
