@@ -67,7 +67,7 @@ type HeaderKeys =
   | "selectionStatus"
   | "extractionStatus"
   | "score"
-  | "readingPriority";
+  | "priority";
 
 type Column = {
   key: HeaderKeys;
@@ -112,12 +112,12 @@ export default function Expanded({
       width: columnWidths.selectionStatus,
     },
     { label: "Score", key: "score", width: columnWidths.score },
-    { label: "Priority", key: "readingPriority", width: columnWidths.priority },
+    { label: "Priority", key: "priority", width: columnWidths.priority },
   ];
 
   const statusIconMap: Record<string, React.ReactElement> = {
     INCLUDED: <CheckCircleIcon color="green.500" />,
-    DUPLICATED: <InfoIcon color="blureference.500" />,
+    DUPLICATED: <InfoIcon color="blue.500" />,
     EXCLUDED: <IoIosCloseCircle color="red" size="1.4rem" />,
     UNCLASSIFIED: <WarningIcon color="yellow.500" />,
   };
@@ -153,7 +153,7 @@ export default function Expanded({
   const handleColumnResize = (key: string, newWidth: number) => {
     setColumnWidths((prev) => ({
       ...prev,
-      [key]: `${newWidth}px`,
+      [key]: newWidth, 
     }));
   };
 
@@ -166,10 +166,10 @@ export default function Expanded({
     setSelectedArticleReview,
   } = studyContext;
 
-  const collapsedSpanTextChanged = {
-  ...collapsedSpanText,
-  w: "auto",
-};
+    const collapsedSpanTextChanged = {
+      ...collapsedSpanText,
+      w: "auto",
+    };
 
   return (
     <Box w="100%" maxH="82.5vh">
@@ -222,7 +222,7 @@ export default function Expanded({
                       p="0"
                       textTransform="capitalize"
                       cursor="pointer"
-                      w={col.width}
+                      w={columnWidths[col.key]}
                     >
                       <Resizable
                         direction="horizontal"
@@ -231,18 +231,16 @@ export default function Expanded({
                       >
                         {({ ref, isResizing }) => (
                           <Box
-                            ref={ref}
+                            ref={ref} 
                             position="relative"
                             h="100%"
-                            w="100%"
+                            w="100%" 
                             display="flex"
                             alignItems="center"
                             justifyContent="center"
                             onClick={() =>
                               !isResizing &&
-                              handleHeaderClick(
-                                col.key as keyof ArticleInterface
-                              )
+                              handleHeaderClick(col.key as keyof ArticleInterface)
                             }
                           >
                             <Box
