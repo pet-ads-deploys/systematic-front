@@ -67,7 +67,7 @@ type HeaderKeys =
   | "selectionStatus"
   | "extractionStatus"
   | "score"
-  | "readingPriority";
+  | "priority";
 
 type Column = {
   key: HeaderKeys;
@@ -112,12 +112,12 @@ export default function Expanded({
       width: columnWidths.selectionStatus,
     },
     { label: "Score", key: "score", width: columnWidths.score },
-    { label: "Priority", key: "readingPriority", width: columnWidths.priority },
+    { label: "Priority", key: "priority", width: columnWidths.priority },
   ];
 
   const statusIconMap: Record<string, React.ReactElement> = {
     INCLUDED: <CheckCircleIcon color="green.500" />,
-    DUPLICATED: <InfoIcon color="blureference.500" />,
+    DUPLICATED: <InfoIcon color="blue.500" />,
     EXCLUDED: <IoIosCloseCircle color="red" size="1.4rem" />,
     UNCLASSIFIED: <WarningIcon color="yellow.500" />,
   };
@@ -153,7 +153,7 @@ export default function Expanded({
   const handleColumnResize = (key: string, newWidth: number) => {
     setColumnWidths((prev) => ({
       ...prev,
-      [key]: `${newWidth}px`,
+      [key]: newWidth, 
     }));
   };
 
@@ -165,11 +165,6 @@ export default function Expanded({
     toggleArticlesSelection,
     setSelectedArticleReview,
   } = studyContext;
-
-  const collapsedSpanTextChanged = {
-  ...collapsedSpanText,
-  w: "auto",
-};
 
   return (
     <Box w="100%" maxH="82.5vh">
@@ -222,7 +217,8 @@ export default function Expanded({
                       p="0"
                       textTransform="capitalize"
                       cursor="pointer"
-                      w={col.width}
+                      w={columnWidths[col.key]}
+                      bg={col.key === "title" ? "red.200" : "white"}
                     >
                       <Resizable
                         direction="horizontal"
@@ -231,19 +227,18 @@ export default function Expanded({
                       >
                         {({ ref, isResizing }) => (
                           <Box
-                            ref={ref}
+                            ref={ref} 
                             position="relative"
                             h="100%"
-                            w="100%"
+                            w="100%" 
                             display="flex"
                             alignItems="center"
                             justifyContent="center"
                             onClick={() =>
                               !isResizing &&
-                              handleHeaderClick(
-                                col.key as keyof ArticleInterface
-                              )
+                              handleHeaderClick(col.key as keyof ArticleInterface)
                             }
+                            bg={col.key === "title" ? "yellow.200" : "white"}
                           >
                             <Box
                               display="flex"
@@ -332,19 +327,19 @@ export default function Expanded({
                       aria-label="Full ID"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>
+                      <Text sx={collapsedSpanText}>
                         {String(reference.studyReviewId).padStart(5, "0")}
                       </Text>
                     </Tooltip>
                   </Td>
-                  <Td sx={tdSX} w={columnWidths.title}>
+                  <Td sx={tdSX} w={columnWidths.title} bg={"blue.500"}>
                     <Tooltip
                       sx={tooltip}
                       label={reference.title}
                       aria-label="Full Title"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.title}</Text>
+                      <Text sx={collapsedSpanText}>{reference.title}</Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.authors}>
@@ -354,7 +349,7 @@ export default function Expanded({
                       aria-label="Full Author List"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.authors}</Text>
+                      <Text sx={collapsedSpanText}>{reference.authors}</Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.venue}>
@@ -364,7 +359,7 @@ export default function Expanded({
                       aria-label="Journal Name"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.venue}</Text>
+                      <Text sx={collapsedSpanText}>{reference.venue}</Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.year}>
@@ -374,7 +369,7 @@ export default function Expanded({
                       aria-label="Year of published"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.year}</Text>
+                      <Text sx={collapsedSpanText}>{reference.year}</Text>
                     </Tooltip>
                   </Td>
                   {page == "Selection" || page == "Identification" ? (
@@ -386,7 +381,7 @@ export default function Expanded({
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.selectionStatus)}
-                        <Text sx={collapsedSpanTextChanged}>
+                        <Text sx={collapsedSpanText}>
                           {capitalize(
                             reference.selectionStatus
                               ?.toString()
@@ -405,7 +400,7 @@ export default function Expanded({
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.extractionStatus)}
-                        <Text sx={collapsedSpanTextChanged}>
+                        <Text sx={collapsedSpanText}>
                           {capitalize(
                             reference.extractionStatus
                               ?.toString()
@@ -422,7 +417,7 @@ export default function Expanded({
                       aria-label="score of article"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanTextChanged}>{reference.score}</Text>
+                      <Text sx={collapsedSpanText}>{reference.score}</Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.priority}>
@@ -433,7 +428,7 @@ export default function Expanded({
                       gap="0.5rem"
                     >
                       {renderPriorityIcon(reference.readingPriority)}
-                      <Text sx={collapsedSpanTextChanged}>
+                      <Text sx={collapsedSpanText}>
                         {capitalize(
                           reference.readingPriority?.toString().toLowerCase() ||
                             ""
