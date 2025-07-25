@@ -1,9 +1,9 @@
 import { FormControl } from "@chakra-ui/react";
-import AddTextField from "./AddTextField";
-import InfosTable from "../Tables/InfosTable";
-import { useAddText } from "../../hooks/useAddText";
-import { useDeleteText } from "../../hooks/useDeleteText";
-import { formcontrol, label } from "./styles/AddTextTableStyles";
+import AddTextField from "../AddTextField";
+import InfosTable from "../../../../../../../../components/Tables/InfosTable";
+import { useAddText } from "../../../../../../../../hooks/useAddText";
+import { useDeleteText } from "../../../../../../../../hooks/useDeleteText";
+import { formcontrol, label } from "./styles";
 
 interface AddTextTableProps {
   text: string;
@@ -16,7 +16,11 @@ export default function AddTextTable({ text, placeholder }: AddTextTableProps) {
   return (
     <FormControl sx={label}>
       <FormControl sx={formcontrol}>
-        <AddTextField onAddText={handleAddText} label={text} text={placeholder}/>
+        <AddTextField
+          onAddText={handleAddText}
+          label={text}
+          text={placeholder}
+        />
         <InfosTable
           typeField={""}
           onDeleteAddedText={(index) => handleDeleteText(index, setAddText)}

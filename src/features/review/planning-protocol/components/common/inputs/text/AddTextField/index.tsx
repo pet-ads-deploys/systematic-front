@@ -1,9 +1,9 @@
 import { Box, FormControl, FormLabel } from "@chakra-ui/react";
-import TextAreaInput from "../Inputs/InputTextArea";
+import TextAreaInput from "../../../../../../../../components/Inputs/InputTextArea";
 import EventButton from "@components/common/buttons/EventButton";
 import { useState } from "react";
-import { formcontrol } from "./styles/AddTextFieldStyle";
-import { capitalize } from "../../features/shared/utils/helpers/formatters/CapitalizeText";
+import { formcontrol } from "./styles";
+import { capitalize } from "../../../../../../../shared/utils/helpers/formatters/CapitalizeText";
 import { useToast } from "@chakra-ui/react";
 
 interface IAddTextFieldProps {

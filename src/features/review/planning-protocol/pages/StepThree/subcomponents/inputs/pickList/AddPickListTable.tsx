@@ -1,27 +1,34 @@
 import { FormControl, FormLabel } from "@chakra-ui/react";
 import AddPickListField from "./AddPickListField";
-import InfosPickList from "../../Tables/PickListTable";
-import { useAddText } from "../../../hooks/useAddText";
-import { useDeletePickList } from "../../../hooks/useDeleteList";
-import { formcontrol, label } from "../styles/AddTextTableStyles";
+import {
+  formcontrol,
+  label,
+} from "@features/review/planning-protocol/components/common/inputs/text/AddTextTable/styles";
 import { useEffect } from "react";
+import { useAddText } from "@hooks/useAddText";
+import { useDeletePickList } from "@hooks/useDeleteList";
+import InfosPickList from "@components/Tables/PickListTable";
 
 interface AddTextTableProps {
   text: string;
   placeholder: string;
-  questionHolder: React.Dispatch<React.SetStateAction<string[]>>
+  questionHolder: React.Dispatch<React.SetStateAction<string[]>>;
   questions: string[];
 }
 
-export default function AddPickListTable({ questions, text, placeholder, questionHolder }: AddTextTableProps) {
+export default function AddPickListTable({
+  questions,
+  text,
+  placeholder,
+  questionHolder,
+}: AddTextTableProps) {
   const { AddText, handleAddText, setAddText } = useAddText("");
   const { handleDeletePickList } = useDeletePickList();
   questionHolder(AddText);
 
-
   useEffect(() => {
     setAddText(questions);
-  }, [])
+  }, []);
 
   return (
     <FormControl sx={label}>
