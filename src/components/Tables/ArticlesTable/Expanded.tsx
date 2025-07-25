@@ -166,6 +166,11 @@ export default function Expanded({
     setSelectedArticleReview,
   } = studyContext;
 
+    const collapsedSpanTextChanged = {
+      ...collapsedSpanText,
+      w: "auto",
+    };
+
   return (
     <Box w="100%" maxH="82.5vh">
       <TableContainer
@@ -325,7 +330,7 @@ export default function Expanded({
                       aria-label="Full ID"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanText}>
+                      <Text sx={collapsedSpanTextChanged}>
                         {String(reference.studyReviewId).padStart(5, "0")}
                       </Text>
                     </Tooltip>
@@ -337,7 +342,7 @@ export default function Expanded({
                       aria-label="Full Title"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanText}>{reference.title}</Text>
+                      <Text sx={collapsedSpanTextChanged}>{reference.title}</Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.authors}>
@@ -347,7 +352,7 @@ export default function Expanded({
                       aria-label="Full Author List"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanText}>{reference.authors}</Text>
+                      <Text sx={collapsedSpanTextChanged}>{reference.authors}</Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.venue}>
@@ -357,7 +362,7 @@ export default function Expanded({
                       aria-label="Journal Name"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanText}>{reference.venue}</Text>
+                      <Text sx={collapsedSpanTextChanged}>{reference.venue}</Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.year}>
@@ -367,7 +372,7 @@ export default function Expanded({
                       aria-label="Year of published"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanText}>{reference.year}</Text>
+                      <Text sx={collapsedSpanTextChanged}>{reference.year}</Text>
                     </Tooltip>
                   </Td>
                   {page == "Selection" || page == "Identification" ? (
@@ -379,7 +384,7 @@ export default function Expanded({
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.selectionStatus)}
-                        <Text sx={collapsedSpanText}>
+                        <Text sx={collapsedSpanTextChanged}>
                           {capitalize(
                             reference.selectionStatus
                               ?.toString()
@@ -398,7 +403,7 @@ export default function Expanded({
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.extractionStatus)}
-                        <Text sx={collapsedSpanText}>
+                        <Text sx={collapsedSpanTextChanged}>
                           {capitalize(
                             reference.extractionStatus
                               ?.toString()
@@ -415,7 +420,7 @@ export default function Expanded({
                       aria-label="score of article"
                       hasArrow
                     >
-                      <Text sx={collapsedSpanText}>{reference.score}</Text>
+                      <Text sx={collapsedSpanTextChanged}>{reference.score}</Text>
                     </Tooltip>
                   </Td>
                   <Td sx={tdSX} w={columnWidths.priority}>
@@ -426,7 +431,7 @@ export default function Expanded({
                       gap="0.5rem"
                     >
                       {renderPriorityIcon(reference.readingPriority)}
-                      <Text sx={collapsedSpanText}>
+                      <Text sx={collapsedSpanTextChanged}>
                         {capitalize(
                           reference.readingPriority?.toString().toLowerCase() ||
                             ""
