@@ -218,7 +218,6 @@ export default function Expanded({
                       textTransform="capitalize"
                       cursor="pointer"
                       w={columnWidths[col.key]}
-                      bg={col.key === "title" ? "red.200" : "white"}
                     >
                       <Resizable
                         direction="horizontal"
@@ -238,7 +237,6 @@ export default function Expanded({
                               !isResizing &&
                               handleHeaderClick(col.key as keyof ArticleInterface)
                             }
-                            bg={col.key === "title" ? "yellow.200" : "white"}
                           >
                             <Box
                               display="flex"
@@ -332,7 +330,7 @@ export default function Expanded({
                       </Text>
                     </Tooltip>
                   </Td>
-                  <Td sx={tdSX} w={columnWidths.title} bg={"blue.500"}>
+                  <Td sx={tdSX} w={columnWidths.title}>
                     <Tooltip
                       sx={tooltip}
                       label={reference.title}
