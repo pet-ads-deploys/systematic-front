@@ -7,7 +7,7 @@ interface ResizeHandlerProps {
 
 interface ResizableProps {
   children: (props: ResizeHandlerProps) => React.ReactNode;
-  onResize?: (width: number) => void;
+  onResize?: (width: number) => number | void;
   direction?: "horizontal" | "vertical";
   minWidth?: number;
   maxWidth?: number;
@@ -66,20 +66,13 @@ export const Resizable: React.FC<ResizableProps> = ({
 
   const handleMove = useCallback(
     (clientX: number, clientY: number) => {
-      const node = ref.current;
-      if (!isResizing || !node) return;
+      if (!isResizing) return;
 
       const position = direction === "horizontal" ? clientX : clientY;
       const diff = position - startPosition;
 
       let newSize = startSize + diff;
       newSize = Math.max(minWidth, Math.min(maxWidth, newSize));
-
-      if (direction === "horizontal") {
-        node.style.width = `${newSize}px`;
-      } else {
-        node.style.height = `${newSize}px`;
-      }
 
       if (onResize) {
         onResize(newSize);

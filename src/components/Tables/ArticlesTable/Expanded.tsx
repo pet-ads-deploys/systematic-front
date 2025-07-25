@@ -91,7 +91,7 @@ export default function Expanded({
     selectionStatus: "5rem ",
     extractionStatus: "5rem ",
     score: "3rem",
-    priority: "5rem ",
+    readingPriority: "5rem ",
   });
   const studyContext = useContext(StudySelectionContext);
 
@@ -112,12 +112,16 @@ export default function Expanded({
       width: columnWidths.selectionStatus,
     },
     { label: "Score", key: "score", width: columnWidths.score },
-    { label: "Priority", key: "readingPriority", width: columnWidths.priority },
+    {
+      label: "Priority",
+      key: "readingPriority",
+      width: columnWidths.readingPriority,
+    },
   ];
 
   const statusIconMap: Record<string, React.ReactElement> = {
     INCLUDED: <CheckCircleIcon color="green.500" />,
-    DUPLICATED: <InfoIcon color="blureference.500" />,
+    DUPLICATED: <InfoIcon color="blue.500" />,
     EXCLUDED: <IoIosCloseCircle color="red" size="1.4rem" />,
     UNCLASSIFIED: <WarningIcon color="yellow.500" />,
   };
@@ -153,7 +157,7 @@ export default function Expanded({
   const handleColumnResize = (key: string, newWidth: number) => {
     setColumnWidths((prev) => ({
       ...prev,
-      [key]: `${newWidth}px`,
+      [key]: newWidth,
     }));
   };
 
@@ -222,7 +226,7 @@ export default function Expanded({
                       p="0"
                       textTransform="capitalize"
                       cursor="pointer"
-                      w={col.width}
+                      w={columnWidths[col.key]}
                     >
                       <Resizable
                         direction="horizontal"
@@ -435,7 +439,7 @@ export default function Expanded({
                       </Text>
                     </Tooltip>
                   </Td>
-                  <Td sx={tdSX} w={columnWidths.priority}>
+                  <Td sx={tdSX} w={columnWidths.readingPriority}>
                     <Box
                       display="flex"
                       alignItems="center"
