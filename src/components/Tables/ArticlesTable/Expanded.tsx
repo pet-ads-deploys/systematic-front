@@ -48,7 +48,7 @@ import { capitalize } from "../../../features/shared/utils/helpers/formatters/Ca
 // Type
 import type ArticleInterface from "../../../types/ArticleInterface";
 import type { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
-import type { ViewModel } from "../../../hooks/useLayoutPage";
+import type { ViewModel } from "../../../features/review/shared/hooks/useLayoutPage";
 
 interface Props {
   articles: ArticleInterface[];

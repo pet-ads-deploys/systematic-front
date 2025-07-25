@@ -2,11 +2,8 @@ import { FormControl, FormLabel } from "@chakra-ui/react";
 import SelectInput from "../../../../../../../../components/Inputs/SelectInput";
 import InfosTable from "../../../../../../../../components/Tables/InfosTable";
 import EventButton from "@components/common/buttons/EventButton";
-import { useSelect } from "../../../../../../../../hooks/useSelect";
-import {
-  conteiner,
-  formcontrol,
-} from "./styles";
+import { useSelect } from "../../../../../services/useSelect";
+import { conteiner, formcontrol } from "./styles";
 
 interface AddSelectTableProps {
   options: string[];

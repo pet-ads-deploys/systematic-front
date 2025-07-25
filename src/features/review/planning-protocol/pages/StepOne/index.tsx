@@ -1,3 +1,5 @@
+// External library
+import { useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -11,15 +13,20 @@ import {
   Heading,
   Divider,
 } from "@chakra-ui/react";
+
+// Services
+import useProtocolAccordion from "../../services/useProtocolAccordion";
+import useCreatePortocol from "../../services/useCreateProtocol";
+
+// Components
 import Header from "../../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
-import { btnBox, formControl } from "./styles";
 import TextAreaInput from "../../../../../components/Inputs/InputTextArea";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
-import useProtocolAccordion from "../../../../../hooks/useProtocolAccordion";
-import useCreatePortocol from "../../../../../hooks/reviews/useCreateProtocol";
-import { useEffect } from "react";
 import AddTextTable from "../../components/common/inputs/text/AddTextTable";
+
+// Styles
+import { btnBox, formControl } from "./styles";
 
 export default function Protocol() {
   const {

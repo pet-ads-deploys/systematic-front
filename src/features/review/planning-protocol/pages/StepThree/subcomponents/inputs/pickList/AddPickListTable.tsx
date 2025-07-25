@@ -5,8 +5,8 @@ import {
   label,
 } from "@features/review/planning-protocol/components/common/inputs/text/AddTextTable/styles";
 import { useEffect } from "react";
-import { useAddText } from "@hooks/useAddText";
-import { useDeletePickList } from "@hooks/useDeleteList";
+import { useAddText } from "@features/review/planning-protocol/services/useAddText";
+import { useDeletePickList } from "@features/review/planning-protocol/hooks/useDeleteList";
 import InfosPickList from "@components/Tables/PickListTable";
 
 interface AddTextTableProps {

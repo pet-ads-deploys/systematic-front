@@ -3,7 +3,7 @@ import { useDisclosure } from "@chakra-ui/react"
 import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
 import NumberScaleTable from "../../Tables/NumberScaleTable";
-import useNumberScale from "../../../hooks/useNumberScale";
+import useNumberScale from "../../../features/review/planning-protocol/hooks/useNumberScale";
 
 interface Props{
     show: Dispatch<SetStateAction<boolean>>;

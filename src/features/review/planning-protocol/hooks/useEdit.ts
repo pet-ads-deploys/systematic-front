@@ -1,5 +1,5 @@
 import { useState, useCallback, ChangeEvent } from "react";
-import { capitalize } from "../features/shared/utils/helpers/formatters/CapitalizeText";
+import { capitalize } from "../../../shared/utils/helpers/formatters/CapitalizeText";
 
 interface UseEditStateProps {
   AddTexts: string[];

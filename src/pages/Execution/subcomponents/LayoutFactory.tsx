@@ -1,6 +1,6 @@
 import ArticleInterface from "../../../types/ArticleInterface";
 import SkeletonLoader from "@components/feedback/Skeleton";
-import { ViewModel } from "../../../hooks/useLayoutPage";
+import { ViewModel } from "../../../features/review/shared/hooks/useLayoutPage";
 import NoDataMessage from "./NoDataMessage";
 import React from "react";
 import { SplitVertical } from "./Layouts/SplitVertical";

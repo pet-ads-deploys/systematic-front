@@ -4,7 +4,7 @@ import { useContext, useMemo, useState } from "react";
 import Expanded from "./Expanded";
 import ArticleInterface from "../../../types/ArticleInterface";
 import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
-import { ViewModel } from "../../../hooks/useLayoutPage";
+import { ViewModel } from "../../../features/review/shared/hooks/useLayoutPage";
 import AppContext from "@features/shared/context/ApplicationContext";
 
 interface Props {

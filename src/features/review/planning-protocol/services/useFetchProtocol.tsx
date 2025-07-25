@@ -1,4 +1,4 @@
-import axios from '../../interceptor/interceptor';
+import axios from '../../../../interceptor/interceptor';
 
 export default async function fetchProtocol(systematicStudyId: string) {
     const url = "http://localhost:8080/";

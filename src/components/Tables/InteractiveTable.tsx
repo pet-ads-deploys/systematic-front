@@ -1,7 +1,7 @@
 import { AddIcon } from "@chakra-ui/icons";
 import EditButton from "@components/common/buttons/EditButton";
 import DeleteButton from "@components/common/buttons/DeleteButton";
-import { useInteractiveTable } from "../../hooks/useInteractiveTable";
+import { useInteractiveTable } from "../../features/review/planning-protocol/hooks/useInteractiveTable";
 import {
   TableContainer,
   Table,

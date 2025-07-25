@@ -5,8 +5,8 @@ import {
   label,
 } from "@features/review/planning-protocol/components/common/inputs/text/AddTextTable/styles";
 import { SetStateAction, useEffect } from "react";
-import { useAddLabeledList } from "@hooks/useAddLabeledList";
-import { handleDeleteLabeledList } from "@hooks/useDeleteLabeledList";
+import { useAddLabeledList } from "@features/review/planning-protocol/hooks/useAddLabeledList";
+import { handleDeleteLabeledList } from "@features/review/planning-protocol/hooks/useDeleteLabeledList";
 import InfosLabeled from "@components/Tables/LabeledListInfosTable";
 
 interface AddTextTableProps {

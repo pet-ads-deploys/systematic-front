@@ -1,14 +1,21 @@
+// External library
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Progress, FormControl, Box } from "@chakra-ui/react";
+
+// Components
 import Header from "../../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
-import { Progress, FormControl, Box } from "@chakra-ui/react";
-import { buttonBox, formControl } from "./styles";
 import TextAreaInput from "../../../../../components/Inputs/InputTextArea";
 import InteractiveTable from "../../../../../components/Tables/InteractiveTable";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import useCreateProtocolThree from "../../../../../hooks/reviews/useCreateProtocolThree";
+
+// Service
 import axios from "../../../../../interceptor/interceptor";
+import createProtocolThree from "../../services/useCreateProtocolThree";
+
+// Styles
+import { buttonBox, formControl } from "./styles";
 
 export default function ProtocolPartThree() {
   const [analysis, setAnalysis] = useState("");
@@ -31,12 +38,12 @@ export default function ProtocolPartThree() {
   }, []);
 
   async function handleData() {
-    await useCreateProtocolThree(analysis, id);
+    await createProtocolThree(analysis, id);
     navigate("/newReview/identification");
   }
 
   async function handleDataReturn() {
-    await useCreateProtocolThree(analysis, id);
+    await createProtocolThree(analysis, id);
     navigate(`/newReview/protocolpartTwo/${id}`);
   }
 

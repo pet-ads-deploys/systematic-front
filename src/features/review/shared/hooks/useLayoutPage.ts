@@ -1,5 +1,7 @@
+// External library
 import { useState } from "react";
 
+// Types
 export type ViewModel =
   | "table"
   | "vertical"

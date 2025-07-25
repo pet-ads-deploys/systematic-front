@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import useCreateProtocol from "./reviews/useCreateProtocol";
-import axios from "../interceptor/interceptor";
+import useCreateProtocol from "./useCreateProtocol";
+import axios from "../../../../interceptor/interceptor";
 import { useToast } from "@chakra-ui/react";
 
 export function useSelect(initialState: string[] = [], context: string) {
@@ -11,25 +11,23 @@ export function useSelect(initialState: string[] = [], context: string) {
   const [selectedValues, setSelectedValues] = useState<string[]>(initialState);
 
   useEffect(() => {
-    const id = localStorage.getItem('systematicReviewId');
+    const id = localStorage.getItem("systematicReviewId");
     const url = `http://localhost:8080/systematic-study/${id}/protocol`;
-    
-    async function fetchSelectedValues(){
-      const token = localStorage.getItem('accessToken');
-      const options = { 
-        headers: { Authentication: `Bearer ${token}` } 
-      }
+
+    async function fetchSelectedValues() {
+      const token = localStorage.getItem("accessToken");
+      const options = {
+        headers: { Authentication: `Bearer ${token}` },
+      };
       let response = await axios.get(url, options);
 
-      if( context == 'Languages' ) {
+      if (context == "Languages") {
         setSelectedValues(response.data.content.studiesLanguages);
-      }
-      else setSelectedValues(response.data.content.informationSources);
+      } else setSelectedValues(response.data.content.informationSources);
     }
 
     fetchSelectedValues();
-
-  }, [])
+  }, []);
 
   const handleSelectChange = (value: string) => {
     setSelectedValue(value);
@@ -43,18 +41,18 @@ export function useSelect(initialState: string[] = [], context: string) {
         status: "warning",
         duration: 4500,
         isClosable: true,
-        position: 'top'
+        position: "top",
       });
       return;
     }
-    if( selectedValues.includes(`${selectedValue}`)){
+    if (selectedValues.includes(`${selectedValue}`)) {
       toast({
         title: "Duplicate option",
         description: "This option already selected!",
         status: "warning",
         duration: 4500,
         isClosable: true,
-        position: 'top'
+        position: "top",
       });
       setSelectedValue(null);
       return;
@@ -69,7 +67,6 @@ export function useSelect(initialState: string[] = [], context: string) {
 
   const handleDeleteSelect = (index: number) => {
     setSelectedValues((prevSelectedValues) => {
-
       const updatedSelectedValues = [...prevSelectedValues];
       updatedSelectedValues.splice(index, 1);
 
@@ -79,5 +76,11 @@ export function useSelect(initialState: string[] = [], context: string) {
     });
   };
 
-  return { selectedValue, selectedValues, handleSelectChange, handleSelectAddButtonClick, handleDeleteSelect };
+  return {
+    selectedValue,
+    selectedValues,
+    handleSelectChange,
+    handleSelectAddButtonClick,
+    handleDeleteSelect,
+  };
 }

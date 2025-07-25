@@ -4,7 +4,7 @@ import StudySelectionArea from "../StudySelectionArea";
 import ArticleInterface from "../../../../types/ArticleInterface";
 import { PageLayout } from "../LayoutFactory";
 import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
-import { ViewModel } from "../../../../hooks/useLayoutPage";
+import { ViewModel } from "../../../../features/review/shared/hooks/useLayoutPage";
 
 interface HorizontalProps {
   isInverted: boolean;

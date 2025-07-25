@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Upload } from "../../../components/commons/toolkit/buttons/upload/Upload";
-import useInputState from "../../../../hooks/useInputState";
+import useInputState from "@features/review/shared/hooks/useInputState";
 import Header from "../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
 import DynamicTable from "../../../components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";

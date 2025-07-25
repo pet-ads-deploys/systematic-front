@@ -13,7 +13,7 @@ import AlertInputText from "@components/Inputs/AlertInputText";
 import ResearcherFilter from "../../../../../pages/UserArea/subcomponents/ResearcherFilter";
 
 // Service
-import useCreateReview from "../../../../../hooks/reviews/useCreateReview";
+import useCreateReview from "../../services/useCreateReview";
 
 export default function NovaRevisao() {
   const {

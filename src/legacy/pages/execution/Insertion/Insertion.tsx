@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import useInputState from "../../../../hooks/useInputState";
+import useInputState from "@features/review/shared/hooks/useInputState";
 import Header from "../../../../components/structure/Header/Header";
 import FlexLayout from "../../../../components/structure/Flex/Flex";
 // import ComboBox from "../../../components/Inputs/ComboBox";

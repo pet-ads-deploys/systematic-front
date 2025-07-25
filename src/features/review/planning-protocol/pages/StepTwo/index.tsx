@@ -1,15 +1,20 @@
+// External library
+import { useEffect } from "react";
+import { Progress, FormControl, Box } from "@chakra-ui/react";
+
+// Components
 import Header from "../../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
-import { Progress, FormControl, Box } from "@chakra-ui/react";
-import { btnBox, conteiner, flex } from "./styles";
 import TextAreaInput from "../../../../../components/Inputs/InputTextArea";
 import AddTextTable from "../../components/common/inputs/text/AddTextTable";
 import AddSelectionTable from "../../components/common/inputs/selection/AddSelectionTable";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
 
-//importimg hook
-import useCreateProtocol from "../../../../../hooks/reviews/useCreateProtocol";
-import { useEffect } from "react";
+// Service
+import useCreateProtocol from "../../services/useCreateProtocol";
+
+// Styles
+import { btnBox, conteiner, flex } from "./styles";
 
 export default function ProtocolPartTwo2() {
   const {

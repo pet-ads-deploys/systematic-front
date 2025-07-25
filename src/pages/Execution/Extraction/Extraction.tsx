@@ -1,7 +1,7 @@
 import { useContext, useMemo, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
-import useInputState from "../../../hooks/useInputState";
+import useInputState from "@features/review/shared/hooks/useInputState";
 
 import Header from "../../../components/structure/Header/Header";
 import FlexLayout from "../../../components/structure/Flex/Flex";
@@ -16,7 +16,7 @@ import { inputconteiner } from "../styles/executionStyles";
 import ArticleInterface from "../../../types/ArticleInterface";
 import { PageLayout } from "../subcomponents/LayoutFactory";
 import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
-import useLayoutPage from "../../../hooks/useLayoutPage";
+import useLayoutPage from "../../../features/review/shared/hooks/useLayoutPage";
 import SelectLayout from "../subcomponents/LayoutButtons";
 import { useFilterReviewArticles } from "../hooks/useFilterReviewArticles";
 
