@@ -7,18 +7,18 @@ import Header from "../../../components/structure/Header/Header";
 import FlexLayout from "../../../components/structure/Flex/Flex";
 import InputText from "../../../components/Inputs/InputText";
 import SelectInput from "../../../components/Inputs/SelectInput";
-import LayoutFactory from "../subcomponents/LayoutFactory";
+import LayoutFactory from "../../../features/review/shared/components/structure/LayoutFactory";
 
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 import { inputconteiner } from "../styles/executionStyles";
 
-import ArticleInterface from "../../../types/ArticleInterface";
-import { PageLayout } from "../subcomponents/LayoutFactory";
-import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
+import ArticleInterface from "../../../features/review/shared/types/ArticleInterface";
+import { PageLayout } from "../../../features/review/shared/components/structure/LayoutFactory";
+import ButtonsForMultipleSelection from "../../../features/review/shared/components/common/buttons/ButtonsForMultipleSelection";
 import useLayoutPage from "../../../features/review/shared/hooks/useLayoutPage";
-import SelectLayout from "../subcomponents/LayoutButtons";
-import { useFilterReviewArticles } from "../hooks/useFilterReviewArticles";
+import SelectLayout from "../../../features/review/shared/components/structure/LayoutButton";
+import { useFilterReviewArticles } from "../../../features/review/shared/hooks/useFilterReviewArticles";
 
 export default function Extraction() {
   const { value: selectedStatus, handleChange: handleSelectChange } =

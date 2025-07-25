@@ -17,9 +17,9 @@ export interface StudyInterface {
   keywords: string[];
   searchSources: string[];
   references: string[];
-  criteria: string[] /*CriteriaType*/;
-  formAnswers: unknown[]; // Defina o tipo correto para a resposta do formulário
-  robAnswers: unknown[]; // Defina o tipo correto para a resposta do ROB
+  criteria: string[];
+  formAnswers: unknown[];
+  robAnswers: unknown[];
   comments: string;
   readingPriority: ReadingPriority;
   selectionStatus: SelectionStatus;

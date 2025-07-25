@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import StudyEditingInput from "../../../../inputs/StudyEditingInput";
-import { StudyInterface } from "../../../../../../../../types/IStudy";
+import { StudyInterface } from "../../../../../../../../features/review/shared/types/IStudy";
 
 interface StudyEdtionModalProps {
   isOpen: boolean;

@@ -9,30 +9,26 @@ import { Tooltip } from "@chakra-ui/react";
 // import AppContext from "../../../context/AppContext";
 
 // Hooks
-import useFetchAllCriteriasByArticle from "../../../hooks/fetch/useFetchAllCriteriasByArticle";
-import useResetStatus from "../../../hooks/useResetStatus";
-import useChangePriority from "../../../hooks/tables/useChangePriority";
+import useFetchAllCriteriasByArticle from "../../../../../../../hooks/fetch/useFetchAllCriteriasByArticle";
+import useResetStatus from "../../../../../../../hooks/useResetStatus";
+import useChangePriority from "../../../../../../../hooks/tables/useChangePriority";
 
 // Components
-import MenuOptions from "../../../components/Inputs/MenuOptions";
-import ComboBox from "../../../components/Inputs/ComboBox";
+import MenuOptions from "../../../../../../../components/Inputs/MenuOptions";
+import ComboBox from "../../../../../../../components/Inputs/ComboBox";
 
 // Styles
-import {
-  boxconteiner,
-  buttonconteiner,
-  conteiner,
-} from "../styles/BtnSelectionStyles";
+import { boxconteiner, buttonconteiner, conteiner } from "./styles";
 
 // Types
-import ArticleInterface from "../../../types/ArticleInterface";
-import { StudyInterface } from "../../../types/IStudy";
-import { PageLayout } from "./LayoutFactory";
+import ArticleInterface from "../../../../types/ArticleInterface";
+import { StudyInterface } from "../../../../types/IStudy";
+import { PageLayout } from "../../../structure/LayoutFactory";
 
 import type {
   OptionProps,
   OptionType,
-} from "../../../hooks/fetch/useFetchAllCriteriasByArticle";
+} from "../../../../../../../hooks/fetch/useFetchAllCriteriasByArticle";
 
 interface ButtonsForSelectionProps {
   page: PageLayout;

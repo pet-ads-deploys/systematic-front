@@ -3,22 +3,22 @@ import { Box, Flex } from "@chakra-ui/react";
 
 import useInputState from "@features/review/shared/hooks/useInputState";
 
-import Header from "../../../components/structure/Header/Header";
-import FlexLayout from "../../../components/structure/Flex/Flex";
-import InputText from "../../../components/Inputs/InputText";
-import SelectInput from "../../../components/Inputs/SelectInput";
-import LayoutFactory from "../subcomponents/LayoutFactory";
+import Header from "../../../../../components/structure/Header/Header";
+import FlexLayout from "../../../../../components/structure/Flex/Flex";
+import InputText from "../../../../../components/Inputs/InputText";
+import SelectInput from "../../../../../components/Inputs/SelectInput";
+import LayoutFactory from "../../../shared/components/structure/LayoutFactory";
 
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
-import { inputconteiner } from "../styles/executionStyles";
+import { inputconteiner } from "../../../../../pages/Execution/styles/executionStyles";
 
-import ArticleInterface from "../../../types/ArticleInterface";
-import { PageLayout } from "../subcomponents/LayoutFactory";
-import ButtonsForMultipleSelection from "../subcomponents/ButtonsForMultipleSelection";
-import useLayoutPage from "../../../features/review/shared/hooks/useLayoutPage";
-import SelectLayout from "../subcomponents/LayoutButtons";
-import { useFilterReviewArticles } from "../hooks/useFilterReviewArticles";
+import ArticleInterface from "../../../shared/types/ArticleInterface";
+import { PageLayout } from "../../../shared/components/structure/LayoutFactory";
+import ButtonsForMultipleSelection from "../../../shared/components/common/buttons/ButtonsForMultipleSelection";
+import useLayoutPage from "../../../shared/hooks/useLayoutPage";
+import SelectLayout from "../../../shared/components/structure/LayoutButton";
+import { useFilterReviewArticles } from "../../../shared/hooks/useFilterReviewArticles";
 
 export default function Selection() {
   const { value: selectedStatus, handleChange: handleSelectChange } =

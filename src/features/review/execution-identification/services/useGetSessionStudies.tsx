@@ -5,7 +5,7 @@ interface HttpResponse {
   studyReviews: ArticleInterface[];
 }
 
-import ArticleInterface from "../../../../types/ArticleInterface";
+import ArticleInterface from "../../shared/types/ArticleInterface";
 
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 

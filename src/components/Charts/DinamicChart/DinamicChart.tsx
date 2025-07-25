@@ -1,7 +1,7 @@
 import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 import { useState } from "react";
-import useFetchDataBases from "../../../features/review/shared/hooks/useFetchDataBases";
+import useFetchDataBases from "../../../features/review/shared/services/useFetchDataBases";
 
 import { Box, Select, Text } from "@chakra-ui/react";
 import useFetchStudiesBySource from "../../../hooks/reports/useFetchStudiesBySource";

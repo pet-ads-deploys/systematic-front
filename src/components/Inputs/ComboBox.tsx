@@ -16,7 +16,7 @@ import { HiOutlineCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 import useComboBoxSelection from "../../hooks/useComboBoxSelection";
 
 // Types
-import type { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import type { PageLayout } from "../../features/review/shared/components/structure/LayoutFactory";
 import type {
   OptionProps,
   OptionType,

@@ -9,7 +9,7 @@ import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";
 
 // Type
-import type { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
+import type { PageLayout } from "../features/review/shared/components/structure/LayoutFactory";
 interface ComboBoxSelectionProps {
   page: PageLayout;
 }

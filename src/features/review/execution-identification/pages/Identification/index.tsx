@@ -6,12 +6,9 @@ import FlexLayout from "../../../../../components/structure/Flex/Flex";
 
 import { StudySelectionProvider } from "@features/review/shared/context/StudiesSelectionContext";
 
-import useFetchDataBases from "../../../shared/hooks/useFetchDataBases";
+import useFetchDataBases from "../../../shared/services/useFetchDataBases";
 
-import {
-  conteiner,
-  dataBaseconteiner,
-} from "./styles";
+import { conteiner, dataBaseconteiner } from "./styles";
 
 export default function Identification() {
   const { databases } = useFetchDataBases();

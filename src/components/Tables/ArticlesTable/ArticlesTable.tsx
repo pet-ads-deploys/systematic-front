@@ -1,9 +1,9 @@
-import ArticlesInterface from "../../../types/ArticleInterface";
+import ArticlesInterface from "../../../features/review/shared/types/ArticleInterface";
 
 import { useContext, useMemo, useState } from "react";
 import Expanded from "./Expanded";
-import ArticleInterface from "../../../types/ArticleInterface";
-import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
+import ArticleInterface from "../../../features/review/shared/types/ArticleInterface";
+import { PageLayout } from "../../../features/review/shared/components/structure/LayoutFactory";
 import { ViewModel } from "../../../features/review/shared/hooks/useLayoutPage";
 import AppContext from "@features/shared/context/ApplicationContext";
 

@@ -8,7 +8,7 @@ import useFetchExclusionCriteria from "./useFetchExclusionCriterias";
 import useFocusedArticle from "../reviews/useFocusedArticle";
 
 // Types
-import { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import { PageLayout } from "../../features/review/shared/components/structure/LayoutFactory";
 import useRevertCriterionState from "../reviews/useRevertCriterionState";
 
 export type OptionType = "INCLUSION" | "EXCLUSION";

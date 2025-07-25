@@ -46,8 +46,8 @@ import {
 import { capitalize } from "../../../features/shared/utils/helpers/formatters/CapitalizeText";
 
 // Type
-import type ArticleInterface from "../../../types/ArticleInterface";
-import type { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
+import type ArticleInterface from "../../../features/review/shared/types/ArticleInterface";
+import type { PageLayout } from "../../../features/review/shared/components/structure/LayoutFactory";
 import type { ViewModel } from "../../../features/review/shared/hooks/useLayoutPage";
 
 interface Props {

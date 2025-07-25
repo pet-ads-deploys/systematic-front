@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ArticleInterface from "../../types/ArticleInterface";
+import ArticleInterface from "../../features/review/shared/types/ArticleInterface";
 
 const MAX_ITENS_PER_PAGE = 15;
 

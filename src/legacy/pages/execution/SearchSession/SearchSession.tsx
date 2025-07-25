@@ -13,7 +13,7 @@ import EventButton from "@components/common/buttons/EventButton";
 import FlexLayout from "../../../../components/structure/Flex/Flex";
 
 import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
-import { tableTypeEnum } from "../../../../types/enums/tableTypeEnum";
+import { tableTypeEnum } from "../../../../features/review/shared/types/enums/tableTypeEnum";
 import { TableHeadersInterface } from "../../../../types/ITableHeaders";
 
 export default function SearchSession() {

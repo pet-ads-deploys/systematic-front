@@ -2,8 +2,8 @@
 import { useMemo } from "react";
 
 // Type
-import type ArticleInterface from "../../../types/ArticleInterface";
-import type { PageLayout } from "../subcomponents/LayoutFactory";
+import type ArticleInterface from "../types/ArticleInterface";
+import type { PageLayout } from "../components/structure/LayoutFactory";
 
 export const useFilterReviewArticles = (
   searchString: string,

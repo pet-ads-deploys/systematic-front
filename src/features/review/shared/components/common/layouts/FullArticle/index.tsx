@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import ArticleInterface from "../../../../types/ArticleInterface";
-import { PageLayout } from "../LayoutFactory";
-import StudySelectionArea from "../StudySelectionArea";
+import { PageLayout } from "../../../structure/LayoutFactory";
+import StudySelectionArea from "../../../structure/StudySelectionArea";
 
 interface TableProps {
   articles: ArticleInterface[];

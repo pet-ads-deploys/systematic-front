@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StudyInterface } from "../../../types/IStudy";
+import { StudyInterface } from "../../../features/review/shared/types/IStudy";
 import { KeywordInterface } from "../../../types/KeywordInterface";
 
 export default function useFetchStudyData<

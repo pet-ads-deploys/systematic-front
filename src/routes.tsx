@@ -25,7 +25,7 @@ import Insertion from "./legacy/pages/execution/Insertion/Insertion";
 import KeyWordScreen from "./legacy/pages/execution/KeyWordScreen/KeyWordScreen";
 import Identification from "./features/review/execution-identification/pages/Identification";
 import IdentificationSession from "./features/review/execution-identification/pages/IdentificationSession";
-import Selection from "./pages/Execution/Selection/Selection";
+import Selection from "./features/review/execution-selection/pages/Selection";
 import Extraction from "./pages/Execution/Extraction/Extraction";
 
 // Summarization

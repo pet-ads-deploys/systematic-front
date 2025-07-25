@@ -8,7 +8,7 @@ import useFocusedArticle from "./useFocusedArticle";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Types
-import type { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import type { PageLayout } from "../../features/review/shared/components/structure/LayoutFactory";
 
 interface RevertCriterionStateProps {
   page: PageLayout;

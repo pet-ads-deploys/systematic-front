@@ -1,9 +1,9 @@
-import { ExtractionStatus } from "../../../types/enums/extractionStatus";
-import { SelectionStatus } from "../../../types/enums/selectionStatus";
+import { ExtractionStatus } from "../../../features/review/shared/types/enums/extractionStatus";
+import { SelectionStatus } from "../../../features/review/shared/types/enums/selectionStatus";
 
 import useFetchStudyData from "./useFetchStudyData";
-import { ExcutionFaseEnum } from "../../../types/enums/ExcutionFaseEnum";
-import { StudyInterface } from "../../../types/IStudy";
+import { ExcutionFaseEnum } from "../../../features/review/shared/types/enums/ExcutionFaseEnum";
+import { StudyInterface } from "../../../features/review/shared/types/IStudy";
 import { KeywordInterface } from "../../../types/KeywordInterface";
 
 export default function FilteredStudies(

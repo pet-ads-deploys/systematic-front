@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { TableHeadersInterface } from "../../../types/ITableHeaders";
 import { KeyWordHeaderInterface } from "../../../types/IKeyWordHeard";
 import { KeywordInterface } from "../../../types/KeywordInterface";
-import { StudyInterface } from "../../../types/IStudy";
+import { StudyInterface } from "../../../features/review/shared/types/IStudy";
 
 interface SortOptions {
   sortBy: string | null;

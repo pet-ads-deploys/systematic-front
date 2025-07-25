@@ -3,14 +3,14 @@ import { useContext } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
 // Components
-import ButtonsForSelection from "./ButtonsForSelection";
-import StudyDataFiel from "../../../components/Modals/StudyModal/StudyData";
+import ButtonsForSelection from "../../common/buttons/ButtonsForSelection";
+import StudyDataFiel from "../../../../../../components/Modals/StudyModal/StudyData";
 
 // Context
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
 // Types
-import type { PageLayout } from "./LayoutFactory";
+import type { PageLayout } from "../LayoutFactory";
 import type ArticleInterface from "../../../types/ArticleInterface";
 import type { StudyInterface } from "../../../types/IStudy";
 

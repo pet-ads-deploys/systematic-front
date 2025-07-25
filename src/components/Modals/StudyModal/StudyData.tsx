@@ -2,9 +2,9 @@ import { Flex } from "@chakra-ui/react";
 
 import ArticlePreview from "./ArticlePreview";
 
-import { PageLayout } from "../../../pages/Execution/subcomponents/LayoutFactory";
+import { PageLayout } from "../../../features/review/shared/components/structure/LayoutFactory";
 import ExtractionForm from "./ExtractionForm";
-import { StudyInterface } from "../../../types/IStudy";
+import { StudyInterface } from "../../../features/review/shared/types/IStudy";
 
 interface IStudyDataFiel {
   studyData: StudyInterface;

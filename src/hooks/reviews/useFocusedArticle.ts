@@ -8,8 +8,8 @@ import StudySelectionContext from "@features/review/shared/context/StudiesSelect
 import useFetchAllClassifiedArticles from "../fetch/useFetchAllClassifiedArticles";
 
 // Type
-import type ArticleInterface from "../../types/ArticleInterface";
-import type { PageLayout } from "../../pages/Execution/subcomponents/LayoutFactory";
+import type ArticleInterface from "../../features/review/shared/types/ArticleInterface";
+import type { PageLayout } from "../../features/review/shared/components/structure/LayoutFactory";
 
 type FocusedArticleOutputProps = {
   articleInFocus?: ArticleInterface;

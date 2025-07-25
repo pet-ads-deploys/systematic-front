@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { Button, Flex } from "@chakra-ui/react";
 
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
-import { UseChangeStudySelectionStatus } from "../../../hooks/useChangeStudySelectionStatus";
-import useSendDuplicatedStudies from "../../../hooks/tables/useSendDuplicatedStudies";
+import { UseChangeStudySelectionStatus } from "../../../../../../../hooks/useChangeStudySelectionStatus";
+import useSendDuplicatedStudies from "../../../../../../../hooks/tables/useSendDuplicatedStudies";
 import { FaCheckCircle, FaEye, FaTrashAlt } from "react-icons/fa";
 import { MdOutlineCleaningServices } from "react-icons/md";
 

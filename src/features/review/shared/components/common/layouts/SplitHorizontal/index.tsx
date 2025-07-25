@@ -1,71 +1,78 @@
 import { Flex } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import StudySelectionArea from "../StudySelectionArea";
+import StudySelectionArea from "../../../structure/StudySelectionArea";
 import ArticleInterface from "../../../../types/ArticleInterface";
-import { PageLayout } from "../LayoutFactory";
-import ArticlesTable from "../../../../components/Tables/ArticlesTable/ArticlesTable";
+import { PageLayout } from "../../../structure/LayoutFactory";
+import ArticlesTable from "../../../../../../../components/Tables/ArticlesTable/ArticlesTable";
+import { ViewModel } from "../../../../hooks/useLayoutPage";
 
-interface VerticalProps {
+interface HorizontalProps {
   isInverted: boolean;
   articles: ArticleInterface[];
   page: PageLayout;
+  layout: ViewModel;
 }
 
-export const SplitVertical: React.FC<VerticalProps> = ({
+export const SplitHorizontal: React.FC<HorizontalProps> = ({
   isInverted,
   articles,
   page,
+  layout,
 }) => {
-  const verticalTransitionVariants = {
-    initial: { opacity: 0, x: 5 },
-    animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-    exit: { opacity: 0, x: -5, transition: { duration: 0.5 } },
+  const horizontalTransitionVariants = {
+    initial: { opacity: 0, y: 5 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    exit: { opacity: 0, y: -5, transition: { duration: 0.5 } },
   };
 
   return (
-    <Flex w="100%" h="100%" gap="1rem" justifyContent="space-between">
+    <Flex
+      w="100%"
+      h="100%"
+      flexDirection="column"
+      gap=".5rem"
+      justifyContent="space-between"
+    >
       {isInverted ? (
         <AnimatePresence mode="wait">
           <motion.div
             key="top"
-            variants={verticalTransitionVariants}
+            variants={horizontalTransitionVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ minWidth: "35%", maxHeight: "100%" }}
+            style={{ maxWidth: "100%", maxHeight: "55%" }}
           >
             <StudySelectionArea articles={articles} page={page} />
           </motion.div>
           <motion.div
             key="bottom"
-            variants={verticalTransitionVariants}
+            variants={horizontalTransitionVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ maxWidth: "65%", maxHeight: "100%" }}
           >
-            <ArticlesTable articles={articles} page={page} />
+            <ArticlesTable articles={articles} page={page} layout={layout} />
           </motion.div>
         </AnimatePresence>
       ) : (
         <AnimatePresence mode="wait">
           <motion.div
             key="bottom"
-            variants={verticalTransitionVariants}
+            variants={horizontalTransitionVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ maxWidth: "65%", maxHeight: "100%" }}
           >
-            <ArticlesTable articles={articles} page={page} />
+            <ArticlesTable articles={articles} page={page} layout={layout} />
           </motion.div>
           <motion.div
             key="top"
-            variants={verticalTransitionVariants}
+            variants={horizontalTransitionVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ minWidth: "35%", maxHeight: "100%" }}
+            style={{ maxWidth: "100%", maxHeight: "55%" }}
           >
             <StudySelectionArea articles={articles} page={page} />
           </motion.div>

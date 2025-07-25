@@ -9,7 +9,7 @@ import { UseChangeStudySelectionStatus } from "./useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "./useChangeStudyExtractionStatus";
 
 //Types
-import { PageLayout } from "../pages/Execution/subcomponents/LayoutFactory";
+import { PageLayout } from "../features/review/shared/components/structure/LayoutFactory";
 import useFocusedArticle from "./reviews/useFocusedArticle";
 
 interface ResetButtonProps {

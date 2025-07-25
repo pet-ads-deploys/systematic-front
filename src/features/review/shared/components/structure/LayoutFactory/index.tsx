@@ -1,12 +1,12 @@
 import ArticleInterface from "../../../types/ArticleInterface";
 import SkeletonLoader from "@components/feedback/Skeleton";
-import { ViewModel } from "../../../features/review/shared/hooks/useLayoutPage";
-import NoDataMessage from "./NoDataMessage";
+import { ViewModel } from "../../../hooks/useLayoutPage";
+import NoDataMessage from "../NoDataMessage";
 import React from "react";
-import { SplitVertical } from "./Layouts/SplitVertical";
-import { FullTable } from "./Layouts/FullTable";
-import { SplitHorizontal } from "./Layouts/SplitHorizontal";
-import { FullArticle } from "./Layouts/FullArticle";
+import { SplitVertical } from "../../common/layouts/SplitVertical";
+import { FullTable } from "../../common/layouts/FullTable";
+import { SplitHorizontal } from "../../common/layouts/SplitHorizontal";
+import { FullArticle } from "../../common/layouts/FullArticle";
 
 export type PageLayout = "Selection" | "Extraction" | "Identification";
 

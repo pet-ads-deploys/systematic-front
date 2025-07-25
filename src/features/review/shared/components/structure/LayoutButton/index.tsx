@@ -13,10 +13,10 @@ import { PiArticleMediumBold } from "react-icons/pi";
 
 import { RiFlipHorizontalLine } from "react-icons/ri";
 
-import { ViewModel } from "../../../features/review/shared/hooks/useLayoutPage";
+import { ViewModel } from "../../../hooks/useLayoutPage";
 
 import React, { useState } from "react";
-import { capitalize } from "../../../features/shared/utils/helpers/formatters/CapitalizeText";
+import { capitalize } from "../../../../../shared/utils/helpers/formatters/CapitalizeText";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 interface SelectLayoutProps {

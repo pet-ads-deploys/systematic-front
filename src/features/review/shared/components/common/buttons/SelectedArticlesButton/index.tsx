@@ -1,12 +1,15 @@
 import { Button, Flex } from "@chakra-ui/react";
-import { buttonconteiner } from "../styles/BtnSelectionStyles";
+import { buttonconteiner } from "../ButtonsForSelection/styles";
 
 interface SelectedArticlesButtonProos {
   handleSendDuplicates: () => void;
   handleClearSelectedArticles: () => void;
 }
 
-export default function SelectedArticlesButton({ handleSendDuplicates, handleClearSelectedArticles}:SelectedArticlesButtonProos) {
+export default function SelectedArticlesButton({
+  handleSendDuplicates,
+  handleClearSelectedArticles,
+}: SelectedArticlesButtonProos) {
   return (
     <Flex
       w="100%"

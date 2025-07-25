@@ -8,7 +8,7 @@ import ColoredIcon from "../../../../../../../../components/common/icons/Colored
 import { TableHeadersInterface } from "../../../../../../../../types/ITableHeaders";
 import { KeyWordHeaderInterface } from "../../../../../../../../types/IKeyWordHeard";
 import { KeywordInterface } from "../../../../../../../../types/KeywordInterface";
-import { StudyInterface } from "../../../../../../../../types/IStudy";
+import { StudyInterface } from "../../../../../../../../features/review/shared/types/IStudy";
 import AppContext from "@features/shared/context/ApplicationContext";
 
 interface IStudy<T, U> {

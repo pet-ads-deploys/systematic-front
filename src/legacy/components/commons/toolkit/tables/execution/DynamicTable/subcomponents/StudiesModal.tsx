@@ -17,7 +17,7 @@ import NavegationIconsPanel from "./NavigationIconPanel";
 import OtherStudyPanels from "./OtherStudyPanels";
 import ModalContext from "../../../../../../../context/ModalContext";
 
-import { StudyInterface } from "../../../../../../../../types/IStudy";
+import { StudyInterface } from "../../../../../../../../features/review/shared/types/IStudy";
 import AppContext from "@features/shared/context/ApplicationContext";
 
 interface IStudy {

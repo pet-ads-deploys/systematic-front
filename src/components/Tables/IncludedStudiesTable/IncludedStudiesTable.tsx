@@ -9,8 +9,8 @@ import useFetchInclusionCriteria from "../../../hooks/fetch/useFetchInclusionCri
 import { ReportTd } from "../Subcomponents/ReportTd";
 
 // Types
-import type ArticleInterface from "../../../types/ArticleInterface";
-import { StudyInterface } from "../../../types/IStudy";
+import type ArticleInterface from "../../../features/review/shared/types/ArticleInterface";
+import { StudyInterface } from "../../../features/review/shared/types/IStudy";
 
 type Column = {
   label: string;
