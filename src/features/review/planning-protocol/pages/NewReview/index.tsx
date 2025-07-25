@@ -1,14 +1,19 @@
+// External library
 import { Box, FormControl } from "@chakra-ui/react";
-import Header from "../../components/structure/Header/Header";
-import InputText from "../../components/Inputs/InputText";
-import NavButton from "@components/common/buttons/NavigationButton";
-import InputTextArea from "../../components/Inputs/InputTextArea";
-import ResearcherFilter from "../UserArea/subcomponents/ResearcherFilter";
-import FlexLayout from "../../components/structure/Flex/Flex";
 
-//importin hooks
-import useCreateReview from "../../hooks/reviews/useCreateReview";
-import AlertInputText from "../../components/Inputs/AlertInputText";
+// Components
+import Header from "@components/structure/Header/Header";
+import InputText from "@components/Inputs/InputText";
+import NavButton from "@components/common/buttons/NavigationButton";
+import InputTextArea from "@components/Inputs/InputTextArea";
+import FlexLayout from "@components/structure/Flex/Flex";
+import AlertInputText from "@components/Inputs/AlertInputText";
+
+// Pages component
+import ResearcherFilter from "../../../../../pages/UserArea/subcomponents/ResearcherFilter";
+
+// Service
+import useCreateReview from "../../../../../hooks/reviews/useCreateReview";
 
 export default function NovaRevisao() {
   const {

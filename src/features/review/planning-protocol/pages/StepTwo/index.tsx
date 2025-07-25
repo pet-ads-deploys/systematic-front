@@ -1,14 +1,18 @@
-import Header from "../../components/structure/Header/Header";
+import Header from "../../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
 import { Progress, FormControl, Box } from "@chakra-ui/react";
-import { btnBox, conteiner, flex } from "./styles/partTwooStyles";
-import TextAreaInput from "../../components/Inputs/InputTextArea";
-import AddTextTable from "../../components/AddDataFields/AddTextTable";
-import AddSelectionTable from "../../components/AddDataFields/AddSelectionTable";
-import FlexLayout from "../../components/structure/Flex/Flex";
+import {
+  btnBox,
+  conteiner,
+  flex,
+} from "./styles";
+import TextAreaInput from "../../../../../components/Inputs/InputTextArea";
+import AddTextTable from "../../../../../components/AddDataFields/AddTextTable";
+import AddSelectionTable from "../../../../../components/AddDataFields/AddSelectionTable";
+import FlexLayout from "../../../../../components/structure/Flex/Flex";
 
 //importimg hook
-import useCreateProtocol from "../../hooks/reviews/useCreateProtocol";
+import useCreateProtocol from "../../../../../hooks/reviews/useCreateProtocol";
 import { useEffect } from "react";
 
 export default function ProtocolPartTwo2() {

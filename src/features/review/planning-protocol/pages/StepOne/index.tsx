@@ -11,15 +11,18 @@ import {
   Heading,
   Divider,
 } from "@chakra-ui/react";
-import Header from "../../components/structure/Header/Header";
+import Header from "../../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
-import { btnBox, formControl } from "./styles/partOneStyles";
-import TextAreaInput from "../../components/Inputs/InputTextArea";
-import FlexLayout from "../../components/structure/Flex/Flex";
-import useProtocolAccordion from "../../hooks/useProtocolAccordion";
-import useCreatePortocol from "../../hooks/reviews/useCreateProtocol";
+import {
+  btnBox,
+  formControl,
+} from "./styles";
+import TextAreaInput from "../../../../../components/Inputs/InputTextArea";
+import FlexLayout from "../../../../../components/structure/Flex/Flex";
+import useProtocolAccordion from "../../../../../hooks/useProtocolAccordion";
+import useCreatePortocol from "../../../../../hooks/reviews/useCreateProtocol";
 import { useEffect } from "react";
-import AddTextTable from "../../components/AddDataFields/AddTextTable";
+import AddTextTable from "../../../../../components/AddDataFields/AddTextTable";
 
 export default function Protocol() {
   const {

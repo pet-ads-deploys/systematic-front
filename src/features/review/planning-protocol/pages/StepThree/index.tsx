@@ -1,14 +1,14 @@
-import Header from "../../components/structure/Header/Header";
+import Header from "../../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
 import { Progress, FormControl, Box } from "@chakra-ui/react";
-import { buttonBox, formControl } from "./styles/partThreeStyles";
-import TextAreaInput from "../../components/Inputs/InputTextArea";
-import InteractiveTable from "../../components/Tables/InteractiveTable";
-import FlexLayout from "../../components/structure/Flex/Flex";
+import { buttonBox, formControl } from "./styles";
+import TextAreaInput from "../../../../../components/Inputs/InputTextArea";
+import InteractiveTable from "../../../../../components/Tables/InteractiveTable";
+import FlexLayout from "../../../../../components/structure/Flex/Flex";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import useCreateProtocolThree from "../../hooks/reviews/useCreateProtocolThree";
-import axios from "../../interceptor/interceptor";
+import useCreateProtocolThree from "../../../../../hooks/reviews/useCreateProtocolThree";
+import axios from "../../../../../interceptor/interceptor";
 
 export default function ProtocolPartThree() {
   const [analysis, setAnalysis] = useState("");

@@ -5,26 +5,40 @@ import { RouteObject, useRoutes } from "react-router-dom";
 import ProtectedRoute from "@features/auth/guards/ProtectedRoute";
 
 // Pages Components
-import CollaboratorsPage from "./pages/CollaboratorsPage/CollaboratorsPage";
-import Extraction from "./pages/Execution/Extraction/Extraction";
-import Finalization from "./pages/NovaRevisao/finalization/Finalization";
-import Graphics from "./pages/NovaRevisao/graphics/Graphics";
+
+// Home
 import Homepage from "./pages/Homepage/Homepage";
-import Identification from "./pages/Execution/Identification/Identification";
-import IdentificationSession from "./pages/Execution/Identification/IdentificationSession";
+import LandingPage from "./pages/LandingPage/LandingPage";
+import CollaboratorsPage from "./pages/CollaboratorsPage/CollaboratorsPage";
+
+// User
+import UserArea from "./pages/UserArea/UserArea";
+
+// Planning
+import NovaRevisao from "./features/review/planning-protocol/pages/NewReview";
+import Protocol from "@features/review/planning-protocol/pages/StepOne";
+import ProtocolPartThree from "@features/review/planning-protocol/pages/StepThree";
+import ProtocolPartTwo from "@features/review/planning-protocol/pages/StepTwo";
+
+// Execution
 import Insertion from "./legacy/pages/execution/Insertion/Insertion";
 import KeyWordScreen from "./legacy/pages/execution/KeyWordScreen/KeyWordScreen";
-import LandingPage from "./pages/LandingPage/LandingPage";
-import NovaRevisao from "./pages/NovaRevisao/novaRevisao";
-import Protocol from "./pages/Protocolo/Protocol";
-import ProtocolPartThree from "./pages/Protocolo/ProtocolPartThree";
-import ProtocolPartTwo from "./pages/Protocolo/Protocol-Part-Two";
-import SearchSession from "./legacy/pages/execution/SearchSession/SearchSession";
+import Identification from "./pages/Execution/Identification/Identification";
+import IdentificationSession from "./pages/Execution/Identification/IdentificationSession";
 import Selection from "./pages/Execution/Selection/Selection";
+import Extraction from "./pages/Execution/Extraction/Extraction";
+
+// Summarization
+import Graphics from "./pages/NovaRevisao/graphics/Graphics";
+import Visualization from "./pages/NovaRevisao/visualization/Visualization";
+import Finalization from "./pages/NovaRevisao/finalization/Finalization";
+
+// Error Information
 import ServerError from "./pages/ServerErrorPage/ServerErrorPage";
 import Unauthorized from "./pages/UnauthorizedPage/UnauthorizedPage";
-import UserArea from "./pages/UserArea/UserArea";
-import Visualization from "./pages/NovaRevisao/visualization/Visualization";
+
+// Legacy
+import SearchSession from "./legacy/pages/execution/SearchSession/SearchSession";
 
 const routesList: RouteObject[] = [
   {
