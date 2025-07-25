@@ -1,10 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 
-import DragAndDrop from "../../Inputs/DragAndDropInput";
-
-import useHandleExportedFiles from "../../../hooks/reviews/useHandleExportedFiles";
-
 import {
   Button,
   Modal,
@@ -27,6 +23,8 @@ import { DeleteIcon } from "@chakra-ui/icons";
 
 import { KeyedMutator } from "swr";
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
+import useHandleExportedFiles from "@features/review/execution-identification/services/useHandleExportedFiles";
+import DragAndDrop from "@components/Inputs/DragAndDropInput";
 
 interface IdentificationModalProps {
   show: (value: boolean) => void;

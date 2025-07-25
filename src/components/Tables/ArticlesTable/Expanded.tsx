@@ -40,7 +40,7 @@ import {
   collapsedSpanText,
   tdSX,
   tooltip,
-} from "../../../pages/Execution/styles/CardsStyle";
+} from "../../../features/review/execution-identification/pages/Identification/subcomponents/accordions/styles";
 
 // Utils
 import { capitalize } from "../../../features/shared/utils/helpers/formatters/CapitalizeText";

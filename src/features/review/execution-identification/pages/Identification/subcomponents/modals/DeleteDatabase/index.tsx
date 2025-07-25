@@ -2,8 +2,6 @@ import { useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 
-import UseDeleteSession from "../../../hooks/reviews/useDeleteSession";
-
 import {
   Button,
   Modal,
@@ -24,6 +22,7 @@ import {
 import { IoIosWarning } from "react-icons/io";
 
 import { KeyedMutator } from "swr";
+import UseDeleteSession from "@features/review/execution-identification/services/useDeleteSession";
 
 interface DeleteDatabaseModalProps {
   show: (value: boolean) => void;

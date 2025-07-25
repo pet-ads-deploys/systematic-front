@@ -1,5 +1,5 @@
 import { KeyedMutator } from "swr";
-import axios from "../../interceptor/interceptor";
+import axios from "../../../../interceptor/interceptor";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 interface DeleteSessionProps {

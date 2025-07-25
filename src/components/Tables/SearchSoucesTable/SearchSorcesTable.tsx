@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
+import useFetchDataBases from "../../../features/review/shared/hooks/useFetchDataBases";
 import {
   fetchStudiesBySource,
   HttpResponse,
@@ -59,15 +59,24 @@ export const SearchSorcesTable = () => {
       setIsLoading(false);
     };
 
-    loadData(); 
+    loadData();
   }, [databases]);
 
   useEffect(() => {
-    const includedTotal = studiesData.reduce((sum, data) => sum + data.included.length,0);
-    const excludedTotal = studiesData.reduce((sum, data) => sum + data.excluded.length,0);
-    const total = studiesData.reduce((sum, data) => sum + data.totalOfStudies,0);
+    const includedTotal = studiesData.reduce(
+      (sum, data) => sum + data.included.length,
+      0
+    );
+    const excludedTotal = studiesData.reduce(
+      (sum, data) => sum + data.excluded.length,
+      0
+    );
+    const total = studiesData.reduce(
+      (sum, data) => sum + data.totalOfStudies,
+      0
+    );
     const indexingRate = 0;
-    const precisionRate = total > 0 ? ((includedTotal / total) * 100): 0;
+    const precisionRate = total > 0 ? (includedTotal / total) * 100 : 0;
 
     setDataStatistics({
       included: includedTotal,
@@ -78,8 +87,7 @@ export const SearchSorcesTable = () => {
     });
   }, [studiesData]);
 
-  if(isLoading) return <Text>Loading table...</Text>
-
+  if (isLoading) return <Text>Loading table...</Text>;
 
   return (
     <TableContainer>
@@ -93,9 +101,14 @@ export const SearchSorcesTable = () => {
         </Thead>
         <Tbody>
           {studiesData.map((data) => {
-
-            const indexingRating = dataStatistics.included > 0 ? ((data.included.length / dataStatistics.included) * 100):0;
-            const precisionRate=  data.totalOfStudies > 0 ? ((data.included.length / data.totalOfStudies) * 100): 0;
+            const indexingRating =
+              dataStatistics.included > 0
+                ? (data.included.length / dataStatistics.included) * 100
+                : 0;
+            const precisionRate =
+              data.totalOfStudies > 0
+                ? (data.included.length / data.totalOfStudies) * 100
+                : 0;
 
             return (
               <Tr key={data.source} _hover={{ bg: "gray.300" }}>

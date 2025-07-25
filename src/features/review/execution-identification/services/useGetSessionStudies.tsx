@@ -1,11 +1,11 @@
 import useSWR from "swr";
-import axios from "../interceptor/interceptor";
+import axios from "../../../../interceptor/interceptor";
 
 interface HttpResponse {
   studyReviews: ArticleInterface[];
 }
 
-import ArticleInterface from "../types/ArticleInterface";
+import ArticleInterface from "../../../../types/ArticleInterface";
 
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 

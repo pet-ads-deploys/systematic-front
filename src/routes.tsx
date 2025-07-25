@@ -23,8 +23,8 @@ import ProtocolPartTwo from "@features/review/planning-protocol/pages/StepTwo";
 // Execution
 import Insertion from "./legacy/pages/execution/Insertion/Insertion";
 import KeyWordScreen from "./legacy/pages/execution/KeyWordScreen/KeyWordScreen";
-import Identification from "./pages/Execution/Identification/Identification";
-import IdentificationSession from "./pages/Execution/Identification/IdentificationSession";
+import Identification from "./features/review/execution-identification/pages/Identification";
+import IdentificationSession from "./features/review/execution-identification/pages/IdentificationSession";
 import Selection from "./pages/Execution/Selection/Selection";
 import Extraction from "./pages/Execution/Extraction/Extraction";
 

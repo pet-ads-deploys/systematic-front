@@ -1,18 +1,21 @@
 import { Box } from "@chakra-ui/react";
 
-import DataBaseCard from "./subcomponents/Cards/DatabaseCards";
-import Header from "../../../components/structure/Header/Header";
-import FlexLayout from "../../../components/structure/Flex/Flex";
+import DataBaseCard from "./subcomponents/cards/DatabaseCard";
+import Header from "../../../../../components/structure/Header/Header";
+import FlexLayout from "../../../../../components/structure/Flex/Flex";
 
 import { StudySelectionProvider } from "@features/review/shared/context/StudiesSelectionContext";
 
-import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
+import useFetchDataBases from "../../../shared/hooks/useFetchDataBases";
 
-import { conteiner, dataBaseconteiner } from "../styles/Identification";
+import {
+  conteiner,
+  dataBaseconteiner,
+} from "./styles";
 
 export default function Identification() {
   const { databases } = useFetchDataBases();
-  // console.log(databases);
+
   return (
     <StudySelectionProvider>
       <FlexLayout defaultOpen={1} navigationType="Accordion">

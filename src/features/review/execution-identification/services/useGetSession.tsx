@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import Axios from "../../interceptor/interceptor";
+import Axios from "../../../../interceptor/interceptor";
 
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
@@ -29,7 +29,6 @@ export default function useGetSession(source: string) {
   async function fetchSessions() {
     try {
       const response = await Axios.get<HttpResponse>(path, options);
-      console.log("Dados recebidos:", response.data.searchSessions);
       return response.data.searchSessions;
     } catch (error) {
       throw new Error(`Erro ao buscar sessões: ${error}`);

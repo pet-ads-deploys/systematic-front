@@ -1,13 +1,11 @@
 import { useContext, useState } from "react";
 
-import IdentificationModal from "../../../../components/Modals/IdentificationModal";
-
-import UseDeleteSession from "../../../../hooks/reviews/useDeleteSession";
+import UseDeleteSession from "../../../../../services/useDeleteSession";
 
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
-import type IAcordionDashboard from "../../../../types/IAccordionDashboard";
+import type IAcordionDashboard from "../../../../../types";
 
-import { Accordionbtn, accordion } from "../../styles/CardsStyle";
+import { Accordionbtn, accordion } from "../styles";
 import {
   Accordion,
   AccordionItem,
@@ -22,7 +20,8 @@ import {
   Th,
   Tbody,
 } from "@chakra-ui/react";
-import SessionPrev from "../../Identification/subcomponents/Cards/subcomponents/SessionPrev";
+import SessionPrev from "../AccordionDashboard/subcomponents/tables/SessionPrev";
+import IdentificationModal from "../../modals/IdentificationModal";
 
 interface actionsModal {
   action: "create" | "update";

@@ -1,21 +1,20 @@
 import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 import { useState } from "react";
-import useFetchDataBases from "../../../hooks/fetch/useFetchDataBases";
+import useFetchDataBases from "../../../features/review/shared/hooks/useFetchDataBases";
 
 import { Box, Select, Text } from "@chakra-ui/react";
 import useFetchStudiesBySource from "../../../hooks/reports/useFetchStudiesBySource";
 
 export default function DinamicChart() {
   const { databases } = useFetchDataBases();
-  
+
   const { studiesData, isLoading } = useFetchStudiesBySource(databases);
   const [chartType, setChartType] = useState<"pie" | "bar">("pie");
 
-
-
   const series =
-    chartType === "pie" ? studiesData.map((item) => item.totalOfStudies)
+    chartType === "pie"
+      ? studiesData.map((item) => item.totalOfStudies)
       : [
           {
             name: "studies",
@@ -36,23 +35,21 @@ export default function DinamicChart() {
     },
     dataLabels: {
       enabled: true,
-      
     },
     ...(chartType === "bar"
       ? {
           xaxis: {
             categories: studiesData.map((item) => item.source),
           },
-          colors:["#3c73b6"],
+          colors: ["#3c73b6"],
           plotOptions: {
             bar: {
               horizontal: false,
-              dataLabels:{
-                position:'top' ,
-                }
+              dataLabels: {
+                position: "top",
+              },
             },
           },
-         
         }
       : {
           labels: studiesData.map((item) => item.source),
@@ -61,8 +58,7 @@ export default function DinamicChart() {
 
   if (isLoading) return <Text>Loading chart...</Text>;
 
-
- const width = chartType === "pie"? 650:700;
+  const width = chartType === "pie" ? 650 : 700;
   return (
     <Box>
       <Box mb={4} maxW="200px">
@@ -71,14 +67,20 @@ export default function DinamicChart() {
           onChange={(e) => setChartType(e.target.value as "pie" | "bar")}
           bg="gray.300"
           borderRadius="md"
-          size="sm">
+          size="sm"
+        >
           <option value="pie">Pie Chart</option>
           <option value="bar">Bar Chart</option>
         </Select>
       </Box>
 
-      <Chart key={chartType} options={options} series={series} type={chartType} width={width} />
+      <Chart
+        key={chartType}
+        options={options}
+        series={series}
+        type={chartType}
+        width={width}
+      />
     </Box>
   );
-
 }

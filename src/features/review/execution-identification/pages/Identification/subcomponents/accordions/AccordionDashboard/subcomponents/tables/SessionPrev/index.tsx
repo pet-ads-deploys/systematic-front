@@ -7,7 +7,7 @@ import { InvalidEntry } from "@features/review/shared/context/StudiesSelectionCo
 import {
   createFileToInvalidEntries,
   downloadFile,
-} from "../../../../../../hooks/reviews/createFileToInvalidEntries";
+} from "../../../../../../../../hooks/createFileToInvalidEntries";
 
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { Flex, Button, Text, Tr, Td } from "@chakra-ui/react";
