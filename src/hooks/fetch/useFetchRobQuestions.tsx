@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import Axios from "../../interceptor/interceptor";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
-import { Questions } from "../../pages/Execution/Extraction/subcomponents/forms/types";
+import { Questions } from "../../features/review/execution-extraction/types";
 
 interface HttpResponse {
   questions: Questions[];

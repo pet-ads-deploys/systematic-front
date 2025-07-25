@@ -26,7 +26,7 @@ import KeyWordScreen from "./legacy/pages/execution/KeyWordScreen/KeyWordScreen"
 import Identification from "./features/review/execution-identification/pages/Identification";
 import IdentificationSession from "./features/review/execution-identification/pages/IdentificationSession";
 import Selection from "./features/review/execution-selection/pages/Selection";
-import Extraction from "./pages/Execution/Extraction/Extraction";
+import Extraction from "./features/review/execution-extraction/pages/Extraction";
 
 // Summarization
 import Graphics from "./pages/NovaRevisao/graphics/Graphics";

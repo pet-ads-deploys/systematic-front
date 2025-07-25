@@ -13,7 +13,7 @@ import type {
   AnswerStrucuture,
   ArticleAnswerStrucuture,
   FormType,
-} from "../../pages/Execution/Extraction/subcomponents/forms/types";
+} from "../../features/review/execution-extraction/types";
 import type { QuestionAnswer } from "./useFetchIncludedStudiesAnswers";
 
 export default function useFetchAllQuestionsByArticle() {

@@ -11,7 +11,7 @@ import StudySelectionContext from "@features/review/shared/context/StudiesSelect
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Types
-import type { SendAnswerProps } from "../../../pages/Execution/Extraction/subcomponents/forms/types";
+import type { SendAnswerProps } from "../../../features/review/execution-extraction/types";
 
 export function useSendBatchAnswers() {
   const selectionContext = useContext(StudySelectionContext);

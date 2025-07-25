@@ -14,7 +14,7 @@ import useFocusedArticle from "../useFocusedArticle";
 import type {
   AnswerStrucuture,
   ArticleAnswerStrucuture,
-} from "../../../pages/Execution/Extraction/subcomponents/forms/types";
+} from "../../../features/review/execution-extraction/types";
 
 interface UseFormSubmissionProps {
   responses: ArticleAnswerStrucuture;

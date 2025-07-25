@@ -4,7 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import type {
   AnswerStrucuture,
   HandleSendAnswerProps,
-} from "../../../pages/Execution/Extraction/subcomponents/forms/types";
+} from "../../../features/review/execution-extraction/types";
 
 interface SendAnswerProps {
   answers: HandleSendAnswerProps[];

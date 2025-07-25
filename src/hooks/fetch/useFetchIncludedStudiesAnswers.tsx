@@ -5,7 +5,7 @@ import useSWR from "swr";
 import Axios from "../../interceptor/interceptor";
 
 // Types
-import type { TypeOfQuestions } from "../../pages/Execution/Extraction/subcomponents/forms/types";
+import type { TypeOfQuestions } from "../../features/review/execution-extraction/types";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 type UseIncludedStudiesAnswersProps = {

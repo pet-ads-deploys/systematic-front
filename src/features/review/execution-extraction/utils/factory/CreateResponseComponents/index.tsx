@@ -2,16 +2,16 @@
 import { ReactNode } from "react";
 
 // Components
-import DropdownList from "../Responses/DropdownList/DropdownList";
-import LabeledList from "../Responses/LabeledList/LabeledList";
-import NumberScale from "../Responses/NumberScale/NumberScale.tsx";
-import TextualResponse from "../Responses/Textual/Textual.tsx";
+import DropdownList from "../../../components/forms/DataExtraction/subcomponents/responses/DropdownList/index.tsx";
+import LabeledList from "../../../components/forms/DataExtraction/subcomponents/responses/LabeledList/index.tsx";
+import NumberScale from "../../../components/forms/DataExtraction/subcomponents/responses/NumberScale/index.tsx";
+import TextualResponse from "../../../components/forms/DataExtraction/subcomponents/responses/Textual/index.tsx";
 
 // Hooks
-import { useFetchQuestionById } from "../../../../../../hooks/fetch/useFetchQuestionById";
+import { useFetchQuestionById } from "../../../../../../hooks/fetch/useFetchQuestionById.tsx";
 
 // Types
-import type { CreateResponseProps, TypeOfQuestions } from "../types";
+import type { CreateResponseProps, TypeOfQuestions } from "../../../types.ts";
 
 export default function CreateResponseComponent({
   articleId,

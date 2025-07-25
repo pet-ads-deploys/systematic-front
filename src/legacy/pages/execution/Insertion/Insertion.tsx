@@ -13,7 +13,7 @@ import {
   btnconteiner,
   conteiner,
   inputconteiner,
-} from "../../../../pages/Execution/styles/executionStyles";
+} from "../../../../features/review/shared/styles/executionStyles";
 
 import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
 import { tableTypeEnum } from "../../../../features/review/shared/types/enums/tableTypeEnum";

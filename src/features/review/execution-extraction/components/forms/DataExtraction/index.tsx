@@ -12,7 +12,7 @@ import {
 import { FaPlusCircle } from "react-icons/fa";
 
 // Component
-import CreateResponseComponent from "../utils/CreateResponseComponents.tsx";
+import CreateResponseComponent from "../../../utils/factory/CreateResponseComponents/index.tsx";
 
 // Hooks
 import { useExtractionFormSubmission } from "../../../../../../hooks/reviews/forms/useExtractionFormSubmission.tsx";
@@ -21,7 +21,11 @@ import { useExtractionFormSubmission } from "../../../../../../hooks/reviews/for
 import { button } from "../styles.ts";
 
 // Types
-import { AnswerProps, ArticleAnswerStrucuture, FormType } from "../types.ts";
+import {
+  AnswerProps,
+  ArticleAnswerStrucuture,
+  FormType,
+} from "../../../types.ts";
 
 interface DataExtractionFormProps {
   currentId: number;

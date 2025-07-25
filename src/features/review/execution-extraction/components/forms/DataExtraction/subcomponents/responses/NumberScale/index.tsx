@@ -15,8 +15,8 @@ import {
   radioBox,
   clearButton,
   radiosLabel,
-} from "./numberScale";
-import { capitalize } from "../../../../../../../features/shared/utils/helpers/formatters/CapitalizeText";
+} from "./styles";
+import { capitalize } from "../../../../../../../../shared/utils/helpers/formatters/CapitalizeText";
 import { container, label } from "../styles";
 
 interface NumberScaleProps {

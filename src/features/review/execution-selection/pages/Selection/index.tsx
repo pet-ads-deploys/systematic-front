@@ -11,7 +11,7 @@ import LayoutFactory from "../../../shared/components/structure/LayoutFactory";
 
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
-import { inputconteiner } from "../../../../../pages/Execution/styles/executionStyles";
+import { inputconteiner } from "../../../shared/styles/executionStyles";
 
 import ArticleInterface from "../../../shared/types/ArticleInterface";
 import { PageLayout } from "../../../shared/components/structure/LayoutFactory";

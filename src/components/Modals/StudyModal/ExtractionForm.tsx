@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 
 // Components
-import HeaderForm from "../../../pages/Execution/Extraction/subcomponents/forms/HeaderForm/HeaderForm";
+import HeaderForm from "../../../features/review/execution-extraction/components/forms/DataExtraction/subcomponents/Header";
 import SkeletonLoader from "@components/feedback/Skeleton";
 
 // Hooks
@@ -22,7 +22,7 @@ import { capitalize } from "../../../features/shared/utils/helpers/formatters/Ca
 // Types
 import type { ArticlePreviewProps } from "./StudyData";
 import React from "react";
-import DataExtraction from "../../../pages/Execution/Extraction/subcomponents/forms/DataExtraction";
+import DataExtraction from "../../../features/review/execution-extraction/components/forms/DataExtraction";
 
 export type FormType = "EXTRACTION" | "RISK_OF_BIAS";
 
