@@ -8,7 +8,7 @@ import useFetchTableData from "../../../hooks/execution/useFetchStudyData";
 import SearchInformations from "./subcomponents/searchInformations";
 import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";
 // import ComboBox from "../../components/Inputs/ComboBox";
-import { flex } from "../../../../pages/NovaRevisao/styles/finalizationStyles";
+import { flex } from "../../../../features/review/summarization-finalization/pages/Finalization/styles";
 import EventButton from "@components/common/buttons/EventButton";
 import FlexLayout from "../../../../components/structure/Flex/Flex";
 

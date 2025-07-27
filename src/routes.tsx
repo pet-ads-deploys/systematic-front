@@ -15,7 +15,7 @@ import CollaboratorsPage from "./pages/CollaboratorsPage/CollaboratorsPage";
 import UserArea from "./pages/UserArea/UserArea";
 
 // Planning
-import NovaRevisao from "./features/review/planning-protocol/pages/NewReview";
+import NovaRevisao from "@features/review/planning-protocol/pages/NewReview";
 import Protocol from "@features/review/planning-protocol/pages/StepOne";
 import ProtocolPartThree from "@features/review/planning-protocol/pages/StepThree";
 import ProtocolPartTwo from "@features/review/planning-protocol/pages/StepTwo";
@@ -23,15 +23,15 @@ import ProtocolPartTwo from "@features/review/planning-protocol/pages/StepTwo";
 // Execution
 import Insertion from "./legacy/pages/execution/Insertion/Insertion";
 import KeyWordScreen from "./legacy/pages/execution/KeyWordScreen/KeyWordScreen";
-import Identification from "./features/review/execution-identification/pages/Identification";
-import IdentificationSession from "./features/review/execution-identification/pages/IdentificationSession";
-import Selection from "./features/review/execution-selection/pages/Selection";
-import Extraction from "./features/review/execution-extraction/pages/Extraction";
+import Identification from "@features/review/execution-identification/pages/Identification";
+import IdentificationSession from "@features/review/execution-identification/pages/IdentificationSession";
+import Selection from "@features/review/execution-selection/pages/Selection";
+import Extraction from "@features/review/execution-extraction/pages/Extraction";
 
 // Summarization
-import Graphics from "./features/review/summarization-graphics/pages/Graphics";
-import Visualization from "./pages/NovaRevisao/visualization/Visualization";
-import Finalization from "./pages/NovaRevisao/finalization/Finalization";
+import Graphics from "@features/review/summarization-graphics/pages/Graphics";
+import Visualization from "@features/review/summarization-visualization/pages/visualization";
+import Finalization from "@features/review/summarization-finalization/pages/Finalization";
 
 // Error Information
 import ServerError from "./pages/ServerErrorPage/ServerErrorPage";

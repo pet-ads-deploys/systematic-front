@@ -1,13 +1,13 @@
 import { Box, Flex, Textarea } from "@chakra-ui/react";
 import useInputState from "@features/review/shared/hooks/useInputState";
 
-import Header from "../../../components/structure/Header/Header";
+import Header from "../../../../../components/structure/Header/Header";
 // import ComboBox from "../../../components/Inputs/ComboBox";
-import InputText from "../../../components/Inputs/InputText";
-import SelectInput from "../../../components/Inputs/SelectInput";
+import InputText from "../../../../../components/Inputs/InputText";
+import SelectInput from "../../../../../components/Inputs/SelectInput";
 import EventButton from "@components/common/buttons/EventButton";
-import DynamicTable from "../../../legacy/components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
-import useFetchTableData from "../../../legacy/hooks/execution/useFetchStudyData";
+import DynamicTable from "../../../../../legacy/components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
+import useFetchTableData from "../../../../../legacy/hooks/execution/useFetchStudyData";
 import {
   btnStyles,
   conteiner,
@@ -15,12 +15,12 @@ import {
   inputconteiner,
   tableconteiner,
   textArea,
-} from "../styles/finalizationStyles";
-import FlexLayout from "../../../components/structure/Flex/Flex";
+} from "./styles";
+import FlexLayout from "../../../../../components/structure/Flex/Flex";
 
-import { NoStudiesData } from "../../../components/NotFound/NoStudiesData";
-import { tableTypeEnum } from "../../../features/review/shared/types/enums/tableTypeEnum";
-import { TableHeadersInterface } from "../../../types/ITableHeaders";
+import { NoStudiesData } from "../../../../../components/NotFound/NoStudiesData";
+import { tableTypeEnum } from "../../../shared/types/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../../../types/ITableHeaders";
 
 export default function Finalization() {
   const bodyData = useFetchTableData("/data/tableData.json");

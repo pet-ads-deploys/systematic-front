@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
-import Header from "../../../components/structure/Header/Header";
-import FlexLayout from "../../../components/structure/Flex/Flex";
+import Header from "../../../../../components/structure/Header/Header";
+import FlexLayout from "../../../../../components/structure/Flex/Flex";
 
 export default function Visualization() {
   return (
