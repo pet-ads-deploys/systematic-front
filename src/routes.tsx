@@ -7,9 +7,9 @@ import ProtectedRoute from "@features/auth/guards/ProtectedRoute";
 // Pages Components
 
 // Home
-import Homepage from "./pages/Homepage/Homepage";
-import LandingPage from "./pages/LandingPage/LandingPage";
-import CollaboratorsPage from "./pages/CollaboratorsPage/CollaboratorsPage";
+import Homepage from "./features/landing/pages/Homepage";
+import LandingPage from "./features/landing/pages/Landing";
+import CollaboratorsPage from "./features/landing/pages/Collaborators";
 
 // User
 import UserArea from "./pages/UserArea/UserArea";
