@@ -1,23 +1,23 @@
 import { Box } from "@chakra-ui/react";
-import useInputState from "../../../../hooks/useInputState";
-import Header from "../../../../components/ui/Header/Header";
-import FlexLayout from "../../../../components/ui/Flex/Flex";
+import useInputState from "@features/review/shared/hooks/useInputState";
+import Header from "../../../../components/structure/Header/Header";
+import FlexLayout from "../../../../components/structure/Flex/Flex";
 // import ComboBox from "../../../components/Inputs/ComboBox";
-import InputText from "../../../../components/Inputs/InputText";
-import NavButton from "../../../../components/Buttons/NavButton";
-import SelectInput from "../../../../components/Inputs/SelectInput";
-import EventButton from "../../../../components/Buttons/EventButton";
+import InputText from "../../../../components/common/inputs/InputText";
+import NavButton from "@components/common/buttons/NavigationButton";
+import SelectInput from "../../../../components/common/inputs/SelectInput";
+import EventButton from "@components/common/buttons/EventButton";
 import DynamicTable from "../../../components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../hooks/execution/useFetchStudyData";
 import {
   btnconteiner,
   conteiner,
   inputconteiner,
-} from "../../../../pages/Execution/styles/executionStyles";
+} from "../../../../features/review/shared/styles/executionStyles";
 
-import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
-import { tableTypeEnum } from "../../../../types/enums/tableTypeEnum";
-import { TableHeadersInterface } from "../../../../types/ITableHeaders";
+import { NoStudiesData } from "../../../../features/application/components/NotFound";
+import { tableTypeEnum } from "../../../../features/review/shared/types/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../types/ITableHeaders";
 
 export default function Insertion() {
   const bodyData = useFetchTableData("/data/tableData.json");

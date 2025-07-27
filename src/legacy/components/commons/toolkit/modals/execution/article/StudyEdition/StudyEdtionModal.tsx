@@ -11,8 +11,8 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import StudyEditingInput from "../../../../../../../../components/Inputs/StudyEditingInput";
-import { StudyInterface } from "../../../../../../../../types/IStudy";
+import StudyEditingInput from "../../../../inputs/StudyEditingInput";
+import { StudyInterface } from "../../../../../../../../features/review/shared/types/IStudy";
 
 interface StudyEdtionModalProps {
   isOpen: boolean;
