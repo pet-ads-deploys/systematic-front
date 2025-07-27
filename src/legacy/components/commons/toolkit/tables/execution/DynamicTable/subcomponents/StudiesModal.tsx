@@ -12,13 +12,14 @@ import {
   Text,
 } from "@chakra-ui/react";
 import StatusSelection from "./StatusSelection";
-import StudyDataFiel from "../../../../../../../../components/Modals/StudyModal/StudyData";
+
 import NavegationIconsPanel from "./NavigationIconPanel";
 import OtherStudyPanels from "./OtherStudyPanels";
 import ModalContext from "../../../../../../../context/ModalContext";
 
-import AppContext from "../../../../../../../../context/AppContext";
-import { StudyInterface } from "../../../../../../../../types/IStudy";
+import { StudyInterface } from "../../../../../../../../features/review/shared/types/IStudy";
+import AppContext from "@features/shared/context/ApplicationContext";
+import StudyDataFiel from "@features/review/shared/components/common/tables/StudyData";
 
 interface IStudy {
   isOpen: boolean;

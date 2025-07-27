@@ -1,14 +1,14 @@
 import TableRow from "./subcomponents/TableRow";
 import useTableSorting from "../../../../../../hooks/execution/useTableSorting";
 import useColumnVisibility from "../../../../../../hooks/execution/useColumnVisibility";
-import { tbConteiner } from "../../../../../../../components/Tables/styles/DynamicTableStyle";
+import { tbConteiner } from "./DynamicTableStyle";
 import { Table, TableContainer, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 
-import { tableTypeEnum } from "../../../../../../../types/enums/tableTypeEnum";
-import { TableHeadersInterface } from "../../../../../../../types/ITableHeaders";
-import { StudyInterface } from "../../../../../../../types/IStudy";
-import { KeywordInterface } from "../../../../../../../types/KeywordInterface";
-import { KeyWordHeaderInterface } from "../../../../../../../types/IKeyWordHeard";
+import { tableTypeEnum } from "../../../../../../../features/review/shared/types/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../../../../types/ITableHeaders";
+import { StudyInterface } from "../../../../../../../features/review/shared/types/IStudy";
+import { KeywordInterface } from "../../../../../../types/KeywordInterface";
+import { KeyWordHeaderInterface } from "../../../../../../types/IKeyWordHeard";
 // import { useContext } from "react";
 // import AppContext from "../Context/AppContext";
 

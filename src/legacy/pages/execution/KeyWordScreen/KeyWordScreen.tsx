@@ -3,8 +3,8 @@
 import { Flex } from "@chakra-ui/react";
 import useFetchStudyData from "../../../hooks/execution/useFetchStudyData";
 
-import FlexLayout from "../../../../components/ui/Flex/Flex";
-import Header from "../../../../components/ui/Header/Header";
+import FlexLayout from "../../../../components/structure/Flex/Flex";
+import Header from "../../../../components/structure/Header/Header";
 import KeywordsTable from "../../../components/commons/toolkit/tables/execution/Keywords/KeywordsTable";
 import type { KeyWordHeaderInterface, KeywordInterface } from "./types";
 

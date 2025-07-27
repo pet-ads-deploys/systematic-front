@@ -1,20 +1,24 @@
 import { Box } from "@chakra-ui/react";
 import { Upload } from "../../../components/commons/toolkit/buttons/upload/Upload";
-import useInputState from "../../../../hooks/useInputState";
-import Header from "../../../../components/ui/Header/Header";
-import NavButton from "../../../../components/Buttons/NavButton";
+import useInputState from "@features/review/shared/hooks/useInputState";
+import Header from "../../../../components/structure/Header/Header";
+import NavButton from "@components/common/buttons/NavigationButton";
 import DynamicTable from "../../../components/commons/toolkit/tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../hooks/execution/useFetchStudyData";
 import SearchInformations from "./subcomponents/searchInformations";
 import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";
 // import ComboBox from "../../components/Inputs/ComboBox";
-import { flex } from "../../../../pages/NovaRevisao/styles/finalizationStyles";
-import EventButton from "../../../../components/Buttons/EventButton";
-import FlexLayout from "../../../../components/ui/Flex/Flex";
+import EventButton from "@components/common/buttons/EventButton";
+import FlexLayout from "../../../../components/structure/Flex/Flex";
 
-import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
-import { tableTypeEnum } from "../../../../types/enums/tableTypeEnum";
-import { TableHeadersInterface } from "../../../../types/ITableHeaders";
+import { NoStudiesData } from "../../../../features/application/components/NotFound";
+import { tableTypeEnum } from "../../../../features/review/shared/types/enums/tableTypeEnum";
+import { TableHeadersInterface } from "../../../types/ITableHeaders";
+
+export const flex = {
+  flexDirection: "column",
+  gap: 5,
+};
 
 export default function SearchSession() {
   const bodyData = useFetchTableData("/data/tableData.json");
