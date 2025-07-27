@@ -1,4 +1,4 @@
-import Axios from "../../../../interceptor/interceptor";
+import Axios from "../../../../service/api/Axios";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 export type HttpResponse = {

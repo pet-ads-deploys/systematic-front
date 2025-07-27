@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../../interceptor/interceptor";
+import axios from "../../../service/api/Axios";
 
 export interface cardDataProps {
   id: string;

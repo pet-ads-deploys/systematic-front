@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import axios from "../../../../interceptor/interceptor";
+import axios from "../../../../service/api/Axios";
 
 interface HttpResponse {
   studyReviews: ArticleInterface[];

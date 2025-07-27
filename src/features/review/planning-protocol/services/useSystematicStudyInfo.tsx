@@ -1,4 +1,4 @@
-import axios from "../../../../interceptor/interceptor";
+import axios from "../../../../service/api/Axios";
 
 const useSystematicStudyInfo = async (id: string) => {
   try {

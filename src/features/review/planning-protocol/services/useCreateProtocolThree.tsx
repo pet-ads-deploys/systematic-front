@@ -1,4 +1,4 @@
-import axios from "../../../../interceptor/interceptor";
+import axios from "../../../../service/api/Axios";
 
 const useCreateProtocolTwo = async (analysis: string, id: string) => {
   const data = {

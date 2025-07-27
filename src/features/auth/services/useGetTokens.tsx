@@ -1,5 +1,5 @@
 // Service
-import Axios from "../../../interceptor/interceptor";
+import Axios from "../../../service/api/Axios";
 
 // Types
 import { AccessCredentials } from "../types";

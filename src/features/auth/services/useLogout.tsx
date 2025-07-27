@@ -1,5 +1,5 @@
 // Service
-import Axios from "../../../interceptor/interceptor";
+import Axios from "../../../service/api/Axios";
 
 // Hooks
 import useDeleteUserData from "@features/auth/hooks/useDeleteUserData";

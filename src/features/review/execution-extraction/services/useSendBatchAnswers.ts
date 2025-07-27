@@ -2,7 +2,7 @@
 import { useContext } from "react";
 
 // Service
-import Axios from "../../../../interceptor/interceptor";
+import Axios from "../../../../service/api/Axios";
 
 // Context
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";

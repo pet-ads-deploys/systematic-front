@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../../../interceptor/interceptor";
+import axios from "../../../../service/api/Axios";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 const useFetchExclusionCriteria = () => {

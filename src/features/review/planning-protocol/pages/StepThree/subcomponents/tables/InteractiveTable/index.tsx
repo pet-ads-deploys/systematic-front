@@ -16,7 +16,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import useSendExtractionForm from "../../../../../../execution-extraction/services/useSendExtractionForm";
-import axios from "../../../../../../../../interceptor/interceptor";
+import axios from "../../../../../../../../service/api/Axios";
 import { useEffect, useState } from "react";
 import NumberScaleModal from "../../modals/NumberScaleModal";
 import PickListModal from "../../modals/PickListModal";

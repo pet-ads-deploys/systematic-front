@@ -1,5 +1,5 @@
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
-import axios from "../../../../interceptor/interceptor";
+import axios from "../../../../service/api/Axios";
 
 interface Props {
   studyReviewId: number[];

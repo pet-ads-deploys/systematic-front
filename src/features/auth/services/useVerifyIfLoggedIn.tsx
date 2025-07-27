@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 // Service
-import Axios from "../../../interceptor/interceptor";
+import Axios from "../../../service/api/Axios";
 
 export function useVerifyIfLoggedIn() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

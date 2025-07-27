@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../../../../interceptor/interceptor";
+import axios from "../../../../service/api/Axios";
 
 const useFetchDataBases = () => {
   const [databases, setdatabase] = useState<string[]>([]);
