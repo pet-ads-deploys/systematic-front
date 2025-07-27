@@ -29,7 +29,7 @@ import Selection from "./features/review/execution-selection/pages/Selection";
 import Extraction from "./features/review/execution-extraction/pages/Extraction";
 
 // Summarization
-import Graphics from "./pages/NovaRevisao/graphics/Graphics";
+import Graphics from "./features/review/summarization-graphics/pages/Graphics";
 import Visualization from "./pages/NovaRevisao/visualization/Visualization";
 import Finalization from "./pages/NovaRevisao/finalization/Finalization";
 
