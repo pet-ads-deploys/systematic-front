@@ -1,8 +1,9 @@
 import EditButton from "@components/common/buttons/EditButton";
 import DeleteButton from "@components/common/buttons/DeleteButton";
-import { useEditLabeledList } from "../../features/review/planning-protocol/hooks/useEditLabeledList";
-import { tbConteiner } from "./styles/infosTableStyles";
+import { useEditLabeledList } from "../../../../../hooks/useEditLabeledList";
+
 import { Table, Tbody, Tr, Td, TableContainer, Input } from "@chakra-ui/react";
+import { tbConteiner } from "../InfosTable/styles";
 
 interface InfosTableProps {
   AddTexts: Record<string, number>; // Agora é um objeto

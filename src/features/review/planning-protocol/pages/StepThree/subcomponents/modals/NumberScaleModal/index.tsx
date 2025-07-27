@@ -11,7 +11,7 @@ import {
 import { useDisclosure } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
-import NumberScaleTable from "../../../../../../../../components/Tables/NumberScaleTable";
+import NumberScaleTable from "../../tables/NumberScaleTable";
 import useNumberScale from "../../../../../hooks/useNumberScale";
 
 interface Props {

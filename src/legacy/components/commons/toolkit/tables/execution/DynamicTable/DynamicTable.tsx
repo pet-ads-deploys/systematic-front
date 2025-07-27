@@ -1,7 +1,7 @@
 import TableRow from "./subcomponents/TableRow";
 import useTableSorting from "../../../../../../hooks/execution/useTableSorting";
 import useColumnVisibility from "../../../../../../hooks/execution/useColumnVisibility";
-import { tbConteiner } from "../../../../../../../components/Tables/styles/DynamicTableStyle";
+import { tbConteiner } from "./DynamicTableStyle";
 import { Table, TableContainer, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 
 import { tableTypeEnum } from "../../../../../../../features/review/shared/types/enums/tableTypeEnum";

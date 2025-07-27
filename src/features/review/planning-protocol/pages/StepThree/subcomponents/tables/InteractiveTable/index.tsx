@@ -1,7 +1,7 @@
 import { AddIcon } from "@chakra-ui/icons";
 import EditButton from "@components/common/buttons/EditButton";
 import DeleteButton from "@components/common/buttons/DeleteButton";
-import { useInteractiveTable } from "../../features/review/planning-protocol/hooks/useInteractiveTable";
+import { useInteractiveTable } from "../../../../../hooks/useInteractiveTable";
 import {
   TableContainer,
   Table,
@@ -15,12 +15,12 @@ import {
   Input,
   FormLabel,
 } from "@chakra-ui/react";
-import useSendExtractionForm from "../../features/review/execution-extraction/services/useSendExtractionForm";
-import axios from "../../interceptor/interceptor";
+import useSendExtractionForm from "../../../../../../execution-extraction/services/useSendExtractionForm";
+import axios from "../../../../../../../../interceptor/interceptor";
 import { useEffect, useState } from "react";
-import NumberScaleModal from "../../features/review/planning-protocol/pages/StepThree/subcomponents/modals/NumberScaleModal";
-import PickListModal from "../../features/review/planning-protocol/pages/StepThree/subcomponents/modals/PickListModal";
-import LabeledScaleModal from "../../features/review/planning-protocol/pages/StepThree/subcomponents/modals/LabeledScale";
+import NumberScaleModal from "../../modals/NumberScaleModal";
+import PickListModal from "../../modals/PickListModal";
+import LabeledScaleModal from "../../modals/LabeledScaleModal";
 
 interface Props {
   id: string;
