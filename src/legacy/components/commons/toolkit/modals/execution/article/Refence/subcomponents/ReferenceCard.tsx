@@ -1,7 +1,7 @@
 import React from "react";
 
 import { HStack, Container, Text, Input, Flex, Button } from "@chakra-ui/react";
-import TextAreaInput from "../../../../../../../../../components/Inputs/InputTextArea";
+import TextAreaInput from "../../../../../../../../../components/common/inputs/InputTextArea";
 
 interface Props {
   authors: string;

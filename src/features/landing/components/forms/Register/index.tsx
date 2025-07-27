@@ -1,7 +1,7 @@
-import SelectInput from "../../../../../components/Inputs/SelectInput";
+import SelectInput from "../../../../../components/common/inputs/SelectInput";
 import EventButton from "@components/common/buttons/EventButton";
 import { FormControl, Box } from "@chakra-ui/react";
-import PasswordInput from "../../../../../components/Inputs/PasswordInput";
+import PasswordInput from "../../../../../components/common/inputs/PasswordInput";
 import FormOptions from "../FormOptions";
 import RegisterInputs from "./subcomponents/inputs/RegisterInputs";
 import useHandleRegister from "../../../../auth/hooks/useHandleRegister";

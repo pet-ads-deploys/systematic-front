@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 
 import Header from "../../../../../components/structure/Header/Header";
-import ArticlesTable from "../../../../../components/Tables/ArticlesTable/ArticlesTable";
 
 import useGetSessionStudies from "../../services/useGetSessionStudies";
 
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
 import { Flex } from "@chakra-ui/react";
+import ArticlesTable from "@features/review/shared/components/common/tables/ArticlesTable";
 
 export default function IdentificationSession() {
   const { session = "" } = useParams();

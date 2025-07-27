@@ -1,8 +1,8 @@
 import useSWR from "swr";
 import Axios from "../../../../interceptor/interceptor";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
-import { useFetchExtractionQuestions } from "../../../../hooks/fetch/useFetchExtractionQuestions";
-import { useFetchRobQuestions } from "../../../../hooks/fetch/useFetchRobQuestions";
+import { useFetchExtractionQuestions } from "../../execution-extraction/services/useFetchExtractionQuestions";
+import { useFetchRobQuestions } from "../../execution-extraction/services/useFetchRobQuestions";
 
 export type AnswerData = {
   userId: string;

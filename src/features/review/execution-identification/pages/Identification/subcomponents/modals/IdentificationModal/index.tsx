@@ -24,7 +24,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { KeyedMutator } from "swr";
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 import useHandleExportedFiles from "@features/review/execution-identification/services/useHandleExportedFiles";
-import DragAndDrop from "@components/Inputs/DragAndDropInput";
+import DragAndDrop from "@components/common/inputs/DragAndDropInput";
 
 interface IdentificationModalProps {
   show: (value: boolean) => void;

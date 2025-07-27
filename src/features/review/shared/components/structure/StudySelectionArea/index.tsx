@@ -4,7 +4,6 @@ import { Box, Flex } from "@chakra-ui/react";
 
 // Components
 import ButtonsForSelection from "../../common/buttons/ButtonsForSelection";
-import StudyDataFiel from "../../../../../../components/Modals/StudyModal/StudyData";
 
 // Context
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
@@ -13,6 +12,7 @@ import StudySelectionContext from "@features/review/shared/context/StudiesSelect
 import type { PageLayout } from "../LayoutFactory";
 import type ArticleInterface from "../../../types/ArticleInterface";
 import type { StudyInterface } from "../../../types/IStudy";
+import StudyDataFiel from "../../common/tables/StudyData";
 
 interface StudySelectionAreaProps {
   articles: ArticleInterface[] | StudyInterface[];

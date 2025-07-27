@@ -21,7 +21,7 @@ import useCreatePortocol from "../../services/useCreateProtocol";
 // Components
 import Header from "../../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
-import TextAreaInput from "../../../../../components/Inputs/InputTextArea";
+import TextAreaInput from "../../../../../components/common/inputs/InputTextArea";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
 import AddTextTable from "../../components/common/inputs/text/AddTextTable";
 

@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/react";
 import LineChart from "../../../../components/charts/LineChart.tsx";
-import useGetAllReviewArticles from "../../../../../../../hooks/useGetAllReviewArticles";
+import useGetAllReviewArticles from "../../../../../shared/services/useGetAllReviewArticles.ts";
 
 export const IncludedStudiesLineChart = () => {
   const { articles, isLoading } = useGetAllReviewArticles();

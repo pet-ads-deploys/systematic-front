@@ -2,8 +2,8 @@
 import { Table, TableContainer, Thead, Tr, Tbody, Th } from "@chakra-ui/react";
 
 // Hooks
-import useGetAllReviewArticles from "../../../../../../hooks/useGetAllReviewArticles";
-import useFetchInclusionCriteria from "../../../../../../hooks/fetch/useFetchInclusionCriteria";
+import useGetAllReviewArticles from "../../../../shared/services/useGetAllReviewArticles";
+import useFetchInclusionCriteria from "../../../../shared/services/useFetchInclusionCriteria";
 
 // Components
 import { ReportTd } from "../subcomponents/row/ReportTd";

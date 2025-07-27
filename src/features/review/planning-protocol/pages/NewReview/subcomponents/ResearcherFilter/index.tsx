@@ -1,7 +1,7 @@
 import { FormControl } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FormControlstyle } from "./styles";
-import TextAreaInput from "../../../../../../../components/Inputs/InputTextArea";
+import TextAreaInput from "../../../../../../../components/common/inputs/InputTextArea";
 
 interface IResearcherData {
   name: string;

@@ -5,8 +5,8 @@ import useInputState from "@features/review/shared/hooks/useInputState";
 
 import Header from "../../../../../components/structure/Header/Header";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
-import InputText from "../../../../../components/Inputs/InputText";
-import SelectInput from "../../../../../components/Inputs/SelectInput";
+import InputText from "../../../../../components/common/inputs/InputText";
+import SelectInput from "../../../../../components/common/inputs/SelectInput";
 import LayoutFactory from "../../../shared/components/structure/LayoutFactory";
 
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";

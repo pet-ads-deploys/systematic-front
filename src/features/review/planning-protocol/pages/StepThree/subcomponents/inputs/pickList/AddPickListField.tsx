@@ -3,7 +3,7 @@ import { FormControl, useToast } from "@chakra-ui/react";
 import EventButton from "@components/common/buttons/EventButton";
 import { useState } from "react";
 import { formcontrol } from "@features/review/planning-protocol/components/common/inputs/text/AddTextField/styles";
-import TextAreaInput from "@components/Inputs/InputTextArea";
+import TextAreaInput from "@components/common/inputs/InputTextArea";
 
 interface IAddTextFieldProps {
   onAddText: (newKeyword: string) => void;

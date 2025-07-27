@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import StudySelectionArea from "../../../structure/StudySelectionArea";
 import ArticleInterface from "../../../../types/ArticleInterface";
 import { PageLayout } from "../../../structure/LayoutFactory";
-import ArticlesTable from "../../../../../../../components/Tables/ArticlesTable/ArticlesTable";
+import ArticlesTable from "../../tables/ArticlesTable";
 
 interface VerticalProps {
   isInverted: boolean;

@@ -12,7 +12,7 @@ import EventButton from "@components/common/buttons/EventButton";
 import { useState } from "react";
 // import { formcontrol } from "../../../features/review/planning-protocol/components/common/inputs/text/AddTextField/styles";
 import { useToast } from "@chakra-ui/react";
-import TextAreaInput from "@components/Inputs/InputTextArea";
+import TextAreaInput from "@components/common/inputs/InputTextArea";
 import { formcontrol } from "@features/review/planning-protocol/components/common/inputs/text/AddTextField/styles";
 
 interface IAddTextFieldProps {

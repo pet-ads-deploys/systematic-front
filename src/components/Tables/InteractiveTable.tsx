@@ -15,12 +15,12 @@ import {
   Input,
   FormLabel,
 } from "@chakra-ui/react";
-import useSendExtractionForm from "../../hooks/reviews/extractionForm/useSendExtractionForm";
+import useSendExtractionForm from "../../features/review/execution-extraction/services/useSendExtractionForm";
 import axios from "../../interceptor/interceptor";
 import { useEffect, useState } from "react";
-import NumberScaleModal from "../Modals/ExtractionQuestions/NumberScaleModal";
-import PickListModal from "../Modals/ExtractionQuestions/PickListModal";
-import LabeledScaleModal from "../Modals/ExtractionQuestions/labeledScale";
+import NumberScaleModal from "../../features/review/planning-protocol/pages/StepThree/subcomponents/modals/NumberScaleModal";
+import PickListModal from "../../features/review/planning-protocol/pages/StepThree/subcomponents/modals/PickListModal";
+import LabeledScaleModal from "../../features/review/planning-protocol/pages/StepThree/subcomponents/modals/LabeledScale";
 
 interface Props {
   id: string;

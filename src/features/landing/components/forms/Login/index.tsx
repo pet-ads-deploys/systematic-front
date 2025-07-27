@@ -2,7 +2,7 @@ import { useState } from "react";
 import EventButton from "@components/common/buttons/EventButton";
 import { useGetTokens } from "../../../../auth/services/useGetTokens";
 import { FormControl, Box } from "@chakra-ui/react";
-import PasswordInput from "../../../../../components/Inputs/PasswordInput";
+import PasswordInput from "../../../../../components/common/inputs/PasswordInput";
 import FormOptions from "../FormOptions";
 import RegisterInputs from "../Register/subcomponents/inputs/RegisterInputs";
 import { bxconteiner, evbtn, formcontrol } from "./styles";

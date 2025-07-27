@@ -9,13 +9,13 @@ import { Tooltip } from "@chakra-ui/react";
 // import AppContext from "../../../context/AppContext";
 
 // Hooks
-import useFetchAllCriteriasByArticle from "../../../../../../../hooks/fetch/useFetchAllCriteriasByArticle";
-import useResetStatus from "../../../../../../../hooks/useResetStatus";
-import useChangePriority from "../../../../../../../hooks/tables/useChangePriority";
+import useFetchAllCriteriasByArticle from "../../../../services/useFetchAllCriteriasByArticle";
+import useResetStatus from "../../../../hooks/useResetStatus";
+import useChangePriority from "../../../../services/useChangePriority";
 
 // Components
-import MenuOptions from "../../../../../../../components/Inputs/MenuOptions";
-import ComboBox from "../../../../../../../components/Inputs/ComboBox";
+import MenuOptions from "../../../../../../../components/common/menu/MenuOptions";
+import ComboBox from "../../menu/ComboBox";
 
 // Styles
 import { boxconteiner, buttonconteiner, conteiner } from "./styles";
@@ -28,7 +28,7 @@ import { PageLayout } from "../../../structure/LayoutFactory";
 import type {
   OptionProps,
   OptionType,
-} from "../../../../../../../hooks/fetch/useFetchAllCriteriasByArticle";
+} from "../../../../services/useFetchAllCriteriasByArticle";
 
 interface ButtonsForSelectionProps {
   page: PageLayout;

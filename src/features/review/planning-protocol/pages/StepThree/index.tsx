@@ -6,7 +6,7 @@ import { Progress, FormControl, Box } from "@chakra-ui/react";
 // Components
 import Header from "../../../../../components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
-import TextAreaInput from "../../../../../components/Inputs/InputTextArea";
+import TextAreaInput from "../../../../../components/common/inputs/InputTextArea";
 import InteractiveTable from "../../../../../components/Tables/InteractiveTable";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
 

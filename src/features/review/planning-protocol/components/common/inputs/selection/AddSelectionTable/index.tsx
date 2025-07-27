@@ -1,5 +1,5 @@
 import { FormControl, FormLabel } from "@chakra-ui/react";
-import SelectInput from "../../../../../../../../components/Inputs/SelectInput";
+import SelectInput from "../../../../../../../../components/common/inputs/SelectInput";
 import InfosTable from "../../../../../../../../components/Tables/InfosTable";
 import EventButton from "@components/common/buttons/EventButton";
 import { useSelect } from "../../../../../services/useSelect";

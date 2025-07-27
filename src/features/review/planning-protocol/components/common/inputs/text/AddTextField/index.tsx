@@ -1,5 +1,5 @@
 import { Box, FormControl, FormLabel } from "@chakra-ui/react";
-import TextAreaInput from "../../../../../../../../components/Inputs/InputTextArea";
+import TextAreaInput from "../../../../../../../../components/common/inputs/InputTextArea";
 import EventButton from "@components/common/buttons/EventButton";
 import { useState } from "react";
 import { formcontrol } from "./styles";

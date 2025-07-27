@@ -3,11 +3,11 @@ import { Box, FormControl } from "@chakra-ui/react";
 
 // Components
 import Header from "@components/structure/Header/Header";
-import InputText from "@components/Inputs/InputText";
+import InputText from "@components/common/inputs/InputText";
 import NavButton from "@components/common/buttons/NavigationButton";
-import InputTextArea from "@components/Inputs/InputTextArea";
+import InputTextArea from "@components/common/inputs/InputTextArea";
 import FlexLayout from "@components/structure/Flex/Flex";
-import AlertInputText from "@components/Inputs/AlertInputText";
+import AlertInputText from "@components/common/inputs/AlertInputText";
 
 // Pages component
 import ResearcherFilter from "./subcomponents/ResearcherFilter";

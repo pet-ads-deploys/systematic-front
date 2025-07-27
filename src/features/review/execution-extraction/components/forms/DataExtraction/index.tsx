@@ -12,10 +12,10 @@ import {
 import { FaPlusCircle } from "react-icons/fa";
 
 // Component
-import CreateResponseComponent from "../../../utils/factory/CreateResponseComponents/index.tsx";
+import CreateResponseComponent from "../../../factory/CreateResponseComponents/index.tsx";
 
 // Hooks
-import { useExtractionFormSubmission } from "../../../../../../hooks/reviews/forms/useExtractionFormSubmission.tsx";
+import { useExtractionFormSubmission } from "../../../services/useExtractionFormSubmission.tsx";
 
 // Styles
 import { button } from "../styles.ts";

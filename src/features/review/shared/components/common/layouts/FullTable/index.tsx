@@ -1,7 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import ArticleInterface from "../../../../types/ArticleInterface";
-import ArticlesTable from "../../../../../../../components/Tables/ArticlesTable/ArticlesTable";
+
 import { PageLayout } from "../../../structure/LayoutFactory";
+import ArticlesTable from "../../tables/ArticlesTable";
 
 interface TableProps {
   articles: ArticleInterface[];
