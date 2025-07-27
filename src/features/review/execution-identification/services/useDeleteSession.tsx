@@ -1,5 +1,5 @@
 import { KeyedMutator } from "swr";
-import axios from "../../../../service/api/Axios";
+import axios from "../../../../infrastructure/http/axiosClient";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 interface DeleteSessionProps {

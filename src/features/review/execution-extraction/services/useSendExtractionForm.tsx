@@ -1,4 +1,4 @@
-import axios from "../../../../service/api/Axios";
+import axios from "../../../../infrastructure/http/axiosClient";
 
 interface TextualProps {
   question: string;

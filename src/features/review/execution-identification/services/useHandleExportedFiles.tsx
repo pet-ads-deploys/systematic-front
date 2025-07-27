@@ -1,6 +1,6 @@
 // import { SetStateAction, useEffect, useState } from "react";
 import { SetStateAction, useState } from "react";
-import axios from "../../../../service/api/Axios";
+import axios from "../../../../infrastructure/http/axiosClient";
 // import useGetSession from "./useGetSession";
 import { useToast } from "@chakra-ui/react";
 import { InvalidEntry } from "@features/review/shared/context/StudiesSelectionContext";

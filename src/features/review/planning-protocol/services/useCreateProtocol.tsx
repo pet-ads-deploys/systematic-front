@@ -1,4 +1,4 @@
-import axios from "../../../../service/api/Axios";
+import axios from "../../../../infrastructure/http/axiosClient";
 
 //importing hooks
 import { useEffect, useState } from "react";

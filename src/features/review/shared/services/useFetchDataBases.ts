@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../../../../service/api/Axios";
+import axios from "../../../../infrastructure/http/axiosClient";
 
 const useFetchDataBases = () => {
   const [databases, setdatabase] = useState<string[]>([]);

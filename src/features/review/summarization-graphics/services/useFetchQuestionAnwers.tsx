@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import Axios from "../../../../service/api/Axios";
+import Axios from "../../../../infrastructure/http/axiosClient";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import { useFetchExtractionQuestions } from "../../execution-extraction/services/useFetchExtractionQuestions";
 import { useFetchRobQuestions } from "../../execution-extraction/services/useFetchRobQuestions";

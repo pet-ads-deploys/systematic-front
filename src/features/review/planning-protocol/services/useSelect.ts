@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useCreateProtocol from "./useCreateProtocol";
-import axios from "../../../../service/api/Axios";
+import axios from "../../../../infrastructure/http/axiosClient";
 import { useToast } from "@chakra-ui/react";
 
 export function useSelect(initialState: string[] = [], context: string) {

@@ -1,6 +1,6 @@
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import useSWR from "swr";
-import Axios from "../../../../service/api/Axios";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 export type StudiesByCriteriaData = {
   userId: string;

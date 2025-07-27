@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import Axios from "../../../../service/api/Axios";
+import Axios from "../../../../infrastructure/http/axiosClient";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 type StudiesByStageData = {

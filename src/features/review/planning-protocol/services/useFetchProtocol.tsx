@@ -1,4 +1,4 @@
-import axios from "../../../../service/api/Axios";
+import axios from "../../../../infrastructure/http/axiosClient";
 
 export default async function fetchProtocol(systematicStudyId: string) {
   const url = "http://localhost:8080/";

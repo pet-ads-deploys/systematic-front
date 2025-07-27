@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../../service/api/Axios";
+import axios from "../../../infrastructure/http/axiosClient";
 
 export interface cardDataProps {
   id: string;

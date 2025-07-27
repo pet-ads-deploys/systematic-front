@@ -2,7 +2,7 @@
 import useSWR from "swr";
 
 // Service
-import Axios from "../../../../service/api/Axios";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 // Types
 import type { TypeOfQuestions } from "../types";

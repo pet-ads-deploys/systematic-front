@@ -1,5 +1,5 @@
 // Service
-import Axios from "../../../service/api/Axios";
+import Axios from "../../../infrastructure/http/axiosClient";
 
 // Hooks
 import useStorageUserData from "@features/auth/hooks/useStorageUserData";

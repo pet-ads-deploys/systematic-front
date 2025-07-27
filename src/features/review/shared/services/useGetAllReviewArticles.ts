@@ -1,6 +1,6 @@
 // import { useEffect, useState } from 'react';
 import ArticleInterface from "../types/ArticleInterface";
-import axios from "../../../../service/api/Axios";
+import axios from "../../../../infrastructure/http/axiosClient";
 
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import useSWR from "swr";

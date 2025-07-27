@@ -11,7 +11,7 @@ import InteractiveTable from "./subcomponents/tables/InteractiveTable";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
 
 // Service
-import axios from "../../../../../service/api/Axios";
+import axios from "../../../../../infrastructure/http/axiosClient";
 import createProtocolThree from "../../services/useCreateProtocolThree";
 
 // Styles
