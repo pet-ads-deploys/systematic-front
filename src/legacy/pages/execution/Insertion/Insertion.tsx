@@ -15,7 +15,7 @@ import {
   inputconteiner,
 } from "../../../../features/review/shared/styles/executionStyles";
 
-import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
+import { NoStudiesData } from "../../../../features/application/components/NotFound";
 import { tableTypeEnum } from "../../../../features/review/shared/types/enums/tableTypeEnum";
 import { TableHeadersInterface } from "../../../types/ITableHeaders";
 

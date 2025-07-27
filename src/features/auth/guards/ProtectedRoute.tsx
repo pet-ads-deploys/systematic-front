@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 import { useVerifyIfLoggedIn } from "../services/useVerifyIfLoggedIn";
 
 // Page Component
-import LoadingPage from "../../../pages/LoadingPage/loadingPage";
+import LoadingPage from "../../application/pages/LoadingPage";
 
 // Types
 interface ProtectedRouteProps {

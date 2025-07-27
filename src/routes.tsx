@@ -34,8 +34,8 @@ import Visualization from "@features/review/summarization-visualization/pages/vi
 import Finalization from "@features/review/summarization-finalization/pages/Finalization";
 
 // Error Information
-import ServerError from "./pages/ServerErrorPage/ServerErrorPage";
-import Unauthorized from "./pages/UnauthorizedPage/UnauthorizedPage";
+import ServerError from "./features/application/pages/ServerErrorPage";
+import Unauthorized from "./features/application/pages/UnauthorizedPage";
 
 // Legacy
 import SearchSession from "./legacy/pages/execution/SearchSession/SearchSession";

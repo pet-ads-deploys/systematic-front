@@ -1,4 +1,4 @@
-import { Center, Spinner, Text, VStack } from '@chakra-ui/react';
+import { Center, Spinner, Text, VStack } from "@chakra-ui/react";
 
 export default function LoadingPage() {
   return (

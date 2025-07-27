@@ -2,7 +2,7 @@ import { Container, Box, Heading } from "@chakra-ui/react";
 import DynamicTable from "../../../../tables/execution/DynamicTable/DynamicTable";
 import useFetchTableData from "../../../../../../../hooks/execution/useFetchStudyData";
 
-import { NoStudiesData } from "../../../../../../../../components/NotFound/NoStudiesData";
+import { NoStudiesData } from "../../../../../../../../features/application/components/NotFound";
 import { tableTypeEnum } from "../../../../../../../../features/review/shared/types/enums/tableTypeEnum";
 import { TableHeadersInterface } from "../../../../../../../types/ITableHeaders";
 import useInputState from "@features/review/shared/hooks/useInputState";

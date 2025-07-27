@@ -11,7 +11,7 @@ import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";
 import EventButton from "@components/common/buttons/EventButton";
 import FlexLayout from "../../../../components/structure/Flex/Flex";
 
-import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
+import { NoStudiesData } from "../../../../features/application/components/NotFound";
 import { tableTypeEnum } from "../../../../features/review/shared/types/enums/tableTypeEnum";
 import { TableHeadersInterface } from "../../../types/ITableHeaders";
 
