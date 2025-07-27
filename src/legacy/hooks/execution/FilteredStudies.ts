@@ -4,7 +4,7 @@ import { SelectionStatus } from "../../../features/review/shared/types/enums/sel
 import useFetchStudyData from "./useFetchStudyData";
 import { ExcutionFaseEnum } from "../../../features/review/shared/types/enums/ExcutionFaseEnum";
 import { StudyInterface } from "../../../features/review/shared/types/IStudy";
-import { KeywordInterface } from "../../../types/KeywordInterface";
+import { KeywordInterface } from "../../types/KeywordInterface";
 
 export default function FilteredStudies(
   type: ExcutionFaseEnum

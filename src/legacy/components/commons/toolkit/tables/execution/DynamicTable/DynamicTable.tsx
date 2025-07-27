@@ -5,10 +5,10 @@ import { tbConteiner } from "../../../../../../../components/Tables/styles/Dynam
 import { Table, TableContainer, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 
 import { tableTypeEnum } from "../../../../../../../features/review/shared/types/enums/tableTypeEnum";
-import { TableHeadersInterface } from "../../../../../../../types/ITableHeaders";
+import { TableHeadersInterface } from "../../../../../../types/ITableHeaders";
 import { StudyInterface } from "../../../../../../../features/review/shared/types/IStudy";
-import { KeywordInterface } from "../../../../../../../types/KeywordInterface";
-import { KeyWordHeaderInterface } from "../../../../../../../types/IKeyWordHeard";
+import { KeywordInterface } from "../../../../../../types/KeywordInterface";
+import { KeyWordHeaderInterface } from "../../../../../../types/IKeyWordHeard";
 // import { useContext } from "react";
 // import AppContext from "../Context/AppContext";
 

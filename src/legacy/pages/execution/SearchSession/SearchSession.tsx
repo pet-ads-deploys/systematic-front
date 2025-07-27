@@ -8,13 +8,17 @@ import useFetchTableData from "../../../hooks/execution/useFetchStudyData";
 import SearchInformations from "./subcomponents/searchInformations";
 import { conteiner, navbtnStyles } from "./styles/searchSessionStyles";
 // import ComboBox from "../../components/Inputs/ComboBox";
-import { flex } from "../../../../features/review/summarization-finalization/pages/Finalization/styles";
 import EventButton from "@components/common/buttons/EventButton";
 import FlexLayout from "../../../../components/structure/Flex/Flex";
 
 import { NoStudiesData } from "../../../../components/NotFound/NoStudiesData";
 import { tableTypeEnum } from "../../../../features/review/shared/types/enums/tableTypeEnum";
-import { TableHeadersInterface } from "../../../../types/ITableHeaders";
+import { TableHeadersInterface } from "../../../types/ITableHeaders";
+
+export const flex = {
+  flexDirection: "column",
+  gap: 5,
+};
 
 export default function SearchSession() {
   const bodyData = useFetchTableData("/data/tableData.json");

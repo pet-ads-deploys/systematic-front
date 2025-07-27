@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StudyInterface } from "../../../features/review/shared/types/IStudy";
-import { KeywordInterface } from "../../../types/KeywordInterface";
+import { KeywordInterface } from "../../types/KeywordInterface";
 
 export default function useFetchStudyData<
   U extends StudyInterface | KeywordInterface
