@@ -2,10 +2,10 @@
 import { useNavigate } from "react-router-dom";
 
 // Hook
-import useFetchRevisionStage from "./fetch/useFetchRevisionStage.tsx";
+import useFetchRevisionStage from "./useFetchRevisionStage.tsx";
 
 // Type
-import type { Stage } from "./fetch/useFetchRevisionStage.tsx";
+import type { Stage } from "./useFetchRevisionStage.tsx";
 
 type NavigateToPendingStageProps = {
   reviewId: string;

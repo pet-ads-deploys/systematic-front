@@ -1,5 +1,9 @@
-import { Box, Text, Tooltip  } from "@chakra-ui/react";
-import { conteiner, text, titleSX } from "../styles/CardInfosStyle";
+import { Box, Text, Tooltip } from "@chakra-ui/react";
+import {
+  conteiner,
+  text,
+  titleSX,
+} from "./CardInfosStyle";
 
 interface ICardInfosProps {
   title: string;

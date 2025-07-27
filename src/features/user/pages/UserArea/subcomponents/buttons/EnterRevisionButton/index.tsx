@@ -1,4 +1,4 @@
-import Dashboard from "../../../components/Modals/Dashboard/Dashboard";
+import Dashboard from "../../../../../../../components/Modals/Dashboard/Dashboard";
 
 export default function EnterRevisionButton() {
   return (

@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  cardDataProps,
-  useFetchRevisionCard,
-} from "../fetch/useFetchRevisionCard";
+import { cardDataProps, useFetchRevisionCard } from "./useFetchRevisionCard";
 
 const useGetReviewCard = () => {
   const [myRevisionsUrl, setMyRevisionsUrl] = useState("");

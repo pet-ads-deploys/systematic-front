@@ -1,6 +1,6 @@
 import { Icon } from "@chakra-ui/icons";
 import { FaRegCircle } from "react-icons/fa6";
-import { editionicon } from "../styles/IconStyles";
+import { editionicon } from "../styles";
 
 interface IEditedProps {
   isEdited: boolean;

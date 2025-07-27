@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../../../../interceptor/interceptor";
 
 import { useNavigate } from "react-router-dom";
-import useSystematicStudyInfo from "../../../../hooks/reviews/useSystematicStudyInfo";
+import useSystematicStudyInfo from "./useSystematicStudyInfo";
 
 interface useCreateReviewPutProps {
   title: string;

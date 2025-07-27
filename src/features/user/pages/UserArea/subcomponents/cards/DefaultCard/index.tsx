@@ -1,9 +1,9 @@
-import CardIcon from "./CardIcon";
-import CardInfos from "./CardInfos";
-import EditionInfos from "./EditionInfos";
+import CardIcon from "../CardIcon";
+import CardInfos from "../CardInfo";
+import EditionInfos from "../../containers/EditionInfo";
 import { Box, Card } from "@chakra-ui/react";
-import EnterRevisionButton from "./EnterRevisionButton";
-import { conteiner, infoconteiner } from "../styles/CardStyles";
+import EnterRevisionButton from "../../buttons/EnterRevisionButton";
+import { conteiner, infoconteiner } from "./CardStyles";
 
 interface iRevisionCardProps {
   title: string;

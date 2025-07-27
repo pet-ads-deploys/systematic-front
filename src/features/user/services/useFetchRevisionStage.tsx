@@ -2,7 +2,7 @@
 import useSWR from "swr";
 
 // Service
-import Axios from "../../interceptor/interceptor";
+import Axios from "../../../interceptor/interceptor";
 
 // Utils
 import getRequestOptions from "@features/auth/utils/getRequestOptions";

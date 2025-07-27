@@ -12,7 +12,7 @@ import LandingPage from "./features/landing/pages/Landing";
 import CollaboratorsPage from "./features/landing/pages/Collaborators";
 
 // User
-import UserArea from "./pages/UserArea/UserArea";
+import UserArea from "./features/user/pages/UserArea";
 
 // Planning
 import NovaRevisao from "@features/review/planning-protocol/pages/NewReview";

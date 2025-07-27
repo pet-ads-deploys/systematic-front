@@ -2,15 +2,15 @@
 import { Box, Card } from "@chakra-ui/react";
 
 // Components
-import CardIcon from "./CardIcon";
-import CardInfos from "./CardInfos";
-import EditionInfos from "./EditionInfos";
+import CardIcon from "../CardIcon";
+import CardInfos from "../CardInfo";
+import EditionInfos from "../../containers/EditionInfo";
 
 // Hook
-import useNavigateToPendingStage from "../../../hooks/useNavigateToPendingStage";
+import useNavigateToPendingStage from "../../../../../services/useNavigateToPendingStage";
 
 // Styles
-import { CardInfosConteiner, Cardstyles } from "../styles/revisionCardstyles";
+import { CardInfosConteiner, Cardstyles } from "./styles";
 
 // Type
 interface RevisionCardProps {

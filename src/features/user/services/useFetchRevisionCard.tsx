@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../interceptor/interceptor";
+import axios from "../../../interceptor/interceptor";
 
 export interface cardDataProps {
   id: string;
@@ -14,28 +14,25 @@ export interface cardDataProps {
 
 const useFetchRevisionCard = (url: string) => {
   const [cardData, setCardData] = useState<cardDataProps[] | []>([]);
-  const accessToken = localStorage.getItem('AccessToken');
-  
+  const accessToken = localStorage.getItem("AccessToken");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         let options = {
-          headers: { "Authorization":  `Bearer ${accessToken}`}
-        }
+          headers: { Authorization: `Bearer ${accessToken}` },
+        };
 
         const response = await axios.get(url, options);
         const data = await response.data.content;
-        console.log(data)
+        console.log(data);
         setCardData(data);
-      } 
-
-      catch (error) {
+      } catch (error) {
         console.log(error);
       }
     };
 
     fetchData();
-    
   }, [url]);
   return cardData;
 };

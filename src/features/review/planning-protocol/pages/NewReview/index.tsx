@@ -10,7 +10,7 @@ import FlexLayout from "@components/structure/Flex/Flex";
 import AlertInputText from "@components/Inputs/AlertInputText";
 
 // Pages component
-import ResearcherFilter from "../../../../../pages/UserArea/subcomponents/ResearcherFilter";
+import ResearcherFilter from "./subcomponents/ResearcherFilter";
 
 // Service
 import useCreateReview from "../../services/useCreateReview";

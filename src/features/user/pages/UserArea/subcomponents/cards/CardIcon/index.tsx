@@ -1,5 +1,5 @@
 import { Icon } from "@chakra-ui/react";
-import { cardIcon } from "../styles/IconStyles";
+import { cardIcon } from "../../icons/styles";
 
 import { AiOutlineFileSearch } from "react-icons/ai";
 //import { BiFileFind } from "react-icons/bi";
@@ -8,11 +8,6 @@ import { AiOutlineFileSearch } from "react-icons/ai";
 
 export default function CardIcon() {
   return (
-    <Icon 
-      color="#263C56" 
-      as={AiOutlineFileSearch} 
-      sx={cardIcon} 
-      mr="10px" 
-    />
+    <Icon color="#263C56" as={AiOutlineFileSearch} sx={cardIcon} mr="10px" />
   );
 }

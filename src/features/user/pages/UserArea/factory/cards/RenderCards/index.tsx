@@ -1,8 +1,8 @@
 // Components
-import RevisionCard from "../subcomponents/RevisionCard";
+import RevisionCard from "../../../subcomponents/cards/RevisionCard";
 
 // Type
-import { cardDataProps } from "../../../hooks/fetch/useFetchRevisionCard";
+import { cardDataProps } from "../../../../../services/useFetchRevisionCard";
 
 interface RenderCardsProps {
   data: cardDataProps[];

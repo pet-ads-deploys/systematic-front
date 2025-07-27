@@ -1,7 +1,7 @@
 import { FormControl } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { FormControlstyle } from "../styles/ResearcherFilterStyles";
-import TextAreaInput from "../../../components/Inputs/InputTextArea";
+import { FormControlstyle } from "./styles";
+import TextAreaInput from "../../../../../../../components/Inputs/InputTextArea";
 
 interface IResearcherData {
   name: string;
@@ -10,7 +10,9 @@ interface IResearcherData {
 
 export default function ResearcherFilter() {
   const [researchers, setResearchers] = useState<IResearcherData[]>([]);
-  const [filteredResearchers, setFilteredResearchers] = useState<IResearcherData[]>([]);
+  const [filteredResearchers, setFilteredResearchers] = useState<
+    IResearcherData[]
+  >([]);
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
@@ -23,7 +25,11 @@ export default function ResearcherFilter() {
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setInputValue(value);
-    setFilteredResearchers(researchers.filter((researcher) => researcher.name.includes(e.target.value)));
+    setFilteredResearchers(
+      researchers.filter((researcher) =>
+        researcher.name.includes(e.target.value)
+      )
+    );
     console.log(filteredResearchers);
   };
 
