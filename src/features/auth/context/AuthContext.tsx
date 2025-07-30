@@ -25,7 +25,7 @@ import { isLeft, right } from "@features/shared/errors/pattern/Either";
 // Types
 import type { AccessCredentials, UserData } from "@features/auth/types";
 
-interface AuthContextProps {
+export interface AuthContextProps {
   user: UserData | null;
   isLoading: boolean;
   login: (
