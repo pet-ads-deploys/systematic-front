@@ -6,6 +6,16 @@ export interface User {
   affiliation: string;
 }
 
+export interface JWTClaims {
+  id: string;
+  exp: number;
+  iat: number;
+}
+
+export interface UserData extends User, JWTClaims {
+  token: string;
+}
+
 export interface AccessCredentials {
   username: string;
   password: string;
