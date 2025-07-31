@@ -1,6 +1,5 @@
 // External library
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 // Hooks
 import useDecodeToken from "@features/auth/hooks/useDecodeToken";
@@ -43,7 +42,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { decodeToken, checkTokenExpiration } = useDecodeToken();
-  const navigate = useNavigate();
 
   const initialize = (): Either<ApplicationError, UserData> => {
     setIsLoading(true);
@@ -87,7 +85,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         return errorFactory("custom", "Request is empty.");
       }
 
-      const { token } = response.data;
+      const { accessToken: token } = response.data;
 
       if (!token) {
         return errorFactory("unauthorized", "Token not found.");
@@ -105,7 +103,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       };
 
       userStorage.set(userData);
-      navigate("/user");
 
       return right(undefined);
     } catch (error) {
@@ -122,7 +119,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     userStorage.clear();
     logoutService();
     setUser(null);
-    navigate("/");
   };
 
   return (
