@@ -37,7 +37,6 @@ export const userStorage: UserStorageProps = {
     localStorage.setItem(TOKEN_KEY, data.token);
   },
   clear: () => {
-    localStorage.removeItem(USER_KEY);
-    localStorage.removeItem(TOKEN_KEY);
+    localStorage.clear();
   },
 };
