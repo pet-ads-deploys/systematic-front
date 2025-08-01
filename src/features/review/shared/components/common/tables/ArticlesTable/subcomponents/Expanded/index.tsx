@@ -1,4 +1,6 @@
+// External library
 import React, { useContext, useState } from "react";
+
 import {
   TableContainer,
   Table,
@@ -12,6 +14,7 @@ import {
   Checkbox,
   Box,
 } from "@chakra-ui/react";
+
 import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
@@ -21,21 +24,35 @@ import {
   MdKeyboardArrowUp,
   MdKeyboardArrowDown,
 } from "react-icons/md";
+
 import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
+
+// Context
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
+
+// Hook
 import usePagination from "@features/review/shared/hooks/usePagination";
-import { Resizable } from "./subcomponents/Resizable";
-import PaginationControl from "../controlls/PaginationControl";
-import type ArticleInterface from "@features/review/shared/types/ArticleInterface";
-import type { PageLayout } from "@features/review/shared/components/structure/LayoutFactory";
-import type { ViewModel } from "@features/review/shared/hooks/useLayoutPage";
+
+// Components
+
+// Style
 import {
   chevronIcon,
   collapsedSpanText,
   tdSX,
   tooltip,
 } from "@features/review/execution-identification/pages/Identification/subcomponents/accordions/styles";
+
+
+// Utils
 import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
+
+// Type
+import type ArticleInterface from "@features/review/shared/types/ArticleInterface";
+import type { PageLayout } from "@features/review/shared/components/structure/LayoutFactory";
+import type { ViewModel } from "@features/review/shared/hooks/useLayoutPage";
+import { Resizable } from "./subcomponents/Resizable";
+import PaginationControl from "../controlls/PaginationControl"; 
 
 interface Props {
   articles: ArticleInterface[];
