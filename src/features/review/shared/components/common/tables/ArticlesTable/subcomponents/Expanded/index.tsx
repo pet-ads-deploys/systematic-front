@@ -314,7 +314,7 @@ export default function Expanded({
                               justifyContent="center"
                               alignItems="center"
                               w="100%"
-                              p="2rem 0 1rem 0"
+                              p="2rem 1rem 1rem 0"
                               overflow="hidden"
                               textOverflow="ellipsis"
                               whiteSpace="nowrap"
