@@ -23,10 +23,6 @@ export default async function useLoginUser(data: AccessCredentials) {
       }
     );
     localStorage.setItem("accessToken", response.data.accessToken);
-    localStorage.setItem(
-      "myReviewsLink",
-      response.data._links["find-my-reviews"].href
-    );
     return response;
   } catch (error) {
     errorFactory("unauthorized", (error as Error).message);
