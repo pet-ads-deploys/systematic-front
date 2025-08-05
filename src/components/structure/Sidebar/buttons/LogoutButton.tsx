@@ -1,9 +1,9 @@
 // External library
-import { useNavigate } from "react-router-dom";
 import { ImExit } from "react-icons/im";
 
 // Hooks
 import { useAuth } from "@features/auth/hooks/useAuth";
+import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 // Guards
 import { isLeft } from "@features/shared/errors/pattern/Either";
@@ -13,7 +13,7 @@ import style from "./LogouButton.module.css";
 
 const LogoutButton = () => {
   const result = useAuth();
-  const navigate = useNavigate();
+  const { toGo } = useNavigation();
 
   if (isLeft(result)) return null;
 
@@ -21,7 +21,7 @@ const LogoutButton = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/");
+    toGo("/");
   };
 
   return (

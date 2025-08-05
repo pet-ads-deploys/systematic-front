@@ -3,6 +3,7 @@ import { useState } from "react";
 
 // Hooks
 import { useAuth } from "@features/auth/hooks/useAuth";
+import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 // Constants
 const MINIMAL_PASSWORD_LENGHT = 5;
@@ -12,7 +13,6 @@ import type { AccessCredentials } from "@features/auth/types";
 
 // Guards
 import { isLeft } from "@features/shared/errors/pattern/Either";
-import { useNavigate } from "react-router-dom";
 
 export default function useHandleLogin() {
   const [credentials, setCredentials] = useState<AccessCredentials>({
@@ -25,7 +25,8 @@ export default function useHandleLogin() {
     general: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const navigate = useNavigate();
+
+  const { toGo } = useNavigation();
 
   const handleChangeCredentials = (
     field: keyof typeof credentials,
@@ -73,7 +74,7 @@ export default function useHandleLogin() {
       const { login } = result.value;
 
       await login(credentials);
-      navigate("/user");
+      toGo("/user");
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
