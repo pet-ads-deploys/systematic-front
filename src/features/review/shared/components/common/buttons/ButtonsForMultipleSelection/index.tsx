@@ -60,7 +60,7 @@ export default function ButtonsForMultipleSelection({
     onShowSelectedArticles(false);
   };
 
-  return articles && Object.keys(articles).length >= 1 ? (
+  return articles && Object.keys(articles).length > 1 ? (
     <Flex gap=".5rem">
       {!isShown ? (
         <Button

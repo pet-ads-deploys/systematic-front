@@ -51,7 +51,7 @@ export default function Selection() {
   const finalFilteredArticles = useMemo(() => {
     if (
       showSelected &&
-      Object.keys(selectionContext.selectedArticles).length > 0
+      Object.keys(selectionContext.selectedArticles).length > 1
     ) {
       const selectedIds = Object.keys(selectionContext.selectedArticles).map(
         Number
