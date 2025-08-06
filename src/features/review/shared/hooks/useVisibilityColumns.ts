@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 // Types
 import { PageLayout } from "../components/structure/LayoutFactory";
 
-type ColumnVisibility = {
+export type ColumnVisibility = {
   studyReviewId: boolean;
   title: boolean;
   authors: boolean;
