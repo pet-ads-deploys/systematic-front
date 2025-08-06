@@ -43,7 +43,6 @@ import {
   tooltip,
 } from "@features/review/execution-identification/pages/Identification/subcomponents/accordions/styles";
 
-
 // Utils
 import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
 
@@ -52,7 +51,8 @@ import type ArticleInterface from "@features/review/shared/types/ArticleInterfac
 import type { PageLayout } from "@features/review/shared/components/structure/LayoutFactory";
 import type { ViewModel } from "@features/review/shared/hooks/useLayoutPage";
 import { Resizable } from "./subcomponents/Resizable";
-import PaginationControl from "../controlls/PaginationControl"; 
+import PaginationControl from "../controlls/PaginationControl";
+import useVisibiltyColumns from "@features/review/shared/hooks/useVisibilityColumns";
 
 interface Props {
   articles: ArticleInterface[];
@@ -137,14 +137,6 @@ export default function Expanded({
     VERY_HIGH: <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
   };
 
-  const shouldShowColumn = (colKey: string) => {
-    if (colKey === "selectionStatus")
-      return page === "Selection" || page === "Identification";
-    if (colKey === "extractionStatus")
-      return page === "Extraction" || page === "Identification";
-    return true;
-  };
-
   const renderStatusIcon = (status: string) => statusIconMap[status] || null;
   const renderPriorityIcon = (priority: string) =>
     priorityIconMap[priority] || null;
@@ -158,13 +150,17 @@ export default function Expanded({
     handlePrevPage,
   } = usePagination(articles);
 
+  const { columnsVisible } = useVisibiltyColumns({
+    page,
+  });
+
   const handleColumnResize = (key: HeaderKeys, newWidth: number) => {
     setColumnWidths((prev) => {
       const newWidths = { ...prev };
-      
+
       // Filtra as chaves de colunas visíveis
       const visibleColumnsKeys = (Object.keys(prev) as HeaderKeys[]).filter(
-        (colKey) => shouldShowColumn(colKey)
+        (colKey) => columnsVisible[`${colKey}`]
       );
 
       const columnIndex = visibleColumnsKeys.indexOf(key);
@@ -182,7 +178,8 @@ export default function Expanded({
 
       let totalResizableWidth = 0;
       for (let i = columnIndex + 1; i < visibleColumnsKeys.length; i++) {
-        totalResizableWidth += parseFloat(prev[visibleColumnsKeys[i]]) - minWidth;
+        totalResizableWidth +=
+          parseFloat(prev[visibleColumnsKeys[i]]) - minWidth;
       }
 
       if (difference > totalResizableWidth) {
@@ -275,7 +272,7 @@ export default function Expanded({
               </Th>
               {columns.map(
                 (col) =>
-                  shouldShowColumn(col.key) && (
+                  columnsVisible[`${col.key}`] && (
                     <Th
                       key={col.key}
                       textAlign="center"
@@ -406,21 +403,19 @@ export default function Expanded({
                       }}
                     />
                   </Td>
-                  {shouldShowColumn("studyReviewId") && (
-                    <Td sx={tdSX} w={columnWidths.studyReviewId}>
-                      <Tooltip
-                        sx={tooltip}
-                        label={reference.title}
-                        aria-label="Full ID"
-                        hasArrow
-                      >
-                        <Text sx={collapsedSpanTextChanged}>
-                          {String(reference.studyReviewId).padStart(5, "0")}
-                        </Text>
-                      </Tooltip>
-                    </Td>
-                  )}
-                  {shouldShowColumn("title") && (
+                  <Td sx={tdSX} w={columnWidths.studyReviewId}>
+                    <Tooltip
+                      sx={tooltip}
+                      label={reference.title}
+                      aria-label="Full ID"
+                      hasArrow
+                    >
+                      <Text sx={collapsedSpanTextChanged}>
+                        {String(reference.studyReviewId).padStart(5, "0")}
+                      </Text>
+                    </Tooltip>
+                  </Td>
+                  {columnsVisible["title"] && (
                     <Td sx={tdSX} w={columnWidths.title}>
                       <Tooltip
                         sx={tooltip}
@@ -434,7 +429,7 @@ export default function Expanded({
                       </Tooltip>
                     </Td>
                   )}
-                  {shouldShowColumn("authors") && (
+                  {columnsVisible["authors"] && (
                     <Td sx={tdSX} w={columnWidths.authors}>
                       <Tooltip
                         sx={tooltip}
@@ -448,7 +443,7 @@ export default function Expanded({
                       </Tooltip>
                     </Td>
                   )}
-                  {shouldShowColumn("venue") && (
+                  {columnsVisible["venue"] && (
                     <Td sx={tdSX} w={columnWidths.venue}>
                       <Tooltip
                         sx={tooltip}
@@ -462,7 +457,7 @@ export default function Expanded({
                       </Tooltip>
                     </Td>
                   )}
-                  {shouldShowColumn("year") && (
+                  {columnsVisible["year"] && (
                     <Td sx={tdSX} w={columnWidths.year}>
                       <Tooltip
                         sx={tooltip}
@@ -476,7 +471,7 @@ export default function Expanded({
                       </Tooltip>
                     </Td>
                   )}
-                  {shouldShowColumn("selectionStatus") && (
+                  {columnsVisible["selectionStatus"] && (
                     <Td sx={tdSX} w={columnWidths.selectionStatus}>
                       <Box
                         display="flex"
@@ -495,7 +490,7 @@ export default function Expanded({
                       </Box>
                     </Td>
                   )}
-                  {shouldShowColumn("extractionStatus") && (
+                  {columnsVisible["extractionStatus"] && (
                     <Td sx={tdSX} w={columnWidths.extractionStatus}>
                       <Box
                         display="flex"
@@ -514,7 +509,7 @@ export default function Expanded({
                       </Box>
                     </Td>
                   )}
-                  {shouldShowColumn("score") && (
+                  {columnsVisible["score"] && (
                     <Td sx={tdSX} w={columnWidths.score}>
                       <Tooltip
                         sx={tooltip}
@@ -528,8 +523,13 @@ export default function Expanded({
                       </Tooltip>
                     </Td>
                   )}
-                  {shouldShowColumn("readingPriority") && (
-                    <Td sx={tdSX} w={columnWidths.readingPriority} pl="0.5rem" pr="0.5rem">
+                  {columnsVisible["readingPriority"] && (
+                    <Td
+                      sx={tdSX}
+                      w={columnWidths.readingPriority}
+                      pl="0.5rem"
+                      pr="0.5rem"
+                    >
                       <Box
                         display="flex"
                         alignItems="center"
@@ -539,8 +539,9 @@ export default function Expanded({
                         {renderPriorityIcon(reference.readingPriority)}
                         <Text sx={collapsedSpanTextChanged}>
                           {capitalize(
-                            reference.readingPriority?.toString().toLowerCase() ||
-                              ""
+                            reference.readingPriority
+                              ?.toString()
+                              .toLowerCase() || ""
                           ).replace("_", " ")}
                         </Text>
                       </Box>
