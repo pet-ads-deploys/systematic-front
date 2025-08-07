@@ -146,6 +146,7 @@ export default function Expanded({
     paginatedArticles,
     handleNextPage,
     handlePrevPage,
+    changeQuantityOfItens,
   } = usePagination(articles);
 
   const handleColumnResize = (key: HeaderKeys, newWidth: number) => {
@@ -558,6 +559,7 @@ export default function Expanded({
         quantityOfPages={quantityOfPages}
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}
+        changeQuantityOfItens={changeQuantityOfItens}
       />
     </Box>
   );
