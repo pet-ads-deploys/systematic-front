@@ -1,6 +1,5 @@
 // External library
 import React, { useContext, useState } from "react";
-
 import {
   TableContainer,
   Table,
@@ -34,6 +33,8 @@ import StudySelectionContext from "@features/review/shared/context/StudiesSelect
 import usePagination from "@features/review/shared/hooks/usePagination";
 
 // Components
+import PaginationControl from "../controlls/PaginationControl";
+import { Resizable } from "./subcomponents/Resizable";
 
 // Style
 import {
@@ -48,18 +49,15 @@ import { capitalize } from "@features/shared/utils/helpers/formatters/Capitalize
 
 // Type
 import type ArticleInterface from "@features/review/shared/types/ArticleInterface";
-import type { PageLayout } from "@features/review/shared/components/structure/LayoutFactory";
 import type { ViewModel } from "@features/review/shared/hooks/useLayoutPage";
-import { Resizable } from "./subcomponents/Resizable";
-import PaginationControl from "../controlls/PaginationControl";
-import useVisibiltyColumns from "@features/review/shared/hooks/useVisibilityColumns";
+import type { ColumnVisibility } from "@features/review/shared/hooks/useVisibilityColumns";
 
 interface Props {
   articles: ArticleInterface[];
   handleHeaderClick: (key: keyof ArticleInterface) => void;
   sortConfig: { key: keyof ArticleInterface; direction: "asc" | "desc" } | null;
-  page: PageLayout;
   layout?: ViewModel;
+  columnsVisible: ColumnVisibility;
 }
 
 type HeaderKeys =
@@ -83,8 +81,8 @@ export default function Expanded({
   articles,
   handleHeaderClick,
   sortConfig,
-  page,
   layout,
+  columnsVisible,
 }: Props) {
   const [columnWidths, setColumnWidths] = useState({
     studyReviewId: "62px",
@@ -150,15 +148,10 @@ export default function Expanded({
     handlePrevPage,
   } = usePagination(articles);
 
-  const { columnsVisible } = useVisibiltyColumns({
-    page,
-  });
-
   const handleColumnResize = (key: HeaderKeys, newWidth: number) => {
     setColumnWidths((prev) => {
       const newWidths = { ...prev };
 
-      // Filtra as chaves de colunas visíveis
       const visibleColumnsKeys = (Object.keys(prev) as HeaderKeys[]).filter(
         (colKey) => columnsVisible[`${colKey}`]
       );
