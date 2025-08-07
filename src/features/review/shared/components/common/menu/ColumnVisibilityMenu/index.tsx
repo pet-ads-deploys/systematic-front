@@ -1,5 +1,5 @@
 // External library
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, easeInOut } from "framer-motion";
 import { CgOptions } from "react-icons/cg";
 
@@ -41,13 +41,33 @@ export default function ColumnVisibilityMenu({
   toggleColumnVisibility,
 }: ColumnVisibilityMenuInput) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownMenu = useRef<HTMLDivElement>(null);
+
+  const handleMenuState = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownMenu.current &&
+      !dropdownMenu.current.contains(event.target as Node)
+    )
+      setIsOpen(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
 
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      <button
-        onClick={() => setIsOpen((prev) => !prev)}
-        className={styles["dropdown-toggle"]}
-      >
+    <div
+      style={{ position: "relative", display: "inline-block" }}
+      ref={dropdownMenu}
+    >
+      <button onClick={handleMenuState} className={styles["dropdown-toggle"]}>
         <div className={styles["dropdown-toggle-content"]}>
           <CgOptions />
           <span>View</span>
@@ -60,18 +80,25 @@ export default function ColumnVisibilityMenu({
             {...DROPDOWN_MENU}
             className={styles["dropdown-container"]}
           >
-            {Object.entries(columnLabels).map(([key, label]) => (
-              <label key={key} className={styles["dropdown-label"]}>
-                <input
-                  type="checkbox"
-                  checked={columnsVisible[key as keyof ColumnVisibility]}
-                  onChange={() =>
-                    toggleColumnVisibility(key as keyof ColumnVisibility)
-                  }
-                />
-                <span style={{ marginLeft: 8 }}>{label}</span>
-              </label>
-            ))}
+            {Object.entries(columnLabels)
+              .filter(
+                ([key]) =>
+                  columnsVisible[key as keyof ColumnVisibility] !== null
+              )
+              .map(([key, label]) => (
+                <label key={key} className={styles["dropdown-label"]}>
+                  <input
+                    type="checkbox"
+                    checked={
+                      columnsVisible[key as keyof ColumnVisibility] as boolean
+                    }
+                    onChange={() =>
+                      toggleColumnVisibility(key as keyof ColumnVisibility)
+                    }
+                  />
+                  <span style={{ marginLeft: 8 }}>{label}</span>
+                </label>
+              ))}
           </motion.div>
         )}
       </AnimatePresence>

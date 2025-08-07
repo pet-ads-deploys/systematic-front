@@ -10,8 +10,8 @@ export type ColumnVisibility = {
   authors: boolean;
   venue: boolean;
   year: boolean;
-  selectionStatus: boolean;
-  extractionStatus: boolean;
+  selectionStatus: boolean | null;
+  extractionStatus: boolean | null;
   score: boolean;
   readingPriority: boolean;
 };
@@ -44,10 +44,10 @@ export default function useVisibiltyColumns({
   const initialVisibility = useMemo(() => {
     const visibility = { ...defaultVisibility };
     if (page === "Selection") {
-      visibility.extractionStatus = false;
+      visibility.extractionStatus = null;
     }
     if (page === "Extraction") {
-      visibility.selectionStatus = false;
+      visibility.selectionStatus = null;
     }
     return visibility;
   }, [page]);

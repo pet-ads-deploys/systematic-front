@@ -1,7 +1,8 @@
 .dropdown-toggle {
   padding: 0.5rem 1rem;
-  background: #263c56;
-  color: #e0e0e0;
+  background: #fff;
+  color: #263c56;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
   cursor: pointer;
