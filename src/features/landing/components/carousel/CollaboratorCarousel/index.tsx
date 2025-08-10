@@ -1,18 +1,18 @@
+// External library
+import React, { useState, useEffect, CSSProperties, useCallback } from "react";
+
+// Components
 import Arrow from "./subcomponents/buttons/ArrowButton";
-import React, {
-  useState,
-  useEffect,
-  ReactNode,
-  CSSProperties,
-  useCallback,
-} from "react";
+
+// Styles
 import "./styles.css";
 
+// Types
 interface CarouselProps {
-  children: ReactNode[];
+  children: React.ReactNode[];
 }
 
-function Carousel({ children }: CarouselProps): JSX.Element {
+function Carousel({ children }: CarouselProps): React.ReactNode {
   const [index, setIndex] = useState<number>(0);
   const [maxNumberOfVisibleCards, setMaxNumberOfVisibleCards] = useState<
     number | null
