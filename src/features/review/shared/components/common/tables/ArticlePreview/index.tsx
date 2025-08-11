@@ -172,7 +172,7 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
             </Text>
           </Text>
           <Text
-            fontSize={"20px"}
+            fontSize={"16px"}
             align={"right"}
             as="i"
             fontWeight={"Bold"}
@@ -183,11 +183,14 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
         </Flex>
 
         <Text
-          fontSize={"35"}
+          fontSize={["xl", "2xl", "3xl", "4xl"]}
           fontWeight={"bold"}
           fontFamily={"Boboni"}
-          lineHeight="2.3rem"
+          lineHeight={"2.3rem"}
           align={"center"}
+          whiteSpace={"normal"}
+          wordBreak={"break-word"}
+          maxWidth={"100%"}
         >
           {studyData.title}
         </Text>
