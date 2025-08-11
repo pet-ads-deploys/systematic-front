@@ -17,8 +17,11 @@ const useGetAllReviewArticles = () => {
     `http://localhost:8080/api/v1/systematic-study/${id}/study-review`,
     fetchAllArticlesReview,
     {
+      fallbackData: [],
       revalidateOnFocus: true,
       revalidateOnMount: true,
+      dedupingInterval: 5000,
+      refreshInterval: 30000,
     }
   );
 
