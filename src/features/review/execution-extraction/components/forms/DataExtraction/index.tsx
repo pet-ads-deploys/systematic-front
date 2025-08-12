@@ -55,7 +55,14 @@ export default function DataExtraction({
   });
 
   return (
-    <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">
+    <FormControl
+      w="100%"
+      height="100%"
+      gap="3rem"
+      bg="white"
+      overflowY="auto"
+      p=".5rem"
+    >
       <Box gap="5rem">
         {Object.entries(questions).map(
           ([sectionKey, sectionQuestions], index, allQuestions) => {

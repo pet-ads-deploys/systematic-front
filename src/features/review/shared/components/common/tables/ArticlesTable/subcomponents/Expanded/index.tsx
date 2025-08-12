@@ -234,27 +234,20 @@ export default function Expanded({
             ? "12rem"
             : {
                 base: "calc(100vh - 18rem)",
-                md: "calc(100vh - 20rem)",
-                lg: "calc(100vh - 25rem)",
+                md: "calc(100vh - 15rem)",
               }
         }
         maxH={
           layout == "horizontal" || layout == "horizontal-invert"
             ? "15rem"
-            : "calc(100vh - 15.5rem)"
+            : "calc(100vh - 15rem)"
         }
         borderRadius="1rem 1rem 0 0"
         boxShadow="lg"
         bg="white"
         overflowY="auto"
       >
-        <Table
-          variant="unstyled"
-          colorScheme="black"
-          size="md"
-          boxShadow="md"
-          layout="fixed"
-        >
+        <Table variant="unstyled" colorScheme="black" size="md" layout="fixed">
           <Thead
             bg="white"
             borderRadius="1rem"
