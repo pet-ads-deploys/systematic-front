@@ -1,4 +1,4 @@
- // External libraries
+// External libraries
 import {
   Button,
   Checkbox,
@@ -7,7 +7,7 @@ import {
   MenuItem,
   MenuList,
   Tooltip,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { HiOutlineCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 
@@ -64,7 +64,7 @@ export default function ComboBox({
       title: "Ação não permitida",
       description:
         "Você não pode incluir ou excluir critérios de um artigo marcado como duplicado pelo sistema.",
-      status: "warning"
+      status: "warning",
     });
 
   return (
@@ -76,6 +76,7 @@ export default function ComboBox({
         justifyContent="center"
         bg="white"
         color="black"
+        isDisabled={isDisabled}
       >
         {text === "Include" ? (
           <HiOutlineCheckCircle size="1.75rem" />
