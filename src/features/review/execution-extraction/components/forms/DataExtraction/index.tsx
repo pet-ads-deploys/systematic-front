@@ -54,6 +54,12 @@ export default function DataExtraction({
     onQuestionsMutated: mutateQuestion,
   });
 
+  const hasAnyQuestion =
+    questions &&
+    Object.values(questions).every(
+      (section) => Array.isArray(section) && section.length > 0
+    );
+
   return (
     <FormControl
       w="100%"
@@ -205,11 +211,13 @@ export default function DataExtraction({
           }
         )}
       </Box>
-      <Flex w="100%" justifyContent="space-between" pb="1rem">
-        <Button type="submit" onClick={submitResponses}>
-          Enviar
-        </Button>
-      </Flex>
+      {hasAnyQuestion && (
+        <Flex w="100%" justifyContent="space-between" pb="1rem">
+          <Button type="submit" onClick={submitResponses}>
+            Enviar
+          </Button>
+        </Flex>
+      )}
     </FormControl>
   );
 }
