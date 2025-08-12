@@ -1,4 +1,11 @@
+.dropdown-wrapper {
+  display: inline-block;
+  min-width: 120px;
+  position: relative;
+}
+
 .dropdown-toggle {
+  width: 100%;
   padding: 0.5rem 1rem;
   background: #fff;
   color: #263c56;
@@ -14,7 +21,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .dropdown-toggle:hover {
@@ -22,6 +29,7 @@
 }
 
 .dropdown-container {
+  width: 100%;
   position: absolute;
   top: 100%;
   right: 0;

@@ -63,10 +63,7 @@ export default function ColumnVisibilityMenu({
   });
 
   return (
-    <div
-      style={{ position: "relative", display: "inline-block" }}
-      ref={dropdownMenu}
-    >
+    <div className={styles["dropdown-wrapper"]} ref={dropdownMenu}>
       <button onClick={handleMenuState} className={styles["dropdown-toggle"]}>
         <div className={styles["dropdown-toggle-content"]}>
           <CgOptions />
