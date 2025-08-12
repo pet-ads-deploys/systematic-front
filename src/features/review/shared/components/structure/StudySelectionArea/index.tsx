@@ -52,8 +52,8 @@ export default function StudySelectionArea({
       borderRadius="1rem"
       bg="white"
       w="100%"
-      h="100%"
-      p="2"
+      h="calc(100vh - 10rem)"
+      p="1rem 1.5rem"
       alignItems="center"
       gap="1rem"
     >
