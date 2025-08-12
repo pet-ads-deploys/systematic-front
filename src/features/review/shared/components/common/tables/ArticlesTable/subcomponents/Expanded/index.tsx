@@ -228,6 +228,15 @@ export default function Expanded({
     <Box w="100%" maxH="82.5vh">
       <TableContainer
         w="100%"
+        minH={
+          layout == "horizontal" || layout == "horizontal-invert"
+            ? "12rem"
+            : {
+                base: "calc(100vh - 18rem)",
+                md: "calc(100vh - 20rem)",
+                lg: "calc(100vh - 25rem)",
+              }
+        }
         maxH={
           layout == "horizontal" || layout == "horizontal-invert"
             ? "15rem"
