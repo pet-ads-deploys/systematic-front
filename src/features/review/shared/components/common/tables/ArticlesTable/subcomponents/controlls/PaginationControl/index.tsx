@@ -1,25 +1,65 @@
-import { Box, Button, Flex, Text, Select } from "@chakra-ui/react";
-import { Dispatch, SetStateAction } from "react";
+// External library
+import { Box, Button, Flex, Text, Select, Tooltip } from "@chakra-ui/react";
+import {
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+  MdKeyboardDoubleArrowLeft,
+  MdKeyboardDoubleArrowRight,
+} from "react-icons/md";
 
-interface ControlsProps {
+// Types
+interface PaginationControlProps {
   currentPage: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
   quantityOfPages: number;
   handlePrevPage: () => void;
   handleNextPage: () => void;
+  handleBackToInitial: () => void;
+  handleGoToFinal: () => void;
   changeQuantityOfItens: (newQuantity: number) => void;
 }
 
-export default function PaginationControl({
+type ActionButton = {
+  icon: React.ReactElement;
+  action: () => void;
+  label: string;
+};
+
+const PaginationControl: React.FC<PaginationControlProps> = ({
   currentPage,
-  setCurrentPage,
   quantityOfPages,
   handleNextPage,
   handlePrevPage,
+  handleBackToInitial,
+  handleGoToFinal,
   changeQuantityOfItens,
-}: ControlsProps) {
+}) => {
   const numberOfCases = String(quantityOfPages).length;
   const isPaginationEnabled = quantityOfPages > 1;
+
+  const actionButtons: ActionButton[] = [
+    {
+      label: "First page",
+      icon: <MdKeyboardDoubleArrowLeft />,
+      action: handleBackToInitial,
+    },
+    {
+      label: "Previous page",
+      icon: <MdKeyboardArrowLeft />,
+      action: handlePrevPage,
+    },
+    {
+      label: "Next page",
+      icon: <MdKeyboardArrowRight />,
+      action: handleNextPage,
+    },
+    {
+      label: "Last page",
+      icon: <MdKeyboardDoubleArrowRight />,
+      action: handleGoToFinal,
+    },
+  ];
+
+  const paginationValues = [10, 15, 20, 25, 30];
 
   return (
     <Flex
@@ -47,13 +87,13 @@ export default function PaginationControl({
           h="32px"
           textAlign="center"
           onChange={(e) => changeQuantityOfItens(Number(e.target.value))}
-          defaultValue={15}
+          defaultValue={20}
         >
-          <option value={10}>10</option>
-          <option value={15}>15</option>
-          <option value={20}>20</option>
-          <option value={25}>25</option>
-          <option value={30}>30</option>
+          {paginationValues.map((value, index) => (
+            <option key={index} value={value}>
+              {value}
+            </option>
+          ))}
         </Select>
       </Flex>
       <Flex
@@ -65,31 +105,33 @@ export default function PaginationControl({
         w={{ base: "100%", md: "auto" }}
         order={{ base: 3, md: 2 }}
       >
-        <Text>
+        <Text whiteSpace="nowrap">
           Page {String(currentPage).padStart(numberOfCases, "0")} of
           {" " + quantityOfPages}
         </Text>
-        {isPaginationEnabled && (
-          <Button variant="outline" fontSize="1.6rem" onClick={() => setCurrentPage(1)}>
-            &laquo;
-          </Button>
-        )}
-        {isPaginationEnabled && (
-          <Button variant="outline" fontSize="2rem" onClick={handlePrevPage}>
-            &lsaquo;
-          </Button>
-        )}
-        {isPaginationEnabled && (
-          <Button variant="outline" fontSize="2rem" onClick={handleNextPage}>
-            &rsaquo;
-          </Button>
-        )}
-        {isPaginationEnabled && (
-          <Button variant="outline" fontSize="1.6rem" onClick={() => setCurrentPage(quantityOfPages)}>
-            &raquo;
-          </Button>
-        )}
+        {isPaginationEnabled &&
+          actionButtons.map(({ icon, action, label }, index) => (
+            <Tooltip
+              label={label}
+              hasArrow
+              placement="top"
+              p=".5rem"
+              borderRadius=".25rem"
+            >
+              <Button
+                key={index}
+                variant="outline"
+                fontSize="1.25rem"
+                onClick={action}
+                aria-label={label}
+              >
+                {icon}
+              </Button>
+            </Tooltip>
+          ))}
       </Flex>
     </Flex>
   );
-}
+};
+
+export default PaginationControl;

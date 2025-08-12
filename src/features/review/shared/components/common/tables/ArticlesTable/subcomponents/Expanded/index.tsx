@@ -141,11 +141,12 @@ export default function Expanded({
 
   const {
     currentPage,
-    setCurrentPage,
     quantityOfPages,
     paginatedArticles,
     handleNextPage,
     handlePrevPage,
+    handleBackToInitial,
+    handleGoToFinal,
     changeQuantityOfItens,
   } = usePagination(articles);
 
@@ -555,10 +556,11 @@ export default function Expanded({
       </TableContainer>
       <PaginationControl
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
         quantityOfPages={quantityOfPages}
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}
+        handleBackToInitial={handleBackToInitial}
+        handleGoToFinal={handleGoToFinal}
         changeQuantityOfItens={changeQuantityOfItens}
       />
     </Box>
