@@ -121,8 +121,8 @@ export default function Extraction() {
                 values={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
                 onSelect={(value) => handleSelectChange(value)}
                 selectedValue={selectedStatus}
-                page={"selection"}
-                placeholder="Selection status"
+                page={"extraction"}
+                placeholder="Extraction status"
               />
             </Box>
           </Box>
