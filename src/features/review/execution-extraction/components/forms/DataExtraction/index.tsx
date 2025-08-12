@@ -71,7 +71,7 @@ export default function DataExtraction({
     >
       <Box gap="5rem">
         {Object.entries(questions).map(
-          ([sectionKey, sectionQuestions], index, allQuestions) => {
+          ([sectionKey, sectionQuestions], index) => {
             const typeFormKey =
               sectionKey == "extractionQuestions"
                 ? "EXTRACTION"
@@ -79,45 +79,6 @@ export default function DataExtraction({
 
             const formatedFormKey =
               typeFormKey == "EXTRACTION" ? "Extraction" : "Risk Of Bias";
-
-            if (allQuestions.length === 0)
-              return (
-                <Flex
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  textAlign="center"
-                  gap="1rem"
-                  p="2rem"
-                  borderRadius="8px"
-                  border="1px solid #ccc"
-                  bg="white"
-                  w={"100%"}
-                >
-                  <Text fontSize="lg" fontWeight="bold" color="gray.700">
-                    No questions found
-                  </Text>
-                  <Text fontSize="md" color="gray.600">
-                    Create questions to register your answers in the data
-                    extraction form .
-                  </Text>
-                  <Button
-                    leftIcon={<FaPlusCircle />}
-                    sx={button}
-                    _hover={{
-                      bg: "white",
-                      color: "black",
-                      border: "2px solid black",
-                    }}
-                    w="30%"
-                    onClick={() =>
-                      toGo(`/newReview/ProtocolPartThree/${reviewId}`)
-                    }
-                  >
-                    Create Questions
-                  </Button>
-                </Flex>
-              );
 
             if (
               !Array.isArray(sectionQuestions) ||
@@ -150,7 +111,7 @@ export default function DataExtraction({
                       color: "black",
                       border: "2px solid black",
                     }}
-                    w="30%"
+                    w="15rem"
                     onClick={() =>
                       toGo(`/newReview/ProtocolPartThree/${reviewId}`)
                     }
