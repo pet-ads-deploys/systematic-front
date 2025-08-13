@@ -1,5 +1,5 @@
 // External library
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 
 // Context
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
@@ -21,31 +21,36 @@ const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
 
   const { reloadArticles, selectedArticleReview } = selectionContext;
 
-  const changeStatus = (
-    status: "INCLUDED" | "EXCLUDED",
-    criterias: string[]
-  ) => {
-    const getFunction =
-      page == "Selection"
-        ? UseChangeStudySelectionStatus
-        : UseChangeStudyExtractionStatus;
+  const changeStatus = useCallback(
+    (status: "INCLUDED" | "EXCLUDED", criterias: string[]) => {
+      const getFunction =
+        page === "Selection"
+          ? UseChangeStudySelectionStatus
+          : UseChangeStudyExtractionStatus;
 
-    getFunction({
-      studyReviewId: [selectedArticleReview],
-      criterias,
-      status,
-    });
-  };
+      getFunction({
+        studyReviewId: [selectedArticleReview],
+        criterias,
+        status,
+      });
+      reloadArticles();
+    },
+    [page, selectedArticleReview, reloadArticles]
+  );
 
-  const handleIncludeItemClick = (criterias: string[]) => {
-    changeStatus("INCLUDED", criterias);
-    reloadArticles();
-  };
+  const handleIncludeItemClick = useCallback(
+    (criterias: string[]) => {
+      changeStatus("INCLUDED", criterias);
+    },
+    [changeStatus]
+  );
 
-  const handleExcludeItemClick = (criterias: string[]) => {
-    changeStatus("EXCLUDED", criterias);
-    reloadArticles();
-  };
+  const handleExcludeItemClick = useCallback(
+    (criterias: string[]) => {
+      changeStatus("EXCLUDED", criterias);
+    },
+    [changeStatus]
+  );
 
   return { handleIncludeItemClick, handleExcludeItemClick };
 };
