@@ -29,7 +29,11 @@ export const useFilterReviewArticles = (
           article.extractionStatus,
           article.score?.toString(),
           article.readingPriority,
-        ].some((field) => field.toLowerCase().includes(formattedSearch));
+        ].some((field) =>
+          (field ? field.toString() : "")
+            .toLocaleLowerCase()
+            .includes(formattedSearch)
+        );
 
       const matchesStatus =
         page === "Selection"
