@@ -85,40 +85,64 @@ export default function DataExtraction({
               sectionQuestions.length === 0
             )
               return (
-                <Flex
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  textAlign="center"
-                  gap="1rem"
-                  p="2rem"
-                  borderRadius="8px"
-                  border="1px solid #ccc"
-                  bg="white"
-                  w={"100%"}
-                >
-                  <Text fontSize="lg" fontWeight="bold" color="gray.700">
-                    No questions found
-                  </Text>
-                  <Text fontSize="md" color="gray.600">
-                    {`Create ${formatedFormKey} questions to register your answers.`}
-                  </Text>
-                  <Button
-                    leftIcon={<FaPlusCircle />}
-                    sx={button}
-                    _hover={{
-                      bg: "white",
-                      color: "black",
-                      border: "2px solid black",
-                    }}
-                    w="15rem"
-                    onClick={() =>
-                      toGo(`/newReview/ProtocolPartThree/${reviewId}`)
-                    }
+                <>
+                  {index > 0 && (
+                    <Divider
+                      orientation="vertical"
+                      h=".5rem"
+                      bg="#263C56"
+                      m="2rem 0"
+                    />
+                  )}
+                  <Flex
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    textAlign="center"
+                    gap="1rem"
+                    p="2rem"
+                    borderRadius="8px"
+                    border="1px solid #ccc"
+                    bg="white"
+                    w={"100%"}
                   >
-                    Create Questions
-                  </Button>
-                </Flex>
+                    <Text
+                      fontSize="clamp(0.9rem, 1.5vw, 1rem)"
+                      fontWeight="bold"
+                      color="gray.700"
+                      whiteSpace="nowrap"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
+                      No questions found
+                    </Text>
+
+                    <Text
+                      fontSize="clamp(0.85rem, 1.2vw, 0.95rem)"
+                      color="gray.600"
+                      whiteSpace="nowrap"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
+                      {`Create ${formatedFormKey} questions to register your answers.`}
+                    </Text>
+                    <Button
+                      leftIcon={<FaPlusCircle />}
+                      sx={button}
+                      _hover={{
+                        bg: "white",
+                        color: "black",
+                        border: "2px solid black",
+                      }}
+                      w="15rem"
+                      onClick={() =>
+                        toGo(`/newReview/ProtocolPartThree/${reviewId}`)
+                      }
+                    >
+                      Create Questions
+                    </Button>
+                  </Flex>
+                </>
               );
 
             return (
@@ -138,21 +162,14 @@ export default function DataExtraction({
                   boxShadow="sm"
                 >
                   <Heading
-                    as="h1"
-                    size="lg"
+                    as="h2"
+                    fontSize="clamp(1.5rem, 2vw, 1.8rem)"
                     color="#263C56"
                     fontWeight="semibold"
                     letterSpacing="wide"
-                    position="relative"
-                    _after={{
-                      content: '""',
-                      position: "absolute",
-                      bottom: "-5px",
-                      left: "0",
-                      width: "3.5rem",
-                      height: ".5rem",
-                      bg: "#263C56",
-                    }}
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
                   >
                     {formatedFormKey}
                   </Heading>
