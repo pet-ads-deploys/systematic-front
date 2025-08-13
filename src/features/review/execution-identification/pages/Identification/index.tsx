@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 
+import DataBaseRequired from "../../../shared/components/structure/DataBaseRequired"
 import DataBaseCard from "./subcomponents/cards/DatabaseCard";
 import Header from "../../../../../components/structure/Header/Header";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
@@ -27,9 +28,13 @@ export default function Identification() {
           w={"100%"}
         >
           <Box sx={dataBaseconteiner}>
-            {databases.map((data, index) => {
-              return <DataBaseCard text={data} key={index} />;
-            })}
+            {databases.length === 0 ? (
+              <DataBaseRequired />
+            ) : (
+              databases.map((data, index) => (
+                <DataBaseCard text={data} key={index} />
+              ))
+            )}
           </Box>
         </Box>
       </FlexLayout>
