@@ -1,25 +1,21 @@
-import { Box, Heading, Tooltip } from "@chakra-ui/react";
-import {
-  container,
-  header,
-} from "./styles";
-import { capitalize } from "../../../../../../../shared/utils/helpers/formatters/CapitalizeText";
+// External library
+import { Box, Heading } from "@chakra-ui/react";
 
+// Utils
+import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
+
+// Styles
+import { container, header } from "./styles";
+
+// Types
 interface HeaderFormProps {
   text: string;
 }
 
 export default function HeaderForm({ text }: HeaderFormProps) {
-  const handleDesactiveTooltip = (text: string) => {
-    const MAX_VALUE: number = 30;
-    return text.length <= MAX_VALUE;
-  };
-
   return (
     <Box sx={container}>
-      <Tooltip label={text} isDisabled={handleDesactiveTooltip(text)} p="1rem">
-        <Heading sx={header}>{capitalize(text)}</Heading>
-      </Tooltip>
+      <Heading sx={header}>{capitalize(text)}</Heading>
     </Box>
   );
 }
