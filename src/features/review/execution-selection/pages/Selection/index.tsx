@@ -40,13 +40,15 @@ export default function Selection() {
     page: "Selection",
   });
 
-  if (!selectionContext) throw new Error("Failed to get the selection context");
+  const safeArticles = selectionContext?.articles ?? [];
+  const safeSelectedArticles = selectionContext?.selectedArticles ?? {};
+  const isLoading = selectionContext?.isLoading ?? false;
 
   const allArticles: ArticleInterface[] = useMemo(() => {
-    return selectionContext.articles.filter(
+    return safeArticles.filter(
       (art): art is ArticleInterface => "studyReviewId" in art
     );
-  }, [selectionContext.articles]);
+  }, [safeArticles]);
 
   const startFilteredArticles = useFilterReviewArticles(
     searchString,
@@ -56,19 +58,14 @@ export default function Selection() {
   );
 
   const finalFilteredArticles = useMemo(() => {
-    if (
-      showSelected &&
-      Object.keys(selectionContext.selectedArticles).length > 1
-    ) {
-      const selectedIds = Object.keys(selectionContext.selectedArticles).map(
-        Number
-      );
+    if (showSelected && Object.keys(safeSelectedArticles).length > 0) {
+      const selectedIds = Object.keys(safeSelectedArticles).map(Number);
       return startFilteredArticles.filter((article) =>
         selectedIds.includes(article.studyReviewId)
       );
     }
     return startFilteredArticles;
-  }, [showSelected, startFilteredArticles, selectionContext.selectedArticles]);
+  }, [showSelected, startFilteredArticles, safeSelectedArticles]);
 
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">
@@ -132,7 +129,7 @@ export default function Selection() {
               articles={finalFilteredArticles}
               columnsVisible={columnsVisible}
               layout={layout}
-              isLoading={selectionContext.isLoading}
+              isLoading={isLoading}
             />
           </Box>
         </Box>
