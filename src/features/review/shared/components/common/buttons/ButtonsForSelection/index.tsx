@@ -105,13 +105,17 @@ export default function ButtonsForSelection({
     INCLUSION: {
       label: "Include",
       description: "Add inclusion criteria",
-      isDisabled: isExclusionActive,
+      isDisabled:
+        criteriaGroupDataMap["INCLUSION"].data.length === 0 ||
+        isExclusionActive,
       options: criteriaGroupDataMap["INCLUSION"].data || [],
     },
     EXCLUSION: {
       label: "Exclude",
       description: "Add exclusion criteria",
-      isDisabled: isInclusionActive,
+      isDisabled:
+        criteriaGroupDataMap["EXCLUSION"].data.length === 0 ||
+        isInclusionActive,
       options: criteriaGroupDataMap["EXCLUSION"].data || [],
     },
   };
