@@ -1,70 +1,137 @@
+// External library
+import { Box, Button, Flex, Text, Select, Tooltip } from "@chakra-ui/react";
 import {
-  Button,
-  Flex,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Text,
-} from "@chakra-ui/react";
-import { Dispatch, SetStateAction } from "react";
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+  MdKeyboardDoubleArrowLeft,
+  MdKeyboardDoubleArrowRight,
+} from "react-icons/md";
 
-interface ControlsProps {
+// Types
+interface PaginationControlProps {
   currentPage: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
   quantityOfPages: number;
   handlePrevPage: () => void;
   handleNextPage: () => void;
+  handleBackToInitial: () => void;
+  handleGoToFinal: () => void;
+  changeQuantityOfItens: (newQuantity: number) => void;
 }
 
-export default function PaginationControl({
+type ActionButton = {
+  icon: React.ReactElement;
+  action: () => void;
+  label: string;
+};
+
+const PaginationControl: React.FC<PaginationControlProps> = ({
   currentPage,
-  setCurrentPage,
   quantityOfPages,
   handleNextPage,
   handlePrevPage,
-}: ControlsProps) {
+  handleBackToInitial,
+  handleGoToFinal,
+  changeQuantityOfItens,
+}) => {
   const numberOfCases = String(quantityOfPages).length;
-
   const isPaginationEnabled = quantityOfPages > 1;
+
+  const actionButtons: ActionButton[] = [
+    {
+      label: "First page",
+      icon: <MdKeyboardDoubleArrowLeft />,
+      action: handleBackToInitial,
+    },
+    {
+      label: "Previous page",
+      icon: <MdKeyboardArrowLeft />,
+      action: handlePrevPage,
+    },
+    {
+      label: "Next page",
+      icon: <MdKeyboardArrowRight />,
+      action: handleNextPage,
+    },
+    {
+      label: "Last page",
+      icon: <MdKeyboardDoubleArrowRight />,
+      action: handleGoToFinal,
+    },
+  ];
+
+  const paginationValues = [10, 15, 20, 25, 30];
 
   return (
     <Flex
-      justifyContent="center"
-      alignItems="center"
-      gap="1rem"
       w="100%"
       bg="white"
-      p="1.5rem 0"
+      p="1.5rem"
       borderRadius="0 0 1rem 1rem"
+      flexWrap="wrap"
+      alignItems="center"
     >
-      {isPaginationEnabled && (
-        <Button onClick={handlePrevPage}>Anterior</Button>
-      )}
-      <Text>
-        Página {String(currentPage).padStart(numberOfCases, "0")} de
-        {" " + quantityOfPages}
-      </Text>
-      <NumberInput
-        width="5rem"
-        min={1}
-        max={quantityOfPages}
-        value={currentPage}
-        onChange={(valueString) => {
-          const pageNumber = Number(valueString);
-          if (pageNumber >= 1 && pageNumber <= quantityOfPages) {
-            setCurrentPage(pageNumber);
-          }
-        }}
+      <Box flex="1" minW="100px" display={{ base: "none", md: "block" }} />
+      <Flex
+        flex="1"
+        justifyContent="center"
+        alignItems="center"
+        gap=".5rem"
+        minW={{ base: "100%", md: "200px" }}
+        w={{ base: "100%", md: "auto" }}
+        order={{ base: 2, md: 1 }}
+        mb={{ base: "0.5rem", md: 0 }}
       >
-        <NumberInputField border="2px solid black" />
-        <NumberInputStepper>
-          <NumberIncrementStepper color="black" />
-          <NumberDecrementStepper color="black" />
-        </NumberInputStepper>
-      </NumberInput>
-      {isPaginationEnabled && <Button onClick={handleNextPage}>Próxima</Button>}
+        <Text whiteSpace="nowrap">Rows per page</Text>
+        <Select
+          w="70px"
+          h="32px"
+          textAlign="center"
+          onChange={(e) => changeQuantityOfItens(Number(e.target.value))}
+          defaultValue={20}
+        >
+          {paginationValues.map((value, index) => (
+            <option key={index} value={value}>
+              {value}
+            </option>
+          ))}
+        </Select>
+      </Flex>
+      <Flex
+        flex="1"
+        justifyContent={{ base: "center", md: "flex-end" }}
+        alignItems="center"
+        gap="1rem"
+        minW={{ base: "100%", md: "250px" }}
+        w={{ base: "100%", md: "auto" }}
+        order={{ base: 3, md: 2 }}
+      >
+        <Text whiteSpace="nowrap">
+          Page {String(currentPage).padStart(numberOfCases, "0")} of
+          {" " + quantityOfPages}
+        </Text>
+        {isPaginationEnabled &&
+          actionButtons.map(({ icon, action, label }, index) => (
+            <Tooltip
+              label={label}
+              hasArrow
+              placement="top"
+              p=".5rem"
+              borderRadius=".25rem"
+            >
+              <Button
+                key={index}
+                variant="outline"
+                fontSize="1.25rem"
+                onClick={action}
+                aria-label={label}
+              >
+                {icon}
+              </Button>
+            </Tooltip>
+          ))}
+      </Flex>
     </Flex>
   );
-}
+};
+
+export default PaginationControl;

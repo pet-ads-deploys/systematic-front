@@ -53,7 +53,7 @@ export default function StudySelectionArea({
       bg="white"
       w="100%"
       h="100%"
-      p="2"
+      p="1rem 1.5rem"
       alignItems="center"
       gap="1rem"
     >

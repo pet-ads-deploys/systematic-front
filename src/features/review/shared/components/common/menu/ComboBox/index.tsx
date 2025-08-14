@@ -8,12 +8,12 @@ import {
   MenuList,
   Tooltip,
   Text,
-  useToast,
 } from "@chakra-ui/react";
 import { HiOutlineCheckCircle, HiOutlineXCircle } from "react-icons/hi";
 
 // Hooks
 import useComboBoxSelection from "../../../../hooks/useComboBoxSelection";
+import useToaster from "@components/feedback/Toaster";
 
 // Types
 import type { PageLayout } from "../../../structure/LayoutFactory";
@@ -52,7 +52,7 @@ export default function ComboBox({
 }: IComboBoxProps) {
   const { handleIncludeItemClick, handleExcludeItemClick } =
     useComboBoxSelection({ page });
-  const toast = useToast();
+  const toast = useToaster();
 
   const { selectionStatus, extractionStatus } = status;
 
@@ -65,9 +65,6 @@ export default function ComboBox({
       description:
         "Você não pode incluir ou excluir critérios de um artigo marcado como duplicado pelo sistema.",
       status: "warning",
-      duration: 4500,
-      isClosable: true,
-      position: "top",
     });
 
   return (
@@ -79,6 +76,7 @@ export default function ComboBox({
         justifyContent="center"
         bg="white"
         color="black"
+        isDisabled={isDisabled}
       >
         {text === "Include" ? (
           <HiOutlineCheckCircle size="1.75rem" />

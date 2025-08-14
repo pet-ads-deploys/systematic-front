@@ -1,5 +1,4 @@
 // External library
-import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,10 +11,11 @@ import {
 import { FaPlusCircle } from "react-icons/fa";
 
 // Component
-import CreateResponseComponent from "../../../factory/CreateResponseComponents/index.tsx";
+import CreateResponseComponent from "@features/review/execution-extraction/factory/CreateResponseComponents/index.tsx";
 
 // Hooks
-import { useExtractionFormSubmission } from "../../../services/useExtractionFormSubmission.tsx";
+import { useExtractionFormSubmission } from "@features/review/execution-extraction/services/useExtractionFormSubmission.tsx";
+import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 // Styles
 import { button } from "../styles.ts";
@@ -47,18 +47,31 @@ export default function DataExtraction({
 }: DataExtractionFormProps) {
   const reviewId = localStorage.getItem("systematicReviewId");
 
-  const navigate = useNavigate();
+  const { toGo } = useNavigation();
 
   const { submitResponses } = useExtractionFormSubmission({
     responses: questions ?? {},
     onQuestionsMutated: mutateQuestion,
   });
 
+  const hasAnyQuestion =
+    questions &&
+    Object.values(questions).every(
+      (section) => Array.isArray(section) && section.length > 0
+    );
+
   return (
-    <FormControl w="100%" height="100%" gap="3rem" bg="white" overflowY="auto">
+    <FormControl
+      w="100%"
+      height="100%"
+      gap="3rem"
+      bg="white"
+      overflowY="auto"
+      p=".5rem"
+    >
       <Box gap="5rem">
         {Object.entries(questions).map(
-          ([sectionKey, sectionQuestions], index, allQuestions) => {
+          ([sectionKey, sectionQuestions], index) => {
             const typeFormKey =
               sectionKey == "extractionQuestions"
                 ? "EXTRACTION"
@@ -67,84 +80,69 @@ export default function DataExtraction({
             const formatedFormKey =
               typeFormKey == "EXTRACTION" ? "Extraction" : "Risk Of Bias";
 
-            if (allQuestions.length === 0)
-              return (
-                <Flex
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  textAlign="center"
-                  gap="1rem"
-                  p="2rem"
-                  borderRadius="8px"
-                  border="1px solid #ccc"
-                  bg="white"
-                  w={"100%"}
-                >
-                  <Text fontSize="lg" fontWeight="bold" color="gray.700">
-                    No questions found
-                  </Text>
-                  <Text fontSize="md" color="gray.600">
-                    Create questions to register your answers in the data
-                    extraction form .
-                  </Text>
-                  <Button
-                    leftIcon={<FaPlusCircle />}
-                    sx={button}
-                    _hover={{
-                      bg: "white",
-                      color: "black",
-                      border: "2px solid black",
-                    }}
-                    w="30%"
-                    onClick={() =>
-                      navigate(`/newReview/ProtocolPartThree/${reviewId}`)
-                    }
-                  >
-                    Create Questions
-                  </Button>
-                </Flex>
-              );
-
             if (
               !Array.isArray(sectionQuestions) ||
               sectionQuestions.length === 0
             )
               return (
-                <Flex
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  textAlign="center"
-                  gap="1rem"
-                  p="2rem"
-                  borderRadius="8px"
-                  border="1px solid #ccc"
-                  bg="white"
-                  w={"100%"}
-                >
-                  <Text fontSize="lg" fontWeight="bold" color="gray.700">
-                    No questions found
-                  </Text>
-                  <Text fontSize="md" color="gray.600">
-                    {`Create ${formatedFormKey} questions to register your answers.`}
-                  </Text>
-                  <Button
-                    leftIcon={<FaPlusCircle />}
-                    sx={button}
-                    _hover={{
-                      bg: "white",
-                      color: "black",
-                      border: "2px solid black",
-                    }}
-                    w="30%"
-                    onClick={() =>
-                      navigate(`/newReview/ProtocolPartThree/${reviewId}`)
-                    }
+                <>
+                  {index > 0 && (
+                    <Divider
+                      orientation="vertical"
+                      h=".5rem"
+                      bg="#263C56"
+                      m="2rem 0"
+                    />
+                  )}
+                  <Flex
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    textAlign="center"
+                    gap="1rem"
+                    p="2rem"
+                    borderRadius="8px"
+                    border="1px solid #ccc"
+                    bg="white"
+                    w={"100%"}
                   >
-                    Create Questions
-                  </Button>
-                </Flex>
+                    <Text
+                      fontSize="clamp(0.9rem, 1.5vw, 1rem)"
+                      fontWeight="bold"
+                      color="gray.700"
+                      whiteSpace="nowrap"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
+                      No questions found
+                    </Text>
+
+                    <Text
+                      fontSize="clamp(0.85rem, 1.2vw, 0.95rem)"
+                      color="gray.600"
+                      whiteSpace="nowrap"
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                    >
+                      {`Create ${formatedFormKey} questions to register your answers.`}
+                    </Text>
+                    <Button
+                      leftIcon={<FaPlusCircle />}
+                      sx={button}
+                      _hover={{
+                        bg: "white",
+                        color: "black",
+                        border: "2px solid black",
+                      }}
+                      w="15rem"
+                      onClick={() =>
+                        toGo(`/newReview/ProtocolPartThree/${reviewId}`)
+                      }
+                    >
+                      Create Questions
+                    </Button>
+                  </Flex>
+                </>
               );
 
             return (
@@ -164,21 +162,14 @@ export default function DataExtraction({
                   boxShadow="sm"
                 >
                   <Heading
-                    as="h1"
-                    size="lg"
+                    as="h2"
+                    fontSize="clamp(1.5rem, 2vw, 1.8rem)"
                     color="#263C56"
                     fontWeight="semibold"
                     letterSpacing="wide"
-                    position="relative"
-                    _after={{
-                      content: '""',
-                      position: "absolute",
-                      bottom: "-5px",
-                      left: "0",
-                      width: "3.5rem",
-                      height: ".5rem",
-                      bg: "#263C56",
-                    }}
+                    whiteSpace="nowrap"
+                    overflow="hidden"
+                    textOverflow="ellipsis"
                   >
                     {formatedFormKey}
                   </Heading>
@@ -198,11 +189,13 @@ export default function DataExtraction({
           }
         )}
       </Box>
-      <Flex w="100%" justifyContent="space-between" pb="1rem">
-        <Button type="submit" onClick={submitResponses}>
-          Enviar
-        </Button>
-      </Flex>
+      {hasAnyQuestion && (
+        <Flex w="100%" justifyContent="space-between" pb="1rem">
+          <Button type="submit" onClick={submitResponses}>
+            Enviar
+          </Button>
+        </Flex>
+      )}
     </FormControl>
   );
 }

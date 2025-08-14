@@ -1,67 +1,71 @@
+// External library
 import { useContext, useMemo, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
-import useInputState from "@features/review/shared/hooks/useInputState";
+// Context
+import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
+// Hooks
+import useInputState from "@features/review/shared/hooks/useInputState";
+import useLayoutPage from "../../../shared/hooks/useLayoutPage";
+import { useFilterReviewArticles } from "../../../shared/hooks/useFilterReviewArticles";
+
+// Components
 import Header from "../../../../../components/structure/Header/Header";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
 import InputText from "../../../../../components/common/inputs/InputText";
 import SelectInput from "../../../../../components/common/inputs/SelectInput";
 import LayoutFactory from "../../../shared/components/structure/LayoutFactory";
+import ButtonsForMultipleSelection from "../../../shared/components/common/buttons/ButtonsForMultipleSelection";
+import SelectLayout from "../../../shared/components/structure/LayoutButton";
+import ColumnVisibilityMenu from "@features/review/shared/components/common/menu/ColumnVisibilityMenu";
 
-import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
-
+// Styles
 import { inputconteiner } from "../../../shared/styles/executionStyles";
 
-import ArticleInterface from "../../../shared/types/ArticleInterface";
-import { PageLayout } from "../../../shared/components/structure/LayoutFactory";
-import ButtonsForMultipleSelection from "../../../shared/components/common/buttons/ButtonsForMultipleSelection";
-import useLayoutPage from "../../../shared/hooks/useLayoutPage";
-import SelectLayout from "../../../shared/components/structure/LayoutButton";
-import { useFilterReviewArticles } from "../../../shared/hooks/useFilterReviewArticles";
+// Types
+import type ArticleInterface from "../../../shared/types/ArticleInterface";
+import useVisibiltyColumns from "@features/review/shared/hooks/useVisibilityColumns";
 
 export default function Extraction() {
-  const { value: selectedStatus, handleChange: handleSelectChange } =
-    useInputState<string | null>(null);
   const [searchString, setSearchString] = useState<string>("");
-
   const [showSelected, setShowSelected] = useState<boolean>(false);
-
   const selectionContext = useContext(StudySelectionContext);
 
-  if (!selectionContext) throw new Error("Failed to get the selection context");
-
-  const allArticles: ArticleInterface[] = useMemo(() => {
-    return selectionContext.articles
-      .filter((art): art is ArticleInterface => "studyReviewId" in art)
-      .filter((art) => art.selectionStatus === "INCLUDED");
-  }, [selectionContext.articles]);
-
+  const { value: selectedStatus, handleChange: handleSelectChange } =
+    useInputState<string | null>(null);
   const { layout, handleChangeLayout } = useLayoutPage();
 
-  const page: PageLayout = "Extraction";
+  const { columnsVisible, toggleColumnVisibility } = useVisibiltyColumns({
+    page: "Extraction",
+  });
+
+  const safeArticles = selectionContext?.articles ?? [];
+  const safeSelectedArticles = selectionContext?.selectedArticles ?? {};
+  const isLoading = selectionContext?.isLoading ?? false;
+
+  const allArticles: ArticleInterface[] = useMemo(() => {
+    return safeArticles
+      .filter((art): art is ArticleInterface => "studyReviewId" in art)
+      .filter((art) => art.selectionStatus === "INCLUDED");
+  }, [safeArticles]);
 
   const startFilteredArticles = useFilterReviewArticles(
     searchString,
     selectedStatus,
     allArticles,
-    page
+    "Extraction"
   );
 
   const finalFilteredArticles = useMemo(() => {
-    if (
-      showSelected &&
-      Object.keys(selectionContext.selectedArticles).length > 0
-    ) {
-      const selectedIds = Object.keys(selectionContext.selectedArticles).map(
-        Number
-      );
+    if (showSelected && Object.keys(safeSelectedArticles).length > 0) {
+      const selectedIds = Object.keys(safeSelectedArticles).map(Number);
       return startFilteredArticles.filter((article) =>
         selectedIds.includes(article.studyReviewId)
       );
     }
     return startFilteredArticles;
-  }, [showSelected, startFilteredArticles, selectionContext.selectedArticles]);
+  }, [showSelected, startFilteredArticles, safeSelectedArticles]);
 
   return (
     <FlexLayout defaultOpen={1} navigationType="Accordion">
@@ -105,22 +109,27 @@ export default function Extraction() {
               justifyContent="space-between"
               alignItems="center"
             >
+              <ColumnVisibilityMenu
+                columnsVisible={columnsVisible}
+                toggleColumnVisibility={toggleColumnVisibility}
+              />
               <SelectInput
                 names={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
                 values={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
                 onSelect={(value) => handleSelectChange(value)}
                 selectedValue={selectedStatus}
-                page={"selection"}
-                placeholder="Selection status"
+                page={"extraction"}
+                placeholder="Extraction status"
               />
             </Box>
           </Box>
           <Box w="100%" h="82.5vh">
             <LayoutFactory
               page="Extraction"
-              layout={layout}
               articles={finalFilteredArticles}
-              isLoading={selectionContext.isLoading}
+              columnsVisible={columnsVisible}
+              layout={layout}
+              isLoading={isLoading}
             />
           </Box>
         </Box>

@@ -10,7 +10,7 @@ import LoadingPage from "../../application/pages/LoadingPage";
 
 // Types
 interface ProtectedRouteProps {
-  element: JSX.Element;
+  element: React.ReactElement;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {

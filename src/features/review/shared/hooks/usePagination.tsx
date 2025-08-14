@@ -1,11 +1,12 @@
 import { useState } from "react";
 import ArticleInterface from "../types/ArticleInterface";
 
-const MAX_ITENS_PER_PAGE = 15;
+const MAX_ITENS_PER_PAGE = 30;
+const MIN_ITENS_PER_PAGE = 10;
 
 export default function usePagination(articles: ArticleInterface[]) {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itensPerPage, setItensPerPage] = useState<number>(MAX_ITENS_PER_PAGE);
+  const [itensPerPage, setItensPerPage] = useState<number>(20);
 
   const quantityOfElements = articles.length;
   const quantityOfPages = Math.ceil(quantityOfElements / itensPerPage);
@@ -28,20 +29,30 @@ export default function usePagination(articles: ArticleInterface[]) {
     );
   };
 
-  const changeQuantityOfItens = (quantity: number) => {
-    if (quantity <= 1 || quantity > MAX_ITENS_PER_PAGE) return;
+  const handleBackToInitial = () => {
+    setCurrentPage(1);
+  };
+
+  const handleGoToFinal = () => {
+    setCurrentPage(quantityOfPages);
+  };
+
+  const changeQuantityOfItens = (newQuantity: number) => {
+    const quantity = Number(newQuantity);
+    if (quantity < MIN_ITENS_PER_PAGE || quantity > MAX_ITENS_PER_PAGE) return;
 
     setItensPerPage(quantity);
-    console.log(itensPerPage);
+    setCurrentPage(1);
   };
 
   return {
     currentPage,
-    setCurrentPage,
     quantityOfPages,
     paginatedArticles,
     handleNextPage,
     handlePrevPage,
+    handleBackToInitial,
+    handleGoToFinal,
     changeQuantityOfItens,
   };
 }

@@ -7,12 +7,12 @@ import ProtectedRoute from "@features/auth/guards/ProtectedRoute";
 // Pages Components
 
 // Home
-import Homepage from "./features/landing/pages/Homepage";
-import LandingPage from "./features/landing/pages/Landing";
-import CollaboratorsPage from "./features/landing/pages/Collaborators";
+import Homepage from "@features/landing/pages/Homepage";
+import LandingPage from "@features/landing/pages/Landing";
+import CollaboratorsPage from "@features/landing/pages/Collaborators";
 
 // User
-import UserArea from "./features/user/pages/UserArea";
+import UserArea from "@features/user/pages/UserArea";
 
 // Planning
 import NovaRevisao from "@features/review/planning-protocol/pages/NewReview";
@@ -21,8 +21,6 @@ import ProtocolPartThree from "@features/review/planning-protocol/pages/StepThre
 import ProtocolPartTwo from "@features/review/planning-protocol/pages/StepTwo";
 
 // Execution
-import Insertion from "./legacy/pages/execution/Insertion/Insertion";
-import KeyWordScreen from "./legacy/pages/execution/KeyWordScreen/KeyWordScreen";
 import Identification from "@features/review/execution-identification/pages/Identification";
 import IdentificationSession from "@features/review/execution-identification/pages/IdentificationSession";
 import Selection from "@features/review/execution-selection/pages/Selection";
@@ -34,11 +32,8 @@ import Visualization from "@features/review/summarization-visualization/pages/vi
 import Finalization from "@features/review/summarization-finalization/pages/Finalization";
 
 // Error Information
-import ServerError from "./features/application/pages/ServerErrorPage";
-import Unauthorized from "./features/application/pages/UnauthorizedPage";
-
-// Legacy
-import SearchSession from "./legacy/pages/execution/SearchSession/SearchSession";
+import Unauthorized from "@features/application/pages/UnauthorizedPage";
+import ServerError from "@features/application/pages/ServerErrorPage";
 
 const routesList: RouteObject[] = [
   {
@@ -90,20 +85,12 @@ const routesList: RouteObject[] = [
     element: <ProtectedRoute element={<IdentificationSession />} />,
   },
   {
-    path: "/newReview/keywords",
-    element: <ProtectedRoute element={<KeyWordScreen />} />,
-  },
-  {
     path: "/newReview/selection",
     element: <ProtectedRoute element={<Selection />} />,
   },
   {
     path: "/newReview/extraction",
     element: <ProtectedRoute element={<Extraction />} />,
-  },
-  {
-    path: "/newReview/insertion",
-    element: <ProtectedRoute element={<Insertion />} />,
   },
   {
     path: "/newReview/graphics",
@@ -116,10 +103,6 @@ const routesList: RouteObject[] = [
   {
     path: "/newReview/visualization",
     element: <ProtectedRoute element={<Visualization />} />,
-  },
-  {
-    path: "/newReview/searchSession",
-    element: <ProtectedRoute element={<SearchSession />} />,
   },
 ];
 
