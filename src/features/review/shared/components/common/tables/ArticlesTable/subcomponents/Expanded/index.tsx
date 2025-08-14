@@ -231,7 +231,7 @@ export default function Expanded({
         w="100%"
         minH={
           layout == "horizontal" || layout == "horizontal-invert"
-            ? "12rem"
+            ? "15rem"
             : {
                 base: "calc(100vh - 18rem)",
                 md: "calc(100vh - 15rem)",
