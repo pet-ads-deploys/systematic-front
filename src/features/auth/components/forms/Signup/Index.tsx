@@ -9,42 +9,53 @@ export default function FormSignup({
   closeModal: () => void;
 }) {
   const {
-    name,
-    setName,
-    email,
-    setEmail,
-    affiliation,
-    setAffiliation,
-    state,
-    setState,
-    password,
-    setPassword,
-    confirmPassword,
-    setConfirmPassword,
-    nameError,
-    emailError,
-    affiliationError,
-    stateError,
-    passwordError,
-    confirmPasswordError,
-    handleSubmit,
+    createUser,
+    errors,
+    handleChangeUserInformations,
+    handleRegister,
     isSubmitting,
   } = useHandleSignup(redirectFormLogin);
 
+  const {
+    username,
+    name,
+    email,
+    affiliation,
+    country,
+    password,
+    confirmPassword,
+  } = createUser;
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleRegister}>
       <h2>Sign Up</h2>
       <div className="contentForm">
+        <div className="inputGroup">
+          <label htmlFor="name">Username</label>
+          <input
+            type="text"
+            id="name"
+            value={username}
+            onChange={(e) =>
+              handleChangeUserInformations("username", e.target.value)
+            }
+            className={errors.username ? "inputError" : ""}
+          />
+          {errors.username && <p className="error">{errors.username}</p>}
+        </div>
+
         <div className="inputGroup">
           <label htmlFor="name">Name</label>
           <input
             type="text"
             id="name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={nameError ? "inputError" : ""}
+            onChange={(e) =>
+              handleChangeUserInformations("name", e.target.value)
+            }
+            className={errors.name ? "inputError" : ""}
           />
-          {nameError && <p className="error">{nameError}</p>}
+          {errors.name && <p className="error">{errors.name}</p>}
         </div>
 
         <div className="inputGroup">
@@ -53,10 +64,12 @@ export default function FormSignup({
             type="text"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={emailError ? "inputError" : ""}
+            onChange={(e) =>
+              handleChangeUserInformations("email", e.target.value)
+            }
+            className={errors.email ? "inputError" : ""}
           />
-          {emailError && <p className="error">{emailError}</p>}
+          {errors.email && <p className="error">{errors.email}</p>}
         </div>
 
         <div className="inputGroup">
@@ -65,26 +78,30 @@ export default function FormSignup({
             type="text"
             id="affiliation"
             value={affiliation}
-            onChange={(e) => setAffiliation(e.target.value)}
-            className={affiliationError ? "inputError" : ""}
+            onChange={(e) =>
+              handleChangeUserInformations("affiliation", e.target.value)
+            }
+            className={errors.affiliation ? "inputError" : ""}
           />
-          {affiliationError && <p className="error">{affiliationError}</p>}
+          {errors.affiliation && <p className="error">{errors.affiliation}</p>}
         </div>
 
         <div className="inputGroup">
           <label htmlFor="state">Country</label>
           <select
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            className={stateError ? "inputError" : ""}
+            value={country}
+            onChange={(e) =>
+              handleChangeUserInformations("country", e.target.value)
+            }
+            className={errors.country ? "inputError" : ""}
           >
-            <option value="">Select Country</option>
+            <option>Select Country</option>
             <option>Brazil</option>
             <option>Spain</option>
-            <option>England</option>
+            <option>United Kingdom</option>
             <option>France</option>
           </select>
-          {stateError && <p className="error">{stateError}</p>}
+          {errors.country && <p className="error">{errors.country}</p>}
         </div>
 
         <div className="inputGroup">
@@ -93,10 +110,12 @@ export default function FormSignup({
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={passwordError ? "inputError" : ""}
+            onChange={(e) =>
+              handleChangeUserInformations("password", e.target.value)
+            }
+            className={errors.password ? "inputError" : ""}
           />
-          {passwordError && <p className="error">{passwordError}</p>}
+          {errors.password && <p className="error">{errors.password}</p>}
         </div>
 
         <div className="inputGroup">
@@ -105,11 +124,13 @@ export default function FormSignup({
             type="password"
             id="confirmPassword"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className={confirmPasswordError ? "inputError" : ""}
+            onChange={(e) =>
+              handleChangeUserInformations("confirmPassword", e.target.value)
+            }
+            className={errors.confirmPassword ? "inputError" : ""}
           />
-          {confirmPasswordError && (
-            <p className="error">{confirmPasswordError}</p>
+          {errors.confirmPassword && (
+            <p className="error">{errors.confirmPassword}</p>
           )}
         </div>
 
