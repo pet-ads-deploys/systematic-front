@@ -42,13 +42,14 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
         </Flex>
 
         <Text
-          fontSize={["xl", "2xl", "3xl", "4xl"]}
+          fontSize={"21px"}
           fontWeight={"bold"}
           fontFamily={"Boboni"}
-          lineHeight={"2.3rem"}
+          lineHeight={"1.4rem"}
           align={"center"}
           whiteSpace={"normal"}
           wordBreak={"break-word"}
+          overflowWrap="break-word"
           maxWidth={"100%"}
         >
           {studyData.title}
