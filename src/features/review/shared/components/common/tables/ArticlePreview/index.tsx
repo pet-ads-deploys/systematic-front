@@ -69,20 +69,24 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
           gap="1rem"
           pb="3.75rem"
         >
-          <Text
-            fontSize="clamp(.7rem, 1vw, .85rem)"
-            lineHeight="1.5rem"
-            textAlign="justify"
-          >
-            <b>Abstract:</b> {abstract}
-          </Text>
-          <Text
-            fontSize="clamp(.7rem, 1vw, .85rem)"
-            lineHeight="1.5rem"
-            textAlign="justify"
-          >
-            <b>Keywords:</b> {keywords}
-          </Text>
+          {abstract && (
+            <Text
+              fontSize="clamp(.7rem, 1vw, .85rem)"
+              lineHeight="1.5rem"
+              textAlign="justify"
+            >
+              <b>Abstract:</b> {abstract}
+            </Text>
+          )}
+          {keywords && keywords.length > 0 && (
+            <Text
+              fontSize="clamp(.7rem, 1vw, .85rem)"
+              lineHeight="1.5rem"
+              textAlign="justify"
+            >
+              <b>Keywords:</b> {keywords}
+            </Text>
+          )}
         </Flex>
       </Flex>
     </Flex>
