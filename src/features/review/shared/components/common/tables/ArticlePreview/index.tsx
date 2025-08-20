@@ -1,10 +1,16 @@
+// External librayr
 import { Flex, Text } from "@chakra-ui/react";
 
-import { ArticlePreviewProps } from "../StudyData";
-
+// Components
 import ArticleHeader from "../../../table/header/ArticleHeader";
 
+// Types
+import type { ArticlePreviewProps } from "../StudyData";
+
 export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
+  const { abstract, studyType, year, venue, title, authors, keywords } =
+    studyData;
+
   return (
     <Flex
       w="100%"
@@ -25,52 +31,57 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
       >
         <ArticleHeader studyData={studyData} />
         <Flex>
-          <Text marginBottom={"7px"} w="30%" align={"left"}>
-            <Text fontSize={"14px"} fontWeight={"bold"}>
-              Type: {studyData.studyType}
+          <Text marginBottom=".45rem" w="30%" align="left">
+            <Text fontSize="clamp(.75rem, 1vw, .85rem)" fontWeight="bold">
+              Type: {studyType}
             </Text>
           </Text>
           <Text
-            fontSize={"16px"}
-            align={"right"}
+            fontSize="clamp(0.85rem, 1.2vw, 1rem)"
+            align="right"
             as="i"
-            fontWeight={"Bold"}
+            fontWeight="Bold"
             w="70%"
           >
-            {studyData.venue}, {studyData.year}
+            {venue}, {year}
           </Text>
         </Flex>
-
         <Text
-          fontSize={"21px"}
-          fontWeight={"bold"}
-          fontFamily={"Boboni"}
-          lineHeight={"1.4rem"}
-          align={"center"}
-          whiteSpace={"normal"}
-          wordBreak={"break-word"}
+          fontSize="clamp(1.15rem, 2vw, 1.25rem)"
+          fontWeight="bold"
+          fontFamily="Boboni"
+          lineHeight="1.4rem"
+          align="center"
+          whiteSpace="normal"
+          wordBreak="break-word"
           overflowWrap="break-word"
-          maxWidth={"100%"}
+          maxWidth="100%"
         >
-          {studyData.title}
+          {title}
         </Text>
-
-        <Text p="1" lineHeight={"1.5rem"} fontWeight={"Bold"} align={"center"}>
-          {studyData.authors}
+        <Text p="0.25rem" lineHeight="1.5rem" fontWeight="Bold" align="center">
+          {authors}
         </Text>
-
         <Flex
-          fontFamily={"Literata"}
-          flexDirection={"column"}
-          align={"right"}
-          gap="15px"
-          pb="60px"
+          fontFamily="Literata"
+          flexDirection="column"
+          align="right"
+          gap="1rem"
+          pb="3.75rem"
         >
-          <Text fontSize={"xxl"} lineHeight={"1.5rem"} textAlign="justify">
-            <b>Abstract:</b> {studyData.abstract}
+          <Text
+            fontSize="clamp(.7rem, 1vw, .85rem)"
+            lineHeight="1.5rem"
+            textAlign="justify"
+          >
+            <b>Abstract:</b> {abstract}
           </Text>
-          <Text fontSize={"xxl"} lineHeight={"1.5rem"} textAlign="justify">
-            <b>Keywords:</b> {studyData.keywords}
+          <Text
+            fontSize="clamp(.7rem, 1vw, .85rem)"
+            lineHeight="1.5rem"
+            textAlign="justify"
+          >
+            <b>Keywords:</b> {keywords}
           </Text>
         </Flex>
       </Flex>
