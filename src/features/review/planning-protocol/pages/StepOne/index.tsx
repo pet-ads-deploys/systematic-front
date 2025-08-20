@@ -58,7 +58,7 @@ export default function Protocol() {
   if (loading) return <></>;
 
   return (
-    <FlexLayout defaultOpen={0} navigationType="Accordion">
+    <FlexLayout navigationType="Accordion">
       <Box w={"100%"}>
         <Header text="Protocol" />
         <Progress value={33} w={"100%"} />

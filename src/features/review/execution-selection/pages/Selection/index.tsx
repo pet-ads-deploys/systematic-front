@@ -68,7 +68,7 @@ export default function Selection() {
   }, [showSelected, startFilteredArticles, safeSelectedArticles]);
 
   return (
-    <FlexLayout defaultOpen={1} navigationType="Accordion">
+    <FlexLayout navigationType="Accordion">
       <Box w="98%" m="1rem" h="fit-content">
         <Box
           w="100%"

@@ -19,7 +19,7 @@ export default function Identification() {
   const databaseListIsEmpty = databases.length == 0;
 
   return (
-    <FlexLayout defaultOpen={1} navigationType="Accordion">
+    <FlexLayout navigationType="Accordion">
       <Header text="Studies Identification" />
       <Box
         sx={conteiner}
