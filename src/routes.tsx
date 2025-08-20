@@ -8,7 +8,6 @@ import ProtectedRoute from "@features/auth/guards/ProtectedRoute";
 
 // Home
 import Homepage from "@features/landing/pages/Homepage";
-import LandingPage from "@features/landing/pages/Landing";
 import CollaboratorsPage from "@features/landing/pages/Collaborators";
 
 // User
@@ -39,10 +38,6 @@ const routesList: RouteObject[] = [
   {
     path: "/",
     element: <Homepage />,
-  },
-  {
-    path: "/landing",
-    element: <ProtectedRoute element={<LandingPage />} />,
   },
   {
     path: "/user",
