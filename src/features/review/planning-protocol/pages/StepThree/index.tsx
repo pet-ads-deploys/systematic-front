@@ -44,12 +44,12 @@ export default function ProtocolPartThree() {
 
   async function handleData() {
     await createProtocolThree(analysis, id);
-    toGo("/newReview/identification");
+    toGo("/review/execution/identification");
   }
 
   async function handleDataReturn() {
     await createProtocolThree(analysis, id);
-    toGo(`/newReview/protocolpartTwo/${id}`);
+    toGo(`/review/planning/protocol-part-II/${id}`);
   }
 
   function handleAnalysisAndSynthesis(

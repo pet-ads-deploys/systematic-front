@@ -52,51 +52,51 @@ const routesList: RouteObject[] = [
     element: <Unauthorized />,
   },
   {
-    path: "/serverError",
+    path: "/server-error",
     element: <ServerError />,
   },
   {
-    path: "/newReview",
+    path: "/review",
     element: <ProtectedRoute element={<NovaRevisao />} />,
   },
   {
-    path: "/newReview/protocol/:id",
+    path: "/review/planning/protocol-part-I/:id",
     element: <Protocol />,
   },
   {
-    path: "/newReview/protocolpartTwo/:id",
+    path: "/review/planning/protocol-part-II/:id",
     element: <ProtectedRoute element={<ProtocolPartTwo />} />,
   },
   {
-    path: "/newReview/protocolpartThree/:id",
+    path: "/review/planning/protocol-part-III/:id",
     element: <ProtectedRoute element={<ProtocolPartThree />} />,
   },
   {
-    path: "/newReview/identification",
+    path: "/review/execution/identification",
     element: <ProtectedRoute element={<Identification />} />,
   },
   {
-    path: "/newReview/identification/:session",
+    path: "/review/execution/identification/:session",
     element: <ProtectedRoute element={<IdentificationSession />} />,
   },
   {
-    path: "/newReview/selection",
+    path: "/review/execution/selection",
     element: <ProtectedRoute element={<Selection />} />,
   },
   {
-    path: "/newReview/extraction",
+    path: "/review/execution/extraction",
     element: <ProtectedRoute element={<Extraction />} />,
   },
   {
-    path: "/newReview/graphics",
+    path: "/review/summarization/graphics",
     element: <ProtectedRoute element={<Graphics />} />,
   },
   {
-    path: "/newReview/finalization",
+    path: "/review/summarization/finalization",
     element: <ProtectedRoute element={<Finalization />} />,
   },
   {
-    path: "/newReview/visualization",
+    path: "/review/summarization/visualization",
     element: <ProtectedRoute element={<Visualization />} />,
   },
 ];
