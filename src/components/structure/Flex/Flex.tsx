@@ -1,20 +1,19 @@
 import Sidebar from "../Sidebar/Sidebar";
 import { useContext } from "react";
-
 import { boxStyles, flexStyles } from "./FlexStyle";
 import { Box } from "@chakra-ui/react";
 import AppContext from "@features/shared/context/ApplicationContext";
 
 interface iFlexLayout {
   navigationType: string;
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactNode;
 }
 
 export default function FlexLayout({ navigationType, children }: iFlexLayout) {
   const context = useContext(AppContext);
 
   if (!context) {
-    throw new Error("Failed to get the context in FlexLayout.");
+    return null;
   }
   const { sidebarState } = context;
 
