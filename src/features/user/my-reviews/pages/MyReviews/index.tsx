@@ -2,7 +2,7 @@
 import { Flex } from "@chakra-ui/react";
 
 // Services
-import useGetReviewCard from "@features/user/services/useGetReviewCard";
+import useGetReviewCard from "../../services/useGetReviewCard";
 
 // Components
 import FlexLayout from "@components/structure/Flex/Flex";

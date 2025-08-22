@@ -2,7 +2,7 @@
 import useSWR from "swr";
 
 // Infra
-import Axios from "../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 // Utils
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
