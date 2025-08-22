@@ -2,21 +2,21 @@
 import { Flex } from "@chakra-ui/react";
 
 // Services
-import useGetReviewCard from "../../services/useGetReviewCard";
+import useGetReviewCard from "@features/user/services/useGetReviewCard";
 
 // Components
-import FlexLayout from "../../../../components/structure/Flex/Flex";
-import Header from "../../../../components/structure/Header/Header";
-import Loader from "../../../../components/feedback/Loader";
+import FlexLayout from "@components/structure/Flex/Flex";
+import Header from "@components/structure/Header/Header";
+import Loader from "@components/feedback/Loader";
 
 // Factory
-import RenderCards from "./factory/cards/RenderCards";
-import RenderCreateNewReview from "./factory/cards/RenderCreateNewReview";
+import RenderCards from "../../factory/cards/RenderCards";
+import RenderCreateNewReview from "../../factory/cards/RenderCreateNewReview";
 
 // Styles
 import { flexStyles } from "./styles";
 
-export default function UserArea() {
+export default function MyReviews() {
   const { cardData, isLoaded } = useGetReviewCard();
 
   return (

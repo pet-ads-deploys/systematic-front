@@ -1,5 +1,5 @@
 // Components
-import RevisionCard from "../../../subcomponents/cards/RevisionCard";
+import RevisionCard from "@features/user/my-reviews/components/cards/RevisionCard";
 
 // Type
 import type { CardReview } from "@features/user/types";

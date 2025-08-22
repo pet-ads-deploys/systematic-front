@@ -7,7 +7,7 @@ import CardInfos from "../CardInfo";
 import EditionInfos from "../../containers/EditionInfo";
 
 // Hook
-import useNavigateToPendingStage from "../../../../../services/useNavigateToPendingStage";
+import useNavigateToPendingStage from "@features/user/services/useNavigateToPendingStage";
 
 // Styles
 import { CardInfosConteiner, Cardstyles } from "./styles";

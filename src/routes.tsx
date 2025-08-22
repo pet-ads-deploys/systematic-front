@@ -11,7 +11,7 @@ import Homepage from "@features/landing/pages/Homepage";
 import CollaboratorsPage from "@features/landing/pages/Collaborators";
 
 // User
-import UserArea from "@features/user/pages/UserArea";
+import MyReviews from "@features/user/my-reviews/pages/MyReviews";
 
 // Planning
 import NovaRevisao from "@features/review/planning-protocol/pages/NewReview";
@@ -40,8 +40,8 @@ const routesList: RouteObject[] = [
     element: <Homepage />,
   },
   {
-    path: "/user",
-    element: <ProtectedRoute element={<UserArea />} />,
+    path: "/my-reviews",
+    element: <ProtectedRoute element={<MyReviews />} />,
   },
   {
     path: "/collaborators",
