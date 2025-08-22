@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { boxStyles, flexStyles } from "./FlexStyle";
 import { Box } from "@chakra-ui/react";
 import AppContext from "@features/shared/context/ApplicationContext";
+import React from "react";
 
 interface iFlexLayout {
   navigationType: string;
@@ -17,14 +18,42 @@ export default function FlexLayout({ navigationType, children }: iFlexLayout) {
   }
   const { sidebarState } = context;
 
-  const templateColumns = sidebarState === "open" ? "16rem 1fr" : "0px 1fr";
+  const templateColumns = sidebarState === "open" ? "14rem 1fr" : "0px 1fr";
   const contentMargin = sidebarState === "open" ? "1.5rem" : "0.5rem";
+
+
+  const contentGridStyles = {
+    display: "grid",
+    gridTemplateRows: "auto 1fr",
+    gridTemplateColumns: "1fr",
+    gap: "2rem",
+  };
+
+  const childrenArray = React.Children.toArray(children);
+  const header = childrenArray[0];
+  const mainContent = childrenArray.slice(1);
 
   return (
     <Box sx={{ ...flexStyles, gridTemplateColumns: templateColumns }}>
       <Sidebar type={navigationType} />
-      <Box sx={{ ...boxStyles, marginLeft: contentMargin }}>
-        {children}
+      <Box
+        sx={{
+          ...boxStyles,
+          marginLeft: contentMargin,
+          ...contentGridStyles,
+        }}
+      >
+        <Box
+          gridColumn="1 / -1"
+          gridRow="1"
+          sx={sidebarState === "collapsed" ? { paddingLeft: "4rem" } : { paddingLeft: "1rem" }}
+        >
+          {header}
+        </Box>
+
+        <Box gridColumn="1 / -1" gridRow="2">
+          {mainContent}
+        </Box>
       </Box>
     </Box>
   );
