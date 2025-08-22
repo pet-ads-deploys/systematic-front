@@ -17,11 +17,7 @@ import errorFactory from "@features/shared/errors/factory/errorFactory";
 import { type Either, right } from "@features/shared/errors/pattern/Either";
 
 // Types
-import type { User } from "@features/auth/types";
-export interface Profile extends User {
-  userId: string;
-  authorities: string[];
-}
+import type { Profile } from "../types";
 
 export default function useProfile() {
   const fetcher = async (): Promise<Either<ApplicationError, Profile>> => {
