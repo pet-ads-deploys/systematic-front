@@ -96,7 +96,7 @@ export default function Protocol() {
                 <h2 style={{ color: "#2E4B6C" }}>
                   <AccordionButton>
                     <Box flex="1" textAlign="center">
-                      <Heading size="md">Secundary Questions</Heading>
+                      <Heading size="md">Secondary Questions</Heading>
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>

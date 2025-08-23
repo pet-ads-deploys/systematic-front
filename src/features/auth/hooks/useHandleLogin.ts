@@ -6,7 +6,7 @@ import { useAuth } from "@features/auth/hooks/useAuth";
 import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 // Constants
-const MINIMAL_PASSWORD_LENGHT = 5;
+import { PASSWORD_LENGHT } from "@features/auth/constants/user";
 
 // Types
 import type { AccessCredentials } from "@features/auth/types";
@@ -27,6 +27,7 @@ export default function useHandleLogin() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { toGo } = useNavigation();
+  const result = useAuth();
 
   const handleChangeCredentials = (
     field: keyof typeof credentials,
@@ -52,15 +53,16 @@ export default function useHandleLogin() {
       errors.password = "Please, enter your password";
     }
 
-    if (credentials.password.length < MINIMAL_PASSWORD_LENGHT) {
-      errors.password = `Password must have at least ${MINIMAL_PASSWORD_LENGHT} characters`;
+    if (
+      credentials.password.length < PASSWORD_LENGHT.MIN ||
+      credentials.password.length > PASSWORD_LENGHT.MAX
+    ) {
+      errors.password = `Password must be at least ${PASSWORD_LENGHT.MIN} characters and at most ${PASSWORD_LENGHT.MAX} characters`;
     }
 
     setErrors((prev) => ({ ...prev, ...errors }));
     return errors.username === "" && errors.password === "";
   };
-
-  const result = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,7 +76,7 @@ export default function useHandleLogin() {
       const { login } = result.value;
 
       await login(credentials);
-      toGo("/user");
+      toGo("/my-reviews");
     } catch (error) {
       setErrors((prev) => ({
         ...prev,

@@ -1,185 +1,174 @@
 // External library
 import { useState } from "react";
 
-// Services
-import useRegisterUser from "../services/useRegisterUser";
-
-// Types
-import type { User } from "../types";
+// Components
 import useToaster from "@components/feedback/Toaster";
 
+// Services
+import registerUser from "@features/auth/services/useRegisterUser";
+
+// Constants
+import { PASSWORD_LENGHT } from "@features/auth/constants/user";
+
+const defaultRegister = {
+  username: "",
+  name: "",
+  email: "",
+  affiliation: "",
+  country: "",
+  password: "",
+  confirmPassword: "",
+};
+
+const defaultErrors = {
+  username: "",
+  name: "",
+  email: "",
+  affiliation: "",
+  country: "",
+  password: "",
+  confirmPassword: "",
+};
+
+// Types
+import type { User } from "@features/auth/types";
+
+// Guards
+import { isLeft } from "@features/shared/errors/pattern/Either";
+import errorFactory from "@features/shared/errors/factory/errorFactory";
+
+interface RegisterUser extends User {
+  confirmPassword: string;
+}
+
 const useHandleRegister = (redirectFormLogin: () => void) => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [affiliation, setAffiliation] = useState<string>("");
-  const [state, setState] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [nameError, setNameError] = useState<string>("");
-  const [emailError, setEmailError] = useState<string>("");
-  const [affiliationError, setAffiliationError] = useState<string>("");
-  const [stateError, setStateError] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [createUser, setCreateUser] = useState<RegisterUser>(defaultRegister);
+  const [errors, setErrors] =
+    useState<Record<keyof RegisterUser, string>>(defaultErrors);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const toast = useToaster();
 
-  let toast = useToaster();
+  const {
+    username,
+    name,
+    email,
+    affiliation,
+    country,
+    password,
+    confirmPassword,
+  } = createUser;
 
-  const validateEmail = (email: string): boolean => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
+  const handleChangeUserInformations = (
+    field: keyof RegisterUser,
+    value: string
+  ) => {
+    setCreateUser((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setName(e.target.value);
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value);
-  const handleAffiliationChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setAffiliation(e.target.value);
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setState(e.target.value);
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setPassword(e.target.value);
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => setConfirmPassword(e.target.value);
+  const validateEmail = (email: string): boolean =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.toLowerCase());
 
-  const passwordMatch = password === confirmPassword;
+  const validateFields = () => {
+    const errors = {
+      ...defaultErrors,
+    };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let isValid = true;
+    if (!username) {
+      errors.username = "Please, enter your username";
+    }
 
     if (!name) {
-      setNameError("Please enter your name");
-      isValid = false;
-    } else {
-      setNameError("");
+      errors.name = "Please, enter your full name";
     }
 
     if (!email) {
-      setEmailError("Please enter your email");
-      isValid = false;
+      errors.email = "Please, enter your email";
     } else if (!validateEmail(email)) {
-      setEmailError("Invalid email address format");
-      isValid = false;
-    } else {
-      setEmailError("");
+      errors.email = "Invalid email address format";
     }
 
     if (!affiliation) {
-      setAffiliationError("Please enter your affiliation");
-      isValid = false;
-    } else {
-      setAffiliationError("");
+      errors.affiliation = "Please, enter your affiliation";
     }
 
-    if (!state) {
-      setStateError("Please select your state");
-      isValid = false;
-    } else {
-      setStateError("");
+    if (!country) {
+      errors.country = "Please, enter your country";
     }
 
     if (!password) {
-      setPasswordError("Please, enter your password");
-      setConfirmPasswordError("Please, enter your password");
-      isValid = false;
-    } else if (!confirmPassword) {
-      setPasswordError("Please, enter your confirm password");
-      setConfirmPasswordError("Please, enter your confirm password");
-      isValid = false;
-    } else if (password.length < 5) {
-      setPasswordError("Password must be at least 5 characters long");
-      setConfirmPasswordError("Password must be at least 5 characters long");
-      isValid = false;
-    } else if (password !== confirmPassword) {
-      setPasswordError("Passwords do not match");
-      setConfirmPasswordError("Passwords do not match");
-      isValid = false;
-    } else {
-      setPasswordError("");
-      setConfirmPasswordError("");
+      errors.password = "Please, enter your password";
+    } else if (
+      password.length < PASSWORD_LENGHT.MIN ||
+      password.length > PASSWORD_LENGHT.MAX
+    ) {
+      errors.password = `Password must be at least ${PASSWORD_LENGHT.MIN} characters and at most ${PASSWORD_LENGHT.MAX} characters`;
     }
 
-    if (isValid) {
-      setIsSubmitting(true);
-      const data: User = {
-        username: name,
-        password: password,
-        email: email,
-        country: state,
-        affiliation: affiliation,
-      };
+    if (!confirmPassword) {
+      errors.confirmPassword = "Please, confirm your password";
+    } else if (password !== confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
 
-      try {
-        const response = await useRegisterUser(data);
-        const user = response.data.username;
-        sessionStorage.setItem("userId", response.data.id);
+    setErrors(errors);
+    return Object.values(errors).every((value) => value === "");
+  };
 
-        if (response.status === 201) {
-          toast({
-            title: "Account created.",
-            status: "success", 
-            description: `You can now log in with your account, ${user}.`
-          });
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-          redirectFormLogin();
-        }
-      } catch (err: any) {
-        console.error(err);
-        const errorMessage = err.response.data.detail;
-        if (errorMessage.includes("username")) setNameError(errorMessage);
-        else if (errorMessage.includes("email")) setEmailError(errorMessage);
+    if (!validateFields()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const { confirmPassword, ...rest } = createUser;
+
+      const result = await registerUser({ data: rest });
+
+      if (isLeft(result)) {
+        const error = result.value;
+        if (error.message.includes("username"))
+          setErrors((prev) => ({ ...prev, username: error.message }));
+        else if (error.message.includes("email"))
+          setErrors((prev) => ({ ...prev, email: error.message }));
         else {
           toast({
-            title: "Network Error",
-            status: "error", 
-            description: `Please check your internet connection.`
+            title: "Error",
+            status: "error",
+            description: error.message,
           });
         }
-      } finally {
-        setIsSubmitting(false);
+        return;
       }
+
+      toast({
+        title: "Account created",
+        status: "success",
+        description: `You can now log in with your account, ${result.value.username}.`,
+      });
+      redirectFormLogin();
+    } catch (error) {
+      const appError = errorFactory("custom", (error as Error).message);
+      toast({
+        title: "Unexpected error",
+        status: "error",
+        description: appError.value.message,
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return {
-    name,
-    setName,
-    email,
-    setEmail,
-    affiliation,
-    setAffiliation,
-    state,
-    setState,
-    password,
-    setPassword,
-    confirmPassword,
-    setConfirmPassword,
-    nameError,
-    setNameError,
-    emailError,
-    setEmailError,
-    affiliationError,
-    setAffiliationError,
-    stateError,
-    setStateError,
-    passwordError,
-    setPasswordError,
-    confirmPasswordError,
-    setConfirmPasswordError,
-    handleSubmit,
+    createUser,
+    errors,
     isSubmitting,
-    handleNameChange,
-    handleEmailChange,
-    handleAffiliationChange,
-    handleSelectChange,
-    handlePasswordChange,
-    handleConfirmPasswordChange,
-    passwordMatch,
+    handleChangeUserInformations,
     handleRegister: handleSubmit,
-    selectedValue: state,
   };
 };
 
