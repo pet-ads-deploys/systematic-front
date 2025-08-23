@@ -54,11 +54,7 @@ export default function DataExtraction({
     onQuestionsMutated: mutateQuestion,
   });
 
-  const hasAnyQuestion =
-    questions &&
-    Object.values(questions).every(
-      (section) => Array.isArray(section) && section.length > 0
-    );
+  const hasAnyQuestion = questions && questions.extractionQuestions.length > 0;
 
   return (
     <FormControl
@@ -80,10 +76,9 @@ export default function DataExtraction({
             const formatedFormKey =
               typeFormKey == "EXTRACTION" ? "Extraction" : "Risk Of Bias";
 
-            if (
-              !Array.isArray(sectionQuestions) ||
-              sectionQuestions.length === 0
-            )
+            const isExtractionKey = typeFormKey == "RISK_OF_BIAS";
+
+            if (!Array.isArray(sectionQuestions) || sectionQuestions.length < 1)
               return (
                 <>
                   {index > 0 && (
@@ -124,7 +119,9 @@ export default function DataExtraction({
                       overflow="hidden"
                       textOverflow="ellipsis"
                     >
-                      {`Create ${formatedFormKey} questions to register your answers.`}
+                      {isExtractionKey
+                        ? `Create ${formatedFormKey} questions to register your answers.`
+                        : "(Optional) You can create Risk of Bias questions to assess methodological quality."}
                     </Text>
                     <Button
                       leftIcon={<FaPlusCircle />}
@@ -190,7 +187,7 @@ export default function DataExtraction({
         )}
       </Box>
       {hasAnyQuestion && (
-        <Flex w="100%" justifyContent="space-between" pb="1rem">
+        <Flex w="100%" justifyContent="space-between" p="1.25rem 0">
           <Button type="submit" onClick={submitResponses}>
             Enviar
           </Button>

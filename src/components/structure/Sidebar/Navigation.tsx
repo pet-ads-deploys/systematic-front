@@ -14,17 +14,16 @@ const Navigation = ({ type }: Props) => {
   return type == "Default" ? (
     <Flex direction="column" justifyContent="space-between" height="100%">
       <Box className={Styles.navDiv}>
-        <NavItem to="/review" text="New Review" />
-        <NavItem to="/user" text="My Reviews" />
+        <NavItem to="/newReview" text="New Review" />
+        <NavItem to="/my-reviews" text="My Reviews" />
         <LogoutButton />
       </Box>
     </Flex>
   ) : (
     <Box className={Styles.accordionNavDiv}>
       <AccordionComponent />
-
       <Box mt="2.6vw">
-        <NavItem to="/user" text="My Reviews" />
+        <NavItem to="/my-reviews" text="My Reviews" />
         <LogoutButton />
       </Box>
     </Box>

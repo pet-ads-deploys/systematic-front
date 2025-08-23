@@ -2,7 +2,7 @@
 import useSWR from "swr";
 
 // Infra
-import Axios from "../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 // Hooks
 import { useAuth } from "@features/auth/hooks/useAuth";

@@ -76,7 +76,7 @@ export default function useHandleLogin() {
       const { login } = result.value;
 
       await login(credentials);
-      toGo("/user");
+      toGo("/my-reviews");
     } catch (error) {
       setErrors((prev) => ({
         ...prev,

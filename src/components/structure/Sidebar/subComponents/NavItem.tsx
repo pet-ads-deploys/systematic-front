@@ -13,10 +13,10 @@ interface Props {
 const NavItem = ({ to, text }: Props) => {
   return (
     <Box w="116px" display="flex" className={Styles.linksBox}>
-      {to == "/review" && (
+      {to == "/newReview" && (
         <Icon boxSize="20px" mr="7px" as={FiPlusCircle} color="#c9d9e5" />
       )}
-      {to == "/user" && (
+      {to == "/my-reviews" && (
         <Icon boxSize="21" mr="7px" as={ImBooks} color="#c9d9e5" />
       )}
       {to == "/" && (
