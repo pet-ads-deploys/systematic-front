@@ -19,18 +19,16 @@ export default function useNavigateToPendingStage({
   const { toGo } = useNavigation();
 
   const getStageLink = (Stage: Stage) => {
-    const basePath = "/newReview/";
-
     const StageMap: Record<Stage, string> = {
-      PROTOCOL_PART_I: `${basePath}protocol/${reviewId}`,
-      PICOC: `${basePath}protocol/${reviewId}`,
-      PROTOCOL_PART_II: `${basePath}protocolpartTwo/${reviewId}`,
-      PROTOCOL_PART_III: `${basePath}protocolpartThree/${reviewId}`,
-      IDENTIFICATION: `${basePath}identification`,
-      SELECTION: `${basePath}selection`,
-      EXTRACTION: `${basePath}extraction`,
-      GRAPHICS: `${basePath}graphics`,
-      FINALIZATION: `${basePath}finalization`,
+      PROTOCOL_PART_I: `/review/planning/protocol-part-I/${reviewId}`,
+      PICOC: `/review/planning/protocol-part-I/${reviewId}`,
+      PROTOCOL_PART_II: `/review/planning/protocol-part-II/${reviewId}`,
+      PROTOCOL_PART_III: `/review/planning/protocol-part-III/${reviewId}`,
+      IDENTIFICATION: `/review/execution/identification`,
+      SELECTION: `/review/execution/selection`,
+      EXTRACTION: `/review/execution/extraction`,
+      GRAPHICS: `/review/summarization/graphics`,
+      FINALIZATION: `/review/summarization/finalization`,
     };
 
     return StageMap[Stage];

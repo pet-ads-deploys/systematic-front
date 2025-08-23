@@ -38,7 +38,7 @@ export default function DataBaseRequired() {
   const { toGo } = useNavigation();
 
   const handleGoToProtocolPartTwo = () => {
-    toGo(`/newReview/protocolpartTwo/${reviewId}`);
+    toGo(`/review/planning/protocol-part-II/${reviewId}`);
   };
 
   return (

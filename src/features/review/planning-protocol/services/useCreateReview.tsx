@@ -134,7 +134,7 @@ const useCreateReview = () => {
 
       localStorage.setItem("systematicReviewId", reviewId);
 
-      toGo(`/newReview/protocol/${reviewId}`);
+      toGo(`/review/planning/protocol-part-I/${reviewId}`);
     }
   }
 
@@ -142,7 +142,7 @@ const useCreateReview = () => {
     if (title === "") setIsTitleValid(false);
     else {
       await useCreateReviewPut({ title, description, id });
-      toGo(`/newReview/protocol/${id}`);
+      toGo(`/review/planning/protocol-part-I/${id}`);
     }
   }
 

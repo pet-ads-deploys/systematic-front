@@ -22,7 +22,6 @@ const Navigation = ({ type }: Props) => {
   ) : (
     <Box className={Styles.accordionNavDiv}>
       <AccordionComponent />
-
       <Box mt="2.6vw">
         <NavItem to="/my-reviews" text="My Reviews" />
         <LogoutButton />

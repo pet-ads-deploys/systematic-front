@@ -133,7 +133,7 @@ export default function DataExtraction({
                       }}
                       w="15rem"
                       onClick={() =>
-                        toGo(`/newReview/ProtocolPartThree/${reviewId}`)
+                        toGo(`/review/planning/protocol-part-III/${reviewId}`)
                       }
                     >
                       Create Questions

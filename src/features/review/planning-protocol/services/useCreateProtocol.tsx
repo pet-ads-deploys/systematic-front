@@ -133,11 +133,12 @@ const useCreateProtocol = () => {
     try {
       await createProtocol();
 
-      if (flag == "protocol") toGo(`/newReview/protocolPartTwo/${id}`);
+      if (flag == "protocol") toGo(`/review/planning/protocol-part-II/${id}`);
 
-      if (flag == "protocolTwo") toGo(`/newReview/ProtocolPartThree/${id}`);
+      if (flag == "protocolTwo")
+        toGo(`/review/planning/protocol-part-III/${id}`);
 
-      if (flag == "protocolThree") toGo(`/newReview/extraction`);
+      if (flag == "protocolThree") toGo(`/review/execution/extraction`);
     } catch (err) {
       console.log(err);
     }
@@ -148,9 +149,10 @@ const useCreateProtocol = () => {
 
     try {
       await createProtocol();
-      if (flag == "protocol") toGo(`/newReview`);
-      if (flag == "protocolTwo") toGo(`/newReview/protocol/${id}`);
-      if (flag == "protocolThree") toGo(`/newReview/protocolpartTwo/${id}`);
+      if (flag == "protocol") toGo(`/review`);
+      if (flag == "protocolTwo") toGo(`/review/planning/protocol-part-I/${id}`);
+      if (flag == "protocolThree")
+        toGo(`/review/planning/protocol-part-II/${id}`);
     } catch (err) {
       console.log(err);
     }
