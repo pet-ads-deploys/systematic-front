@@ -12,6 +12,7 @@ import CollaboratorsPage from "@features/landing/pages/Collaborators";
 
 // User
 import MyReviews from "@features/user/my-reviews/pages/MyReviews";
+import Profile from "@features/user/profile/pages/Profile";
 
 // Planning
 import NovaRevisao from "@features/review/planning-protocol/pages/NewReview";
@@ -42,6 +43,10 @@ const routesList: RouteObject[] = [
   {
     path: "/my-reviews",
     element: <ProtectedRoute element={<MyReviews />} />,
+  },
+  {
+    path: "/profile",
+    element: <ProtectedRoute element={<Profile />} />,
   },
   {
     path: "/collaborators",
