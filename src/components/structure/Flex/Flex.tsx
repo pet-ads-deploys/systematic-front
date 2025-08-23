@@ -1,10 +1,18 @@
-import Sidebar from "../Sidebar/Sidebar";
-import { useContext } from "react";
-import { boxStyles, flexStyles } from "./FlexStyle";
-import { Box } from "@chakra-ui/react";
-import AppContext from "@features/shared/context/ApplicationContext";
+// External library
 import React from "react";
+import { useContext } from "react";
+import { Box } from "@chakra-ui/react";
 
+// Context
+import AppContext from "@features/shared/context/ApplicationContext";
+
+// Components
+import Sidebar from "../Sidebar/Sidebar";
+
+// Styles
+import { flexStyles, contentGridStyles } from "./styles";
+
+// Types
 interface iFlexLayout {
   navigationType: string;
   children: React.ReactNode;
@@ -21,14 +29,6 @@ export default function FlexLayout({ navigationType, children }: iFlexLayout) {
   const templateColumns = sidebarState === "open" ? "14rem 1fr" : "0px 1fr";
   const contentMargin = sidebarState === "open" ? "1.5rem" : "0.5rem";
 
-
-  const contentGridStyles = {
-    display: "grid",
-    gridTemplateRows: "auto 1fr",
-    gridTemplateColumns: "1fr",
-    gap: "2rem",
-  };
-
   const childrenArray = React.Children.toArray(children);
   const header = childrenArray[0];
   const mainContent = childrenArray.slice(1);
@@ -38,15 +38,18 @@ export default function FlexLayout({ navigationType, children }: iFlexLayout) {
       <Sidebar type={navigationType} />
       <Box
         sx={{
-          ...boxStyles,
-          marginLeft: contentMargin,
           ...contentGridStyles,
+          marginLeft: contentMargin,
         }}
       >
         <Box
           gridColumn="1 / -1"
           gridRow="1"
-          sx={sidebarState === "collapsed" ? { paddingLeft: "4rem" } : { paddingLeft: "1rem" }}
+          sx={
+            sidebarState === "collapsed"
+              ? { paddingLeft: "4rem" }
+              : { paddingLeft: "1rem" }
+          }
         >
           {header}
         </Box>
