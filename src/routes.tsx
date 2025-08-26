@@ -8,11 +8,11 @@ import ProtectedRoute from "@features/auth/guards/ProtectedRoute";
 
 // Home
 import Homepage from "@features/landing/pages/Homepage";
-import LandingPage from "@features/landing/pages/Landing";
 import CollaboratorsPage from "@features/landing/pages/Collaborators";
 
 // User
-import UserArea from "@features/user/pages/UserArea";
+import MyReviews from "@features/user/my-reviews/pages/MyReviews";
+import Profile from "@features/user/profile/pages/Profile";
 
 // Planning
 import NovaRevisao from "@features/review/planning-protocol/pages/NewReview";
@@ -41,12 +41,12 @@ const routesList: RouteObject[] = [
     element: <Homepage />,
   },
   {
-    path: "/landing",
-    element: <ProtectedRoute element={<LandingPage />} />,
+    path: "/my-reviews",
+    element: <ProtectedRoute element={<MyReviews />} />,
   },
   {
-    path: "/user",
-    element: <ProtectedRoute element={<UserArea />} />,
+    path: "/profile",
+    element: <ProtectedRoute element={<Profile />} />,
   },
   {
     path: "/collaborators",
@@ -57,51 +57,51 @@ const routesList: RouteObject[] = [
     element: <Unauthorized />,
   },
   {
-    path: "/serverError",
+    path: "/server-error",
     element: <ServerError />,
   },
   {
-    path: "/newReview",
+    path: "/review",
     element: <ProtectedRoute element={<NovaRevisao />} />,
   },
   {
-    path: "/newReview/protocol/:id",
+    path: "/review/planning/protocol-part-I/:id",
     element: <Protocol />,
   },
   {
-    path: "/newReview/protocolpartTwo/:id",
+    path: "/review/planning/protocol-part-II/:id",
     element: <ProtectedRoute element={<ProtocolPartTwo />} />,
   },
   {
-    path: "/newReview/protocolpartThree/:id",
+    path: "/review/planning/protocol-part-III/:id",
     element: <ProtectedRoute element={<ProtocolPartThree />} />,
   },
   {
-    path: "/newReview/identification",
+    path: "/review/execution/identification",
     element: <ProtectedRoute element={<Identification />} />,
   },
   {
-    path: "/newReview/identification/:session",
+    path: "/review/execution/identification/:session",
     element: <ProtectedRoute element={<IdentificationSession />} />,
   },
   {
-    path: "/newReview/selection",
+    path: "/review/execution/selection",
     element: <ProtectedRoute element={<Selection />} />,
   },
   {
-    path: "/newReview/extraction",
+    path: "/review/execution/extraction",
     element: <ProtectedRoute element={<Extraction />} />,
   },
   {
-    path: "/newReview/graphics",
+    path: "/review/summarization/graphics",
     element: <ProtectedRoute element={<Graphics />} />,
   },
   {
-    path: "/newReview/finalization",
+    path: "/review/summarization/finalization",
     element: <ProtectedRoute element={<Finalization />} />,
   },
   {
-    path: "/newReview/visualization",
+    path: "/review/summarization/visualization",
     element: <ProtectedRoute element={<Visualization />} />,
   },
 ];

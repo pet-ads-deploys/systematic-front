@@ -34,7 +34,7 @@ export default function InfosTable({
         <Tbody className="tableBody">
           {AddTexts.map((addText, index) => (
             <Tr key={index}>
-              <Td>
+              <Td whiteSpace={"normal"} wordBreak={"break-word"}>
                 {editIndex === index ? (
                   <Input value={editedValue} onChange={handleChange} />
                 ) : (

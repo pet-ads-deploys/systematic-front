@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const NoStudiesData = () => {
   return (
     <Box
-    position="absolute"
+      position="absolute"
       top="50%"
       left="50%"
       transform="translate(-50%, 50%)"
@@ -32,7 +32,7 @@ export const NoStudiesData = () => {
       </Text>
       <Button
         as={Link}
-        to="/user"
+        to="/my-reviews"
         colorScheme="teal"
         bg="teal.400"
         color="white"
