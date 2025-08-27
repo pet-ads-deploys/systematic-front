@@ -1,11 +1,17 @@
+// External library
 import { useEffect, useState } from "react";
 import { FormControl, FormLabel } from "@chakra-ui/react";
 
-import SelectInput from "../../../../../../../../../components/common/inputs/SelectInput";
-import { capitalize } from "../../../../../../../../shared/utils/helpers/formatters/CapitalizeText";
+// Components
+import SelectInput from "@components/common/inputs/SelectInput";
 
+// Utils
+import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
+
+// Styles
 import { container, label } from "../styles";
 
+// Types
 interface LabeledListProps {
   question: string;
   scales: Record<string, number>;

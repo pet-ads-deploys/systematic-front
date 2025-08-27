@@ -1,10 +1,15 @@
+// External library
 import { useState } from "react";
 import { Box, FormControl, FormLabel, Checkbox } from "@chakra-ui/react";
 
-import { capitalize } from "../../../../../../../../shared/utils/helpers/formatters/CapitalizeText";
 
+// Utils
+import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
+
+// Styles
 import { container, label } from "../styles";
 
+// Types
 interface MultiSelectionListProps {
   question: string;
   options: string[];
