@@ -50,8 +50,6 @@ export default function NumberScale({
     onResponse(value);
   };
 
-  console.log("number", checkedOption);
-
   return (
     <FormControl sx={container}>
       <FormLabel sx={label}>{capitalize(question)}</FormLabel>

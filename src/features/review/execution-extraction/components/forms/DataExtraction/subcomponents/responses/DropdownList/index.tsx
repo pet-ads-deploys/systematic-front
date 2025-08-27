@@ -27,8 +27,6 @@ export default function DropdownList({
     onResponse(value);
   };
 
-  console.log("pick", selected);
-
   return (
     <FormControl sx={container}>
       <FormLabel sx={label}>{capitalize(question)}</FormLabel>
