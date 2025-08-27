@@ -118,7 +118,7 @@ export default function Selection() {
           </Box>
         </Box>
       </Box>
-      <Box w="100%" h="82.5vh" px="1rem">
+      <Box w="100%" h="calc(100vh - 11rem)" px="1rem">
         <LayoutFactory
           page="Selection"
           articles={finalFilteredArticles}
