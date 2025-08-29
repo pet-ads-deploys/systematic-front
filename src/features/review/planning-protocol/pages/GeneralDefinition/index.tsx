@@ -25,7 +25,7 @@ export default function GeneralDefinition() {
     isTitleValid,
   } = useCreateReview();
 
-  const { title, description } = generalDefinition;
+  const { title, description, goal } = generalDefinition;
 
   return (
     <FlexLayout navigationType="Accordion">
@@ -76,7 +76,7 @@ export default function GeneralDefinition() {
         />
 
         <InputTextArea
-          value={description}
+          value={goal}
           label="Objectives"
           placeholder="What are your goals?"
           onChange={(event) =>

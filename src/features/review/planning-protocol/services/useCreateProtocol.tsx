@@ -6,6 +6,7 @@ import axios from "../../../../infrastructure/http/axiosClient";
 
 // Hooks
 import { useNavigation } from "@features/shared/hooks/useNavigation";
+import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 const useCreateProtocol = () => {
   const [flag, setFlag] = useState("");
@@ -44,38 +45,33 @@ const useCreateProtocol = () => {
   const { toGo } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId");
+  const options = getRequestOptions();
 
   const url = `http://localhost:8080/systematic-study/${id}/protocol`;
 
   useEffect(() => {
-    let token = localStorage.getItem("accessToken");
-    let id = localStorage.getItem("systematicReviewId");
-    let url = `http://localhost:8080/systematic-study/${id}/protocol`;
-    let options = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+    const url = `http://localhost:8080/systematic-study/${id}/protocol`;
 
     async function fetch() {
       const response = await axios.get(url, options);
-      console.log(response);
-      let data = response.data;
+      const data = response.data.content;
 
-      setGoal(data.content.goal);
-      setJustification(data.content.justification);
-      setSearchString(data.content.searchString);
-      setStudyTypeDefinition(data.content.studyTypeDefinition);
-      setDataCollectionProcess(data.content.dataCollectionProcess);
-      setSourcesSelectionCriteria(data.content.sourcesSelectionCriteria);
-      setSearchMethod(data.content.searchMethod);
-      setSelectionProcess(data.content.selectionProcess);
-      setAnalysisAndSynthesisProcess(data.content.analysisAndSynthesisProcess);
+      setGoal(data.goal);
+      setJustification(data.justification);
+      setSearchString(data.searchString);
+      setStudyTypeDefinition(data.studyTypeDefinition);
+      setDataCollectionProcess(data.dataCollectionProcess);
+      setSourcesSelectionCriteria(data.sourcesSelectionCriteria);
+      setSearchMethod(data.searchMethod);
+      setSelectionProcess(data.selectionProcess);
+      setAnalysisAndSynthesisProcess(data.analysisAndSynthesisProcess);
 
-      if (data.content.picoc != null) {
-        setPopulation(data.content.picoc.population);
-        setIntervention(data.content.picoc.intervention);
-        setControl(data.content.picoc.control);
-        setOutcome(data.content.picoc.outcome);
-        setContext(data.content.picoc.context);
+      if (data.picoc != null) {
+        setPopulation(data.picoc.population);
+        setIntervention(data.picoc.intervention);
+        setControl(data.picoc.control);
+        setOutcome(data.picoc.outcome);
+        setContext(data.picoc.context);
       }
     }
 
@@ -85,51 +81,24 @@ const useCreateProtocol = () => {
   //protocolOne
 
   async function createProtocol() {
-    let data;
-    const token = localStorage.getItem("accessToken");
-    let picoc = { population, intervention, control, outcome, context };
+    const picoc = { population, intervention, control, outcome, context };
 
-    let options = {
-      headers: { Authorization: `Bearer ${token}` },
+    const data = {
+      goal,
+      justification,
+      picoc,
+      searchString,
+      studyTypeDefinition,
+      dataCollectionProcess,
+      sourcesSelectionCriteria,
+      searchMethod,
+      selectionProcess,
     };
-
-    if (
-      picoc.context != "" ||
-      picoc.control != "" ||
-      picoc.intervention != "" ||
-      picoc.outcome != "" ||
-      picoc.population != ""
-    ) {
-      data = {
-        goal,
-        justification,
-        picoc,
-        searchString,
-        studyTypeDefinition,
-        dataCollectionProcess,
-        sourcesSelectionCriteria,
-        searchMethod,
-        selectionProcess,
-      };
-    } else
-      data = {
-        goal,
-        justification,
-        picoc,
-        searchString,
-        studyTypeDefinition,
-        dataCollectionProcess,
-        sourcesSelectionCriteria,
-        searchMethod,
-        selectionProcess,
-      };
 
     return await axios.put(url, data, options);
   }
 
   async function handleDataAndGoNext() {
-    let id = localStorage.getItem("systematicReviewId");
-
     try {
       await createProtocol();
 
@@ -149,8 +118,9 @@ const useCreateProtocol = () => {
 
     try {
       await createProtocol();
-      if (flag == "protocol") toGo(`/review`);
-      if (flag == "protocolTwo") toGo(`/review/planning/protocol-part-I/${id}`);
+      if (flag == "protocol") toGo(`/review/planning/general-definition`);
+      if (flag == "protocolTwo")
+        toGo(`/review/planning/protocol/research-questions/${id}`);
       if (flag == "protocolThree")
         toGo(`/review/planning/protocol-part-II/${id}`);
     } catch (err) {
@@ -162,40 +132,30 @@ const useCreateProtocol = () => {
 
   async function sendSelectData(data: string[], context: string) {
     let content;
-    const token = localStorage.getItem("accessToken");
-    let options = {
-      headers: { Authentication: `Bearer ${token}` },
-    };
 
     try {
       if (context == "Languages") content = { studiesLanguages: data };
       else content = { informationSources: data };
 
-      let response = await axios.put(url, content, options);
-      console.log(response);
+      await axios.put(url, content, options);
     } catch (err) {
       console.log(err);
     }
   }
 
   async function sendAddText(data: string[], context: string) {
-    console.log(data, context);
     let content;
-    let token = localStorage.getItem(`accessToken`);
-    let options = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
 
     if (context == "Research Questions") content = { researchQuestions: data };
     if (context == "Keywords") content = { keywords: data };
     if (context == "Inclusion criteria") {
-      let array: { description: string; type: string }[] = data.map(
+      const array: { description: string; type: string }[] = data.map(
         (item: string) => {
           return { description: item, type: "INCLUSION" };
         }
       );
 
-      let response = await axios.get(url, options);
+      const response = await axios.get(url, options);
       let aux: { description: string; type: string }[] =
         response.data.content.eligibilityCriteria;
       aux = aux.filter((item) => {
@@ -206,13 +166,13 @@ const useCreateProtocol = () => {
       content = { eligibilityCriteria: content };
     }
     if (context == "Exclusion criteria") {
-      let array: { description: string; type: string }[] = data.map(
+      const array: { description: string; type: string }[] = data.map(
         (item: string) => {
           return { description: item, type: "EXCLUSION" };
         }
       );
 
-      let response = await axios.get(url, options);
+      const response = await axios.get(url, options);
       let aux: { description: string; type: string }[] =
         response.data.content.eligibilityCriteria;
       aux = aux.filter((item) => {
@@ -230,8 +190,6 @@ const useCreateProtocol = () => {
       console.log(err);
     }
   }
-
-  //protocol three
 
   return {
     createProtocol,
