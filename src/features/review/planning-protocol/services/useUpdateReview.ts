@@ -48,7 +48,7 @@ export default function useUpdateReview(): UseUpdateReviewOutput {
     try {
       const path = `http://localhost:8080/api/v1/systematic-study/${id}`;
 
-      const response = await Axios.post(path, data, options);
+      const response = await Axios.put(path, data, options);
       return right({ systematicStudyId: response.data.systematicStudyId });
     } catch (error) {
       return errorFactory("database", (error as Error).message);
