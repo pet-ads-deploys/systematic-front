@@ -15,7 +15,7 @@ import MyReviews from "@features/user/my-reviews/pages/MyReviews";
 import Profile from "@features/user/profile/pages/Profile";
 
 // Planning
-import NovaRevisao from "@features/review/planning-protocol/pages/NewReview";
+import GeneralDefinition from "@features/review/planning-protocol/pages/GeneralDefinition";
 import Protocol from "@features/review/planning-protocol/pages/StepOne";
 import ProtocolPartThree from "@features/review/planning-protocol/pages/StepThree";
 import ProtocolPartTwo from "@features/review/planning-protocol/pages/StepTwo";
@@ -62,7 +62,7 @@ const routesList: RouteObject[] = [
   },
   {
     path: "/review",
-    element: <ProtectedRoute element={<NovaRevisao />} />,
+    element: <ProtectedRoute element={<GeneralDefinition />} />,
   },
   {
     path: "/review/planning/protocol-part-I/:id",

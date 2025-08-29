@@ -14,7 +14,7 @@ import errorFactory from "@features/shared/errors/factory/errorFactory";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Types
-import type { GeneralDefinition } from "../pages/NewReview/types";
+import type { GeneralDefinition } from "../pages/GeneralDefinition/types";
 
 interface CreateReviewInput extends GeneralDefinition {}
 
@@ -26,7 +26,7 @@ interface UseCreateReviewOut {
   create: ({
     title,
     description,
-    objectives,
+    goal,
     collaborators,
   }: CreateReviewInput) => Promise<
     Either<ApplicationError, CreateReviewOutput>
@@ -37,10 +37,10 @@ export default function useCreateReview(): UseCreateReviewOut {
   async function create({
     title,
     description,
-    objectives,
+    goal,
     collaborators,
   }: CreateReviewInput): Promise<Either<ApplicationError, CreateReviewOutput>> {
-    const data = { title, description, objectives, collaborators };
+    const data = { title, description, goal, collaborators };
 
     const options = getRequestOptions();
 

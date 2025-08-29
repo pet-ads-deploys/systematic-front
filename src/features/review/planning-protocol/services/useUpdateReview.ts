@@ -14,13 +14,13 @@ import errorFactory from "@features/shared/errors/factory/errorFactory";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Types
-import type { GeneralDefinition } from "../pages/NewReview/types";
+import type { GeneralDefinition } from "../pages/GeneralDefinition/types";
 
 interface UseUpdateReviewOutput {
   update: ({
     title,
     description,
-    objectives,
+    goal,
   }: UpdateReviewInput) => Promise<
     Either<ApplicationError, UpdateReviewOutput>
   >;
@@ -39,9 +39,9 @@ export default function useUpdateReview(): UseUpdateReviewOutput {
     systematicStudyId: id,
     title,
     description,
-    objectives,
+    goal,
   }: UpdateReviewInput): Promise<Either<ApplicationError, UpdateReviewOutput>> {
-    const data = { title, description, objectives };
+    const data = { title, description, goal };
 
     const options = getRequestOptions();
 
