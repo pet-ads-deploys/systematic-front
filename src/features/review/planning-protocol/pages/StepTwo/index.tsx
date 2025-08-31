@@ -19,20 +19,22 @@ import { btnBox, conteiner, flex } from "./styles";
 export default function ProtocolPartTwo2() {
   const {
     searchString,
-    studyTypeDefinition,
+    eligibilityCriteria,
+    handleChangeEligibilityCriteria,
     dataCollectionProcess,
     sourcesSelectionCriteria,
     searchMethod,
     selectionProcess,
     setSearchString,
     setDataCollectionProcess,
-    setStudyTypeDefinition,
     setSourcesSelectionCriteria,
     setSearchMethod,
     setSelectionProcess,
     handleDataAndGoNext,
     setFlag,
   } = useCreateProtocol();
+
+  const { studyTypeDefinition } = eligibilityCriteria;
 
   useEffect(() => {
     setFlag("protocolTwo");
@@ -104,7 +106,10 @@ export default function ProtocolPartTwo2() {
           <TextAreaInput
             value={studyTypeDefinition}
             onChange={(e) => {
-              setStudyTypeDefinition(e.target.value);
+              handleChangeEligibilityCriteria(
+                "studyTypeDefinition",
+                e.target.value
+              );
             }}
             label="Study Type Definition"
             placeholder="Enter the study type definition"

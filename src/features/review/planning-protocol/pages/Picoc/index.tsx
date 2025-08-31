@@ -8,11 +8,11 @@ import TextAreaInput from "@components/common/inputs/InputTextArea";
 import FlexLayout from "@components/structure/Flex/Flex";
 
 // Service
-import useCreatePortocol from "../../services/useCreateProtocol";
+import useCreateProtocol from "../../services/useCreateProtocol";
 
 export default function Picoc() {
   const { picoc, handleChangePicoc, handleDataAndGoNext, handleDataAndReturn } =
-    useCreatePortocol();
+    useCreateProtocol();
 
   const id = localStorage.getItem("systematicReviewId");
   const { population, intervention, control, outcome, context } = picoc;
@@ -78,7 +78,7 @@ export default function Picoc() {
           <NavButton
             event={() =>
               handleDataAndGoNext(
-                `/review/planning/protocol-part-II/${id}`,
+                `/review/planning/protocol/eligibility-criteria/${id}`,
                 true
               )
             }

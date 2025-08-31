@@ -11,6 +11,7 @@ import getRequestOptions from "@features/auth/utils/getRequestOptions";
 // Types
 import { PICOC } from "../pages/Picoc/types";
 import { ResearchQuestion } from "../pages/ResearchQuestions/types";
+import { EligibilityCriteria } from "../pages/EligibilityCriteria/types";
 
 // Constants
 
@@ -26,6 +27,10 @@ const defaultPicoc: PICOC = {
   context: "",
 };
 
+const defaultEligibilityCriteria: EligibilityCriteria = {
+  studyTypeDefinition: "",
+};
+
 const useCreateProtocol = () => {
   // General-Definition
   const [goal, setGoal] = useState<string | null>(null);
@@ -38,14 +43,16 @@ const useCreateProtocol = () => {
   // Picoc
   const [picoc, setPicoc] = useState<PICOC>(defaultPicoc);
 
+  // Eligibility-Criteria
+  const [eligibilityCriteria, setEligibilityCriteria] =
+    useState<EligibilityCriteria>(defaultEligibilityCriteria);
+
   // Aux
   const [flag, setFlag] = useState("");
   console.log(flag);
   //protocolTwo states
   const [searchString, setSearchString] = useState<string | null>(null);
-  const [studyTypeDefinition, setStudyTypeDefinition] = useState<string | null>(
-    null
-  );
+
   const [dataCollectionProcess, setDataCollectionProcess] = useState<
     string | null
   >(null);
@@ -80,6 +87,16 @@ const useCreateProtocol = () => {
     }));
   };
 
+  const handleChangeEligibilityCriteria = (
+    key: keyof EligibilityCriteria,
+    value: string
+  ) => {
+    setEligibilityCriteria((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   const { toGo, toBack } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId") || "";
@@ -94,7 +111,10 @@ const useCreateProtocol = () => {
       setGoal(data.goal);
       handleChangeResearchQuestion("justification", data.justification);
       setSearchString(data.searchString);
-      setStudyTypeDefinition(data.studyTypeDefinition);
+      handleChangeEligibilityCriteria(
+        "studyTypeDefinition",
+        data.studyTypeDefinition
+      );
       setDataCollectionProcess(data.dataCollectionProcess);
       setSourcesSelectionCriteria(data.sourcesSelectionCriteria);
       setSearchMethod(data.searchMethod);
@@ -117,6 +137,7 @@ const useCreateProtocol = () => {
 
   async function updateProtocol() {
     const { justification } = researchQuestion;
+    const { studyTypeDefinition } = eligibilityCriteria;
 
     const data = {
       goal,
@@ -222,8 +243,8 @@ const useCreateProtocol = () => {
     setGoal,
     handleChangeResearchQuestion,
     handleChangePicoc,
+    handleChangeEligibilityCriteria,
     setSearchString,
-    setStudyTypeDefinition,
     setDataCollectionProcess,
     setResearchQuestions,
     setKeywords,
@@ -240,8 +261,8 @@ const useCreateProtocol = () => {
     goal,
     researchQuestion,
     picoc,
+    eligibilityCriteria,
     searchString,
-    studyTypeDefinition,
     dataCollectionProcess,
     researchQuestions,
     keywords,

@@ -19,7 +19,7 @@ import FlexLayout from "@components/structure/Flex/Flex";
 import AddTextTable from "../../components/common/inputs/text/AddTextTable";
 
 // Service
-import useCreatePortocol from "../../services/useCreateProtocol";
+import useCreateProtocol from "../../services/useCreateProtocol";
 import useProtocolAccordion from "../../services/useProtocolAccordion";
 
 export default function ResearchQuestions() {
@@ -28,7 +28,7 @@ export default function ResearchQuestions() {
     handleChangeResearchQuestion,
     handleDataAndGoNext,
     handleDataAndReturn,
-  } = useCreatePortocol();
+  } = useCreateProtocol();
 
   const { showResearchQuestions } = useProtocolAccordion();
 
@@ -56,9 +56,6 @@ export default function ResearchQuestions() {
             handleChangeResearchQuestion("justification", event.target.value)
           }
         />
-        <Box flex="1" textAlign="center">
-          <Heading size="md">Secondary Questions</Heading>
-        </Box>
         <Accordion
           defaultIndex={showResearchQuestions ? [0] : [-1]}
           allowToggle
@@ -68,6 +65,9 @@ export default function ResearchQuestions() {
           <AccordionItem>
             <h2 style={{ color: "#2E4B6C" }}>
               <AccordionButton>
+                <Box flex="1" textAlign="center">
+                  <Heading size="md">Secondary Questions</Heading>
+                </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
