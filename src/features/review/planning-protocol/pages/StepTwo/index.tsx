@@ -18,22 +18,21 @@ import { btnBox, conteiner, flex } from "./styles";
 
 export default function ProtocolPartTwo2() {
   const {
-    searchString,
+    informationSourcesAndSearchStrategy,
     eligibilityCriteria,
-    handleChangeEligibilityCriteria,
     dataCollectionProcess,
-    sourcesSelectionCriteria,
-    searchMethod,
     selectionProcess,
-    setSearchString,
+    handleChangeEligibilityCriteria,
+    handleChangeInformationSourcesAndSearchStrategy,
     setDataCollectionProcess,
-    setSourcesSelectionCriteria,
-    setSearchMethod,
+
     setSelectionProcess,
     handleDataAndGoNext,
     setFlag,
   } = useCreateProtocol();
 
+  const { searchMethod, searchString, sourcesSelectionCriteria } =
+    informationSourcesAndSearchStrategy;
   const { studyTypeDefinition } = eligibilityCriteria;
 
   useEffect(() => {
@@ -97,7 +96,10 @@ export default function ProtocolPartTwo2() {
           <TextAreaInput
             value={searchString}
             onChange={(e) => {
-              setSearchString(e.target.value);
+              handleChangeInformationSourcesAndSearchStrategy(
+                "searchString",
+                e.target.value
+              );
             }}
             label="Search String"
             placeholder="Enter the search string"
@@ -117,8 +119,11 @@ export default function ProtocolPartTwo2() {
 
           <TextAreaInput
             value={sourcesSelectionCriteria}
-            onChange={(e) => {
-              setSourcesSelectionCriteria(e.target.value);
+            onChange={(event) => {
+              handleChangeInformationSourcesAndSearchStrategy(
+                "sourcesSelectionCriteria",
+                event.target.value
+              );
             }}
             label="Sources Selection Criteria"
             placeholder="Enter the sources selection criteria"
@@ -126,11 +131,14 @@ export default function ProtocolPartTwo2() {
 
           <TextAreaInput
             value={searchMethod}
-            onChange={(e) => {
-              setSearchMethod(e.target.value);
+            onChange={(event) => {
+              handleChangeInformationSourcesAndSearchStrategy(
+                "searchMethod",
+                event.target.value
+              );
             }}
-            label="Research Strategy"
-            placeholder="Enter research strategy"
+            label="Search Strategy"
+            placeholder="Enter Search Strategy"
           />
 
           <TextAreaInput

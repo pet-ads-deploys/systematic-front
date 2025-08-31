@@ -19,6 +19,7 @@ import GeneralDefinition from "@features/review/planning-protocol/pages/GeneralD
 import ResearchQuestions from "@features/review/planning-protocol/pages/ResearchQuestions";
 import Picoc from "@features/review/planning-protocol/pages/Picoc";
 import EligibilityCriteria from "@features/review/planning-protocol/pages/EligibilityCriteria";
+import InformationSourcesAndSearchStrategy from "@features/review/planning-protocol/pages/InformationSourcesAndSearchStrategy";
 
 // Protocol
 import Protocol from "@features/review/planning-protocol/pages/StepOne";
@@ -80,6 +81,12 @@ const routesList: RouteObject[] = [
   {
     path: "/review/planning/protocol/eligibility-criteria/:id",
     element: <ProtectedRoute element={<EligibilityCriteria />} />,
+  },
+  {
+    path: "/review/planning/protocol/information-sources-and-search-strategy/:id",
+    element: (
+      <ProtectedRoute element={<InformationSourcesAndSearchStrategy />} />
+    ),
   },
   {
     path: "/review/planning/protocol-part-I/:id",

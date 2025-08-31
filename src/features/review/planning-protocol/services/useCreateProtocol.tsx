@@ -12,6 +12,7 @@ import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import { PICOC } from "../pages/Picoc/types";
 import { ResearchQuestion } from "../pages/ResearchQuestions/types";
 import { EligibilityCriteria } from "../pages/EligibilityCriteria/types";
+import { InformationSourcesAndSearchStrategy } from "../pages/InformationSourcesAndSearchStrategy/types";
 
 // Constants
 
@@ -31,6 +32,13 @@ const defaultEligibilityCriteria: EligibilityCriteria = {
   studyTypeDefinition: "",
 };
 
+const defaultInformationSourcesAndSearchStrategy: InformationSourcesAndSearchStrategy =
+  {
+    searchMethod: "",
+    searchString: "",
+    sourcesSelectionCriteria: "",
+  };
+
 const useCreateProtocol = () => {
   // General-Definition
   const [goal, setGoal] = useState<string | null>(null);
@@ -47,25 +55,30 @@ const useCreateProtocol = () => {
   const [eligibilityCriteria, setEligibilityCriteria] =
     useState<EligibilityCriteria>(defaultEligibilityCriteria);
 
+  // InformationSourcesAndSearchStrategy
+  const [
+    informationSourcesAndSearchStrategy,
+    setInformationSourcesAndSearchStrategy,
+  ] = useState<InformationSourcesAndSearchStrategy>(
+    defaultInformationSourcesAndSearchStrategy
+  );
+
   // Aux
   const [flag, setFlag] = useState("");
   console.log(flag);
   //protocolTwo states
-  const [searchString, setSearchString] = useState<string | null>(null);
 
   const [dataCollectionProcess, setDataCollectionProcess] = useState<
     string | null
   >(null);
+
   const [researchQuestions, setResearchQuestions] = useState<string[]>([]);
   const [keywords, setKeywords] = useState<string[]>([]);
   const [studiesLanguages, setStydiesLanguages] = useState<string[]>([]);
   const [inclusionCriteria, setInclusionCriteria] = useState<string[]>([]);
   const [exclusionCriteria, setExclusionCriteria] = useState<string[]>([]);
-  const [sourcesSelectionCriteria, setSourcesSelectionCriteria] = useState<
-    string | null
-  >(null);
   const [informationSources, setInformationSources] = useState<string[]>([]);
-  const [searchMethod, setSearchMethod] = useState<string | null>(null);
+
   const [selectionProcess, setSelectionProcess] = useState<string | null>(null);
   const [analysisAndSynthesisProcess, setAnalysisAndSynthesisProcess] =
     useState<string | null>(null);
@@ -97,6 +110,16 @@ const useCreateProtocol = () => {
     }));
   };
 
+  const handleChangeInformationSourcesAndSearchStrategy = (
+    key: keyof InformationSourcesAndSearchStrategy,
+    value: string
+  ) => {
+    setInformationSourcesAndSearchStrategy((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   const { toGo, toBack } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId") || "";
@@ -109,15 +132,28 @@ const useCreateProtocol = () => {
       const data = response.data.content;
 
       setGoal(data.goal);
+
       handleChangeResearchQuestion("justification", data.justification);
-      setSearchString(data.searchString);
+
       handleChangeEligibilityCriteria(
         "studyTypeDefinition",
         data.studyTypeDefinition
       );
+      handleChangeInformationSourcesAndSearchStrategy(
+        "searchString",
+        data.searchString
+      );
+      handleChangeInformationSourcesAndSearchStrategy(
+        "sourcesSelectionCriteria",
+        data.sourcesSelectionCriteria
+      );
+      handleChangeInformationSourcesAndSearchStrategy(
+        "searchMethod",
+        data.searchMethod
+      );
+
       setDataCollectionProcess(data.dataCollectionProcess);
-      setSourcesSelectionCriteria(data.sourcesSelectionCriteria);
-      setSearchMethod(data.searchMethod);
+
       setSelectionProcess(data.selectionProcess);
       setAnalysisAndSynthesisProcess(data.analysisAndSynthesisProcess);
 
@@ -138,6 +174,8 @@ const useCreateProtocol = () => {
   async function updateProtocol() {
     const { justification } = researchQuestion;
     const { studyTypeDefinition } = eligibilityCriteria;
+    const { searchMethod, searchString, sourcesSelectionCriteria } =
+      informationSourcesAndSearchStrategy;
 
     const data = {
       goal,
@@ -244,34 +282,30 @@ const useCreateProtocol = () => {
     handleChangeResearchQuestion,
     handleChangePicoc,
     handleChangeEligibilityCriteria,
-    setSearchString,
+    handleChangeInformationSourcesAndSearchStrategy,
     setDataCollectionProcess,
     setResearchQuestions,
     setKeywords,
     setStydiesLanguages,
     setInclusionCriteria,
     setExclusionCriteria,
-    setSourcesSelectionCriteria,
     setInformationSources,
-    setSearchMethod,
     setSelectionProcess,
     sendSelectData,
     sendAddText,
     setFlag,
     goal,
     researchQuestion,
+    researchQuestions,
     picoc,
     eligibilityCriteria,
-    searchString,
+    informationSourcesAndSearchStrategy,
     dataCollectionProcess,
-    researchQuestions,
     keywords,
     studiesLanguages,
     inclusionCriteria,
     exclusionCriteria,
-    sourcesSelectionCriteria,
     informationSources,
-    searchMethod,
     selectionProcess,
     analysisAndSynthesisProcess,
   };

@@ -72,7 +72,7 @@ export default function EligibilityCriteria() {
           <NavButton
             event={() =>
               handleDataAndGoNext(
-                `/review/planning/protocol-part-II/${id}`,
+                `/review/planning/protocol/information-sources-and-search-strategy/${id}`,
                 true
               )
             }
