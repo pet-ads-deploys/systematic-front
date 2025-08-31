@@ -77,7 +77,6 @@ const useCreateProtocol = () => {
   const [flag, setFlag] = useState("");
   console.log(flag);
 
-
   const [researchQuestions, setResearchQuestions] = useState<string[]>([]);
   const [keywords, setKeywords] = useState<string[]>([]);
   const [studiesLanguages, setStydiesLanguages] = useState<string[]>([]);

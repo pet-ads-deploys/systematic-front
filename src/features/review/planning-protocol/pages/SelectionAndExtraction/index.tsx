@@ -70,7 +70,7 @@ export default function SelectionAndExtraction() {
           <NavButton
             event={() =>
               handleDataAndGoNext(
-                `/review/planning/protocol-part-II/${id}`,
+                `/review/planning/protocol/risk-of-bias-assessment/${id}`,
                 true
               )
             }
