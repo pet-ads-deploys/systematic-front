@@ -8,18 +8,39 @@ import axios from "../../../../infrastructure/http/axiosClient";
 import { useNavigation } from "@features/shared/hooks/useNavigation";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
+// Types
+import { PICOC } from "../pages/Picoc/types";
+import { ResearchQuestion } from "../pages/ResearchQuestions/types";
+
+// Constants
+
+const defaultResearchQuestion: ResearchQuestion = {
+  justification: "",
+};
+
+const defaultPicoc: PICOC = {
+  population: "",
+  intervention: "",
+  control: "",
+  outcome: "",
+  context: "",
+};
+
 const useCreateProtocol = () => {
-  const [flag, setFlag] = useState("");
-
-  //protocolOne States
+  // General-Definition
   const [goal, setGoal] = useState<string | null>(null);
-  const [justification, setJustification] = useState<string | null>(null);
-  const [population, setPopulation] = useState<string | null>(null);
-  const [intervention, setIntervention] = useState<string | null>(null);
-  const [control, setControl] = useState<string | null>(null);
-  const [outcome, setOutcome] = useState<string | null>(null);
-  const [context, setContext] = useState<string | null>(null);
 
+  // Research-Questions
+  const [researchQuestion, setResearchQuestion] = useState<ResearchQuestion>(
+    defaultResearchQuestion
+  );
+
+  // Picoc
+  const [picoc, setPicoc] = useState<PICOC>(defaultPicoc);
+
+  // Aux
+  const [flag, setFlag] = useState("");
+  console.log(flag);
   //protocolTwo states
   const [searchString, setSearchString] = useState<string | null>(null);
   const [studyTypeDefinition, setStudyTypeDefinition] = useState<string | null>(
@@ -42,22 +63,36 @@ const useCreateProtocol = () => {
   const [analysisAndSynthesisProcess, setAnalysisAndSynthesisProcess] =
     useState<string | null>(null);
 
-  const { toGo } = useNavigation();
+  const handleChangeResearchQuestion = (
+    key: keyof ResearchQuestion,
+    value: string
+  ) => {
+    setResearchQuestion((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
 
-  const id = localStorage.getItem("systematicReviewId");
+  const handleChangePicoc = (key: keyof PICOC, value: string) => {
+    setPicoc((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const { toGo, toBack } = useNavigation();
+
+  const id = localStorage.getItem("systematicReviewId") || "";
+  const url = `http://localhost:8080/systematic-study/${id}/protocol`;
   const options = getRequestOptions();
 
-  const url = `http://localhost:8080/systematic-study/${id}/protocol`;
-
   useEffect(() => {
-    const url = `http://localhost:8080/systematic-study/${id}/protocol`;
-
     async function fetch() {
       const response = await axios.get(url, options);
       const data = response.data.content;
 
       setGoal(data.goal);
-      setJustification(data.justification);
+      handleChangeResearchQuestion("justification", data.justification);
       setSearchString(data.searchString);
       setStudyTypeDefinition(data.studyTypeDefinition);
       setDataCollectionProcess(data.dataCollectionProcess);
@@ -67,11 +102,11 @@ const useCreateProtocol = () => {
       setAnalysisAndSynthesisProcess(data.analysisAndSynthesisProcess);
 
       if (data.picoc != null) {
-        setPopulation(data.picoc.population);
-        setIntervention(data.picoc.intervention);
-        setControl(data.picoc.control);
-        setOutcome(data.picoc.outcome);
-        setContext(data.picoc.context);
+        handleChangePicoc("population", data.picoc.population);
+        handleChangePicoc("intervention", data.picoc.intervention);
+        handleChangePicoc("control", data.picoc.control);
+        handleChangePicoc("outcome", data.picoc.outcome);
+        handleChangePicoc("context", data.picoc.context);
       }
     }
 
@@ -80,8 +115,8 @@ const useCreateProtocol = () => {
 
   //protocolOne
 
-  async function createProtocol() {
-    const picoc = { population, intervention, control, outcome, context };
+  async function updateProtocol() {
+    const { justification } = researchQuestion;
 
     const data = {
       goal,
@@ -98,31 +133,20 @@ const useCreateProtocol = () => {
     return await axios.put(url, data, options);
   }
 
-  async function handleDataAndGoNext() {
+  async function handleDataAndGoNext(path: string, isNavigateToNext: boolean) {
     try {
-      await createProtocol();
-
-      if (flag == "protocol") toGo(`/review/planning/protocol-part-II/${id}`);
-
-      if (flag == "protocolTwo")
-        toGo(`/review/planning/protocol-part-III/${id}`);
-
-      if (flag == "protocolThree") toGo(`/review/execution/extraction`);
+      await updateProtocol();
+      if (!isNavigateToNext) toBack();
+      toGo(path);
     } catch (err) {
       console.log(err);
     }
   }
 
   async function handleDataAndReturn() {
-    const id = localStorage.getItem("systematicReviewId");
-
     try {
-      await createProtocol();
-      if (flag == "protocol") toGo(`/review/planning/general-definition`);
-      if (flag == "protocolTwo")
-        toGo(`/review/planning/protocol/research-questions/${id}`);
-      if (flag == "protocolThree")
-        toGo(`/review/planning/protocol-part-II/${id}`);
+      await updateProtocol();
+      toBack();
     } catch (err) {
       console.log(err);
     }
@@ -192,16 +216,12 @@ const useCreateProtocol = () => {
   }
 
   return {
-    createProtocol,
+    createProtocol: updateProtocol,
     handleDataAndGoNext,
     handleDataAndReturn,
     setGoal,
-    setJustification,
-    setPopulation,
-    setIntervention,
-    setControl,
-    setOutcome,
-    setContext,
+    handleChangeResearchQuestion,
+    handleChangePicoc,
     setSearchString,
     setStudyTypeDefinition,
     setDataCollectionProcess,
@@ -216,13 +236,10 @@ const useCreateProtocol = () => {
     setSelectionProcess,
     sendSelectData,
     sendAddText,
+    setFlag,
     goal,
-    justification,
-    population,
-    intervention,
-    control,
-    outcome,
-    context,
+    researchQuestion,
+    picoc,
     searchString,
     studyTypeDefinition,
     dataCollectionProcess,
@@ -236,7 +253,6 @@ const useCreateProtocol = () => {
     searchMethod,
     selectionProcess,
     analysisAndSynthesisProcess,
-    setFlag,
   };
 };
 

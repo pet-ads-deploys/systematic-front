@@ -31,7 +31,6 @@ export default function ProtocolPartTwo2() {
     setSearchMethod,
     setSelectionProcess,
     handleDataAndGoNext,
-    handleDataAndReturn,
     setFlag,
   } = useCreateProtocol();
 
@@ -149,8 +148,8 @@ export default function ProtocolPartTwo2() {
         </FormControl>
 
         <Box sx={btnBox}>
-          <NavButton event={handleDataAndReturn} text="Back" />
-          <NavButton event={handleDataAndGoNext} text="Next" />
+          <NavButton event={() => handleDataAndGoNext("", false)} text="Back" />
+          <NavButton event={() => handleDataAndGoNext("", true)} text="Next" />
         </Box>
       </Box>
     </FlexLayout>

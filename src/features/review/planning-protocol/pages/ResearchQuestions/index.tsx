@@ -22,23 +22,19 @@ import AddTextTable from "../../components/common/inputs/text/AddTextTable";
 import useCreatePortocol from "../../services/useCreateProtocol";
 import useProtocolAccordion from "../../services/useProtocolAccordion";
 
-// Hooks
-import { useNavigation } from "@features/shared/hooks/useNavigation";
-
 export default function ResearchQuestions() {
-  const { justification, setJustification } = useCreatePortocol();
+  const {
+    researchQuestion,
+    handleChangeResearchQuestion,
+    handleDataAndGoNext,
+    handleDataAndReturn,
+  } = useCreatePortocol();
+
   const { showResearchQuestions } = useProtocolAccordion();
-  const { toGo, toBack } = useNavigation();
+
+  const { justification } = researchQuestion;
 
   const id = localStorage.getItem("systematicReviewId");
-
-  const navigateToNextSection = () => {
-    toGo(`/review/planning/protocol-part-II/${id}`);
-  };
-
-  const navigateToBackSection = () => {
-    toBack();
-  };
 
   return (
     <FlexLayout navigationType="Accordion">
@@ -56,8 +52,13 @@ export default function ResearchQuestions() {
           value={justification}
           label="Primary question"
           placeholder="Enter review description"
-          onChange={(event) => setJustification(event.target.value)}
+          onChange={(event) =>
+            handleChangeResearchQuestion("justification", event.target.value)
+          }
         />
+        <Box flex="1" textAlign="center">
+          <Heading size="md">Secondary Questions</Heading>
+        </Box>
         <Accordion
           defaultIndex={showResearchQuestions ? [0] : [-1]}
           allowToggle
@@ -67,9 +68,6 @@ export default function ResearchQuestions() {
           <AccordionItem>
             <h2 style={{ color: "#2E4B6C" }}>
               <AccordionButton>
-                <Box flex="1" textAlign="center">
-                  <Heading size="md">Secondary Questions</Heading>
-                </Box>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
@@ -90,8 +88,13 @@ export default function ResearchQuestions() {
           alignItems={"center"}
           justifyContent={"end"}
         >
-          <NavButton event={navigateToBackSection} text="Back" />
-          <NavButton event={navigateToNextSection} text="Next" />
+          <NavButton event={handleDataAndReturn} text="Back" />
+          <NavButton
+            event={() =>
+              handleDataAndGoNext(`/review/planning/protocol/picoc/${id}`, true)
+            }
+            text="Next"
+          />
         </Box>
       </FormControl>
     </FlexLayout>

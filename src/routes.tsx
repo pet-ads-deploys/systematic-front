@@ -17,6 +17,7 @@ import Profile from "@features/user/profile/pages/Profile";
 // Planning
 import GeneralDefinition from "@features/review/planning-protocol/pages/GeneralDefinition";
 import ResearchQuestions from "@features/review/planning-protocol/pages/ResearchQuestions";
+import Picoc from "@features/review/planning-protocol/pages/Picoc";
 import Protocol from "@features/review/planning-protocol/pages/StepOne";
 import ProtocolPartThree from "@features/review/planning-protocol/pages/StepThree";
 import ProtocolPartTwo from "@features/review/planning-protocol/pages/StepTwo";
@@ -68,6 +69,10 @@ const routesList: RouteObject[] = [
   {
     path: "/review/planning/protocol/research-questions/:id",
     element: <ProtectedRoute element={<ResearchQuestions />} />,
+  },
+  {
+    path: "/review/planning/protocol/picoc/:id",
+    element: <ProtectedRoute element={<Picoc />} />,
   },
   {
     path: "/review/planning/protocol-part-I/:id",
