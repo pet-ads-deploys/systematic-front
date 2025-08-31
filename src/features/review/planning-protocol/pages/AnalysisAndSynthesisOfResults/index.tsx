@@ -4,21 +4,29 @@ import { Box, FormControl } from "@chakra-ui/react";
 // Components
 import Header from "@components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
+import TextAreaInput from "@components/common/inputs/InputTextArea";
 import FlexLayout from "@components/structure/Flex/Flex";
-import InteractiveTable from "@features/review/planning-protocol/pages/StepThree/subcomponents/tables/InteractiveTable";
 
 // Service
 import useCreateProtocol from "../../services/useCreateProtocol";
 
-export default function RiskOfBiasAssessment() {
-  const { handleDataAndGoNext, handleDataAndReturn } = useCreateProtocol();
+export default function AnalysisAndSynthesisOfResults() {
+  const {
+    analysisAndSynthesisOfResults,
+    handleChangeAnalysisAndSynthesisOfResults,
+    handleDataAndGoNext,
+    handleDataAndReturn,
+  } = useCreateProtocol();
+
+  const { analysisAndSynthesisProcess } = analysisAndSynthesisOfResults;
 
   const id = localStorage.getItem("systematicReviewId") || "";
-  const url = `http://localhost:8080/systematic-study/${id}/protocol`;
+  console.log(id);
 
   return (
     <FlexLayout navigationType="Accordion">
-      <Header text="Protocol: Risk Of Bias Assessment" />
+      <Header text="Protocol: Analysis And Synthesis Of Results" />
+
       <FormControl
         m={"20px auto 0"}
         display={"flex"}
@@ -27,7 +35,18 @@ export default function RiskOfBiasAssessment() {
         w={"60vw"}
         alignItems={"center"}
       >
-        <InteractiveTable id={id} url={url} label={"Risk of Bias Questions"} />
+        <TextAreaInput
+          value={analysisAndSynthesisProcess}
+          label="Analysis and Synthesis Method"
+          placeholder="Enter your Analysis and Synthesis Method"
+          onChange={(event) =>
+            handleChangeAnalysisAndSynthesisOfResults(
+              "analysisAndSynthesisProcess",
+              event.target.value
+            )
+          }
+        />
+
         <Box
           w={"60vw"}
           display={"flex"}
@@ -37,10 +56,7 @@ export default function RiskOfBiasAssessment() {
           <NavButton event={handleDataAndReturn} text="Back" />
           <NavButton
             event={() =>
-              handleDataAndGoNext(
-                `/review/planning/protocol/analysis-and-synthesis-of-results/${id}`,
-                true
-              )
+              handleDataAndGoNext("/review/execution/identification", true)
             }
             text="Next"
           />

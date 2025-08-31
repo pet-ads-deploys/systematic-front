@@ -6,17 +6,19 @@ import axios from "../../../../infrastructure/http/axiosClient";
 
 // Hooks
 import { useNavigation } from "@features/shared/hooks/useNavigation";
+
+// Utils
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 // Types
-import { PICOC } from "../pages/Picoc/types";
-import { ResearchQuestion } from "../pages/ResearchQuestions/types";
-import { EligibilityCriteria } from "../pages/EligibilityCriteria/types";
-import { InformationSourcesAndSearchStrategy } from "../pages/InformationSourcesAndSearchStrategy/types";
-import { SelectionAndExtraction } from "../pages/SelectionAndExtraction/types";
+import type { PICOC } from "../pages/Picoc/types";
+import type { ResearchQuestion } from "../pages/ResearchQuestions/types";
+import type { EligibilityCriteria } from "../pages/EligibilityCriteria/types";
+import type { InformationSourcesAndSearchStrategy } from "../pages/InformationSourcesAndSearchStrategy/types";
+import type { SelectionAndExtraction } from "../pages/SelectionAndExtraction/types";
+import type { AnalysisAndSynthesisOfResults } from "../pages/AnalysisAndSynthesisOfResults/types";
 
 // Constants
-
 const defaultResearchQuestion: ResearchQuestion = {
   justification: "",
 };
@@ -43,6 +45,10 @@ const defaultInformationSourcesAndSearchStrategy: InformationSourcesAndSearchStr
 const defaultSelectionAndExtraction: SelectionAndExtraction = {
   dataCollectionProcess: "",
   selectionProcess: "",
+};
+
+const defaultAnalysisAndSynthesisOfResults: AnalysisAndSynthesisOfResults = {
+  analysisAndSynthesisProcess: "",
 };
 
 const useCreateProtocol = () => {
@@ -73,6 +79,12 @@ const useCreateProtocol = () => {
   const [selectionAndExtraction, setSelectionAndExtraction] =
     useState<SelectionAndExtraction>(defaultSelectionAndExtraction);
 
+  // Analysis-And-Synthesis-Of-Results
+  const [analysisAndSynthesisOfResults, setAnalysisAndSynthesisOfResults] =
+    useState<AnalysisAndSynthesisOfResults>(
+      defaultAnalysisAndSynthesisOfResults
+    );
+
   // Aux
   const [flag, setFlag] = useState("");
   console.log(flag);
@@ -83,9 +95,6 @@ const useCreateProtocol = () => {
   const [inclusionCriteria, setInclusionCriteria] = useState<string[]>([]);
   const [exclusionCriteria, setExclusionCriteria] = useState<string[]>([]);
   const [informationSources, setInformationSources] = useState<string[]>([]);
-
-  const [analysisAndSynthesisProcess, setAnalysisAndSynthesisProcess] =
-    useState<string | null>(null);
 
   const handleChangeResearchQuestion = (
     key: keyof ResearchQuestion,
@@ -134,6 +143,16 @@ const useCreateProtocol = () => {
     }));
   };
 
+  const handleChangeAnalysisAndSynthesisOfResults = (
+    key: keyof AnalysisAndSynthesisOfResults,
+    value: string
+  ) => {
+    setAnalysisAndSynthesisOfResults((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   const { toGo, toBack } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId") || "";
@@ -175,7 +194,10 @@ const useCreateProtocol = () => {
         data.selectionProcess
       );
 
-      setAnalysisAndSynthesisProcess(data.analysisAndSynthesisProcess);
+      handleChangeAnalysisAndSynthesisOfResults(
+        "analysisAndSynthesisProcess",
+        data.analysisAndSynthesisProcess
+      );
 
       if (data.picoc != null) {
         handleChangePicoc("population", data.picoc.population);
@@ -309,13 +331,14 @@ const useCreateProtocol = () => {
     inclusionCriteria,
     exclusionCriteria,
     informationSources,
-    analysisAndSynthesisProcess,
+    analysisAndSynthesisOfResults,
 
     handleChangeResearchQuestion,
     handleChangePicoc,
     handleChangeEligibilityCriteria,
     handleChangeInformationSourcesAndSearchStrategy,
     handleChangeSelectionAndExtraction,
+    handleChangeAnalysisAndSynthesisOfResults,
 
     setGoal,
     setResearchQuestions,

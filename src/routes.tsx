@@ -22,6 +22,7 @@ import EligibilityCriteria from "@features/review/planning-protocol/pages/Eligib
 import InformationSourcesAndSearchStrategy from "@features/review/planning-protocol/pages/InformationSourcesAndSearchStrategy";
 import SelectionAndExtraction from "@features/review/planning-protocol/pages/SelectionAndExtraction";
 import RiskOfBiasAssessment from "@features/review/planning-protocol/pages/RiskOfBiasAssessment ";
+import AnalysisAndSynthesisOfResults from "@features/review/planning-protocol/pages/AnalysisAndSynthesisOfResults";
 
 // Protocol
 import Protocol from "@features/review/planning-protocol/pages/StepOne";
@@ -97,6 +98,10 @@ const routesList: RouteObject[] = [
   {
     path: "/review/planning/protocol/risk-of-bias-assessment/:id",
     element: <ProtectedRoute element={<RiskOfBiasAssessment />} />,
+  },
+  {
+    path: "/review/planning/protocol/analysis-and-synthesis-of-results/:id",
+    element: <ProtectedRoute element={<AnalysisAndSynthesisOfResults />} />,
   },
   {
     path: "/review/planning/protocol-part-I/:id",
