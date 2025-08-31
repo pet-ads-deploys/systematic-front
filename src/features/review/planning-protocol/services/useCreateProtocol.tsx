@@ -13,6 +13,7 @@ import { PICOC } from "../pages/Picoc/types";
 import { ResearchQuestion } from "../pages/ResearchQuestions/types";
 import { EligibilityCriteria } from "../pages/EligibilityCriteria/types";
 import { InformationSourcesAndSearchStrategy } from "../pages/InformationSourcesAndSearchStrategy/types";
+import { SelectionAndExtraction } from "../pages/SelectionAndExtraction/types";
 
 // Constants
 
@@ -39,6 +40,11 @@ const defaultInformationSourcesAndSearchStrategy: InformationSourcesAndSearchStr
     sourcesSelectionCriteria: "",
   };
 
+const defaultSelectionAndExtraction: SelectionAndExtraction = {
+  dataCollectionProcess: "",
+  selectionProcess: "",
+};
+
 const useCreateProtocol = () => {
   // General-Definition
   const [goal, setGoal] = useState<string | null>(null);
@@ -55,7 +61,7 @@ const useCreateProtocol = () => {
   const [eligibilityCriteria, setEligibilityCriteria] =
     useState<EligibilityCriteria>(defaultEligibilityCriteria);
 
-  // InformationSourcesAndSearchStrategy
+  // Information-Sources-And-Search-Strategy
   const [
     informationSourcesAndSearchStrategy,
     setInformationSourcesAndSearchStrategy,
@@ -63,14 +69,14 @@ const useCreateProtocol = () => {
     defaultInformationSourcesAndSearchStrategy
   );
 
+  // Selection-And-Extraction
+  const [selectionAndExtraction, setSelectionAndExtraction] =
+    useState<SelectionAndExtraction>(defaultSelectionAndExtraction);
+
   // Aux
   const [flag, setFlag] = useState("");
   console.log(flag);
-  //protocolTwo states
 
-  const [dataCollectionProcess, setDataCollectionProcess] = useState<
-    string | null
-  >(null);
 
   const [researchQuestions, setResearchQuestions] = useState<string[]>([]);
   const [keywords, setKeywords] = useState<string[]>([]);
@@ -79,7 +85,6 @@ const useCreateProtocol = () => {
   const [exclusionCriteria, setExclusionCriteria] = useState<string[]>([]);
   const [informationSources, setInformationSources] = useState<string[]>([]);
 
-  const [selectionProcess, setSelectionProcess] = useState<string | null>(null);
   const [analysisAndSynthesisProcess, setAnalysisAndSynthesisProcess] =
     useState<string | null>(null);
 
@@ -120,6 +125,16 @@ const useCreateProtocol = () => {
     }));
   };
 
+  const handleChangeSelectionAndExtraction = (
+    key: keyof SelectionAndExtraction,
+    value: string
+  ) => {
+    setSelectionAndExtraction((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   const { toGo, toBack } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId") || "";
@@ -152,9 +167,15 @@ const useCreateProtocol = () => {
         data.searchMethod
       );
 
-      setDataCollectionProcess(data.dataCollectionProcess);
+      handleChangeSelectionAndExtraction(
+        "dataCollectionProcess",
+        data.dataCollectionProcess
+      );
+      handleChangeSelectionAndExtraction(
+        "selectionProcess",
+        data.selectionProcess
+      );
 
-      setSelectionProcess(data.selectionProcess);
       setAnalysisAndSynthesisProcess(data.analysisAndSynthesisProcess);
 
       if (data.picoc != null) {
@@ -176,6 +197,7 @@ const useCreateProtocol = () => {
     const { studyTypeDefinition } = eligibilityCriteria;
     const { searchMethod, searchString, sourcesSelectionCriteria } =
       informationSourcesAndSearchStrategy;
+    const { dataCollectionProcess, selectionProcess } = selectionAndExtraction;
 
     const data = {
       goal,
@@ -275,39 +297,41 @@ const useCreateProtocol = () => {
   }
 
   return {
-    createProtocol: updateProtocol,
-    handleDataAndGoNext,
-    handleDataAndReturn,
-    setGoal,
-    handleChangeResearchQuestion,
-    handleChangePicoc,
-    handleChangeEligibilityCriteria,
-    handleChangeInformationSourcesAndSearchStrategy,
-    setDataCollectionProcess,
-    setResearchQuestions,
-    setKeywords,
-    setStydiesLanguages,
-    setInclusionCriteria,
-    setExclusionCriteria,
-    setInformationSources,
-    setSelectionProcess,
-    sendSelectData,
-    sendAddText,
-    setFlag,
     goal,
     researchQuestion,
     researchQuestions,
     picoc,
     eligibilityCriteria,
     informationSourcesAndSearchStrategy,
-    dataCollectionProcess,
+    selectionAndExtraction,
+
     keywords,
     studiesLanguages,
     inclusionCriteria,
     exclusionCriteria,
     informationSources,
-    selectionProcess,
     analysisAndSynthesisProcess,
+
+    handleChangeResearchQuestion,
+    handleChangePicoc,
+    handleChangeEligibilityCriteria,
+    handleChangeInformationSourcesAndSearchStrategy,
+    handleChangeSelectionAndExtraction,
+
+    setGoal,
+    setResearchQuestions,
+    setKeywords,
+    setStydiesLanguages,
+    setInclusionCriteria,
+    setExclusionCriteria,
+    setInformationSources,
+
+    sendSelectData,
+    sendAddText,
+    createProtocol: updateProtocol,
+    handleDataAndGoNext,
+    handleDataAndReturn,
+    setFlag,
   };
 };
 

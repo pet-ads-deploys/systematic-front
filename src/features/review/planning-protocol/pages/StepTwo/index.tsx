@@ -20,13 +20,10 @@ export default function ProtocolPartTwo2() {
   const {
     informationSourcesAndSearchStrategy,
     eligibilityCriteria,
-    dataCollectionProcess,
-    selectionProcess,
+    selectionAndExtraction,
+    handleChangeSelectionAndExtraction,
     handleChangeEligibilityCriteria,
     handleChangeInformationSourcesAndSearchStrategy,
-    setDataCollectionProcess,
-
-    setSelectionProcess,
     handleDataAndGoNext,
     setFlag,
   } = useCreateProtocol();
@@ -34,6 +31,7 @@ export default function ProtocolPartTwo2() {
   const { searchMethod, searchString, sourcesSelectionCriteria } =
     informationSourcesAndSearchStrategy;
   const { studyTypeDefinition } = eligibilityCriteria;
+  const { dataCollectionProcess, selectionProcess } = selectionAndExtraction;
 
   useEffect(() => {
     setFlag("protocolTwo");
@@ -143,17 +141,23 @@ export default function ProtocolPartTwo2() {
 
           <TextAreaInput
             value={selectionProcess}
-            onChange={(e) => {
-              setSelectionProcess(e.target.value);
+            onChange={(event) => {
+              handleChangeSelectionAndExtraction(
+                "selectionProcess",
+                event.target.value
+              );
             }}
-            label="Article Selection Process"
+            label="Study Selection Process"
             placeholder="Enter selection process"
           />
 
           <TextAreaInput
             value={dataCollectionProcess}
-            onChange={(e) => {
-              setDataCollectionProcess(e.target.value);
+            onChange={(event) => {
+              handleChangeSelectionAndExtraction(
+                "dataCollectionProcess",
+                event.target.value
+              );
             }}
             label="Data Collection Process"
             placeholder="Enter the data colletion process"
