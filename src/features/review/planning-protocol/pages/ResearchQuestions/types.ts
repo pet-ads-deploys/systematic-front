@@ -1,6 +1,3 @@
-export interface GeneralDefinition {
-  title: string;
-  description: string;
-  goal: string;
-  collaborators: string[];
+export interface ResearchQuestion {
+  justification: string;
 }
