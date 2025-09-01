@@ -19,6 +19,7 @@ const Navigation = ({ type }: Props) => {
           text="New Review"
         />
         <NavItem to="/my-reviews" text="My Reviews" />
+        <NavItem to="/profile" text="Profile" />
         <LogoutButton />
       </Box>
     </Flex>
@@ -27,6 +28,7 @@ const Navigation = ({ type }: Props) => {
       <AccordionComponent />
       <Box mt="2.6vw">
         <NavItem to="/my-reviews" text="My Reviews" />
+        <NavItem to="/profile" text="Profile" />
         <LogoutButton />
       </Box>
     </Box>
