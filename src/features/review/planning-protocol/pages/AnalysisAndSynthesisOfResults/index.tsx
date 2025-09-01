@@ -14,19 +14,16 @@ export default function AnalysisAndSynthesisOfResults() {
   const {
     analysisAndSynthesisOfResults,
     handleChangeAnalysisAndSynthesisOfResults,
-    handleDataAndGoNext,
-    handleDataAndReturn,
+    syncAndNavigate,
   } = useCreateProtocol();
 
   const { analysisAndSynthesisProcess } = analysisAndSynthesisOfResults;
 
   const id = localStorage.getItem("systematicReviewId") || "";
-  console.log(id);
 
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Analysis And Synthesis Of Results" />
-
       <FormControl
         m={"20px auto 0"}
         display={"flex"}
@@ -46,18 +43,22 @@ export default function AnalysisAndSynthesisOfResults() {
             )
           }
         />
-
         <Box
           w={"60vw"}
           display={"flex"}
           alignItems={"center"}
           justifyContent={"end"}
         >
-          <NavButton event={handleDataAndReturn} text="Back" />
           <NavButton
             event={() =>
-              handleDataAndGoNext("/review/execution/identification", true)
+              syncAndNavigate(
+                `/review/planning/protocol/risk-of-bias-assessment/${id}`
+              )
             }
+            text="Back"
+          />
+          <NavButton
+            event={() => syncAndNavigate("/review/execution/identification")}
             text="Next"
           />
         </Box>

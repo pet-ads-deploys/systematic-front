@@ -1,5 +1,4 @@
 // External library
-import { useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -33,21 +32,17 @@ export default function Protocol() {
     goal,
     picoc,
     researchQuestion,
-    handleChangeResearchQuestion,
-    handleDataAndGoNext,
-    handleDataAndReturn,
     setGoal,
+    handleChangeResearchQuestion,
     handleChangePicoc,
-    setFlag,
+    syncAndNavigate,
   } = useCreatePortocol();
 
   const { showResearchQuestions, loading, showPicoc } = useProtocolAccordion();
   const { population, intervention, control, outcome, context } = picoc;
   const { justification } = researchQuestion;
 
-  useEffect(() => {
-    setFlag("protocol");
-  }, []);
+  const id = localStorage.getItem("systematicReviewId") || "";
 
   if (loading) return <></>;
 
@@ -171,8 +166,18 @@ export default function Protocol() {
           </FormControl>
 
           <Box sx={btnBox}>
-            <NavButton event={() => handleDataAndReturn} text="Back" />
-            <NavButton event={() => handleDataAndGoNext} text="Next" />
+            <NavButton
+              event={() =>
+                syncAndNavigate(`/review/planning/protocol/general-definition`)
+              }
+              text="Back"
+            />
+            <NavButton
+              event={() =>
+                syncAndNavigate(`/review/planning/protocol-part-II/${id}`)
+              }
+              text="Next"
+            />
           </Box>
         </Flex>
       </Box>

@@ -23,12 +23,8 @@ import useCreateProtocol from "../../services/useCreateProtocol";
 import useProtocolAccordion from "../../services/useProtocolAccordion";
 
 export default function ResearchQuestions() {
-  const {
-    researchQuestion,
-    handleChangeResearchQuestion,
-    handleDataAndGoNext,
-    handleDataAndReturn,
-  } = useCreateProtocol();
+  const { researchQuestion, handleChangeResearchQuestion, syncAndNavigate } =
+    useCreateProtocol();
 
   const { showResearchQuestions } = useProtocolAccordion();
 
@@ -71,7 +67,6 @@ export default function ResearchQuestions() {
                 <AccordionIcon />
               </AccordionButton>
             </h2>
-
             <AccordionPanel pb={4}>
               <Flex>
                 <AddTextTable
@@ -88,10 +83,15 @@ export default function ResearchQuestions() {
           alignItems={"center"}
           justifyContent={"end"}
         >
-          <NavButton event={handleDataAndReturn} text="Back" />
           <NavButton
             event={() =>
-              handleDataAndGoNext(`/review/planning/protocol/picoc/${id}`, true)
+              syncAndNavigate(`/review/planning/protocol/general-definition`)
+            }
+            text="Back"
+          />
+          <NavButton
+            event={() =>
+              syncAndNavigate(`/review/planning/protocol/picoc/${id}`)
             }
             text="Next"
           />

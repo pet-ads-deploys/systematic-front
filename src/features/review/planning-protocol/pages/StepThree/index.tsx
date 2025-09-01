@@ -18,7 +18,7 @@ export default function ProtocolPartThree() {
   const {
     analysisAndSynthesisOfResults,
     handleChangeAnalysisAndSynthesisOfResults,
-    handleDataAndGoNext,
+    syncAndNavigate,
   } = useCreateProtocol();
 
   const { analysisAndSynthesisProcess } = analysisAndSynthesisOfResults;
@@ -64,17 +64,12 @@ export default function ProtocolPartThree() {
           <NavButton
             text="Back"
             event={() =>
-              handleDataAndGoNext(
-                `/review/planning/protocol-part-II/${id}`,
-                true
-              )
+              syncAndNavigate(`/review/planning/protocol-part-II/${id}`)
             }
           />
           <NavButton
             text="Save"
-            event={() =>
-              handleDataAndGoNext("/review/execution/identification", true)
-            }
+            event={() => syncAndNavigate("/review/execution/identification")}
             w={"fit-content"}
           />
         </Box>

@@ -7,11 +7,11 @@ import NavButton from "@components/common/buttons/NavigationButton";
 import FlexLayout from "@components/structure/Flex/Flex";
 import InteractiveTable from "@features/review/planning-protocol/pages/StepThree/subcomponents/tables/InteractiveTable";
 
-// Service
-import useCreateProtocol from "../../services/useCreateProtocol";
+// Hooks
+import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 export default function RiskOfBiasAssessment() {
-  const { handleDataAndGoNext, handleDataAndReturn } = useCreateProtocol();
+  const { toGo } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId") || "";
   const url = `http://localhost:8080/systematic-study/${id}/protocol`;
@@ -34,12 +34,16 @@ export default function RiskOfBiasAssessment() {
           alignItems={"center"}
           justifyContent={"end"}
         >
-          <NavButton event={handleDataAndReturn} text="Back" />
           <NavButton
             event={() =>
-              handleDataAndGoNext(
-                `/review/planning/protocol/analysis-and-synthesis-of-results/${id}`,
-                true
+              toGo(`/review/planning/protocol/selection-and-extraction/${id}`)
+            }
+            text="Back"
+          />
+          <NavButton
+            event={() =>
+              toGo(
+                `/review/planning/protocol/analysis-and-synthesis-of-results/${id}`
               )
             }
             text="Next"

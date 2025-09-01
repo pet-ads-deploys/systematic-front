@@ -1,5 +1,4 @@
 // External library
-import { useEffect } from "react";
 import { Progress, FormControl, Box } from "@chakra-ui/react";
 
 // Components
@@ -24,18 +23,14 @@ export default function ProtocolPartTwo2() {
     handleChangeSelectionAndExtraction,
     handleChangeEligibilityCriteria,
     handleChangeInformationSourcesAndSearchStrategy,
-    handleDataAndGoNext,
-    setFlag,
+    syncAndNavigate,
   } = useCreateProtocol();
 
   const { searchMethod, searchString, sourcesSelectionCriteria } =
     informationSourcesAndSearchStrategy;
   const { studyTypeDefinition } = eligibilityCriteria;
   const { dataCollectionProcess, selectionProcess } = selectionAndExtraction;
-
-  useEffect(() => {
-    setFlag("protocolTwo");
-  }, []);
+  const id = localStorage.getItem("systematicReviewId") || "";
 
   return (
     <FlexLayout defaultOpen={0} navigationType="Accordion">
@@ -165,8 +160,18 @@ export default function ProtocolPartTwo2() {
         </FormControl>
 
         <Box sx={btnBox}>
-          <NavButton event={() => handleDataAndGoNext("", false)} text="Back" />
-          <NavButton event={() => handleDataAndGoNext("", true)} text="Next" />
+          <NavButton
+            event={() =>
+              syncAndNavigate(`/review/planning/protocol-part-I/${id}`)
+            }
+            text="Back"
+          />
+          <NavButton
+            event={() =>
+              syncAndNavigate(`/review/planning/protocol-part-III/${id}`)
+            }
+            text="Next"
+          />
         </Box>
       </Box>
     </FlexLayout>

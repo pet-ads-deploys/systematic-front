@@ -30,7 +30,6 @@ export default function GeneralDefinition() {
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: General Definition" />
-
       <FormControl
         m={"20px auto 0"}
         display={"flex"}

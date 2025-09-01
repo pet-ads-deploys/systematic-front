@@ -11,8 +11,7 @@ import FlexLayout from "@components/structure/Flex/Flex";
 import useCreateProtocol from "../../services/useCreateProtocol";
 
 export default function Picoc() {
-  const { picoc, handleChangePicoc, handleDataAndGoNext, handleDataAndReturn } =
-    useCreateProtocol();
+  const { picoc, handleChangePicoc, syncAndNavigate } = useCreateProtocol();
 
   const id = localStorage.getItem("systematicReviewId");
   const { population, intervention, control, outcome, context } = picoc;
@@ -74,12 +73,18 @@ export default function Picoc() {
           alignItems={"center"}
           justifyContent={"end"}
         >
-          <NavButton event={handleDataAndReturn} text="Back" />
           <NavButton
             event={() =>
-              handleDataAndGoNext(
-                `/review/planning/protocol/eligibility-criteria/${id}`,
-                true
+              syncAndNavigate(
+                `/review/planning/protocol/research-questions/${id}`
+              )
+            }
+            text="Back"
+          />
+          <NavButton
+            event={() =>
+              syncAndNavigate(
+                `/review/planning/protocol/eligibility-criteria/${id}`
               )
             }
             text="Next"

@@ -16,8 +16,7 @@ export default function InformationSourcesAndSearchStrategy() {
   const {
     informationSourcesAndSearchStrategy,
     handleChangeInformationSourcesAndSearchStrategy,
-    handleDataAndGoNext,
-    handleDataAndReturn,
+    syncAndNavigate,
   } = useCreateProtocol();
 
   const { searchMethod, searchString, sourcesSelectionCriteria } =
@@ -94,12 +93,18 @@ export default function InformationSourcesAndSearchStrategy() {
           alignItems={"center"}
           justifyContent={"end"}
         >
-          <NavButton event={handleDataAndReturn} text="Back" />
           <NavButton
             event={() =>
-              handleDataAndGoNext(
-                `/review/planning/protocol/selection-and-extraction/${id}`,
-                true
+              syncAndNavigate(
+                `/review/planning/protocol/eligibility-criteria/${id}`
+              )
+            }
+            text="Back"
+          />
+          <NavButton
+            event={() =>
+              syncAndNavigate(
+                `/review/planning/protocol/selection-and-extraction/${id}`
               )
             }
             text="Next"

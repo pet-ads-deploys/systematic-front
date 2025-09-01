@@ -16,8 +16,7 @@ export default function EligibilityCriteria() {
   const {
     eligibilityCriteria,
     handleChangeEligibilityCriteria,
-    handleDataAndGoNext,
-    handleDataAndReturn,
+    syncAndNavigate,
   } = useCreateProtocol();
 
   const { studyTypeDefinition } = eligibilityCriteria;
@@ -68,12 +67,16 @@ export default function EligibilityCriteria() {
           alignItems={"center"}
           justifyContent={"end"}
         >
-          <NavButton event={handleDataAndReturn} text="Back" />
           <NavButton
             event={() =>
-              handleDataAndGoNext(
-                `/review/planning/protocol/information-sources-and-search-strategy/${id}`,
-                true
+              syncAndNavigate(`/review/planning/protocol/picoc/${id}`)
+            }
+            text="Back"
+          />
+          <NavButton
+            event={() =>
+              syncAndNavigate(
+                `/review/planning/protocol/information-sources-and-search-strategy/${id}`
               )
             }
             text="Next"

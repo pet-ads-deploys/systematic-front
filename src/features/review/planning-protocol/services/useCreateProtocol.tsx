@@ -51,7 +51,7 @@ const defaultAnalysisAndSynthesisOfResults: AnalysisAndSynthesisOfResults = {
   analysisAndSynthesisProcess: "",
 };
 
-const useCreateProtocol = () => {
+export default function useCreateProtocol() {
   // General-Definition
   const [goal, setGoal] = useState<string | null>(null);
 
@@ -153,7 +153,7 @@ const useCreateProtocol = () => {
     }));
   };
 
-  const { toGo, toBack } = useNavigation();
+  const { toGo } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId") || "";
   const url = `http://localhost:8080/systematic-study/${id}/protocol`;
@@ -235,20 +235,10 @@ const useCreateProtocol = () => {
     return await axios.put(url, data, options);
   }
 
-  async function handleDataAndGoNext(path: string, isNavigateToNext: boolean) {
+  async function syncAndNavigate(path: string) {
     try {
       await updateProtocol();
-      if (!isNavigateToNext) toBack();
       toGo(path);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async function handleDataAndReturn() {
-    try {
-      await updateProtocol();
-      toBack();
     } catch (err) {
       console.log(err);
     }
@@ -351,10 +341,7 @@ const useCreateProtocol = () => {
     sendSelectData,
     sendAddText,
     createProtocol: updateProtocol,
-    handleDataAndGoNext,
-    handleDataAndReturn,
+    syncAndNavigate,
     setFlag,
   };
-};
-
-export default useCreateProtocol;
+}

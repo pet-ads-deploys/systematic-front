@@ -15,8 +15,7 @@ export default function SelectionAndExtraction() {
   const {
     selectionAndExtraction,
     handleChangeSelectionAndExtraction,
-    handleDataAndGoNext,
-    handleDataAndReturn,
+    syncAndNavigate,
   } = useCreateProtocol();
 
   const { dataCollectionProcess, selectionProcess } = selectionAndExtraction;
@@ -35,8 +34,6 @@ export default function SelectionAndExtraction() {
         w={"60vw"}
         alignItems={"center"}
       >
-        <InteractiveTable id={id} url={url} label={"Extraction Questions"} />
-
         <TextAreaInput
           value={selectionProcess}
           onChange={(event) => {
@@ -48,7 +45,6 @@ export default function SelectionAndExtraction() {
           label="Study Selection Process"
           placeholder="Enter selection process"
         />
-
         <TextAreaInput
           value={dataCollectionProcess}
           onChange={(event) => {
@@ -60,18 +56,25 @@ export default function SelectionAndExtraction() {
           label="Data Collection Process"
           placeholder="Enter the data colletion process"
         />
+        <InteractiveTable id={id} url={url} label={"Extraction Questions"} />
         <Box
           w={"60vw"}
           display={"flex"}
           alignItems={"center"}
           justifyContent={"end"}
         >
-          <NavButton event={handleDataAndReturn} text="Back" />
           <NavButton
             event={() =>
-              handleDataAndGoNext(
-                `/review/planning/protocol/risk-of-bias-assessment/${id}`,
-                true
+              syncAndNavigate(
+                `/review/planning/protocol/information-sources-and-search-strategy/${id}`
+              )
+            }
+            text="Back"
+          />
+          <NavButton
+            event={() =>
+              syncAndNavigate(
+                `/review/planning/protocol/risk-of-bias-assessment/${id}`
               )
             }
             text="Next"
