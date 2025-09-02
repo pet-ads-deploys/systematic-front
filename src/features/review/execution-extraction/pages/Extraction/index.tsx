@@ -46,7 +46,8 @@ export default function Extraction() {
 
   const allArticles: ArticleInterface[] = useMemo(() => {
     return safeArticles.filter(
-      (art): art is ArticleInterface => "studyReviewId" in art
+      (art): art is ArticleInterface =>
+        "studyReviewId" in art && art.selectionStatus == "INCLUDED"
     );
   }, [safeArticles]);
 
@@ -89,7 +90,10 @@ export default function Extraction() {
     { value: "INCLUDED", label: `Included (${statusCounts.INCLUDED})` },
     { value: "DUPLICATED", label: `Duplicated (${statusCounts.DUPLICATED})` },
     { value: "EXCLUDED", label: `Excluded (${statusCounts.EXCLUDED})` },
-    { value: "UNCLASSIFIED", label: `Unclassified (${statusCounts.UNCLASSIFIED})` },
+    {
+      value: "UNCLASSIFIED",
+      label: `Unclassified (${statusCounts.UNCLASSIFIED})`,
+    },
   ];
 
   return (
