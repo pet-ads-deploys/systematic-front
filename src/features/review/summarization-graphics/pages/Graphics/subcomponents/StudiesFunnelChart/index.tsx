@@ -1,16 +1,14 @@
-// External library
+
 import { Node, Edge } from "@xyflow/react";
 import { Text } from "@chakra-ui/react";
 
-// Hooks
+
 import { useFetchStudiesByStage } from "../../../../services/useFetchStudiesByStage";
 import useFetchStudiesByCriteria from "../../../../services/useFetchStudiesByCriteria";
 import { useFetchStudiesFunnel } from "../../../../services/useFetchStudiesFunnel";
 
-// Components
 import FlowChart from "../../../../components/charts/FunnelChart";
 
-// Mock
 const baseNodes: Node[] = [
   {
     id: "0",
@@ -47,13 +45,7 @@ const baseNodes: Node[] = [
     data: { label: "Studies included in qualitative synthesis" },
     position: { x: 200, y: 550 },
   },
-  {
-    id: "7",
-    data: {
-      label: "Studies included in quantitative synthesis (meta-analysis)",
-    },
-    position: { x: 200, y: 650 },
-  },
+  
 ];
 
 const edges: Edge[] = [
@@ -63,7 +55,7 @@ const edges: Edge[] = [
   { id: "e2_4", source: "2", target: "4", type: "straight" },
   { id: "e4_5", source: "4", target: "5", type: "straight" },
   { id: "e4_6", source: "4", target: "6", type: "straight" },
-  { id: "e6_7", source: "6", target: "7", type: "straight" },
+ 
 ];
 
 export default function StudiesFunnelChart() {

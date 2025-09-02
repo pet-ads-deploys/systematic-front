@@ -10,12 +10,7 @@ import BarChart from "../../../../components/charts/BarChart";
 import { QuestionsTable } from "../../../../components/tables/QuestionsTable";
 
 // Styles
-import {
-  barchartBox,
-  graphicsconteiner,
-  piechartBox,
-  textDescription,
-} from "../../styles";
+import { piechartBox, textDescription } from "../../styles";
 
 // Types
 type Question = {
@@ -79,17 +74,36 @@ function updateLabel(question: Question): (string | number)[] {
   }
   return labels;
 }
-
-export const QuestionsCharts = () => {
+export const QuestionsCharts = ({
+  selectedQuestionId,
+}: {
+  selectedQuestionId?: string;
+}) => {
   const { extractionAnswers, isLoadingExtractionAnswers } =
     useFetchQuestionAnswers();
 
   if (isLoadingExtractionAnswers) return <Text>loading charts...</Text>;
+
+  const filteredAnswers = selectedQuestionId
+    ? extractionAnswers.filter(
+        (q) => q.question.questionId === selectedQuestionId
+      )
+    : extractionAnswers.length
+    ? [extractionAnswers[0]]
+    : [];
+
+  if (filteredAnswers.length === 0)
+    return (
+      <Text fontStyle="italic" color="gray.500">
+        No data available for selected question.
+      </Text>
+    );
+
   return (
-    <Box display="flex" flexDirection="column" gap={6}>
-      {extractionAnswers.map((question) => {
+    <>
+      {filteredAnswers.map((question) => {
         const description = question.question.description;
-        const questionId = question.question.questionId;
+        const questionId: any = question.question.questionId; // mantém como any
         const code = question.question.code;
         const entries = Object.entries(question.answer ?? {});
 
@@ -103,33 +117,27 @@ export const QuestionsCharts = () => {
           questionType === "NUMBERED_SCALE"
         ) {
           chart = (
-            <Box sx={graphicsconteiner}>
-              <Box sx={piechartBox}>
-                <PieChart
-                  title={`Question code: ${code}`}
-                  labels={labels}
-                  data={data}
-                />
-              </Box>
+            <Box sx={piechartBox}>
+              <PieChart
+                title={`Question code: ${code}`}
+                labels={labels}
+                data={data}
+              />
             </Box>
           );
         } else if (questionType === "PICK_LIST") {
           chart = (
-            <Box sx={graphicsconteiner}>
-              <Box sx={barchartBox}>
-                <BarChart
-                  title={`Question code: ${code}`}
-                  labels={labels}
-                  data={data}
-                />
-              </Box>
+            <Box>
+              <BarChart
+                title={`Question code: ${code}`}
+                labels={labels}
+                data={data}
+              />
             </Box>
           );
         } else {
           chart = (
-            <Box sx={graphicsconteiner}>
-              <QuestionsTable data={question.answer ?? {}}></QuestionsTable>
-            </Box>
+            <QuestionsTable data={question.answer ?? {}}></QuestionsTable>
           );
         }
 
@@ -142,6 +150,6 @@ export const QuestionsCharts = () => {
           </Box>
         );
       })}
-    </Box>
+    </>
   );
 };
