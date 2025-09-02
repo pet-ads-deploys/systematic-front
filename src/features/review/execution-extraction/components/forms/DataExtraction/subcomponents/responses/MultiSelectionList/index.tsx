@@ -1,7 +1,12 @@
 // External library
-import { useState } from "react";
-import { Box, FormControl, FormLabel, Checkbox } from "@chakra-ui/react";
-
+import { useEffect, useState } from "react";
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Checkbox,
+  CheckboxGroup,
+} from "@chakra-ui/react";
 
 // Utils
 import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
@@ -23,33 +28,41 @@ export default function MultiSelectionList({
   answer,
   onResponse,
 }: MultiSelectionListProps) {
-  const [selected, setSelected] = useState<string[]>(answer);
+  const [selected, setSelected] = useState<string[]>([]);
 
-  const hasIncludesValue = (value: string): string[] => {
-    if (!selected.includes(value)) return [...selected, value];
-    return selected.filter((item) => item !== value);
-  };
+  useEffect(() => {
+    if (!answer) return;
+    setSelected(answer);
+  }, [answer]);
 
-  const handleSelectChange = (value: string) => {
-    const content = hasIncludesValue(value);
-    setSelected(content);
-    onResponse(content);
+  const handleChange = (values: (string | number)[]) => {
+    const next = values.map(String);
+    setSelected(next);
+    onResponse(next);
   };
 
   return (
     <FormControl sx={container}>
       <FormLabel sx={label}>{capitalize(question)}</FormLabel>
-      <Box display="flex" flexDirection="column" gap="1rem">
-        {options.map((value, index) => (
-          <Checkbox
-            checked={selected.includes(value)}
-            onChange={() => handleSelectChange(value)}
-            key={index}
-          >
-            {value}
-          </Checkbox>
-        ))}
-      </Box>
+      <CheckboxGroup value={selected} onChange={handleChange}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          gap="1rem"
+          overflowY="auto"
+          maxH="8rem"
+        >
+          {options.map((value) => (
+            <Checkbox
+              value={value}
+              key={value}
+              isChecked={selected.includes(value)}
+            >
+              {value}
+            </Checkbox>
+          ))}
+        </Box>
+      </CheckboxGroup>
     </FormControl>
   );
 }
