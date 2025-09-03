@@ -129,7 +129,7 @@ export default function Protocol() {
                   </AccordionButton>
                 </h2>
 
-                <AccordionPanel pb={4}>
+                <AccordionPanel pb={4} display="flex" flexDirection="column" gap={10}>
                   <Divider mb={4} />
                   <TextAreaInput
                     value={population}
@@ -138,7 +138,6 @@ export default function Protocol() {
                     onChange={(e) => {
                       setPopulation(e.target.value);
                     }}
-                    mt={4}
                   />
                   <TextAreaInput
                     value={intervention}
@@ -147,7 +146,6 @@ export default function Protocol() {
                     onChange={(e) => {
                       setIntervention(e.target.value);
                     }}
-                    mt={4}
                   />
                   <TextAreaInput
                     value={control}
@@ -156,7 +154,6 @@ export default function Protocol() {
                     onChange={(e) => {
                       setControl(e.target.value);
                     }}
-                    mt={4}
                   />
                   <TextAreaInput
                     value={outcome}
@@ -165,7 +162,6 @@ export default function Protocol() {
                     onChange={(e) => {
                       setOutcome(e.target.value);
                     }}
-                    mt={4}
                   />
                   <TextAreaInput
                     value={context}
@@ -174,7 +170,6 @@ export default function Protocol() {
                     onChange={(e) => {
                       setContext(e.target.value);
                     }}
-                    mt={4}
                   />
                 </AccordionPanel>
               </AccordionItem>
