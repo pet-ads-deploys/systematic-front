@@ -3,13 +3,19 @@ import Chart from "react-apexcharts";
 
 type Props = {
   title: string;
-  labels: (string |number)[];
+  labels: (string | number)[];
   data: number[];
   color?: string;
   height?: number;
 };
 
-export default function BarChart({ title, labels, data, color = "#3c73b6", height = 450 }: Props) {
+export default function BarChart({
+  title,
+  labels,
+  data,
+  color = "#3c73b6",
+  height = 450,
+}: Props) {
   const chartConfig = {
     series: [
       {
@@ -35,10 +41,8 @@ export default function BarChart({ title, labels, data, color = "#3c73b6", heigh
             position: "top",
           },
         },
-      },
-      dataLabels: {
-        enabled: true,
-      },
+      },    
+
       tooltip: {
         custom: ({ dataPointIndex }: { dataPointIndex: number }) => {
           const fullText = labels[dataPointIndex];
@@ -49,8 +53,9 @@ export default function BarChart({ title, labels, data, color = "#3c73b6", heigh
         },
       },
       xaxis: {
-        categories: labels.map((_,indexOf)=>(`C${indexOf+1}`))
+        categories: labels.map((_, indexOf) => `C${indexOf + 1}`),
       },
+
       title: {
         text: title,
         align: "left",
@@ -58,5 +63,12 @@ export default function BarChart({ title, labels, data, color = "#3c73b6", heigh
     } as ApexOptions,
   };
 
-  return <Chart options={chartConfig.options} series={chartConfig.series} type="bar" height={height} />;
+  return (
+    <Chart
+      options={chartConfig.options}
+      series={chartConfig.series}
+      type="bar"
+      height={height}
+    />
+  );
 }
