@@ -51,6 +51,7 @@ export default function MultiSelectionList({
           gap="1rem"
           overflowY="auto"
           maxH="8rem"
+          padding="0.25rem"
         >
           {options.map((value) => (
             <Checkbox
