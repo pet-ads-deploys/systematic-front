@@ -49,6 +49,7 @@ export default function InteractiveTable({ id, url, label }: Props) {
     handleAddQuestions,
     handleNumberScale,
     handleLabeledList,
+    handlePickMany,
   } = useInteractiveTable();
   const {
     sendTextualQuestion,
@@ -225,10 +226,11 @@ export default function InteractiveTable({ id, url, label }: Props) {
         question: rows[index].question,
         questionId: rows[index].id,
         reviewId: id,
-        options: questions,
+        options: pickManyQuestions,
       };
 
-      handleAddQuestions(index, questions);
+      handlePickMany(index, pickManyQuestions);
+      
       let questionId;
       if (rows[index].isNew) questionId = await sendPickManyQuestion(data);
       else updatePickManyQuestion(data, rows[index].questionId, "PICK_MANY");
@@ -249,6 +251,7 @@ export default function InteractiveTable({ id, url, label }: Props) {
 
   function addNewRow() {
     addRow(setEditIndex, setQuestions);
+    setPickManyQuestions([]);
   }
 
   return (
@@ -308,6 +311,7 @@ export default function InteractiveTable({ id, url, label }: Props) {
                     setQuestions(row.questions);
                     setLabeledQuestions(row.scale);
                     setEditIndex(index);
+                    setPickManyQuestions(row.questions);
                     setShowModal(true);
                     setModalType(row.type);
                   }}
