@@ -26,7 +26,7 @@ export default function EligibilityCriteria() {
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Eligibility Criteria" />
-      <CardDefault>
+      <CardDefault backgroundColor="#fff" width="65rem" height="35rem" borderRadius="20px">
         <FormControl
           m={"20px auto 0"}
           display={"flex"}

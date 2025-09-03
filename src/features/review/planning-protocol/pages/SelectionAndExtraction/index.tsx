@@ -27,7 +27,7 @@ export default function SelectionAndExtraction() {
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Selection And Extraction" />
-      <CardDefault>
+      <CardDefault backgroundColor="#fff" width="65rem" height="35rem" borderRadius="20px">
         <FormControl
           m={"20px auto 0"}
           display={"flex"}

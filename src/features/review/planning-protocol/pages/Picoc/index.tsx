@@ -17,10 +17,10 @@ export default function Picoc() {
   const id = localStorage.getItem("systematicReviewId");
   const { population, intervention, control, outcome, context } = picoc;
 
-return (
+  return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: PICOC" />
-      <CardDefault>
+      <CardDefault backgroundColor="#fff" width="65rem" height="35rem" borderRadius="20px">
         <FormControl
           m={"20px auto 0"}
           display={"flex"}

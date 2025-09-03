@@ -11,18 +11,23 @@ export default function CardDefault({
   withShadow = false,
 }: CardDefaultProps) {
   return (
-    <section
-      className={`${styles.cardContainer} ${withShadow ? styles.shadow : ""}`}
-      style={{
-        width,
-        height,
-        backgroundColor,
-        padding,
-        borderRadius,
-        margin: "0 auto", 
-      }}
-    >
-      {children}
+    <section className={styles.cardContainer}>
+      <div
+        className={withShadow ? styles.shadow : undefined}
+        style={{
+          width,             
+          height,            
+          backgroundColor,
+          padding,
+          borderRadius,
+          margin: "0 auto",   
+          overflowY: "auto",  
+          overflowX: "hidden",
+          boxSizing: "border-box",
+        }}
+      >
+        {children}
+      </div>
     </section>
   );
 }

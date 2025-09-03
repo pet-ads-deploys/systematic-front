@@ -27,7 +27,7 @@ export default function InformationSourcesAndSearchStrategy() {
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Information Sources And Search Strategy" />
-      <CardDefault>
+      <CardDefault backgroundColor="#fff" width="65rem" height="35rem" borderRadius="20px">
         <FormControl
           m={"20px auto 0"}
           display={"flex"}
