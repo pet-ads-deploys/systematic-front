@@ -3,27 +3,30 @@ import styles from "./cardDefault.module.css";
 
 export default function CardDefault({
   children,
-  width = "60vw",
-  height = "auto",
+  width = "90%",
+  height = "85%",
   backgroundColor = "transparent",
   padding = "0",
   borderRadius = "0",
   withShadow = false,
 }: CardDefaultProps) {
   return (
-    <section className={styles.cardContainer}>
+    <section
+      className={`${styles.cardContainer} ${withShadow ? styles.shadow : ""}`}
+      style={{
+        width,
+        height,
+        backgroundColor,
+        borderRadius,
+        margin: "0 auto",
+      }}
+    >
       <div
-        className={withShadow ? styles.shadow : undefined}
+        className={styles.innerContent}
         style={{
-          width,             
-          height,            
-          backgroundColor,
+          width: "100%",
+          height: "100%",
           padding,
-          borderRadius,
-          margin: "0 auto",   
-          overflowY: "auto",  
-          overflowX: "hidden",
-          boxSizing: "border-box",
         }}
       >
         {children}

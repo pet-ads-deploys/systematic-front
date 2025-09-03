@@ -36,69 +36,63 @@ export default function ResearchQuestions() {
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Research Questions" />
-      <CardDefault backgroundColor="#fff" width="65rem" height="35rem" borderRadius="20px">
-        <FormControl
-          m={"20px auto 0"}
-          display={"flex"}
-          gap={10}
-          flexDir={"column"}
-          w={"60vw"}
-          alignItems={"center"}
+        <CardDefault
+          backgroundColor="#fff"
+          borderRadius="1rem"
+          withShadow={false}
         >
-          <InputTextArea
-            value={justification}
-            label="Primary question"
-            placeholder="Enter review description"
-            onChange={(event) =>
-              handleChangeResearchQuestion("justification", event.target.value)
-            }
-          />
-          <Accordion
-            defaultIndex={showResearchQuestions ? [0] : [-1]}
-            allowToggle
-            mt={6}
-            w="60vw"
-          >
-            <AccordionItem>
-              <h2 style={{ color: "#2E4B6C" }}>
-                <AccordionButton>
-                  <Box flex="1" textAlign="center">
-                    <Heading size="md">Secondary Questions</Heading>
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4}>
-                <Flex>
-                  <AddTextTable
-                    text="Research Questions"
-                    placeholder="Enter the other Research Questions"
-                  />
-                </Flex>
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
-          <Box
-            w={"60vw"}
+          <FormControl
+            m={"1rem auto 0"}
             display={"flex"}
+            gap={1.5}
+            flexDir={"column"}
+            w={"60vw"}
             alignItems={"center"}
-            justifyContent={"end"}
           >
-            <NavButton
-              event={() =>
-                syncAndNavigate(`/review/planning/protocol/general-definition`)
+            <InputTextArea
+              value={justification}
+              label="Primary question"
+              placeholder="Enter review description"
+              onChange={(event) =>
+                handleChangeResearchQuestion("justification", event.target.value)
               }
-              text="Back"
             />
-            <NavButton
-              event={() =>
-                syncAndNavigate(`/review/planning/protocol/picoc/${id}`)
-              }
-              text="Next"
-            />
-          </Box>
-        </FormControl>
-      </CardDefault>
+
+            <Accordion defaultIndex={showResearchQuestions ? [0] : [-1]} allowToggle mt={6} w="60vw">
+              <AccordionItem>
+                <h2 style={{ color: "#2E4B6C" }}>
+                  <AccordionButton>
+                    <Box flex="1" textAlign="center">
+                      <Heading size="md">Secondary Questions</Heading>
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <Flex>
+                    <AddTextTable
+                      text="Research Questions"
+                      placeholder="Enter the other Research Questions"
+                    />
+                  </Flex>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+
+            <Box w={"60vw"} display={"flex"} alignItems={"center"} justifyContent={"end"}>
+              <NavButton
+                event={() =>
+                  syncAndNavigate(`/review/planning/protocol/general-definition`)
+                }
+                text="Back"
+              />
+              <NavButton
+                event={() => syncAndNavigate(`/review/planning/protocol/picoc/${id}`)}
+                text="Next"
+              />
+            </Box>
+          </FormControl>
+        </CardDefault>
     </FlexLayout>
   );
 }

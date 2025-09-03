@@ -25,7 +25,9 @@ export default function AnalysisAndSynthesisOfResults() {
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Analysis And Synthesis Of Results" />
-      <CardDefault backgroundColor="#fff" width="65rem" height="35rem" borderRadius="20px">
+      <CardDefault backgroundColor="#fff"
+          borderRadius="1rem"
+          withShadow={false}>
         <FormControl
           m={"20px auto 0"}
           display={"flex"}
