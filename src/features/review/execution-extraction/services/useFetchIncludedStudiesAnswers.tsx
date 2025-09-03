@@ -17,7 +17,7 @@ export interface QuestionAnswer {
   code: string;
   type: TypeOfQuestions;
   description: string;
-  answer: string | number | null;
+  answer: string | string[] | number | null;
 }
 
 export interface HttpResponse {
