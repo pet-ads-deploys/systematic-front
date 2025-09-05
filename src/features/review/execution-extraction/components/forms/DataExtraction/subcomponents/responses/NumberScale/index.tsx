@@ -1,3 +1,5 @@
+// External library
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -8,7 +10,12 @@ import {
   RadioGroup,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+
+// Utils
+import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
+
+// Styles
+import { container, label } from "../styles";
 import {
   radiosGroup,
   radios,
@@ -16,9 +23,8 @@ import {
   clearButton,
   radiosLabel,
 } from "./styles";
-import { capitalize } from "../../../../../../../../shared/utils/helpers/formatters/CapitalizeText";
-import { container, label } from "../styles";
 
+// Types
 interface NumberScaleProps {
   answer: string;
   question: string;
@@ -49,8 +55,6 @@ export default function NumberScale({
     setCheckedOption(value);
     onResponse(value);
   };
-
-  console.log("number", checkedOption);
 
   return (
     <FormControl sx={container}>

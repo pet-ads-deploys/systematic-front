@@ -9,14 +9,11 @@ import {
   Th,
   Text,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
+import { fetchStudiesBySource, HttpResponse } from "@features/review/summarization-graphics/services/fetchStudiesBySources";
+import useGetAllReviewArticles from "@features/review/shared/services/useGetAllReviewArticles";
 import useFetchDataBases from "@features/review/shared/services/useFetchDataBases";
-
-import {
-  fetchStudiesBySource,
-  HttpResponse,
-} from "@features/review/summarization-graphics/services/fetchStudiesBySources";
 
 type Column = {
   label: string;
@@ -32,6 +29,7 @@ type Descripition = {
 export const SearchSorcesTable = () => {
   const { databases } = useFetchDataBases();
   const [isLoading, setIsLoading] = useState(true);
+  const { articles } = useGetAllReviewArticles();
   const [studiesData, setStudiesData] = useState<HttpResponse[]>([]);
   const [dataStatistics, setDataStatistics] = useState<Descripition>({
     included: 0,
@@ -61,24 +59,33 @@ export const SearchSorcesTable = () => {
       setIsLoading(false);
     };
 
-    loadData();
+    loadData(); 
   }, [databases]);
 
+    const { includedStudiesBySource,totalIncludedFromSources} = useMemo(() => {
+    const includedArticles = articles.filter((a) => a.selectionStatus === "INCLUDED");
+    const counts: Record<string, number> = {};
+
+    includedArticles.forEach((article) => {
+      article.searchSources?.forEach((source) => {
+        counts[source] = (counts[source] || 0) + 1;
+      });
+    });
+
+    const total = Object.values(counts).reduce((sum, data) => sum + data, 0);
+
+    return {
+        includedStudiesBySource: counts,
+      totalIncludedFromSources: total,
+    };
+  }, [articles]);
+
   useEffect(() => {
-    const includedTotal = studiesData.reduce(
-      (sum, data) => sum + data.included.length,
-      0
-    );
-    const excludedTotal = studiesData.reduce(
-      (sum, data) => sum + data.excluded.length,
-      0
-    );
-    const total = studiesData.reduce(
-      (sum, data) => sum + data.totalOfStudies,
-      0
-    );
-    const indexingRate = 0;
-    const precisionRate = total > 0 ? (includedTotal / total) * 100 : 0;
+    const includedTotal = studiesData.reduce((sum, data) => sum + data.included.length,0);
+    const excludedTotal = studiesData.reduce((sum, data) => sum + data.excluded.length,0);
+    const total = studiesData.reduce((sum, data) => sum + data.totalOfStudies,0);
+    const indexingRate =includedTotal > 0? (totalIncludedFromSources / includedTotal) * 100: 0
+    const precisionRate = total > 0 ? ((includedTotal / total) * 100): 0;
 
     setDataStatistics({
       included: includedTotal,
@@ -89,7 +96,10 @@ export const SearchSorcesTable = () => {
     });
   }, [studiesData]);
 
-  if (isLoading) return <Text>Loading table...</Text>;
+
+
+  if(isLoading) return <Text>Loading table...</Text>
+
 
   return (
     <TableContainer>
@@ -103,22 +113,16 @@ export const SearchSorcesTable = () => {
         </Thead>
         <Tbody>
           {studiesData.map((data) => {
-            const indexingRating =
-              dataStatistics.included > 0
-                ? (data.included.length / dataStatistics.included) * 100
-                : 0;
-            const precisionRate =
-              data.totalOfStudies > 0
-                ? (data.included.length / data.totalOfStudies) * 100
-                : 0;
+            const indexingRate = totalIncludedFromSources > 0 ? ( includedStudiesBySource[data.source] ?? 0) / dataStatistics.included * 100: 0;
+            const precisionRate=  data.totalOfStudies > 0 ? ((data.included.length / data.totalOfStudies) * 100): 0;
 
             return (
               <Tr key={data.source} _hover={{ bg: "gray.300" }}>
                 <Td>{data.source}</Td>
-                <Td>{data.included.length}</Td>
+                <Td>{includedStudiesBySource[data.source] ?? 0}</Td>
                 <Td>{data.excluded.length}</Td>
                 <Td>{data.totalOfStudies}</Td>
-                <Td>{indexingRating.toFixed(2)}%</Td>
+                <Td>{indexingRate.toFixed(2)}%</Td>
                 <Td>{precisionRate.toFixed(2)}%</Td>
               </Tr>
             );
@@ -138,3 +142,4 @@ export const SearchSorcesTable = () => {
     </TableContainer>
   );
 };
+
