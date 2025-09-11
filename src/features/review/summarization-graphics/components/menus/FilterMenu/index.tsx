@@ -86,7 +86,11 @@ export default function FiltersModal({availableFilters,filters,setFilters,}: {
 
   return (
     <>
-      <Button onClick={onOpen} bg="gray.200" color="gray.600">
+      <Button onClick={onOpen}    
+              w="24rem"
+        bg="#EBF0F3"
+        color="#2E4B6C"
+        fontWeight="light">
         Filters
         <FiChevronDown />
       </Button>
