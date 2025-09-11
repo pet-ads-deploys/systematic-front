@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useCreateProtocol from "./useCreateProtocol";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 import useToaster from "@components/feedback/Toaster";
 
 export function useSelect(initialState: string[] = [], context: string) {
@@ -12,14 +12,14 @@ export function useSelect(initialState: string[] = [], context: string) {
 
   useEffect(() => {
     const id = localStorage.getItem("systematicReviewId");
-    const url = `http://localhost:8080/systematic-study/${id}/protocol`;
+    const url = `systematic-study/${id}/protocol`;
 
     async function fetchSelectedValues() {
       const token = localStorage.getItem("accessToken");
       const options = {
         headers: { Authentication: `Bearer ${token}` },
       };
-      let response = await axios.get(url, options);
+      let response = await Axios.get(url, options);
 
       if (context == "Languages") {
         setSelectedValues(response.data.content.studiesLanguages);
@@ -38,7 +38,7 @@ export function useSelect(initialState: string[] = [], context: string) {
       toast({
         title: "Empty Field",
         description: "The field must be filled!",
-        status: "warning"
+        status: "warning",
       });
       return;
     }
@@ -46,7 +46,7 @@ export function useSelect(initialState: string[] = [], context: string) {
       toast({
         title: "Duplicate option",
         description: "This option already selected!",
-        status: "warning"
+        status: "warning",
       });
       setSelectedValue(null);
       return;

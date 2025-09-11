@@ -45,7 +45,7 @@ export default function useCreateReview(): UseCreateReviewOut {
     const options = getRequestOptions();
 
     try {
-      const path = "http://localhost:8080/api/v1/systematic-study";
+      const path = "systematic-study";
       const response = await Axios.post(path, data, options);
       return right({ systematicStudyId: response.data.systematicStudyId });
     } catch (error) {

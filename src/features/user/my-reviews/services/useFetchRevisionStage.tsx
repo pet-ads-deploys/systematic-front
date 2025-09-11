@@ -34,9 +34,7 @@ type HttpResponse = {
 export default function useFetchRevisionStage({
   reviewId,
 }: RevisionStageProps) {
-  const path = reviewId
-    ? `http://localhost:8080/systematic-study/${reviewId}/protocol/stage`
-    : null;
+  const path = reviewId ? `systematic-study/${reviewId}/protocol/stage` : null;
 
   async function getStage(): Promise<Stage> {
     if (!path) throw new Error("Invalid path");

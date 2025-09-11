@@ -23,12 +23,22 @@ export default function EligibilityCriteria() {
   const { studyTypeDefinition } = eligibilityCriteria;
   const id = localStorage.getItem("systematicReviewId");
 
+  const languageOptions = [
+    "ENGLISH",
+    "PORTUGUESE",
+    "FRENCH",
+    "SPANISH",
+    "GERMAN",
+  ];
+
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Eligibility Criteria" />
-      <CardDefault backgroundColor="#fff"
-          borderRadius="1rem"
-          withShadow={false}>
+      <CardDefault
+        backgroundColor="#fff"
+        borderRadius="1rem"
+        withShadow={false}
+      >
         <FormControl
           m={"20px auto 0"}
           display={"flex"}
@@ -58,7 +68,7 @@ export default function EligibilityCriteria() {
           />
           <AddSelectionTable
             label="Languages"
-            options={["English", "Portuguese", "French", "Spanish", "German"]}
+            options={languageOptions}
             placeholder={"Select language"}
             typeField="select"
           />

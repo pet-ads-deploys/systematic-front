@@ -22,15 +22,16 @@ export default function SelectionAndExtraction() {
   const { dataCollectionProcess, selectionProcess } = selectionAndExtraction;
 
   const id = localStorage.getItem("systematicReviewId") || "";
-  const url = `http://localhost:8080/systematic-study/${id}/protocol`;
+  const url = `systematic-study/${id}/protocol`;
 
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Selection And Extraction" />
-      <CardDefault backgroundColor="#fff"
-          borderRadius="1rem"
-          withShadow={false}
-          >
+      <CardDefault
+        backgroundColor="#fff"
+        borderRadius="1rem"
+        withShadow={false}
+      >
         <FormControl
           m={"20px auto 0"}
           display={"flex"}

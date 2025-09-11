@@ -33,7 +33,7 @@ const fetcher = async (
   try {
     const results = await Promise.all(
       questionIds.map(async (id) => {
-        const path = `http://localhost:8080/api/v1/systematic-study/${systematicStudyId}/report/find-answer/${id}`;
+        const path = `systematic-study/${systematicStudyId}/report/find-answer/${id}`;
         const res = await Axios.get<AnswerData>(path, options);
         return res.data;
       })

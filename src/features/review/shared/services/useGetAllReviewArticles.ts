@@ -1,6 +1,6 @@
 // import { useEffect, useState } from 'react';
 import ArticleInterface from "../types/ArticleInterface";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import useSWR from "swr";
@@ -14,7 +14,7 @@ const useGetAllReviewArticles = () => {
   const id = localStorage.getItem("systematicReviewId");
   const options = getRequestOptions();
   const { data, mutate, error, isLoading } = useSWR(
-    `http://localhost:8080/api/v1/systematic-study/${id}/study-review`,
+    `systematic-study/${id}/study-review`,
     fetchAllArticlesReview,
     {
       fallbackData: [],
@@ -27,8 +27,8 @@ const useGetAllReviewArticles = () => {
 
   async function fetchAllArticlesReview() {
     try {
-      const response = await axios.get<HttpResponse>(
-        `http://localhost:8080/api/v1/systematic-study/${id}/study-review`,
+      const response = await Axios.get<HttpResponse>(
+        `systematic-study/${id}/study-review`,
         options
       );
       return response.data.studyReviews || [];

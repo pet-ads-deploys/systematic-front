@@ -31,7 +31,7 @@ export default function useFetchIncludedStudiesAnswers({
 }: UseIncludedStudiesAnswersProps) {
   const id = localStorage.getItem("systematicReviewId");
 
-  const path = `http://localhost:8080/api/v1/systematic-study/${id}/report/${articleId}/included-studies-answers`;
+  const path = `systematic-study/${id}/report/${articleId}/included-studies-answers`;
 
   const { data, isLoading, mutate } = useSWR(path, fetcher, {
     revalidateOnFocus: false,

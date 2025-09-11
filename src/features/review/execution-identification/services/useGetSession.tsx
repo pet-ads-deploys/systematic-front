@@ -18,7 +18,7 @@ interface HttpResponse {
 
 export default function useGetSession(source: string) {
   const id = localStorage.getItem("systematicReviewId");
-  const path = `http://localhost:8080/api/v1/systematic-study/${id}/search-session-source/${source}`;
+  const path = `systematic-study/${id}/search-session-source/${source}`;
   const options = getRequestOptions();
 
   const { data, error, isLoading, mutate } = useSWR(path, fetchSessions, {

@@ -45,7 +45,7 @@ const RenderCreateNewReview = () => {
 
       <NavButton
         text="Create review"
-        path="/review"
+        path="/review/planning/protocol/general-definition"
         sx={button}
         _hover={{
           bg: "white",

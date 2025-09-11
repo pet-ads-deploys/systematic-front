@@ -1,4 +1,4 @@
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 interface ResearchQuestionsType {
   researchQuestions: string;
@@ -15,7 +15,7 @@ const useSendResearchQuestions = () => {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
 
-    let response = await axios.get(url, options);
+    let response = await Axios.get(url, options);
     const fetchedResearchQuestions = response.data.content.researchQuestions;
 
     const updatedResearchQuestions = [
@@ -24,7 +24,7 @@ const useSendResearchQuestions = () => {
     ];
 
     const data = { researchQuestions: updatedResearchQuestions };
-    await axios.put(url, data, options);
+    await Axios.put(url, data, options);
   }
 
   return sendResearchQuestions;

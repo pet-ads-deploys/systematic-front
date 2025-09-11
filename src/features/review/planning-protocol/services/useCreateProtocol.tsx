@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 // Infra
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 // Hooks
 import { useNavigation } from "@features/shared/hooks/useNavigation";
@@ -156,12 +156,12 @@ export default function useCreateProtocol() {
   const { toGo } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId") || "";
-  const url = `http://localhost:8080/systematic-study/${id}/protocol`;
+  const url = `systematic-study/${id}/protocol`;
   const options = getRequestOptions();
 
   useEffect(() => {
     async function fetch() {
-      const response = await axios.get(url, options);
+      const response = await Axios.get(url, options);
       const data = response.data.content;
 
       setGoal(data.goal);
@@ -232,7 +232,7 @@ export default function useCreateProtocol() {
       selectionProcess,
     };
 
-    return await axios.put(url, data, options);
+    return await Axios.put(url, data, options);
   }
 
   async function syncAndNavigate(path: string) {
@@ -253,7 +253,7 @@ export default function useCreateProtocol() {
       if (context == "Languages") content = { studiesLanguages: data };
       else content = { informationSources: data };
 
-      await axios.put(url, content, options);
+      await Axios.put(url, content, options);
     } catch (err) {
       console.log(err);
     }
@@ -271,7 +271,7 @@ export default function useCreateProtocol() {
         }
       );
 
-      const response = await axios.get(url, options);
+      const response = await Axios.get(url, options);
       let aux: { description: string; type: string }[] =
         response.data.content.eligibilityCriteria;
       aux = aux.filter((item) => {
@@ -288,7 +288,7 @@ export default function useCreateProtocol() {
         }
       );
 
-      const response = await axios.get(url, options);
+      const response = await Axios.get(url, options);
       let aux: { description: string; type: string }[] =
         response.data.content.eligibilityCriteria;
       aux = aux.filter((item) => {
@@ -301,7 +301,7 @@ export default function useCreateProtocol() {
 
     try {
       console.log(content);
-      await axios.put(url, content, options);
+      await Axios.put(url, content, options);
     } catch (err) {
       console.log(err);
     }

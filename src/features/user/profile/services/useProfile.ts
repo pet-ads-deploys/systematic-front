@@ -23,10 +23,7 @@ export default function useProfile() {
   const fetcher = async (): Promise<Either<ApplicationError, Profile>> => {
     try {
       const options = getRequestOptions();
-      const response = await Axios.get<Profile>(
-        "http://localhost:8080/api/v1/user/profile",
-        options
-      );
+      const response = await Axios.get<Profile>("user/profile", options);
       return right(response.data);
     } catch (error) {
       return errorFactory("custom", (error as Error).message);

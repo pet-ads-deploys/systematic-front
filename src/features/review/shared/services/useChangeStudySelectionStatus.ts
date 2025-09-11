@@ -1,5 +1,5 @@
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 interface Props {
   studyReviewId: number[];
@@ -14,7 +14,7 @@ export const UseChangeStudySelectionStatus = ({
 }: Props) => {
   const id = localStorage.getItem("systematicReviewId");
   const options = getRequestOptions();
-  const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/selection-status`;
+  const path = `systematic-study/${id}/study-review/selection-status`;
 
-  axios.patch(path, { status, criteria: criterias, studyReviewId }, options);
+  Axios.patch(path, { status, criteria: criterias, studyReviewId }, options);
 };

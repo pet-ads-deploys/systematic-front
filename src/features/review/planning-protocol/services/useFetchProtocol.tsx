@@ -1,4 +1,4 @@
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 export default async function fetchProtocol(systematicStudyId: string) {
   const url = "http://localhost:8080/";
@@ -8,7 +8,7 @@ export default async function fetchProtocol(systematicStudyId: string) {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
 
-    const response = await axios.get(
+    const response = await Axios.get(
       `${url}systematic-study/${systematicStudyId}/protocol`,
       options
     );

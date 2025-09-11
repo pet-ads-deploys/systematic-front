@@ -1,7 +1,13 @@
+// External library
 import useSWR from "swr";
+
+// Infra
 import Axios from "../../../../infrastructure/http/axiosClient";
+
+// Utils
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
+//Types
 interface FindAnswerResponse {
   linksFactory: object;
   responseEntity: object;
@@ -16,7 +22,7 @@ export default function useFindAnswer({ questionId }: UseFindAnswerProps) {
   const requestOptions = getRequestOptions();
   const reviewId = localStorage.getItem("systematicReviewId");
 
-  const fetchUrl = `http://localhost:8080/api/v1/systematic-study/${reviewId}/report/find-answer/${questionId}`;
+  const fetchUrl = `systematic-study/${reviewId}/report/find-answer/${questionId}`;
 
   const fetchAnswer = async (): Promise<FindAnswerResponse> => {
     try {

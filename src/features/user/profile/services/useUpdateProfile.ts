@@ -46,7 +46,7 @@ export default function useUpdateProfile(): useUpdateProfileOutput {
 
     try {
       const response = await Axios.patch(
-        "http://localhost:8080/api/v1/user/profile",
+        "user/profile",
         {
           ...user,
         },

@@ -8,7 +8,7 @@ export const useGetTokens = async (credentials: AccessCredentials) => {
   const { username, password } = credentials;
 
   try {
-    const response = await Axios.post(`http://localhost:8080/api/v1/auth`, {
+    const response = await Axios.post(`auth`, {
       username,
       password,
     });

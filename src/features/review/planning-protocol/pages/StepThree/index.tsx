@@ -24,7 +24,7 @@ export default function ProtocolPartThree() {
   const { analysisAndSynthesisProcess } = analysisAndSynthesisOfResults;
 
   const id = localStorage.getItem("systematicReviewId") || "";
-  const url = `http://localhost:8080/systematic-study/${id}/protocol`;
+  const url = `systematic-study/${id}/protocol`;
 
   return (
     <FlexLayout defaultOpen={0} navigationType="Accordion">

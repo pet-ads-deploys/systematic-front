@@ -1,7 +1,14 @@
+// External library
 import useSWR from "swr";
+
+// Infra
 import Axios from "../../../../infrastructure/http/axiosClient";
+
+// Utils
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
-import { Questions } from "../types";
+
+// Types
+import type { Questions } from "../types";
 
 interface HttpResponse {
   questions: Questions[];
@@ -11,7 +18,7 @@ export function useFetchRobQuestions() {
   const id = localStorage.getItem("systematicReviewId");
 
   const { data, isLoading, mutate } = useSWR(
-    `http://localhost:8080/api/v1/systematic-study/${id}/protocol/rob-question`,
+    `systematic-study/${id}/protocol/rob-question`,
     fetchExtractionQuestion,
     { revalidateOnFocus: false }
   );
@@ -20,7 +27,7 @@ export function useFetchRobQuestions() {
     try {
       const options = getRequestOptions();
       const response = await Axios.get<HttpResponse>(
-        `http://localhost:8080/api/v1/systematic-study/${id}/protocol/rob-question`,
+        `systematic-study/${id}/protocol/rob-question`,
         options
       );
 

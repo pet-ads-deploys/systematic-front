@@ -22,7 +22,7 @@ type StudiesByStageData = {
 
 export const useFetchStudiesByStage = (stage: string) => {
   const id = localStorage.getItem("systematicReviewId");
-  const path = `http://localhost:8080/api/v1/systematic-study/${id}/report/studies/${stage}`;
+  const path = `systematic-study/${id}/report/studies/${stage}`;
 
   const { data, isLoading, mutate } = useSWR(path, fetchStudiesByStage, {
     revalidateOnFocus: false,

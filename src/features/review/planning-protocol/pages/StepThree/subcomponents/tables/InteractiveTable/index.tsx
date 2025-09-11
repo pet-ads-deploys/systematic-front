@@ -16,7 +16,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import useSendExtractionForm from "../../../../../../execution-extraction/services/useSendExtractionForm";
-import axios from "../../../../../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../../../../../infrastructure/http/axiosClient";
 import { useEffect, useState } from "react";
 import NumberScaleModal from "../../modals/NumberScaleModal";
 import PickListModal from "../../modals/PickListModal";
@@ -87,10 +87,10 @@ export default function InteractiveTable({ id, url, label }: Props) {
           headers: { Authorization: `Bearer ${accessToken}` },
         };
 
-        let response = await axios.get(url, options);
+        let response = await Axios.get(url, options);
 
-        let link = `http://localhost:8080/api/v1/systematic-study/${id}/protocol/${adress}`;
-        response = await axios.get(link, options);
+        let link = `systematic-study/${id}/protocol/${adress}`;
+        response = await Axios.get(link, options);
 
         const fetchedRows = response.data.questions.map(
           (item: {
@@ -230,7 +230,7 @@ export default function InteractiveTable({ id, url, label }: Props) {
       };
 
       handlePickMany(index, pickManyQuestions);
-      
+
       let questionId;
       if (rows[index].isNew) questionId = await sendPickManyQuestion(data);
       else updatePickManyQuestion(data, rows[index].questionId, "PICK_MANY");
@@ -243,8 +243,8 @@ export default function InteractiveTable({ id, url, label }: Props) {
     };
 
     setEditIndex(null);
-    await axios.get(
-      `http://localhost:8080/api/v1/systematic-study/${id}/protocol/extraction-question`,
+    await Axios.get(
+      `systematic-study/${id}/protocol/extraction-question`,
       options
     );
   }

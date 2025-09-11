@@ -15,15 +15,16 @@ export default function RiskOfBiasAssessment() {
   const { toGo } = useNavigation();
 
   const id = localStorage.getItem("systematicReviewId") || "";
-  const url = `http://localhost:8080/systematic-study/${id}/protocol`;
+  const url = `systematic-study/${id}/protocol`;
 
-   return (
+  return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: Risk Of Bias Assessment" />
-      <CardDefault backgroundColor="#fff"
-          borderRadius="1rem"
-          withShadow={false}
-          >
+      <CardDefault
+        backgroundColor="#fff"
+        borderRadius="1rem"
+        withShadow={false}
+      >
         <FormControl
           m={"20px auto 0"}
           display={"flex"}
@@ -32,7 +33,11 @@ export default function RiskOfBiasAssessment() {
           w={"60vw"}
           alignItems={"center"}
         >
-          <InteractiveTable id={id} url={url} label={"Risk of Bias Questions"} />
+          <InteractiveTable
+            id={id}
+            url={url}
+            label={"Risk of Bias Questions"}
+          />
           <Box
             w={"60vw"}
             display={"flex"}

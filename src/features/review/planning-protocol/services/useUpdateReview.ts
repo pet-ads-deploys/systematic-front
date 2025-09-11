@@ -46,7 +46,7 @@ export default function useUpdateReview(): UseUpdateReviewOutput {
     const options = getRequestOptions();
 
     try {
-      const path = `http://localhost:8080/api/v1/systematic-study/${id}`;
+      const path = `systematic-study/${id}`;
 
       const response = await Axios.put(path, data, options);
       return right({ systematicStudyId: response.data.systematicStudyId });

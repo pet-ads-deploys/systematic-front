@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 const useFetchDataBases = () => {
   const [databases, setdatabase] = useState<string[]>([]);
@@ -8,10 +8,9 @@ const useFetchDataBases = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response = await axios.get(
-          `http://localhost:8080/systematic-study/${id}/protocol`,
-          { withCredentials: true }
-        );
+        let response = await Axios.get(`systematic-study/${id}/protocol`, {
+          withCredentials: true,
+        });
         setdatabase(response.data.content.informationSources);
       } catch (error) {
         console.error("Erro ao buscar os dados:", error);
