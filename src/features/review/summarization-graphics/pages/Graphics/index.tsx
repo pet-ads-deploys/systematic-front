@@ -1,12 +1,11 @@
-import { Box, Text } from "@chakra-ui/react";
-import { conteiner } from "./styles";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Header from "@components/structure/Header/Header";
 import FlexLayout from "@components/structure/Flex/Flex";
 import ChartsRenderer from "./subcomponents/ChartRenderer";
-import SectionMenu from "../../components/menus/SectionMenu";
 import FiltersModal from "../../components/menus/FilterMenu";
-import { useGraphicsState } from "../../hooks/useGraphicsState";
 import SelectMenu from "../../components/menus/SelectMenu";
+import { useGraphicsState } from "../../hooks/useGraphicsState";
+import SectionMenu from "../../components/menus/SectionMenu";
 
 export default function Graphics() {
   const {
@@ -25,60 +24,76 @@ export default function Graphics() {
 
   return (
     <FlexLayout navigationType="Accordion" defaultOpen={2}>
-      <Header text="Graphics" />
-      <Box sx={conteiner}>
-        <Box display="flex" gap="1rem" flexWrap="wrap" mb={5} alignItems="flex-start">
-          
-          {/* Section menu */}
-          <SectionMenu onSelect={handleSectionChange} selected={section} />
+      <Box w="98%" m="1rem" h="fit-content">
+        <Box
+          w="100%"
+          h="100%"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+        >
+          {/* Chart type */}
+          <Flex
+            w="100%"
+            h="2.5rem"
+            justifyContent="space-between"
+            alignItems="center"
+            mb="2rem"
+          >
+            <Header text="Graphics" />
+            <SectionMenu onSelect={handleSectionChange} selected={section} />
+          </Flex>
 
-          {/* Questions menu*/}
-          {section === "Form Questions" && (
-            <SelectMenu
-              options={allQuestions.filter((q) => q.questionId !== null)}
-              selected={allQuestions.find((q) => q.questionId === selectedQuestionId)}
-              onSelect={(q) => setSelectedQuestionId(q.questionId ?? undefined)}
-              getLabel={(q) => q.code}
-              getKey={(q) => q.questionId ?? q.code}
-              placeholder="Choose Question"
-            />
-          )}
+          {/*Section + Filters */}
+          <Flex  
+            w="100%"
+            h="2.5rem"
+            justifyContent="space-between"
+            alignItems="center"
+            mb="2rem"
+          >
+            {section === "Form Questions" ? (
+              <SelectMenu
+                options={allQuestions.filter((q) => q.questionId !== null)}
+                selected={allQuestions.find(
+                  (q) => q.questionId === selectedQuestionId
+                )}
+                onSelect={(q) =>
+                  setSelectedQuestionId(q.questionId ?? undefined)
+                }
+                getLabel={(q) => q.code}
+                getKey={(q) => q.questionId ?? q.code}
+                placeholder="Choose Question"
+              />
+            ) : currentAllowedTypes.length > 0 ? (
+              <SelectMenu
+                options={currentAllowedTypes}
+                selected={type}
+                onSelect={setType}
+                placeholder="Choose Layout"
+              />
+            ) : (
+              <Text fontStyle="italic" color="gray.500">
+                No visualization type available.
+              </Text>
+            )}
+            {filtersBySection[section]?.length > 0 && (
+              <FiltersModal
+                availableFilters={filtersBySection[section]}
+                filters={filters}
+                setFilters={setFilters}
+              />
+            )}
+          </Flex>
 
-          {/* Graphic type menu*/}
-          {section !== "Form Questions" && currentAllowedTypes.length > 0 && (
-            <SelectMenu
-              options={currentAllowedTypes}
-              selected={type}
-              onSelect={setType}
-              placeholder="Choose Layout"
-            />
-          )}
-
-          {/* no view type*/}
-          {section !== "Form Questions" && currentAllowedTypes.length === 0 && (
-            <Text fontStyle="italic" color="gray.500" pl={5}>
-              No visualization type available.
-            </Text>
-          )}
-
-          {/* FilterModal*/}
-          {filtersBySection[section]?.length > 0 && (
-            <FiltersModal
-              availableFilters={filtersBySection[section]}
-              filters={filters}
-              setFilters={setFilters}
-            />
-          )}
+          <ChartsRenderer
+            key={section + type + JSON.stringify(filters)}
+            section={section}
+            type={type}
+            filters={filters}
+            selectedQuestionId={selectedQuestionId}
+          />
         </Box>
-
-        {/* ChartsRenderer */}
-        <ChartsRenderer
-          key={section + type + JSON.stringify(filters)} // força atualização ao mudar filtros
-          section={section}
-          type={type}
-          filters={filters}
-          selectedQuestionId={selectedQuestionId}
-        />
       </Box>
     </FlexLayout>
   );
