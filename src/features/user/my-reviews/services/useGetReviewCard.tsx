@@ -32,9 +32,7 @@ export default function useGetReviewCard() {
   const userId = user?.id ?? null;
 
   const path =
-    !authLoading && userId
-      ? `http://localhost:8080/api/v1/systematic-study/owner/${userId}`
-      : null;
+    !authLoading && userId ? `systematic-study/owner/${userId}` : null;
 
   const fetchAllCardReview = async () => {
     if (!path) return;

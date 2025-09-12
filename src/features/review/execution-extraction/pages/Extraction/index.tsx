@@ -45,9 +45,10 @@ export default function Extraction() {
   const isLoading = selectionContext?.isLoading ?? false;
 
   const allArticles: ArticleInterface[] = useMemo(() => {
-    return safeArticles
-      .filter((art): art is ArticleInterface => "studyReviewId" in art)
-      .filter((art) => art.selectionStatus === "INCLUDED");
+    return safeArticles.filter(
+      (art): art is ArticleInterface =>
+        "studyReviewId" in art && art.selectionStatus == "INCLUDED"
+    );
   }, [safeArticles]);
 
   const startFilteredArticles = useFilterReviewArticles(
@@ -67,9 +68,37 @@ export default function Extraction() {
     return startFilteredArticles;
   }, [showSelected, startFilteredArticles, safeSelectedArticles]);
 
+  const statusCounts = useMemo(() => {
+    const counts: Record<string, number> = {
+      INCLUDED: 0,
+      DUPLICATED: 0,
+      EXCLUDED: 0,
+      UNCLASSIFIED: 0,
+    };
+
+    allArticles.forEach((article) => {
+      const status = article.extractionStatus as keyof typeof counts;
+      if (status && counts[status] !== undefined) {
+        counts[status] += 1;
+      }
+    });
+
+    return counts;
+  }, [allArticles]);
+
+  const statusOptions = [
+    { value: "INCLUDED", label: `Included (${statusCounts.INCLUDED})` },
+    { value: "DUPLICATED", label: `Duplicated (${statusCounts.DUPLICATED})` },
+    { value: "EXCLUDED", label: `Excluded (${statusCounts.EXCLUDED})` },
+    {
+      value: "UNCLASSIFIED",
+      label: `Unclassified (${statusCounts.UNCLASSIFIED})`,
+    },
+  ];
+
   return (
     <FlexLayout navigationType="Accordion">
-      <Box w="100%" px="1rem" py="1rem" h="fit-content">
+      <Box w="100%" px="1rem" py=".75rem" h="fit-content">
         <Flex
           w="100%"
           h="2.5rem"
@@ -107,8 +136,8 @@ export default function Extraction() {
               toggleColumnVisibility={toggleColumnVisibility}
             />
             <SelectInput
-              names={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
-              values={["INCLUDED", "DUPLICATED", "EXCLUDED", "UNCLASSIFIED"]}
+              names={statusOptions.map((opt) => opt.label)}
+              values={statusOptions.map((opt) => opt.value)}
               onSelect={(value) => handleSelectChange(value)}
               selectedValue={selectedStatus}
               page={"extraction"}
@@ -117,7 +146,11 @@ export default function Extraction() {
           </Box>
         </Box>
       </Box>
-      <Box w="100%" h="calc(100vh - 11rem)" px="1rem">
+      <Box
+        w="calc(100% - 1.25rem)"
+        h="calc(100vh - 10rem)"
+        padding="0 0 0 .5rem"
+      >
         <LayoutFactory
           page="Extraction"
           articles={finalFilteredArticles}

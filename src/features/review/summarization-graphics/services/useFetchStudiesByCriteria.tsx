@@ -13,7 +13,7 @@ export type StudiesByCriteriaData = {
 
 const useFetchStudiesByCriteria = (criteria: string) => {
   const id = localStorage.getItem("systematicReviewId");
-  const path = `http://localhost:8080/api/v1/systematic-study/${id}/report/criteria/${criteria}`;
+  const path = `systematic-study/${id}/report/criteria/${criteria}`;
 
   const { data, isLoading, mutate } = useSWR(
     ["studiesByCriteria", criteria],

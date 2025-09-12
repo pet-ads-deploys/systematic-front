@@ -39,9 +39,9 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
   return (
     <Flex
       w="100%"
-      h="100%"
+      h="calc(100% - 1rem)"
       flexDirection="column"
-      gap=".5rem"
+      gap="2.5rem"
       justifyContent="space-between"
     >
       {isInverted ? (
@@ -52,7 +52,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ width: "100%", height: "45%" }}
+            style={{ width: "100%", height: "50%" }}
           >
             <Box w="100%" h="100%" overflowY="auto">
               <StudySelectionArea articles={articles} page={page} />
@@ -64,7 +64,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ width: "100%", height: "55%" }}
+            style={{ width: "100%", height: "50%" }}
           >
             <Box w="100%" h="100%" overflowY="auto">
               <ArticlesTable

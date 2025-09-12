@@ -26,7 +26,7 @@ export function useSendBatchAnswers() {
     try {
       const id = localStorage.getItem("systematicReviewId");
       const options = getRequestOptions();
-      const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/${selectionContext.selectedArticleReview}/batch-answer-question`;
+      const path = `systematic-study/${id}/study-review/${selectionContext.selectedArticleReview}/batch-answer-question`;
       await Axios.patch(
         path,
         {

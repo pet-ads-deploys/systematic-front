@@ -1,4 +1,4 @@
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 
 interface KeywordType {
   keyword: string;
@@ -12,13 +12,13 @@ const useSendKeywords = () => {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
 
-    let response = await axios.get(url, options);
+    let response = await Axios.get(url, options);
     const fetchedKeywords = response.data.content.keywords;
 
     const updatedKeywords = [...fetchedKeywords, keyword];
 
     const data = { keywords: updatedKeywords };
-    await axios.put(url, data, options);
+    await Axios.put(url, data, options);
   }
 
   return sendKeywords;

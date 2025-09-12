@@ -1,35 +1,35 @@
 .wrapper {
-    background-color: #263C56;
-    display: flex;
-    flex-direction: column;
-    height: calc(100% - 2rem); 
-    width: 14rem; 
-    margin: 1rem 1rem 1rem 1rem; 
+  background-color: #263c56;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 2rem);
+  width: 14rem;
+  margin: 1rem 1rem 1rem 1rem;
 }
 
 .closeBtn {
-    position: relative;
-    top: .25rem;
-    left: .5rem;
+  position: relative;
+  top: 0.25rem;
+  left: 0.5rem;
 }
 
 .collapsed {
-    display: flex;
-    flex-direction: column;
-    align-self: self-start;
-    margin: 1rem 2em 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-self: self-start;
+  margin: 1rem 2em 0 1rem;
 }
 
 .navDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 7vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7vh;
 }
 
 .accordionNavDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
 }

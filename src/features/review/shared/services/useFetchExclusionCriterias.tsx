@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 const useFetchExclusionCriteria = () => {
   const [exclusionCriterias, setInclusionCriterias] = useState<string[]>([]);
   const id = localStorage.getItem("systematicReviewId");
-  const path = `http://localhost:8080/systematic-study/${id}/protocol`;
+  const path = `systematic-study/${id}/protocol`;
   const options = getRequestOptions();
 
   useEffect(() => {
     const fetchCriteria = async () => {
       try {
-        const response = await axios.get(path, options);
+        const response = await Axios.get(path, options);
         const eligibilityCriteria =
           response.data.content.eligibilityCriteria || [];
         const inclusion = eligibilityCriteria.filter(

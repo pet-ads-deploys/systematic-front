@@ -19,18 +19,20 @@ export default function useNavigateToPendingStage({
   const { toGo } = useNavigation();
 
   const getStageLink = (Stage: Stage) => {
-    const basePath = "/newReview/";
-
     const StageMap: Record<Stage, string> = {
-      PROTOCOL_PART_I: `${basePath}protocol/${reviewId}`,
-      PICOC: `${basePath}protocol/${reviewId}`,
-      PROTOCOL_PART_II: `${basePath}protocolpartTwo/${reviewId}`,
-      PROTOCOL_PART_III: `${basePath}protocolpartThree/${reviewId}`,
-      IDENTIFICATION: `${basePath}identification`,
-      SELECTION: `${basePath}selection`,
-      EXTRACTION: `${basePath}extraction`,
-      GRAPHICS: `${basePath}graphics`,
-      FINALIZATION: `${basePath}finalization`,
+      GENERAL_DEFINITION: `/review/planning/protocol/general-definition`,
+      RESEARCH_QUESTIONS: `/review/planning/protocol/research-questions/${reviewId}`,
+      PICOC: `/review/planning/protocol/picoc/${reviewId}`,
+      ELIGIBILITY_CRITERIA: `/review/planning/protocol/eligibility-criteria/${reviewId}`,
+      INFORMATION_SOURCES_AND_SEARCH_STRATEGY: `/review/planning/protocol/information-sources-and-search-strategy/${reviewId}`,
+      SELECTION_AND_EXTRACTION: `/review/planning/protocol/selection-and-extraction/${reviewId}`,
+      RISK_OF_BIAS: `/review/planning/protocol/risk-of-bias-assessment/${reviewId}`,
+      ANALYSIS_AND_SYNTHESIS_METHOD: `/review/planning/protocol/analysis-and-synthesis-of-results/${reviewId}`,
+      IDENTIFICATION: `/review/execution/identification`,
+      SELECTION: `/review/execution/selection`,
+      EXTRACTION: `/review/execution/extraction`,
+      GRAPHICS: `/review/summarization/graphics`,
+      FINALIZATION: `/review/summarization/finalization`,
     };
 
     return StageMap[Stage];

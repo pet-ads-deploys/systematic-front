@@ -22,10 +22,7 @@ export default async function registerUser({
   data,
 }: RegisterUser): Promise<Either<ApplicationError, User>> {
   try {
-    const response = await Axios.post<User>(
-      `http://localhost:8080/api/v1/user`,
-      data
-    );
+    const response = await Axios.post<User>(`user`, data);
 
     if (response.status === 201) {
       return right(response.data);

@@ -1,5 +1,5 @@
 import { KeyedMutator } from "swr";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 interface DeleteSessionProps {
@@ -24,9 +24,9 @@ export default async function UseDeleteSession({
 }: DeleteSessionProps) {
   const id = localStorage.getItem("systematicReviewId");
   const options = getRequestOptions();
-  const url = `http://localhost:8080/api/v1/systematic-study/${id}/search-session/${sessionId}`;
+  const url = `systematic-study/${id}/search-session/${sessionId}`;
 
-  const response = await axios.delete(url, options);
+  const response = await Axios.delete(url, options);
   mutate();
   return response;
 }

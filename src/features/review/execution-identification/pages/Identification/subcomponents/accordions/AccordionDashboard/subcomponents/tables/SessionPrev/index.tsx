@@ -89,7 +89,7 @@ const SessionPrev = ({
           {numberOfStudies && numberOfStudies > 0 ? (
             <Button
               as={Link}
-              to={`/newReview/identification/${sessionId}`}
+              to={`/review/execution/identification/${sessionId}`}
               colorScheme="gray"
               height="35px"
               flex={1}

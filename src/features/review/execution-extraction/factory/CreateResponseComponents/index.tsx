@@ -12,6 +12,7 @@ import { useFetchQuestionById } from "@features/review/shared/hooks/useFetchQues
 
 // Types
 import { CreateResponseProps, TypeOfQuestions } from "../../types.ts";
+import MultiSelectionList from "../../components/forms/DataExtraction/subcomponents/responses/MultiSelectionList/index.tsx";
 
 export default function CreateResponseComponent({
   articleId,
@@ -26,6 +27,8 @@ export default function CreateResponseComponent({
   });
 
   if (!question) return;
+
+  console.log("questão dentro da factory", question);
 
   const questionTypesMap: Record<TypeOfQuestions, ReactNode> = {
     TEXTUAL: (
@@ -80,6 +83,20 @@ export default function CreateResponseComponent({
           updateResponse(articleId, questionId, typeform, {
             value: response,
             type: "PICK_LIST",
+          })
+        }
+      />
+    ),
+    PICK_MANY: (
+      <MultiSelectionList
+        key={question.code}
+        question={question.description}
+        options={question.options || []}
+        answer={answer.value as string[]}
+        onResponse={(response) =>
+          updateResponse(articleId, questionId, typeform, {
+            value: response,
+            type: "PICK_MANY",
           })
         }
       />

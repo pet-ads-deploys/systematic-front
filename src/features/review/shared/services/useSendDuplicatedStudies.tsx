@@ -1,4 +1,4 @@
-import axios from "axios";
+import Axios from "../../../../infrastructure/http/axiosClient";
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 interface SendDuplicatedStudiesProps {
@@ -15,8 +15,8 @@ export default function useSendDuplicatedStudies({
 
   const sendDuplicatedStudies = () => {
     if (firstSelected === null) return;
-    const path = `http://localhost:8080/api/v1/systematic-study/${studyReviewId}/study-review/${firstSelected}/duplicated`;
-    axios.patch(path, { duplicatedStudyIds: duplicatedStudies }, options);
+    const path = `systematic-study/${studyReviewId}/study-review/${firstSelected}/duplicated`;
+    Axios.patch(path, { duplicatedStudyIds: duplicatedStudies }, options);
   };
 
   return {

@@ -1,17 +1,28 @@
+// External library
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
-// import { inputconteiner } from "./styles/inputTextStyle";
 
+// Types
 interface ITextFieldProps {
   label?: string;
   placeholder: string;
   type: string;
   nome: string;
   onChange?: (value: React.ChangeEvent<HTMLInputElement>) => void;
-  labelAbove?: boolean; 
+  labelAbove?: boolean;
   value?: string;
+  isDisabled?: boolean;
 }
 
-export default function InputText({ label, placeholder, type, nome, onChange, labelAbove, value }: ITextFieldProps) {
+export default function InputText({
+  label,
+  placeholder,
+  type,
+  nome,
+  onChange,
+  labelAbove,
+  value,
+  isDisabled,
+}: ITextFieldProps) {
   const isSearchField = type === "search";
 
   return (
@@ -19,11 +30,9 @@ export default function InputText({ label, placeholder, type, nome, onChange, la
       <FormControl>
         {label && (
           <FormLabel
-            color={"#2E4B6C"}
             mb={labelAbove ? "0.3rem" : "0"}
-            textAlign="left"
-            width="100%"
-            mr={"5px"}
+            fontWeight={500}
+            fontSize={"large"}
           >
             {label}
           </FormLabel>
@@ -33,14 +42,16 @@ export default function InputText({ label, placeholder, type, nome, onChange, la
           name={nome}
           placeholder={placeholder}
           w={isSearchField ? "250px" : "100%"}
-          bgColor={"#EBF0F3"}
+          bgColor={"#ffffffff"}
           borderRadius={"3px"}
+          border="2px solid"
+          borderColor="gray.300"
           _placeholder={{ opacity: 1, color: "gray.500" }}
           focusBorderColor="#2E4B6C"
           onChange={onChange}
           value={value}
+          isDisabled={isDisabled}
         />
-        {/* {isSearchField && <SearchButton />} */}
       </FormControl>
     </FormControl>
   );

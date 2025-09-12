@@ -1,6 +1,6 @@
 // import { SetStateAction, useEffect, useState } from "react";
 import { SetStateAction, useState } from "react";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 // import useGetSession from "./useGetSession";
 import useToaster from "@components/feedback/Toaster";
 import { InvalidEntry } from "@features/review/shared/context/StudiesSelectionContext";
@@ -30,7 +30,7 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
 
   const options = getRequestOptions();
   const id = localStorage.getItem("systematicReviewId");
-  const url = `http://localhost:8080/api/v1/systematic-study/${id}/search-session`;
+  const url = `systematic-study/${id}/search-session`;
 
   const checkForDuplicateFile = (newFile: File) => {
     return referenceFiles.some(
@@ -108,7 +108,7 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
     }
 
     try {
-      const response = await axios.post(url, formData, options);
+      const response = await Axios.post(url, formData, options);
       const sessionId = response.data.sessionId;
       const invalidArticles: string[] = response.data.invalidEntries ?? [];
       mutate();
@@ -123,7 +123,7 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
         toast({
           title: "Some files need revision",
           description: `${invalidArticles.length} file(s) could not be processed.`,
-          status: "warning"
+          status: "warning",
         });
       }
     } catch (err) {

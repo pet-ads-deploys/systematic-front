@@ -133,7 +133,11 @@ export default function DataExtraction({
                       }}
                       w="15rem"
                       onClick={() =>
-                        toGo(`/newReview/ProtocolPartThree/${reviewId}`)
+                        toGo(
+                          typeFormKey == "EXTRACTION"
+                            ? `/review/planning/protocol/selection-and-extraction/${reviewId}`
+                            : `/review/planning/protocol/risk-of-bias-assessment/${reviewId}`
+                        )
                       }
                     >
                       Create Questions
