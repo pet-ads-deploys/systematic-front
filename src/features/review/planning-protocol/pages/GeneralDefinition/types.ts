@@ -1,6 +1,6 @@
 export interface GeneralDefinition {
   title: string;
   description: string;
-  goal: string;
+  objectives: string;
   collaborators: string[];
 }

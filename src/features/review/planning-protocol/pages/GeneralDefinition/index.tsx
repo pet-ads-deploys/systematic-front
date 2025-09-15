@@ -16,7 +16,6 @@ import ResearcherFilter from "./subcomponents/ResearcherFilter";
 // Service
 import useCreateReview from "../../services/useStructureReview";
 
-
 export default function GeneralDefinition() {
   const {
     generalDefinition,
@@ -27,15 +26,16 @@ export default function GeneralDefinition() {
     isTitleValid,
   } = useCreateReview();
 
-  const { title, description, goal } = generalDefinition;
+  const { title, description, objectives } = generalDefinition;
 
   return (
-    
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: General Definition" />
-      <CardDefault backgroundColor="#fff"
-          borderRadius="1rem"
-          withShadow={false}>
+      <CardDefault
+        backgroundColor="#fff"
+        borderRadius="1rem"
+        withShadow={false}
+      >
         <FormControl
           m={"20px auto 0"}
           display={"flex"}
@@ -81,11 +81,11 @@ export default function GeneralDefinition() {
           />
 
           <InputTextArea
-            value={goal}
+            value={objectives}
             label="Objectives"
             placeholder="What are your goals?"
             onChange={(event) =>
-              handleChangeGeneralDefinition("goal", event.target.value)
+              handleChangeGeneralDefinition("objectives", event.target.value)
             }
           />
 

@@ -20,7 +20,7 @@ interface UseUpdateReviewOutput {
   update: ({
     title,
     description,
-    goal,
+    objectives,
   }: UpdateReviewInput) => Promise<
     Either<ApplicationError, UpdateReviewOutput>
   >;
@@ -39,9 +39,9 @@ export default function useUpdateReview(): UseUpdateReviewOutput {
     systematicStudyId: id,
     title,
     description,
-    goal,
+    objectives,
   }: UpdateReviewInput): Promise<Either<ApplicationError, UpdateReviewOutput>> {
-    const data = { title, description, goal };
+    const data = { title, description, objectives };
 
     const options = getRequestOptions();
 

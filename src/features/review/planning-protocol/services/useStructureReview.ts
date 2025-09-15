@@ -22,7 +22,7 @@ import useToaster from "@components/feedback/Toaster";
 const defaultGeneralDefinition = {
   title: "",
   description: "",
-  goal: "",
+  objectives: "",
   collaborators: [],
 };
 
@@ -33,7 +33,7 @@ export default function useStructureReview() {
   const [isReturn, setIsReturn] = useState(false);
   const [isTitleValid, setIsTitleValid] = useState(true);
 
-  const { title, collaborators, description, goal } = generalDefinition;
+  const { title, collaborators, description, objectives } = generalDefinition;
   const id = localStorage.getItem("systematicReviewId") || "";
 
   const { create } = useCreateReview();
@@ -68,9 +68,14 @@ export default function useStructureReview() {
 
         const reviewData = await fetchSystematicStudyInformation(id);
 
-        const { title, description } = reviewData;
-        handleChangeGeneralDefinition("title", title);
-        handleChangeGeneralDefinition("description", description);
+        const { title, description, objectives } = reviewData;
+
+        setGeneralDefinition((prev) => ({
+          ...prev,
+          title,
+          description,
+          objectives,
+        }));
       }
     }
 
@@ -83,7 +88,7 @@ export default function useStructureReview() {
     const result = await create({
       title,
       description,
-      goal,
+      objectives,
       collaborators,
     });
 
@@ -108,7 +113,7 @@ export default function useStructureReview() {
       systematicStudyId: id,
       title,
       description,
-      goal,
+      objectives,
     });
 
     if (result && isLeft(result)) {

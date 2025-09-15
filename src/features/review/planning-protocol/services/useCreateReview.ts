@@ -26,7 +26,7 @@ interface UseCreateReviewOut {
   create: ({
     title,
     description,
-    goal,
+    objectives,
     collaborators,
   }: CreateReviewInput) => Promise<
     Either<ApplicationError, CreateReviewOutput>
@@ -37,10 +37,10 @@ export default function useCreateReview(): UseCreateReviewOut {
   async function create({
     title,
     description,
-    goal,
+    objectives,
     collaborators,
   }: CreateReviewInput): Promise<Either<ApplicationError, CreateReviewOutput>> {
-    const data = { title, description, goal, collaborators };
+    const data = { title, description, objectives, collaborators };
 
     const options = getRequestOptions();
 
