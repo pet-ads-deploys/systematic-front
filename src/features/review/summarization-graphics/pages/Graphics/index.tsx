@@ -2,10 +2,10 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import Header from "@components/structure/Header/Header";
 import FlexLayout from "@components/structure/Flex/Flex";
 import ChartsRenderer from "./subcomponents/ChartRenderer";
-import FiltersModal from "../../components/menus/FilterMenu";
 import SelectMenu from "../../components/menus/SelectMenu";
 import { useGraphicsState } from "../../hooks/useGraphicsState";
 import SectionMenu from "../../components/menus/SectionMenu";
+import FiltersMenu from "../../components/menus/FilterMenu";
 
 export default function Graphics() {
   const {
@@ -41,48 +41,61 @@ export default function Graphics() {
             mb="2rem"
           >
             <Header text="Graphics" />
-            <SectionMenu onSelect={handleSectionChange} selected={section} />
+            {/* Menus empilhados */}
+            <Flex
+              flexDirection="column"
+              gap="2rem"
+              alignItems="flex-start"
+              mt="5rem"
+            >
+              <SectionMenu onSelect={handleSectionChange} selected={section} />
+              {section === "Form Questions" ? (
+                <SelectMenu
+                  options={allQuestions.filter((q) => q.questionId !== null)}
+                  selected={allQuestions.find(
+                    (q) => q.questionId === selectedQuestionId
+                  )}
+                  onSelect={(q) =>
+                    setSelectedQuestionId(q.questionId ?? undefined)
+                  }
+                  getLabel={(q) => q.code}
+                  getKey={(q) => q.questionId ?? q.code}
+                  placeholder="Choose Question"
+                />
+              ) : currentAllowedTypes.length > 0 ? (
+                <SelectMenu
+                  options={currentAllowedTypes}
+                  selected={type}
+                  onSelect={setType}
+                  placeholder="Choose Layout"
+                />
+              ) : (
+                <Text fontStyle="italic" color="gray.500">
+                  No visualization type available.
+                </Text>
+              )}
+            </Flex>
           </Flex>
 
-          {/*Section + Filters */}
-          <Flex  
+          {/* Section + Filters */}
+          <Flex
             w="100%"
-            h="2.5rem"
-            justifyContent="space-between"
-            alignItems="center"
             mb="2rem"
+            flexDirection="column"
+            alignItems="flex-start"
+            gap="0.5rem"
           >
-            {section === "Form Questions" ? (
-              <SelectMenu
-                options={allQuestions.filter((q) => q.questionId !== null)}
-                selected={allQuestions.find(
-                  (q) => q.questionId === selectedQuestionId
-                )}
-                onSelect={(q) =>
-                  setSelectedQuestionId(q.questionId ?? undefined)
-                }
-                getLabel={(q) => q.code}
-                getKey={(q) => q.questionId ?? q.code}
-                placeholder="Choose Question"
-              />
-            ) : currentAllowedTypes.length > 0 ? (
-              <SelectMenu
-                options={currentAllowedTypes}
-                selected={type}
-                onSelect={setType}
-                placeholder="Choose Layout"
-              />
-            ) : (
-              <Text fontStyle="italic" color="gray.500">
-                No visualization type available.
-              </Text>
-            )}
             {filtersBySection[section]?.length > 0 && (
-              <FiltersModal
-                availableFilters={filtersBySection[section]}
-                filters={filters}
-                setFilters={setFilters}
-              />
+              <>
+                <Text fontWeight="semibold" fontSize="lg" color="#263C56">
+                  Filters Area
+                </Text>
+                <FiltersMenu
+                  availableFilters={filtersBySection[section]}
+                  filters={filters}
+                  setFilters={setFilters}
+                />
+              </>
             )}
           </Flex>
 

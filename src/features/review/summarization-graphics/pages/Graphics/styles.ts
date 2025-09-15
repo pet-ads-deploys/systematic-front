@@ -21,6 +21,7 @@ export const graphicsconteiner = {
   justifyContent: "center",   
   alignItems:"center",
   boxShadow: "md",
+  bg: 'white',
 };
 export const barchartBox = {
   width: "45%",
