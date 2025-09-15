@@ -3,8 +3,8 @@ import styles from "./cardDefault.module.css";
 
 export default function CardDefault({
   children,
-  width = "100%",
-  height = "100%",
+  width = "calc(100% - 1.5rem)",
+  height = "calc(100% - 1rem)",
   backgroundColor = "transparent",
   padding = "0",
   borderRadius = "0",
