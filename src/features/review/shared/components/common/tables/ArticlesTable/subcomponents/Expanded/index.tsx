@@ -220,6 +220,7 @@ export default function Expanded({
   const collapsedSpanTextChanged = {
     ...collapsedSpanText,
     w: "auto",
+    textAlign: "start",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
@@ -275,7 +276,7 @@ export default function Expanded({
                       textAlign="center"
                       color="#263C56"
                       fontSize="larger"
-                      p="0"
+                      p="1rem"
                       textTransform="capitalize"
                       cursor="pointer"
                       w={columnWidths[col.key]}
@@ -318,7 +319,7 @@ export default function Expanded({
                                 overflow="hidden"
                                 textOverflow="ellipsis"
                                 whiteSpace="nowrap"
-                                textAlign="center"
+                                textAlign="start"
                                 px="0.5rem"
                               >
                                 {col.label}
@@ -416,7 +417,7 @@ export default function Expanded({
                     <Td sx={tdSX} w={columnWidths.title}>
                       <Tooltip
                         sx={tooltip}
-                        label={reference.title}
+                        label={reference.title} 
                         aria-label="Full Title"
                         hasArrow
                       >
@@ -492,7 +493,7 @@ export default function Expanded({
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="start"
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.extractionStatus)}
@@ -530,7 +531,7 @@ export default function Expanded({
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="start"
                         gap="0.5rem"
                       >
                         {renderPriorityIcon(reference.readingPriority)}
