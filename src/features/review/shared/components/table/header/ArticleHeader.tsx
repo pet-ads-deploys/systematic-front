@@ -4,12 +4,12 @@ import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { IoIosCloseCircle } from "react-icons/io";
 import { LuFeather } from "react-icons/lu";
 import {
-  MdKeyboardArrowDown,
-  MdKeyboardArrowUp,
-  MdKeyboardDoubleArrowDown,
-  MdKeyboardDoubleArrowUp,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardDoubleArrowLeft,
+  MdOutlineKeyboardDoubleArrowRight,
 } from "react-icons/md";
-
+  
 // Utils
 import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
 
@@ -35,19 +35,19 @@ export default function ArticleHeader({ studyData }: ArticlePreviewProps) {
     { icon: React.ReactNode; color: string }
   > = {
     VERY_LOW: {
-      icon: <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
+      icon: <MdOutlineKeyboardDoubleArrowLeft color="#D32F2F" size="1.5rem" />,
       color: "red",
     },
     LOW: {
-      icon: <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
+      icon: <MdOutlineKeyboardArrowLeft color="#FBC02D" size="1.5rem" />,
       color: "yellow",
     },
     HIGH: {
-      icon: <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
+      icon: <MdOutlineKeyboardArrowRight color="#F57C00" size="1.5rem" />,
       color: "orange",
     },
     VERY_HIGH: {
-      icon: <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
+      icon: <MdOutlineKeyboardDoubleArrowRight color="#388E3C" size="1.5rem" />,
       color: "green",
     },
   };
@@ -93,6 +93,8 @@ export default function ArticleHeader({ studyData }: ArticlePreviewProps) {
         alignItems="center"
         justifyContent="center"
         h={{ base: "1.75rem", md: "2rem" }}
+        minW="7.5rem"
+        maxW="7.5rem"
         px={{ base: 3, md: 4 }}
         gap={2}
         bg={`${priorityLevel.color}.100`}

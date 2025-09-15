@@ -18,10 +18,10 @@ import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
 import {
-  MdKeyboardDoubleArrowUp,
-  MdKeyboardDoubleArrowDown,
-  MdKeyboardArrowUp,
-  MdKeyboardArrowDown,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardDoubleArrowLeft,
+  MdOutlineKeyboardDoubleArrowRight,
 } from "react-icons/md";
 
 import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
@@ -129,10 +129,10 @@ export default function Expanded({
   };
 
   const priorityIconMap: Record<string, React.ReactElement> = {
-    VERY_LOW: <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
-    LOW: <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
-    HIGH: <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
-    VERY_HIGH: <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
+    VERY_LOW: <MdOutlineKeyboardDoubleArrowLeft color="#D32F2F" size="1.5rem" />,
+    LOW: <MdOutlineKeyboardArrowLeft color="#FBC02D" size="1.5rem" />,
+    HIGH: <MdOutlineKeyboardArrowRight color="#F57C00" size="1.5rem" />,
+    VERY_HIGH: <MdOutlineKeyboardDoubleArrowRight color="#388E3C" size="1.5rem" />,
   };
 
   const renderStatusIcon = (status: string) => statusIconMap[status] || null;
