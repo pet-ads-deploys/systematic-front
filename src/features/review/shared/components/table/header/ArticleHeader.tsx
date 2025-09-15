@@ -9,14 +9,17 @@ import {
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,
 } from "react-icons/md";
-  
+
 // Utils
 import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
 
 // Types
 import type { ArticlePreviewProps } from "../../common/tables/StudyData";
 
-export default function ArticleHeader({ studyData }: ArticlePreviewProps) {
+export default function ArticleHeader({
+  studyData,
+  mode,
+}: ArticlePreviewProps) {
   const statusIconMap: Record<
     string,
     { icon: React.ReactNode; color: string }
@@ -52,7 +55,10 @@ export default function ArticleHeader({ studyData }: ArticlePreviewProps) {
     },
   };
 
-  const selectionStatus = statusIconMap[studyData.selectionStatus];
+  const currentStatus =
+    mode === "selection"
+      ? statusIconMap[studyData.selectionStatus]
+      : statusIconMap[studyData.extractionStatus];
   const priorityLevel = priorityIconMap[studyData.readingPriority];
   const pathToReference = studyData.doi;
 
@@ -75,20 +81,26 @@ export default function ArticleHeader({ studyData }: ArticlePreviewProps) {
         h={{ base: "1.75rem", md: "2rem" }}
         px={{ base: 3, md: 4 }}
         gap={2}
-        bg={`${selectionStatus.color}.100`}
-        color={`${selectionStatus.color}.700`}
+        bg={`${currentStatus.color}.100`}
+        color={`${currentStatus.color}.700`}
         fontWeight="semibold"
         fontSize={{ base: "0.5rem", md: "0.75rem" }}
         borderRadius=".35rem"
         boxShadow="sm"
         transition="all 0.3s ease"
         _hover={{
-          bg: `${selectionStatus.color}.200`,
+          bg: `${currentStatus.color}.200`,
         }}
       >
-        {selectionStatus.icon}
-        {capitalize(studyData.selectionStatus.toLowerCase())}
+        {currentStatus.icon}
+        {capitalize(
+          (mode === "selection"
+            ? studyData.selectionStatus
+            : studyData.extractionStatus
+          ).toLowerCase()
+        )}
       </Flex>
+
       <Flex
         alignItems="center"
         justifyContent="center"

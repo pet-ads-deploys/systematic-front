@@ -7,7 +7,7 @@ import ArticleHeader from "../../../table/header/ArticleHeader";
 // Types
 import type { ArticlePreviewProps } from "../StudyData";
 
-export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
+export default function ArticlePreview({ studyData, mode }: ArticlePreviewProps) {
   const { abstract, studyType, year, venue, title, authors, keywords } =
     studyData;
 
@@ -29,7 +29,7 @@ export default function ArticlePreview({ studyData }: ArticlePreviewProps) {
         p=".25rem"
         h="100%"
       >
-        <ArticleHeader studyData={studyData} />
+        <ArticleHeader studyData={studyData} mode={mode} />
         <Flex>
           <Text marginBottom=".45rem" w="30%" align="left">
             <Text fontSize="clamp(.75rem, 1vw, .85rem)" fontWeight="bold">
