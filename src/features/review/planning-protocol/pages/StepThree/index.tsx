@@ -27,7 +27,7 @@ export default function ProtocolPartThree() {
   const url = `systematic-study/${id}/protocol`;
 
   return (
-    <FlexLayout defaultOpen={0} navigationType="Accordion">
+    <FlexLayout navigationType="Accordion">
       <Box
         w={"100%"}
         display={"flex"}

@@ -24,7 +24,7 @@ export default function Graphics() {
   } = useGraphicsState();
 
   return (
-    <FlexLayout navigationType="Accordion" defaultOpen={2}>
+    <FlexLayout navigationType="Accordion">
       <Header text="Graphics" />
       <Box sx={conteiner}>
         <Box display="flex" gap="1rem" flexWrap="wrap" mb={5} alignItems="flex-start">

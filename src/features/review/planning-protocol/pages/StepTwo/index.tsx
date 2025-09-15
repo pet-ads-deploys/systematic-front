@@ -33,7 +33,7 @@ export default function ProtocolPartTwo2() {
   const id = localStorage.getItem("systematicReviewId") || "";
 
   return (
-    <FlexLayout defaultOpen={0} navigationType="Accordion">
+    <FlexLayout navigationType="Accordion">
       <Box
         w={"100%"}
         display={"flex"}

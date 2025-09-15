@@ -185,7 +185,7 @@ export default function Profile() {
   const isActiveUpdateMode = isUpdateMode !== "DEFAULT";
 
   return (
-    <FlexLayout defaultOpen={0} navigationType="Default">
+    <FlexLayout navigationType="Default">
       <Header text="My Profile" />
       <Flex sx={conteiner}>
         {isLoading ? (

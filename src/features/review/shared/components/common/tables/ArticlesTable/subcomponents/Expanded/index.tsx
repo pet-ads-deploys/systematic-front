@@ -231,16 +231,13 @@ export default function Expanded({
         w="100%"
         minH={
           layout == "horizontal" || layout == "horizontal-invert"
-            ? "15rem"
-            : {
-                base: "calc(100vh - 18rem)",
-                md: "calc(100vh - 15rem)",
-              }
+            ? "16rem"
+            : "calc(100vh - 16rem)"
         }
         maxH={
           layout == "horizontal" || layout == "horizontal-invert"
-            ? "15rem"
-            : "calc(100vh - 15rem)"
+            ? "16rem"
+            : "calc(100vh - 16rem)"
         }
         borderRadius="1rem 1rem 0 0"
         boxShadow="lg"

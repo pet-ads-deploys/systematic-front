@@ -5,7 +5,7 @@ import { TbArticleOff } from "react-icons/tb";
 export default function NoDataMessage() {
   const container = {
     w: "100%",
-    h: "100%",
+    h: "calc(100% - 1rem)",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",

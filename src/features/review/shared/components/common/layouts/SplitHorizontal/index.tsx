@@ -1,6 +1,6 @@
 // External library
 import { AnimatePresence, motion } from "framer-motion";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 
 // Components
 import ArticlesTable from "../../tables/ArticlesTable";
@@ -39,9 +39,9 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
   return (
     <Flex
       w="100%"
-      h="100%"
+      h="calc(100% - 1rem)"
       flexDirection="column"
-      gap=".5rem"
+      gap="2.5rem"
       justifyContent="space-between"
     >
       {isInverted ? (
@@ -52,9 +52,11 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ maxWidth: "100%", maxHeight: "55%" }}
+            style={{ width: "100%", height: "50%" }}
           >
-            <StudySelectionArea articles={articles} page={page} />
+            <Box w="100%" h="100%" overflowY="auto">
+              <StudySelectionArea articles={articles} page={page} />
+            </Box>
           </motion.div>
           <motion.div
             key="bottom"
@@ -62,12 +64,15 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
+            style={{ width: "100%", height: "50%" }}
           >
-            <ArticlesTable
-              articles={articles}
-              layout={layout}
-              columnsVisible={columnsVisible}
-            />
+            <Box w="100%" h="100%" overflowY="auto">
+              <ArticlesTable
+                articles={articles}
+                layout={layout}
+                columnsVisible={columnsVisible}
+              />
+            </Box>
           </motion.div>
         </AnimatePresence>
       ) : (
@@ -78,12 +83,15 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
+            style={{ width: "100%", height: "50%" }}
           >
-            <ArticlesTable
-              articles={articles}
-              layout={layout}
-              columnsVisible={columnsVisible}
-            />
+            <Box w="100%" h="100%" overflowY="auto">
+              <ArticlesTable
+                articles={articles}
+                layout={layout}
+                columnsVisible={columnsVisible}
+              />
+            </Box>
           </motion.div>
           <motion.div
             key="top"
@@ -91,9 +99,11 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             initial="initial"
             animate="animate"
             exit="exit"
-            style={{ maxWidth: "100%", maxHeight: "55%" }}
+            style={{ width: "100%", height: "50%" }}
           >
-            <StudySelectionArea articles={articles} page={page} />
+            <Box w="100%" h="100%" overflowY="auto">
+              <StudySelectionArea articles={articles} page={page} />
+            </Box>
           </motion.div>
         </AnimatePresence>
       )}
