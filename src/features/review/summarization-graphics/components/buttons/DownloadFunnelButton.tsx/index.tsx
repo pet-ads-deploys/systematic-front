@@ -1,27 +1,35 @@
-import {  IconButton } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { Panel, useReactFlow } from "@xyflow/react";
 import { toPng } from "html-to-image";
 import { FiDownload } from "react-icons/fi";
 
-function downloadImage(dataUrl: string) {
+
+type Props={
+  selector:string
+  fileName:string
+}
+
+export default function DownloadFunnelButton({selector,fileName}: Props) {
+
+
+  function downloadImage(dataUrl: string) {
   const a = document.createElement("a");
-  a.setAttribute("download", "StudiesFunnel.png");
+  a.setAttribute("download", fileName);
   a.setAttribute("href", dataUrl);
   a.click();
 }
 
-export default function DownloadFunnelButton() {
   const { fitView } = useReactFlow();
 
-  const ButtonClick = (): void => {
+  const handleClick = (): void => {
     fitView();
 
     setTimeout(() => {
       const element = document.querySelector(
-        ".react-flow__viewport"
+        selector
       ) as HTMLElement | null;
       if (!element) {
-        console.warn(" .react-flow__viewport not found.");
+        console.warn( selector + " not found.");
         return;
       }
 
@@ -40,13 +48,15 @@ export default function DownloadFunnelButton() {
   };
 
   return (
-    <Panel position="top-right">
-      <IconButton
-        onClick={ButtonClick}
-        aria-label="Download Image"
-        icon={<FiDownload />}
+    <Panel position="bottom-right">
+      <Button
+        onClick={handleClick}
+        leftIcon={<FiDownload/>}
         size="sm"
-      />
+        colorScheme="blue"
+      >
+        Download
+      </Button>
     </Panel>
   );
 }
