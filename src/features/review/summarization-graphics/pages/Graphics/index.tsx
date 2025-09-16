@@ -38,15 +38,17 @@ export default function Graphics() {
             h="2.5rem"
             justifyContent="space-between"
             alignItems="center"
-            mb="2rem"
+          
           >
             <Header text="Graphics" />
-            {/* Menus empilhados */}
+
+            {/* Menus */}
             <Flex
               flexDirection="column"
               gap="2rem"
               alignItems="flex-start"
               mt="5rem"
+              minH="6rem" 
             >
               <SectionMenu onSelect={handleSectionChange} selected={section} />
               {section === "Form Questions" ? (
@@ -62,17 +64,15 @@ export default function Graphics() {
                   getKey={(q) => q.questionId ?? q.code}
                   placeholder="Choose Question"
                 />
-              ) : currentAllowedTypes.length > 0 ? (
-                <SelectMenu
-                  options={currentAllowedTypes}
-                  selected={type}
-                  onSelect={setType}
-                  placeholder="Choose Layout"
-                />
               ) : (
-                <Text fontStyle="italic" color="gray.500">
-                  No visualization type available.
-                </Text>
+                currentAllowedTypes.length > 0 && (
+                  <SelectMenu
+                    options={currentAllowedTypes}
+                    selected={type}
+                    onSelect={setType}
+                    placeholder="Choose Layout"
+                  />
+                )
               )}
             </Flex>
           </Flex>
@@ -87,10 +87,10 @@ export default function Graphics() {
           >
             {filtersBySection[section]?.length > 0 && (
               <>
-                <Text fontWeight="semibold" fontSize="lg" color="#263C56">
+                <Text fontWeight="semibold" fontSize="lg" color="#263C56"  mt='0.5rem'>
                   Filters Area
                 </Text>
-                <FiltersMenu
+                <FiltersMenu 
                   availableFilters={filtersBySection[section]}
                   filters={filters}
                   setFilters={setFilters}
