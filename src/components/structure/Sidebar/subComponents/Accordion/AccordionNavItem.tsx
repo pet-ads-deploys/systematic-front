@@ -38,7 +38,7 @@ const ProtocolAccordionSubItem = ({ to, text, icon }: Props) => {
           alignItems: "center",
           gap: "0.75rem",
           textDecoration: "none",
-          color: "black",
+          color: isActive ? "black" : "gray",
           fontWeight: isActive ? "bold" : "normal",
           flex: 1,
         }}

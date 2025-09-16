@@ -29,7 +29,7 @@ const AccordionComponent = () => {
         <h2>
           <AccordionButton
             p=".5rem"
-            color="black"
+            fontWeight={activeSection === "Planning" ? "bold" : "light"}
             bg={activeSection === "Planning" ? "#dadada" : "transparent"}
             borderRadius=".25rem"
           >
@@ -87,8 +87,8 @@ const AccordionComponent = () => {
         <h2>
           <AccordionButton
             p=".5rem"
-            color="black"
-            bg={activeSection === "Execution" ? "#DDE4E9" : "transparent"}
+            fontWeight={activeSection === "Execution" ? "bold" : "light"}
+            bg={activeSection === "Execution" ? "#dadada" : "transparent"}
             borderRadius=".25rem"
           >
             <Box
@@ -124,8 +124,8 @@ const AccordionComponent = () => {
         <h2>
           <AccordionButton
             p=".5rem"
-            color="black"
-            bg={activeSection === "Summarization" ? "#DDE4E9" : "transparent"}
+            fontWeight={activeSection === "Summarization" ? "bold" : "light"}
+            bg={activeSection === "Summarization" ? "#dadada" : "transparent"}
             borderRadius=".25rem"
           >
             <Box
