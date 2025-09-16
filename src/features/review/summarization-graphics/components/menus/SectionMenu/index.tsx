@@ -5,7 +5,6 @@ import {
   Flex,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList,
@@ -59,17 +58,18 @@ export default function SectionMenu({ onSelect, selected }: MenuProps) {
         </Flex>
       </MenuButton>
 
-      <MenuList bg="#EBF0F3" color="#2E4B6C" zIndex="2">
+      <MenuList bg="#EBF0F3" color="#2E4B6C" >
         {Object.entries(groupedSections).map(([groupName, items]) => {
           const isUngrouped = groupName === "ungrouped";
 
           return (
             <Box key={groupName}>
-              {!isUngrouped && <MenuGroup title={groupName} bg="#EBF0F3"  />}
+              {!isUngrouped && <MenuGroup title={groupName} bg="#EBF0F3" ml="3" />}
               {items.map((item) => (
                 <MenuItem
                   key={item.value}
                   onClick={() => onSelect(item.value)}
+                  ml={isUngrouped ? "0" :"1"}
                    
         
                   bg={selected === item.value ? "blue.100" : "transparent"}
@@ -78,7 +78,7 @@ export default function SectionMenu({ onSelect, selected }: MenuProps) {
                   {item.label}
                 </MenuItem>
               ))}
-              {!isUngrouped && <MenuDivider />}
+        
             </Box>
           );
         })}
