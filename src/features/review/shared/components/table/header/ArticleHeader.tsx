@@ -16,6 +16,23 @@ import { capitalize } from "@features/shared/utils/helpers/formatters/Capitalize
 // Types
 import type { ArticlePreviewProps } from "../../common/tables/StudyData";
 
+// Styles
+
+const tagContainer = {
+  alignItems: "center",
+  justifyContent: "center",
+  width: "8rem",
+  h: { base: "1.75rem", md: "2rem" },
+  px: { base: 3, md: 4 },
+  gap: 2,
+  whiteSpace: "nowrap",
+  fontWeight: "semibold",
+  fontSize: { base: "0.5rem", md: "0.75rem" },
+  borderRadius: ".35rem",
+  boxShadow: "sm",
+  transition: "all 0.3s ease",
+};
+
 export default function ArticleHeader({
   studyData,
   mode,
@@ -76,18 +93,9 @@ export default function ArticleHeader({
       flexWrap="wrap"
     >
       <Flex
-        alignItems="center"
-        justifyContent="center"
-        h={{ base: "1.75rem", md: "2rem" }}
-        px={{ base: 3, md: 4 }}
-        gap={2}
+        sx={tagContainer}
         bg={`${currentStatus.color}.100`}
         color={`${currentStatus.color}.700`}
-        fontWeight="semibold"
-        fontSize={{ base: "0.5rem", md: "0.75rem" }}
-        borderRadius=".35rem"
-        boxShadow="sm"
-        transition="all 0.3s ease"
         _hover={{
           bg: `${currentStatus.color}.200`,
         }}
@@ -102,20 +110,9 @@ export default function ArticleHeader({
       </Flex>
 
       <Flex
-        alignItems="center"
-        justifyContent="center"
-        h={{ base: "1.75rem", md: "2rem" }}
-        minW="7.5rem"
-        maxW="7.5rem"
-        px={{ base: 3, md: 4 }}
-        gap={2}
+        sx={tagContainer}
         bg={`${priorityLevel.color}.100`}
         color={`${priorityLevel.color}.700`}
-        fontWeight="semibold"
-        fontSize={{ base: "0.5rem", md: "0.75rem" }}
-        borderRadius=".35rem"
-        boxShadow="sm"
-        transition="all 0.3s ease"
         _hover={{ bg: `${priorityLevel.color}.200` }}
       >
         {priorityLevel.icon}
