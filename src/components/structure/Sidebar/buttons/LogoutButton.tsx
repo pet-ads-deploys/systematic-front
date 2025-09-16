@@ -29,7 +29,7 @@ const LogoutButton = () => {
       className={style.linkBox}
       style={{ display: "flex", width: "120px", alignItems: "center" }}
     >
-      <ImExit size={20} style={{ marginRight: "1rem", color: "#c9d9e5" }} />
+      <ImExit size={20} style={{ marginRight: "1rem", color: "black" }} />
       <button className={style.link} onClick={handleLogout}>
         Logout
       </button>

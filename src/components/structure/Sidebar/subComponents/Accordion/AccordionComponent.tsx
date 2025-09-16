@@ -13,32 +13,41 @@ import { LuFileSearch, LuFileCheck2 } from "react-icons/lu";
 // Components
 import ProtocolAccordionSubItem from "./AccordionNavItem";
 
+// Hooks
+import useActiveSection from "@features/shared/hooks/useActiveSection";
+
 // Constants
 const hasShowOcultScreens = false;
 
 const AccordionComponent = () => {
   const id = localStorage.getItem("systematicReviewId");
+  const { activeSection } = useActiveSection();
 
   return (
     <Accordion w="80%" allowToggle>
       <AccordionItem>
         <h2>
-          <AccordionButton p="1.2vw 1vh" color="white">
+          <AccordionButton
+            p=".5rem"
+            color="black"
+            bg={activeSection === "Planning" ? "#dadada" : "transparent"}
+            borderRadius=".25rem"
+          >
             <Box
-              color="#c9d9e5"
+              color="black"
               as="span"
               flex="1"
               textAlign="left"
               display="flex"
               gap=".5rem"
             >
-              <MdRule size="1.25rem" color="#c9d9e5" />
+              <MdRule size="1.25rem" color="black" />
               Planning
             </Box>
             <AccordionIcon />
           </AccordionButton>
         </h2>
-        <AccordionPanel pb={4}>
+        <AccordionPanel pb={4} paddingInlineEnd={0}>
           <ProtocolAccordionSubItem
             to={`/review/planning/protocol/general-definition`}
             text="Definition"
@@ -76,22 +85,27 @@ const AccordionComponent = () => {
 
       <AccordionItem>
         <h2>
-          <AccordionButton p="1.2vw 1vh" color="white">
+          <AccordionButton
+            p=".5rem"
+            color="black"
+            bg={activeSection === "Execution" ? "#DDE4E9" : "transparent"}
+            borderRadius=".25rem"
+          >
             <Box
-              color="#c9d9e5"
+              color="black"
               as="span"
               flex="1"
               textAlign="left"
               display="flex"
               gap=".5rem"
             >
-              <LuFileSearch size="1.1rem" color="#c9d9e5" />
+              <LuFileSearch size="1.1rem" color="black" />
               Execution
             </Box>
             <AccordionIcon />
           </AccordionButton>
         </h2>
-        <AccordionPanel pb={4}>
+        <AccordionPanel pb={4} paddingInlineEnd={0}>
           <ProtocolAccordionSubItem
             to={`/review/execution/identification`}
             text="Identification"
@@ -108,22 +122,27 @@ const AccordionComponent = () => {
       </AccordionItem>
       <AccordionItem>
         <h2>
-          <AccordionButton p="1.2vw 1vh" color="white">
+          <AccordionButton
+            p=".5rem"
+            color="black"
+            bg={activeSection === "Summarization" ? "#DDE4E9" : "transparent"}
+            borderRadius=".25rem"
+          >
             <Box
-              color="#c9d9e5"
+              color="black"
               as="span"
               flex="1"
               textAlign="left"
               display="flex"
               gap=".5rem"
             >
-              <LuFileCheck2 size="1rem" color="#c9d9e5" />
+              <LuFileCheck2 size="1rem" color="black" />
               Summarization
             </Box>
             <AccordionIcon />
           </AccordionButton>
         </h2>
-        <AccordionPanel pb={4}>
+        <AccordionPanel pb={4} paddingInlineEnd={0}>
           <ProtocolAccordionSubItem
             to={`/review/summarization/graphics`}
             text="Graphics"

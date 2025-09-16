@@ -12,16 +12,46 @@ interface Props {
   icon?: React.ReactNode;
 }
 
+// Hooks
+import useActiveSection from "@features/shared/hooks/useActiveSection";
+
 const ProtocolAccordionSubItem = ({ to, text, icon }: Props) => {
+  const { pathname } = useActiveSection();
+  const isActive = pathname === to;
+
   return (
     <Box
-      w="10rem"
+      w="100%"
       display="flex"
+      alignItems="center"
       className={Styles.accordionNavlinkBox}
-      gap=".5rem"
+      gap=".75rem"
+      bg={isActive ? "#dadada" : "transparent"}
+      borderRadius=".25rem"
     >
       {icon}
-      <Link className={Styles.accordionLink} to={to}>
+      <Link
+        className={Styles.accordionLink}
+        to={to}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+          textDecoration: "none",
+          color: "black",
+          fontWeight: isActive ? "bold" : "normal",
+          flex: 1,
+        }}
+      >
+        <span
+          style={{
+            display: "inline-block",
+            width: "6px",
+            height: "100%",
+            minHeight: "1rem",
+            borderLeft: isActive ? "2px solid black" : "2px dashed gray",
+          }}
+        />
         {text}
       </Link>
     </Box>
