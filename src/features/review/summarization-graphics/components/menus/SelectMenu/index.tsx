@@ -1,13 +1,21 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { FiChevronDown } from "react-icons/fi";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 
 type SelectMenuProps<T> = {
-  options: T[];                  
-  selected?: T;                 
-  onSelect: (option: T) => void;  
+  options: T[];
+  selected?: T;
+  onSelect: (option: T) => void;
   getLabel?: (option: T) => string;
   getKey?: (option: T) => string | number;
-  placeholder?: string;  
+  placeholder: string;
 };
 
 export default function SelectMenu<T>({
@@ -16,21 +24,36 @@ export default function SelectMenu<T>({
   onSelect,
   getLabel = (o) => String(o),
   getKey = (o) => String(o),
-  placeholder = "Choose option",
+  placeholder,
 }: SelectMenuProps<T>) {
   return (
     <Menu>
       <MenuButton
         as={Button}
-        bg="gray.200"
-        color="gray.600"
-        rightIcon={<FiChevronDown />}
+        w="24rem"
+        bg="#EBF0F3"
+        color="#2E4B6C"
+        fontWeight="light"
+        display="flex"
       >
-        {selected ? getLabel(selected) : placeholder}
+        <Flex w="100%" justifyContent="space-between" alignItems="center">
+          <Box>{placeholder}</Box>
+          <ChevronDownIcon fontSize="1.25rem" />
+        </Flex>
       </MenuButton>
-      <MenuList maxHeight="300px" overflowY="auto">
+
+      <MenuList bg="#EBF0F3" color="#2E4B6C" zIndex="2">
         {options.map((option) => (
-          <MenuItem key={getKey(option)} onClick={() => onSelect(option)}>
+          <MenuItem
+            key={getKey(option)}
+            onClick={() => onSelect(option)}
+            bg={
+              selected && getKey(selected) === getKey(option)
+                ? "blue.100"
+                : "transparent"
+            }
+            _hover={{ bg: "blue.200" }}
+          >
             {getLabel(option)}
           </MenuItem>
         ))}

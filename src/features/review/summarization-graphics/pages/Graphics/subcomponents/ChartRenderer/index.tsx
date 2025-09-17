@@ -18,19 +18,13 @@ import useGetAllReviewArticles from "@features/review/shared/services/useGetAllR
 import { StudyInterface } from "@features/review/shared/types/IStudy";
 import { useMemo } from "react";
 import ArticleInterface from "@features/review/shared/types/ArticleInterface";
+import { FiltersState } from "@features/review/summarization-graphics/hooks/useGraphicsState";
 
 type Props = {
   section: string;
   type: string;
-  filters: Filters;
+  filters: FiltersState;
   selectedQuestionId?: string;
-};
-
- export type Filters = {
-  startYear?: number;
-  endYear?: number;
-  sources?: string[];
-  criteria?: string[];
 };
 
 export default function ChartsRenderer({
@@ -41,7 +35,7 @@ export default function ChartsRenderer({
 }: Props) {
   const { articles, isLoading: isLoadingArticles } = useGetAllReviewArticles();
 
-  // Filtrar
+  // Filters
   const filteredStudies = useMemo(() => {
     return articles
       .filter((s) => {
@@ -51,12 +45,11 @@ export default function ChartsRenderer({
         return true;
       })
       .filter((s) =>
-        filters.sources && filters.sources.length > 0
-          ? s.searchSources.some((src) => filters.sources!.includes(src))
+        filters.source && filters.source.length > 0
+          ? s.searchSources.some((src) => filters.source!.includes(src))
           : true
-      )
-    
-  }, [articles, filters]);
+      );
+  }, [articles, filters.source]);
   console.log(filteredStudies);
 
   let content;
@@ -77,7 +70,7 @@ export default function ChartsRenderer({
           });
         });
         return map;
-      }, [filteredStudies]);
+      }, [filteredStudies, filters.criteria]);
 
       const labels = Object.keys(sourceCountMap);
       const totalOfStudies = Object.values(sourceCountMap);
@@ -111,59 +104,54 @@ export default function ChartsRenderer({
       }
       break;
     case "S1_Inclusion Criteria":
-      if (type === "Bar Chart") {
-        content = (
-          <Box sx={barchartBox}>
-            <CriteriaBarChart
-              criteria="inclusion"
-              stage="selection"
-              filteredStudies={filteredStudies}
-            />
-          </Box>
-        );
-      }
+      content = (
+        <Box sx={barchartBox}>
+          <CriteriaBarChart
+            criteria="inclusion"
+            stage="selection"
+            filteredStudies={filteredStudies}
+          />
+        </Box>
+      );
+
       break;
 
     case "S1_Exclusion Criteria":
-      if (type === "Bar Chart") {
-        content = (
-          <Box sx={barchartBox}>
-            <CriteriaBarChart
-              criteria="exclusion"
-              stage="selection"
-              filteredStudies={filteredStudies}
-            />
-          </Box>
-        );
-      }
+      content = (
+        <Box sx={barchartBox}>
+          <CriteriaBarChart
+            criteria="exclusion"
+            stage="selection"
+            filteredStudies={filteredStudies}
+          />
+        </Box>
+      );
+
       break;
 
     case "S2_Inclusion Criteria":
-      if (type === "Bar Chart") {
-        content = (
-          <Box sx={barchartBox}>
-            <CriteriaBarChart
-              criteria="inclusion"
-              stage="extraction"
-              filteredStudies={filteredStudies}
-            />
-          </Box>
-        );
-      }
+      content = (
+        <Box sx={barchartBox}>
+          <CriteriaBarChart
+            criteria="inclusion"
+            stage="extraction"
+            filteredStudies={filteredStudies}
+          />
+        </Box>
+      );
+
       break;
 
     case "S2_Exclusion Criteria":
-      if (type === "Bar Chart") {
-        content = (
-          <Box sx={barchartBox}>
-            <CriteriaBarChart
-              criteria="exclusion"
-              stage="extraction"
-              filteredStudies={filteredStudies}
-            />
-          </Box>
-        );
-      }
+      content = (
+        <Box sx={barchartBox}>
+          <CriteriaBarChart
+            criteria="exclusion"
+            stage="extraction"
+            filteredStudies={filteredStudies}
+          />
+        </Box>
+      );
       break;
 
     case "Included Studies":

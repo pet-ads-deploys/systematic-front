@@ -24,8 +24,8 @@ export function useGraphicsState() {
   const [selectedQuestionId, setSelectedQuestionId] = useState<string | undefined>(
     allQuestions[0]?.questionId ?? undefined
   );
-  const [section, setSection] = useState("");
-  const [type, setType] = useState("");
+  const [section, setSection] = useState("Included Studies");
+  const [type, setType] = useState("Table");
   const [filters, setFilters] = useState<FiltersState>({});
 
   // tipos por seção

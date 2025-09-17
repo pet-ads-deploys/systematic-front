@@ -21,6 +21,7 @@ export const graphicsconteiner = {
   justifyContent: "center",   
   alignItems:"center",
   boxShadow: "md",
+  bg: 'white',
 };
 export const barchartBox = {
   width: "45%",
@@ -33,9 +34,7 @@ export const piechartBox = {
 };
 export const fluxogramaBox={
   width:'100vw', 
-  height: '100vh'
-
-
+  height: '80vh'
 }
 
 
