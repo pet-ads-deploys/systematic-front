@@ -1,9 +1,15 @@
-import NavItem from "./subComponents/NavItem";
+// External library
 import { Box, Flex } from "@chakra-ui/react";
-import AccordionComponent from "./subComponents/Accordion/AccordionComponent";
-import Styles from "./Sidebar.module.css";
-import LogoutButton from "./buttons/LogoutButton";
 
+// Components
+import NavItem from "./subComponents/NavItem";
+import LogoutButton from "./buttons/LogoutButton";
+import AccordionComponent from "./subComponents/Accordion/AccordionComponent";
+
+// Styles
+import Styles from "./Sidebar.module.css";
+
+// Types
 interface Props {
   type: string;
 }

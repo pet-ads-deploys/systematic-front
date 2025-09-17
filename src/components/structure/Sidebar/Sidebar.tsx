@@ -49,7 +49,10 @@ const Sidebar = ({ type }: SidebarProps) => {
           <motion.div
             animate={{ opacity: isOpen ? 1 : 0 }}
             transition={{ duration: 0.25 }}
-            style={{ pointerEvents: isOpen ? "auto" : "none" }}
+            style={{
+              pointerEvents: isOpen ? "auto" : "none",
+            }}
+            className={Style.contentWrapper}
           >
             <Navigation type={type} />
           </motion.div>

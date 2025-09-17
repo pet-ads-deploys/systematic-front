@@ -7,10 +7,16 @@
   margin: 1rem 1rem 1rem 1rem;
 }
 
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .closeBtn {
   position: relative;
   top: 0.25rem;
   left: 0.5rem;
+  margin-bottom: 2vh;
 }
 
 .collapsed {
@@ -24,12 +30,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 7vh;
+  justify-content: space-between;
 }
 
 .accordionNavDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2vh;
 }
