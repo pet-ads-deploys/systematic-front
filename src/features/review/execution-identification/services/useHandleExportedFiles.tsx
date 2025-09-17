@@ -21,16 +21,22 @@ interface Props {
     }[]
   >;
   setInvalidEntries?: React.Dispatch<SetStateAction<InvalidEntry[]>>;
+  searchString: string;
+  comment: string;
 }
 
-const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
+const useHandleExportedFiles = ({
+  mutate,
+  setInvalidEntries,
+  comment = "",
+  searchString = "",
+}: Props) => {
   const [referenceFiles, setReferenceFiles] = useState<File[]>([]);
   const [source, setSource] = useState("");
   const toast = useToaster();
 
   const options = getRequestOptions();
   const id = localStorage.getItem("systematicReviewId");
-  const url = `systematic-study/${id}/search-session`;
 
   const checkForDuplicateFile = (newFile: File) => {
     return referenceFiles.some(
@@ -98,8 +104,8 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
     const formData = new FormData();
     const data = JSON.stringify({
       source: source,
-      searchString: "Machine Learning",
-      additionalInfo: "Referências para revisão",
+      searchString,
+      additionalInfo: comment,
     });
 
     if (referenceFiles.length > 0) {
@@ -108,7 +114,11 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
     }
 
     try {
-      const response = await Axios.post(url, formData, options);
+      const response = await Axios.post(
+        `systematic-study/${id}/search-session`,
+        formData,
+        options
+      );
       const sessionId = response.data.sessionId;
       const invalidArticles: string[] = response.data.invalidEntries ?? [];
       mutate();
