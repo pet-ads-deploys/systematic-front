@@ -16,151 +16,118 @@ import ProtocolAccordionSubItem from "./AccordionNavItem";
 // Hooks
 import useActiveSection from "@features/shared/hooks/useActiveSection";
 
+// Types
+type AccordionSection = "Planning" | "Execution" | "Summarization";
+
 // Constants
 const hasShowOcultScreens = false;
+
+const sectionIcons: Record<AccordionSection, React.ReactNode> = {
+  Planning: <MdRule size="1.25rem" color="black" />,
+  Execution: <LuFileSearch size="1.1rem" color="black" />,
+  Summarization: <LuFileCheck2 size="1rem" color="black" />,
+};
 
 const AccordionComponent = () => {
   const id = localStorage.getItem("systematicReviewId");
   const { activeSection } = useActiveSection();
 
+  const sections: Record<
+    AccordionSection,
+    {
+      path: string;
+      label: string;
+    }[]
+  > = {
+    Planning: [
+      {
+        path: `/review/planning/protocol/general-definition`,
+        label: "Definition",
+      },
+      {
+        path: `/review/planning/protocol/research-questions/${id}`,
+        label: "Research",
+      },
+      { path: `/review/planning/protocol/picoc/${id}`, label: "PICOC" },
+      {
+        path: `/review/planning/protocol/eligibility-criteria/${id}`,
+        label: "Criteria",
+      },
+      {
+        path: `/review/planning/protocol/information-sources-and-search-strategy/${id}`,
+        label: "Sources",
+      },
+      {
+        path: `/review/planning/protocol/selection-and-extraction/${id}`,
+        label: "Selection",
+      },
+      {
+        path: `/review/planning/protocol/risk-of-bias-assessment/${id}`,
+        label: "Risk Of Bias",
+      },
+      {
+        path: `/review/planning/protocol/analysis-and-synthesis-of-results/${id}`,
+        label: "Analysis",
+      },
+    ],
+    Execution: [
+      { path: `/review/execution/identification`, label: "Identification" },
+      { path: `/review/execution/selection`, label: "Selection" },
+      { path: `/review/execution/extraction`, label: "Extraction" },
+    ],
+    Summarization: [
+      { path: `/review/summarization/graphics`, label: "Graphics" },
+      ...(hasShowOcultScreens
+        ? [
+            {
+              path: `/review/summarization/visualization`,
+              label: "Visualization",
+            },
+            {
+              path: `/review/summarization/finalization`,
+              label: "Finalization",
+            },
+          ]
+        : []),
+    ],
+  };
+
   return (
     <Accordion w="80%" allowToggle>
-      <AccordionItem>
-        <h2>
-          <AccordionButton
-            p=".5rem"
-            fontWeight={activeSection === "Planning" ? "bold" : "light"}
-            bg={activeSection === "Planning" ? "#dadada" : "transparent"}
-            borderRadius=".25rem"
-          >
-            <Box
-              color="black"
-              as="span"
-              flex="1"
-              textAlign="left"
-              display="flex"
-              gap=".5rem"
+      {Object.entries(sections).map(([section, children]) => (
+        <AccordionItem key={section}>
+          <h2>
+            <AccordionButton
+              p=".5rem"
+              fontWeight={activeSection === section ? "bold" : "light"}
+              bg={activeSection === section ? "#dadada" : "transparent"}
+              borderRadius=".25rem"
             >
-              <MdRule size="1.25rem" color="black" />
-              Planning
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4} paddingInlineEnd={0}>
-          <ProtocolAccordionSubItem
-            to={`/review/planning/protocol/general-definition`}
-            text="Definition"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/planning/protocol/research-questions/${id}`}
-            text="Research"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/planning/protocol/picoc/${id}`}
-            text="Picoc"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/planning/protocol/eligibility-criteria/${id}`}
-            text="Criteria"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/planning/protocol/information-sources-and-search-strategy/${id}`}
-            text="Sources"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/planning/protocol/selection-and-extraction/${id}`}
-            text="Selection"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/planning/protocol/risk-of-bias-assessment/${id}`}
-            text="Risk Of Bias"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/planning/protocol/analysis-and-synthesis-of-results/${id}`}
-            text="Analysys"
-          />
-        </AccordionPanel>
-      </AccordionItem>
-
-      <AccordionItem>
-        <h2>
-          <AccordionButton
-            p=".5rem"
-            fontWeight={activeSection === "Execution" ? "bold" : "light"}
-            bg={activeSection === "Execution" ? "#dadada" : "transparent"}
-            borderRadius=".25rem"
-          >
-            <Box
-              color="black"
-              as="span"
-              flex="1"
-              textAlign="left"
-              display="flex"
-              gap=".5rem"
-            >
-              <LuFileSearch size="1.1rem" color="black" />
-              Execution
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4} paddingInlineEnd={0}>
-          <ProtocolAccordionSubItem
-            to={`/review/execution/identification`}
-            text="Identification"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/execution/selection`}
-            text="Selection"
-          />
-          <ProtocolAccordionSubItem
-            to={`/review/execution/extraction`}
-            text="Extraction"
-          />
-        </AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
-        <h2>
-          <AccordionButton
-            p=".5rem"
-            fontWeight={activeSection === "Summarization" ? "bold" : "light"}
-            bg={activeSection === "Summarization" ? "#dadada" : "transparent"}
-            borderRadius=".25rem"
-          >
-            <Box
-              color="black"
-              as="span"
-              flex="1"
-              textAlign="left"
-              display="flex"
-              gap=".5rem"
-            >
-              <LuFileCheck2 size="1rem" color="black" />
-              Summarization
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4} paddingInlineEnd={0}>
-          <ProtocolAccordionSubItem
-            to={`/review/summarization/graphics`}
-            text="Graphics"
-          />
-          {hasShowOcultScreens && (
-            <>
+              <Box
+                color="black"
+                as="span"
+                flex="1"
+                textAlign="left"
+                display="flex"
+                gap=".5rem"
+              >
+                {sectionIcons[section as AccordionSection]}
+                {section}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel paddingInlineEnd={0}>
+            {children.map((child) => (
               <ProtocolAccordionSubItem
-                to={`/review/summarization/visualization`}
-                text="Visualization"
+                key={child.path}
+                to={child.path}
+                text={child.label}
               />
-              <ProtocolAccordionSubItem
-                to={`/review/summarization/finalization`}
-                text="Finalization"
-              />
-            </>
-          )}
-        </AccordionPanel>
-      </AccordionItem>
+            ))}
+          </AccordionPanel>
+        </AccordionItem>
+      ))}
     </Accordion>
   );
 };
