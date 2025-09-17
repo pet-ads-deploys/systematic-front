@@ -129,10 +129,14 @@ export default function Expanded({
   };
 
   const priorityIconMap: Record<string, React.ReactElement> = {
-    VERY_LOW: <MdOutlineKeyboardDoubleArrowLeft color="#D32F2F" size="1.5rem" />,
+    VERY_LOW: (
+      <MdOutlineKeyboardDoubleArrowLeft color="#D32F2F" size="1.5rem" />
+    ),
     LOW: <MdOutlineKeyboardArrowLeft color="#FBC02D" size="1.5rem" />,
     HIGH: <MdOutlineKeyboardArrowRight color="#F57C00" size="1.5rem" />,
-    VERY_HIGH: <MdOutlineKeyboardDoubleArrowRight color="#388E3C" size="1.5rem" />,
+    VERY_HIGH: (
+      <MdOutlineKeyboardDoubleArrowRight color="#388E3C" size="1.5rem" />
+    ),
   };
 
   const renderStatusIcon = (status: string) => statusIconMap[status] || null;
@@ -220,6 +224,7 @@ export default function Expanded({
   const collapsedSpanTextChanged = {
     ...collapsedSpanText,
     w: "auto",
+    textAlign: "start",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
@@ -262,7 +267,7 @@ export default function Expanded({
                 w="1rem"
                 bg="white"
               >
-                <RiCheckboxMultipleBlankFill size="1.25rem" />
+                <RiCheckboxMultipleBlankFill size="1rem" />
               </Th>
               {columns.map(
                 (col) =>
@@ -271,8 +276,7 @@ export default function Expanded({
                       key={col.key}
                       textAlign="center"
                       color="#263C56"
-                      fontSize="larger"
-                      p="0"
+                      fontSize="medium"
                       textTransform="capitalize"
                       cursor="pointer"
                       w={columnWidths[col.key]}
@@ -305,7 +309,7 @@ export default function Expanded({
                               justifyContent="center"
                               alignItems="center"
                               w="100%"
-                              p="2rem 1rem 1rem 0"
+                              p=".25rem"
                               overflow="hidden"
                               textOverflow="ellipsis"
                               whiteSpace="nowrap"
@@ -315,7 +319,7 @@ export default function Expanded({
                                 overflow="hidden"
                                 textOverflow="ellipsis"
                                 whiteSpace="nowrap"
-                                textAlign="center"
+                                textAlign="start"
                                 px="0.5rem"
                               >
                                 {col.label}
@@ -342,7 +346,7 @@ export default function Expanded({
                               right="0"
                               top="0"
                               bottom="0"
-                              width=".5rem"
+                              width=".25rem"
                               cursor="col-resize"
                               zIndex={2}
                               _hover={{ bg: "#263C56" }}
@@ -489,7 +493,7 @@ export default function Expanded({
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="start"
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.extractionStatus)}
@@ -527,7 +531,7 @@ export default function Expanded({
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="start"
                         gap="0.5rem"
                       >
                         {renderPriorityIcon(reference.readingPriority)}

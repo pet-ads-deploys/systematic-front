@@ -23,7 +23,7 @@ Now, you can use the following command to put up the webpage:
 There! Now the front-end is up and running on `http://localhost:5173`. Just open that address on your browser and it should show you the running project. Make sure to keep the terminal running the server open while you use the website.
 
 ## Requests
-To execute requests to the back-end, you must run it as well. Instructions to do so are located on the [systematic](https://github.com/pet-ads/systematic) repository
+To execute requests to the back-end, you must run it as well. Instructions to do so are located on the [systematic](https://github.com/pet-ads/systematic) repository.
 
 ## Folder Structure
 When working on this project, please try to follow the folder structure pointed at on the folder-structure.txt file. This allows for easy understanding of what any given file might do, and helps other developers work on the project.
