@@ -1,14 +1,14 @@
 .link {
-    color: #c9d9e5;
-    height: 80%
+  color: black;
+  height: 80%;
 }
 
 .linksBox {
-    display: flex;
-    align-items: center;
-    margin-bottom: 6vh;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6vh;
 }
 
 .navDiv {
-    margin-top: 50vh;
+  margin-top: 50vh;
 }
