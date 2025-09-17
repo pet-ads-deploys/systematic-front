@@ -22,7 +22,7 @@ const Navigation = ({ type }: Props) => {
           to="/review/planning/protocol/general-definition"
           text="New Review"
         />
-        <NavItem to="/my-reviews" text="My Reviews" />
+        <NavItem to="/home" text="Home" />
         <NavItem to="/profile" text="Profile" />
         <LogoutButton />
       </Box>
@@ -31,7 +31,7 @@ const Navigation = ({ type }: Props) => {
     <Box className={Styles.accordionNavDiv}>
       <AccordionComponent />
       <Box mt="2.6vw">
-        <NavItem to="/my-reviews" text="My Reviews" />
+        <NavItem to="/home" text="Home" />
         <NavItem to="/profile" text="Profile" />
         <LogoutButton />
       </Box>

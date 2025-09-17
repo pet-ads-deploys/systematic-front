@@ -50,7 +50,7 @@ const routesList: RouteObject[] = [
     element: <Homepage />,
   },
   {
-    path: "/my-reviews",
+    path: "/home",
     element: <ProtectedRoute element={<MyReviews />} />,
   },
   {

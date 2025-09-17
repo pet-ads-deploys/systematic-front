@@ -8,6 +8,7 @@ import useGetReviewCard from "../../services/useGetReviewCard";
 import FlexLayout from "@components/structure/Flex/Flex";
 import Header from "@components/structure/Header/Header";
 import Loader from "@components/feedback/Loader";
+import CardDefault from "@components/common/cards";
 
 // Factory
 import RenderCards from "../../factory/cards/RenderCards";
@@ -19,31 +20,28 @@ import { flexStyles } from "./styles";
 export default function MyReviews() {
   const { cardData, isLoaded } = useGetReviewCard();
 
- return (
+  return (
     <FlexLayout navigationType="Default">
       <Box w="100%" px="1rem" py="1rem" h="fit-content">
-        <Flex
-          w="100%"
-          h="2.5rem"
-          alignItems="center"
-          mb="2rem"
-        >
-          <Header text="My Systematic Reviews" />
+        <Flex w="100%" h="2.5rem" alignItems="center" mb="2rem">
+          <Header text="Home" />
         </Flex>
       </Box>
-      <Box w="100%" px="1rem">
-        <Flex sx={flexStyles} w={"100%"} align="center" justify="center">
-          {!isLoaded && <Loader />}
+      <CardDefault backgroundColor="white" borderRadius="1rem">
+        <Box w="100%" px="1rem">
+          <Flex sx={flexStyles} w={"100%"} align="center" justify="center">
+            {!isLoaded && <Loader />}
 
-          {cardData && cardData.length == 0 && isLoaded && (
-            <RenderCreateNewReview />
-          )}
+            {cardData && cardData.length == 0 && isLoaded && (
+              <RenderCreateNewReview />
+            )}
 
-          {cardData && cardData.length > 0 && isLoaded && (
-            <RenderCards data={cardData} />
-          )}
-        </Flex>
-      </Box>
+            {cardData && cardData.length > 0 && isLoaded && (
+              <RenderCards data={cardData} />
+            )}
+          </Flex>
+        </Box>
+      </CardDefault>
     </FlexLayout>
   );
 }

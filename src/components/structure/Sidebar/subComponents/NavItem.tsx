@@ -17,7 +17,7 @@ const NavItem = ({ to, text }: Props) => {
       {to == "/review/planning/protocol/general-definition" && (
         <Icon boxSize="20px" mr="7px" as={FiPlusCircle} color="#272927" />
       )}
-      {to == "/my-reviews" && (
+      {to == "/home" && (
         <Icon boxSize="21" mr="7px" as={ImBooks} color="#272927" />
       )}
       {to == "/profile" && (
