@@ -33,7 +33,7 @@ export default function useRevertCriterionState({
     }
 
     try {
-      const path = `http://localhost:8080/api/v1/systematic-study/${id}/study-review/remove-criteria/${articleId}`;
+      const path = `systematic-study/${id}/study-review/remove-criteria/${articleId}`;
       const response = await Axios.patch<HttpResponse>(
         path,
         { criteria },

@@ -130,7 +130,7 @@ export default function Header({ show }: IHeaderProps) {
               _hover={{ color: "black", backgroundColor: "white" }}
               color={openModal == "login" && showModal ? "black" : "white"}
               bgColor={openModal == "login" && showModal ? "white" : "green"}
-              onClick={() => toGo("/my-reviews")}
+              onClick={() => toGo("/home")}
             >
               Bem vindo, {username}
             </Button>

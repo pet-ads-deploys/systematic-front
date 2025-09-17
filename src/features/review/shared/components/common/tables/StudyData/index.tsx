@@ -13,6 +13,7 @@ interface IStudyDataFiel {
 
 export interface ArticlePreviewProps {
   studyData: StudyInterface;
+  mode?: "selection" | "extraction";
 }
 
 export default function StudyDataFiel({ studyData, page }: IStudyDataFiel) {
@@ -29,9 +30,9 @@ export default function StudyDataFiel({ studyData, page }: IStudyDataFiel) {
   return (
     <Flex sx={selectionSX}>
       {page == "Selection" || page == "Identification" ? (
-        <ArticlePreview studyData={studyData} />
+        <ArticlePreview studyData={studyData} mode="selection" />
       ) : (
-        <ExtractionForm studyData={studyData} />
+        <ExtractionForm studyData={studyData} mode="extraction" />
       )}
     </Flex>
   );

@@ -1,22 +1,26 @@
-import { Text } from "@chakra-ui/react";
+
+
 import LineChart from "../../../../components/charts/LineChart.tsx";
-import useGetAllReviewArticles from "../../../../../shared/services/useGetAllReviewArticles.ts";
 
-export const IncludedStudiesLineChart = () => {
-  const { articles, isLoading } = useGetAllReviewArticles();
-  const IncludedArticles = articles.filter(
-    (study) => study.extractionStatus === "INCLUDED"
-  );
+import ArticleInterface from "@features/review/shared/types/ArticleInterface.ts";
+import { StudyInterface } from "@features/review/shared/types/IStudy.tsx";
 
+
+type Props={
+  filteredStudies:(ArticleInterface | StudyInterface)[],
+}
+export const IncludedStudiesLineChart = ({ filteredStudies}:Props) => {
+ 
+  
   const categories = [
-    ...new Set(IncludedArticles.map((study) => String(study.year))),
+    ...new Set(filteredStudies.map((study) => String(study.year))),
   ].sort();
   const data = categories.map(
     (year) =>
-      IncludedArticles.filter((study) => study.year.toString() === year).length
+      filteredStudies.filter((study) => study.year.toString() === year).length
   );
 
-  if (isLoading) return <Text>Loading chart...</Text>;
+ 
 
   return (
     <LineChart

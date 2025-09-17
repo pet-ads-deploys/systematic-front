@@ -18,11 +18,7 @@ export default async function useLogout(): Promise<
   Either<ApplicationError, void>
 > {
   try {
-    await Axios.post(
-      "http://localhost:8080/api/v1/auth/logout",
-      {},
-      { withCredentials: true }
-    );
+    await Axios.post("auth/logout", {});
     userStorage.clear();
     return right(undefined);
   } catch (error) {

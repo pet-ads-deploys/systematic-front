@@ -4,10 +4,10 @@ import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
 import { IoIosCloseCircle } from "react-icons/io";
 import { LuFeather } from "react-icons/lu";
 import {
-  MdKeyboardArrowDown,
-  MdKeyboardArrowUp,
-  MdKeyboardDoubleArrowDown,
-  MdKeyboardDoubleArrowUp,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardDoubleArrowLeft,
+  MdOutlineKeyboardDoubleArrowRight,
 } from "react-icons/md";
 
 // Utils
@@ -16,7 +16,27 @@ import { capitalize } from "@features/shared/utils/helpers/formatters/Capitalize
 // Types
 import type { ArticlePreviewProps } from "../../common/tables/StudyData";
 
-export default function ArticleHeader({ studyData }: ArticlePreviewProps) {
+// Styles
+
+const tagContainer = {
+  alignItems: "center",
+  justifyContent: "center",
+  width: "8rem",
+  h: { base: "1.75rem", md: "2rem" },
+  px: { base: 3, md: 4 },
+  gap: 2,
+  whiteSpace: "nowrap",
+  fontWeight: "semibold",
+  fontSize: { base: "0.5rem", md: "0.75rem" },
+  borderRadius: ".35rem",
+  boxShadow: "sm",
+  transition: "all 0.3s ease",
+};
+
+export default function ArticleHeader({
+  studyData,
+  mode,
+}: ArticlePreviewProps) {
   const statusIconMap: Record<
     string,
     { icon: React.ReactNode; color: string }
@@ -35,24 +55,27 @@ export default function ArticleHeader({ studyData }: ArticlePreviewProps) {
     { icon: React.ReactNode; color: string }
   > = {
     VERY_LOW: {
-      icon: <MdKeyboardDoubleArrowDown color="#D32F2F" size="1.5rem" />,
+      icon: <MdOutlineKeyboardDoubleArrowLeft color="#D32F2F" size="1.5rem" />,
       color: "red",
     },
     LOW: {
-      icon: <MdKeyboardArrowDown color="#FBC02D" size="1.5rem" />,
+      icon: <MdOutlineKeyboardArrowLeft color="#FBC02D" size="1.5rem" />,
       color: "yellow",
     },
     HIGH: {
-      icon: <MdKeyboardArrowUp color="#F57C00" size="1.5rem" />,
+      icon: <MdOutlineKeyboardArrowRight color="#F57C00" size="1.5rem" />,
       color: "orange",
     },
     VERY_HIGH: {
-      icon: <MdKeyboardDoubleArrowUp color="#388E3C" size="1.5rem" />,
+      icon: <MdOutlineKeyboardDoubleArrowRight color="#388E3C" size="1.5rem" />,
       color: "green",
     },
   };
 
-  const selectionStatus = statusIconMap[studyData.selectionStatus];
+  const currentStatus =
+    mode === "selection"
+      ? statusIconMap[studyData.selectionStatus]
+      : statusIconMap[studyData.extractionStatus];
   const priorityLevel = priorityIconMap[studyData.readingPriority];
   const pathToReference = studyData.doi;
 
@@ -70,38 +93,26 @@ export default function ArticleHeader({ studyData }: ArticlePreviewProps) {
       flexWrap="wrap"
     >
       <Flex
-        alignItems="center"
-        justifyContent="center"
-        h={{ base: "1.75rem", md: "2rem" }}
-        px={{ base: 3, md: 4 }}
-        gap={2}
-        bg={`${selectionStatus.color}.100`}
-        color={`${selectionStatus.color}.700`}
-        fontWeight="semibold"
-        fontSize={{ base: "0.5rem", md: "0.75rem" }}
-        borderRadius=".35rem"
-        boxShadow="sm"
-        transition="all 0.3s ease"
+        sx={tagContainer}
+        bg={`${currentStatus.color}.100`}
+        color={`${currentStatus.color}.700`}
         _hover={{
-          bg: `${selectionStatus.color}.200`,
+          bg: `${currentStatus.color}.200`,
         }}
       >
-        {selectionStatus.icon}
-        {capitalize(studyData.selectionStatus.toLowerCase())}
+        {currentStatus.icon}
+        {capitalize(
+          (mode === "selection"
+            ? studyData.selectionStatus
+            : studyData.extractionStatus
+          ).toLowerCase()
+        )}
       </Flex>
+
       <Flex
-        alignItems="center"
-        justifyContent="center"
-        h={{ base: "1.75rem", md: "2rem" }}
-        px={{ base: 3, md: 4 }}
-        gap={2}
+        sx={tagContainer}
         bg={`${priorityLevel.color}.100`}
         color={`${priorityLevel.color}.700`}
-        fontWeight="semibold"
-        fontSize={{ base: "0.5rem", md: "0.75rem" }}
-        borderRadius=".35rem"
-        boxShadow="sm"
-        transition="all 0.3s ease"
         _hover={{ bg: `${priorityLevel.color}.200` }}
       >
         {priorityLevel.icon}

@@ -15,13 +15,13 @@ const CloseButton = ({ handleToggle, className = "", isOpen }: Props) => {
       onClick={handleToggle}
       w="1rem"
       borderRadius={"50%"}
-      bgColor="#263C56"
-      _hover={{ bgColor: "#263C56" }}
+      bgColor={isOpen ? "white" : "#263C56"}
+      _hover={{ bgColor: isOpen ? "white" : "#263C56" }}
     >
       {isOpen ? (
-        <CloseIcon color="#c9d9e5" boxSize={4} />
+        <CloseIcon color="black" boxSize={4} />
       ) : (
-        <HamburgerIcon boxSize="22px" color="#c9d9e5" />
+        <HamburgerIcon boxSize="22px" color="white" bgColor="#263c56" />
       )}
     </Button>
   );

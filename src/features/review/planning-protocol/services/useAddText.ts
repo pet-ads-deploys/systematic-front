@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useCreateProtocol from "./useCreateProtocol";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 import useToaster from "@components/feedback/Toaster";
 
 export function useAddText(context: string) {
@@ -16,8 +16,8 @@ export function useAddText(context: string) {
     };
 
     async function fetchAddTexts() {
-      const response = await axios.get(
-        `http://localhost:8080/systematic-study/${id}/protocol`,
+      const response = await Axios.get(
+        `systematic-study/${id}/protocol`,
         options
       );
 
@@ -62,7 +62,7 @@ export function useAddText(context: string) {
         toast({
           title: "Duplicate Keyword",
           description: "This keyword already exists!",
-          status: "warning"
+          status: "warning",
         });
         return prevKeyWord;
       }

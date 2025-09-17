@@ -23,7 +23,7 @@ const fetcher = async (
   try {
     const results = await Promise.all(
       databases.map(async (db) => {
-        const path = `http://localhost:8080/api/v1/systematic-study/${systematicReviewId}/report/source/${db}`;
+        const path = `systematic-study/${systematicReviewId}/report/source/${db}`;
         const res = await Axios.get<HttpResponse>(path, options);
         return res.data;
       })

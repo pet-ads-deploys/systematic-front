@@ -1,6 +1,6 @@
 import { Node, Edge, ReactFlow, Controls } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import DownloadFunnelButton from "./subcomponents/buttons/DownloadFunnelButton";
+import DownloadFunnelButton from "../../buttons/DownloadFunnelButton.tsx";
 
 type Props = {
   baseNodes: Node[];
@@ -16,7 +16,7 @@ export default function FlowChart({ baseNodes, edges}: Props) {
       proOptions={{ hideAttribution: true }}
     >
       <Controls />
-      <DownloadFunnelButton/>
+      <DownloadFunnelButton selector={".react-flow__viewport"} fileName="StudiesFunnel"/>
     </ReactFlow>
   );
 } 

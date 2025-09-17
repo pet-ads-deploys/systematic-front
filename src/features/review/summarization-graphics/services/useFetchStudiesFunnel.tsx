@@ -26,7 +26,7 @@ type StudiesFunnelData = {
 
 export const useFetchStudiesFunnel = () => {
   const id = localStorage.getItem("systematicReviewId");
-  const path = `http://localhost:8080/api/v1/systematic-study/${id}/report/studies-funnel`;
+  const path = `systematic-study/${id}/report/studies-funnel`;
 
   const { data, isLoading, mutate } = useSWR(path, fetchStudiesFunnel, {
     revalidateOnFocus: false,

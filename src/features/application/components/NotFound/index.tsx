@@ -32,7 +32,7 @@ export const NoStudiesData = () => {
       </Text>
       <Button
         as={Link}
-        to="/my-reviews"
+        to="/home"
         colorScheme="teal"
         bg="teal.400"
         color="white"

@@ -1,18 +1,29 @@
 export const Cardstyles = {
-  h: { base: "16em", sm: "14em", md: "12em", lg: "10em", xl: "8em" },
-  w: { base: "100px", sm: "300px", md: "400px", lg: "650px", xl: "1020px" },
-  boxShadow: "0 3px 3px 0 rgba(0, 0 , 0, 0.5)",
   display: "flex",
-  flexDir: { base: "column", sm: "column", md: "column", lg: "row", xl: "row" },
-  borderRadius: "9px",
-  fontSize: "12px",
-  //border: "solid 2px #C9D9E5",
-  justifySelf: "center",
-  bgColor: "#EBF0F3",
+  flexDirection: { base: "column", md: "row" },
+  // alignItems: "center",
+  alignItems: { base: "left", md: "center" },
+  justifyContent: "space-between",
+
+  w: { base: "100%", sm: "90%", md: "750px", lg: "950px" },
+  // minH: { base: "auto", md: "3vh" },
+  h: { base: "25vh", md: "10vh" },
+
+  borderRadius: "0",
+  boxShadow: "none",
+  // border: "1px solid #E2E8F0",
+  borderBottom: "1px solid #E2E8F0",
+  borderTop: "1px solid #E2E8F0",
+  bgColor: "white",
+  padding: "1rem",
+  gap: { base: ".25rem", md: "1rem" },
 };
+
 export const CardInfosConteiner = {
-  ml: "100px",
-  w: { base: "100px", sm: "300px", md: "400px", lg: "650px", xl: "1020px" },
-  h: "min-content",
-  alignItens: "center"
+  flex: 1,
+  display: "flex",
+  justifyContent: { base: "center", md: "flex-start" },
+  alignItems: "center",
+  px: 4,
+  py: 2,
 };

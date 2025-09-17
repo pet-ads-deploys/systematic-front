@@ -1,6 +1,6 @@
 // import { SetStateAction, useEffect, useState } from "react";
 import { SetStateAction, useState } from "react";
-import axios from "../../../../infrastructure/http/axiosClient";
+import Axios from "../../../../infrastructure/http/axiosClient";
 // import useGetSession from "./useGetSession";
 import useToaster from "@components/feedback/Toaster";
 import { InvalidEntry } from "@features/review/shared/context/StudiesSelectionContext";
@@ -21,16 +21,22 @@ interface Props {
     }[]
   >;
   setInvalidEntries?: React.Dispatch<SetStateAction<InvalidEntry[]>>;
+  searchString: string;
+  comment: string;
 }
 
-const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
+const useHandleExportedFiles = ({
+  mutate,
+  setInvalidEntries,
+  comment = "",
+  searchString = "",
+}: Props) => {
   const [referenceFiles, setReferenceFiles] = useState<File[]>([]);
   const [source, setSource] = useState("");
   const toast = useToaster();
 
   const options = getRequestOptions();
   const id = localStorage.getItem("systematicReviewId");
-  const url = `http://localhost:8080/api/v1/systematic-study/${id}/search-session`;
 
   const checkForDuplicateFile = (newFile: File) => {
     return referenceFiles.some(
@@ -98,8 +104,8 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
     const formData = new FormData();
     const data = JSON.stringify({
       source: source,
-      searchString: "Machine Learning",
-      additionalInfo: "Referências para revisão",
+      searchString,
+      additionalInfo: comment,
     });
 
     if (referenceFiles.length > 0) {
@@ -108,7 +114,11 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
     }
 
     try {
-      const response = await axios.post(url, formData, options);
+      const response = await Axios.post(
+        `systematic-study/${id}/search-session`,
+        formData,
+        options
+      );
       const sessionId = response.data.sessionId;
       const invalidArticles: string[] = response.data.invalidEntries ?? [];
       mutate();
@@ -123,7 +133,7 @@ const useHandleExportedFiles = ({ mutate, setInvalidEntries }: Props) => {
         toast({
           title: "Some files need revision",
           description: `${invalidArticles.length} file(s) could not be processed.`,
-          status: "warning"
+          status: "warning",
         });
       }
     } catch (err) {

@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import {
   Button,
@@ -50,11 +50,16 @@ function IdentificationModal({
   type,
   mutate,
 }: IdentificationModalProps) {
+  const [searchString, setSearchString] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
+
   const { isOpen, onClose, onOpen } = useDisclosure();
+
   const selectionContext = useContext(StudySelectionContext);
   if (!selectionContext)
     throw new Error("Failed to get selection context on identification modal!");
   const reloadArticles = selectionContext.reloadArticles;
+
   const {
     handleFile,
     referenceFiles,
@@ -64,6 +69,8 @@ function IdentificationModal({
   } = useHandleExportedFiles({
     mutate: mutate,
     setInvalidEntries: selectionContext.setInvalidEntries,
+    searchString,
+    comment,
   });
 
   useEffect(() => {
@@ -110,11 +117,17 @@ function IdentificationModal({
           </FormControl>
           <FormControl mb={4}>
             <FormLabel>Search String</FormLabel>
-            <Textarea placeholder="Enter your search string" />
+            <Textarea
+              placeholder="Enter your search string"
+              onChange={(event) => setSearchString(event.target.value)}
+            />
           </FormControl>
           <FormControl mb={4}>
             <FormLabel>Comments</FormLabel>
-            <Textarea placeholder="Add comments" />
+            <Textarea
+              placeholder="Add comments"
+              onChange={(event) => setComment(event.target.value)}
+            />
           </FormControl>
           {action == "create" && (
             <FormControl mb={4}>

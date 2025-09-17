@@ -25,7 +25,7 @@ export default function useFetchCriteriaForFocusedArticle({
 
   const path =
     id && articleId
-      ? `http://localhost:8080/api/v1/systematic-study/${id}/report/study-review/${articleId}/criteria`
+      ? `systematic-study/${id}/report/study-review/${articleId}/criteria`
       : null;
 
   const { data, isLoading, error, mutate } = useSWR(path, fetchAllCriteria, {

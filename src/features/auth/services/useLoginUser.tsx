@@ -15,13 +15,7 @@ type LoginUserOutput = {
 
 export default async function useLoginUser(data: AccessCredentials) {
   try {
-    const response = await Axios.post<LoginUserOutput>(
-      "http://localhost:8080/api/v1/auth",
-      data,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await Axios.post<LoginUserOutput>("auth", data);
     localStorage.setItem("accessToken", response.data.accessToken);
     return response;
   } catch (error) {

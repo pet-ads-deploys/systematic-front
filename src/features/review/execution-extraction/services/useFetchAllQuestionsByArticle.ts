@@ -67,6 +67,18 @@ export default function useFetchAllQuestionsByArticle() {
     return `${name}: ${value}`;
   }
 
+  function formatAnswer(answer: string | string[] | null): string[] {
+    if (!answer) return [];
+
+    if (Array.isArray(answer)) return answer;
+
+    return answer
+      .replace(/^\[|\]$/g, "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
   useEffect(() => {
     if (!question) return;
 
@@ -76,18 +88,31 @@ export default function useFetchAllQuestionsByArticle() {
       const mapToStructure = (
         questions: QuestionAnswer[]
       ): AnswerStrucuture[] =>
-        questions.map((quest) => ({
-          questionId: quest.questionId,
-          description: quest.description,
-          code: quest.code,
-          type: quest.type,
-          answer: {
-            value:
-              quest.type == "LABELED_SCALE" && quest.answer
-                ? formatLabel(quest.answer as string)
-                : quest.answer,
-          },
-        }));
+        questions.map((quest) => {
+          let formattedAnswer = quest.answer;
+
+          if (quest.type === "LABELED_SCALE" && quest.answer) {
+            formattedAnswer = formatLabel(quest.answer as string);
+          }
+
+          if (
+            quest.type === "PICK_MANY" &&
+            quest.answer &&
+            typeof quest.answer != "number"
+          ) {
+            formattedAnswer = formatAnswer(quest.answer);
+          }
+
+          return {
+            questionId: quest.questionId,
+            description: quest.description,
+            code: quest.code,
+            type: quest.type,
+            answer: {
+              value: formattedAnswer,
+            },
+          };
+        });
 
       const structuredAnswers: ArticleAnswerStrucuture = {
         extractionQuestions: mapToStructure(question.extractionQuestions),

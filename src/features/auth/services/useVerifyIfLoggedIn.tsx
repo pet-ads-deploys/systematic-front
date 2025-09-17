@@ -11,11 +11,7 @@ export function useVerifyIfLoggedIn() {
   useEffect(() => {
     const verifyLogin = async () => {
       try {
-        const response = await Axios.post(
-          "http://localhost:8080/api/v1/auth/refresh",
-          {},
-          { withCredentials: true }
-        );
+        const response = await Axios.post("auth/refresh", {});
         console.log(response);
         if (response.status === 200) {
           setIsLoggedIn(true);

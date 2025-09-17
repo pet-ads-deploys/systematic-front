@@ -1,32 +1,42 @@
-import axios from "axios";
+// External library
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
-const Axios = axios.create({});
+const Axios = axios.create({
+  baseURL: "http://localhost:8080/api/v1/",
+  withCredentials: true,
+});
 
 Axios.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    if (error.response.status == 401 || error.response.status == 500) {
-      try {
-        let response = await axios.post(
-          "http://localhost:8080/api/v1/auth/refresh",
-          {},
-          { withCredentials: true }
-        );
-        console.log(response);
+  async (error: AxiosError) => {
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
 
-        if (response.status == 200) {
-          localStorage.setItem("accessToken", response.data.accessToken);
-          error.config.headers[
-            "Authorization"
-          ] = `Bearer ${response.data.accessToken}`;
+    if (!error.response) {
+      return Promise.reject(error);
+    }
 
-          return axios(error.config);
-        }
-      } catch (err) {
-        console.log(err);
-        throw err;
-      }
-    } else throw error;
+    const { status } = error.response;
+
+    if (status !== 401 || originalRequest._retry) {
+      return Promise.reject(error);
+    }
+
+    originalRequest._retry = true;
+
+    try {
+      const refreshResponse = await Axios.post("auth/refresh", {});
+      const token = refreshResponse.data.accessToken;
+
+      localStorage.setItem("accessToken", token);
+
+      originalRequest.headers.set("Authorization", `Bearer ${token}`);
+
+      return Axios(originalRequest);
+    } catch (err) {
+      return Promise.reject(err);
+    }
   }
 );
 

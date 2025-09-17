@@ -1,5 +1,5 @@
 // External library
-import { Box, Card } from "@chakra-ui/react";
+import { Card, Flex } from "@chakra-ui/react";
 
 // Components
 import CardIcon from "../CardIcon";
@@ -10,28 +10,19 @@ import EditionInfos from "../../containers/EditionInfo";
 import useNavigateToPendingStage from "@features/user/my-reviews/services/useNavigateToPendingStage";
 
 // Styles
-import { CardInfosConteiner, Cardstyles } from "./styles";
+import { Cardstyles } from "./styles";
 
-// Type
+// Types
 interface RevisionCardProps {
   revisionId: string;
   id: string;
   title: string;
-  RevisorNames: string[];
-  status?: string;
-  creation: string;
-  lastModification?: string;
-  isEdited: boolean;
 }
 
 export default function RevisionCard({
   revisionId,
   id,
   title,
-  RevisorNames,
-  lastModification,
-  isEdited,
-  creation,
 }: RevisionCardProps) {
   const { redirectToPendingStage, stage } = useNavigateToPendingStage({
     reviewId: revisionId,
@@ -44,17 +35,11 @@ export default function RevisionCard({
 
   return (
     <Card sx={Cardstyles} onClick={redirectToReview} cursor="pointer">
-      <CardIcon />
-      <CardInfos title={title} RevisorNames={RevisorNames} />
-      <Box sx={CardInfosConteiner} id={id}>
-        {/* <EnterRevisionButton text="Review Info" /> */}
-        <EditionInfos
-          lastModification={lastModification as string}
-          status={stage}
-          isEdited={isEdited}
-          creation={creation}
-        />
-      </Box>
+      <Flex>
+        <CardIcon />
+        <CardInfos title={title} id={id} />
+      </Flex>
+      <EditionInfos status={stage} />
     </Card>
   );
 }

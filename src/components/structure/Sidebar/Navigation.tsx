@@ -1,21 +1,29 @@
-import NavItem from "./subComponents/NavItem";
+// External library
 import { Box, Flex } from "@chakra-ui/react";
-import AccordionComponent from "./subComponents/Accordion/AccordionComponent";
-import Styles from "./Sidebar.module.css";
-import LogoutButton from "./buttons/LogoutButton";
 
+// Components
+import NavItem from "./subComponents/NavItem";
+import LogoutButton from "./buttons/LogoutButton";
+import AccordionComponent from "./subComponents/Accordion/AccordionComponent";
+
+// Styles
+import Styles from "./Sidebar.module.css";
+
+// Types
 interface Props {
   type: string;
 }
 
 const Navigation = ({ type }: Props) => {
-  //const id = localStorage.getItem('systematicReviewId');
-
   return type == "Default" ? (
     <Flex direction="column" justifyContent="space-between" height="100%">
       <Box className={Styles.navDiv}>
-        <NavItem to="/newReview" text="New Review" />
-        <NavItem to="/my-reviews" text="My Reviews" />
+        <NavItem
+          to="/review/planning/protocol/general-definition"
+          text="New Review"
+        />
+        <NavItem to="/home" text="Home" />
+        <NavItem to="/profile" text="Profile" />
         <LogoutButton />
       </Box>
     </Flex>
@@ -23,7 +31,8 @@ const Navigation = ({ type }: Props) => {
     <Box className={Styles.accordionNavDiv}>
       <AccordionComponent />
       <Box mt="2.6vw">
-        <NavItem to="/my-reviews" text="My Reviews" />
+        <NavItem to="/home" text="Home" />
+        <NavItem to="/profile" text="Profile" />
         <LogoutButton />
       </Box>
     </Box>

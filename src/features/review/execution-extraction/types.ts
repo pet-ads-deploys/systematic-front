@@ -15,16 +15,17 @@ export type TypeOfQuestions =
   | "TEXTUAL"
   | "NUMBERED_SCALE"
   | "LABELED_SCALE"
-  | "PICK_LIST";
+  | "PICK_LIST"
+  | "PICK_MANY";
 
 export type AnswerProps = {
-  value: string | number | { name: string; value: number } | null;
+  value: string | string[] | number | { name: string; value: number } | null;
   type: TypeOfQuestions;
 };
 
 export interface HandleSendAnswerProps {
   questionId: string;
-  answer: string | number | { name: string; value: number } | null;
+  answer: string | string[] | number | { name: string; value: number } | null;
   type: TypeOfQuestions;
 }
 
@@ -35,7 +36,7 @@ export interface SendAnswerProps {
 export type FormType = "EXTRACTION" | "RISK_OF_BIAS";
 
 export type Answer = {
-  value: string | number | { name: string; value: number } | null;
+  value: string | string[] | number | { name: string; value: number } | null;
 };
 
 export type AnswerStrucuture = {

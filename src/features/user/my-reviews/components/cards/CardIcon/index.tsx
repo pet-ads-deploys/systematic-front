@@ -1,13 +1,32 @@
-import { Icon } from "@chakra-ui/react";
-import { cardIcon } from "../../icons/styles";
-
-import { AiOutlineFileSearch } from "react-icons/ai";
-//import { BiFileFind } from "react-icons/bi";
-//import { HiDocumentSearch } from "react-icons/hi";
-//import { IoDocumentText } from "react-icons/io5";
+// External library
+import { ImFileText2 } from "react-icons/im";
 
 export default function CardIcon() {
   return (
-    <Icon color="#263C56" as={AiOutlineFileSearch} sx={cardIcon} mr="10px" />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "5rem",
+        height: "5rem",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "3rem",
+          height: "3rem",
+          backgroundColor: "#EDF2F7",
+          borderRadius: ".25rem",
+        }}
+      >
+        <ImFileText2 color="black" size="1.75rem" />
+      </div>
+    </div>
   );
 }

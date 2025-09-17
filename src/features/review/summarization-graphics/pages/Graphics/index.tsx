@@ -1,85 +1,105 @@
-import { Box, Text } from "@chakra-ui/react";
-import Header from "../../../../../components/structure/Header/Header";
-
-import {
-  barchartBox,
-  conteiner,
-  fluxogramaBox,
-  graphicsconteiner,
-  piechartBox,
-  textDescription,
-  textSection,
-} from "./styles";
-import FlexLayout from "../../../../../components/structure/Flex/Flex";
-
-import { IncludedStudiesTable } from "../../components/tables/IncludedStudiesTable";
-import CriteriaBarChart from "./subcomponents/CriteriaBarChart";
-import StudiesFunnelChart from "./subcomponents/StudiesFunnelChart";
-import { IncludedStudiesLineChart } from "./subcomponents/IncludedStudiesLineChart";
-import { QuestionsCharts } from "./subcomponents/QuestionsCharts";
-import DinamicChart from "../../components/charts/DinamicChart";
-import { SearchSorcesTable } from "../../components/tables/SearchSoucesTable";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import Header from "@components/structure/Header/Header";
+import FlexLayout from "@components/structure/Flex/Flex";
+import ChartsRenderer from "./subcomponents/ChartRenderer";
+import SelectMenu from "../../components/menus/SelectMenu";
+import { useGraphicsState } from "../../hooks/useGraphicsState";
+import SectionMenu from "../../components/menus/SectionMenu";
+import FiltersMenu from "../../components/menus/FilterMenu";
+import { conteiner } from "./styles";
 
 export default function Graphics() {
+  const {
+    allQuestions,
+    selectedQuestionId,
+    setSelectedQuestionId,
+    section,
+    handleSectionChange,
+    type,
+    setType,
+    filters,
+    setFilters,
+    filtersBySection,
+    currentAllowedTypes,
+  } = useGraphicsState();
+
   return (
-    <FlexLayout navigationType="Accordion" defaultOpen={2}>
+    <FlexLayout navigationType="Accordion">
       <Header text="Graphics" />
       <Box sx={conteiner}>
-        {/* SEÇÃO:GENERAL INFORMATION*/}
-        <Box>
-          <Text sx={textSection}>General Information</Text>
-
-          {/* Serach sources*/}
-          <Text sx={textDescription}>Search Sources</Text>
-          <Box sx={graphicsconteiner}>
-            <Box sx={piechartBox}>
-              <DinamicChart />
-            </Box>
-            <SearchSorcesTable />
-          </Box>
-
-          {/*First Selection*/}
-          <Text sx={textDescription}>First Selection</Text>
-          <Box sx={graphicsconteiner}>
-            <Box sx={barchartBox}>
-              <CriteriaBarChart criteria="inclusion" stage="selection" />
-            </Box>
-            <Box sx={barchartBox}>
-              <CriteriaBarChart criteria="exclusion" stage="selection" />
-            </Box>
-          </Box>
-
-          {/*Second Selection*/}
-          <Text sx={textDescription}>Second Selection</Text>
-          <Box sx={graphicsconteiner}>
-            <Box sx={barchartBox}>
-              <CriteriaBarChart criteria="inclusion" stage="extraction" />
-            </Box>
-            <Box sx={barchartBox}>
-              <CriteriaBarChart criteria="exclusion" stage="extraction" />
-            </Box>
-          </Box>
-
-          {/*Funnel*/}
-          <Text sx={textDescription}>Studies Funnel</Text>
-          <Box sx={graphicsconteiner}>
-            <Box sx={fluxogramaBox}>
-              <StudiesFunnelChart />
-            </Box>
-          </Box>
-
-          {/*included studies*/}
-          <Text sx={textDescription}>Included Studies</Text>
-          <Box sx={graphicsconteiner}>
-            <IncludedStudiesTable />
-            <IncludedStudiesLineChart />
-          </Box>
+        <Box
+          display="flex"
+          gap="1rem"
+          flexWrap="wrap"
+          mb={5}
+          alignItems="flex-start"
+        >
+          <Flex
+            flexDirection="column"
+            gap="2rem"
+            alignItems="flex-start"
+            mt="5rem"
+            minH="6rem"
+          >
+            <SectionMenu onSelect={handleSectionChange} selected={section} />
+            {section === "Form Questions" ? (
+              <SelectMenu
+                options={allQuestions.filter((q) => q.questionId !== null)}
+                selected={allQuestions.find(
+                  (q) => q.questionId === selectedQuestionId
+                )}
+                onSelect={(q) =>
+                  setSelectedQuestionId(q.questionId ?? undefined)
+                }
+                getLabel={(q) => q.code}
+                getKey={(q) => q.questionId ?? q.code}
+                placeholder="Choose Question"
+              />
+            ) : (
+              currentAllowedTypes.length > 0 && (
+                <SelectMenu
+                  options={currentAllowedTypes}
+                  selected={type}
+                  onSelect={setType}
+                  placeholder="Choose Layout"
+                />
+              )
+            )}
+          </Flex>
         </Box>
+        <Flex
+          w="100%"
+          mb="2rem"
+          flexDirection="column"
+          alignItems="flex-start"
+          gap="0.5rem"
+        >
+          {filtersBySection[section]?.length > 0 && (
+            <>
+              <Text
+                fontWeight="semibold"
+                fontSize="lg"
+                color="#263C56"
+                mt="0.5rem"
+              >
+                Filters Area
+              </Text>
+              <FiltersMenu
+                availableFilters={filtersBySection[section]}
+                filters={filters}
+                setFilters={setFilters}
+              />
+            </>
+          )}
+        </Flex>
 
-        {/* SEÇÃO:FORM QUESTIONS*/}
-
-        <Text sx={textSection}>Form Questions</Text>
-        <QuestionsCharts />
+        <ChartsRenderer
+          key={section + type + JSON.stringify(filters)}
+          section={section}
+          type={type}
+          filters={filters}
+          selectedQuestionId={selectedQuestionId}
+        />
       </Box>
     </FlexLayout>
   );

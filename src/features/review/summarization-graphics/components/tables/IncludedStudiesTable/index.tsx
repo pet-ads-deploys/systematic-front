@@ -1,14 +1,11 @@
-// External library
+
 import { Table, TableContainer, Thead, Tr, Tbody, Th } from "@chakra-ui/react";
 
-// Hooks
-import useGetAllReviewArticles from "../../../../shared/services/useGetAllReviewArticles";
+
 import useFetchInclusionCriteria from "../../../../shared/services/useFetchInclusionCriteria";
 
-// Components
 import { ReportTd } from "../subcomponents/row/ReportTd";
 
-// Types
 import type ArticleInterface from "../../../../shared/types/ArticleInterface";
 import { StudyInterface } from "../../../../shared/types/IStudy";
 
@@ -16,7 +13,11 @@ type Column = {
   label: string;
 };
 
-export const IncludedStudiesTable = () => {
+type Props = {
+  filteredStudies: (ArticleInterface | StudyInterface)[];
+};
+
+export const IncludedStudiesTable = ({filteredStudies}:Props) => {
   const columns: Column[] = [
     { label: "Id" },
     { label: "Title" },
@@ -27,10 +28,6 @@ export const IncludedStudiesTable = () => {
     { label: "IC" },
   ];
 
-  const studies: (StudyInterface | ArticleInterface)[] =
-    useGetAllReviewArticles().articles.filter(
-      (study) => study.extractionStatus === "INCLUDED"
-    );
 
   const inclusionCriterias = useFetchInclusionCriteria();
 
@@ -45,7 +42,7 @@ export const IncludedStudiesTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {studies.map((study, index) => {
+          {filteredStudies.map((study, index) => {
             const id =
               "studyReviewId" in study ? study.studyReviewId : index.toString();
             const sourceText =

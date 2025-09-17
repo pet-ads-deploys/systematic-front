@@ -35,7 +35,12 @@ export const SplitVertical: React.FC<VerticalProps> = ({
   columnsVisible,
 }) => {
   return (
-    <Flex w="100%" h="100%" gap="1rem" justifyContent="space-between">
+    <Flex
+      w="100%"
+      h="calc(100% - 1rem)"
+      gap="1rem"
+      justifyContent="space-between"
+    >
       {isInverted ? (
         <AnimatePresence mode="wait">
           <motion.div

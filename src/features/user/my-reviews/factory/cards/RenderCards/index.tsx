@@ -13,13 +13,10 @@ const RenderCards = ({ data }: RenderCardsProps) => {
     <>
       {data.map((item) => (
         <RevisionCard
-          key={item.id}
+          key={item.key}
           revisionId={item.id}
-          id={item.key}
+          id={item.id}
           title={item.title}
-          RevisorNames={item.collaborators}
-          creation={item.creation}
-          isEdited={item.isEdited}
         />
       ))}
     </>

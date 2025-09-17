@@ -1,5 +1,5 @@
 // External library
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 // Services
 import useGetReviewCard from "../../services/useGetReviewCard";
@@ -8,6 +8,7 @@ import useGetReviewCard from "../../services/useGetReviewCard";
 import FlexLayout from "@components/structure/Flex/Flex";
 import Header from "@components/structure/Header/Header";
 import Loader from "@components/feedback/Loader";
+import CardDefault from "@components/common/cards";
 
 // Factory
 import RenderCards from "../../factory/cards/RenderCards";
@@ -20,19 +21,27 @@ export default function MyReviews() {
   const { cardData, isLoaded } = useGetReviewCard();
 
   return (
-    <FlexLayout defaultOpen={0} navigationType="Default">
-      <Header text="My Systematic Reviews" />
-      <Flex sx={flexStyles} w={"100%"} align="center" justify="center">
-        {!isLoaded && <Loader />}
+    <FlexLayout navigationType="Default">
+      <Box w="100%" px="1rem" py="1rem" h="fit-content">
+        <Flex w="100%" h="2.5rem" alignItems="center" mb="2rem">
+          <Header text="Home" />
+        </Flex>
+      </Box>
+      <CardDefault backgroundColor="white" borderRadius="1rem">
+        <Box w="100%" px="1rem">
+          <Flex sx={flexStyles} w={"100%"} align="center" justify="center">
+            {!isLoaded && <Loader />}
 
-        {cardData && cardData.length == 0 && isLoaded && (
-          <RenderCreateNewReview />
-        )}
+            {cardData && cardData.length == 0 && isLoaded && (
+              <RenderCreateNewReview />
+            )}
 
-        {cardData && cardData.length > 0 && isLoaded && (
-          <RenderCards data={cardData} />
-        )}
-      </Flex>
+            {cardData && cardData.length > 0 && isLoaded && (
+              <RenderCards data={cardData} />
+            )}
+          </Flex>
+        </Box>
+      </CardDefault>
     </FlexLayout>
   );
 }

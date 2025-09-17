@@ -1,3 +1,4 @@
+// External library
 import {
   Accordion,
   AccordionItem,
@@ -6,120 +7,127 @@ import {
   AccordionIcon,
   AccordionPanel,
 } from "@chakra-ui/react";
-// import NavItem from "../NavItem"
-import ProtocolAccordionSubItem from "./AccordionNavItem";
-// import LogoutButton from "../../buttons/LogoutButton";
+import { MdRule } from "react-icons/md";
+import { LuFileSearch, LuFileCheck2 } from "react-icons/lu";
 
-import { MdRule, MdOutlineArticle } from "react-icons/md";
-import { LuFileSearch, LuFileCheck2, LuTextSelect } from "react-icons/lu";
-import { CgCheckR } from "react-icons/cg";
-import { IoBarChartSharp } from "react-icons/io5";
-import { GrTag } from "react-icons/gr";
-import { TbFilterSearch } from "react-icons/tb";
-import { VscOpenPreview } from "react-icons/vsc";
+// Components
+import ProtocolAccordionSubItem from "./AccordionNavItem";
+
+// Hooks
+import useActiveSection from "@features/shared/hooks/useActiveSection";
+
+// Types
+type AccordionSection = "Planning" | "Execution" | "Summarization";
+
+// Constants
+const hasShowOcultScreens = false;
+
+const sectionIcons: Record<AccordionSection, React.ReactNode> = {
+  Planning: <MdRule size="1.25rem" color="black" />,
+  Execution: <LuFileSearch size="1.1rem" color="black" />,
+  Summarization: <LuFileCheck2 size="1rem" color="black" />,
+};
 
 const AccordionComponent = () => {
   const id = localStorage.getItem("systematicReviewId");
+  const { activeSection } = useActiveSection();
+
+  const sections: Record<
+    AccordionSection,
+    {
+      path: string;
+      label: string;
+    }[]
+  > = {
+    Planning: [
+      {
+        path: `/review/planning/protocol/general-definition`,
+        label: "Definition",
+      },
+      {
+        path: `/review/planning/protocol/research-questions/${id}`,
+        label: "Research",
+      },
+      { path: `/review/planning/protocol/picoc/${id}`, label: "PICOC" },
+      {
+        path: `/review/planning/protocol/eligibility-criteria/${id}`,
+        label: "Criteria",
+      },
+      {
+        path: `/review/planning/protocol/information-sources-and-search-strategy/${id}`,
+        label: "Sources",
+      },
+      {
+        path: `/review/planning/protocol/selection-and-extraction/${id}`,
+        label: "Selection",
+      },
+      {
+        path: `/review/planning/protocol/risk-of-bias-assessment/${id}`,
+        label: "Risk Of Bias",
+      },
+      {
+        path: `/review/planning/protocol/analysis-and-synthesis-of-results/${id}`,
+        label: "Analysis",
+      },
+    ],
+    Execution: [
+      { path: `/review/execution/identification`, label: "Identification" },
+      { path: `/review/execution/selection`, label: "Selection" },
+      { path: `/review/execution/extraction`, label: "Extraction" },
+    ],
+    Summarization: [
+      { path: `/review/summarization/graphics`, label: "Graphics" },
+      ...(hasShowOcultScreens
+        ? [
+            {
+              path: `/review/summarization/visualization`,
+              label: "Visualization",
+            },
+            {
+              path: `/review/summarization/finalization`,
+              label: "Finalization",
+            },
+          ]
+        : []),
+    ],
+  };
 
   return (
     <Accordion w="80%" allowToggle>
-      <AccordionItem>
-        <h2>
-          <AccordionButton p="1.2vw 1vh" color="white">
-            <Box
-              color="#c9d9e5"
-              as="span"
-              flex="1"
-              textAlign="left"
-              display="flex"
-              gap=".5rem"
+      {Object.entries(sections).map(([section, children]) => (
+        <AccordionItem key={section}>
+          <h2>
+            <AccordionButton
+              p=".5rem"
+              fontWeight={activeSection === section ? "bold" : "light"}
+              bg={activeSection === section ? "#dadada" : "transparent"}
+              borderRadius=".25rem"
             >
-              <MdRule size="1.25rem" color="#c9d9e5" />
-              Planning
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          <ProtocolAccordionSubItem
-            icon={<MdOutlineArticle size="1.2rem" color="#c9d9e5" />}
-            to={`/review/planning/protocol-part-I/${id}`}
-            text="Protocol"
-          />
-        </AccordionPanel>
-      </AccordionItem>
-
-      <AccordionItem>
-        <h2>
-          <AccordionButton p="1.2vw 1vh" color="white">
-            <Box
-              color="#c9d9e5"
-              as="span"
-              flex="1"
-              textAlign="left"
-              display="flex"
-              gap=".5rem"
-            >
-              <LuFileSearch size="1.1rem" color="#c9d9e5" />
-              Execution
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          <ProtocolAccordionSubItem
-            icon={<GrTag size="1rem" color="#c9d9e5" />}
-            to={`/review/execution/identification`}
-            text="Identification"
-          />
-          <ProtocolAccordionSubItem
-            icon={<LuTextSelect size="1.2rem" color="#c9d9e5" />}
-            to={`/review/execution/selection`}
-            text="Selection"
-          />
-          <ProtocolAccordionSubItem
-            icon={<TbFilterSearch size="1.2rem" color="#c9d9e5" />}
-            to={`/review/execution/extraction`}
-            text="Extraction"
-          />
-        </AccordionPanel>
-      </AccordionItem>
-
-      <AccordionItem>
-        <h2>
-          <AccordionButton p="1.2vw 1vh" color="white">
-            <Box
-              color="#c9d9e5"
-              as="span"
-              flex="1"
-              textAlign="left"
-              display="flex"
-              gap=".5rem"
-            >
-              <LuFileCheck2 size="1rem" color="#c9d9e5" />
-              Summarization
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>
-          <ProtocolAccordionSubItem
-            icon={<IoBarChartSharp size="1rem" color="#c9d9e5" />}
-            to={`/review/summarization/graphics`}
-            text="Graphics"
-          />
-          <ProtocolAccordionSubItem
-            icon={<VscOpenPreview size="1.2rem" color="#c9d9e5" />}
-            to={`/review/summarization/visualization`}
-            text="Visualization"
-          />
-          <ProtocolAccordionSubItem
-            icon={<CgCheckR size="1rem" color="#c9d9e5" />}
-            to={`/review/summarization/finalization`}
-            text="Finalization"
-          />
-        </AccordionPanel>
-      </AccordionItem>
+              <Box
+                color="black"
+                as="span"
+                flex="1"
+                textAlign="left"
+                display="flex"
+                gap=".5rem"
+              >
+                {sectionIcons[section as AccordionSection]}
+                {section}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel paddingInlineEnd={0}>
+            {children.map((child) => (
+              <ProtocolAccordionSubItem
+                key={child.path}
+                to={child.path}
+                text={child.label}
+              />
+            ))}
+          </AccordionPanel>
+        </AccordionItem>
+      ))}
     </Accordion>
   );
 };

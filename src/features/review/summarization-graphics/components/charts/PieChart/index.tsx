@@ -18,6 +18,7 @@ const chartConfig = {
       chart: {
         toolbar: {
           show: true,
+          
         },
       },
       labels: labels,
@@ -27,9 +28,7 @@ const chartConfig = {
       },
       dataLabels: {
         enabled: true,
-        formatter: (_val, opts) => {
-          return opts.w.config.series[opts.seriesIndex];
-        }
+      
       },
       legend: {
         position: "bottom"
