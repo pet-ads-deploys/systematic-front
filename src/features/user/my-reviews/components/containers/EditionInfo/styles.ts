@@ -1,12 +1,11 @@
-
 export const conteiner = {
   display: "flex",
   flexDir: "column",
-  alignItems: "center", 
+  alignItems: "center",
   justifyContent: "center",
-  ml: 5,
-  w: "fit-content",
-  height: "97px", //triste
+  ml: { base: 0, md: 5 },
+  h: "auto",
+  minH: "70px",
 };
 
 export const infosconteiner = {

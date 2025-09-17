@@ -1,10 +1,16 @@
 export const conteiner = {
   display: "flex",
-  flexDir: {base:"column", sm:"column", md:"column", lg:"column", xl:"column"},
+  flexDir: {
+    base: "column",
+    sm: "column",
+    md: "column",
+    lg: "column",
+    xl: "column",
+  },
   alignSelf: "center",
   justifySelf: "center",
   w: "fit-content",
-  ml: "10px"
+  ml: "10px",
 };
 
 export const text = {
@@ -14,11 +20,11 @@ export const text = {
 
 export const titleSX = {
   as: "h4",
-  w: "26em",
-  alignSelf: "center",
+  color: "black",
+  fontWeight: "bold",
+  fontSize: "1rem",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  fontWeight: 500, 
-  cursor: "pointer"
+  maxW: { base: "200px", sm: "300px", md: "400px" },
 };

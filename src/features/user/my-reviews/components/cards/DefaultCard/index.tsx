@@ -13,25 +13,15 @@ interface iRevisionCardProps {
   isEdited: boolean;
 }
 
-export default function RevisionCard({
-  title,
-  RevisorNames,
-  lastModification,
-  creation,
-  isEdited,
-}: iRevisionCardProps) {
+export default function RevisionCard({ title }: iRevisionCardProps) {
   return (
     <>
       <Card sx={conteiner}>
         <CardIcon />
-        <CardInfos title={title} RevisorNames={RevisorNames} />
+        <CardInfos title={title} id="" />
         <Box sx={infoconteiner}>
           <EnterRevisionButton />
-          <EditionInfos
-            lastModification={lastModification}
-            creation={creation}
-            isEdited={isEdited}
-          />
+          <EditionInfos status="" />
         </Box>
       </Card>
     </>
