@@ -1,6 +1,6 @@
 // External library
 import { useContext } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Box } from "@chakra-ui/react";
 
 // Context
@@ -33,27 +33,28 @@ const Sidebar = ({ type }: SidebarProps) => {
 
   return (
     <motion.div
-      className={isOpen ? Style.wrapper : Style.collapsed}
+      className={Style.wrapper}
       animate={{
-        width: isOpen ? "14rem" : "0px",
+        width: isOpen ? "14rem" : "3rem",
         borderRadius: "1.25rem",
+        backgroundColor: isOpen ? "#fff" : "#ffffff00",
       }}
-      transition={{ type: "tween", duration: 0.25 }}
+      transition={{ type: "tween", duration: 0.5 }}
     >
-      {isOpen ? (
-        <>
-          <Box className={Style.closeBtn}>
-            <CloseButton isOpen={isOpen} handleToggle={toggleSidebar} />
-          </Box>
-          <Navigation type={type} />
-        </>
-      ) : (
-        <CloseButton
-          isOpen={isOpen}
-          className={Style.collapsedBtn}
-          handleToggle={toggleSidebar}
-        />
-      )}
+      <Box className={isOpen ? Style.closeBtn : Style.collapsedBtn}>
+        <CloseButton isOpen={isOpen} handleToggle={toggleSidebar} />
+      </Box>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            animate={{ opacity: isOpen ? 1 : 0 }}
+            transition={{ duration: 0.25 }}
+            style={{ pointerEvents: isOpen ? "auto" : "none" }}
+          >
+            <Navigation type={type} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
