@@ -80,7 +80,9 @@ export default function EligibilityCriteria() {
           >
             <NavButton
               event={() =>
-                syncAndNavigate(`/review/planning/protocol/picoc/${id}`)
+                syncAndNavigate(
+                  `/review/planning/protocol/research-questions/${id}`
+                )
               }
               text="Back"
             />

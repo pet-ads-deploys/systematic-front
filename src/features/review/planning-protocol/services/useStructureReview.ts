@@ -58,7 +58,7 @@ export default function useStructureReview() {
   };
 
   const navigateToNextSection = (id: string) => {
-    toGo(`/review/planning/protocol/research-questions/${id}`);
+    toGo(`/review/planning/protocol/picoc/${id}`);
   };
 
   useEffect(() => {
