@@ -1,17 +1,8 @@
 // External library
 import { useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Circle,
-  Flex,
-  HStack,
-  SimpleGrid,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
-import { EditIcon } from "@chakra-ui/icons";
-import { BiSave } from "react-icons/bi";
+import { Box, Button, Circle, Flex, Text } from "@chakra-ui/react";
+import { EditIcon, CloseIcon } from "@chakra-ui/icons";
+import { FaCheckCircle } from "react-icons/fa";
 
 // Service
 import useProfile from "@features/user/profile/services/useProfile";
@@ -23,21 +14,16 @@ import Header from "@components/structure/Header/Header";
 import SkeletonLoader from "@components/feedback/Skeleton";
 import toaster from "@components/feedback/Toaster";
 import InputText from "@components/common/inputs/InputText";
-
-// Styles
-import { conteiner } from "./styles";
+import CardDefault from "@components/common/cards";
 
 // Guards
 import { isLeft } from "@features/shared/errors/pattern/Either";
 
 // Types
-import type { Profile } from "../../types";
-type UpdateProfileDTO = Omit<Profile, "userId" | "username" | "authorities">;
-type Mode = "DEFAULT" | "UPDATE";
+import type { Profile, UpdateProfileDTO, Mode } from "../../types";
 
 // Utils
 import { splitInitialCaracter } from "../../utils/helpers/formatters/SplitInitialCarater";
-import { capitalize } from "@features/shared/utils/helpers/formatters/CapitalizeText";
 
 // Constants
 const defaultUserProfile: Profile = {
@@ -174,165 +160,162 @@ export default function Profile() {
     setIsUpdateMode("DEFAULT");
   };
 
-  const { userId, username, name, email, affiliation, country, authorities } =
-    userProfile;
+  const { username, name, email, affiliation, country } = userProfile;
 
   const initialCaracter = splitInitialCaracter(name ?? username) || "U";
-  const formatterAuthorites = capitalize(
-    authorities.join(", ").toLocaleLowerCase()
-  );
 
   const isActiveUpdateMode = isUpdateMode !== "DEFAULT";
 
   return (
     <FlexLayout navigationType="Default">
       <Header text="My Profile" />
-      <Flex sx={conteiner}>
-        {isLoading ? (
-          <SkeletonLoader width="100%" height="100%" />
-        ) : (
-          <Box
-            alignItems="center"
-            justifyContent="space-between"
-            w="100%"
-            h="100%"
-            padding="1rem"
-            overflowX="auto"
-          >
-            <Flex
-              width="100%"
-              height="20%"
-              alignItems="center"
-              justifyContent="flex-start"
-              gap="1rem"
-            >
-              <Circle
-                size="10rem"
-                bg="blue.500"
-                color="white"
-                fontSize="5xl"
-                fontWeight="bold"
-                shadow="md"
+      <CardDefault backgroundColor="white" borderRadius="1rem">
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          width="100%"
+          height="100%"
+        >
+          <Box width="80%" height="calc(100% - 2rem)">
+            {isLoading ? (
+              <SkeletonLoader width="100%" height="100%" />
+            ) : (
+              <Box
+                alignItems="center"
+                justifyContent="space-between"
+                w="100%"
+                h="100%"
+                padding="1rem"
+                overflowX="auto"
               >
-                {initialCaracter}
-              </Circle>
-              <Box>
-                <Text fontSize="4xl" fontWeight="bold">
-                  {name ?? username}
-                </Text>
-                <Flex alignItems="center" gap=".5rem">
-                  <Text>{username}</Text>
-                  <Tooltip
-                    label={userId}
-                    placement="top"
-                    hasArrow
-                    borderRadius=".25rem"
-                  >
-                    <Circle
-                      size="1.5rem"
-                      bg="green.300"
-                      fontWeight="bold"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      #
-                    </Circle>
-                  </Tooltip>
-                </Flex>
-              </Box>
-            </Flex>
-            <Box height="100%" gap="1rem">
-              <SimpleGrid columns={{ base: 1, md: 2 }} spacing="1rem" mb="2rem">
-                <InputText
-                  nome="username"
-                  label="Username"
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  isDisabled
-                />
-                <InputText
-                  nome="name"
-                  label="Full Name"
-                  type="text"
-                  placeholder="Name"
-                  value={isActiveUpdateMode ? updateProfile.name : name}
-                  onChange={(event) =>
-                    handleChangeUserProfile("name", event.target.value)
-                  }
-                  isDisabled={!isActiveUpdateMode}
-                />
-                <InputText
-                  nome="email"
-                  label="Email"
-                  type="email"
-                  placeholder="Email"
-                  value={isActiveUpdateMode ? updateProfile.email : email}
-                  onChange={(event) =>
-                    handleChangeUserProfile("email", event.target.value)
-                  }
-                  isDisabled={!isActiveUpdateMode}
-                />
-                <InputText
-                  nome="affiliation"
-                  label="Affiliation"
-                  type="text"
-                  placeholder="Affiliation"
-                  value={
-                    isActiveUpdateMode ? updateProfile.affiliation : affiliation
-                  }
-                  onChange={(event) =>
-                    handleChangeUserProfile("affiliation", event.target.value)
-                  }
-                  isDisabled={!isActiveUpdateMode}
-                />
-                <InputText
-                  nome="country"
-                  label="Country"
-                  type="text"
-                  placeholder="Country"
-                  value={isActiveUpdateMode ? updateProfile.country : country}
-                  onChange={(event) =>
-                    handleChangeUserProfile("country", event.target.value)
-                  }
-                  isDisabled={!isActiveUpdateMode}
-                />
-                <InputText
-                  nome="authorities"
-                  label="Authorities"
-                  type="text"
-                  placeholder="Authorities"
-                  value={formatterAuthorites}
-                  isDisabled
-                />
-              </SimpleGrid>
-              <HStack spacing={4}>
-                <Button
-                  leftIcon={<EditIcon fontSize="1rem" />}
-                  colorScheme="blue"
-                  color="black"
-                  variant="outline"
-                  onClick={handleSetModeScreen}
+                <Flex
+                  width="100%"
+                  height="20%"
+                  alignItems="center"
+                  justifyContent="flex-start"
+                  gap="1rem"
                 >
-                  Update
-                </Button>
-
-                {isActiveUpdateMode && (
-                  <Button
-                    leftIcon={<BiSave fontSize="1rem" />}
+                  <Circle
+                    size="10rem"
                     bg="blue.500"
                     color="white"
-                    variant="solid"
-                    onClick={handleSubmitUpdate}
+                    fontSize="5xl"
+                    fontWeight="bold"
+                    shadow="md"
                   >
-                    Update profile
-                  </Button>
-                )}
-              </HStack>
-            </Box>
+                    {initialCaracter}
+                  </Circle>
+                  <Box>
+                    <Text fontSize="4xl" fontWeight="bold">
+                      {name ?? username}
+                    </Text>
+                    <Flex alignItems="center" gap=".5rem" color="gray.600">
+                      <Text>{username}</Text>
+                    </Flex>
+                  </Box>
+                </Flex>
+                <Box gap="1rem">
+                  <Box mb="2rem">
+                    <InputText
+                      width="calc(100% - 2rem)"
+                      nome="name"
+                      label="Full Name"
+                      type="text"
+                      placeholder="Name"
+                      value={isActiveUpdateMode ? updateProfile.name : name}
+                      onChange={(event) =>
+                        handleChangeUserProfile("name", event.target.value)
+                      }
+                      isDisabled={!isActiveUpdateMode}
+                    />
+                    <InputText
+                      width="calc(100% - 2rem)"
+                      nome="email"
+                      label="Email"
+                      type="email"
+                      placeholder="Email"
+                      value={isActiveUpdateMode ? updateProfile.email : email}
+                      onChange={(event) =>
+                        handleChangeUserProfile("email", event.target.value)
+                      }
+                      isDisabled={!isActiveUpdateMode}
+                    />
+                    <InputText
+                      width="calc(100% - 2rem)"
+                      nome="affiliation"
+                      label="Affiliation"
+                      type="text"
+                      placeholder="Affiliation"
+                      value={
+                        isActiveUpdateMode
+                          ? updateProfile.affiliation
+                          : affiliation
+                      }
+                      onChange={(event) =>
+                        handleChangeUserProfile(
+                          "affiliation",
+                          event.target.value
+                        )
+                      }
+                      isDisabled={!isActiveUpdateMode}
+                    />
+                    <InputText
+                      width="calc(100% - 2rem)"
+                      nome="country"
+                      label="Country"
+                      type="text"
+                      placeholder="Country"
+                      value={
+                        isActiveUpdateMode ? updateProfile.country : country
+                      }
+                      onChange={(event) =>
+                        handleChangeUserProfile("country", event.target.value)
+                      }
+                      isDisabled={!isActiveUpdateMode}
+                    />
+                  </Box>
+                  <Flex justifyContent="end" gap="2rem">
+                    {isActiveUpdateMode ? (
+                      <Button
+                        leftIcon={<CloseIcon color="white" fontSize=".75rem" />}
+                        colorScheme="red"
+                        color="white"
+                        variant="solid"
+                        onClick={handleSetModeScreen}
+                      >
+                        Cancel
+                      </Button>
+                    ) : (
+                      <Button
+                        leftIcon={<EditIcon fontSize="1.25rem" />}
+                        colorScheme="blue"
+                        color="black"
+                        variant="outline"
+                        onClick={handleSetModeScreen}
+                      >
+                        Update
+                      </Button>
+                    )}
+                    {isActiveUpdateMode && (
+                      <Button
+                        leftIcon={<FaCheckCircle fontSize="1rem" />}
+                        bg="green.500"
+                        color="white"
+                        variant="solid"
+                        onClick={handleSubmitUpdate}
+                      >
+                        Update
+                      </Button>
+                    )}
+                  </Flex>
+                </Box>
+              </Box>
+            )}
           </Box>
-        )}
-      </Flex>
+        </Box>
+      </CardDefault>
     </FlexLayout>
   );
 }
