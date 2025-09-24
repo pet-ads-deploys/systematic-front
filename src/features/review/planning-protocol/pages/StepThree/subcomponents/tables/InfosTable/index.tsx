@@ -64,14 +64,14 @@ const handleAddText = () => {
         <Tbody className="tableBody">
           {AddTexts.map((addText, index) => (
             <Tr key={index}>
-              <Td whiteSpace={"normal"} wordBreak={"break-word"}>
+              <Td whiteSpace={"normal"} wordBreak={"break-word"} py={"1"}>
                 {editIndex === index ? (
                   <Input value={editedValue} onChange={handleChange} />
                 ) : (
                   addText
                 )}
               </Td>
-              <Td textAlign={"right"}>
+              <Td textAlign={"right"} py={"1"}>
                 <DeleteButton
                   index={index}
                   handleDelete={() => onDeleteAddedText(index)}

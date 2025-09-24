@@ -17,10 +17,10 @@ export default function SelectInfosTable({
         <Tbody className="tableBody">
           {selectedItems.map((item, index) => (
             <Tr key={index}>
-              <Td whiteSpace={"normal"} wordBreak={"break-word"}>
+              <Td whiteSpace={"normal"} wordBreak={"break-word"} py={"1"}>
                 {item}
               </Td>
-              <Td textAlign={"right"}>
+              <Td textAlign={"right"} py={"1"}>
                 <DeleteButton
                   index={index}
                   handleDelete={() => onDeleteItem(index)}
