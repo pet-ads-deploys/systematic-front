@@ -13,6 +13,8 @@ import type { AccessCredentials } from "@features/auth/types";
 
 // Guards
 import { isLeft } from "@features/shared/errors/pattern/Either";
+import { ApplicationError } from "@features/shared/errors/base/ApplicationError";
+import useToaster from "@components/feedback/Toaster";
 
 export default function useHandleLogin() {
   const [credentials, setCredentials] = useState<AccessCredentials>({
@@ -28,6 +30,7 @@ export default function useHandleLogin() {
 
   const { toGo } = useNavigation();
   const result = useAuth();
+  const Toaster = useToaster();
 
   const handleChangeCredentials = (
     field: keyof typeof credentials,
@@ -43,6 +46,7 @@ export default function useHandleLogin() {
     const errors = {
       username: "",
       password: "",
+      general: "",
     };
 
     if (!credentials.username) {
@@ -61,7 +65,9 @@ export default function useHandleLogin() {
     }
 
     setErrors((prev) => ({ ...prev, ...errors }));
-    return errors.username === "" && errors.password === "";
+    return (
+      errors.username === "" && errors.password === "" && errors.general === ""
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -75,19 +81,23 @@ export default function useHandleLogin() {
 
       const { login } = result.value;
 
-      await login(credentials);
+      const tst = await login(credentials);
+      if (tst.value instanceof ApplicationError) {
+        throw tst.value;
+      }
       toGo("/home");
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
         general: "Wrong username or password",
       }));
-    } finally {
-      setErrors({
-        username: "",
-        password: "",
-        general: "",
+      handleChangeCredentials("password", "");
+      Toaster({
+        title: "Login failed",
+        description: "Incorrect username or password.",
+        status: "error",
       });
+    } finally {
       setIsSubmitting(false);
     }
   };
