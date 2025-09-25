@@ -1,9 +1,16 @@
 // External library
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
+// Constants
+import { ERROR_CODE } from "@features/shared/errors/constants/error";
+
 const Axios = axios.create({
-  baseURL: process.env.PUBLIC_API_URL,
+  baseURL: import.meta.env.VITE_PUBLIC_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
   withCredentials: true,
+  timeout: 100000,
 });
 
 Axios.interceptors.response.use(
@@ -19,7 +26,9 @@ Axios.interceptors.response.use(
 
     const { status } = error.response;
 
-    if (status !== 401 || originalRequest._retry) {
+    const authCodes = [ERROR_CODE.unauthorized, ERROR_CODE.forbidden];
+
+    if (authCodes.every((code) => code !== status) || originalRequest._retry) {
       return Promise.reject(error);
     }
 
@@ -31,7 +40,7 @@ Axios.interceptors.response.use(
 
       localStorage.setItem("accessToken", token);
 
-      originalRequest.headers.set("Authorization", `Bearer ${token}`);
+      originalRequest.headers.Authorization = `Bearer ${token}`;
 
       return Axios(originalRequest);
     } catch (err) {
