@@ -1,35 +1,32 @@
-// External Library
+// // External Library
 import { useState, useMemo } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
-// Types
+// // Styles
+import styles from "./styles.module.css";
+
+// // Types
 import type { GenericTableProps, SortConfig } from "./types";
 
 export default function DefaultTable<T extends object>({
+  title,
   columns,
   data,
 }: GenericTableProps<T>) {
   const [sortConfig, setSortConfig] = useState<SortConfig<T>>(null);
 
   const sortedData = useMemo(() => {
-    if (!sortConfig) {
-      return data;
-    }
-
+    if (!sortConfig) return data;
     const sorted = [...data].sort((primary, secund) => {
       const primaryValue = primary[sortConfig.key];
       const nextValue = secund[sortConfig.key];
-
-      if (primaryValue < nextValue) {
+      if (primaryValue < nextValue)
         return sortConfig.direction === "asc" ? -1 : 1;
-      }
-      if (primaryValue > nextValue) {
+      if (primaryValue > nextValue)
         return sortConfig.direction === "asc" ? 1 : -1;
-      }
       return 0;
     });
-
     return sorted;
-    // CORREÇÃO 2: O array de dependências deve usar `data`, não `articles`
   }, [data, sortConfig]);
 
   const handleHeaderClick = (key: keyof T) => {
@@ -41,33 +38,72 @@ export default function DefaultTable<T extends object>({
   };
 
   return (
-    <div>
-      <div>
-        <table>
+    <div className={styles.tableContainer}>
+      <h1 className={styles.title}>{title}</h1>
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
           <thead>
             <tr>
-              {columns.map((col, index) => (
-                <th key={index} onClick={() => handleHeaderClick(col.key)}>
-                  {col.label}
-                  {sortConfig?.key === col.key && (
-                    <span>{sortConfig.direction === "asc" ? " ▲" : " ▼"}</span>
-                  )}
+              {columns.map((col) => (
+                <th
+                  key={String(col.key)}
+                  className={styles.th}
+                  style={{ width: col.width }}
+                  onClick={() => handleHeaderClick(col.key)}
+                >
+                  <div className={styles.headerContent}>
+                    <span>{col.label}</span>
+                    <span className={styles.chevronIcon}>
+                      {sortConfig?.key === col.key ? (
+                        sortConfig.direction === "asc" ? (
+                          <FaChevronUp />
+                        ) : (
+                          <FaChevronDown />
+                        )
+                      ) : (
+                        <FaChevronDown style={{ opacity: 0.3 }} />
+                      )}
+                    </span>
+                  </div>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {sortedData.map((item, rowIndex) => (
-              <tr key={rowIndex}>
-                {columns.map((column, colIndex) => (
-                  <td key={colIndex}>
-                    {column.render
-                      ? column.render(item)
-                      : String(item[column.key] ?? "")}
-                  </td>
-                ))}
+            {sortedData.length > 0 ? (
+              sortedData.map((item, rowIndex) => (
+                <tr key={rowIndex} className={styles.tr}>
+                  {columns.map((column) => (
+                    <td
+                      key={String(column.key)}
+                      className={styles.td}
+                      style={{
+                        textAlign: column.render
+                          ? "center"
+                          : typeof item[column.key] === "number"
+                          ? "end"
+                          : "start",
+                      }}
+                    >
+                      {column.render ? (
+                        column.render(item)
+                      ) : (
+                        <div
+                          className={styles.truncate}
+                          title={String(item[column.key] ?? "")}
+                        >
+                          {String(item[column.key] ?? "")}
+                        </div>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr className={styles.emptyRow}>
+                <td colSpan={columns.length}>Nenhum dado encontrado.</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

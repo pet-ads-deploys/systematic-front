@@ -1,0 +1,78 @@
+.tableContainer {
+  width: 100%;
+  height: calc(100% - 20rem);
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+}
+
+.title {
+  position: sticky;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #263c56;
+}
+
+.tableWrapper {
+  width: 100%;
+  height: calc(100% - 3rem);
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.th {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-bottom: 5px solid #dde4e9;
+  color: #263c56;
+  text-transform: capitalize;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #ffffff;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.chevronIcon {
+  color: #263c56;
+  flex-shrink: 0;
+}
+
+.tr:hover {
+  background-color: #f1f5f9;
+}
+
+.td {
+  padding: 0.75rem 1rem;
+  color: #4a5568;
+}
+
+.emptyRow td {
+  text-align: center;
+  padding: 2rem;
+  color: #718096;
+  font-style: italic;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
