@@ -1,8 +1,9 @@
 // External library
 import { useEffect, useState } from "react";
 import { Box, Button, Circle, Flex, Text } from "@chakra-ui/react";
-import { EditIcon, CloseIcon } from "@chakra-ui/icons";
+import { CloseIcon } from "@chakra-ui/icons";
 import { FaCheckCircle } from "react-icons/fa";
+import { FaPen } from "react-icons/fa6";
 
 // Service
 import useProfile from "@features/user/profile/services/useProfile";
@@ -166,158 +167,145 @@ export default function Profile() {
 
   const isActiveUpdateMode = isUpdateMode !== "DEFAULT";
 
-return (
-  <FlexLayout navigationType="Default">
-    <Header text="My Profile" />
-    <CardDefault
-      backgroundColor="white"
-      borderRadius="1rem"
-      padding="1rem"
-      withShadow
-    >
-      {isLoading ? (
-        <SkeletonLoader width="100%" height="100%" />
-      ) : (
-        <Box display="flex" flexDirection="column" gap="2rem" height="100%">
-          
-          {/* SEÇÃO DE PERFIL - Container de Posicionamento Relativo */}
-          <Box
-            position="relative"
-            // Fundo pastel suave
-            bg="#9bd9fe"
-            p="3rem"
-            // Altura mínima para conter o avatar
-            minHeight="120px"
-            borderRadius="0.5rem"
-          >
-            <Circle
-              size="8rem"
-              bg="blue.500"
-              color="white"
-              fontSize="4xl"
-              fontWeight="bold"
-              shadow="md"
-              border="4px solid white" 
-              
-              // POSICIONAMENTO ABSOLUTO - APENAS PARA BAIXO
-              position="absolute"
-              // Posiciona na parte inferior, saindo para baixo
-              top="1.5rem" 
-              left="1.5rem"
+  return (
+    <FlexLayout navigationType="Default">
+      <Header text="My Profile" />
+      <CardDefault
+        backgroundColor="white"
+        borderRadius="1rem"
+        // padding="1rem"
+        withShadow
+      >
+        {isLoading ? (
+          <SkeletonLoader width="100%" height="100%" />
+        ) : (
+          <Box display="flex" flexDirection="column" gap="2rem" height="100%">
+            <Box position="relative" bg="#9bd9fe" minHeight="10rem">
+              <Circle
+                size="8rem"
+                bg="blue.500"
+                color="white"
+                fontSize="4xl"
+                fontWeight="bold"
+                shadow="md"
+                border="5px solid white"
+                position="absolute"
+                top="5rem"
+                left="1.5rem"
+              >
+                {initialCaracter}
+              </Circle>
+            </Box>
+            <Flex
+              width="100%"
+              padding="1rem"
+              mt="1.25rem"
+              justifyContent="space-between"
             >
-              {initialCaracter}
-            </Circle>
-          </Box>
+              <Box>
+                <Text fontSize="3xl" fontWeight="bold" lineHeight="short">
+                  {name ?? username}
+                </Text>
+                <Text fontSize="lg" color="gray.600">
+                  @{username}
+                </Text>
+              </Box>
+              <Button onClick={handleSetModeScreen}>
+                <FaPen />
+              </Button>
+            </Flex>
 
-          {/* NOME POSICIONADO ABAIXO DO AVATAR */}
-          <Box marginLeft="2.75rem" mt="0.5rem"> 
-            <Text fontSize="3xl" fontWeight="bold" lineHeight="short">
-              {name ?? username}
-            </Text>
-            <Text fontSize="lg" color="gray.600">
-              @{username}
-            </Text>
+            <Box padding="1rem">
+              <Flex flexWrap="wrap" gap="1rem">
+                <Box flex="1 1 48%">
+                  <InputText
+                    nome="name"
+                    label="Full Name"
+                    type="text"
+                    placeholder="Name"
+                    value={isActiveUpdateMode ? updateProfile.name : name}
+                    onChange={(event) =>
+                      handleChangeUserProfile("name", event.target.value)
+                    }
+                    isDisabled={!isActiveUpdateMode}
+                    width="100%"
+                  />
+                </Box>
+                <Box flex="1 1 48%">
+                  <InputText
+                    nome="email"
+                    label="Email"
+                    type="email"
+                    placeholder="Email"
+                    value={isActiveUpdateMode ? updateProfile.email : email}
+                    onChange={(event) =>
+                      handleChangeUserProfile("email", event.target.value)
+                    }
+                    isDisabled={!isActiveUpdateMode}
+                    width="100%"
+                  />
+                </Box>
+                <Box flex="1 1 48%">
+                  <InputText
+                    nome="affiliation"
+                    label="Affiliation"
+                    type="text"
+                    placeholder="Affiliation"
+                    value={
+                      isActiveUpdateMode
+                        ? updateProfile.affiliation
+                        : affiliation
+                    }
+                    onChange={(event) =>
+                      handleChangeUserProfile("affiliation", event.target.value)
+                    }
+                    isDisabled={!isActiveUpdateMode}
+                    width="100%"
+                  />
+                </Box>
+                <Box flex="1 1 48%">
+                  <InputText
+                    nome="country"
+                    label="Country"
+                    type="text"
+                    placeholder="Country"
+                    value={isActiveUpdateMode ? updateProfile.country : country}
+                    onChange={(event) =>
+                      handleChangeUserProfile("country", event.target.value)
+                    }
+                    isDisabled={!isActiveUpdateMode}
+                    width="100%"
+                  />
+                </Box>
+              </Flex>
+              <Flex justifyContent="flex-end" gap="1rem" mt="2rem" pb="1rem">
+                {isActiveUpdateMode && (
+                  <>
+                    <Button
+                      leftIcon={<CloseIcon color="white" fontSize=".75rem" />}
+                      colorScheme="red"
+                      color="white"
+                      variant="solid"
+                      onClick={handleSetModeScreen}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      leftIcon={<FaCheckCircle fontSize="1rem" />}
+                      bg="green.500"
+                      color="white"
+                      variant="solid"
+                      onClick={handleSubmitUpdate}
+                    >
+                      Save
+                    </Button>
+                  </>
+                )}
+              </Flex>
+            </Box>
           </Box>
-          
-          {/* INPUTS - REDUZIDO O ESPAÇO SUPERIOR */}
-          <Flex flexWrap="wrap" gap="1rem" >
-            <Box flex="1 1 48%">
-              <InputText
-                nome="name"
-                label="Full Name"
-                type="text"
-                placeholder="Name"
-                value={isActiveUpdateMode ? updateProfile.name : name}
-                onChange={(event) =>
-                  handleChangeUserProfile("name", event.target.value)
-                }
-                isDisabled={!isActiveUpdateMode}
-                width="100%"
-              />
-            </Box>
-            <Box flex="1 1 48%">
-              <InputText
-                nome="email"
-                label="Email"
-                type="email"
-                placeholder="Email"
-                value={isActiveUpdateMode ? updateProfile.email : email}
-                onChange={(event) =>
-                  handleChangeUserProfile("email", event.target.value)
-                }
-                isDisabled={!isActiveUpdateMode}
-                width="100%"
-              />
-            </Box>
-            <Box flex="1 1 48%">
-              <InputText
-                nome="affiliation"
-                label="Affiliation"
-                type="text"
-                placeholder="Affiliation"
-                value={
-                  isActiveUpdateMode ? updateProfile.affiliation : affiliation
-                }
-                onChange={(event) =>
-                  handleChangeUserProfile("affiliation", event.target.value)
-                }
-                isDisabled={!isActiveUpdateMode}
-                width="100%"
-              />
-            </Box>
-            <Box flex="1 1 48%">
-              <InputText
-                nome="country"
-                label="Country"
-                type="text"
-                placeholder="Country"
-                value={isActiveUpdateMode ? updateProfile.country : country}
-                onChange={(event) =>
-                  handleChangeUserProfile("country", event.target.value)
-                }
-                isDisabled={!isActiveUpdateMode}
-                width="100%"
-              />
-            </Box>
-          </Flex>
-          
-          {/* BOTÕES */}
-          <Flex justifyContent="flex-end" gap="1rem" mt="2rem" pb="1rem">
-            {isActiveUpdateMode ? (
-              <Button
-                leftIcon={<CloseIcon color="white" fontSize=".75rem" />}
-                colorScheme="red"
-                color="white"
-                variant="solid"
-                onClick={handleSetModeScreen}
-              >
-                Cancel
-              </Button>
-            ) : (
-              <Button
-                leftIcon={<EditIcon fontSize="1.25rem" />}
-                colorScheme="blue"
-                variant="solid"
-                onClick={handleSetModeScreen}
-              >
-                Update
-              </Button>
-            )}
-            {isActiveUpdateMode && (
-              <Button
-                leftIcon={<FaCheckCircle fontSize="1rem" />}
-                bg="green.500"
-                color="white"
-                variant="solid"
-                onClick={handleSubmitUpdate}
-              >
-                Save
-              </Button>
-            )}
-          </Flex>
-        </Box>
-      )}
-    </CardDefault>
-  </FlexLayout>
-);
+        )}
+      </CardDefault>
+    </FlexLayout>
+  );
 }
