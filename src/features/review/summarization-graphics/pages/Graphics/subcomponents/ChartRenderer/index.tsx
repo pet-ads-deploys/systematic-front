@@ -8,7 +8,6 @@ import {
 } from "../../styles";
 import CriteriaBarChart from "../CriteriaBarChart";
 import { SearchSorcesTable } from "@features/review/summarization-graphics/components/tables/SearchSoucesTable";
-import { IncludedStudiesTable } from "@features/review/summarization-graphics/components/tables/IncludedStudiesTable";
 import { IncludedStudiesLineChart } from "../IncludedStudiesLineChart";
 import { QuestionsCharts } from "../QuestionsCharts";
 import StudiesFunnelChart from "../StudiesFunnelChart";
@@ -19,6 +18,8 @@ import { StudyInterface } from "@features/review/shared/types/IStudy";
 import { useMemo } from "react";
 import ArticleInterface from "@features/review/shared/types/ArticleInterface";
 import { FiltersState } from "@features/review/summarization-graphics/hooks/useGraphicsState";
+
+import LayoutFactoryChart from "@features/review/summarization-graphics/components/tables/ChartTable/LayoutFactoryChart";
 
 type Props = {
   section: string;
@@ -94,6 +95,7 @@ export default function ChartsRenderer({
                 title="Search Sources"
                 labels={labels}
                 data={totalOfStudies}
+                section ={'searchSource'}
               />
             </Box>
           );
@@ -172,15 +174,23 @@ export default function ChartsRenderer({
         },
         filteredStudies
       );
+      console.log(articles);
 
       switch (type) {
         case "Table":
-          content = <IncludedStudiesTable filteredStudies={includedStudies} />;
+          content = (
+            <LayoutFactoryChart
+              articles={includedStudies as ArticleInterface[]}
+              isLoading={isLoadingArticles}
+            />
+          );
+
           break;
         case "Line Chart":
           content = (
             <IncludedStudiesLineChart filteredStudies={includedStudies} />
           );
+
           break;
       }
       break;
@@ -198,5 +208,14 @@ export default function ChartsRenderer({
       break;
   }
 
-  return <Box sx={graphicsconteiner}>{content}</Box>;
+  return (
+    <Box sx={
+        section === "Included Studies" && type === "Table"
+          ? undefined
+          : graphicsconteiner
+      }
+    >
+      {content}
+    </Box>
+  );
 }
