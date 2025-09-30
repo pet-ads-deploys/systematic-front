@@ -58,6 +58,7 @@ interface Props {
   sortConfig: { key: keyof ArticleInterface; direction: "asc" | "desc" } | null;
   layout?: ViewModel;
   columnsVisible: ColumnVisibility;
+  onRowClick?: (article: ArticleInterface) => void;
 }
 
 type HeaderKeys =
@@ -83,6 +84,7 @@ export default function Expanded({
   sortConfig,
   layout,
   columnsVisible,
+  onRowClick,
 }: Props) {
   const [columnWidths, setColumnWidths] = useState({
     studyReviewId: "62px",
@@ -373,8 +375,18 @@ export default function Expanded({
                       ? "#F5B7B1"
                       : "transparent"
                   }
-                  onClick={() => {
+                  onClick={(e) => {
+                    if (
+                      (e.target as HTMLElement).tagName.toLowerCase() ===
+                      "input"
+                    )
+                      return;
+
                     setSelectedArticleReview(reference.studyReviewId);
+
+                    if (onRowClick) {
+                      onRowClick(reference);
+                    }
                   }}
                   transition="background-color 0.3s, box-shadow 0.3s"
                   p="0"
