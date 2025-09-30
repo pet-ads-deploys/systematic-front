@@ -62,20 +62,20 @@ export default function StudiesFunnelChart() {
   const { funnelData, isLoading } = useFetchStudiesFunnel();
   const selectionStage = useFetchStudiesByStage("selection").studiesByStage;
   const extractionStage = useFetchStudiesByStage("extraction").studiesByStage;
-  //const inclusionCriteria  = useFetchStudiesByCriteria("inclusion").studiesByCriteria;
+  const inclusionCriteria  = useFetchStudiesByCriteria("inclusion").studiesByCriteria;
   const exclusionCriteria =
     useFetchStudiesByCriteria("exclusion").studiesByCriteria;
 
   if (isLoading) return <Text>Loading chart...</Text>;
 
   // Selection
-  /*const selectionIncludedIds = selectionStage?.includedStudies.ids ?? [];
+  const selectionIncludedIds = selectionStage?.includedStudies.ids ?? [];
   const studiesScreenedByCriteria  = [
     ...Object.values(inclusionCriteria?.criteria ?? {}).map(
       (ids) => ids.filter((id) => selectionIncludedIds.includes(id)).length
     ),
     funnelData?.totalScreened ?? 0
-  ];*/
+  ];
 
   const selectionExcludedIds = selectionStage?.excludedStudies.ids ?? [];
   const studiesExcludedInScreened = [
@@ -86,13 +86,13 @@ export default function StudiesFunnelChart() {
   ];
 
   // Extraction
-  /*const extractionIncludedIds = extractionStage?.includedStudies.ids ?? [];
+  const extractionIncludedIds = extractionStage?.includedStudies.ids ?? [];
   const studiesFullTextByCriteria = [
     ...Object.values(inclusionCriteria?.criteria ?? {}).map(
       (ids) => ids.filter((id) => extractionIncludedIds.includes(id)).length
     ),
     funnelData?.totalFullTextAssessed ?? 0
-  ];*/
+  ];
 
   const extractionExcludedIds = extractionStage?.excludedStudies.ids ?? [];
   const studiesExcludedInFullText = [
@@ -112,10 +112,9 @@ export default function StudiesFunnelChart() {
   const Inicialdata: (number | null | number[])[] = [
     totalIdentified,
     totalAfterDuplicates,
-    /*studiesScreenedByCriteria ?? []*/ funnelData?.totalScreened ?? null,
+    studiesScreenedByCriteria ?? [],
     studiesExcludedInScreened ?? [],
-    /*studiesFullTextByCriteria ?? []*/ funnelData?.totalFullTextAssessed ??
-      null,
+    studiesFullTextByCriteria ?? [],
     studiesExcludedInFullText ?? [],
     funnelData?.totalIncluded ?? null,
     null,

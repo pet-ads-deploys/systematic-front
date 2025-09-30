@@ -1,12 +1,15 @@
 import { ApexOptions } from "apexcharts";
 import Chart from "react-apexcharts";
 
+
+type section= 'inclusion'|'exclusion'|'searchSource' | 'questions'
 type Props = {
   title: string;
   labels: (string | number)[];
   data: number[];
   color?: string;
   height?: number;
+  section: section;
 };
 
 export default function BarChart({
@@ -14,8 +17,13 @@ export default function BarChart({
   labels,
   data,
   color = "#3c73b6",
-  height = 450,
+  height = 500,
+  section
+
 }: Props) {
+  const labelAbbreviation = section =='inclusion' ? 'IC'
+    : section == 'exclusion' ? 'EC' : section == 'questions' ? 'RQ' : 'Source'
+  
   const chartConfig = {
     series: [
       {
@@ -48,12 +56,12 @@ export default function BarChart({
           const fullText = labels[dataPointIndex];
           return `
             <Box style="padding: 8px; max-width: 300px; white-space: normal;">
-              <Text>C${dataPointIndex + 1} - ${fullText}</Text>
+              <Text>${labelAbbreviation +(dataPointIndex + 1)} - ${fullText}</Text>
             </Box>`;
         },
       },
       xaxis: {
-        categories: labels.map((_, indexOf) => `C${indexOf + 1}`),
+        categories: labels.map((_, indexOf) => `${labelAbbreviation +(indexOf + 1)}`),
       },
 
       title: {

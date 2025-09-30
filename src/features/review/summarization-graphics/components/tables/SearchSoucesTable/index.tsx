@@ -119,25 +119,25 @@ export const SearchSorcesTable = () => {
             return (
               <Tr key={data.source} _hover={{ bg: "gray.300" }}>
                 <Td>{data.source}</Td>
-                <Td>{includedStudiesBySource[data.source] ?? 0}</Td>
-                <Td>{data.excluded.length}</Td>
-                <Td>{data.totalOfStudies}</Td>
-                <Td>{indexingRate.toFixed(2)}%</Td>
-                <Td>{precisionRate.toFixed(2)}%</Td>
+                <Td isNumeric>{includedStudiesBySource[data.source] ?? 0}</Td>
+                <Td isNumeric>{data.excluded.length}</Td>
+                <Td isNumeric>{data.totalOfStudies}</Td>
+                <Td isNumeric>{indexingRate.toFixed(2)}%</Td>
+                <Td isNumeric>{precisionRate.toFixed(2)}%</Td>
               </Tr>
             );
           })}
         </Tbody>
-        <Tfoot bg="gray.300" fontWeight="bold">
-          <Tr>
-            <Td>All Studies</Td>
-            <Td>{dataStatistics.included}</Td>
-            <Td>{dataStatistics.excluded}</Td>
-            <Td>{dataStatistics.total}</Td>
-            <Td>{dataStatistics.indexingRate.toFixed(2)}%</Td>
-            <Td>{dataStatistics.precisionRate.toFixed(2)}%</Td>
-          </Tr>
-        </Tfoot>
+<Tfoot bg="gray.300" fontWeight="bold">
+  <Tr>
+    <Td>All Studies</Td>
+    <Td isNumeric>{dataStatistics.included}</Td>
+    <Td isNumeric>{dataStatistics.excluded}</Td>
+    <Td isNumeric>{dataStatistics.total}</Td>
+    <Td isNumeric>{dataStatistics.indexingRate.toFixed(2)}%</Td>
+    <Td isNumeric>{dataStatistics.precisionRate.toFixed(2)}%</Td>
+  </Tr>
+</Tfoot>
       </Table>
     </TableContainer>
   );

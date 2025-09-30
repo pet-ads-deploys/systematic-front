@@ -12,6 +12,7 @@ interface ArticleInterface {
   extractionStatus: string;
   score: number;
   searchSources:[];
+  criteria: string[];
 }
 
 export default ArticleInterface;

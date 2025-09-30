@@ -34,7 +34,7 @@ export default function CheckboxDropdown({
       >
         {label}
       </MenuButton>
-      <MenuList maxH="200px" overflowY="auto" p={2} bg={"white"}>
+      <MenuList maxH="200px" overflowY="auto" p="2" bg="white" zIndex="2000">
         {options.map((option) => (
           <MenuItem key={option} closeOnSelect={false}>
             <Checkbox
