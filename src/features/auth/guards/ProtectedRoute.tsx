@@ -2,11 +2,12 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-// Services
-import { useVerifyIfLoggedIn } from "../services/useVerifyIfLoggedIn";
+// Hooks
+import { useAuth } from "../hooks/useAuth";
 
 // Page Component
 import LoadingPage from "../../application/pages/LoadingPage";
+import { isLeft } from "@features/shared/errors/pattern/Either";
 
 // Types
 interface ProtectedRouteProps {
@@ -14,13 +15,19 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { isLoggedIn, isChecking } = useVerifyIfLoggedIn();
+  const authResult = useAuth();
 
-  if (isChecking) {
+  if (isLeft(authResult)) {
+    return <Navigate to="/" replace />;
+  }
+
+  const { user, isLoading } = authResult.value;
+
+  if (isLoading) {
     return <LoadingPage />;
   }
 
-  if (!isLoggedIn) {
+  if (!user) {
     return <Navigate to="/unauthorized" replace />;
   }
 

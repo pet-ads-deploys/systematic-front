@@ -12,14 +12,17 @@ import ForgotPassword from "@features/auth/components/forms/ForgotPassword";
 import HeaderLink from "./subcomponents/links/HeaderLink";
 
 // Hooks
-import useRecoverUserData from "@features/auth/hooks/useRecoverUserData";
 import { useNavigation } from "@features/shared/hooks/useNavigation";
+import { useAuth } from "@features/auth/hooks/useAuth";
 
 // Assets
 import Logo from "../../../../../../assets/images/logos/startwhite.png";
 
 // Styles
 import { HeaderTheme } from "./styles";
+
+// Guards
+import { isLeft } from "@features/shared/errors/pattern/Either";
 
 // Types
 interface IHeaderProps {
@@ -37,11 +40,12 @@ export default function Header({ show }: IHeaderProps) {
   const showLinks = show;
   const [showModal, setShowModal] = useState(false);
   const [openModal, setOpenModal] = useState<IModal>("");
-  const [username, setUsername] = useState<string | null>(null);
 
   const { toGo } = useNavigation();
 
-  useRecoverUserData(setUsername);
+  const authResult = useAuth();
+
+  const user = !isLeft(authResult) ? authResult.value.user : null;
 
   function handleSignUpModal() {
     setOpenModal("signup");
@@ -113,7 +117,7 @@ export default function Header({ show }: IHeaderProps) {
           )}
         </Flex>
         <Flex gap="5%">
-          {!username && (
+          {!user && (
             <Button
               _hover={{ color: "black", backgroundColor: "white" }}
               color={openModal == "signup" && showModal ? "black" : "white"}
@@ -125,14 +129,14 @@ export default function Header({ show }: IHeaderProps) {
               Sign Up
             </Button>
           )}
-          {username ? (
+          {user ? (
             <Button
               _hover={{ color: "black", backgroundColor: "white" }}
               color={openModal == "login" && showModal ? "black" : "white"}
               bgColor={openModal == "login" && showModal ? "white" : "green"}
               onClick={() => toGo("/home")}
             >
-              Bem vindo, {username}
+              Welcome, {user.sub}
             </Button>
           ) : (
             <Button
@@ -143,7 +147,7 @@ export default function Header({ show }: IHeaderProps) {
               }
               onClick={handleLoginModal}
             >
-              Log In
+              Login
             </Button>
           )}
         </Flex>
