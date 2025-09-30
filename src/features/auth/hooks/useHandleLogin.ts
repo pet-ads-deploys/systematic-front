@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useAuth } from "@features/auth/hooks/useAuth";
+import { useAuthStore } from "../store/useAuthStore";
 import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 // Constants
@@ -28,7 +28,9 @@ export default function useHandleLogin() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { toGo } = useNavigation();
-  const result = useAuth();
+
+  const { login } = useAuthStore();
+
   const Toaster = useToaster();
 
   const handleChangeCredentials = (
@@ -76,10 +78,6 @@ export default function useHandleLogin() {
 
     setIsSubmitting(true);
     try {
-      if (isLeft(result)) return;
-
-      const { login } = result.value;
-
       const loginResult = await login(credentials);
 
       if (isLeft(loginResult)) {

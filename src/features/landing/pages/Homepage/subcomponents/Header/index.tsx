@@ -13,7 +13,6 @@ import HeaderLink from "./subcomponents/links/HeaderLink";
 
 // Hooks
 import { useNavigation } from "@features/shared/hooks/useNavigation";
-import { useAuth } from "@features/auth/hooks/useAuth";
 
 // Assets
 import Logo from "../../../../../../assets/images/logos/startwhite.png";
@@ -22,7 +21,7 @@ import Logo from "../../../../../../assets/images/logos/startwhite.png";
 import { HeaderTheme } from "./styles";
 
 // Guards
-import { isLeft } from "@features/shared/errors/pattern/Either";
+import { useAuthStore } from "@features/auth/store/useAuthStore";
 
 // Types
 interface IHeaderProps {
@@ -43,9 +42,9 @@ export default function Header({ show }: IHeaderProps) {
 
   const { toGo } = useNavigation();
 
-  const authResult = useAuth();
+  const { user, _hasHydrated } = useAuthStore();
 
-  const user = !isLeft(authResult) ? authResult.value.user : null;
+  console.log("dados usuario", user);
 
   function handleSignUpModal() {
     setOpenModal("signup");
@@ -117,38 +116,52 @@ export default function Header({ show }: IHeaderProps) {
           )}
         </Flex>
         <Flex gap="5%">
-          {!user && (
-            <Button
-              _hover={{ color: "black", backgroundColor: "white" }}
-              color={openModal == "signup" && showModal ? "black" : "white"}
-              bgColor={
-                openModal == "signup" && showModal ? "white" : "rgba(0,0,0,0)"
-              }
-              onClick={handleSignUpModal}
-            >
-              Sign Up
-            </Button>
-          )}
-          {user ? (
-            <Button
-              _hover={{ color: "black", backgroundColor: "white" }}
-              color={openModal == "login" && showModal ? "black" : "white"}
-              bgColor={openModal == "login" && showModal ? "white" : "green"}
-              onClick={() => toGo("/home")}
-            >
-              Welcome, {user.sub}
-            </Button>
-          ) : (
-            <Button
-              _hover={{ color: "black", backgroundColor: "white" }}
-              color={openModal == "login" && showModal ? "black" : "white"}
-              bgColor={
-                openModal == "login" && showModal ? "white" : "rgba(0,0,0,0)"
-              }
-              onClick={handleLoginModal}
-            >
-              Login
-            </Button>
+          {_hasHydrated && (
+            <>
+              {user ? (
+                <Button
+                  _hover={{ color: "black", backgroundColor: "white" }}
+                  color={openModal == "login" && showModal ? "black" : "white"}
+                  bgColor={
+                    openModal == "login" && showModal ? "white" : "green"
+                  }
+                  onClick={() => toGo("/home")}
+                >
+                  Welcome, {user.sub}
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    _hover={{ color: "black", backgroundColor: "white" }}
+                    color={
+                      openModal == "signup" && showModal ? "black" : "white"
+                    }
+                    bgColor={
+                      openModal == "signup" && showModal
+                        ? "white"
+                        : "rgba(0,0,0,0)"
+                    }
+                    onClick={handleSignUpModal}
+                  >
+                    Sign Up
+                  </Button>
+                  <Button
+                    _hover={{ color: "black", backgroundColor: "white" }}
+                    color={
+                      openModal == "login" && showModal ? "black" : "white"
+                    }
+                    bgColor={
+                      openModal == "login" && showModal
+                        ? "white"
+                        : "rgba(0,0,0,0)"
+                    }
+                    onClick={handleLoginModal}
+                  >
+                    Login
+                  </Button>
+                </>
+              )}
+            </>
           )}
         </Flex>
       </Flex>

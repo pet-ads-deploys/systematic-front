@@ -2,22 +2,17 @@
 import { ImExit } from "react-icons/im";
 
 // Hooks
-import { useAuth } from "@features/auth/hooks/useAuth";
+import { useAuthStore } from "@features/auth/store/useAuthStore";
 import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 // Guards
-import { isLeft } from "@features/shared/errors/pattern/Either";
 
 // Styles
 import style from "./LogouButton.module.css";
 
 const LogoutButton = () => {
-  const result = useAuth();
+  const { logout } = useAuthStore();
   const { toGo } = useNavigation();
-
-  if (isLeft(result)) return null;
-
-  const { logout } = result.value;
 
   const handleLogout = async () => {
     await logout();

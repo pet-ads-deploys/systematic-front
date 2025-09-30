@@ -3,11 +3,10 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 // Hooks
-import { useAuth } from "../hooks/useAuth";
+import { useAuthStore } from "../store/useAuthStore";
 
 // Page Component
 import LoadingPage from "../../application/pages/LoadingPage";
-import { isLeft } from "@features/shared/errors/pattern/Either";
 
 // Types
 interface ProtectedRouteProps {
@@ -15,20 +14,14 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const authResult = useAuth();
+  const { user, _hasHydrated } = useAuthStore();
 
-  if (isLeft(authResult)) {
-    return <Navigate to="/" replace />;
-  }
-
-  const { user, isLoading } = authResult.value;
-
-  if (isLoading) {
+  if (!_hasHydrated) {
     return <LoadingPage />;
   }
 
   if (!user) {
-    return <Navigate to="/unauthorized" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return element;
