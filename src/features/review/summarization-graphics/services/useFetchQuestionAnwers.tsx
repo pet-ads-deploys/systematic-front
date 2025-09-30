@@ -12,7 +12,7 @@ export type AnswerData = {
     systematicStudyId: string;
     code: string;
     description: string;
-    questionType: "TEXTUAL" | "LABELED_SCALE" | "NUMBERED_SCALE" | "PICK_LIST";
+    questionType: "TEXTUAL" | "LABELED_SCALE" | "NUMBERED_SCALE" | "PICK_LIST" |"PICK_MANY";
     scales: Record<string, number> | null;
     higher: number | null;
     lower: number | null;
