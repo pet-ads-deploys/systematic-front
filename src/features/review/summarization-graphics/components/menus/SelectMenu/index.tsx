@@ -42,7 +42,7 @@ export default function SelectMenu<T>({
         </Flex>
       </MenuButton>
 
-      <MenuList bg="#EBF0F3" color="#2E4B6C" zIndex="2">
+      <MenuList bg="#EBF0F3" color="#2E4B6C" zIndex="2000">
         {options.map((option) => (
           <MenuItem
             key={getKey(option)}
