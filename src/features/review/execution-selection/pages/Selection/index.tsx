@@ -67,52 +67,65 @@ export default function Selection() {
 
   return (
     <FlexLayout navigationType="Accordion">
-      <Box w="98%" m="1rem" h="fit-content">
-        <Flex flexDirection="column" w="100%" h="100%" justifyContent="space-between">
-          <Flex w="100%" h="2.5rem" justifyContent="space-between" alignItems="center" mb="2rem">
-            <Header text="Selection" />
-            <SelectLayout handleChangeLayout={handleChangeLayout} />
+      <Box w="100%" px="1rem" py=".75rem" h="fit-content">
+        <Flex
+          w="100%"
+          h="2.5rem"
+          justifyContent="space-between"
+          alignItems="center"
+          mb="2rem"
+        >
+          <Header text="Selection" />
+          <SelectLayout handleChangeLayout={handleChangeLayout} />
+        </Flex>
+        <Box sx={inputconteiner}>
+          <Flex gap="1rem" w="35%" justifyContent="space-between">
+            <InputText
+              type="search"
+              placeholder="Insert article atribute"
+              nome="search"
+              onChange={(e) => setSearchString(e.target.value)}
+              value={searchString}
+            />
+            {layout !== "article" ? (
+              <ButtonsForMultipleSelection
+                onShowSelectedArticles={setShowSelected}
+                isShown={showSelected}
+              />
+            ) : null}
           </Flex>
-          <Box sx={inputconteiner}>
-            <Flex gap="1rem" w="35%" justifyContent="space-between">
-              <InputText
-                type="search"
-                placeholder="Insert article atribute"
-                nome="search"
-                onChange={(e) => setSearchString(e.target.value)}
-                value={searchString}
-              />
-              {layout !== "article" && (
-                <ButtonsForMultipleSelection
-                  onShowSelectedArticles={setShowSelected}
-                  isShown={showSelected}
-                />
-              )}
-            </Flex>
-            <Box display="flex" gap="1rem" justifyContent="space-between" alignItems="center">
-              <ColumnVisibilityMenu
-                columnsVisible={columnsVisible}
-                toggleColumnVisibility={toggleColumnVisibility}
-              />
-              <StatusSelect
-                articles={allArticles}
-                selectedValue={selectedStatus}
-                onSelect={handleSelectChange}
-                page="Selection"
-                placeholder="Selection status"
-              />
-            </Box>
-          </Box>
-          <Box w="100%" h="82.5vh">
-            <LayoutFactory
-              page="Selection"
-              articles={finalFilteredArticles}
+          <Box
+            display="flex"
+            gap="1rem"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <ColumnVisibilityMenu
               columnsVisible={columnsVisible}
-              layout={layout}
-              isLoading={isLoading}
+              toggleColumnVisibility={toggleColumnVisibility}
+            />
+            <StatusSelect
+              articles={allArticles}
+              selectedValue={selectedStatus}
+              onSelect={handleSelectChange}
+              page="Selection"
+              placeholder="Selection status"
             />
           </Box>
-        </Flex>
+        </Box>
+      </Box>
+      <Box
+        w="calc(100% - 1.25rem)"
+        h="calc(100vh - 10rem)"
+        padding="0 0 0 .5rem"
+      >
+        <LayoutFactory
+          page="Selection"
+          articles={finalFilteredArticles}
+          columnsVisible={columnsVisible}
+          layout={layout}
+          isLoading={isLoading}
+        />
       </Box>
     </FlexLayout>
   );
