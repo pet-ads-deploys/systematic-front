@@ -32,19 +32,28 @@ interface AuthState {
   logout: () => Promise<void>;
   _hasHydrated: boolean;
   setHasHydrated: (value: boolean) => void;
+  updateToken: (newToken: string) => void;
 }
 
 const { checkTokenExpiration, decodeToken } = useDecodeToken();
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       isLoading: true,
       _hasHydrated: false,
 
       setHasHydrated: (value) => {
         set({ _hasHydrated: value });
+      },
+
+      updateToken: (newToken: string) => {
+        const currentUser = get().user;
+        if (!currentUser) return;
+        set({
+          user: { ...currentUser, token: newToken },
+        });
       },
 
       login: async (credentials) => {
