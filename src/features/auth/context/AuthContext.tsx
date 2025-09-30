@@ -6,7 +6,7 @@ import useDecodeToken from "@features/auth/hooks/useDecodeToken";
 
 // Services
 import loginService from "@features/auth/services/login";
-import logoutService from "@features/auth/services/useLogout";
+import logoutService from "@features/auth/services/logout";
 
 // Utils
 import { userStorage } from "@features/auth/utils/userStorage";
