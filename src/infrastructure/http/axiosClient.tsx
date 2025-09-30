@@ -1,8 +1,15 @@
 // External library
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
+// Store
+import { useAuthStore } from "@features/auth/store/useAuthStore";
+
+// Services
+import refresh from "@features/auth/services/refresh";
+
 // Constants
 import { ERROR_CODE } from "@features/shared/errors/constants/error";
+import { isLeft } from "@features/shared/errors/pattern/Either";
 
 const Axios = axios.create({
   baseURL: import.meta.env.VITE_PUBLIC_API_URL,
@@ -35,12 +42,18 @@ Axios.interceptors.response.use(
     originalRequest._retry = true;
 
     try {
-      const refreshResponse = await Axios.post("auth/refresh", {});
-      const token = refreshResponse.data.accessToken;
+      const result = await refresh();
 
-      localStorage.setItem("accessToken", token);
+      if (isLeft(result)) {
+        useAuthStore.getState().logout();
+        return Promise.reject(result.value);
+      }
 
-      originalRequest.headers.Authorization = `Bearer ${token}`;
+      const { accessToken } = result.value;
+
+      localStorage.setItem("accessToken", accessToken);
+
+      originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
       return Axios(originalRequest);
     } catch (err) {
