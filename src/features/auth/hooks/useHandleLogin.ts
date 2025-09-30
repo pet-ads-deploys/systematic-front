@@ -13,7 +13,6 @@ import type { AccessCredentials } from "@features/auth/types";
 
 // Guards
 import { isLeft } from "@features/shared/errors/pattern/Either";
-import { ApplicationError } from "@features/shared/errors/base/ApplicationError";
 import useToaster from "@components/feedback/Toaster";
 
 export default function useHandleLogin() {
@@ -81,11 +80,25 @@ export default function useHandleLogin() {
 
       const { login } = result.value;
 
-      const tst = await login(credentials);
-      if (tst.value instanceof ApplicationError) {
-        throw tst.value;
+      const loginResult = await login(credentials);
+
+      if (isLeft(loginResult)) {
+        const errorMessage = loginResult.value.message;
+        setErrors((prev) => ({
+          ...prev,
+          general: errorMessage,
+        }));
+        handleChangeCredentials("password", "");
+        Toaster({
+          title: "Login failed",
+          description: errorMessage,
+          status: "error",
+        });
+        return;
       }
       toGo("/home");
+
+      setIsSubmitting(false);
     } catch (error) {
       setErrors((prev) => ({
         ...prev,

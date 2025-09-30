@@ -5,7 +5,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import useDecodeToken from "@features/auth/hooks/useDecodeToken";
 
 // Services
-import loginService from "@features/auth/services/useLoginUser";
+import loginService from "@features/auth/services/login";
 import logoutService from "@features/auth/services/useLogout";
 
 // Utils
@@ -79,17 +79,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     credentials: AccessCredentials
   ): Promise<Either<ApplicationError, void>> => {
     try {
-      const response = await loginService(credentials);
+      const result = await loginService(credentials);
 
-      if (!response || !response.data) {
-        return errorFactory("custom", "Request is empty.");
+      if (isLeft(result)) {
+        return result;
       }
 
-      const { accessToken: token } = response.data;
-
-      if (!token) {
-        return errorFactory("unauthorized", "Token not found.");
-      }
+      const { accessToken: token } = result.value;
 
       const decoded = decodeToken(token);
 
@@ -113,8 +109,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return right(undefined);
     } catch (error) {
       return errorFactory(
-        "unauthorized",
-        "Username or password incorrect. Try again with other credentials."
+        "custom",
+        "An unexpected error occurred in the login flow."
       );
     } finally {
       setIsLoading(false);
