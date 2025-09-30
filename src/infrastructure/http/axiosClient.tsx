@@ -51,12 +51,13 @@ Axios.interceptors.response.use(
 
       const { accessToken } = result.value;
 
-      localStorage.setItem("accessToken", accessToken);
+      useAuthStore.getState().updateToken(accessToken);
 
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
       return Axios(originalRequest);
     } catch (err) {
+      useAuthStore.getState().logout();
       return Promise.reject(err);
     }
   }
