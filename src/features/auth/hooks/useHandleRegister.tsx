@@ -5,7 +5,10 @@ import { useState } from "react";
 import useToaster from "@components/feedback/Toaster";
 
 // Services
-import registerUser from "@features/auth/services/useRegisterUser";
+import registerUser from "@features/auth/services/register";
+
+// Error
+import { ApplicationError } from "@features/shared/errors/base/ApplicationError";
 
 // Constants
 import { PASSWORD_LENGHT } from "@features/auth/constants/user";
@@ -127,19 +130,28 @@ const useHandleRegister = (redirectFormLogin: () => void) => {
     try {
       const { confirmPassword, ...rest } = createUser;
 
-      const result = await registerUser({ data: rest });
+      const result = await registerUser(rest);
 
       if (isLeft(result)) {
         const error = result.value;
-        if (error.message.includes("username"))
-          setErrors((prev) => ({ ...prev, username: error.message }));
-        else if (error.message.includes("email"))
-          setErrors((prev) => ({ ...prev, email: error.message }));
-        else {
+
+        if (error instanceof ApplicationError) {
+          if (error.message.includes("username")) {
+            setErrors((prev) => ({ ...prev, username: error.message }));
+          } else if (error.message.includes("email")) {
+            setErrors((prev) => ({ ...prev, email: error.message }));
+          } else {
+            toast({
+              title: "Error",
+              status: "error",
+              description: error.message,
+            });
+          }
+        } else {
           toast({
-            title: "Error",
+            title: "Unexpected Error",
             status: "error",
-            description: error.message,
+            description: "An unknown error format was received.",
           });
         }
         return;
