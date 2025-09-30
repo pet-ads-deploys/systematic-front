@@ -34,7 +34,8 @@
     "react-router-dom": "^6.21.1",
     "reactflow": "^11.11.4",
     "swr": "^2.3.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
