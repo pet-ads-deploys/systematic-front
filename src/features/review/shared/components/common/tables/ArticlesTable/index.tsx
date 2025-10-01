@@ -14,12 +14,14 @@ interface Props {
   articles: ArticleInterface[];
   layout?: ViewModel;
   columnsVisible: ColumnVisibility;
+  onRowClick?: (article: ArticleInterface) => void;
 }
 
 export default function ArticlesTable({
   articles,
   layout,
   columnsVisible,
+  onRowClick,
 }: Props) {
   const [sortConfig, setSortConfig] = useState<{
     key: keyof ArticleInterface;
@@ -61,6 +63,7 @@ export default function ArticlesTable({
       sortConfig={sortConfig}
       layout={layout}
       columnsVisible={columnsVisible}
+      onRowClick={onRowClick}
     />
   );
 }
