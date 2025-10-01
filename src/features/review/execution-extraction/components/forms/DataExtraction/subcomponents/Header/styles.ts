@@ -1,17 +1,20 @@
 export const container = {
   bg: "white",
   w: "100%",
-  borderRadius: ".5rem",
-  h: "5rem",
   justifyContent: "center",
   alignContent: "center",
   paddingTop: "2rem",
 };
 
 export const header = {
-  fontSize: "clamp(1.75rem, 2vw, 1.8rem)",
-  fontWeight: "bold",
+  fontSize: "clamp(1.15rem, 2vw, 1.5rem)",
+  fontWeight: "semibold",
   textAlign: "left",
   w: "100%",
-  color: "#263C56",
+  color: "black",
+  fontFamily: "Boboni",
+  lineHeight: "1.4rem",
+  whiteSpace: "normal",
+  wordBreak: "break-word",
+  overflowWrap: "break-word",
 };
