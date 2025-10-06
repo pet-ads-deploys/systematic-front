@@ -9,33 +9,31 @@ import StudySelectionContext from "@features/review/shared/context/StudiesSelect
 import useInputState from "@features/review/shared/hooks/useInputState";
 import useLayoutPage from "../../../shared/hooks/useLayoutPage";
 import { useFilterReviewArticles } from "../../../shared/hooks/useFilterReviewArticles";
+import useVisibiltyColumns from "@features/review/shared/hooks/useVisibilityColumns";
 
 // Components
 import Header from "../../../../../components/structure/Header/Header";
 import FlexLayout from "../../../../../components/structure/Flex/Flex";
 import InputText from "../../../../../components/common/inputs/InputText";
-import SelectInput from "../../../../../components/common/inputs/SelectInput";
 import LayoutFactory from "../../../shared/components/structure/LayoutFactory";
-import ButtonsForMultipleSelection from "../../../shared/components/common/buttons/ButtonsForMultipleSelection";
 import SelectLayout from "../../../shared/components/structure/LayoutButton";
 import ColumnVisibilityMenu from "@features/review/shared/components/common/menu/ColumnVisibilityMenu";
+import StatusSelect from "@features/review/shared/components/common/inputs/StatusSelect";
+import ButtonsForMultipleSelection from "@features/review/shared/components/common/buttons/ButtonsForMultipleSelection";
 
 // Styles
 import { inputconteiner } from "../../../shared/styles/executionStyles";
 
 // Types
 import type ArticleInterface from "../../../shared/types/ArticleInterface";
-import useVisibiltyColumns from "@features/review/shared/hooks/useVisibilityColumns";
 
 export default function Extraction() {
   const [searchString, setSearchString] = useState<string>("");
   const [showSelected, setShowSelected] = useState<boolean>(false);
   const selectionContext = useContext(StudySelectionContext);
-
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
   const { layout, handleChangeLayout } = useLayoutPage();
-
   const { columnsVisible, toggleColumnVisibility } = useVisibiltyColumns({
     page: "Extraction",
   });
@@ -45,10 +43,9 @@ export default function Extraction() {
   const isLoading = selectionContext?.isLoading ?? false;
 
   const allArticles: ArticleInterface[] = useMemo(() => {
-    return safeArticles.filter(
-      (art): art is ArticleInterface =>
-        "studyReviewId" in art && art.selectionStatus == "INCLUDED"
-    );
+    return safeArticles
+      .filter((art): art is ArticleInterface => "studyReviewId" in art)
+      .filter((art) => art.selectionStatus === "INCLUDED");
   }, [safeArticles]);
 
   const startFilteredArticles = useFilterReviewArticles(
@@ -67,34 +64,6 @@ export default function Extraction() {
     }
     return startFilteredArticles;
   }, [showSelected, startFilteredArticles, safeSelectedArticles]);
-
-  const statusCounts = useMemo(() => {
-    const counts: Record<string, number> = {
-      INCLUDED: 0,
-      DUPLICATED: 0,
-      EXCLUDED: 0,
-      UNCLASSIFIED: 0,
-    };
-
-    allArticles.forEach((article) => {
-      const status = article.extractionStatus as keyof typeof counts;
-      if (status && counts[status] !== undefined) {
-        counts[status] += 1;
-      }
-    });
-
-    return counts;
-  }, [allArticles]);
-
-  const statusOptions = [
-    { value: "INCLUDED", label: `Included (${statusCounts.INCLUDED})` },
-    { value: "DUPLICATED", label: `Duplicated (${statusCounts.DUPLICATED})` },
-    { value: "EXCLUDED", label: `Excluded (${statusCounts.EXCLUDED})` },
-    {
-      value: "UNCLASSIFIED",
-      label: `Unclassified (${statusCounts.UNCLASSIFIED})`,
-    },
-  ];
 
   return (
     <FlexLayout navigationType="Accordion">
@@ -135,12 +104,11 @@ export default function Extraction() {
               columnsVisible={columnsVisible}
               toggleColumnVisibility={toggleColumnVisibility}
             />
-            <SelectInput
-              names={statusOptions.map((opt) => opt.label)}
-              values={statusOptions.map((opt) => opt.value)}
-              onSelect={(value) => handleSelectChange(value)}
+            <StatusSelect
+              articles={allArticles}
               selectedValue={selectedStatus}
-              page={"extraction"}
+              onSelect={handleSelectChange}
+              page="Extraction"
               placeholder="Extraction status"
             />
           </Box>

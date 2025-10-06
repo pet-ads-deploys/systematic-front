@@ -18,7 +18,7 @@ type Question = {
   systematicStudyId: string;
   code: string;
   description: string;
-  questionType: "TEXTUAL" | "LABELED_SCALE" | "NUMBERED_SCALE" | "PICK_LIST";
+  questionType: "TEXTUAL" | "LABELED_SCALE" | "NUMBERED_SCALE" | "PICK_LIST" |"PICK_MANY";
   scales: Record<string, number> | null;
   higher: number | null;
   lower: number | null;
@@ -103,7 +103,7 @@ export const QuestionsCharts = ({
     <>
       {filteredAnswers.map((question) => {
         const description = question.question.description;
-        const questionId: any = question.question.questionId; // mantém como any
+        const questionId: any = question.question.questionId; // mantem como any
         const code = question.question.code;
         const entries = Object.entries(question.answer ?? {});
 
@@ -114,7 +114,7 @@ export const QuestionsCharts = ({
 
         if (
           questionType === "LABELED_SCALE" ||
-          questionType === "NUMBERED_SCALE"
+          questionType === "NUMBERED_SCALE" || questionType === "PICK_LIST"
         ) {
           chart = (
             <Box sx={piechartBox}>
@@ -125,13 +125,14 @@ export const QuestionsCharts = ({
               />
             </Box>
           );
-        } else if (questionType === "PICK_LIST") {
+        } else if (questionType === "PICK_MANY") {
           chart = (
             <Box>
               <BarChart
                 title={`Question code: ${code}`}
                 labels={labels}
                 data={data}
+                section={'questions'}
               />
             </Box>
           );

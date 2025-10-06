@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Components
 import SkeletonLoader from "@components/feedback/Skeleton";
@@ -32,8 +32,29 @@ export default function LayoutFactory({
   isLoading,
   columnsVisible,
 }: LayoutFactoryProps) {
+  const [currentLayout, setCurrentLayout] = useState<ViewModel>(layout);
+  const [selectedArticle, setSelectedArticle] =
+    useState<ArticleInterface | null>(null);
+  
+  useEffect(() => {
+    setCurrentLayout(layout);
+  }, [layout]);
+
+  const handleRowClick = (article: ArticleInterface) => {
+    if (!selectedArticle) {
+      setSelectedArticle(article);
+      setCurrentLayout("vertical");
+    }
+  };
+
   const layoutMap: Record<ViewModel, React.ReactNode> = {
-    table: <FullTable articles={articles} columnsVisible={columnsVisible} />,
+    table: (
+      <FullTable
+        articles={articles}
+        columnsVisible={columnsVisible}
+        onRowClick={handleRowClick}
+      />
+    ),
     vertical: (
       <SplitVertical
         articles={articles}
@@ -74,7 +95,7 @@ export default function LayoutFactory({
   return isLoading ? (
     <SkeletonLoader width="100%" height="100%" />
   ) : articles && articles.length > 0 ? (
-    layoutMap[layout]
+    layoutMap[currentLayout]
   ) : (
     <NoDataMessage />
   );

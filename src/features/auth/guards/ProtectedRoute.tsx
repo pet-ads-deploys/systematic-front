@@ -2,8 +2,8 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-// Services
-import { useVerifyIfLoggedIn } from "../services/useVerifyIfLoggedIn";
+// Hooks
+import { useAuthStore } from "../store/useAuthStore";
 
 // Page Component
 import LoadingPage from "../../application/pages/LoadingPage";
@@ -14,14 +14,14 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { isLoggedIn, isChecking } = useVerifyIfLoggedIn();
+  const { user, _hasHydrated } = useAuthStore();
 
-  if (isChecking) {
+  if (!_hasHydrated) {
     return <LoadingPage />;
   }
 
-  if (!isLoggedIn) {
-    return <Navigate to="/unauthorized" replace />;
+  if (!user) {
+    return <Navigate to="/" replace />;
   }
 
   return element;

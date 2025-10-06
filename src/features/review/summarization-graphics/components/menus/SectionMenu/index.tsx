@@ -51,6 +51,7 @@ export default function SectionMenu({ onSelect, selected }: MenuProps) {
         color="#2E4B6C"
         fontWeight="light"
         display="flex"
+        
       >
         <Flex w="100%" justifyContent="space-between" alignItems="center">
           <Box>Choose Section</Box>
@@ -58,7 +59,7 @@ export default function SectionMenu({ onSelect, selected }: MenuProps) {
         </Flex>
       </MenuButton>
 
-      <MenuList bg="#EBF0F3" color="#2E4B6C" >
+      <MenuList bg="#EBF0F3" color="#2E4B6C" zIndex="2000" >
         {Object.entries(groupedSections).map(([groupName, items]) => {
           const isUngrouped = groupName === "ungrouped";
 

@@ -44,11 +44,11 @@ const AccordionComponent = () => {
         path: `/review/planning/protocol/general-definition`,
         label: "Definition",
       },
+      { path: `/review/planning/protocol/picoc/${id}`, label: "PICOC" },
       {
         path: `/review/planning/protocol/research-questions/${id}`,
         label: "Research",
       },
-      { path: `/review/planning/protocol/picoc/${id}`, label: "PICOC" },
       {
         path: `/review/planning/protocol/eligibility-criteria/${id}`,
         label: "Criteria",

@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useAuth } from "@features/auth/hooks/useAuth";
+import { useAuthStore } from "../store/useAuthStore";
 import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 // Constants
@@ -13,6 +13,7 @@ import type { AccessCredentials } from "@features/auth/types";
 
 // Guards
 import { isLeft } from "@features/shared/errors/pattern/Either";
+import useToaster from "@components/feedback/Toaster";
 
 export default function useHandleLogin() {
   const [credentials, setCredentials] = useState<AccessCredentials>({
@@ -27,7 +28,10 @@ export default function useHandleLogin() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { toGo } = useNavigation();
-  const result = useAuth();
+
+  const { login } = useAuthStore();
+
+  const Toaster = useToaster();
 
   const handleChangeCredentials = (
     field: keyof typeof credentials,
@@ -43,6 +47,7 @@ export default function useHandleLogin() {
     const errors = {
       username: "",
       password: "",
+      general: "",
     };
 
     if (!credentials.username) {
@@ -61,7 +66,9 @@ export default function useHandleLogin() {
     }
 
     setErrors((prev) => ({ ...prev, ...errors }));
-    return errors.username === "" && errors.password === "";
+    return (
+      errors.username === "" && errors.password === "" && errors.general === ""
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,23 +78,37 @@ export default function useHandleLogin() {
 
     setIsSubmitting(true);
     try {
-      if (isLeft(result)) return;
+      const loginResult = await login(credentials);
 
-      const { login } = result.value;
-
-      await login(credentials);
+      if (isLeft(loginResult)) {
+        const errorMessage = loginResult.value.message;
+        setErrors((prev) => ({
+          ...prev,
+          general: errorMessage,
+        }));
+        handleChangeCredentials("password", "");
+        Toaster({
+          title: "Login failed",
+          description: errorMessage,
+          status: "error",
+        });
+        return;
+      }
       toGo("/home");
+
+      setIsSubmitting(false);
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
         general: "Wrong username or password",
       }));
-    } finally {
-      setErrors({
-        username: "",
-        password: "",
-        general: "",
+      handleChangeCredentials("password", "");
+      Toaster({
+        title: "Login failed",
+        description: "Incorrect username or password.",
+        status: "error",
       });
+    } finally {
       setIsSubmitting(false);
     }
   };

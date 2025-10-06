@@ -1,9 +1,23 @@
 // External library
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
+// Store
+import { useAuthStore } from "@features/auth/store/useAuthStore";
+
+// Services
+import refresh from "@features/auth/services/refresh";
+
+// Constants
+import { ERROR_CODE } from "@features/shared/errors/constants/error";
+import { isLeft } from "@features/shared/errors/pattern/Either";
+
 const Axios = axios.create({
-  baseURL: "http://localhost:8080/api/v1/",
+  baseURL: import.meta.env.VITE_PUBLIC_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
   withCredentials: true,
+  timeout: 100000,
 });
 
 Axios.interceptors.response.use(
@@ -19,22 +33,31 @@ Axios.interceptors.response.use(
 
     const { status } = error.response;
 
-    if (status !== 401 || originalRequest._retry) {
+    const authCodes = [ERROR_CODE.unauthorized, ERROR_CODE.forbidden];
+
+    if (authCodes.every((code) => code !== status) || originalRequest._retry) {
       return Promise.reject(error);
     }
 
     originalRequest._retry = true;
 
     try {
-      const refreshResponse = await Axios.post("auth/refresh", {});
-      const token = refreshResponse.data.accessToken;
+      const result = await refresh();
 
-      localStorage.setItem("accessToken", token);
+      if (isLeft(result)) {
+        useAuthStore.getState().logout();
+        return Promise.reject(result.value);
+      }
 
-      originalRequest.headers.set("Authorization", `Bearer ${token}`);
+      const { accessToken } = result.value;
+
+      useAuthStore.getState().updateToken(accessToken);
+
+      originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
       return Axios(originalRequest);
     } catch (err) {
+      useAuthStore.getState().logout();
       return Promise.reject(err);
     }
   }

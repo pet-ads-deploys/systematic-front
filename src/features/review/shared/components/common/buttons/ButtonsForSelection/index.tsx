@@ -134,10 +134,11 @@ export default function ButtonsForSelection({
             p=".5rem"
             borderRadius=".25rem"
           >
-            <Button onClick={goToPreviousArticle} bg="white">
-              <IoIosArrowBack color="black" size="1.5rem" />
-              prev
-            </Button>
+            <IoIosArrowBack
+              color="black"
+              size="1.5rem"
+              onClick={goToPreviousArticle}
+            />
           </Tooltip>
         </Flex>
       )}
@@ -211,10 +212,11 @@ export default function ButtonsForSelection({
             p=".5rem"
             borderRadius=".25rem"
           >
-            <Button onClick={goToNextArticle} bg="white">
-              next
-              <IoIosArrowForward color="black" size="1.5rem" />
-            </Button>
+            <IoIosArrowForward
+              color="black"
+              size="1.5rem"
+              onClick={goToNextArticle}
+            />
           </Tooltip>
         </Flex>
       )}

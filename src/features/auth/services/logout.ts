@@ -1,3 +1,6 @@
+// External library
+import { isAxiosError } from "axios";
+
 // Infra
 import Axios from "../../../infrastructure/http/axiosClient";
 
@@ -14,7 +17,7 @@ import errorFactory from "@features/shared/errors/factory/errorFactory";
 // Guard
 import { right } from "@features/shared/errors/pattern/Either";
 
-export default async function useLogout(): Promise<
+export default async function logout(): Promise<
   Either<ApplicationError, void>
 > {
   try {
@@ -22,6 +25,18 @@ export default async function useLogout(): Promise<
     userStorage.clear();
     return right(undefined);
   } catch (error) {
-    return errorFactory("custom", "Error logging out.");
+    if (isAxiosError(error)) {
+      const message =
+        error.response?.data?.detail ||
+        error.response?.data?.message ||
+        error.message;
+      return errorFactory("unauthorized", message);
+    }
+
+    if (error instanceof Error) {
+      return errorFactory("custom", error.message);
+    }
+
+    return errorFactory("custom", "An unexpected error occurred.");
   }
 }

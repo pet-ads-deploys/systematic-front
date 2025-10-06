@@ -74,12 +74,12 @@ const routesList: RouteObject[] = [
     element: <ProtectedRoute element={<GeneralDefinition />} />,
   },
   {
-    path: "/review/planning/protocol/research-questions/:id",
-    element: <ProtectedRoute element={<ResearchQuestions />} />,
-  },
-  {
     path: "/review/planning/protocol/picoc/:id",
     element: <ProtectedRoute element={<Picoc />} />,
+  },
+  {
+    path: "/review/planning/protocol/research-questions/:id",
+    element: <ProtectedRoute element={<ResearchQuestions />} />,
   },
   {
     path: "/review/planning/protocol/eligibility-criteria/:id",

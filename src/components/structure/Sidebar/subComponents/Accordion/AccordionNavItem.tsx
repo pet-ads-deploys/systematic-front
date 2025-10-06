@@ -49,7 +49,7 @@ const ProtocolAccordionSubItem = ({ to, text, icon }: Props) => {
             width: "6px",
             height: "100%",
             minHeight: "1rem",
-            borderLeft: isActive ? "2px solid black" : "2px dashed #272927",
+            borderLeft: isActive ? "2px solid black" : "none",
           }}
         />
         {text}

@@ -26,7 +26,7 @@ export default function SelectInput({
 
   const isProtocol = page === "protocol";
   return (
-    <FormControl mt={2} sx={formcontrol} w={isProtocol ? "55%" : "20rem"}>
+    <FormControl sx={formcontrol} w={isProtocol ? "55%" : "20rem"}>
       <Select
         bgColor={"#ffffffff"}
         color="#2E4B6C"

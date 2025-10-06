@@ -20,9 +20,11 @@ export default function Picoc() {
   return (
     <FlexLayout navigationType="Accordion">
       <Header text="Protocol: PICOC" />
-      <CardDefault backgroundColor="#fff"
-          borderRadius="1rem"
-          withShadow={false}>
+      <CardDefault
+        backgroundColor="#fff"
+        borderRadius="1rem"
+        withShadow={false}
+      >
         <FormControl
           m={"20px auto 0"}
           display={"flex"}
@@ -79,16 +81,14 @@ export default function Picoc() {
           >
             <NavButton
               event={() =>
-                syncAndNavigate(
-                  `/review/planning/protocol/research-questions/${id}`
-                )
+                syncAndNavigate("/review/planning/protocol/general-definition")
               }
               text="Back"
             />
             <NavButton
               event={() =>
                 syncAndNavigate(
-                  `/review/planning/protocol/eligibility-criteria/${id}`
+                  `/review/planning/protocol/research-questions/${id}`
                 )
               }
               text="Next"

@@ -4,6 +4,12 @@ import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 // Types
 interface ITextFieldProps {
   label?: string;
+  width?: string | number;
+  maxWidth?: string | number;
+  minWidth?: string | number;
+  height?: string | number;
+  maxHeight?: string | number;
+  minHeight?: string | number;
   placeholder: string;
   type: string;
   nome: string;
@@ -15,6 +21,12 @@ interface ITextFieldProps {
 
 export default function InputText({
   label,
+  width,
+  minWidth,
+  maxWidth,
+  height,
+  minHeight,
+  maxHeight,
   placeholder,
   type,
   nome,
@@ -26,7 +38,11 @@ export default function InputText({
   const isSearchField = type === "search";
 
   return (
-    <FormControl maxW={"60vw"} mt={isSearchField ? "" : 10}>
+    <FormControl
+      width={width ? `clamp(${minWidth}, ${width}, ${maxWidth})` : "60vw"}
+      height={`clamp(${minHeight}, ${height}, ${maxHeight})`}
+      mt={isSearchField ? "" : 5}
+    >
       <FormControl>
         {label && (
           <FormLabel

@@ -5,13 +5,10 @@ import useSWR from "swr";
 import Axios from "../../../../infrastructure/http/axiosClient";
 
 // Hooks
-import { useAuth } from "@features/auth/hooks/useAuth";
+import { useAuthStore } from "@features/auth/store/useAuthStore";
 
 // Types
 import type { CardReview } from "../types";
-
-// Guards
-import { isLeft } from "@features/shared/errors/pattern/Either";
 
 // Utils
 import getRequestOptions from "@features/auth/utils/getRequestOptions";
@@ -23,11 +20,7 @@ interface HttpResponse {
 export default function useGetReviewCard() {
   localStorage.removeItem("systematicReviewId");
 
-  const result = useAuth();
-
-  const user = !isLeft(result) ? result.value.user : null;
-  const authLoading = !isLeft(result) ? result.value.isLoading : false;
-  const authError = isLeft(result) ? result.value.message : null;
+  const { user, isLoading: authLoading } = useAuthStore();
 
   const userId = user?.id ?? null;
 
@@ -53,7 +46,7 @@ export default function useGetReviewCard() {
   return {
     cardData: data,
     isLoaded: !isLoading,
-    error: error || authError,
+    error: error,
     mutate,
   };
 }

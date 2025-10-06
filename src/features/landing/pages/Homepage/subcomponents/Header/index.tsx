@@ -12,7 +12,6 @@ import ForgotPassword from "@features/auth/components/forms/ForgotPassword";
 import HeaderLink from "./subcomponents/links/HeaderLink";
 
 // Hooks
-import useRecoverUserData from "@features/auth/hooks/useRecoverUserData";
 import { useNavigation } from "@features/shared/hooks/useNavigation";
 
 // Assets
@@ -20,6 +19,9 @@ import Logo from "../../../../../../assets/images/logos/startwhite.png";
 
 // Styles
 import { HeaderTheme } from "./styles";
+
+// Guards
+import { useAuthStore } from "@features/auth/store/useAuthStore";
 
 // Types
 interface IHeaderProps {
@@ -37,11 +39,12 @@ export default function Header({ show }: IHeaderProps) {
   const showLinks = show;
   const [showModal, setShowModal] = useState(false);
   const [openModal, setOpenModal] = useState<IModal>("");
-  const [username, setUsername] = useState<string | null>(null);
 
   const { toGo } = useNavigation();
 
-  useRecoverUserData(setUsername);
+  const { user, _hasHydrated } = useAuthStore();
+
+  console.log("dados usuario", user);
 
   function handleSignUpModal() {
     setOpenModal("signup");
@@ -113,38 +116,52 @@ export default function Header({ show }: IHeaderProps) {
           )}
         </Flex>
         <Flex gap="5%">
-          {!username && (
-            <Button
-              _hover={{ color: "black", backgroundColor: "white" }}
-              color={openModal == "signup" && showModal ? "black" : "white"}
-              bgColor={
-                openModal == "signup" && showModal ? "white" : "rgba(0,0,0,0)"
-              }
-              onClick={handleSignUpModal}
-            >
-              Sign Up
-            </Button>
-          )}
-          {username ? (
-            <Button
-              _hover={{ color: "black", backgroundColor: "white" }}
-              color={openModal == "login" && showModal ? "black" : "white"}
-              bgColor={openModal == "login" && showModal ? "white" : "green"}
-              onClick={() => toGo("/home")}
-            >
-              Bem vindo, {username}
-            </Button>
-          ) : (
-            <Button
-              _hover={{ color: "black", backgroundColor: "white" }}
-              color={openModal == "login" && showModal ? "black" : "white"}
-              bgColor={
-                openModal == "login" && showModal ? "white" : "rgba(0,0,0,0)"
-              }
-              onClick={handleLoginModal}
-            >
-              Log In
-            </Button>
+          {_hasHydrated && (
+            <>
+              {user ? (
+                <Button
+                  _hover={{ color: "black", backgroundColor: "white" }}
+                  color={openModal == "login" && showModal ? "black" : "white"}
+                  bgColor={
+                    openModal == "login" && showModal ? "white" : "green"
+                  }
+                  onClick={() => toGo("/home")}
+                >
+                  Welcome, {user.sub}
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    _hover={{ color: "black", backgroundColor: "white" }}
+                    color={
+                      openModal == "signup" && showModal ? "black" : "white"
+                    }
+                    bgColor={
+                      openModal == "signup" && showModal
+                        ? "white"
+                        : "rgba(0,0,0,0)"
+                    }
+                    onClick={handleSignUpModal}
+                  >
+                    Sign Up
+                  </Button>
+                  <Button
+                    _hover={{ color: "black", backgroundColor: "white" }}
+                    color={
+                      openModal == "login" && showModal ? "black" : "white"
+                    }
+                    bgColor={
+                      openModal == "login" && showModal
+                        ? "white"
+                        : "rgba(0,0,0,0)"
+                    }
+                    onClick={handleLoginModal}
+                  >
+                    Login
+                  </Button>
+                </>
+              )}
+            </>
           )}
         </Flex>
       </Flex>

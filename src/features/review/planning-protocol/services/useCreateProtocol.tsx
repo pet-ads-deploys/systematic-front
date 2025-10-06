@@ -249,9 +249,11 @@ export default function useCreateProtocol() {
   async function sendSelectData(data: string[], context: string) {
     let content;
 
+    const upperData = data.map(i => i.toUpperCase());
+
     try {
-      if (context == "Languages") content = { studiesLanguages: data };
-      else content = { informationSources: data };
+      if (context == "Languages") content = { studiesLanguages: upperData };
+      else content = { informationSources: upperData };
 
       await Axios.put(url, content, options);
     } catch (err) {

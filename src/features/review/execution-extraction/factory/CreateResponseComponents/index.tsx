@@ -28,8 +28,6 @@ export default function CreateResponseComponent({
 
   if (!question) return;
 
-  console.log("questão dentro da factory", question);
-
   const questionTypesMap: Record<TypeOfQuestions, ReactNode> = {
     TEXTUAL: (
       <TextualResponse

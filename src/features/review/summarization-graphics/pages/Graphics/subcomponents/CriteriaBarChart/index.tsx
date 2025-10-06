@@ -61,6 +61,7 @@ const filteredStudiesIds = filteredStudies
       labels={labels}
       data={data}
       color={color}
+      section={criteria}
     />
   );
 }
