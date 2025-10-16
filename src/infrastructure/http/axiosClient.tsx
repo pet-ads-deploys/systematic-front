@@ -20,6 +20,21 @@ const Axios = axios.create({
   timeout: 100000,
 });
 
+Axios.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    const token = useAuthStore.getState().user?.token;
+
+    if (token && !config.headers.Authorization) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error);
+  }
+);
+
 Axios.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
