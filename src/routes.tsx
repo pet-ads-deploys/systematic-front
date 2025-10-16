@@ -24,11 +24,6 @@ import SelectionAndExtraction from "@features/review/planning-protocol/pages/Sel
 import RiskOfBiasAssessment from "@features/review/planning-protocol/pages/RiskOfBiasAssessment ";
 import AnalysisAndSynthesisOfResults from "@features/review/planning-protocol/pages/AnalysisAndSynthesisOfResults";
 
-// Protocol
-import Protocol from "@features/review/planning-protocol/pages/StepOne";
-import ProtocolPartThree from "@features/review/planning-protocol/pages/StepThree";
-import ProtocolPartTwo from "@features/review/planning-protocol/pages/StepTwo";
-
 // Execution
 import Identification from "@features/review/execution-identification/pages/Identification";
 import IdentificationSession from "@features/review/execution-identification/pages/IdentificationSession";
@@ -102,18 +97,6 @@ const routesList: RouteObject[] = [
   {
     path: "/review/planning/protocol/analysis-and-synthesis-of-results/:id",
     element: <ProtectedRoute element={<AnalysisAndSynthesisOfResults />} />,
-  },
-  {
-    path: "/review/planning/protocol-part-I/:id",
-    element: <Protocol />,
-  },
-  {
-    path: "/review/planning/protocol-part-II/:id",
-    element: <ProtectedRoute element={<ProtocolPartTwo />} />,
-  },
-  {
-    path: "/review/planning/protocol-part-III/:id",
-    element: <ProtectedRoute element={<ProtocolPartThree />} />,
   },
   {
     path: "/review/execution/identification",
