@@ -28,10 +28,7 @@ export default async function login(
     return right(response);
   } catch (error) {
     if (isAxiosError(error)) {
-      const message =
-        error.response?.data?.detail ||
-        error.response?.data?.message ||
-        error.message;
+      const message = "Wrong username or password";
       return errorFactory("unauthorized", message);
     }
 
