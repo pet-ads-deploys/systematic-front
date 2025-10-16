@@ -6,7 +6,7 @@ import Header from "@components/structure/Header/Header";
 import NavButton from "@components/common/buttons/NavigationButton";
 import TextAreaInput from "../../../../../components/common/inputs/InputTextArea";
 import FlexLayout from "@components/structure/Flex/Flex";
-import InteractiveTable from "@features/review/planning-protocol/pages/StepThree/subcomponents/tables/InteractiveTable";
+import InteractiveTable from "@features/review/planning-protocol/components/common/tables/InteractiveTable";
 import CardDefault from "@components/common/cards";
 
 // Service

@@ -1,7 +1,7 @@
 import { AddIcon } from "@chakra-ui/icons";
 import EditButton from "@components/common/buttons/EditButton";
 import DeleteButton from "@components/common/buttons/DeleteButton";
-import { useInteractiveTable } from "../../../../../hooks/useInteractiveTable";
+import { useInteractiveTable } from "../../../../hooks/useInteractiveTable";
 import {
   TableContainer,
   Table,
@@ -15,8 +15,8 @@ import {
   Input,
   FormLabel,
 } from "@chakra-ui/react";
-import useSendExtractionForm from "../../../../../../execution-extraction/services/useSendExtractionForm";
-import Axios from "../../../../../../../../infrastructure/http/axiosClient";
+import useSendExtractionForm from "../../../../../execution-extraction/services/useSendExtractionForm";
+import Axios from "../../../../../../../infrastructure/http/axiosClient";
 import { useEffect, useState } from "react";
 import NumberScaleModal from "../../modals/NumberScaleModal";
 import PickListModal from "../../modals/PickListModal";

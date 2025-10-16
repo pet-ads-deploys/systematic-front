@@ -1,6 +1,6 @@
 import EditButton from "@components/common/buttons/EditButton";
 import DeleteButton from "@components/common/buttons/DeleteButton";
-import { useEditLabeledList } from "../../../../../hooks/useEditLabeledList";
+import { useEditLabeledList } from "../../../../hooks/useEditLabeledList";
 
 import { Table, Tbody, Tr, Td, TableContainer, Input } from "@chakra-ui/react";
 import { tbConteiner } from "../InfosTable/styles";

@@ -1,5 +1,6 @@
 import {
   Button,
+  FormControl,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -9,34 +10,25 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
+import AddLabeledScaleTable from "@features/review/planning-protocol/components/common/inputs/labeledScale/AddLabeledScaleTable";
 import { useEffect } from "react";
 import { Dispatch, SetStateAction } from "react";
-import NumberScaleTable from "../../tables/NumberScaleTable";
-import useNumberScale from "../../../../../hooks/useNumberScale";
 
 interface Props {
   show: Dispatch<SetStateAction<boolean>>;
-  scaleHolder: React.Dispatch<React.SetStateAction<number[]>>;
-  values: number[];
+  questionHolder: React.Dispatch<React.SetStateAction<Record<string, number>>>;
+  questions: Record<string, number>;
 }
 
-function NumberScaleModal({ show, scaleHolder, values }: Props) {
-  const { handleMinimalValue, handleMaximalValue, minimalValue, maximalValue } =
-    useNumberScale();
+function LabeledScaleModal({ show, questionHolder, questions }: Props) {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   useEffect(() => {
-    // console.log(values);
     onOpen();
-    handleMinimalValue("", values[0]);
-    handleMaximalValue("", values[1]);
-  }, []);
+    console.log(questions);
+  }, [questions]);
 
   function handleSave() {
-    if (minimalValue < maximalValue) {
-      let array: number[] = [minimalValue, maximalValue];
-      scaleHolder(array);
-    }
     onClose();
     show(false);
   }
@@ -46,16 +38,18 @@ function NumberScaleModal({ show, scaleHolder, values }: Props) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          Values to number scale
+          Values to labeled list
           <ModalCloseButton onClick={onClose} />
         </ModalHeader>
         <ModalBody>
-          <NumberScaleTable
-            handleMaximalValue={handleMaximalValue}
-            handleMinimalValue={handleMinimalValue}
-            minimalValue={minimalValue}
-            maximalValue={maximalValue}
-          />
+          <FormControl>
+            <AddLabeledScaleTable
+              questions={questions}
+              questionHolder={questionHolder}
+              placeholder="Insert your question here"
+              text="question"
+            />
+          </FormControl>
         </ModalBody>
         <ModalFooter>
           <Button onClick={onClose} m={"1rem"}>
@@ -68,4 +62,4 @@ function NumberScaleModal({ show, scaleHolder, values }: Props) {
   );
 }
 
-export default NumberScaleModal;
+export default LabeledScaleModal;

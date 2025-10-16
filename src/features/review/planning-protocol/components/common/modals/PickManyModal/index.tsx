@@ -9,18 +9,18 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import AddPickListTable from "@features/review/planning-protocol/pages/StepThree/subcomponents/inputs/pickList/AddPickListTable";
+import AddPickListTable from "@features/review/planning-protocol/components/common/inputs/pickList/AddPickListTable";
 import { useEffect } from "react";
 
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   show: Dispatch<SetStateAction<boolean>>;
-  questionHolder: React.Dispatch<React.SetStateAction<string[]>>;
-  questions: string[];
+  optionHolder: React.Dispatch<React.SetStateAction<string[]>>;
+  options: string[];
 }
 
-function PickListModal({ show, questionHolder, questions }: Props) {
+function PickManyModal({ show, optionHolder, options }: Props) {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   useEffect(() => {
@@ -37,15 +37,15 @@ function PickListModal({ show, questionHolder, questions }: Props) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          Insert the options
+          Insert multiple options
           <ModalCloseButton onClick={close} />
         </ModalHeader>
         <ModalBody>
           <AddPickListTable
-            text="Options"
-            placeholder="Options here"
-            questionHolder={questionHolder}
-            questions={questions}
+            text="Multiple Options"
+            placeholder="Type an option"
+            questionHolder={optionHolder}
+            questions={options}
           />
         </ModalBody>
         <ModalFooter>
@@ -56,4 +56,4 @@ function PickListModal({ show, questionHolder, questions }: Props) {
   );
 }
 
-export default PickListModal;
+export default PickManyModal;

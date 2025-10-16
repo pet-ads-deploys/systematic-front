@@ -2,7 +2,7 @@ import { FormControl, FormLabel } from "@chakra-ui/react";
 import { useAddText } from "../../../../../services/useAddText";
 import { useDeleteText } from "../../../../../hooks/useDeleteText";
 import { formcontrol, label } from "./styles";
-import InfosTable from "@features/review/planning-protocol/pages/StepThree/subcomponents/tables/InfosTable";
+import InfosTable from "@features/review/planning-protocol/components/common/tables/InfosTable";
 
 interface AddTextTableProps {
   text: string;
