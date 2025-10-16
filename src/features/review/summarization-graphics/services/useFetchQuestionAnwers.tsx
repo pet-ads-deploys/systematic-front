@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import Axios from "../../../../infrastructure/http/axiosClient";
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import { useFetchExtractionQuestions } from "../../execution-extraction/services/useFetchExtractionQuestions";
 import { useFetchRobQuestions } from "../../execution-extraction/services/useFetchRobQuestions";
 
@@ -12,7 +11,12 @@ export type AnswerData = {
     systematicStudyId: string;
     code: string;
     description: string;
-    questionType: "TEXTUAL" | "LABELED_SCALE" | "NUMBERED_SCALE" | "PICK_LIST" |"PICK_MANY";
+    questionType:
+      | "TEXTUAL"
+      | "LABELED_SCALE"
+      | "NUMBERED_SCALE"
+      | "PICK_LIST"
+      | "PICK_MANY";
     scales: Record<string, number> | null;
     higher: number | null;
     lower: number | null;
@@ -28,13 +32,11 @@ const fetcher = async (
 ): Promise<AnswerData[]> => {
   if (!systematicStudyId || questionIds.length === 0) return [];
 
-  const options = getRequestOptions();
-
   try {
     const results = await Promise.all(
       questionIds.map(async (id) => {
         const path = `systematic-study/${systematicStudyId}/report/find-answer/${id}`;
-        const res = await Axios.get<AnswerData>(path, options);
+        const res = await Axios.get<AnswerData>(path);
         return res.data;
       })
     );

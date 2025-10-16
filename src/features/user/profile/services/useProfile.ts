@@ -4,9 +4,6 @@ import useSWR from "swr";
 // Infra
 import Axios from "../../../../infrastructure/http/axiosClient";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Error
 import { ApplicationError } from "@features/shared/errors/base/ApplicationError";
 
@@ -22,8 +19,7 @@ import type { Profile } from "../types";
 export default function useProfile() {
   const fetcher = async (): Promise<Either<ApplicationError, Profile>> => {
     try {
-      const options = getRequestOptions();
-      const response = await Axios.get<Profile>("user/profile", options);
+      const response = await Axios.get<Profile>("user/profile");
       return right(response.data);
     } catch (error) {
       return errorFactory("custom", (error as Error).message);

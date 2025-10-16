@@ -7,9 +7,6 @@ import Axios from "../../../../infrastructure/http/axiosClient";
 // Hooks
 import { useNavigation } from "@features/shared/hooks/useNavigation";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Types
 import type { PICOC } from "../pages/Picoc/types";
 import type { ResearchQuestion } from "../pages/ResearchQuestions/types";
@@ -157,11 +154,10 @@ export default function useCreateProtocol() {
 
   const id = localStorage.getItem("systematicReviewId") || "";
   const url = `systematic-study/${id}/protocol`;
-  const options = getRequestOptions();
 
   useEffect(() => {
     async function fetch() {
-      const response = await Axios.get(url, options);
+      const response = await Axios.get(url);
       const data = response.data.content;
 
       setGoal(data.goal);
@@ -232,7 +228,7 @@ export default function useCreateProtocol() {
       selectionProcess,
     };
 
-    return await Axios.put(url, data, options);
+    return await Axios.put(url, data);
   }
 
   async function syncAndNavigate(path: string) {
@@ -249,13 +245,13 @@ export default function useCreateProtocol() {
   async function sendSelectData(data: string[], context: string) {
     let content;
 
-    const upperData = data.map(i => i.toUpperCase());
+    const upperData = data.map((i) => i.toUpperCase());
 
     try {
       if (context == "Languages") content = { studiesLanguages: upperData };
       else content = { informationSources: upperData };
 
-      await Axios.put(url, content, options);
+      await Axios.put(url, content);
     } catch (err) {
       console.log(err);
     }
@@ -273,7 +269,7 @@ export default function useCreateProtocol() {
         }
       );
 
-      const response = await Axios.get(url, options);
+      const response = await Axios.get(url);
       let aux: { description: string; type: string }[] =
         response.data.content.eligibilityCriteria;
       aux = aux.filter((item) => {
@@ -290,7 +286,7 @@ export default function useCreateProtocol() {
         }
       );
 
-      const response = await Axios.get(url, options);
+      const response = await Axios.get(url);
       let aux: { description: string; type: string }[] =
         response.data.content.eligibilityCriteria;
       aux = aux.filter((item) => {
@@ -303,7 +299,7 @@ export default function useCreateProtocol() {
 
     try {
       console.log(content);
-      await Axios.put(url, content, options);
+      await Axios.put(url, content);
     } catch (err) {
       console.log(err);
     }

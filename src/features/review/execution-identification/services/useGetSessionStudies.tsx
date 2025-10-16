@@ -7,12 +7,9 @@ interface HttpResponse {
 
 import ArticleInterface from "../../shared/types/ArticleInterface";
 
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 const useGetSessionStudies = (sessionId: string) => {
   const reviewId = localStorage.getItem("systematicReviewId");
   const path = `systematic-study/${reviewId}/find-by-search-session/${sessionId}`;
-  const options = getRequestOptions();
 
   const { data, error, isLoading } = useSWR(path, fetchArticlesSession, {
     revalidateOnFocus: true,
@@ -20,7 +17,7 @@ const useGetSessionStudies = (sessionId: string) => {
 
   async function fetchArticlesSession() {
     try {
-      const response = await Axios.get<HttpResponse>(path, options);
+      const response = await Axios.get<HttpResponse>(path);
       return response.data.studyReviews;
     } catch (error) {
       console.error("Error fetching articles", error);

@@ -1,8 +1,6 @@
 import useSWR from "swr";
 import Axios from "../../../../infrastructure/http/axiosClient";
 
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 interface HttpResponse {
   searchSessions: {
     id: string;
@@ -19,7 +17,6 @@ interface HttpResponse {
 export default function useGetSession(source: string) {
   const id = localStorage.getItem("systematicReviewId");
   const path = `systematic-study/${id}/search-session-source/${source}`;
-  const options = getRequestOptions();
 
   const { data, error, isLoading, mutate } = useSWR(path, fetchSessions, {
     revalidateOnFocus: true,
@@ -28,7 +25,7 @@ export default function useGetSession(source: string) {
 
   async function fetchSessions() {
     try {
-      const response = await Axios.get<HttpResponse>(path, options);
+      const response = await Axios.get<HttpResponse>(path);
       return response.data.searchSessions;
     } catch (error) {
       throw new Error(`Erro ao buscar sessões: ${error}`);

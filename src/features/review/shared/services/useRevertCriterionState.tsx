@@ -4,9 +4,6 @@ import Axios from "../../../../infrastructure/http/axiosClient";
 // Hooks
 import useFocusedArticle from "../hooks/useFocusedArticle";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Types
 import type { PageLayout } from "../components/structure/LayoutFactory";
 
@@ -26,7 +23,6 @@ export default function useRevertCriterionState({
 
   const revertCriterionState = async (criteria: string[]) => {
     const id = localStorage.getItem("systematicReviewId");
-    const options = getRequestOptions();
 
     if (!id || articleId === -1) {
       throw new Error("Invalid systematicReviewId or articleId");
@@ -34,11 +30,7 @@ export default function useRevertCriterionState({
 
     try {
       const path = `systematic-study/${id}/study-review/remove-criteria/${articleId}`;
-      const response = await Axios.patch<HttpResponse>(
-        path,
-        { criteria },
-        options
-      );
+      const response = await Axios.patch<HttpResponse>(path, { criteria });
       return response.data.criteria;
     } catch (error) {
       console.error("Failed to revert criterion state:", error);

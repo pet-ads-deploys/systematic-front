@@ -1,4 +1,3 @@
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import Axios from "../../../../infrastructure/http/axiosClient";
 
 interface Props {
@@ -13,8 +12,7 @@ export const UseChangeStudySelectionStatus = ({
   criterias,
 }: Props) => {
   const id = localStorage.getItem("systematicReviewId");
-  const options = getRequestOptions();
   const path = `systematic-study/${id}/study-review/selection-status`;
 
-  Axios.patch(path, { status, criteria: criterias, studyReviewId }, options);
+  Axios.patch(path, { status, criteria: criterias, studyReviewId });
 };

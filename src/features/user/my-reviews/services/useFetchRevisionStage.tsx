@@ -4,9 +4,6 @@ import useSWR from "swr";
 // Service
 import Axios from "../../../../infrastructure/http/axiosClient";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Type
 type RevisionStageProps = {
   reviewId: string;
@@ -39,8 +36,7 @@ export default function useFetchRevisionStage({
   async function getStage(): Promise<Stage> {
     if (!path) throw new Error("Invalid path");
     try {
-      const options = getRequestOptions();
-      const response = await Axios.get<HttpResponse>(path, options);
+      const response = await Axios.get<HttpResponse>(path);
       return response.data.currentStage as Stage;
     } catch (error) {
       console.log("Error at get revision Stage");

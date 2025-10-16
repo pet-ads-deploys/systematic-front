@@ -10,9 +10,6 @@ import { type Either, right } from "@features/shared/errors/pattern/Either";
 // Factory
 import errorFactory from "@features/shared/errors/factory/errorFactory";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Types
 import type { GeneralDefinition } from "../pages/GeneralDefinition/types";
 
@@ -42,11 +39,9 @@ export default function useCreateReview(): UseCreateReviewOut {
   }: CreateReviewInput): Promise<Either<ApplicationError, CreateReviewOutput>> {
     const data = { title, description, objectives, collaborators };
 
-    const options = getRequestOptions();
-
     try {
       const path = "systematic-study";
-      const response = await Axios.post(path, data, options);
+      const response = await Axios.post(path, data);
       return right({ systematicStudyId: response.data.systematicStudyId });
     } catch (error) {
       return errorFactory("database", (error as Error).message);

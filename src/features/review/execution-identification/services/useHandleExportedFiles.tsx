@@ -4,7 +4,6 @@ import Axios from "../../../../infrastructure/http/axiosClient";
 // import useGetSession from "./useGetSession";
 import useToaster from "@components/feedback/Toaster";
 import { InvalidEntry } from "@features/review/shared/context/StudiesSelectionContext";
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import { KeyedMutator } from "swr";
 
 interface Props {
@@ -35,7 +34,6 @@ const useHandleExportedFiles = ({
   const [source, setSource] = useState("");
   const toast = useToaster();
 
-  const options = getRequestOptions();
   const id = localStorage.getItem("systematicReviewId");
 
   const checkForDuplicateFile = (newFile: File) => {
@@ -116,8 +114,7 @@ const useHandleExportedFiles = ({
     try {
       const response = await Axios.post(
         `systematic-study/${id}/search-session`,
-        formData,
-        options
+        formData
       );
       const sessionId = response.data.sessionId;
       const invalidArticles: string[] = response.data.invalidEntries ?? [];

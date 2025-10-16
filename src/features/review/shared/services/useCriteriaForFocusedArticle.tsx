@@ -4,9 +4,6 @@ import useSWR from "swr";
 // Service
 import Axios from "../../../../infrastructure/http/axiosClient";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Types
 interface HttpResponse {
   inclusionCriteria: string[];
@@ -21,7 +18,6 @@ export default function useFetchCriteriaForFocusedArticle({
   articleId,
 }: CriteriaForFocusedArticleProps) {
   const id = localStorage.getItem("systematicReviewId");
-  const options = getRequestOptions();
 
   const path =
     id && articleId
@@ -36,7 +32,7 @@ export default function useFetchCriteriaForFocusedArticle({
   async function fetchAllCriteria() {
     try {
       if (!path) return;
-      const response = await Axios.get<HttpResponse>(path, options);
+      const response = await Axios.get<HttpResponse>(path);
       return response.data;
     } catch (error) {
       console.error("Error fetching criteria", error);

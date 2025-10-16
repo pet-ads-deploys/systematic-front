@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import Axios from "../../../../infrastructure/http/axiosClient";
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 type StudiesByStageData = {
   userId: string;
@@ -31,10 +30,7 @@ export const useFetchStudiesByStage = (stage: string) => {
   async function fetchStudiesByStage() {
     if (!id) return;
     try {
-      const response = await Axios.get<StudiesByStageData>(
-        path,
-        getRequestOptions()
-      );
+      const response = await Axios.get<StudiesByStageData>(path);
 
       return response.data;
     } catch {

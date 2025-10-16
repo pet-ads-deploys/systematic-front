@@ -6,7 +6,6 @@ import Axios from "../../../../infrastructure/http/axiosClient";
 
 // Types
 import type { TypeOfQuestions } from "../types";
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 type UseIncludedStudiesAnswersProps = {
   articleId: number;
@@ -41,8 +40,7 @@ export default function useFetchIncludedStudiesAnswers({
   async function fetcher() {
     try {
       if (!id) return;
-      const options = getRequestOptions();
-      const response = await Axios.get<HttpResponse>(path, options);
+      const response = await Axios.get<HttpResponse>(path);
       return response.data;
     } catch (error) {
       console.error("Error fetching included studies answers", error);

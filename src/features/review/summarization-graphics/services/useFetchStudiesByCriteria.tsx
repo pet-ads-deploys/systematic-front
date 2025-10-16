@@ -1,4 +1,3 @@
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import useSWR from "swr";
 import Axios from "../../../../infrastructure/http/axiosClient";
 
@@ -26,10 +25,7 @@ const useFetchStudiesByCriteria = (criteria: string) => {
   async function fetchGetStudiesByCriteria() {
     if (!id) return;
     try {
-      const response = await Axios.get<StudiesByCriteriaData>(
-        path,
-        getRequestOptions()
-      );
+      const response = await Axios.get<StudiesByCriteriaData>(path);
       return response.data;
     } catch (error) {
       console.error("Failed to get studies by criteria");
