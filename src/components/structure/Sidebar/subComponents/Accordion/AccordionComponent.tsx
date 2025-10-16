@@ -63,7 +63,7 @@ const AccordionComponent = () => {
       },
       {
         path: `/review/planning/protocol/risk-of-bias-assessment/${id}`,
-        label: "Risk Of Bias",
+        label: "Risk of Bias",
       },
       {
         path: `/review/planning/protocol/analysis-and-synthesis-of-results/${id}`,
