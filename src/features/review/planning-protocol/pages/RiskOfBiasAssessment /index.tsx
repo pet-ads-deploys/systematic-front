@@ -25,6 +25,13 @@ export default function RiskOfBiasAssessment() {
         borderRadius="1rem"
         withShadow={false}
       >
+        <Box
+          display="flex" 
+          flexDirection="column" 
+          alignItems={"center"}
+          h="calc(100vh - 10rem)"
+          overflowY={"auto"}
+        >
         <FormControl
           m={"20px auto 0"}
           display={"flex"}
@@ -32,17 +39,21 @@ export default function RiskOfBiasAssessment() {
           flexDir={"column"}
           w={"60vw"}
           alignItems={"center"}
+          flexGrow={1} 
         >
           <InteractiveTable
             id={id}
             url={url}
             label={"Risk of Bias Questions"}
           />
+          </FormControl>
+          </Box>
           <Box
-            w={"60vw"}
+            w={"70vw"}
             display={"flex"}
             alignItems={"center"}
             justifyContent={"end"}
+            pt={"0.5rem"}
           >
             <NavButton
               event={() =>
@@ -59,7 +70,6 @@ export default function RiskOfBiasAssessment() {
               text="Next"
             />
           </Box>
-        </FormControl>
       </CardDefault>
     </FlexLayout>
   );
