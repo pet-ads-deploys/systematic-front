@@ -7,6 +7,7 @@ import ProtocolFormLayout from "../../components/common/protocolForm";
 
 // Service
 import useCreateProtocol from "../../services/useCreateProtocol";
+import { Box } from "@chakra-ui/react";
 
 export default function EligibilityCriteria() {
   const {
@@ -29,7 +30,7 @@ export default function EligibilityCriteria() {
   return (
     <ProtocolFormLayout
       headerText="Protocol: Eligibility Criteria"
-      navButtons={(
+      navButtons={
         <>
           <NavButton
             event={() =>
@@ -48,27 +49,35 @@ export default function EligibilityCriteria() {
             text="Next"
           />
         </>
-      )}
+      }
     >
-      <AddTextTable text="Inclusion criteria" placeholder="Enter the criteria" />
-      <AddTextTable text="Exclusion criteria" placeholder="Enter the criteria" />
-      <TextAreaInput
-        value={studyTypeDefinition}
-        onChange={(event) => {
-          handleChangeEligibilityCriteria(
-            "studyTypeDefinition",
-            event.target.value
-          );
-        }}
-        label="Study Type Definition"
-        placeholder="Enter the study type definition"
-      />
-      <AddSelectionTable
-        label="Languages"
-        options={languageOptions}
-        placeholder={"Select language"}
-        typeField="select"
-      />
+      <Box>
+        <AddTextTable
+          text="Inclusion criteria"
+          placeholder="Enter the criteria"
+        />
+        <AddTextTable
+          text="Exclusion criteria"
+          placeholder="Enter the criteria"
+        />
+        <TextAreaInput
+          value={studyTypeDefinition}
+          onChange={(event) => {
+            handleChangeEligibilityCriteria(
+              "studyTypeDefinition",
+              event.target.value
+            );
+          }}
+          label="Study Type Definition"
+          placeholder="Enter the study type definition"
+        />
+        <AddSelectionTable
+          label="Languages"
+          options={languageOptions}
+          placeholder={"Select language"}
+          typeField="select"
+        />
+      </Box>
     </ProtocolFormLayout>
   );
 }

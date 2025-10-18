@@ -1,13 +1,16 @@
+// External Library
+import React from "react";
 import { Box, FormControl, FormControlProps } from "@chakra-ui/react";
+
 // Components
 import FlexLayout from "@components/structure/Flex/Flex";
 import Header from "@components/structure/Header/Header";
 import CardDefault from "@components/common/cards";
-import React from 'react';
 
+// Types
 interface ProtocolFormLayoutProps {
   headerText: string;
-  children: React.ReactNode; 
+  children: React.ReactNode;
   navButtons: React.ReactNode;
   formControlProps?: FormControlProps;
 }
@@ -16,10 +19,9 @@ export default function ProtocolFormLayout({
   headerText,
   children,
   navButtons,
-  formControlProps = {}, 
+  formControlProps = {},
 }: ProtocolFormLayoutProps) {
-  
-const baseFormControlStyles = {
+  const baseFormControlStyles = {
     m: "20px auto 0",
     display: "flex",
     gap: 10,
@@ -32,26 +34,25 @@ const baseFormControlStyles = {
   return (
     <FlexLayout navigationType="Accordion">
       <Header text={headerText} />
-      
-      <CardDefault 
+      <CardDefault
         backgroundColor="#fff"
         borderRadius="1rem"
         withShadow={false}
       >
-        <Box 
-          display="flex" 
-          flexDirection="column" 
+        <Box
+          display="flex"
+          flexDirection="column"
           alignItems={"center"}
-          //h="calc(100vh - 10rem)" 
           h="88%"
-          overflowY={"auto"} 
+          overflowY={"auto"}
           overflowX={"hidden"}
         >
           <FormControl
-            {...baseFormControlStyles} 
-            {...formControlProps} 
-            minW={0} 
-            w="100%" 
+            {...baseFormControlStyles}
+            {...formControlProps}
+            minW={0}
+            w="100%"
+            gap="2rem"
           >
             {children}
           </FormControl>
@@ -62,8 +63,8 @@ const baseFormControlStyles = {
           alignItems={"center"}
           justifyContent={"end"}
           pt={"0.5rem"}
-          mb={4} 
-          mx={"auto"} 
+          mb={4}
+          mx={"auto"}
         >
           {navButtons}
         </Box>

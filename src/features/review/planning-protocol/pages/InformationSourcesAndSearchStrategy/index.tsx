@@ -7,6 +7,7 @@ import ProtocolFormLayout from "../../components/common/protocolForm";
 
 // Service
 import useCreateProtocol from "../../services/useCreateProtocol";
+import { Box } from "@chakra-ui/react";
 
 export default function InformationSourcesAndSearchStrategy() {
   const {
@@ -19,10 +20,10 @@ export default function InformationSourcesAndSearchStrategy() {
     informationSourcesAndSearchStrategy;
   const id = localStorage.getItem("systematicReviewId");
 
-return (
+  return (
     <ProtocolFormLayout
       headerText="Protocol: Information Sources And Search Strategy"
-      navButtons={(
+      navButtons={
         <>
           <NavButton
             event={() =>
@@ -41,61 +42,63 @@ return (
             text="Next"
           />
         </>
-      )}
+      }
     >
-      <TextAreaInput
-        value={sourcesSelectionCriteria}
-        onChange={(event) => {
-          handleChangeInformationSourcesAndSearchStrategy(
-            "sourcesSelectionCriteria",
-            event.target.value
-          );
-        }}
-        label="Sources Selection Criteria"
-        placeholder="Enter the sources selection criteria"
-      />
-      <AddSelectionTable
-        label="Databases and Information Source"
-        options={[
-          "Google Scholar",
-          "Scopus",
-          "Scielo",
-          "BDTD",
-          "PubMed",
-          "Expert Suggestion",
-          "Backward Snowballing",
-          "Forward Snowballing",
-          "Grey Literature Sources",
-        ]}
-        placeholder={"Select Data Base"}
-        typeField="select"
-      />
-      <TextAreaInput
-        value={searchMethod}
-        onChange={(event) => {
-          handleChangeInformationSourcesAndSearchStrategy(
-            "searchMethod",
-            event.target.value
-          );
-        }}
-        label="Search Strategy"
-        placeholder="Enter Search Strategy"
-      />
-      <AddTextTable
-        text="Keywords"
-        placeholder="Enter the keywords related to your review"
-      />
-      <TextAreaInput
-        value={searchString}
-        onChange={(event) => {
-          handleChangeInformationSourcesAndSearchStrategy(
-            "searchString",
-            event.target.value
-          );
-        }}
-        label="Search String"
-        placeholder="Enter the search string"
-      />
+      <Box>
+        <TextAreaInput
+          value={sourcesSelectionCriteria}
+          onChange={(event) => {
+            handleChangeInformationSourcesAndSearchStrategy(
+              "sourcesSelectionCriteria",
+              event.target.value
+            );
+          }}
+          label="Sources Selection Criteria"
+          placeholder="Enter the sources selection criteria"
+        />
+        <AddSelectionTable
+          label="Databases and Information Source"
+          options={[
+            "Google Scholar",
+            "Scopus",
+            "Scielo",
+            "BDTD",
+            "PubMed",
+            "Expert Suggestion",
+            "Backward Snowballing",
+            "Forward Snowballing",
+            "Grey Literature Sources",
+          ]}
+          placeholder={"Select Data Base"}
+          typeField="select"
+        />
+        <TextAreaInput
+          value={searchMethod}
+          onChange={(event) => {
+            handleChangeInformationSourcesAndSearchStrategy(
+              "searchMethod",
+              event.target.value
+            );
+          }}
+          label="Search Strategy"
+          placeholder="Enter Search Strategy"
+        />
+        <AddTextTable
+          text="Keywords"
+          placeholder="Enter the keywords related to your review"
+        />
+        <TextAreaInput
+          value={searchString}
+          onChange={(event) => {
+            handleChangeInformationSourcesAndSearchStrategy(
+              "searchString",
+              event.target.value
+            );
+          }}
+          label="Search String"
+          placeholder="Enter the search string"
+        />
+      </Box>
     </ProtocolFormLayout>
   );
 }
