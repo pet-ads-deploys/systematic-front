@@ -12,9 +12,24 @@ import { Params } from "@features/shared/types/params";
 
 interface HttpResponse {
   studyReviews: ArticleInterface[] | StudyInterface[];
+  systematicStudyId: string;
+  size: number;
+  page: number;
+  totalElements: number;
+  totalPages: number;
 }
 
 interface FetchParams extends Params {}
+
+// Constants
+const EMPTY_PAGINATION_DATA: HttpResponse = {
+  studyReviews: [],
+  totalElements: 0,
+  totalPages: 0,
+  systematicStudyId: "",
+  size: 0,
+  page: 0,
+};
 
 const useFetchSelectionArticles = ({ page = 0, size = 20 }: FetchParams) => {
   const id = localStorage.getItem("systematicReviewId");
@@ -26,7 +41,7 @@ const useFetchSelectionArticles = ({ page = 0, size = 20 }: FetchParams) => {
   }, [id, page, size, endpoint]);
 
   const fetcher = async () => {
-    if (!id) return [];
+    if (!id) return EMPTY_PAGINATION_DATA;
 
     try {
       const response = await Axios.get<HttpResponse>(endpoint, {
@@ -35,7 +50,8 @@ const useFetchSelectionArticles = ({ page = 0, size = 20 }: FetchParams) => {
           size,
         },
       });
-      return response.data.studyReviews || [];
+
+      return response.data;
     } catch (error) {
       console.error("Error fetching articles", error);
       throw error;
@@ -43,14 +59,27 @@ const useFetchSelectionArticles = ({ page = 0, size = 20 }: FetchParams) => {
   };
 
   const { data, mutate, error, isLoading } = useSWR(swrKey, fetcher, {
-    fallbackData: [],
+    fallbackData: EMPTY_PAGINATION_DATA,
     revalidateOnFocus: true,
     revalidateOnMount: true,
     dedupingInterval: 5000,
     refreshInterval: 30000,
   });
 
-  return { articles: data || [], mutate, error, isLoading };
+  const articles = data?.studyReviews || [];
+  const totalElements = data?.totalElements || 0;
+  const totalPages = data?.totalPages || 0;
+
+  return {
+    articles: articles.filter(
+      (art): art is ArticleInterface => "studyReviewId" in art
+    ),
+    totalElements,
+    totalPages,
+    mutate,
+    error,
+    isLoading,
+  };
 };
 
 export default useFetchSelectionArticles;
