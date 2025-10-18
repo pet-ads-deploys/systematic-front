@@ -16,13 +16,13 @@ interface HttpResponse {
 
 interface FetchParams extends Params {}
 
-const useFetchExtractionArticles = ({ page = 0, size = 20 }: FetchParams) => {
+const useFetchSelectionArticles = ({ page = 0, size = 20 }: FetchParams) => {
   const id = localStorage.getItem("systematicReviewId");
   const endpoint = `systematic-study/${id}/study-review`;
 
   const swrKey = useMemo(() => {
     if (!id) return null;
-    return [endpoint, page, size, "extraction-page"];
+    return [endpoint, page, size, "selection-page"];
   }, [id, page, size, endpoint]);
 
   const fetcher = async () => {
@@ -35,13 +35,7 @@ const useFetchExtractionArticles = ({ page = 0, size = 20 }: FetchParams) => {
           size,
         },
       });
-
-      const allArticles = response.data.studyReviews;
-      const includedArticles = allArticles
-        .filter((art): art is ArticleInterface => "studyReviewId" in art)
-        .filter((art) => art.selectionStatus === "INCLUDED");
-
-      return includedArticles;
+      return response.data.studyReviews || [];
     } catch (error) {
       console.error("Error fetching articles", error);
       throw error;
@@ -59,4 +53,4 @@ const useFetchExtractionArticles = ({ page = 0, size = 20 }: FetchParams) => {
   return { articles: data || [], mutate, error, isLoading };
 };
 
-export default useFetchExtractionArticles;
+export default useFetchSelectionArticles;
