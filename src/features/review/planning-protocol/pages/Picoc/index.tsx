@@ -26,7 +26,7 @@ export default function Picoc() {
         withShadow={false}
       >
         <FormControl
-          m={"20px auto 0"}
+          m={"30px auto 0"}
           display={"flex"}
           gap={10}
           flexDir={"column"}
@@ -35,7 +35,7 @@ export default function Picoc() {
         >
           <TextAreaInput
             value={population}
-            label="Population:"
+            label="Population"
             placeholder="What is your study population?"
             onChange={(event) => {
               handleChangePicoc("population", event.target.value);
@@ -43,7 +43,7 @@ export default function Picoc() {
           />
           <TextAreaInput
             value={intervention}
-            label="Intervention:"
+            label="Intervention"
             placeholder="What is your intervention?"
             onChange={(event) => {
               handleChangePicoc("intervention", event.target.value);
@@ -51,7 +51,7 @@ export default function Picoc() {
           />
           <TextAreaInput
             value={control}
-            label="Control:"
+            label="Control"
             placeholder="What is your control?"
             onChange={(event) => {
               handleChangePicoc("control", event.target.value);
@@ -59,7 +59,7 @@ export default function Picoc() {
           />
           <TextAreaInput
             value={outcome}
-            label="Outcome:"
+            label="Outcome"
             placeholder="What is your outcome?"
             onChange={(event) => {
               handleChangePicoc("outcome", event.target.value);
@@ -67,7 +67,7 @@ export default function Picoc() {
           />
           <TextAreaInput
             value={context}
-            label="Context:"
+            label="Context"
             placeholder="What is your context?"
             onChange={(event) => {
               handleChangePicoc("context", event.target.value);

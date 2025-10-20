@@ -29,7 +29,7 @@ export default function AnalysisAndSynthesisOfResults() {
           borderRadius="1rem"
           withShadow={false}>
         <FormControl
-          m={"20px auto 0"}
+          m={"30px auto 0"}
           display={"flex"}
           gap={10}
           flexDir={"column"}

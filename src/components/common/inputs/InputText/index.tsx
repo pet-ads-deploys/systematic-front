@@ -31,7 +31,6 @@ export default function InputText({
   type,
   nome,
   onChange,
-  labelAbove,
   value,
   isDisabled,
 }: ITextFieldProps) {
@@ -45,11 +44,7 @@ export default function InputText({
     >
       <FormControl>
         {label && (
-          <FormLabel
-            mb={labelAbove ? "0.3rem" : "0"}
-            fontWeight={500}
-            fontSize={"large"}
-          >
+          <FormLabel fontWeight={500} fontSize="large">
             {label}
           </FormLabel>
         )}
@@ -62,6 +57,7 @@ export default function InputText({
           borderRadius={"3px"}
           border="2px solid"
           borderColor="gray.300"
+          fontSize={"lg"}
           _placeholder={{ opacity: 1, color: "gray.500" }}
           focusBorderColor="#2E4B6C"
           onChange={onChange}

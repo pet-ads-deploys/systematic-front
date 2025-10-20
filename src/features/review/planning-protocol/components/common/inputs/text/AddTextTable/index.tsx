@@ -15,7 +15,7 @@ export default function AddTextTable({ text, placeholder }: AddTextTableProps) {
   return (
     <FormControl sx={label}>
       <FormControl sx={formcontrol}>
-        <FormLabel>{text}</FormLabel>
+        <FormLabel  fontWeight={500} fontSize={"large"}>{text}</FormLabel>
         <InfosTable
           typeField={""}
           onAddText={handleAddText}
