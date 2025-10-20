@@ -1,8 +1,9 @@
 import { FormControl, Menu, MenuButton, MenuList, MenuItem, Button, HStack, Text, Box, Divider, Portal } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, ChevronDownIcon, QuestionIcon, WarningIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState, ReactNode } from "react";
-import { FaCheckCircle, FaCopy, FaQuestionCircle, FaRegCircle, FaTimes } from "react-icons/fa";
+import { FaRegCircle } from "react-icons/fa";
 import type ArticleInterface from "@features/review/shared/types/ArticleInterface";
+import { IoIosCloseCircle } from "react-icons/io";
 
 type StatusKey = "INCLUDED" | "DUPLICATED" | "EXCLUDED" | "UNCLASSIFIED";
 
@@ -22,13 +23,11 @@ const colors = {
   clearFilters: "rgb(38, 60, 86)",
 };
 
-const iconConfig: Record<
-  Lowercase<StatusKey>,
-  { icon: ReactNode; bg: string }> = {
-  included: { icon: <FaCheckCircle color="white" size="12px" />, bg: "green" },
-  duplicated: { icon: <FaCopy color="white" size="12px" />, bg: "blue" },
-  excluded: { icon: <FaTimes color="white" size="12px" />, bg: "red" },
-  unclassified: {icon: <FaQuestionCircle color="white" size="12px" />, bg: "gold"}
+const iconConfig: Record<Lowercase<StatusKey>, { icon: ReactNode; bg: string }> = {
+  included: { icon: <CheckCircleIcon color="green.500" />, bg: "green.100" },
+  duplicated: { icon: <WarningIcon color="blue.500" />, bg: "blue.100" },
+  excluded: { icon: <IoIosCloseCircle color="red" size="1.4rem" />, bg: "red.100" },
+  unclassified: { icon: <QuestionIcon color="yellow.500" />, bg: "yellow.100" },
 };
 
 const getIcon = (status: string) => {
