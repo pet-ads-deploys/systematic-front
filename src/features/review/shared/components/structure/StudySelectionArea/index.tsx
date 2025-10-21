@@ -64,7 +64,7 @@ export default function StudySelectionArea({
       <Flex alignItems="center" justifyContent="center" w="100%" maxW="100%">
         <ButtonsForSelection
           page={page}
-          articles={articles as StudyInterface[]}
+          articles={articles}
           articleIndex={studyIndex}
           setSelectedArticleReview={setSelectedArticleReview}
           reloadArticles={reloadArticles}
