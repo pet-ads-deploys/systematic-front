@@ -35,7 +35,7 @@ export default function AddSelectTable({
 
   return (
     <FormControl sx={conteiner} alignContent={"center"}>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel mt={"3%"}>{label}</FormLabel>
       <FormControl sx={formcontrol} justifyContent={"space-between"}>
         <SelectInput
           values={formattedOptions}
