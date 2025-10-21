@@ -14,7 +14,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, QuestionIcon, WarningIcon } from "@chakra-ui/icons";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
 import {
@@ -123,11 +123,39 @@ export default function Expanded({
     },
   ];
 
+  const IconWrapper = ({ children }: { children: React.ReactNode }) => (
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      w="1.25rem"
+      h="1.25rem"
+    >
+      {children}
+    </Box>
+  );
+
   const statusIconMap: Record<string, React.ReactElement> = {
-    INCLUDED: <CheckCircleIcon color="green.500" />,
-    DUPLICATED: <InfoIcon color="blue.500" />,
-    EXCLUDED: <IoIosCloseCircle color="red" size="1.4rem" />,
-    UNCLASSIFIED: <WarningIcon color="yellow.500" />,
+    INCLUDED: (
+      <IconWrapper>
+        <CheckCircleIcon color="green.500" boxSize="1rem" />
+      </IconWrapper>
+    ),
+    DUPLICATED: (
+      <IconWrapper>
+        <WarningIcon color="blue.500" boxSize="1rem" />
+      </IconWrapper>
+    ),
+    EXCLUDED: (
+      <IconWrapper>
+        <IoIosCloseCircle color="red" size="1.25rem" />
+      </IconWrapper>
+    ),
+    UNCLASSIFIED: (
+      <IconWrapper>
+        <QuestionIcon color="yellow.500" boxSize="1rem" />
+      </IconWrapper>
+    ),
   };
 
   const priorityIconMap: Record<string, React.ReactElement> = {
@@ -486,7 +514,7 @@ export default function Expanded({
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="flex-start"
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.selectionStatus)}
@@ -505,7 +533,7 @@ export default function Expanded({
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent="start"
+                        justifyContent="flex-start"
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.extractionStatus)}
