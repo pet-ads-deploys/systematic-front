@@ -33,7 +33,7 @@ const EMPTY_PAGINATION_DATA: HttpResponse = {
 
 const useFetchExtractionArticles = ({ page = 0, size = 20 }: FetchParams) => {
   const id = localStorage.getItem("systematicReviewId");
-  const endpoint = `systematic-study/${id}/study-review`;
+  const endpoint = `systematic-study/${id}/study-review/selection-included`;
 
   const swrKey = useMemo(() => {
     if (!id) return null;

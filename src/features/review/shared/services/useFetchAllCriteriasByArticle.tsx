@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from "react";
 import useFetchCriteriaForFocusedArticle from "./useCriteriaForFocusedArticle";
 import useFetchInclusionCriteria from "./useFetchInclusionCriteria";
 import useFetchExclusionCriteria from "./useFetchExclusionCriterias";
-import useFocusedArticle from "../hooks/useFocusedArticle";
 
 // Types
 import { PageLayout } from "../components/structure/LayoutFactory";
