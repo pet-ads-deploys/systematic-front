@@ -21,11 +21,16 @@ const verticalTransitionVariants = {
 
 // Types
 import type { PageLayout } from "../../../structure/LayoutFactory";
+import { PaginationControls } from "@features/shared/types/pagination";
+import { KeyedMutator } from "swr";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
 interface VerticalProps {
   isInverted: boolean;
   articles: ArticleInterface[];
   page: PageLayout;
   columnsVisible: ColumnVisibility;
+  pagination: PaginationControls;
+  reloadArticles: KeyedMutator<SelectionArticles>;
 }
 
 export const SplitVertical: React.FC<VerticalProps> = ({
@@ -33,6 +38,8 @@ export const SplitVertical: React.FC<VerticalProps> = ({
   articles,
   page,
   columnsVisible,
+  pagination,
+  reloadArticles,
 }) => {
   return (
     <Flex
@@ -51,7 +58,11 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             exit="exit"
             style={{ minWidth: "35%", maxHeight: "100%" }}
           >
-            <StudySelectionArea articles={articles} page={page} />
+            <StudySelectionArea
+              articles={articles}
+              page={page}
+              reloadArticles={reloadArticles}
+            />
           </motion.div>
           <motion.div
             key="bottom"
@@ -64,6 +75,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             <ArticlesTable
               articles={articles}
               columnsVisible={columnsVisible}
+              pagination={pagination}
             />
           </motion.div>
         </AnimatePresence>
@@ -80,6 +92,7 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             <ArticlesTable
               articles={articles}
               columnsVisible={columnsVisible}
+              pagination={pagination}
             />
           </motion.div>
           <motion.div
@@ -90,7 +103,11 @@ export const SplitVertical: React.FC<VerticalProps> = ({
             exit="exit"
             style={{ minWidth: "35%", maxHeight: "100%" }}
           >
-            <StudySelectionArea articles={articles} page={page} />
+            <StudySelectionArea
+              articles={articles}
+              page={page}
+              reloadArticles={reloadArticles}
+            />
           </motion.div>
         </AnimatePresence>
       )}

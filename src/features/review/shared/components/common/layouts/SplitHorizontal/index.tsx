@@ -20,6 +20,9 @@ const horizontalTransitionVariants = {
 import type { PageLayout } from "../../../structure/LayoutFactory";
 import type { ViewModel } from "../../../../hooks/useLayoutPage";
 import type ArticleInterface from "../../../../types/ArticleInterface";
+import { PaginationControls } from "@features/shared/types/pagination";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
+import { KeyedMutator } from "swr";
 
 interface HorizontalProps {
   isInverted: boolean;
@@ -27,6 +30,8 @@ interface HorizontalProps {
   page: PageLayout;
   layout: ViewModel;
   columnsVisible: ColumnVisibility;
+  pagination: PaginationControls;
+  reloadArticles: KeyedMutator<SelectionArticles>;
 }
 
 export const SplitHorizontal: React.FC<HorizontalProps> = ({
@@ -35,6 +40,8 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
   page,
   layout,
   columnsVisible,
+  pagination,
+  reloadArticles,
 }) => {
   return (
     <Flex
@@ -55,7 +62,11 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             style={{ width: "100%", height: "50%" }}
           >
             <Box w="100%" h="100%" overflowY="auto">
-              <StudySelectionArea articles={articles} page={page} />
+              <StudySelectionArea
+                articles={articles}
+                page={page}
+                reloadArticles={reloadArticles}
+              />
             </Box>
           </motion.div>
           <motion.div
@@ -71,6 +82,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
                 articles={articles}
                 layout={layout}
                 columnsVisible={columnsVisible}
+                pagination={pagination}
               />
             </Box>
           </motion.div>
@@ -90,6 +102,7 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
                 articles={articles}
                 layout={layout}
                 columnsVisible={columnsVisible}
+                pagination={pagination}
               />
             </Box>
           </motion.div>
@@ -102,7 +115,11 @@ export const SplitHorizontal: React.FC<HorizontalProps> = ({
             style={{ width: "100%", height: "50%" }}
           >
             <Box w="100%" h="100%" overflowY="auto">
-              <StudySelectionArea articles={articles} page={page} />
+              <StudySelectionArea
+                articles={articles}
+                page={page}
+                reloadArticles={reloadArticles}
+              />
             </Box>
           </motion.div>
         </AnimatePresence>

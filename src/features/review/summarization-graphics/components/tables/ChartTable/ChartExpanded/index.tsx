@@ -292,11 +292,10 @@ export default function ChartExpanded({
           <Tbody>
             {paginatedArticles.length > 0 ? (
               paginatedArticles.map((study, index) => {
-                
                 const sourceText =
                   "searchSources" in study && Array.isArray(study.searchSources)
                     ? study.searchSources.join(", ")
-                    : "";  
+                    : "";
                 const criteriaText =
                   "criteria" in study && Array.isArray(study.criteria)
                     ? study.criteria
@@ -305,12 +304,10 @@ export default function ChartExpanded({
                             (item) => item === cr
                           );
                           //return `IC${idx + 1} : ${cr}`;
-                          return `IC${idx+1}`; //verificar depois
+                          return `IC${idx + 1}`; //verificar depois
                         })
                         .join(" , ")
                     : "";
-
-              
 
                 return (
                   <Tr key={index} bg="transparent" p="0">
@@ -369,6 +366,7 @@ export default function ChartExpanded({
       </TableContainer>
       <PaginationControl
         currentPage={currentPage}
+        itensPerPage={20}
         quantityOfPages={quantityOfPages}
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}

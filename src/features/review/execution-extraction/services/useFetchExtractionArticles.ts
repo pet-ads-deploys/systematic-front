@@ -70,10 +70,14 @@ const useFetchExtractionArticles = ({ page = 0, size = 20 }: FetchParams) => {
   const totalElements = data?.totalElements || 0;
   const totalPages = data?.totalPages || 0;
 
-  return {
-    articles: articles
+  const filteredArticles = useMemo(() => {
+    return articles
       .filter((art): art is ArticleInterface => "studyReviewId" in art)
-      .filter((art) => art.selectionStatus === "INCLUDED"),
+      .filter((art) => art.selectionStatus === "INCLUDED");
+  }, [articles]);
+
+  return {
+    articles: filteredArticles,
     totalElements,
     totalPages,
     mutate,

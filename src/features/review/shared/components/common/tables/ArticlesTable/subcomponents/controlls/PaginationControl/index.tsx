@@ -10,6 +10,7 @@ import {
 // Types
 interface PaginationControlProps {
   currentPage: number;
+  itensPerPage: number;
   quantityOfPages: number;
   handlePrevPage: () => void;
   handleNextPage: () => void;
@@ -26,6 +27,7 @@ type ActionButton = {
 
 const PaginationControl: React.FC<PaginationControlProps> = ({
   currentPage,
+  itensPerPage,
   quantityOfPages,
   handleNextPage,
   handlePrevPage,
@@ -87,6 +89,7 @@ const PaginationControl: React.FC<PaginationControlProps> = ({
           h="32px"
           textAlign="center"
           onChange={(e) => changeQuantityOfItens(Number(e.target.value))}
+          value={itensPerPage}
           defaultValue={20}
         >
           {paginationValues.map((value, index) => (

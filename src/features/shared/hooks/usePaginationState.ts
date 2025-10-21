@@ -1,5 +1,5 @@
 // External Library
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Constants
 const MAX_ITENS_PER_PAGE = 30;
@@ -19,6 +19,12 @@ export default function usePaginationState({
   const [itensPerPage, setItensPerPage] = useState<number>(initialSize);
 
   const quantityOfPages = totalPages > 0 ? totalPages : 1;
+
+  useEffect(() => {
+    if (currentPage > quantityOfPages) {
+      setCurrentPage(quantityOfPages);
+    }
+  }, [currentPage, quantityOfPages]);
 
   const handleNextPage = () => {
     setCurrentPage((prev) => (prev === quantityOfPages ? 1 : prev + 1));

@@ -14,6 +14,9 @@ import { ColumnVisibility } from "@features/review/shared/hooks/useVisibilityCol
 // Types
 import type ArticleInterface from "../../../types/ArticleInterface";
 import type { ViewModel } from "../../../hooks/useLayoutPage";
+import { PaginationControls } from "@features/shared/types/pagination";
+import { KeyedMutator } from "swr";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
 
 export type PageLayout = "Selection" | "Extraction" | "Identification";
 
@@ -23,6 +26,8 @@ interface LayoutFactoryProps {
   page: PageLayout;
   isLoading: boolean;
   columnsVisible: ColumnVisibility;
+  pagination: PaginationControls;
+  reloadArticles: KeyedMutator<SelectionArticles>;
 }
 
 export default function LayoutFactory({
@@ -31,11 +36,13 @@ export default function LayoutFactory({
   page,
   isLoading,
   columnsVisible,
+  pagination,
+  reloadArticles,
 }: LayoutFactoryProps) {
   const [currentLayout, setCurrentLayout] = useState<ViewModel>(layout);
   const [selectedArticle, setSelectedArticle] =
     useState<ArticleInterface | null>(null);
-  
+
   useEffect(() => {
     setCurrentLayout(layout);
   }, [layout]);
@@ -53,6 +60,7 @@ export default function LayoutFactory({
         articles={articles}
         columnsVisible={columnsVisible}
         onRowClick={handleRowClick}
+        pagination={pagination}
       />
     ),
     vertical: (
@@ -61,6 +69,8 @@ export default function LayoutFactory({
         isInverted={false}
         page={page}
         columnsVisible={columnsVisible}
+        pagination={pagination}
+        reloadArticles={reloadArticles}
       />
     ),
     "vertical-invert": (
@@ -69,6 +79,8 @@ export default function LayoutFactory({
         isInverted
         page={page}
         columnsVisible={columnsVisible}
+        pagination={pagination}
+        reloadArticles={reloadArticles}
       />
     ),
     horizontal: (
@@ -78,6 +90,8 @@ export default function LayoutFactory({
         page={page}
         layout={layout}
         columnsVisible={columnsVisible}
+        pagination={pagination}
+        reloadArticles={reloadArticles}
       />
     ),
     "horizontal-invert": (
@@ -87,9 +101,17 @@ export default function LayoutFactory({
         page={page}
         layout={layout}
         columnsVisible={columnsVisible}
+        pagination={pagination}
+        reloadArticles={reloadArticles}
       />
     ),
-    article: <FullArticle articles={articles} page={page} />,
+    article: (
+      <FullArticle
+        articles={articles}
+        page={page}
+        reloadArticles={reloadArticles}
+      />
+    ),
   };
 
   return isLoading ? (

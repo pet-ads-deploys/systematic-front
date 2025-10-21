@@ -10,7 +10,7 @@ import ArticleInterface from "@features/review/shared/types/ArticleInterface";
 import { StudyInterface } from "@features/review/shared/types/IStudy";
 import { Params } from "@features/shared/types/params";
 
-interface HttpResponse {
+export interface SelectionArticles {
   studyReviews: ArticleInterface[] | StudyInterface[];
   systematicStudyId: string;
   size: number;
@@ -22,7 +22,7 @@ interface HttpResponse {
 interface FetchParams extends Params {}
 
 // Constants
-const EMPTY_PAGINATION_DATA: HttpResponse = {
+const EMPTY_PAGINATION_DATA: SelectionArticles = {
   studyReviews: [],
   totalElements: 0,
   totalPages: 0,
@@ -44,7 +44,7 @@ const useFetchSelectionArticles = ({ page = 0, size = 20 }: FetchParams) => {
     if (!id) return EMPTY_PAGINATION_DATA;
 
     try {
-      const response = await Axios.get<HttpResponse>(endpoint, {
+      const response = await Axios.get<SelectionArticles>(endpoint, {
         params: {
           page,
           size,

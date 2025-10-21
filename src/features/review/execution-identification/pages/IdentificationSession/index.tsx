@@ -9,6 +9,7 @@ import { Box } from "@chakra-ui/react";
 import ArticlesTable from "@features/review/shared/components/common/tables/ArticlesTable";
 import useVisibiltyColumns from "@features/review/shared/hooks/useVisibilityColumns";
 import ColumnVisibilityMenu from "@features/review/shared/components/common/menu/ColumnVisibilityMenu";
+import usePaginationState from "@features/shared/hooks/usePaginationState";
 
 export default function IdentificationSession() {
   const { session = "" } = useParams();
@@ -17,6 +18,15 @@ export default function IdentificationSession() {
   const { columnsVisible, toggleColumnVisibility } = useVisibiltyColumns({
     page: "Identification",
   });
+
+  const {
+    currentPage,
+    handleNextPage,
+    handlePrevPage,
+    handleBackToInitial,
+    handleGoToFinal,
+    changeQuantityOfItens,
+  } = usePaginationState({ totalPages: 1, initialSize: 20 });
 
   return (
     <FlexLayout navigationType="Accordion">
@@ -40,7 +50,21 @@ export default function IdentificationSession() {
             toggleColumnVisibility={toggleColumnVisibility}
           />
         </Box>
-        <ArticlesTable articles={articles} columnsVisible={columnsVisible} />
+        <ArticlesTable
+          articles={articles}
+          columnsVisible={columnsVisible}
+          pagination={{
+            currentPage,
+            itensPerPage: 20,
+            quantityOfPages: 3,
+            totalElements: articles.length,
+            handleNextPage,
+            handlePrevPage,
+            handleBackToInitial,
+            handleGoToFinal,
+            changeQuantityOfItens,
+          }}
+        />
       </Box>
     </FlexLayout>
   );
