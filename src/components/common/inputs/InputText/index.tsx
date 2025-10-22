@@ -40,7 +40,6 @@ export default function InputText({
     <FormControl
       width={width ? `clamp(${minWidth}, ${width}, ${maxWidth})` : "60vw"}
       height={`clamp(${minHeight}, ${height}, ${maxHeight})`}
-      mt={isSearchField ? "" : 5}
     >
       <FormControl>
         {label && (

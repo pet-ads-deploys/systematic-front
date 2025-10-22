@@ -35,8 +35,8 @@ export default function AddSelectTable({
 
   return (
     <FormControl sx={conteiner} alignContent={"center"}>
-      <FormLabel  fontWeight={500} fontSize={"large"}>{label}</FormLabel>
-      <FormControl sx={formcontrol} justifyContent="left">
+      <FormLabel mt={"30px"} fontWeight={500} fontSize={"large"}>{label}</FormLabel>
+      <FormControl sx={formcontrol} justifyContent={"space-between"}>
         <SelectInput
           values={formattedOptions}
           names={options}
@@ -45,7 +45,7 @@ export default function AddSelectTable({
           placeholder={placeholder}
           page={"protocol"}
         />
-        <EventButton text="Add" event={handleSelectAddButtonClick} w={"2%"} />
+        <EventButton text="Add" event={handleSelectAddButtonClick} w={"2%"} mr={"17px"} />
       </FormControl>
 
       <SelectInfosTable
