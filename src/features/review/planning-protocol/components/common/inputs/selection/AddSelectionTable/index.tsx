@@ -35,7 +35,7 @@ export default function AddSelectTable({
 
   return (
     <FormControl sx={conteiner} alignContent={"center"}>
-      <FormLabel fontWeight={500} fontSize={"large"}>{label}</FormLabel>
+      <FormLabel mt={"30px"} fontWeight={500} fontSize={"large"}>{label}</FormLabel>
       <FormControl sx={formcontrol} justifyContent={"space-between"}>
         <SelectInput
           values={formattedOptions}
