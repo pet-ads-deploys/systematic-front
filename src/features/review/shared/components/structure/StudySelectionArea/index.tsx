@@ -13,15 +13,19 @@ import type { PageLayout } from "../LayoutFactory";
 import type ArticleInterface from "../../../types/ArticleInterface";
 import type { StudyInterface } from "../../../types/IStudy";
 import StudyDataFiel from "../../common/tables/StudyData";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
+import { KeyedMutator } from "swr";
 
 interface StudySelectionAreaProps {
   articles: ArticleInterface[] | StudyInterface[];
   page: PageLayout;
+  reloadArticles: KeyedMutator<SelectionArticles>;
 }
 
 export default function StudySelectionArea({
   articles,
   page,
+  reloadArticles,
 }: StudySelectionAreaProps) {
   const selectionContext = useContext(StudySelectionContext);
 
@@ -60,9 +64,10 @@ export default function StudySelectionArea({
       <Flex alignItems="center" justifyContent="center" w="100%" maxW="100%">
         <ButtonsForSelection
           page={page}
-          articles={articles as StudyInterface[]}
+          articles={articles}
           articleIndex={studyIndex}
           setSelectedArticleReview={setSelectedArticleReview}
+          reloadArticles={reloadArticles}
         />
       </Flex>
       <Box w="100%" h="80%">

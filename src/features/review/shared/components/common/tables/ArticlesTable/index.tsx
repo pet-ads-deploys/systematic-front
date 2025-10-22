@@ -9,12 +9,14 @@ import Expanded from "./subcomponents/Expanded";
 // Types
 import type { ViewModel } from "@features/review/shared/hooks/useLayoutPage";
 import { ColumnVisibility } from "@features/review/shared/hooks/useVisibilityColumns";
+import { PaginationControls } from "@features/shared/types/pagination";
 
 interface Props {
   articles: ArticleInterface[];
   layout?: ViewModel;
   columnsVisible: ColumnVisibility;
   onRowClick?: (article: ArticleInterface) => void;
+  pagination: PaginationControls;
 }
 
 export default function ArticlesTable({
@@ -22,6 +24,7 @@ export default function ArticlesTable({
   layout,
   columnsVisible,
   onRowClick,
+  pagination,
 }: Props) {
   const [sortConfig, setSortConfig] = useState<{
     key: keyof ArticleInterface;
@@ -64,6 +67,7 @@ export default function ArticlesTable({
       layout={layout}
       columnsVisible={columnsVisible}
       onRowClick={onRowClick}
+      pagination={pagination}
     />
   );
 }

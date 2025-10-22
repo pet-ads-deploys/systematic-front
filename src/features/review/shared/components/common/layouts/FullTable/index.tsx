@@ -9,16 +9,19 @@ import { ColumnVisibility } from "@features/review/shared/hooks/useVisibilityCol
 
 // Types
 import type ArticleInterface from "../../../../types/ArticleInterface";
+import { PaginationControls } from "@features/shared/types/pagination";
 interface TableProps {
   articles: ArticleInterface[];
   columnsVisible: ColumnVisibility;
   onRowClick?: (article: ArticleInterface) => void;
+  pagination: PaginationControls;
 }
 
 export const FullTable: React.FC<TableProps> = ({
   articles,
   columnsVisible,
   onRowClick,
+  pagination,
 }) => {
   return (
     <Box w="100%" h="100%">
@@ -26,6 +29,7 @@ export const FullTable: React.FC<TableProps> = ({
         articles={articles}
         columnsVisible={columnsVisible}
         onRowClick={onRowClick}
+        pagination={pagination}
       />
     </Box>
   );

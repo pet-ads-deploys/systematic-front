@@ -5,9 +5,6 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { RiResetLeftLine } from "react-icons/ri";
 import { Tooltip } from "@chakra-ui/react";
 
-// Context
-// import AppContext from "../../../context/AppContext";
-
 // Hooks
 import useFetchAllCriteriasByArticle from "../../../../services/useFetchAllCriteriasByArticle";
 import useResetStatus from "../../../../hooks/useResetStatus";
@@ -29,12 +26,15 @@ import type {
   OptionProps,
   OptionType,
 } from "../../../../services/useFetchAllCriteriasByArticle";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
+import { KeyedMutator } from "swr";
 
 interface ButtonsForSelectionProps {
   page: PageLayout;
   articles: ArticleInterface[] | StudyInterface[];
   articleIndex: number;
   setSelectedArticleReview: React.Dispatch<React.SetStateAction<number>>;
+  reloadArticles: KeyedMutator<SelectionArticles>;
 }
 
 export default function ButtonsForSelection({
@@ -42,12 +42,17 @@ export default function ButtonsForSelection({
   articles,
   articleIndex,
   setSelectedArticleReview,
+  reloadArticles,
 }: ButtonsForSelectionProps) {
-  const { handleResetStatusToUnclassified } = useResetStatus({ page });
-  const { handleChangePriority } = useChangePriority();
+  const { handleResetStatusToUnclassified } = useResetStatus({
+    page,
+    reloadArticles,
+  });
+  const { handleChangePriority } = useChangePriority({ reloadArticles });
   const { criterias: fetchedCriterias, handlerUpdateCriteriasStructure } =
     useFetchAllCriteriasByArticle({ page });
 
+  console.log("Criterios aqui nos botões", fetchedCriterias);
   if (!fetchedCriterias) return;
 
   const currentArticle = articles[articleIndex];
@@ -75,6 +80,8 @@ export default function ButtonsForSelection({
 
   if (!criteriaGroupDataMap["INCLUSION"] || !criteriaGroupDataMap["EXCLUSION"])
     return;
+
+  console.log("Não retornou");
 
   const isInclusionActive = criteriaOptions.INCLUSION.isActive;
   const isExclusionActive = criteriaOptions.EXCLUSION.isActive;
@@ -163,6 +170,7 @@ export default function ButtonsForSelection({
                 handlerUpdateCriteriasStructure={
                   handlerUpdateCriteriasStructure
                 }
+                reloadArticles={reloadArticles}
               />
             </Box>
           </Tooltip>
