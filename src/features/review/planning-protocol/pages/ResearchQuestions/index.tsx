@@ -42,7 +42,7 @@ export default function ResearchQuestions() {
         withShadow={false}
       >
         <FormControl
-          m={"1rem auto 0"}
+          m={"30px auto 0"}
           display={"flex"}
           gap={1.5}
           flexDir={"column"}
