@@ -2,7 +2,6 @@
 import ArticleInterface from "../types/ArticleInterface";
 import Axios from "../../../../infrastructure/http/axiosClient";
 
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
 import useSWR from "swr";
 import { StudyInterface } from "../types/IStudy";
 
@@ -12,7 +11,6 @@ interface HttpResponse {
 
 const useGetAllReviewArticles = () => {
   const id = localStorage.getItem("systematicReviewId");
-  const options = getRequestOptions();
   const { data, mutate, error, isLoading } = useSWR(
     `systematic-study/${id}/study-review`,
     fetchAllArticlesReview,
@@ -28,8 +26,7 @@ const useGetAllReviewArticles = () => {
   async function fetchAllArticlesReview() {
     try {
       const response = await Axios.get<HttpResponse>(
-        `systematic-study/${id}/study-review`,
-        options
+        `systematic-study/${id}/study-review`
       );
       return response.data.studyReviews || [];
     } catch (error) {

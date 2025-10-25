@@ -10,9 +10,6 @@ import { useAuthStore } from "@features/auth/store/useAuthStore";
 // Types
 import type { CardReview } from "../types";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 interface HttpResponse {
   content: CardReview[];
 }
@@ -30,8 +27,7 @@ export default function useGetReviewCard() {
   const fetchAllCardReview = async () => {
     if (!path) return;
     try {
-      const options = getRequestOptions();
-      const response = await Axios.get<HttpResponse>(path, options);
+      const response = await Axios.get<HttpResponse>(path);
       return response.data.content || [];
     } catch (error) {
       console.log("Error", error);

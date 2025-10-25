@@ -7,9 +7,6 @@ import Axios from "../../../../infrastructure/http/axiosClient";
 // Context
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Types
 import type { SendAnswerProps } from "../types";
 
@@ -25,15 +22,10 @@ export function useSendBatchAnswers() {
     }
     try {
       const id = localStorage.getItem("systematicReviewId");
-      const options = getRequestOptions();
       const path = `systematic-study/${id}/study-review/${selectionContext.selectedArticleReview}/batch-answer-question`;
-      await Axios.patch(
-        path,
-        {
-          answers,
-        },
-        options
-      );
+      await Axios.patch(path, {
+        answers,
+      });
     } catch (error) {
       console.log(error);
     }

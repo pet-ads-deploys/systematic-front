@@ -14,7 +14,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-import { CheckCircleIcon, InfoIcon, WarningIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, QuestionIcon, WarningIcon } from "@chakra-ui/icons";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
 import {
@@ -28,9 +28,6 @@ import { RiCheckboxMultipleBlankFill } from "react-icons/ri";
 
 // Context
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
-
-// Hook
-import usePagination from "@features/review/shared/hooks/usePagination";
 
 // Components
 import PaginationControl from "../controlls/PaginationControl";
@@ -51,6 +48,7 @@ import { capitalize } from "@features/shared/utils/helpers/formatters/Capitalize
 import type ArticleInterface from "@features/review/shared/types/ArticleInterface";
 import type { ViewModel } from "@features/review/shared/hooks/useLayoutPage";
 import type { ColumnVisibility } from "@features/review/shared/hooks/useVisibilityColumns";
+import { PaginationControls } from "@features/shared/types/pagination";
 
 interface Props {
   articles: ArticleInterface[];
@@ -59,6 +57,7 @@ interface Props {
   layout?: ViewModel;
   columnsVisible: ColumnVisibility;
   onRowClick?: (article: ArticleInterface) => void;
+  pagination: PaginationControls;
 }
 
 type HeaderKeys =
@@ -85,6 +84,7 @@ export default function Expanded({
   layout,
   columnsVisible,
   onRowClick,
+  pagination,
 }: Props) {
   const [columnWidths, setColumnWidths] = useState({
     studyReviewId: "62px",
@@ -123,11 +123,39 @@ export default function Expanded({
     },
   ];
 
+  const IconWrapper = ({ children }: { children: React.ReactNode }) => (
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      w="1.25rem"
+      h="1.25rem"
+    >
+      {children}
+    </Box>
+  );
+
   const statusIconMap: Record<string, React.ReactElement> = {
-    INCLUDED: <CheckCircleIcon color="green.500" />,
-    DUPLICATED: <InfoIcon color="blue.500" />,
-    EXCLUDED: <IoIosCloseCircle color="red" size="1.4rem" />,
-    UNCLASSIFIED: <WarningIcon color="yellow.500" />,
+    INCLUDED: (
+      <IconWrapper>
+        <CheckCircleIcon color="green.500" boxSize="1rem" />
+      </IconWrapper>
+    ),
+    DUPLICATED: (
+      <IconWrapper>
+        <WarningIcon color="blue.500" boxSize="1rem" />
+      </IconWrapper>
+    ),
+    EXCLUDED: (
+      <IconWrapper>
+        <IoIosCloseCircle color="red" size="1.25rem" />
+      </IconWrapper>
+    ),
+    UNCLASSIFIED: (
+      <IconWrapper>
+        <QuestionIcon color="yellow.500" boxSize="1rem" />
+      </IconWrapper>
+    ),
   };
 
   const priorityIconMap: Record<string, React.ReactElement> = {
@@ -147,14 +175,14 @@ export default function Expanded({
 
   const {
     currentPage,
+    itensPerPage,
     quantityOfPages,
-    paginatedArticles,
     handleNextPage,
     handlePrevPage,
     handleBackToInitial,
     handleGoToFinal,
     changeQuantityOfItens,
-  } = usePagination(articles);
+  } = pagination;
 
   const handleColumnResize = (key: HeaderKeys, newWidth: number) => {
     setColumnWidths((prev) => {
@@ -362,8 +390,8 @@ export default function Expanded({
             </Tr>
           </Thead>
           <Tbody>
-            {paginatedArticles.length > 0 ? (
-              paginatedArticles.map((reference, index) => (
+            {articles.length > 0 ? (
+              articles.map((reference, index) => (
                 <Tr
                   key={index}
                   bg={
@@ -486,7 +514,7 @@ export default function Expanded({
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="flex-start"
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.selectionStatus)}
@@ -505,7 +533,7 @@ export default function Expanded({
                       <Box
                         display="flex"
                         alignItems="center"
-                        justifyContent="start"
+                        justifyContent="flex-start"
                         gap="0.5rem"
                       >
                         {renderStatusIcon(reference.extractionStatus)}
@@ -570,6 +598,7 @@ export default function Expanded({
         </Table>
       </TableContainer>
       <PaginationControl
+        itensPerPage={itensPerPage}
         currentPage={currentPage}
         quantityOfPages={quantityOfPages}
         handleNextPage={handleNextPage}

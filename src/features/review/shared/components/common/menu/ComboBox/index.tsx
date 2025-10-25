@@ -21,6 +21,8 @@ import type {
   OptionProps,
   OptionType,
 } from "../../../../services/useFetchAllCriteriasByArticle";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
+import { KeyedMutator } from "swr";
 
 interface IComboBoxProps {
   text: string;
@@ -38,6 +40,7 @@ interface IComboBoxProps {
     optionText: string,
     newValue: boolean
   ) => void;
+  reloadArticles: KeyedMutator<SelectionArticles>;
 }
 
 export default function ComboBox({
@@ -49,9 +52,10 @@ export default function ComboBox({
   status,
   groupKey,
   handlerUpdateCriteriasStructure,
+  reloadArticles,
 }: IComboBoxProps) {
   const { handleIncludeItemClick, handleExcludeItemClick } =
-    useComboBoxSelection({ page });
+    useComboBoxSelection({ page, reloadArticles });
   const toast = useToaster();
 
   const { selectionStatus, extractionStatus } = status;

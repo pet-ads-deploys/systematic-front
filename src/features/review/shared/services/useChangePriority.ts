@@ -6,9 +6,8 @@ import Axios from "../../../../infrastructure/http/axiosClient";
 
 // Contenxt
 import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
-
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
+import { KeyedMutator } from "swr";
 
 // Type
 type PriorityValue = "VERY_LOW" | "LOW" | "HIGH" | "VERY_HIGH";
@@ -18,6 +17,10 @@ interface ChangePriorityInArticle {
   criteria?: string[];
 }
 
+interface useChangePriorityPayload {
+  reloadArticles: KeyedMutator<SelectionArticles>;
+}
+
 const priorityMap: Record<string, PriorityValue> = {
   "Very Low": "VERY_LOW",
   Low: "LOW",
@@ -25,12 +28,14 @@ const priorityMap: Record<string, PriorityValue> = {
   "Very High": "VERY_HIGH",
 };
 
-export default function useChangePriority() {
+export default function useChangePriority({
+  reloadArticles,
+}: useChangePriorityPayload) {
   const selectionContext = useContext(StudySelectionContext);
 
   if (!selectionContext) throw new Error("Context not available");
 
-  const { selectedArticleReview, reloadArticles } = selectionContext;
+  const { selectedArticleReview } = selectionContext;
 
   const handleChangePriority = async ({
     status,
@@ -38,7 +43,6 @@ export default function useChangePriority() {
   }: ChangePriorityInArticle) => {
     try {
       const id = localStorage.getItem("systematicReviewId");
-      const options = getRequestOptions();
 
       const priorityValue = priorityMap[status];
 
@@ -47,15 +51,11 @@ export default function useChangePriority() {
       }
 
       const path = `systematic-study/${id}/study-review/reading-priority`;
-      await Axios.patch(
-        path,
-        {
-          studyReviewId: [selectedArticleReview],
-          status: priorityValue,
-          criteria,
-        },
-        options
-      );
+      await Axios.patch(path, {
+        studyReviewId: [selectedArticleReview],
+        status: priorityValue,
+        criteria,
+      });
       reloadArticles();
     } catch (error) {
       console.log(error);

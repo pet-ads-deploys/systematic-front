@@ -17,7 +17,7 @@ export default function InputText({ label, placeholder, type, nome, onChange, la
   const isSearchField = type === "search";
 
   return (
-    <FormControl maxW={"60vw"} mt={isSearchField ? "" : 10}>
+    <FormControl maxW={"60vw"}>
       <FormControl>
         {label && (
           <FormLabel

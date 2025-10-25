@@ -5,7 +5,7 @@ import { capitalize } from "@features/shared/utils/helpers/formatters/Capitalize
 import EventButton from "@components/common/buttons/EventButton";
 import { useSelect } from "../../../../../services/useSelect";
 import { conteiner, formcontrol } from "./styles";
-import SelectInfosTable from "@features/review/planning-protocol/pages/StepThree/subcomponents/tables/SelectInfosTable";
+import SelectInfosTable from "@features/review/planning-protocol/components/common/tables/SelectInfosTable";
 
 interface AddSelectTableProps {
   options: string[];
@@ -35,8 +35,8 @@ export default function AddSelectTable({
 
   return (
     <FormControl sx={conteiner} alignContent={"center"}>
-      <FormLabel>{label}</FormLabel>
-      <FormControl sx={formcontrol} justifyContent="left">
+      <FormLabel mt={"30px"} fontWeight={500} fontSize={"large"}>{label}</FormLabel>
+      <FormControl sx={formcontrol} justifyContent={"space-between"}>
         <SelectInput
           values={formattedOptions}
           names={options}
@@ -45,10 +45,10 @@ export default function AddSelectTable({
           placeholder={placeholder}
           page={"protocol"}
         />
-        <EventButton text="Add" event={handleSelectAddButtonClick} w={"2%"} />
+        <EventButton text="Add" event={handleSelectAddButtonClick} w={"2%"} mr={"17px"} />
       </FormControl>
-        
-      <SelectInfosTable 
+
+      <SelectInfosTable
         selectedItems={formatSelectedValues}
         onDeleteItem={handleDeleteSelect}
       />

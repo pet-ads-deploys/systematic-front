@@ -10,16 +10,22 @@ import { UseChangeStudyExtractionStatus } from "../services/useChangeStudyExtrac
 
 // Type
 import type { PageLayout } from "../components/structure/LayoutFactory";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
+import { KeyedMutator } from "swr";
 interface ComboBoxSelectionProps {
   page: PageLayout;
+  reloadArticles: KeyedMutator<SelectionArticles>;
 }
 
-const useComboBoxSelection = ({ page }: ComboBoxSelectionProps) => {
+const useComboBoxSelection = ({
+  page,
+  reloadArticles,
+}: ComboBoxSelectionProps) => {
   const selectionContext = useContext(StudySelectionContext);
 
   if (!selectionContext) throw new Error("Context not available");
 
-  const { reloadArticles, selectedArticleReview } = selectionContext;
+  const { selectedArticleReview } = selectionContext;
 
   const changeStatus = useCallback(
     (status: "INCLUDED" | "EXCLUDED", criterias: string[]) => {

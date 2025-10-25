@@ -7,7 +7,7 @@ import {
 import { SetStateAction, useEffect } from "react";
 import { useAddLabeledList } from "@features/review/planning-protocol/hooks/useAddLabeledList";
 import { handleDeleteLabeledList } from "@features/review/planning-protocol/hooks/useDeleteLabeledList";
-import InfosLabeled from "@features/review/planning-protocol/pages/StepThree/subcomponents/tables/LabeledScaleTable";
+import InfosLabeled from "@features/review/planning-protocol/components/common/tables/LabeledScaleTable";
 
 interface AddTextTableProps {
   text: string;

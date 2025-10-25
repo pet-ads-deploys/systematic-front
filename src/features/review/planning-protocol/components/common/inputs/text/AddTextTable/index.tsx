@@ -2,7 +2,7 @@ import { FormControl, FormLabel } from "@chakra-ui/react";
 import { useAddText } from "../../../../../services/useAddText";
 import { useDeleteText } from "../../../../../hooks/useDeleteText";
 import { formcontrol, label } from "./styles";
-import InfosTable from "@features/review/planning-protocol/pages/StepThree/subcomponents/tables/InfosTable";
+import InfosTable from "@features/review/planning-protocol/components/common/tables/InfosTable";
 
 interface AddTextTableProps {
   text: string;
@@ -15,7 +15,7 @@ export default function AddTextTable({ text, placeholder }: AddTextTableProps) {
   return (
     <FormControl sx={label}>
       <FormControl sx={formcontrol}>
-        <FormLabel>{text}</FormLabel>
+        <FormLabel mt={"30px"} fontWeight={500} fontSize={"large"}>{text}</FormLabel>
         <InfosTable
           typeField={""}
           onAddText={handleAddText}

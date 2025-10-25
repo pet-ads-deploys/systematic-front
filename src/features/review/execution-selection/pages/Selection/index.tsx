@@ -25,11 +25,13 @@ import ButtonsForMultipleSelection from "@features/review/shared/components/comm
 import { inputconteiner } from "../../../shared/styles/executionStyles";
 
 // Types
-import type ArticleInterface from "../../../shared/types/ArticleInterface";
+import useFetchSelectionArticles from "../../services/useFetchSelectionArticles";
+import usePaginationState from "@features/shared/hooks/usePaginationState";
 
 export default function Selection() {
   const [searchString, setSearchString] = useState<string>("");
   const [showSelected, setShowSelected] = useState<boolean>(false);
+  const [fetchedTotalPages, setFetchedTotalPages] = useState<number>(1);
   const selectionContext = useContext(StudySelectionContext);
   const { value: selectedStatus, handleChange: handleSelectChange } =
     useInputState<string | null>(null);
@@ -38,20 +40,32 @@ export default function Selection() {
     page: "Selection",
   });
 
-  const safeArticles = selectionContext?.articles ?? [];
-  const safeSelectedArticles = selectionContext?.selectedArticles ?? {};
-  const isLoading = selectionContext?.isLoading ?? false;
+  const {
+    currentPage,
+    itensPerPage,
+    handleNextPage,
+    handlePrevPage,
+    handleBackToInitial,
+    handleGoToFinal,
+    changeQuantityOfItens,
+  } = usePaginationState({ totalPages: fetchedTotalPages, initialSize: 20 });
 
-  const allArticles: ArticleInterface[] = useMemo(() => {
-    return safeArticles.filter(
-      (art): art is ArticleInterface => "studyReviewId" in art
-    );
-  }, [safeArticles]);
+  const { articles, isLoading, totalElements, totalPages, mutate } =
+    useFetchSelectionArticles({
+      page: currentPage - 1,
+      size: itensPerPage,
+    });
+
+  if (totalPages && totalPages !== fetchedTotalPages) {
+    setFetchedTotalPages(totalPages);
+  }
+
+  const safeSelectedArticles = selectionContext?.selectedArticles ?? {};
 
   const startFilteredArticles = useFilterReviewArticles(
     searchString,
     selectedStatus,
-    allArticles,
+    articles,
     "Selection"
   );
 
@@ -105,7 +119,7 @@ export default function Selection() {
               toggleColumnVisibility={toggleColumnVisibility}
             />
             <StatusSelect
-              articles={allArticles}
+              articles={articles}
               selectedValue={selectedStatus}
               onSelect={handleSelectChange}
               page="Selection"
@@ -125,6 +139,18 @@ export default function Selection() {
           columnsVisible={columnsVisible}
           layout={layout}
           isLoading={isLoading}
+          reloadArticles={mutate}
+          pagination={{
+            currentPage,
+            itensPerPage,
+            quantityOfPages: totalPages,
+            totalElements,
+            handleNextPage,
+            handlePrevPage,
+            handleBackToInitial,
+            handleGoToFinal,
+            changeQuantityOfItens,
+          }}
         />
       </Box>
     </FlexLayout>

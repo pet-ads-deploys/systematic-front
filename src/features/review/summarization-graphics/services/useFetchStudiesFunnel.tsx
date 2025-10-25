@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import Axios from "../../../../infrastructure/http/axiosClient";
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
 
 type StudiesFunnelData = {
   userId: string;
@@ -35,10 +34,7 @@ export const useFetchStudiesFunnel = () => {
   async function fetchStudiesFunnel() {
     if (!id) return;
     try {
-      const response = await Axios.get<StudiesFunnelData>(
-        path,
-        getRequestOptions()
-      );
+      const response = await Axios.get<StudiesFunnelData>(path);
       return response.data;
     } catch (error) {
       console.error("Error fetching studeis funnel:", error);

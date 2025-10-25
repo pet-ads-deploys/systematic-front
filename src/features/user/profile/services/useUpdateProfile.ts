@@ -1,9 +1,6 @@
 // Infra
 import Axios from "../../../../infrastructure/http/axiosClient";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Error
 import { ApplicationError } from "@features/shared/errors/base/ApplicationError";
 
@@ -42,16 +39,10 @@ type useUpdateProfileOutput = {
 
 export default function useUpdateProfile(): useUpdateProfileOutput {
   const update = async (user: Partial<UpdateUserDto>) => {
-    const options = getRequestOptions();
-
     try {
-      const response = await Axios.patch(
-        "user/profile",
-        {
-          ...user,
-        },
-        options
-      );
+      const response = await Axios.patch("user/profile", {
+        ...user,
+      });
       user.country;
       return right(response.data);
     } catch (error) {

@@ -4,9 +4,6 @@ import useSWR from "swr";
 // Infra
 import Axios from "../../../../infrastructure/http/axiosClient";
 
-// Utils
-import getRequestOptions from "@features/auth/utils/getRequestOptions";
-
 // Types
 import type { Questions } from "../types";
 
@@ -25,10 +22,8 @@ export function useFetchExtractionQuestions() {
 
   async function fetchExtractionQuestion() {
     try {
-      const options = getRequestOptions();
       const response = await Axios.get<HttpResponse>(
-        `systematic-study/${id}/protocol/extraction-question`,
-        options
+        `systematic-study/${id}/protocol/extraction-question`
       );
 
       return response.data;

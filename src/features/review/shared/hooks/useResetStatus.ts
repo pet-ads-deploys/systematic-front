@@ -1,9 +1,3 @@
-// External library
-import { useContext } from "react";
-
-// Context
-import StudySelectionContext from "@features/review/shared/context/StudiesSelectionContext";
-
 // Hooks
 import { UseChangeStudySelectionStatus } from "../services/useChangeStudySelectionStatus";
 import { UseChangeStudyExtractionStatus } from "../services/useChangeStudyExtractionStatus";
@@ -11,14 +5,15 @@ import { UseChangeStudyExtractionStatus } from "../services/useChangeStudyExtrac
 //Types
 import { PageLayout } from "../components/structure/LayoutFactory";
 import useFocusedArticle from "./useFocusedArticle";
+import { SelectionArticles } from "@features/review/execution-selection/services/useFetchSelectionArticles";
+import { KeyedMutator } from "swr";
 
 interface ResetButtonProps {
   page: PageLayout;
+  reloadArticles: KeyedMutator<SelectionArticles>;
 }
 
-const useResetStatus = ({ page }: ResetButtonProps) => {
-  const selectionContext = useContext(StudySelectionContext);
-
+const useResetStatus = ({ page, reloadArticles }: ResetButtonProps) => {
   const { articleInFocus } = useFocusedArticle({ page });
 
   const handleResetStatusToUnclassified = () => {
@@ -35,7 +30,7 @@ const useResetStatus = ({ page }: ResetButtonProps) => {
           status: "UNCLASSIFIED",
           criterias: [],
         });
-    selectionContext?.reloadArticles();
+    reloadArticles();
   };
 
   return { handleResetStatusToUnclassified };
